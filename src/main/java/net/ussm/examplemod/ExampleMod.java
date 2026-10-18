@@ -74,6 +74,6 @@ public class ExampleMod {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        LOGGER.info("Oui Oui croissant baguette");
+        LOGGER.info("Oui oui croissant baguette");
     }
 }
