@@ -1,0 +1,14 @@
+{
+  "type": "examplemod:test_type",
+  "generator": {
+    "type": "examplemod:test_chunk_generator",
+    "biome_source": {
+      "type": "examplemod:test_biome_source",
+      "sea": "minecraft:warm_ocean",
+      "shore": "minecraft:beach",
+      "inland": "minecraft:jungle",
+      "mountain": "minecraft:badlands"
+    }
+  },
+  "settings": {}
+}

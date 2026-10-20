@@ -3,6 +3,8 @@ package net.ussm.examplemod;
 import net.ussm.examplemod.init.ModBlock;
 import net.ussm.examplemod.init.ModCreativeModeTabs;
 import net.ussm.examplemod.init.ModItem;
+import net.ussm.examplemod.worldgen.BiomeSources;
+import net.ussm.examplemod.worldgen.ChunkGenerators;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -42,6 +44,8 @@ public class ExampleMod {
 
 
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
+        ChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
+        BiomeSources.BIOME_SOURCES.register(modEventBus);
         NeoForge.EVENT_BUS.register(this);
 
         // Register the item to a creative tab
