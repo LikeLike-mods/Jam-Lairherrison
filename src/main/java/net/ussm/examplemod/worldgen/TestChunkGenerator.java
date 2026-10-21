@@ -71,6 +71,14 @@ public class TestChunkGenerator extends ChunkGenerator {
         return CompletableFuture.completedFuture(chunkAccess);
     }
 
+    private static float length(float x, float y) {
+        return (float)Math.sqrt(x*x + y*y);
+    }
+
+    private boolean inRange(float t, float a, float b) {
+        return (t >= a) && (t <= b);
+    }
+
     public static float getHeight(float posX, float posZ) {
         net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
         float h;
@@ -93,7 +101,10 @@ public class TestChunkGenerator extends ChunkGenerator {
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
         float islands = noise.GetNoise(posX, posZ);
         islands += 1f; islands *= lines2; islands -= 1f;
-        if (islands > 0f) islands = 1f + 0.5f * (float)Math.pow(islands, 5f) - (float)Math.pow(islands + 1f, -1f);
+
+        float mountains = Math.clamp(islands * 2f - 1f, 0f, 1f);
+
+        islands += mountains;
 
         h = islands * 50f;
         return h;
@@ -110,6 +121,13 @@ public class TestChunkGenerator extends ChunkGenerator {
                 int posZ = z + (chunk.getPos().z * 16);
 
                 float h = getHeight(posX, posZ);
+                float n = getHeight(posX + 1, posZ);
+                float s = getHeight(posX - 1, posZ);
+                float e = getHeight(posX, posZ + 1);
+                float w = getHeight(posX, posZ - 1);
+                float slope = length(n - s, e - w);
+                slope *= 2f;
+                if (slope > 1f) slope = 1f;
 
                 // Layers
                 int a = Math.round(h);
@@ -136,11 +154,13 @@ public class TestChunkGenerator extends ChunkGenerator {
 
 
                 // Blocks used
-                BlockState top1High = Blocks.GRASS_BLOCK.defaultBlockState();
-                BlockState top2High = Blocks.DIRT.defaultBlockState();
+                BlockState topLand = Blocks.GRASS_BLOCK.defaultBlockState();
+                BlockState top2Land = Blocks.DIRT.defaultBlockState();
 
-                BlockState top1Low = Blocks.SAND.defaultBlockState();
-                BlockState top2Low = Blocks.SAND.defaultBlockState();
+                if (inRange(h, -1f, 5f * slope)) {
+                    topLand = Blocks.SAND.defaultBlockState();
+                    top2Land = Blocks.SAND.defaultBlockState();
+                }
 
                 BlockState topWater = Blocks.SAND.defaultBlockState();
 
@@ -152,25 +172,19 @@ public class TestChunkGenerator extends ChunkGenerator {
                     pos.set(x, y, z);
 
                     if (y == a) {
-                        if (y >= 6) {
-                            chunk.setBlockState(pos, top1High, false);
-                        }
-                        else if (y < 0) {
+                        if (y < 0) {
                             chunk.setBlockState(pos, topWater, false);
                         }
                         else {
-                            chunk.setBlockState(pos, top1Low, false);
+                            chunk.setBlockState(pos, topLand, false);
                         }
                     }
                     else if (y == a - 1) {
-                        if (y >= 6) {
-                            chunk.setBlockState(pos, top2High, false);
-                        }
-                        else if (y < 0) {
+                        if (y < 0) {
                             chunk.setBlockState(pos, topWater, false);
                         }
                         else {
-                            chunk.setBlockState(pos, top2Low, false);
+                            chunk.setBlockState(pos, top2Land, false);
                         }
                     }
                     else if (y < a - 1){

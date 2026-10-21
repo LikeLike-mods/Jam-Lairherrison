@@ -50,6 +50,10 @@ public class TestBiomeSource extends BiomeSource {
         return (t >= a) && (t <= b);
     }
 
+    private static float length(float x, float y) {
+        return (float) Math.sqrt(x * x + y * y);
+    }
+
     @Override
     public Holder<Biome> getNoiseBiome(
             int x, int y, int z,
@@ -60,9 +64,16 @@ public class TestBiomeSource extends BiomeSource {
         int blockY = y * 4;
 
         float h = Math.round(TestChunkGenerator.getHeight(blockX, blockZ));
+        float n = TestChunkGenerator.getHeight(blockX + 1, blockZ);
+        float s = TestChunkGenerator.getHeight(blockX - 1, blockZ);
+        float e = TestChunkGenerator.getHeight(blockX, blockZ + 1);
+        float w = TestChunkGenerator.getHeight(blockX, blockZ - 1);
+        float slope = length(n - s, e - w);
+        slope *= 2f;
+        if (slope > 1f) slope = 1f;
 
         if (h < 1) return sea;
-        if (inRange(h, 1, 5)) return shore;
+        if (inRange(h, -1f, 5f * slope)) return shore;
         return inland;
     }
 }
