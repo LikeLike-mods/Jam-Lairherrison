@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=true": {
+      "model": "examplemod:block/flytrap"
+    },
+    "open=false": {
+      "model": "examplemod:block/flytrap_closed"
+    }
+  }
+}

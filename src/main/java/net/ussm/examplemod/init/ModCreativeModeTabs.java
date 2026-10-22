@@ -34,6 +34,9 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BIRD_OF_PARADISE);
                         output.accept(ModBlocks.FRANGIPANI);
                         output.accept(ModBlocks.SHADOW_LILY);
+                        output.accept(ModBlocks.FLYTRAP);
+                        output.accept(ModBlocks.PITCHER_PLANT);
+                        output.accept(ModItems.NECTAR);
                     })).build());
 
     public static void register(IEventBus eventBus) {

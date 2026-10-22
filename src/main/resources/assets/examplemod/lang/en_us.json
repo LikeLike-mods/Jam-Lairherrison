@@ -30,5 +30,9 @@
   "block.examplemod.hibiscus": "Hibiscus",
   "block.examplemod.bird_of_paradise": "Bird of Paradise",
   "block.examplemod.frangipani": "Frangipani",
-  "block.examplemod.shadow_lily": "Shadow Lily"
+  "block.examplemod.shadow_lily": "Shadow Lily",
+  "block.examplemod.flytrap": "Venus Flytrap",
+  "block.examplemod.pitcher_plant": "Pitcher Plant",
+  "item.examplemod.nectar": "Pitcher Nectar",
+  "death.attack.examplemod.flytrap": "%1$s was devoured by a Venus flytrap"
 }

@@ -13,6 +13,8 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.ussm.examplemod.blocks.CoconutBlock;
 import net.ussm.examplemod.blocks.DryGrassBlock;
+import net.ussm.examplemod.blocks.FlytrapBlock;
+import net.ussm.examplemod.blocks.PitcherPlantBlock;
 import net.ussm.examplemod.blocks.MessageBottleBlock;
 import net.ussm.examplemod.blocks.TropicalFlowerBlock;
 import net.neoforged.bus.api.IEventBus;
@@ -96,6 +98,23 @@ public class ModBlocks {
     public static final DeferredBlock<TropicalFlowerBlock> SHADOW_LILY = registerBlock("shadow_lily",
             () -> new TropicalFlowerBlock(MobEffects.NIGHT_VISION, 5.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
                     .lightLevel(state -> 6)));
+
+    // Plantes carnivores de la jungle
+    public static final DeferredBlock<FlytrapBlock> FLYTRAP = registerBlock("flytrap",
+            () -> new FlytrapBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .noCollission()
+                    .strength(0.2f)
+                    .sound(SoundType.GRASS)
+                    .pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<PitcherPlantBlock> PITCHER_PLANT = registerBlock("pitcher_plant",
+            () -> new PitcherPlantBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .noCollission()
+                    .strength(0.2f)
+                    .sound(SoundType.GRASS)
+                    .randomTicks()
+                    .pushReaction(PushReaction.DESTROY)));
 
     // Pas d'item "bloc" : en cassant la noix on récupère l'item mangeable ModItems.COCONUT
     public static final DeferredBlock<CoconutBlock> COCONUT = BLOCKS.register("coconut",

@@ -30,5 +30,9 @@
   "block.examplemod.hibiscus": "Hibiscus",
   "block.examplemod.bird_of_paradise": "Oiseau de paradis",
   "block.examplemod.frangipani": "Frangipanier",
-  "block.examplemod.shadow_lily": "Lys d'ombre"
+  "block.examplemod.shadow_lily": "Lys d'ombre",
+  "block.examplemod.flytrap": "Dionée",
+  "block.examplemod.pitcher_plant": "Népenthès",
+  "item.examplemod.nectar": "Nectar de népenthès",
+  "death.attack.examplemod.flytrap": "%1$s a été dévoré par une dionée"
 }
