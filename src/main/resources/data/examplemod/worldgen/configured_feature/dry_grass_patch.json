@@ -1,3 +1,4 @@
+
 {
   "type": "minecraft:random_patch",
   "config": {
@@ -9,10 +10,21 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "examplemod:dry_grass"
-            }
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "examplemod:dry_grass"
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "examplemod:short_dry_grass"
+                },
+                "weight": 3
+              }
+            ]
           }
         }
       },

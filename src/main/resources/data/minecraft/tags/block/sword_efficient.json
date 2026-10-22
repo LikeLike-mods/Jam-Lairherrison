@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "examplemod:dry_grass"
+    "examplemod:dry_grass",
+    "examplemod:short_dry_grass"
   ]
 }

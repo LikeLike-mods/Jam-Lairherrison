@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// Brins d'herbe sèche : poussent sur le sable comme sur la terre.
 public class DryGrassBlock extends BushBlock {
     public static final MapCodec<DryGrassBlock> CODEC = simpleCodec(DryGrassBlock::new);
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);

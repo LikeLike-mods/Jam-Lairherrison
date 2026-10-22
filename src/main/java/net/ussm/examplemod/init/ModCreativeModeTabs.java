@@ -23,12 +23,13 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BROWNSTONE);
                         output.accept(ModBlocks.PALM_LOG);
                         output.accept(ModBlocks.PALM_LEAVES);
+                        output.accept(ModBlocks.DRY_GRASS);
+                        output.accept(ModBlocks.SHORT_DRY_GRASS);
                         output.accept(ModBlocks.LIGHT_SAND);
                         output.accept(ModBlocks.LIGHT_SAND_WET);
                         output.accept(ModBlocks.GREY_GRANITE);
                         output.accept(ModItems.COCONUT);
                         output.accept(ModBlocks.MESSAGE_BOTTLE);
-                        output.accept(ModBlocks.DRY_GRASS);
                     })).build());
 
     public static void register(IEventBus eventBus) {

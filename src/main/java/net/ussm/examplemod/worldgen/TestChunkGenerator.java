@@ -103,7 +103,7 @@ public class TestChunkGenerator extends ChunkGenerator {
         float islands = noise.GetNoise(posX, posZ);
         islands += 1f; islands *= lines2; islands -= 1f;
 
-        h = islands * 50f;
+        h = islands * 50f + 64f;
         return h;
     }
 
@@ -154,8 +154,8 @@ public class TestChunkGenerator extends ChunkGenerator {
                 BlockState topLand = Blocks.GRASS_BLOCK.defaultBlockState();
                 BlockState top2Land = Blocks.DIRT.defaultBlockState();
 
-                if (inRange(h, -1f, 5f * slope)) {
-                    if (inRange(h, 0f, 5f * slope)) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
+                if (inRange(h, 63f, 64f + 5f * slope)) {
+                    if (inRange(h, 64f, 64f + 5f * slope)) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
                     else topLand = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
                     top2Land = ModBlocks.LIGHT_SAND.get().defaultBlockState();
                 }
@@ -167,12 +167,12 @@ public class TestChunkGenerator extends ChunkGenerator {
 
 
                 //Building
-                while (y <= a || y <= 0) {
+                while (y <= a || y <= 64) {
                     pos.set(x, y, z);
 
                     if (y == -128) chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
                     else if (y == a) {
-                        if (y < 0) {
+                        if (y < 64) {
                             chunk.setBlockState(pos, topWater, false);
                         }
                         else {
@@ -180,7 +180,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                         }
                     }
                     else if (y == a - 1) {
-                        if (y < 0) {
+                        if (y < 64) {
                             chunk.setBlockState(pos, topWater, false);
                         }
                         else {
@@ -190,7 +190,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                     else if (y < a - 1){
                         chunk.setBlockState(pos, bottom, false);
                     }
-                    else if (y <= 0){
+                    else if (y <= 64){
                         chunk.setBlockState(pos, Blocks.WATER.defaultBlockState(), false);
                     }
 
@@ -203,12 +203,12 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getSeaLevel() {
-        return 0;
+        return 64;
     }
 
     @Override
     public int getMinY() {
-        return 0;
+        return -128;
     }
 
     @Override

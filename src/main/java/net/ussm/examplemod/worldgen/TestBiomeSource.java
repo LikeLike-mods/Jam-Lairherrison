@@ -72,8 +72,8 @@ public class TestBiomeSource extends BiomeSource {
         slope *= 2f;
         if (slope > 1f) slope = 1f;
 
-        if (h < 1) return sea;
-        if (inRange(h, -1f, 5f * slope)) return shore;
+        if (h < 65) return sea;
+        if (inRange(h, 63f, 64f + 5f * slope)) return shore;
         return inland;
     }
 }

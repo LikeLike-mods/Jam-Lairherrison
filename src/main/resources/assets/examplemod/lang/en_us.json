@@ -6,11 +6,12 @@
   "block.examplemod.light_sand_wet": "Wet light sand",
   "block.examplemod.palm_leaves": "Palm leaves",
   "block.examplemod.grey_granite": "Grey granite",
-  "biome.examplemod.tropical_ocean": "Tropical Ocean",
-  "biome.examplemod.tropical_beach": "Tropical Beach",
-  "biome.examplemod.palm_jungle": "Palm Jungle",
+  "biome.examplemod.tropical_ocean": "Tropical ocean",
+  "biome.examplemod.tropical_beach": "Tropical beach",
+  "biome.examplemod.palm_jungle": "Palm jungle",
   "item.examplemod.coconut": "Coconut",
   "block.examplemod.coconut": "Coconut",
   "block.examplemod.message_bottle": "Washed-up Bottle",
-  "block.examplemod.dry_grass": "Dry Grass"
+  "block.examplemod.dry_grass": "Dry grass",
+  "block.examplemod.short_dry_grass" : "Short dry grass"
 }

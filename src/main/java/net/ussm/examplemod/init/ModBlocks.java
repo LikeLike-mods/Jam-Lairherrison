@@ -17,6 +17,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
+import net.ussm.examplemod.blocks.ShortDryGrassBlock;
 
 import java.util.function.Supplier;
 
@@ -36,7 +37,6 @@ public class ModBlocks {
                     .strength(1.8f, 6f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.DEEPSLATE)));
-    // Bois, sable et feuilles se récoltent à la main comme en vanilla (le bon outil va juste plus vite)
     public static final DeferredBlock<Block> PALM_LOG = registerBlock("palm_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.TERRACOTTA_BROWN)
@@ -56,8 +56,6 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PALM_LEAVES = registerBlock("palm_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LEAVES)
                     .sound(SoundType.AZALEA_LEAVES)));
-
-    // L'item ne s'obtient qu'en créatif : en survie la bouteille se casse toujours en lâchant son butin
     public static final DeferredBlock<MessageBottleBlock> MESSAGE_BOTTLE = registerBlock("message_bottle",
             () -> new MessageBottleBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.NONE)
@@ -75,7 +73,16 @@ public class ModBlocks {
                     .offsetType(BlockBehaviour.OffsetType.XZ)
                     .ignitedByLava()
                     .pushReaction(PushReaction.DESTROY)));
-    // Pas d'item "bloc" : en cassant la noix on récupère l'item mangeable ModItems.COCONUT
+    public static final DeferredBlock<ShortDryGrassBlock> SHORT_DRY_GRASS = registerBlock("short_dry_grass",
+            () -> new ShortDryGrassBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.SAND)
+                    .replaceable()
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                    .ignitedByLava()
+                    .pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<CoconutBlock> COCONUT = BLOCKS.register("coconut",
             () -> new CoconutBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BROWN)

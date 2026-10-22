@@ -21,15 +21,18 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.examplemod.init.ModItems;
 
-// Noix de coco : pend sous les feuilles d'un palmier, tombe quand elle est mûre ou quand on casse les feuilles,
-// et reste posée sur le sable une fois tombée.
 public class CoconutBlock extends Block implements Fallable {
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
-    private static final VoxelShape HANGING_SHAPE = Block.box(5, 8, 5, 11, 14, 11);
-    private static final VoxelShape GROUND_SHAPE = Block.box(5, 0, 5, 11, 6, 11);
+    private static final VoxelShape HANGING_SHAPE = round(8);
+    private static final VoxelShape GROUND_SHAPE = round(0);
+
+    private static VoxelShape round(int y) {
+        return Shapes.or(Block.box(5, y + 1, 6, 11, y + 5, 10), Block.box(6, y + 1, 5, 10, y + 5, 11), Block.box(6, y, 6, 10, y + 6, 10));
+    }
 
     public CoconutBlock(Properties properties) {
         super(properties);
@@ -81,7 +84,6 @@ public class CoconutBlock extends Block implements Fallable {
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        // de temps en temps, une noix mûre se détache toute seule
         if (random.nextInt(45) == 0 && level.isEmptyBlock(pos.below())) {
             fall(level, pos, state);
         }
@@ -89,7 +91,7 @@ public class CoconutBlock extends Block implements Fallable {
 
     private static void fall(ServerLevel level, BlockPos pos, BlockState state) {
         FallingBlockEntity coconut = FallingBlockEntity.fall(level, pos, state);
-        coconut.setHurtsEntities(1.0F, 3);   // bonk : jusqu'à un cœur et demi sur la tête
+        coconut.setHurtsEntities(1.0F, 3);
     }
 
     @Override
