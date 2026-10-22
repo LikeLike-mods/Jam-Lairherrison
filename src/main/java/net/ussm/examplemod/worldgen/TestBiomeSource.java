@@ -43,7 +43,7 @@ public class TestBiomeSource extends BiomeSource {
 
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.of(sea, shore, mountain);
+        return Stream.of(sea, shore, inland, mountain);
     }
 
     private boolean inRange(float t, float a, float b) {

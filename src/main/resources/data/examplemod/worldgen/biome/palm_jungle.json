@@ -1,6 +1,6 @@
 {
   "carvers": {},
-  "downfall": 0.0,
+  "downfall": 0.5,
   "effects": {
     "fog_color": 12638463,
     "mood_sound": {
@@ -17,17 +17,12 @@
     },
     "sky_color": 8103167,
     "water_color": 4445678,
-    "water_fog_color": 270131
+    "water_fog_color": 270131,
+    "grass_color": 5884220,
+    "foliage_color": 3193611
   },
   "features": [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
+    [], [], [], [], [], [], [], [],
     ["minecraft:spring_water"],
     [
       "minecraft:trees_jungle",

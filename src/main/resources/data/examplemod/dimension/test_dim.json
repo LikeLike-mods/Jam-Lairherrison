@@ -4,9 +4,9 @@
     "type": "examplemod:test_chunk_generator",
     "biome_source": {
       "type": "examplemod:test_biome_source",
-      "sea": "minecraft:warm_ocean",
-      "shore": "minecraft:beach",
-      "inland": "minecraft:jungle",
+      "sea": "examplemod:tropical_ocean",
+      "shore": "examplemod:tropical_beach",
+      "inland": "examplemod:palm_jungle",
       "mountain": "minecraft:badlands"
     }
   },
