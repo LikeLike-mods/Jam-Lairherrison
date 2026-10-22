@@ -17,7 +17,7 @@ public class ModCreativeModeTabs {
 
     public static final Supplier<CreativeModeTab> BLOCKS = CREATIVE_MODE_TAB.register("blocks",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(Items.MILK_BUCKET))
+                    .icon(() -> new ItemStack(ModBlocks.PALM_LOG.get()))
                     .title(Component.translatable("creativetab.examplemod.blocks"))
                     .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(ModBlocks.BROWNSTONE);
@@ -25,6 +25,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.PALM_LEAVES);
                         output.accept(ModBlocks.LIGHT_SAND);
                         output.accept(ModBlocks.LIGHT_SAND_WET);
+                        output.accept(ModBlocks.GREY_GRANITE);
+                        output.accept(ModItems.COCONUT);
+                        output.accept(ModBlocks.MESSAGE_BOTTLE);
+                        output.accept(ModBlocks.DRY_GRASS);
                     })).build());
 
     public static void register(IEventBus eventBus) {

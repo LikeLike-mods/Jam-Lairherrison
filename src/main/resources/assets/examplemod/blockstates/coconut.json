@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=true": {
+      "model": "examplemod:block/coconut_hanging"
+    },
+    "hanging=false": {
+      "model": "examplemod:block/coconut"
+    }
+  }
+}

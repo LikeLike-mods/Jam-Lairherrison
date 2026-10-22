@@ -5,6 +5,7 @@ import net.ussm.examplemod.init.ModCreativeModeTabs;
 import net.ussm.examplemod.init.ModItems;
 import net.ussm.examplemod.init.ModBiomeSources;
 import net.ussm.examplemod.init.ModChunkGenerators;
+import net.ussm.examplemod.init.ModFeatures;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -43,6 +44,7 @@ public class ExampleMod {
         ModBlocks.BLOCKS.register(modEventBus);
         ModChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
         ModBiomeSources.BIOME_SOURCES.register(modEventBus);
+        ModFeatures.FEATURES.register(modEventBus);
 
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);

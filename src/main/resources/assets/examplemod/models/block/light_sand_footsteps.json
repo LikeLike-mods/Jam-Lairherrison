@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "examplemod:block/light_sand_footsteps"
+    "top": "examplemod:block/light_sand_footsteps",
+    "side": "examplemod:block/light_sand_wet",
+    "bottom": "examplemod:block/light_sand_wet"
   }
 }

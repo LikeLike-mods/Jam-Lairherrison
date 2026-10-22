@@ -1,0 +1,16 @@
+{
+  "creativetab.examplemod.blocks": "Blocks",
+  "block.examplemod.brownstone": "Grès marron",
+  "block.examplemod.palm_log": "Bûche de palmier",
+  "block.examplemod.light_sand": "Sable clair",
+  "block.examplemod.light_sand_wet": "Sable clair mouillé",
+  "block.examplemod.palm_leaves": "Feuilles de palmier",
+  "block.examplemod.grey_granite": "Granite gris",
+  "biome.examplemod.tropical_ocean": "Océan tropical",
+  "biome.examplemod.tropical_beach": "Plage tropicale",
+  "biome.examplemod.palm_jungle": "Jungle de palmiers",
+  "item.examplemod.coconut": "Noix de coco",
+  "block.examplemod.coconut": "Noix de coco",
+  "block.examplemod.message_bottle": "Bouteille échouée",
+  "block.examplemod.dry_grass": "Herbe sèche"
+}

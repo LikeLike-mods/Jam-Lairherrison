@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "examplemod:gameplay/message_bottle"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "examplemod:blocks/message_bottle"
+}

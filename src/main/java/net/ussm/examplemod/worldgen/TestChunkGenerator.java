@@ -162,14 +162,16 @@ public class TestChunkGenerator extends ChunkGenerator {
 
                 BlockState topWater = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
 
-                BlockState bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
+                BlockState rock = ModBlocks.BROWNSTONE.get().defaultBlockState();
+                BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
 
 
                 //Building
                 while (y <= a || y <= 0) {
                     pos.set(x, y, z);
 
-                    if (y == a) {
+                    if (y == -128) chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
+                    else if (y == a) {
                         if (y < 0) {
                             chunk.setBlockState(pos, topWater, false);
                         }

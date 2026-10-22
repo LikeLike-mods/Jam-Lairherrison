@@ -2,7 +2,6 @@
   "carvers": {},
   "downfall": 0.5,
   "effects": {
-    "fog_color": 12638463,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -15,22 +14,41 @@
       "replace_current_music": false,
       "sound": "minecraft:music.overworld.jungle"
     },
-    "sky_color": 8103167,
+    "sky_color": 16746815,
+    "fog_color": 15180488,
     "water_color": 4445678,
     "water_fog_color": 270131,
     "grass_color": 5884220,
-    "foliage_color": 3193611
+    "foliage_color": 3193611,
+    "particle": {
+      "options": {
+        "type": "minecraft:spore_blossom_air"
+      },
+      "probability": 0.004
+    }
   },
   "features": [
-    [], [], [], [], [], [], [], [],
-    ["minecraft:spring_water"],
+    [],
+    [],
     [
-      "minecraft:trees_jungle",
-      "minecraft:flower_warm",
-      "minecraft:patch_grass_jungle",
-      "minecraft:patch_sugar_cane",
-      "minecraft:vines"
+      "examplemod:grey_granite_boulder",
+      "examplemod:fallen_palm"
     ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:spring_water"
+    ],
+    [
+      "examplemod:palm_tree_jungle",
+      "examplemod:palm_bush",
+      "minecraft:flower_warm",
+      "minecraft:patch_grass_jungle"
+    ],
+    [],
     []
   ],
   "has_precipitation": true,

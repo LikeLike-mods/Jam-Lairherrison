@@ -1,8 +1,16 @@
 {
-  "creativetab.examplemod.blocks" : "Blocks",
-  "block.examplemod.brownstone" : "Brownstone",
-  "block.examplemod.palm_log" : "Palm log",
-  "block.examplemod.light_sand" : "Light sand",
-  "block.examplemod.light_sand_wet" : "Wet light sand",
-  "block.examplemod.palm_leaves" : "Palm leaves"
+  "creativetab.examplemod.blocks": "Blocks",
+  "block.examplemod.brownstone": "Brownstone",
+  "block.examplemod.palm_log": "Palm log",
+  "block.examplemod.light_sand": "Light sand",
+  "block.examplemod.light_sand_wet": "Wet light sand",
+  "block.examplemod.palm_leaves": "Palm leaves",
+  "block.examplemod.grey_granite": "Grey granite",
+  "biome.examplemod.tropical_ocean": "Tropical Ocean",
+  "biome.examplemod.tropical_beach": "Tropical Beach",
+  "biome.examplemod.palm_jungle": "Palm Jungle",
+  "item.examplemod.coconut": "Coconut",
+  "block.examplemod.coconut": "Coconut",
+  "block.examplemod.message_bottle": "Washed-up Bottle",
+  "block.examplemod.dry_grass": "Dry Grass"
 }
