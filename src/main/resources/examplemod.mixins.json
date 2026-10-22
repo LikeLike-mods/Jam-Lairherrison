@@ -3,6 +3,9 @@
   "package": "net.ussm.examplemod.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
+  "client": [
+    "client.ItemInHandRendererMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

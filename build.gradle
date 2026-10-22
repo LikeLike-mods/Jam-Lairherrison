@@ -27,7 +27,10 @@ sourceSets.main.resources {
 }
 
 repositories {
-    // Add here additional repositories if required by some of the dependencies below.
+    maven {
+        name = "GeckoLib"
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+    }
 }
 
 base {
@@ -127,6 +130,7 @@ dependencies {
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation "blank:coolmod-${mc_version}:${coolmod_version}"
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
 
     // Example mod dependency using a file as dependency
     // implementation files("libs/coolmod-${mc_version}-${coolmod_version}.jar")
@@ -179,6 +183,26 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+def maskVerificationSources = sourceSets.create('maskVerification') {
+    compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+}
+
+def verifyMaskTargets = tasks.register('verifyMaskTargets', JavaExec) {
+    group = 'verification'
+    description = 'Verifies configurable mask targets and control bone exclusions.'
+    dependsOn tasks.named(maskVerificationSources.classesTaskName)
+    classpath = maskVerificationSources.runtimeClasspath
+    mainClass = 'net.ussm.examplemod.client.mask.MaskTargetSelectionTest'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.named('check').configure {
+    dependsOn verifyMaskTargets
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

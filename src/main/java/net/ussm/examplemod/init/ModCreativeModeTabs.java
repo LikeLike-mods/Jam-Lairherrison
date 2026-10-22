@@ -21,7 +21,9 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.exemplemod.test"))
                     .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(ModBlock.SAINT_TEST_BLOCK);
-
+                        output.accept(ModItem.SHADOW_SABER_SWORD);
+                        output.accept(ModItem.SHADOW_SABER_SWORD_VIOLET);
+                        output.accept(ModItem.LIGHT_SABER_SWORD);
                     })).build());
 
     public static void register(IEventBus eventBus) {

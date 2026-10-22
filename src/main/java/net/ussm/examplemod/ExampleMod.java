@@ -3,6 +3,8 @@ package net.ussm.examplemod;
 import net.ussm.examplemod.init.ModBlock;
 import net.ussm.examplemod.init.ModCreativeModeTabs;
 import net.ussm.examplemod.init.ModItem;
+import net.ussm.examplemod.init.ModComponents;
+import net.ussm.examplemod.init.ModSounds;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -39,6 +41,8 @@ public class ExampleMod {
         ModCreativeModeTabs.register(modEventBus);
         ModItem.register(modEventBus);
         ModBlock.register(modEventBus);
+        ModComponents.register(modEventBus);
+        ModSounds.register(modEventBus);
 
 
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.

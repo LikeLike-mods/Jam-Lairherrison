@@ -1,0 +1,6 @@
+{
+  "parent": "examplemod:item/lightsaber_sickle",
+  "textures": {
+    "particle": "examplemod:item/lightsaber_light_sickle"
+  }
+}
