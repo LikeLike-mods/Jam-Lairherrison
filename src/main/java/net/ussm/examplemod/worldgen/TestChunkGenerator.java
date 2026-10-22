@@ -24,6 +24,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.blending.Blender;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import net.ussm.examplemod.init.ModBlocks;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -102,10 +103,6 @@ public class TestChunkGenerator extends ChunkGenerator {
         float islands = noise.GetNoise(posX, posZ);
         islands += 1f; islands *= lines2; islands -= 1f;
 
-        float mountains = Math.clamp(islands * 2f - 1f, 0f, 1f);
-
-        islands += mountains;
-
         h = islands * 50f;
         return h;
     }
@@ -158,13 +155,14 @@ public class TestChunkGenerator extends ChunkGenerator {
                 BlockState top2Land = Blocks.DIRT.defaultBlockState();
 
                 if (inRange(h, -1f, 5f * slope)) {
-                    topLand = Blocks.SAND.defaultBlockState();
-                    top2Land = Blocks.SAND.defaultBlockState();
+                    if (inRange(h, 0f, 5f * slope)) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
+                    else topLand = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
+                    top2Land = ModBlocks.LIGHT_SAND.get().defaultBlockState();
                 }
 
-                BlockState topWater = Blocks.SAND.defaultBlockState();
+                BlockState topWater = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
 
-                BlockState bottom = Blocks.STONE.defaultBlockState();
+                BlockState bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
 
 
                 //Building

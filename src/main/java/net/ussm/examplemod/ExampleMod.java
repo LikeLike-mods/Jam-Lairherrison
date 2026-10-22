@@ -1,10 +1,10 @@
 package net.ussm.examplemod;
 
-import net.ussm.examplemod.init.ModBlock;
+import net.ussm.examplemod.init.ModBlocks;
 import net.ussm.examplemod.init.ModCreativeModeTabs;
-import net.ussm.examplemod.init.ModItem;
-import net.ussm.examplemod.worldgen.BiomeSources;
-import net.ussm.examplemod.worldgen.ChunkGenerators;
+import net.ussm.examplemod.init.ModItems;
+import net.ussm.examplemod.init.ModBiomeSources;
+import net.ussm.examplemod.init.ModChunkGenerators;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -39,13 +39,12 @@ public class ExampleMod {
         modEventBus.addListener(this::commonSetup);
 
         ModCreativeModeTabs.register(modEventBus);
-        ModItem.register(modEventBus);
-        ModBlock.register(modEventBus);
-
+        ModItems.ITEMS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
+        ModBiomeSources.BIOME_SOURCES.register(modEventBus);
 
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
-        ChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
-        BiomeSources.BIOME_SOURCES.register(modEventBus);
         NeoForge.EVENT_BUS.register(this);
 
         // Register the item to a creative tab
@@ -69,15 +68,11 @@ public class ExampleMod {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            ModItem.SAINT_ITEM_TEST.get();
-            ModBlock.SAINT_TEST_BLOCK.get();
-        }
     }
 
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        LOGGER.info("Oui oui croissant baguette");
+        LOGGER.info("Meurt pourriture communiste !");
     }
 }

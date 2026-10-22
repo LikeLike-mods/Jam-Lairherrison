@@ -1,0 +1,60 @@
+{
+  "variants": {
+    "": [
+      { "model": "examplemod:block/light_sand_wet", "x": 0, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet", "x": 90, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet", "x": 180, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet", "x": 270, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet", "x": 0, "y": 90, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet", "x": 0, "y": 180, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet", "x": 0, "y": 270, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet", "x": 0, "y": 0, "z": 90 },
+      { "model": "examplemod:block/light_sand_wet", "x": 0, "y": 0, "z": 180 },
+      { "model": "examplemod:block/light_sand_wet", "x": 0, "y": 0, "z": 270 },
+
+      { "model": "examplemod:block/light_sand_wet2", "x": 0, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 90, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 180, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 270, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 0, "y": 90, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 0, "y": 180, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 0, "y": 270, "z": 0 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 0, "y": 0, "z": 90 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 0, "y": 0, "z": 180 },
+      { "model": "examplemod:block/light_sand_wet2", "x": 0, "y": 0, "z": 270 },
+
+      { "model": "examplemod:block/light_sand_rocks", "x": 0, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 90, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 180, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 270, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 0, "y": 90, "z": 0 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 0, "y": 180, "z": 0 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 0, "y": 270, "z": 0 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 0, "y": 0, "z": 90 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 0, "y": 0, "z": 180 },
+      { "model": "examplemod:block/light_sand_rocks", "x": 0, "y": 0, "z": 270 },
+
+      { "model": "examplemod:block/light_sand_footsteps", "x": 0, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 90, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 180, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 270, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 0, "y": 90, "z": 0 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 0, "y": 180, "z": 0 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 0, "y": 270, "z": 0 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 0, "y": 0, "z": 90 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 0, "y": 0, "z": 180 },
+      { "model": "examplemod:block/light_sand_footsteps", "x": 0, "y": 0, "z": 270 },
+
+      { "model": "examplemod:block/light_sand_shell", "x": 0, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_shell", "x": 90, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_shell", "x": 180, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_shell", "x": 270, "y": 0, "z": 0 },
+      { "model": "examplemod:block/light_sand_shell", "x": 0, "y": 90, "z": 0 },
+      { "model": "examplemod:block/light_sand_shell", "x": 0, "y": 180, "z": 0 },
+      { "model": "examplemod:block/light_sand_shell", "x": 0, "y": 270, "z": 0 },
+      { "model": "examplemod:block/light_sand_shell", "x": 0, "y": 0, "z": 90 },
+      { "model": "examplemod:block/light_sand_shell", "x": 0, "y": 0, "z": 180 },
+      { "model": "examplemod:block/light_sand_shell", "x": 0, "y": 0, "z": 270 }
+    ]
+  }
+}

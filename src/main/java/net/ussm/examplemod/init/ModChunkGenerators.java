@@ -1,14 +1,15 @@
-package net.ussm.examplemod.worldgen;
+package net.ussm.examplemod.init;
 
 import net.ussm.examplemod.ExampleMod;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.ussm.examplemod.worldgen.TestChunkGenerator;
 
 import java.util.function.Supplier;
 
-public class ChunkGenerators {
+public class ModChunkGenerators {
     public static final DeferredRegister<MapCodec<? extends ChunkGenerator>> CHUNK_GENERATORS =
             DeferredRegister.create(Registries.CHUNK_GENERATOR, ExampleMod.MOD_ID);
 

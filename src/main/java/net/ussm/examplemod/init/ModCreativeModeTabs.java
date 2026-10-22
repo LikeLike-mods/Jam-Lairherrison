@@ -15,13 +15,16 @@ public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ExampleMod.MOD_ID);
 
-    public static final Supplier<CreativeModeTab> TEST_TAB = CREATIVE_MODE_TAB.register("test_tab",
+    public static final Supplier<CreativeModeTab> BLOCKS = CREATIVE_MODE_TAB.register("blocks",
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(Items.MILK_BUCKET))
-                    .title(Component.translatable("creativetab.exemplemod.test"))
+                    .title(Component.translatable("creativetab.examplemod.blocks"))
                     .displayItems(((itemDisplayParameters, output) -> {
-                        output.accept(ModBlock.SAINT_TEST_BLOCK);
-
+                        output.accept(ModBlocks.BROWNSTONE);
+                        output.accept(ModBlocks.PALM_LOG);
+                        output.accept(ModBlocks.PALM_LEAVES);
+                        output.accept(ModBlocks.LIGHT_SAND);
+                        output.accept(ModBlocks.LIGHT_SAND_WET);
                     })).build());
 
     public static void register(IEventBus eventBus) {

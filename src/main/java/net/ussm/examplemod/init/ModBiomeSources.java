@@ -1,14 +1,15 @@
-package net.ussm.examplemod.worldgen;
+package net.ussm.examplemod.init;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
+import net.ussm.examplemod.worldgen.TestBiomeSource;
 
 import java.util.function.Supplier;
 
-public class BiomeSources {
+public class ModBiomeSources {
     public static final DeferredRegister<MapCodec<? extends BiomeSource>> BIOME_SOURCES =
             DeferredRegister.create(Registries.BIOME_SOURCE, ExampleMod.MOD_ID);
 

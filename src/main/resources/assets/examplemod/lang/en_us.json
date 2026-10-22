@@ -1,13 +1,8 @@
 {
-  "itemGroup.examplemod": "Example Mod Tab",
-  "block.examplemod.example_block": "Example Block",
-  "item.examplemod.example_item": "Example Item",
-
-  "examplemod.configuration.title": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml.title": "Example Mod Configs",
-  "examplemod.configuration.items": "Item List",
-  "examplemod.configuration.logDirtBlock": "Log Dirt Block",
-  "examplemod.configuration.magicNumberIntroduction": "Magic Number Text",
-  "examplemod.configuration.magicNumber": "Magic Number"
+  "creativetab.examplemod.blocks" : "Blocks",
+  "block.examplemod.brownstone" : "Brownstone",
+  "block.examplemod.palm_log" : "Palm log",
+  "block.examplemod.light_sand" : "Light sand",
+  "block.examplemod.light_sand_wet" : "Wet light sand",
+  "block.examplemod.palm_leaves" : "Palm leaves"
 }
