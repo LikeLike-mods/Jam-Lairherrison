@@ -30,6 +30,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.GREY_GRANITE);
                         output.accept(ModItems.COCONUT);
                         output.accept(ModBlocks.MESSAGE_BOTTLE);
+                        output.accept(ModBlocks.HIBISCUS);
+                        output.accept(ModBlocks.BIRD_OF_PARADISE);
+                        output.accept(ModBlocks.FRANGIPANI);
+                        output.accept(ModBlocks.SHADOW_LILY);
                     })).build());
 
     public static void register(IEventBus eventBus) {

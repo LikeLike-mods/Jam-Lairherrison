@@ -45,7 +45,8 @@
     [
       "examplemod:palm_tree_jungle",
       "minecraft:flower_warm",
-      "minecraft:patch_grass_jungle"
+      "minecraft:patch_grass_jungle",
+      "examplemod:jungle_flowers"
     ],
     [],
     []

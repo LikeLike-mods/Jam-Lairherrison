@@ -1,5 +1,6 @@
 package net.ussm.examplemod.init;
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.ussm.examplemod.blocks.CoconutBlock;
 import net.ussm.examplemod.blocks.DryGrassBlock;
 import net.ussm.examplemod.blocks.MessageBottleBlock;
+import net.ussm.examplemod.blocks.TropicalFlowerBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -83,6 +85,19 @@ public class ModBlocks {
                     .offsetType(BlockBehaviour.OffsetType.XZ)
                     .ignitedByLava()
                     .pushReaction(PushReaction.DESTROY)));
+
+    // Fleurs de l'atoll (poussent aussi sur le sable) ; le lys d'ombre brille un peu la nuit
+    public static final DeferredBlock<TropicalFlowerBlock> HIBISCUS = registerBlock("hibiscus",
+            () -> new TropicalFlowerBlock(MobEffects.REGENERATION, 8.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)));
+    public static final DeferredBlock<TropicalFlowerBlock> BIRD_OF_PARADISE = registerBlock("bird_of_paradise",
+            () -> new TropicalFlowerBlock(MobEffects.MOVEMENT_SPEED, 6.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)));
+    public static final DeferredBlock<TropicalFlowerBlock> FRANGIPANI = registerBlock("frangipani",
+            () -> new TropicalFlowerBlock(MobEffects.SATURATION, 0.35f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)));
+    public static final DeferredBlock<TropicalFlowerBlock> SHADOW_LILY = registerBlock("shadow_lily",
+            () -> new TropicalFlowerBlock(MobEffects.NIGHT_VISION, 5.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
+                    .lightLevel(state -> 6)));
+
+    // Pas d'item "bloc" : en cassant la noix on récupère l'item mangeable ModItems.COCONUT
     public static final DeferredBlock<CoconutBlock> COCONUT = BLOCKS.register("coconut",
             () -> new CoconutBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BROWN)

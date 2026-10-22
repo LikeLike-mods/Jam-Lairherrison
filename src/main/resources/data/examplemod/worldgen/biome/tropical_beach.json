@@ -32,7 +32,8 @@
       "minecraft:patch_sugar_cane",
       "examplemod:message_bottle",
       "examplemod:driftwood",
-      "examplemod:dry_grass_patch"
+      "examplemod:dry_grass_patch",
+      "examplemod:beach_flowers"
     ],
     []
   ],

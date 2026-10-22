@@ -26,5 +26,9 @@
   "entity.examplemod.gulper_eel": "Grandgousier",
   "entity.examplemod.dragonfish": "Poisson-dragon",
   "entity.examplemod.giant_isopod": "Isopode géant",
-  "entity.examplemod.vampire_squid": "Calmar vampire"
+  "entity.examplemod.vampire_squid": "Calmar vampire",
+  "block.examplemod.hibiscus": "Hibiscus",
+  "block.examplemod.bird_of_paradise": "Oiseau de paradis",
+  "block.examplemod.frangipani": "Frangipanier",
+  "block.examplemod.shadow_lily": "Lys d'ombre"
 }

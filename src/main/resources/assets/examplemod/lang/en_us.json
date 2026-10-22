@@ -26,5 +26,9 @@
   "entity.examplemod.gulper_eel": "Gulper Eel",
   "entity.examplemod.dragonfish": "Dragonfish",
   "entity.examplemod.giant_isopod": "Giant Isopod",
-  "entity.examplemod.vampire_squid": "Vampire Squid"
+  "entity.examplemod.vampire_squid": "Vampire Squid",
+  "block.examplemod.hibiscus": "Hibiscus",
+  "block.examplemod.bird_of_paradise": "Bird of Paradise",
+  "block.examplemod.frangipani": "Frangipani",
+  "block.examplemod.shadow_lily": "Shadow Lily"
 }
