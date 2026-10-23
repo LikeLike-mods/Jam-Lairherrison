@@ -1,8 +1,9 @@
 package net.ussm.examplemod;
 
-import net.ussm.examplemod.init.ModBlock;
+import net.ussm.examplemod.init.ModBlocks;
 import net.ussm.examplemod.init.ModCreativeModeTabs;
-import net.ussm.examplemod.init.ModItem;
+import net.ussm.examplemod.init.ModEntities;
+import net.ussm.examplemod.init.ModItems;
 import net.ussm.examplemod.init.ModComponents;
 import net.ussm.examplemod.init.ModSounds;
 import org.slf4j.Logger;
@@ -39,8 +40,9 @@ public class ExampleMod {
         modEventBus.addListener(this::commonSetup);
 
         ModCreativeModeTabs.register(modEventBus);
-        ModItem.register(modEventBus);
-        ModBlock.register(modEventBus);
+        ModEntities.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
         ModComponents.register(modEventBus);
         ModSounds.register(modEventBus);
 
@@ -70,8 +72,8 @@ public class ExampleMod {
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            ModItem.SAINT_ITEM_TEST.get();
-            ModBlock.SAINT_TEST_BLOCK.get();
+            ModItems.SAINT_ITEM_TEST.get();
+            ModBlocks.SAINT_TEST_BLOCK.get();
         }
     }
 

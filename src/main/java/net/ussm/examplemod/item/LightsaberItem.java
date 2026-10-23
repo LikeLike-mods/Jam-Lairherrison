@@ -4,18 +4,28 @@ import net.ussm.examplemod.init.ModComponents;
 import net.ussm.examplemod.init.ModSounds;
 import net.ussm.examplemod.client.LightsaberRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -36,7 +46,7 @@ import java.util.function.Supplier;
  *  - When Off       : 0 dmg bonus
  */
 
-public class LightsaberItem extends SwordItem implements GeoItem {
+public class LightsaberItem extends Item implements GeoItem {
     private static final RawAnimation BLADE_ON = RawAnimation.begin().thenPlayAndHold("on");
     private static final RawAnimation BLADE_OFF = RawAnimation.begin().thenPlayAndHold("off");
 
@@ -46,17 +56,24 @@ public class LightsaberItem extends SwordItem implements GeoItem {
     private final ItemAttributeModifiers activeAttributes;
     private final Supplier<? extends Item> nextForm;
 
-    public LightsaberItem(String modelName, int attackDamage, float attackSpeed,
+    public LightsaberItem(String modelName, int attackDamageBonus, float attackSpeed,
                            Supplier<? extends Item> nextForm, Item.Properties properties) {
-        this(modelName, modelName, attackDamage, attackSpeed, nextForm, properties);
+        this(modelName, modelName, attackDamageBonus, attackSpeed, nextForm, properties);
     }
 
-    public LightsaberItem(String modelName, String textureName, int attackDamage, float attackSpeed,
+    public LightsaberItem(String modelName, String textureName, int attackDamageBonus, float attackSpeed,
                                Supplier<? extends Item> nextForm, Item.Properties properties) {
-        super(Tiers.NETHERITE, properties);
+        super(properties.component(DataComponents.TOOL, SwordItem.createToolProperties()));
         this.modelName = modelName;
         this.textureName = textureName;
-        this.activeAttributes = SwordItem.createAttributes(Tiers.NETHERITE, attackDamage, attackSpeed);
+        this.activeAttributes = ItemAttributeModifiers.builder()
+                .add(Attributes.ATTACK_DAMAGE,
+                        new AttributeModifier(BASE_ATTACK_DAMAGE_ID, attackDamageBonus, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED,
+                        new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND)
+                .build();
         this.nextForm = nextForm;
 
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -99,6 +116,31 @@ public class LightsaberItem extends SwordItem implements GeoItem {
     @Override
     public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
         return isActive(stack) ? this.activeAttributes : ItemAttributeModifiers.EMPTY;
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        return false;
+    }
+
+    @Override
+    public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
+        return !player.isCreative();
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        return true;
+    }
+
+    @Override
+    public boolean canPerformAction(ItemStack stack, ItemAbility ability) {
+        return ItemAbilities.DEFAULT_SWORD_ACTIONS.contains(ability);
     }
 
     @Override

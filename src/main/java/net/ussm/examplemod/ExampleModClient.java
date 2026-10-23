@@ -9,6 +9,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.ussm.examplemod.client.LeviathanRenderer;
+import net.ussm.examplemod.init.ModEntities;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = ExampleMod.MOD_ID, dist = Dist.CLIENT)
@@ -20,6 +23,11 @@ public class ExampleModClient {
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
         // Do not forget to add translations for your config options to the en_us.json file.
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+    }
+
+    @SubscribeEvent
+    static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.LEVIATHAN.get(), LeviathanRenderer::new);
     }
 
     @SubscribeEvent

@@ -13,7 +13,7 @@ import net.ussm.examplemod.ExampleMod;
 import java.util.function.Supplier;
 
 
-public class ModBlock {
+public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ExampleMod.MOD_ID);
 
     public static final DeferredBlock<Block> SAINT_TEST_BLOCK = registerBlock("saint_test_block",
@@ -29,7 +29,7 @@ public class ModBlock {
 
 
     private static <T extends Block> void registerBlockItem(String name,DeferredBlock<T> block) {
-        ModItem.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void register(IEventBus eventBus) {
