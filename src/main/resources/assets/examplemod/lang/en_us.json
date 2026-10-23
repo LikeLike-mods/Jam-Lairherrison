@@ -13,5 +13,18 @@
   "block.examplemod.coconut": "Coconut",
   "block.examplemod.message_bottle": "Washed-up Bottle",
   "block.examplemod.dry_grass": "Dry grass",
-  "block.examplemod.short_dry_grass" : "Short dry grass"
+  "block.examplemod.short_dry_grass" : "Short dry grass",
+  "entity.examplemod.butterfly": "Butterfly",
+  "entity.examplemod.crab": "Crab",
+  "entity.examplemod.gecko": "Gecko",
+  "entity.examplemod.hermit_crab": "Hermit Crab",
+  "entity.examplemod.jellyfish": "Jellyfish",
+  "entity.examplemod.poison_frog": "Poison Dart Frog",
+  "entity.examplemod.seagull": "Seagull",
+  "entity.examplemod.toucan": "Toucan",
+  "entity.examplemod.abyssal_angler": "Abyssal Anglerfish",
+  "entity.examplemod.gulper_eel": "Gulper Eel",
+  "entity.examplemod.dragonfish": "Dragonfish",
+  "entity.examplemod.giant_isopod": "Giant Isopod",
+  "entity.examplemod.vampire_squid": "Vampire Squid"
 }

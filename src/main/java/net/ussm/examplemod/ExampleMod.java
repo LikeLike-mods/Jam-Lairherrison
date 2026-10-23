@@ -2,6 +2,7 @@ package net.ussm.examplemod;
 
 import net.ussm.examplemod.init.ModBlocks;
 import net.ussm.examplemod.init.ModCreativeModeTabs;
+import net.ussm.examplemod.init.ModEntities;
 import net.ussm.examplemod.init.ModItems;
 import net.ussm.examplemod.init.ModBiomeSources;
 import net.ussm.examplemod.init.ModChunkGenerators;
@@ -45,6 +46,7 @@ public class ExampleMod {
         ModChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
         ModBiomeSources.BIOME_SOURCES.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
+        ModEntities.register(modEventBus);
 
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);

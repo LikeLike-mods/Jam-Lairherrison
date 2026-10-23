@@ -13,5 +13,18 @@
   "block.examplemod.coconut": "Noix de coco",
   "block.examplemod.message_bottle": "Bouteille échouée",
   "block.examplemod.dry_grass": "Herbes sèches",
-  "block.examplemod.short_dry_grass" : "Herbes sèches courtes"
+  "block.examplemod.short_dry_grass" : "Herbes sèches courtes",
+  "entity.examplemod.butterfly": "Papillon",
+  "entity.examplemod.crab": "Crabe",
+  "entity.examplemod.gecko": "Gecko",
+  "entity.examplemod.hermit_crab": "Bernard-l'ermite",
+  "entity.examplemod.jellyfish": "Méduse",
+  "entity.examplemod.poison_frog": "Grenouille dendrobate",
+  "entity.examplemod.seagull": "Mouette",
+  "entity.examplemod.toucan": "Toucan",
+  "entity.examplemod.abyssal_angler": "Baudroie des abysses",
+  "entity.examplemod.gulper_eel": "Grandgousier",
+  "entity.examplemod.dragonfish": "Poisson-dragon",
+  "entity.examplemod.giant_isopod": "Isopode géant",
+  "entity.examplemod.vampire_squid": "Calmar vampire"
 }
