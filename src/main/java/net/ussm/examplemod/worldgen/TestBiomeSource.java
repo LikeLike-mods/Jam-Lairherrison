@@ -63,11 +63,11 @@ public class TestBiomeSource extends BiomeSource {
         int blockZ = z * 4;
         int blockY = y * 4;
 
-        float h = Math.round(TestChunkGenerator.getHeight(blockX, blockZ));
-        float n = TestChunkGenerator.getHeight(blockX + 1, blockZ);
-        float s = TestChunkGenerator.getHeight(blockX - 1, blockZ);
-        float e = TestChunkGenerator.getHeight(blockX, blockZ + 1);
-        float w = TestChunkGenerator.getHeight(blockX, blockZ - 1);
+        float h = Math.round(TestChunkGenerator.getHeight(blockX, blockZ, 0f));
+        float n = TestChunkGenerator.getHeight(blockX + 1, blockZ, 0f);
+        float s = TestChunkGenerator.getHeight(blockX - 1, blockZ, 0f);
+        float e = TestChunkGenerator.getHeight(blockX, blockZ + 1, 0f);
+        float w = TestChunkGenerator.getHeight(blockX, blockZ - 1, 0f);
         float slope = length(n - s, e - w);
         slope *= 2f;
         if (slope > 1f) slope = 1f;

@@ -80,7 +80,7 @@ public class TestChunkGenerator extends ChunkGenerator {
         return (t >= a) && (t <= b);
     }
 
-    public static float getHeight(float posX, float posZ) {
+    public static float getHeight(float posX, float posZ, float bonus) {
         net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
         float h;
 
@@ -117,11 +117,11 @@ public class TestChunkGenerator extends ChunkGenerator {
                 int posX = x + (chunk.getPos().x * 16);
                 int posZ = z + (chunk.getPos().z * 16);
 
-                float h = getHeight(posX, posZ);
-                float n = getHeight(posX + 1, posZ);
-                float s = getHeight(posX - 1, posZ);
-                float e = getHeight(posX, posZ + 1);
-                float w = getHeight(posX, posZ - 1);
+                float h = getHeight(posX, posZ, 0f);
+                float n = getHeight(posX + 1, posZ, 0f);
+                float s = getHeight(posX - 1, posZ, 0f);
+                float e = getHeight(posX, posZ + 1, 0f);
+                float w = getHeight(posX, posZ - 1, 0f);
                 float slope = length(n - s, e - w);
                 slope *= 2f;
                 if (slope > 1f) slope = 1f;
