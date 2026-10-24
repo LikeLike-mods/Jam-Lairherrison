@@ -32,12 +32,12 @@ import net.ussm.examplemod.blocks.FlytrapBlock;
 import net.ussm.examplemod.blocks.PitcherPlantBlock;
 import net.ussm.examplemod.blocks.MessageBottleBlock;
 import net.ussm.examplemod.blocks.PalmSaplingBlock;
+import net.ussm.examplemod.blocks.ShortDryGrassBlock;
 import net.ussm.examplemod.blocks.TropicalFlowerBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
-import net.ussm.examplemod.blocks.ShortDryGrassBlock;
 
 import java.util.function.Supplier;
 
