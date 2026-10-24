@@ -1,7 +1,6 @@
 package net.ussm.examplemod.client;
 
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -34,8 +33,5 @@ public class ModClientEvents {
         event.registerEntityRenderer(ModEntities.DRAGONFISH.get(), c -> new MobRenderers<>(c, "dragonfish", 0.0F, false, true, false, MobRenderers.SwimPose.PITCH));
         event.registerEntityRenderer(ModEntities.GIANT_ISOPOD.get(), c -> new MobRenderers<>(c, "giant_isopod", 0.6F, false, true, false));
         event.registerEntityRenderer(ModEntities.VAMPIRE_SQUID.get(), c -> new MobRenderers<>(c, "vampire_squid", 0.0F, false, true, false, MobRenderers.SwimPose.LEAN));
-        event.registerEntityRenderer(EntityType.COW, WarmVariantRenderers.WarmCowRenderer::new);
-        event.registerEntityRenderer(EntityType.PIG, WarmVariantRenderers.WarmPigRenderer::new);
-        event.registerEntityRenderer(EntityType.CHICKEN, WarmVariantRenderers.WarmChickenRenderer::new);
     }
 }
