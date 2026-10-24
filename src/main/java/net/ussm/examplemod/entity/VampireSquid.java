@@ -33,13 +33,13 @@ public class VampireSquid extends AbyssalPredator {
                 .add(Attributes.FOLLOW_RANGE, 16.0);
     }
 
-    @Override
+    /*@Override
     public void aiStep() {
         super.aiStep();
         if (defendTicks > 0) {
             defendTicks--;
         }
-    }
+    }*/
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
