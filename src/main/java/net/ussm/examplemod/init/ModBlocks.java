@@ -183,6 +183,10 @@ public class ModBlocks {
                     .randomTicks()
                     .pushReaction(PushReaction.DESTROY)));
 
+    // Bloc de test d'Oesphy
+    public static final DeferredBlock<Block> SAINT_TEST_BLOCK = registerBlock("saint_test_block",
+            () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST)));
+
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block ) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);

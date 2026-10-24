@@ -1,0 +1,6 @@
+{
+  "parent": "examplemod:item/lightsaber_hammer",
+  "textures": {
+    "particle": "examplemod:item/lightsaber_shadow_hammer_violet"
+  }
+}

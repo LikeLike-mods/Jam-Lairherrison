@@ -18,9 +18,10 @@ public class ModClientEvents {
         event.enqueueWork(() -> Sheets.addWoodType(ModWoodTypes.PALM));
     }
 
-    // (nom, ombre, la tête suit le regard, parties lumineuses, translucide)
+    // (nom, ombre, la tête suit le regard, parties lumineuses, translucide) ; le léviathan a son propre rendu
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.LEVIATHAN.get(), LeviathanRenderer::new);
         event.registerEntityRenderer(ModEntities.BUTTERFLY.get(), c -> new AtollMobRenderer<>(c, "butterfly", 0.2F, false, false, false));
         event.registerEntityRenderer(ModEntities.CRAB.get(), c -> new AtollMobRenderer<>(c, "crab", 0.4F, false, false, false));
         event.registerEntityRenderer(ModEntities.GECKO.get(), c -> new AtollMobRenderer<>(c, "gecko", 0.25F, true, false, false));

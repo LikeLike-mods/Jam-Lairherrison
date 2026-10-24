@@ -22,6 +22,7 @@ import net.ussm.examplemod.entity.PoisonFrog;
 import net.ussm.examplemod.entity.Seagull;
 import net.ussm.examplemod.entity.Toucan;
 import net.ussm.examplemod.entity.VampireSquid;
+import net.ussm.examplemod.entity.LeviathanEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, ExampleMod.MOD_ID);
@@ -43,6 +44,15 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<GiantIsopod>> GIANT_ISOPOD = register("giant_isopod", GiantIsopod::new, MobCategory.MONSTER, 0.9F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.MONSTER, 0.6F, 1.1F);
 
+    // Léviathan d'Oesphy (taille et suivi propres)
+    public static final DeferredHolder<EntityType<?>, EntityType<LeviathanEntity>> LEVIATHAN =
+            ENTITY_TYPES.register("leviathan", () -> EntityType.Builder.of(LeviathanEntity::new, MobCategory.MONSTER)
+                    .sized(2.6F * LeviathanEntity.SIZE_MULTIPLIER, 1.7F * LeviathanEntity.SIZE_MULTIPLIER)
+                    .eyeHeight(1.2F * LeviathanEntity.SIZE_MULTIPLIER)
+                    .clientTrackingRange(12)
+                    .updateInterval(3)
+                    .build(ExampleMod.MOD_ID + ":leviathan"));
+
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.EntityFactory<T> factory,
                                                                                            MobCategory category, float width, float height) {
         return ENTITY_TYPES.register(name, () -> EntityType.Builder.of(factory, category).sized(width, height).build(name));
@@ -62,6 +72,7 @@ public class ModEntities {
         event.put(DRAGONFISH.get(), Dragonfish.createAttributes().build());
         event.put(GIANT_ISOPOD.get(), GiantIsopod.createAttributes().build());
         event.put(VAMPIRE_SQUID.get(), VampireSquid.createAttributes().build());
+        event.put(LEVIATHAN.get(), LeviathanEntity.createAttributes().build());
     }
 
     public static void register(IEventBus eventBus) {

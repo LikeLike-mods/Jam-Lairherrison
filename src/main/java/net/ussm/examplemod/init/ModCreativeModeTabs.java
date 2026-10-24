@@ -59,6 +59,19 @@ public class ModCreativeModeTabs {
                         ModItems.SPAWN_EGGS.forEach(output::accept);
                     })).build());
 
+    // Onglet de test d'Oesphy (sabres laser, léviathan)
+    public static final Supplier<CreativeModeTab> TEST_TAB = CREATIVE_MODE_TAB.register("test_tab",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(Items.MILK_BUCKET))
+                    .title(Component.translatable("creativetab.examplemod.test"))
+                    .displayItems(((itemDisplayParameters, output) -> {
+                        output.accept(ModBlocks.SAINT_TEST_BLOCK);
+                        output.accept(ModItems.SHADOW_SABER_SWORD);
+                        output.accept(ModItems.SHADOW_SABER_SWORD_VIOLET);
+                        output.accept(ModItems.LIGHT_SABER_SWORD);
+                        output.accept(ModItems.LEVIATHAN_SPAWN_EGG);
+                    })).build());
+
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TAB.register(eventBus);
     }
