@@ -50,12 +50,13 @@
       }
     ],
     "axolotls": [],
-    "creature": [{
-      "type": "minecraft:turtle",
-      "maxCount": 5,
-      "minCount": 2,
-      "weight": 5
-    },
+    "creature": [
+      {
+        "type": "minecraft:turtle",
+        "maxCount": 5,
+        "minCount": 2,
+        "weight": 5
+      },
       {
         "type": "minecraft:parrot",
         "maxCount": 2,
