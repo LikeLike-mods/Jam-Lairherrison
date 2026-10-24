@@ -16,9 +16,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-// Base des volants (papillon, mouette, toucan) : vol libre comme le perroquet, pas de dégâts de chute.
-public abstract class AtollFlyer extends AtollCreature {
-    protected AtollFlyer(EntityType<? extends PathfinderMob> type, Level level, boolean hovers) {
+public abstract class FlyingMobs extends Mobs {
+    protected FlyingMobs(EntityType<? extends PathfinderMob> type, Level level, boolean hovers) {
         super(type, level);
         this.moveControl = new FlyingMoveControl(this, 20, hovers);
     }

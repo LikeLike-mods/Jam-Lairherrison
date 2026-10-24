@@ -63,7 +63,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getGenDepth() {
-        return 0;
+        return 512;
     }
 
     @Override
@@ -143,7 +143,6 @@ public class TestChunkGenerator extends ChunkGenerator {
                 int stratum = (int)Math.floor(b * 8);
                 stratum = Math.clamp(stratum, 0, 8);
 
-
                 // Blocks hashes
                 net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(202);
                 noise.SetFrequency(0.1f);
@@ -158,7 +157,6 @@ public class TestChunkGenerator extends ChunkGenerator {
                 noise.SetFrequency(1f);
                 noise.SetNoiseType(FastNoiseLite.NoiseType.Value);
                 float hash3 = noise.GetNoise(x + (chunk.getPos().x * 16), z + (chunk.getPos().z * 16));
-
 
                 // Blocks used
                 BlockState topLand = Blocks.GRASS_BLOCK.defaultBlockState();
@@ -205,7 +203,6 @@ public class TestChunkGenerator extends ChunkGenerator {
                     else if (y <= 64){
                         chunk.setBlockState(pos, Blocks.WATER.defaultBlockState(), false);
                     }
-
                     y += 1;
                 }
             }

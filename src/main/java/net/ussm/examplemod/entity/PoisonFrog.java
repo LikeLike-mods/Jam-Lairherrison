@@ -19,8 +19,7 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Grenouille dendrobate : inoffensive, mais celui qui la frappe à la main est empoisonné.
-public class PoisonFrog extends AtollCreature {
+public class PoisonFrog extends Mobs {
     public PoisonFrog(EntityType<? extends PoisonFrog> type, Level level) {
         super(type, level);
     }
@@ -52,6 +51,6 @@ public class PoisonFrog extends AtollCreature {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "move", 3, state ->
-                state.setAndContinue(state.isMoving() ? AtollAnimations.HOP : DefaultAnimations.IDLE)));
+                state.setAndContinue(state.isMoving() ? Animations.HOP : DefaultAnimations.IDLE)));
     }
 }

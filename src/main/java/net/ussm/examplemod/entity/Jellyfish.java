@@ -12,8 +12,7 @@ import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Méduse : dérive lentement dans le lagon, pique (un peu de poison) ceux qui la touchent.
-public class Jellyfish extends AtollSwimmer {
+public class Jellyfish extends SwimmingMobs {
     private int stingCooldown;
 
     public Jellyfish(EntityType<? extends Jellyfish> type, Level level) {

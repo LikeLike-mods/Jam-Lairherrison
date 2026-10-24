@@ -7,7 +7,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Baudroie des abysses : lente, attend en embuscade derrière son leurre et mord fort quand on passe tout près.
 public class AbyssalAngler extends AbyssalPredator {
     public AbyssalAngler(EntityType<? extends AbyssalAngler> type, Level level) {
         super(type, level, 7.0, DefaultAnimations.ATTACK_BITE);

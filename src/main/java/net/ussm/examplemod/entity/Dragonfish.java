@@ -7,7 +7,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Poisson-dragon : petit, très rapide, fonce sur les joueurs de loin.
 public class Dragonfish extends AbyssalPredator {
     public Dragonfish(EntityType<? extends Dragonfish> type, Level level) {
         super(type, level, 14.0, DefaultAnimations.ATTACK_BITE);

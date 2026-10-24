@@ -9,8 +9,7 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Toucan : vole dans la jungle, avance par petits sauts quand il est au sol.
-public class Toucan extends AtollFlyer {
+public class Toucan extends FlyingMobs {
     public Toucan(EntityType<? extends Toucan> type, Level level) {
         super(type, level, false);
     }
@@ -26,7 +25,7 @@ public class Toucan extends AtollFlyer {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "move", 4, state -> {
             if (this.isFlying()) return state.setAndContinue(DefaultAnimations.FLY);
-            return state.setAndContinue(state.isMoving() ? AtollAnimations.HOP : DefaultAnimations.IDLE);
+            return state.setAndContinue(state.isMoving() ? Animations.HOP : DefaultAnimations.IDLE);
         }));
     }
 }

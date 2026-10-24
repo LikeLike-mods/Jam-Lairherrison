@@ -26,7 +26,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.examplemod.init.ModItems;
 
-// Népenthès : son urne se remplit de nectar ; une fiole vide le récolte, puis l'urne se remplit de nouveau toute seule.
 public class PitcherPlantBlock extends BushBlock {
     public static final MapCodec<PitcherPlantBlock> CODEC = simpleCodec(PitcherPlantBlock::new);
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");

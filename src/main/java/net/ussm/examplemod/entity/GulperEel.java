@@ -7,7 +7,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Grandgousier (anguille-pélican) : rapide, repère de loin et gobe avec sa mâchoire en poche.
 public class GulperEel extends AbyssalPredator {
     public GulperEel(EntityType<? extends GulperEel> type, Level level) {
         super(type, level, 12.0, DefaultAnimations.ATTACK_BITE);

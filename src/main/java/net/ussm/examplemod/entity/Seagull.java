@@ -9,8 +9,7 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Mouette : vole au-dessus de la plage et marche quand elle est posée.
-public class Seagull extends AtollFlyer {
+public class Seagull extends FlyingMobs {
     public Seagull(EntityType<? extends Seagull> type, Level level) {
         super(type, level, false);
     }

@@ -15,8 +15,7 @@ import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Crabe : se balade sur la plage et pince ceux qui l'embêtent.
-public class Crab extends AtollCreature {
+public class Crab extends Mobs {
     public Crab(EntityType<? extends Crab> type, Level level) {
         super(type, level);
     }

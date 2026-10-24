@@ -17,8 +17,7 @@ import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Gecko : grimpe aux murs comme une araignée et file quand un joueur approche.
-public class Gecko extends AtollCreature {
+public class Gecko extends Mobs {
     public Gecko(EntityType<? extends Gecko> type, Level level) {
         super(type, level);
     }

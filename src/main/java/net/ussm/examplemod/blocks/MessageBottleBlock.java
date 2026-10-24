@@ -19,8 +19,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// Bouteille échouée sur la plage : on l'ouvre (clic droit ou en la cassant) et elle lâche son butin
-// (loot table examplemod:gameplay/message_bottle, appelée par la loot table du bloc).
 public class MessageBottleBlock extends HorizontalDirectionalBlock {
     public static final MapCodec<MessageBottleBlock> CODEC = simpleCodec(MessageBottleBlock::new);
     private static final VoxelShape ALONG_X = Block.box(2, 0, 5, 15, 5, 11);

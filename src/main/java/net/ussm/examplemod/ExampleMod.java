@@ -17,18 +17,12 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ExampleMod.MOD_ID)
 public class ExampleMod {
-    // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "examplemod";
-    // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
 
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    // Les événements (installation, pancartes, apparitions des mobs, rendus...) sont dans les classes event/ et client/.
     public ExampleMod(IEventBus modEventBus, ModContainer modContainer) {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);

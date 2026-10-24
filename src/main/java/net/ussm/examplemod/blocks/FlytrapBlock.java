@@ -29,8 +29,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.examplemod.ExampleMod;
 
-// Dionée : se referme d'un coup sur ce qui marche dedans (dégâts + bloqué un instant), puis se rouvre.
-// En marchant accroupi ou en créatif, on passe sans la déclencher.
 public class FlytrapBlock extends BushBlock {
     public static final MapCodec<FlytrapBlock> CODEC = simpleCodec(FlytrapBlock::new);
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
@@ -76,7 +74,7 @@ public class FlytrapBlock extends BushBlock {
         level.playSound(null, pos, SoundEvents.EVOKER_FANGS_ATTACK, SoundSource.BLOCKS, 0.8F, 1.3F);
         living.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DAMAGE)), 3.0F);
         living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 4));
-        level.scheduleTick(pos, this, 80);   // elle "digère" 4 secondes puis se rouvre
+        level.scheduleTick(pos, this, 80);
     }
 
     @Override
