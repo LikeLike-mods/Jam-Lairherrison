@@ -7,6 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.ussm.examplemod.ExampleMod;
+import net.ussm.examplemod.init.ModBlockEntities;
 import net.ussm.examplemod.init.ModEntities;
 import net.ussm.examplemod.init.ModWoodTypes;
 
@@ -19,6 +20,7 @@ public class ModClientEvents {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntities.MESSAGE_BOTTLE.get(), MessageBottleRenderer::new);
         event.registerEntityRenderer(ModEntities.LEVIATHAN.get(), LeviathanRenderer::new);
         event.registerEntityRenderer(ModEntities.BUTTERFLY.get(), c -> new MobRenderers<>(c, "butterfly", 0.2F, false, false, false));
         event.registerEntityRenderer(ModEntities.CRAB.get(), c -> new MobRenderers<>(c, "crab", 0.4F, false, false, false));

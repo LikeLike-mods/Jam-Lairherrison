@@ -1,5 +1,6 @@
 package net.ussm.examplemod;
 
+import net.ussm.examplemod.init.ModBlockEntities;
 import net.ussm.examplemod.init.ModBlocks;
 import net.ussm.examplemod.init.ModComponents;
 import net.ussm.examplemod.init.ModCreativeModeTabs;
@@ -27,6 +28,7 @@ public class ExampleMod {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
         ModBiomeSources.BIOME_SOURCES.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
