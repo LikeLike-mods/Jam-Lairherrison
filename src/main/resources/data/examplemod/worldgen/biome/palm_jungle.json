@@ -65,15 +65,12 @@
       }
     ],
     "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [
-      {
-        "type": "minecraft:parrot",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 2
-      },
+    "creature": [{
+      "type": "minecraft:parrot",
+      "maxCount": 2,
+      "minCount": 1,
+      "weight": 2
+    },
       {
         "type": "minecraft:ocelot",
         "maxCount": 3,
@@ -99,6 +96,8 @@
         "maxCount": 2
       }
     ],
+    "misc": [],
+    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
