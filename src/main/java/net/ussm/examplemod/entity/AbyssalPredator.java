@@ -28,12 +28,12 @@ public abstract class AbyssalPredator extends SwimmingMobs implements Enemy {
         this.wanderSpeed = wanderSpeed;
         this.wanderInterval = wanderInterval;
         this.xpReward = 5;
+        this.goalSelector.addGoal(4, new DeepSwimmingGoal(this, this.wanderSpeed, this.wanderInterval, 40));
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
-        this.goalSelector.addGoal(4, new DeepSwimmingGoal(this, wanderSpeed, wanderInterval, 40));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isInDetectionRange));
     }
