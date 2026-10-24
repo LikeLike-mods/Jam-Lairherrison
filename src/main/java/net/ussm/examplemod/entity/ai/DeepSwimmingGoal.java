@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.phys.Vec3;
-import net.ussm.examplemod.entity.SpawnRules;
+import net.ussm.examplemod.entity.init.SpawnRules;
 import org.jetbrains.annotations.Nullable;
 
 public class DeepSwimmingGoal extends RandomSwimmingGoal {
