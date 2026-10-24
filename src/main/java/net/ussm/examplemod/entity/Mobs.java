@@ -7,11 +7,10 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-// Base des petites bêtes de la plage et de la jungle animées avec GeckoLib.
-public abstract class AtollCreature extends PathfinderMob implements GeoEntity {
+public abstract class Mobs extends PathfinderMob implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    protected AtollCreature(EntityType<? extends PathfinderMob> type, Level level) {
+    protected Mobs(EntityType<? extends PathfinderMob> type, Level level) {
         super(type, level);
     }
 

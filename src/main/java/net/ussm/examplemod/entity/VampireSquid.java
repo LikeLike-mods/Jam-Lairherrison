@@ -16,8 +16,6 @@ import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Calmar vampire : quand on le frappe, il retourne sa cape (moitié moins de dégâts pendant un moment)
-// et lâche un nuage lumineux qui aveugle l'attaquant s'il est proche.
 public class VampireSquid extends AbyssalPredator {
     private int defendTicks;
 
@@ -62,6 +60,6 @@ public class VampireSquid extends AbyssalPredator {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "action", 2, state -> PlayState.STOP)
-                .triggerableAnim("defend", AtollAnimations.DEFEND));
+                .triggerableAnim("defend", Animations.DEFEND));
     }
 }

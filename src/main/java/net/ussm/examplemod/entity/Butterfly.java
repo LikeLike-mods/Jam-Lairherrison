@@ -10,8 +10,7 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Papillon : volette sans jamais se poser, ne bouscule personne.
-public class Butterfly extends AtollFlyer {
+public class Butterfly extends FlyingMobs {
     public Butterfly(EntityType<? extends Butterfly> type, Level level) {
         super(type, level, true);
     }

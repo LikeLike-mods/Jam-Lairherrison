@@ -14,8 +14,7 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Base des prédateurs des grottes inondées : nagent au hasard, attaquent les joueurs qui passent à portée.
-public abstract class AbyssalPredator extends AtollSwimmer implements Enemy {
+public abstract class AbyssalPredator extends SwimmingMobs implements Enemy {
     private final double detectionRange;
     private final RawAnimation attackAnimation;
 

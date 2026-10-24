@@ -25,8 +25,6 @@ import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-// Isopode géant : rampe au fond des grottes (respire sous l'eau grâce au tag can_breathe_under_water), très blindé.
-// Quand on le frappe il peut se rouler en boule : il ne bouge plus et ne prend presque plus de dégâts pendant 4 secondes.
 public class GiantIsopod extends Monster implements GeoEntity {
     private static final EntityDataAccessor<Boolean> ROLLED = SynchedEntityData.defineId(GiantIsopod.class, EntityDataSerializers.BOOLEAN);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -110,7 +108,7 @@ public class GiantIsopod extends Monster implements GeoEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "move", 4, state -> {
-            if (this.isRolled()) return state.setAndContinue(AtollAnimations.ROLL);
+            if (this.isRolled()) return state.setAndContinue(Animations.ROLL);
             return state.setAndContinue(state.isMoving() ? DefaultAnimations.WALK : DefaultAnimations.IDLE);
         }));
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_STRIKE));

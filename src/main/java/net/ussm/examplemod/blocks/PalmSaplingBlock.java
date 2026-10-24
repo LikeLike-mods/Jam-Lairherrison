@@ -15,8 +15,6 @@ import net.ussm.examplemod.ExampleMod;
 
 import java.util.Optional;
 
-// Pousse de palmier : fait pousser le même palmier que la génération du monde (feature examplemod:palm),
-// et se plante aussi dans le sable, pas seulement dans la terre.
 public class PalmSaplingBlock extends SaplingBlock {
     public static final TreeGrower PALM_GROWER = new TreeGrower(ExampleMod.MOD_ID + ":palm", Optional.empty(),
             Optional.of(ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, "palm"))),

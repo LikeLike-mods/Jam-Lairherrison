@@ -16,7 +16,7 @@ import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.ussm.examplemod.ExampleMod;
-import net.ussm.examplemod.entity.AtollSpawnRules;
+import net.ussm.examplemod.entity.SpawnRules;
 import net.ussm.examplemod.init.ModBlocks;
 import net.ussm.examplemod.init.ModEntities;
 import net.ussm.examplemod.init.ModItems;
@@ -38,14 +38,14 @@ public class ModSetupEvents {
         for (EntityType<? extends Mob> type : List.of(ModEntities.BUTTERFLY.get(), ModEntities.CRAB.get(), ModEntities.GECKO.get(),
                 ModEntities.HERMIT_CRAB.get(), ModEntities.POISON_FROG.get(), ModEntities.SEAGULL.get(), ModEntities.TOUCAN.get())) {
             event.register(type, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                    AtollSpawnRules::onSandOrGrass, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                    SpawnRules::onSandOrGrass, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         }
         event.register(ModEntities.JELLYFISH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                AtollSpawnRules::inLagoon, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                SpawnRules::inLagoon, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         for (EntityType<? extends Mob> type : List.of(ModEntities.ABYSSAL_ANGLER.get(), ModEntities.GULPER_EEL.get(),
                 ModEntities.DRAGONFISH.get(), ModEntities.GIANT_ISOPOD.get(), ModEntities.VAMPIRE_SQUID.get())) {
             event.register(type, SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                    AtollSpawnRules::inDeepWater, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                    SpawnRules::inDeepWater, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         }
     }
 

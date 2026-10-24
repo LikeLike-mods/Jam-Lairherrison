@@ -13,11 +13,10 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-// Base des nageurs (méduse et mobs des abysses) : nage fluide comme le dauphin, se noie hors de l'eau.
-public abstract class AtollSwimmer extends WaterAnimal implements GeoEntity {
+public abstract class SwimmingMobs extends WaterAnimal implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    protected AtollSwimmer(EntityType<? extends WaterAnimal> type, Level level) {
+    protected SwimmingMobs(EntityType<? extends WaterAnimal> type, Level level) {
         super(type, level);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
