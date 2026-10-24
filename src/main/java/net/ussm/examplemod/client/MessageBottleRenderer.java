@@ -14,7 +14,7 @@ import net.ussm.examplemod.blocks.MessageBottleBlockEntity;
 
 public class MessageBottleRenderer implements BlockEntityRenderer<MessageBottleBlockEntity> {
     private static final float SCALE = 0.25F;
-    private static final float[][] LYING = {{-4.3F, 0.3F, 0.1F, 8}, {-1.9F, 0.3F, -0.1F, -10}, {-3.1F, 1.0F, 0.0F, 5}, {-0.9F, 1.0F, 0.0F, -6}};
+    private static final float[][] LYING = {{-5.0F, 0.3F, 0.2F, 8}, {-2.6F, 0.3F, -0.2F, -10}, {-3.8F, 1.1F, 0.0F, 5}, {-1.4F, 1.1F, 0.0F, -6}};
     private static final float[][] STANDING = {{0.1F, 0.3F, -0.1F, 5}, {-0.1F, 1.4F, 0.1F, 95}, {0.1F, 2.5F, 0.1F, 183}, {-0.1F, 3.6F, -0.1F, 268}};
     private final ItemRenderer itemRenderer;
 

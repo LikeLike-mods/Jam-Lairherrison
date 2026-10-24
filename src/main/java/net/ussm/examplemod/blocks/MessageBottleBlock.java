@@ -45,8 +45,8 @@ public class MessageBottleBlock extends Block implements EntityBlock {
     public static final BooleanProperty STANDING = BooleanProperty.create("standing");
     public static final ResourceKey<LootTable> TREASURE = ResourceKey.create(Registries.LOOT_TABLE,
             ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, "gameplay/message_bottle"));
-    private static final VoxelShape[] LYING_SHAPES = shapes(1.5, 14.5, 5.5, 10.5, 5);
-    private static final VoxelShape[] STANDING_SHAPES = shapes(5.5, 10.5, 5.5, 10.5, 13);
+    private static final VoxelShape[] LYING_SHAPES = shapes(1, 15, 5, 11, 6);
+    private static final VoxelShape[] STANDING_SHAPES = shapes(5, 11, 5, 11, 14);
 
     public MessageBottleBlock(Properties properties) {
         super(properties);

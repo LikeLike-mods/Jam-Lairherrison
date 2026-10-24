@@ -111,7 +111,8 @@
             3,
             6
           ],
-          "texture": "#t"
+          "texture": "#t",
+          "rotation": 90
         },
         "down": {
           "uv": [
@@ -120,7 +121,8 @@
             3,
             6
           ],
-          "texture": "#t"
+          "texture": "#t",
+          "rotation": 90
         }
       },
       "rotation": {
@@ -153,7 +155,8 @@
             3,
             6
           ],
-          "texture": "#t"
+          "texture": "#t",
+          "rotation": 270
         },
         "down": {
           "uv": [
@@ -162,7 +165,8 @@
             3,
             6
           ],
-          "texture": "#t"
+          "texture": "#t",
+          "rotation": 270
         }
       },
       "rotation": {

@@ -111,7 +111,8 @@
             3,
             6
           ],
-          "texture": "#t"
+          "texture": "#t",
+          "rotation": 90
         },
         "down": {
           "uv": [
@@ -120,7 +121,8 @@
             3,
             6
           ],
-          "texture": "#t"
+          "texture": "#t",
+          "rotation": 90
         }
       },
       "rotation": {
@@ -153,7 +155,8 @@
             3,
             6
           ],
-          "texture": "#t"
+          "texture": "#t",
+          "rotation": 270
         },
         "down": {
           "uv": [
@@ -162,7 +165,8 @@
             3,
             6
           ],
-          "texture": "#t"
+          "texture": "#t",
+          "rotation": 270
         }
       },
       "rotation": {
@@ -231,7 +235,7 @@
       "from": [
         5,
         4,
-        6.5
+        7
       ],
       "to": [
         11,
@@ -305,7 +309,7 @@
       "to": [
         11,
         9,
-        9.5
+        9
       ],
       "faces": {
         "north": {
@@ -373,7 +377,7 @@
       ],
       "to": [
         11,
-        10.5,
+        11,
         8
       ],
       "faces": {
