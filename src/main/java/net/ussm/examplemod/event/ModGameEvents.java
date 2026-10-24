@@ -19,9 +19,11 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.init.ModAttachments;
 import net.ussm.examplemod.init.ModBlocks;
+import net.ussm.examplemod.worldgen.TestChunkGenerator;
 
 @EventBusSubscriber(modid = ExampleMod.MOD_ID)
 public class ModGameEvents {
@@ -39,6 +41,12 @@ public class ModGameEvents {
         if (stripped != null && state.hasProperty(RotatedPillarBlock.AXIS)) {
             event.setFinalState(stripped.defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
         }
+    }
+
+    // Le terrain de l'atoll dépend de la graine du monde (lancé avant la création des dimensions)
+    @SubscribeEvent
+    public static void terrainSeed(ServerAboutToStartEvent event) {
+        TestChunkGenerator.setSeed(event.getServer().getWorldData().worldGenOptions().seed());
     }
 
     // Vaches, cochons et poules de l'île : variante chaude selon le biome où ils apparaissent (génération, apparition naturelle, œuf)
