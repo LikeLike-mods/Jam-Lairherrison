@@ -20,7 +20,7 @@ public class VampireSquid extends AbyssalPredator {
     private int defendTicks;
 
     public VampireSquid(EntityType<? extends VampireSquid> type, Level level) {
-        super(type, level, 10.0, DefaultAnimations.ATTACK_STRIKE);
+        super(type, level, 10.0, DefaultAnimations.ATTACK_STRIKE, 0.7, 50);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

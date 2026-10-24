@@ -9,7 +9,7 @@ import software.bernie.geckolib.constant.DefaultAnimations;
 
 public class AbyssalAngler extends AbyssalPredator {
     public AbyssalAngler(EntityType<? extends AbyssalAngler> type, Level level) {
-        super(type, level, 7.0, DefaultAnimations.ATTACK_BITE);
+        super(type, level, 7.0, DefaultAnimations.ATTACK_BITE, 0.5, 120);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

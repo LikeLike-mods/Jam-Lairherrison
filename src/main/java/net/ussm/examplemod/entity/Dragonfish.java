@@ -9,7 +9,7 @@ import software.bernie.geckolib.constant.DefaultAnimations;
 
 public class Dragonfish extends AbyssalPredator {
     public Dragonfish(EntityType<? extends Dragonfish> type, Level level) {
-        super(type, level, 14.0, DefaultAnimations.ATTACK_BITE);
+        super(type, level, 14.0, DefaultAnimations.ATTACK_BITE, 1.0, 10);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
