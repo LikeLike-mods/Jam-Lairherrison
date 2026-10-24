@@ -34,7 +34,14 @@
   "spawn_costs": {},
   "spawners": {
     "ambient": [],
-    "axolotls": [],
+    "axolotls": [
+      {
+        "type": "examplemod:giant_isopod",
+        "weight": 6,
+        "minCount": 2,
+        "maxCount": 3
+      }
+    ],
     "creature": [],
     "misc": [],
     "monster": [],
@@ -54,12 +61,6 @@
       {
         "type": "examplemod:dragonfish",
         "weight": 5,
-        "minCount": 1,
-        "maxCount": 2
-      },
-      {
-        "type": "examplemod:giant_isopod",
-        "weight": 6,
         "minCount": 1,
         "maxCount": 2
       },
