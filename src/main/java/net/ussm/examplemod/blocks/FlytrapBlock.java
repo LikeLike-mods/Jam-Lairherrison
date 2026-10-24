@@ -16,7 +16,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -29,6 +28,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.examplemod.ExampleMod;
 
+// Dionée : se referme d'un coup sur ce qui marche dedans (dégâts + bloqué un instant), puis se rouvre.
+// En marchant accroupi, on passe sans la déclencher.
 public class FlytrapBlock extends BushBlock {
     public static final MapCodec<FlytrapBlock> CODEC = simpleCodec(FlytrapBlock::new);
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
@@ -66,15 +67,11 @@ public class FlytrapBlock extends BushBlock {
         if (level.isClientSide || !state.getValue(OPEN) || !(entity instanceof LivingEntity living) || entity.isSteppingCarefully()) {
             return;
         }
-        if (entity instanceof Player player && player.getAbilities().instabuild) {
-            return;
-        }
-
         level.setBlock(pos, state.setValue(OPEN, false), Block.UPDATE_ALL);
         level.playSound(null, pos, SoundEvents.EVOKER_FANGS_ATTACK, SoundSource.BLOCKS, 0.8F, 1.3F);
         living.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DAMAGE)), 3.0F);
         living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 4));
-        level.scheduleTick(pos, this, 80);
+        level.scheduleTick(pos, this, 80);   // elle "digère" 4 secondes
     }
 
     @Override
@@ -83,6 +80,5 @@ public class FlytrapBlock extends BushBlock {
             level.setBlock(pos, state.setValue(OPEN, true), Block.UPDATE_ALL);
             level.playSound(null, pos, SoundEvents.BIG_DRIPLEAF_TILT_UP, SoundSource.BLOCKS, 0.6F, 1.2F);
         }
-        level.scheduleTick(pos, this, 1);
     }
 }

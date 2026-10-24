@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "filled=false": {
+      "model": "examplemod:block/pitcher_plant"
+    },
+    "filled=true": {
+      "model": "examplemod:block/pitcher_plant_filled"
+    }
+  }
+}

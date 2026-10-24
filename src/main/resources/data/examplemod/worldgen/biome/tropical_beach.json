@@ -32,14 +32,22 @@
       "minecraft:flower_warm",
       "examplemod:message_bottle",
       "examplemod:driftwood",
-      "examplemod:dry_grass_patch"
+      "examplemod:dry_grass_patch",
+      "examplemod:beach_flowers"
     ],
     []
   ],
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [],
+    "ambient": [
+      {
+        "type": "examplemod:butterfly",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
     "axolotls": [],
     "creature": [
       {
@@ -53,6 +61,24 @@
         "maxCount": 2,
         "minCount": 1,
         "weight": 2
+      },
+      {
+        "type": "examplemod:crab",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "examplemod:hermit_crab",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "examplemod:seagull",
+        "weight": 6,
+        "minCount": 2,
+        "maxCount": 3
       }
     ],
     "misc": [],

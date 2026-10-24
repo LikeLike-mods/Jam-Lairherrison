@@ -46,7 +46,10 @@
       "examplemod:palm_tree_jungle",
       "examplemod:flytrap_patch",
       "minecraft:flower_warm",
-      "minecraft:patch_grass_jungle"
+      "minecraft:patch_grass_jungle",
+      "examplemod:jungle_flowers",
+      "examplemod:flytrap_patch",
+      "examplemod:pitcher_plant_patch"
     ],
     [],
     []
@@ -54,7 +57,14 @@
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [],
+    "ambient": [
+      {
+        "type": "examplemod:butterfly",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 3
+      }
+    ],
     "axolotls": [],
     "creature": [
       {
@@ -68,6 +78,24 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 1
+      },
+      {
+        "type": "examplemod:gecko",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "examplemod:poison_frog",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "examplemod:toucan",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 2
       }
     ],
     "misc": [],

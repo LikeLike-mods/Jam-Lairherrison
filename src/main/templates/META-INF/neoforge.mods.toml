@@ -28,6 +28,8 @@ version="${mod_version}" #mandatory
 
 # A display name for the mod
 displayName="${mod_name}" #mandatory
+# Ajouts aux enums du jeu (type de bateau en palmier)
+enumExtensions="META-INF/enumextensions.json"
 
 # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
@@ -46,7 +48,7 @@ authors="LikeLike, Utumno, DrSupernovas, Oesphy"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Jam
+Un atoll tropical : plages, palmiers et jungle tout pipou à la surface... et des abysses de plus en plus sombres quand on plonge.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
@@ -91,3 +93,10 @@ config="${mod_id}.mixins.json"
 # stop your mod loading on the server for example.
 #[features.${mod_id}]
 #openGLVersion="[3.2,)"
+
+[[dependencies.${mod_id}]]
+    modId="geckolib"
+    type="required"
+    versionRange="[${geckolib_version},)"
+    ordering="NONE"
+    side="BOTH"
