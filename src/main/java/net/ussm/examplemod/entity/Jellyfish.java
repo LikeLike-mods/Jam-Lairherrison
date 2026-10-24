@@ -18,6 +18,7 @@ public class Jellyfish extends SwimmingMobs {
     private int stingCooldown;
     private int pulseTimer;
     private float driftYaw;
+    private double homeY = Double.NaN;
 
     public Jellyfish(EntityType<? extends Jellyfish> type, Level level) {
         super(type, level);
@@ -46,15 +47,19 @@ public class Jellyfish extends SwimmingMobs {
     }
 
     private void drift() {
-        boolean surface = !this.level().getFluidState(this.blockPosition().above()).is(FluidTags.WATER);
+        if (Double.isNaN(homeY)) {
+            homeY = this.getY();
+        }
+        boolean nearSurface = !this.level().getFluidState(this.blockPosition().above(3)).is(FluidTags.WATER);
         if (--pulseTimer <= 0) {
             pulseTimer = 30 + this.random.nextInt(20);
             driftYaw += (this.random.nextFloat() - 0.5F) * 70.0F;
             double dx = -Mth.sin(driftYaw * Mth.DEG_TO_RAD) * 0.035;
             double dz = Mth.cos(driftYaw * Mth.DEG_TO_RAD) * 0.035;
-            this.setDeltaMovement(this.getDeltaMovement().add(dx, surface ? 0.0 : 0.09, dz));
+            double up = nearSurface ? 0.0 : (this.getY() < homeY ? 0.09 : 0.04) + this.random.nextDouble() * 0.03;
+            this.setDeltaMovement(this.getDeltaMovement().add(dx, up, dz));
         } else {
-            this.setDeltaMovement(this.getDeltaMovement().add(0.0, surface ? -0.01 : -0.0022, 0.0));
+            this.setDeltaMovement(this.getDeltaMovement().add(0.0, nearSurface ? -0.004 : -0.0022, 0.0));
         }
         this.setYRot(Mth.rotLerp(0.05F, this.getYRot(), driftYaw));
         this.yBodyRot = this.getYRot();

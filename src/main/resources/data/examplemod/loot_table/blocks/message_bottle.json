@@ -6,8 +6,13 @@
       "bonus_rolls": 0,
       "entries": [
         {
-          "type": "minecraft:loot_table",
-          "value": "examplemod:gameplay/message_bottle"
+          "type": "minecraft:item",
+          "name": "examplemod:message_bottle"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
         }
       ]
     }

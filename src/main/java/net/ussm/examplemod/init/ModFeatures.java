@@ -8,6 +8,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.worldgen.feature.BeachRockFeature;
 import net.ussm.examplemod.worldgen.feature.FallenLogFeature;
+import net.ussm.examplemod.worldgen.feature.MessageBottleFeature;
 import net.ussm.examplemod.worldgen.feature.PalmFeature;
 
 public class ModFeatures {
@@ -23,4 +24,6 @@ public class ModFeatures {
             () -> new FallenLogFeature(NoneFeatureConfiguration.CODEC, 4, 6, true));
     public static final DeferredHolder<Feature<?>, BeachRockFeature> BEACH_ROCK = FEATURES.register("beach_rock",
             () -> new BeachRockFeature(NoneFeatureConfiguration.CODEC));
+    public static final DeferredHolder<Feature<?>, MessageBottleFeature> MESSAGE_BOTTLE = FEATURES.register("message_bottle",
+            () -> new MessageBottleFeature(NoneFeatureConfiguration.CODEC));
 }
