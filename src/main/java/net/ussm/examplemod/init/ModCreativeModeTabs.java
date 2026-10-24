@@ -23,6 +23,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BROWNSTONE);
                         output.accept(ModBlocks.PALM_LOG);
                         output.accept(ModBlocks.PALM_LEAVES);
+                        output.accept(ModBlocks.PALM_SAPLING);
                         output.accept(ModBlocks.STRIPPED_PALM_LOG);
                         output.accept(ModBlocks.PALM_WOOD);
                         output.accept(ModBlocks.STRIPPED_PALM_WOOD);

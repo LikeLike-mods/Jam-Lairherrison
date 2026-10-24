@@ -29,6 +29,9 @@
     },
     "examplemod:coconut": {
       "chance": 0.65
+    },
+    "examplemod:palm_sapling": {
+      "chance": 0.3
     }
   }
 }

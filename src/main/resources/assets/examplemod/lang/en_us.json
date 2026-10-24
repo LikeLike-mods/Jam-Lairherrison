@@ -65,5 +65,7 @@
   "item.examplemod.gulper_eel_spawn_egg": "Gulper Eel Spawn Egg",
   "item.examplemod.dragonfish_spawn_egg": "Dragonfish Spawn Egg",
   "item.examplemod.giant_isopod_spawn_egg": "Giant Isopod Spawn Egg",
-  "item.examplemod.vampire_squid_spawn_egg": "Vampire Squid Spawn Egg"
+  "item.examplemod.vampire_squid_spawn_egg": "Vampire Squid Spawn Egg",
+  "block.examplemod.palm_sapling": "Palm Sapling",
+  "block.examplemod.potted_palm_sapling": "Potted Palm Sapling"
 }

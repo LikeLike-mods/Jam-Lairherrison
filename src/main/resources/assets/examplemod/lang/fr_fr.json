@@ -65,5 +65,7 @@
   "item.examplemod.gulper_eel_spawn_egg": "Œuf d'apparition de grandgousier",
   "item.examplemod.dragonfish_spawn_egg": "Œuf d'apparition de poisson-dragon",
   "item.examplemod.giant_isopod_spawn_egg": "Œuf d'apparition d'isopode géant",
-  "item.examplemod.vampire_squid_spawn_egg": "Œuf d'apparition de calmar vampire"
+  "item.examplemod.vampire_squid_spawn_egg": "Œuf d'apparition de calmar vampire",
+  "block.examplemod.palm_sapling": "Pousse de palmier",
+  "block.examplemod.potted_palm_sapling": "Pousse de palmier en pot"
 }

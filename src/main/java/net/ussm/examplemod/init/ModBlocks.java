@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
@@ -28,6 +29,7 @@ import net.ussm.examplemod.blocks.DryGrassBlock;
 import net.ussm.examplemod.blocks.FlytrapBlock;
 import net.ussm.examplemod.blocks.PitcherPlantBlock;
 import net.ussm.examplemod.blocks.MessageBottleBlock;
+import net.ussm.examplemod.blocks.PalmSaplingBlock;
 import net.ussm.examplemod.blocks.TropicalFlowerBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -72,6 +74,11 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PALM_LEAVES = registerBlock("palm_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LEAVES)
                     .sound(SoundType.AZALEA_LEAVES)));
+
+    public static final DeferredBlock<PalmSaplingBlock> PALM_SAPLING = registerBlock("palm_sapling",
+            () -> new PalmSaplingBlock(PalmSaplingBlock.PALM_GROWER, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SAPLING)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_PALM_SAPLING = BLOCKS.register("potted_palm_sapling",
+            () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PALM_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_JUNGLE_SAPLING)));
 
     // Bois de palmier : le set complet comme un bois vanilla (propriétés et sons copiés du bois de jungle)
     public static final DeferredBlock<Block> STRIPPED_PALM_LOG = registerBlock("stripped_palm_log",
