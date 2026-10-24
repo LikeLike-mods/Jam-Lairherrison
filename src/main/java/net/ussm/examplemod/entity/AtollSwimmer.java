@@ -1,5 +1,6 @@
 package net.ussm.examplemod.entity;
 
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -37,6 +38,18 @@ public abstract class AtollSwimmer extends WaterAnimal implements GeoEntity {
         } else {
             super.travel(travelVector);
         }
+    }
+
+    // Hors de l'eau : petits sauts au hasard comme les poissons vanilla (en attendant de retrouver l'eau ou de se noyer)
+    @Override
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
+            this.setOnGround(false);
+            this.hasImpulse = true;
+            this.playSound(SoundEvents.COD_FLOP, 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
+        }
+        super.aiStep();
     }
 
     @Override

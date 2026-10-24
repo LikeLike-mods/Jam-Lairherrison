@@ -30,10 +30,10 @@ public class ModClientEvents {
         event.registerEntityRenderer(ModEntities.POISON_FROG.get(), c -> new AtollMobRenderer<>(c, "poison_frog", 0.2F, true, false, false));
         event.registerEntityRenderer(ModEntities.SEAGULL.get(), c -> new AtollMobRenderer<>(c, "seagull", 0.3F, true, false, false));
         event.registerEntityRenderer(ModEntities.TOUCAN.get(), c -> new AtollMobRenderer<>(c, "toucan", 0.3F, true, false, false));
-        event.registerEntityRenderer(ModEntities.ABYSSAL_ANGLER.get(), c -> new AtollMobRenderer<>(c, "abyssal_angler", 0.0F, false, true, false));
-        event.registerEntityRenderer(ModEntities.GULPER_EEL.get(), c -> new AtollMobRenderer<>(c, "gulper_eel", 0.0F, false, true, false));
-        event.registerEntityRenderer(ModEntities.DRAGONFISH.get(), c -> new AtollMobRenderer<>(c, "dragonfish", 0.0F, false, true, false));
+        event.registerEntityRenderer(ModEntities.ABYSSAL_ANGLER.get(), c -> new AtollMobRenderer<>(c, "abyssal_angler", 0.0F, false, true, false, AtollMobRenderer.SwimPose.PITCH));
+        event.registerEntityRenderer(ModEntities.GULPER_EEL.get(), c -> new AtollMobRenderer<>(c, "gulper_eel", 0.0F, false, true, false, AtollMobRenderer.SwimPose.PITCH));
+        event.registerEntityRenderer(ModEntities.DRAGONFISH.get(), c -> new AtollMobRenderer<>(c, "dragonfish", 0.0F, false, true, false, AtollMobRenderer.SwimPose.PITCH));
         event.registerEntityRenderer(ModEntities.GIANT_ISOPOD.get(), c -> new AtollMobRenderer<>(c, "giant_isopod", 0.6F, false, true, false));
-        event.registerEntityRenderer(ModEntities.VAMPIRE_SQUID.get(), c -> new AtollMobRenderer<>(c, "vampire_squid", 0.0F, false, true, false));
+        event.registerEntityRenderer(ModEntities.VAMPIRE_SQUID.get(), c -> new AtollMobRenderer<>(c, "vampire_squid", 0.0F, false, true, false, AtollMobRenderer.SwimPose.LEAN));
     }
 }
