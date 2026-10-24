@@ -33,7 +33,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import net.ussm.examplemod.init.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class TestChunkGenerator extends ChunkGenerator {
@@ -66,12 +68,19 @@ public class TestChunkGenerator extends ChunkGenerator {
     @Override
     public void spawnOriginalMobs(WorldGenRegion worldGenRegion) {
         ChunkPos chunkPos = worldGenRegion.getCenter();
-        int x = chunkPos.getMiddleBlockX();
-        int z = chunkPos.getMiddleBlockZ();
-        Holder<Biome> biome = worldGenRegion.getBiome(new BlockPos(x, worldGenRegion.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z), z));
+        Set<Holder<Biome>> biomes = new LinkedHashSet<>();
+        for (int dx = 2; dx < 16; dx += 4) {
+            for (int dz = 2; dz < 16; dz += 4) {
+                int x = chunkPos.getMinBlockX() + dx;
+                int z = chunkPos.getMinBlockZ() + dz;
+                biomes.add(worldGenRegion.getBiome(new BlockPos(x, worldGenRegion.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z), z)));
+            }
+        }
         WorldgenRandom random = new WorldgenRandom(new LegacyRandomSource(RandomSupport.generateUniqueSeed()));
         random.setDecorationSeed(worldGenRegion.getSeed(), chunkPos.getMinBlockX(), chunkPos.getMinBlockZ());
-        NaturalSpawner.spawnMobsForChunkGeneration(worldGenRegion, biome, chunkPos, random);
+        for (Holder<Biome> biome : biomes) {
+            NaturalSpawner.spawnMobsForChunkGeneration(worldGenRegion, biome, chunkPos, random);
+        }
     }
 
     @Override

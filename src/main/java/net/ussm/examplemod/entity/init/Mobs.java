@@ -15,6 +15,11 @@ public abstract class Mobs extends PathfinderMob implements GeoEntity {
     }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return !this.getType().getCategory().isPersistent();
+    }
+
+    @Override
     protected int getBaseExperienceReward() {
         return 1 + this.level().random.nextInt(3);
     }

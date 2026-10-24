@@ -37,7 +37,8 @@
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [
+    "monster": [],
+    "underground_water_creature": [
       {
         "type": "examplemod:abyssal_angler",
         "weight": 4,
@@ -69,7 +70,6 @@
         "maxCount": 1
       }
     ],
-    "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
   },
