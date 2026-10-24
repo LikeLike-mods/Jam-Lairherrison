@@ -19,10 +19,7 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// Bernard-l'ermite : rentre dans sa coquille quand un joueur s'avance vers lui ou court à côté (sauf accroupi),
-// ou quand on le tape. Si on reste immobile, il ressort au bout de 2 secondes et reprend sa balade.
-// Dans sa coquille il ne bouge plus et encaisse beaucoup moins.
-public class HermitCrab extends AtollCreature {
+public class HermitCrab extends Mobs {
     private static final EntityDataAccessor<Boolean> HIDING = SynchedEntityData.defineId(HermitCrab.class, EntityDataSerializers.BOOLEAN);
     private int hideTicks;
     private double lastPlayerDistance = Double.MAX_VALUE;
@@ -48,7 +45,7 @@ public class HermitCrab extends AtollCreature {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         WaterAvoidingRandomStrollGoal balade = new WaterAvoidingRandomStrollGoal(this, 1.0);
-        balade.setInterval(30);                                                 // se balade souvent (par défaut : toutes les 6 s)
+        balade.setInterval(30);
         this.goalSelector.addGoal(1, balade);
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
@@ -108,7 +105,7 @@ public class HermitCrab extends AtollCreature {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "move", 4, state -> {
-            if (this.isHiding()) return state.setAndContinue(AtollAnimations.HIDE);
+            if (this.isHiding()) return state.setAndContinue(Animations.HIDE);
             return state.setAndContinue(state.isMoving() ? DefaultAnimations.WALK : DefaultAnimations.IDLE);
         }));
     }

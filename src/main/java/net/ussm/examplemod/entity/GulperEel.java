@@ -9,7 +9,7 @@ import software.bernie.geckolib.constant.DefaultAnimations;
 
 public class GulperEel extends AbyssalPredator {
     public GulperEel(EntityType<? extends GulperEel> type, Level level) {
-        super(type, level, 12.0, DefaultAnimations.ATTACK_BITE);
+        super(type, level, 12.0, DefaultAnimations.ATTACK_BITE, 0.8, 40);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

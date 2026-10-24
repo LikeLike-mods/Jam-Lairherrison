@@ -39,7 +39,6 @@ public abstract class SwimmingMobs extends WaterAnimal implements GeoEntity {
         }
     }
 
-    // Hors de l'eau : petits sauts au hasard comme les poissons vanilla (en attendant de retrouver l'eau ou de se noyer)
     @Override
     public void aiStep() {
         if (!this.isInWater() && this.onGround() && this.verticalCollision) {

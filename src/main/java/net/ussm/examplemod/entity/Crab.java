@@ -12,12 +12,14 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.ussm.examplemod.entity.ai.SidewaysMoveControl;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
 public class Crab extends Mobs {
     public Crab(EntityType<? extends Crab> type, Level level) {
         super(type, level);
+        this.moveControl = new SidewaysMoveControl(this);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

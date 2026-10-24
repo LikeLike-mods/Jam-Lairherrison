@@ -20,6 +20,8 @@ import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
 public class PoisonFrog extends Mobs {
+    private int hopCooldown;
+
     public PoisonFrog(EntityType<? extends PoisonFrog> type, Level level) {
         super(type, level);
     }
@@ -27,7 +29,8 @@ public class PoisonFrog extends Mobs {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25);
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.JUMP_STRENGTH, 0.3);
     }
 
     @Override
@@ -37,6 +40,19 @@ public class PoisonFrog extends Mobs {
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (!this.level().isClientSide) {
+            if (hopCooldown > 0) {
+                hopCooldown--;
+            } else if (this.onGround() && !this.getNavigation().isDone()) {
+                this.jumpFromGround();
+                hopCooldown = 10;
+            }
+        }
     }
 
     @Override
