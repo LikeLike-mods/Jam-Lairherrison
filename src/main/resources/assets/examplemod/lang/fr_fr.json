@@ -69,5 +69,17 @@
   "block.examplemod.palm_sapling": "Pousse de palmier",
   "block.examplemod.potted_palm_sapling": "Pousse de palmier en pot",
   "item.examplemod.coconut_half": "Demi-noix de coco",
-  "item.examplemod.coconut_shell": "Coque de noix de coco"
+  "item.examplemod.coconut_shell": "Coque de noix de coco",
+  "item.examplemod.leviathan_spawn_egg": "Œuf d'apparition de léviathan",
+  "item.examplemod.lightsaber_light_sword": "Sabre laser de lumière",
+  "item.examplemod.lightsaber_light_sickle": "Sabre laser de lumière",
+  "item.examplemod.lightsaber_light_hammer": "Sabre laser de lumière",
+  "item.examplemod.lightsaber_shadow_sword_white": "Sabre laser d'ombre",
+  "item.examplemod.lightsaber_shadow_sickle_white": "Sabre laser d'ombre",
+  "item.examplemod.lightsaber_shadow_hammer_white": "Sabre laser d'ombre",
+  "item.examplemod.lightsaber_shadow_sword_violet": "Sabre laser d'ombre",
+  "item.examplemod.lightsaber_shadow_sickle_violet": "Sabre laser d'ombre",
+  "item.examplemod.lightsaber_shadow_hammer_violet": "Sabre laser d'ombre",
+  "creativetab.examplemod.test": "Example Mod Tab",
+  "entity.examplemod.leviathan": "Léviathan"
 }

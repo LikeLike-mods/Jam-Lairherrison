@@ -1,12 +1,14 @@
 package net.ussm.examplemod;
 
 import net.ussm.examplemod.init.ModBlocks;
+import net.ussm.examplemod.init.ModComponents;
 import net.ussm.examplemod.init.ModCreativeModeTabs;
 import net.ussm.examplemod.init.ModEntities;
 import net.ussm.examplemod.init.ModItems;
 import net.ussm.examplemod.init.ModBiomeSources;
 import net.ussm.examplemod.init.ModChunkGenerators;
 import net.ussm.examplemod.init.ModFeatures;
+import net.ussm.examplemod.init.ModSounds;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -35,5 +37,7 @@ public class ExampleMod {
         ModBiomeSources.BIOME_SOURCES.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModComponents.register(modEventBus);
+        ModSounds.register(modEventBus);
     }
 }

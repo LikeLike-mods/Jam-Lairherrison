@@ -1,0 +1,57 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"on": {
+			"animation_length": 0.5,
+			"bones": {
+				"mask": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 27, 0],
+							"easing": "easeOutQuart"
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.5": {
+							"vector": [1, 0, 1],
+							"easing": "easeOutQuart"
+						}
+					}
+				}
+			}
+		},
+		"off": {
+			"animation_length": 0.5,
+			"bones": {
+				"mask": {
+					"position": {
+						"0.0": {
+							"vector": [0, 27, 0],
+							"easing": "linear"
+						},
+						"0.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutSine"
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 0, 1],
+							"easing": "linear"
+						},
+						"0.5": {
+							"vector": [1, 1, 1],
+							"easing": "easeInOutSine"
+						}
+					}
+				}
+			}
+		}
+	}
+}

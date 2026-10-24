@@ -1,0 +1,16 @@
+{
+  "lightsaber_ignite": {
+    "sounds": ["examplemod:lightsaber_ignite"]
+  },
+  "lightsaber_extinguish": {
+    "sounds": ["examplemod:lightsaber_extinguish"]
+  },
+  "lightsaber_hum": {
+    "sounds": [
+      {
+        "name": "examplemod:lightsaber_hum",
+        "stream": true
+      }
+    ]
+  }
+}
