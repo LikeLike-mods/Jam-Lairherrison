@@ -19,7 +19,7 @@ public abstract class SwimmingMobs extends WaterAnimal implements GeoEntity {
 
     protected SwimmingMobs(EntityType<? extends WaterAnimal> type, Level level) {
         super(type, level);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
