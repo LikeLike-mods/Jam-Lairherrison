@@ -52,5 +52,18 @@
   "block.examplemod.palm_hanging_sign": "Pancarte suspendue en palmier",
   "block.examplemod.palm_wall_hanging_sign": "Pancarte suspendue en palmier",
   "item.examplemod.palm_boat": "Bateau en palmier",
-  "item.examplemod.palm_chest_boat": "Bateau en palmier avec coffre"
+  "item.examplemod.palm_chest_boat": "Bateau en palmier avec coffre",
+  "item.examplemod.butterfly_spawn_egg": "Œuf d'apparition de papillon",
+  "item.examplemod.crab_spawn_egg": "Œuf d'apparition de crabe",
+  "item.examplemod.gecko_spawn_egg": "Œuf d'apparition de gecko",
+  "item.examplemod.hermit_crab_spawn_egg": "Œuf d'apparition de bernard-l'ermite",
+  "item.examplemod.jellyfish_spawn_egg": "Œuf d'apparition de méduse",
+  "item.examplemod.poison_frog_spawn_egg": "Œuf d'apparition de grenouille dendrobate",
+  "item.examplemod.seagull_spawn_egg": "Œuf d'apparition de mouette",
+  "item.examplemod.toucan_spawn_egg": "Œuf d'apparition de toucan",
+  "item.examplemod.abyssal_angler_spawn_egg": "Œuf d'apparition de baudroie des abysses",
+  "item.examplemod.gulper_eel_spawn_egg": "Œuf d'apparition de grandgousier",
+  "item.examplemod.dragonfish_spawn_egg": "Œuf d'apparition de poisson-dragon",
+  "item.examplemod.giant_isopod_spawn_egg": "Œuf d'apparition d'isopode géant",
+  "item.examplemod.vampire_squid_spawn_egg": "Œuf d'apparition de calmar vampire"
 }

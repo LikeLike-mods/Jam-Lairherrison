@@ -52,5 +52,18 @@
   "block.examplemod.palm_hanging_sign": "Palm Hanging Sign",
   "block.examplemod.palm_wall_hanging_sign": "Palm Hanging Sign",
   "item.examplemod.palm_boat": "Palm Boat",
-  "item.examplemod.palm_chest_boat": "Palm Boat with Chest"
+  "item.examplemod.palm_chest_boat": "Palm Boat with Chest",
+  "item.examplemod.butterfly_spawn_egg": "Butterfly Spawn Egg",
+  "item.examplemod.crab_spawn_egg": "Crab Spawn Egg",
+  "item.examplemod.gecko_spawn_egg": "Gecko Spawn Egg",
+  "item.examplemod.hermit_crab_spawn_egg": "Hermit Crab Spawn Egg",
+  "item.examplemod.jellyfish_spawn_egg": "Jellyfish Spawn Egg",
+  "item.examplemod.poison_frog_spawn_egg": "Poison Dart Frog Spawn Egg",
+  "item.examplemod.seagull_spawn_egg": "Seagull Spawn Egg",
+  "item.examplemod.toucan_spawn_egg": "Toucan Spawn Egg",
+  "item.examplemod.abyssal_angler_spawn_egg": "Abyssal Anglerfish Spawn Egg",
+  "item.examplemod.gulper_eel_spawn_egg": "Gulper Eel Spawn Egg",
+  "item.examplemod.dragonfish_spawn_egg": "Dragonfish Spawn Egg",
+  "item.examplemod.giant_isopod_spawn_egg": "Giant Isopod Spawn Egg",
+  "item.examplemod.vampire_squid_spawn_egg": "Vampire Squid Spawn Egg"
 }

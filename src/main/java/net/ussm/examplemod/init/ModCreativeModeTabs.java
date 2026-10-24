@@ -53,6 +53,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.FLYTRAP);
                         output.accept(ModBlocks.PITCHER_PLANT);
                         output.accept(ModItems.NECTAR);
+                        ModItems.SPAWN_EGGS.forEach(output::accept);
                     })).build());
 
     public static void register(IEventBus eventBus) {
