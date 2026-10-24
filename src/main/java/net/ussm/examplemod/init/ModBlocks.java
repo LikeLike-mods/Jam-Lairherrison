@@ -32,12 +32,12 @@ import net.ussm.examplemod.blocks.FlytrapBlock;
 import net.ussm.examplemod.blocks.PitcherPlantBlock;
 import net.ussm.examplemod.blocks.MessageBottleBlock;
 import net.ussm.examplemod.blocks.PalmSaplingBlock;
+import net.ussm.examplemod.blocks.ShortDryGrassBlock;
 import net.ussm.examplemod.blocks.TropicalFlowerBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
-import net.ussm.examplemod.blocks.ShortDryGrassBlock;
 
 import java.util.function.Supplier;
 
@@ -63,6 +63,7 @@ public class ModBlocks {
                     .strength(2f, 3f)
                     .ignitedByLava()
                     .sound(SoundType.WOOD)));
+    // Sable clair : tombe comme le sable vanilla (le sable mouillé, lui, tient en place)
     public static final DeferredBlock<Block> LIGHT_SAND = registerBlock("light_sand",
             () -> new ColoredFallingBlock(new ColorRGBA(0xE6D8BC), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)
@@ -82,6 +83,7 @@ public class ModBlocks {
     public static final DeferredBlock<FlowerPotBlock> POTTED_PALM_SAPLING = BLOCKS.register("potted_palm_sapling",
             () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PALM_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_JUNGLE_SAPLING)));
 
+    // Bois de palmier : le set complet comme un bois vanilla (propriétés et sons copiés du bois de jungle)
     public static final DeferredBlock<Block> STRIPPED_PALM_LOG = registerBlock("stripped_palm_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_JUNGLE_LOG).mapColor(MapColor.SAND)));
     public static final DeferredBlock<Block> PALM_WOOD = registerBlock("palm_wood",
@@ -106,6 +108,7 @@ public class ModBlocks {
             () -> new PressurePlateBlock(ModWoodTypes.PALM_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PRESSURE_PLATE).mapColor(MapColor.SAND)));
     public static final DeferredBlock<ButtonBlock> PALM_BUTTON = registerBlock("palm_button",
             () -> new ButtonBlock(ModWoodTypes.PALM_SET, 30, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_BUTTON)));
+    // Pancartes : pas d'item bloc, c'est l'item de ModItems qui pose la version debout ou murale
     public static final DeferredBlock<StandingSignBlock> PALM_SIGN = BLOCKS.register("palm_sign",
             () -> new StandingSignBlock(ModWoodTypes.PALM, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SIGN).mapColor(MapColor.SAND)));
     public static final DeferredBlock<WallSignBlock> PALM_WALL_SIGN = BLOCKS.register("palm_wall_sign",
@@ -142,6 +145,7 @@ public class ModBlocks {
                     .ignitedByLava()
                     .pushReaction(PushReaction.DESTROY)));
 
+    // Fleurs de l'atoll (poussent aussi sur le sable) ; le lys d'ombre brille un peu la nuit
     public static final DeferredBlock<TropicalFlowerBlock> HIBISCUS = registerBlock("hibiscus",
             () -> new TropicalFlowerBlock(MobEffects.REGENERATION, 8.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)));
     public static final DeferredBlock<TropicalFlowerBlock> BIRD_OF_PARADISE = registerBlock("bird_of_paradise",
@@ -152,6 +156,7 @@ public class ModBlocks {
             () -> new TropicalFlowerBlock(MobEffects.NIGHT_VISION, 5.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
                     .lightLevel(state -> 6)));
 
+    // Plantes carnivores de la jungle
     public static final DeferredBlock<FlytrapBlock> FLYTRAP = registerBlock("flytrap",
             () -> new FlytrapBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
@@ -168,6 +173,7 @@ public class ModBlocks {
                     .randomTicks()
                     .pushReaction(PushReaction.DESTROY)));
 
+    // Son item est ModItems.COCONUT (déclaré à part pour pouvoir le poser au sol ou suspendu)
     public static final DeferredBlock<CoconutBlock> COCONUT = BLOCKS.register("coconut",
             () -> new CoconutBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BROWN)
@@ -176,6 +182,10 @@ public class ModBlocks {
                     .noOcclusion()
                     .randomTicks()
                     .pushReaction(PushReaction.DESTROY)));
+
+    // Bloc de test d'Oesphy
+    public static final DeferredBlock<Block> SAINT_TEST_BLOCK = registerBlock("saint_test_block",
+            () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block ) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

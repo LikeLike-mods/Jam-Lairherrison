@@ -19,9 +19,13 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-public class HermitCrab extends Mobs {
+// Bernard-l'ermite : rentre dans sa coquille quand un joueur s'avance vers lui ou court à côté (sauf accroupi),
+// ou quand on le tape. Si on reste immobile, il ressort au bout de 2 secondes et reprend sa balade.
+// Dans sa coquille il ne bouge plus et encaisse beaucoup moins.
+public class HermitCrab extends AtollCreature {
     private static final EntityDataAccessor<Boolean> HIDING = SynchedEntityData.defineId(HermitCrab.class, EntityDataSerializers.BOOLEAN);
     private int hideTicks;
+    private double lastPlayerDistance = Double.MAX_VALUE;
 
     public HermitCrab(EntityType<? extends HermitCrab> type, Level level) {
         super(type, level);
@@ -30,7 +34,7 @@ public class HermitCrab extends Mobs {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.18)
+                .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.ARMOR, 4.0);
     }
 
@@ -43,7 +47,9 @@ public class HermitCrab extends Mobs {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 0.6));
+        WaterAvoidingRandomStrollGoal balade = new WaterAvoidingRandomStrollGoal(this, 1.0);
+        balade.setInterval(30);                                                 // se balade souvent (par défaut : toutes les 6 s)
+        this.goalSelector.addGoal(1, balade);
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
     }
@@ -56,12 +62,16 @@ public class HermitCrab extends Mobs {
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
-            Player player = this.level().getNearestPlayer(this, 3.0);
-            if (player != null && !player.isShiftKeyDown() && !player.isSpectator()) {
-                hideTicks = 60;
-            } else if (hideTicks > 0) {
-                hideTicks--;
+            Player player = this.level().getNearestPlayer(this, 4.0);
+            if (player != null && !player.isSpectator() && !player.isShiftKeyDown()) {
+                double distance = player.distanceTo(this);
+                boolean approche = distance < lastPlayerDistance - 0.03;
+                if (distance < 3.0 && (approche || player.isSprinting())) hideTicks = 40;
+                lastPlayerDistance = distance;
+            } else {
+                lastPlayerDistance = Double.MAX_VALUE;
             }
+            if (hideTicks > 0) hideTicks--;
             this.entityData.set(HIDING, hideTicks > 0);
         }
     }
@@ -98,7 +108,7 @@ public class HermitCrab extends Mobs {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "move", 4, state -> {
-            if (this.isHiding()) return state.setAndContinue(Animations.HIDE);
+            if (this.isHiding()) return state.setAndContinue(AtollAnimations.HIDE);
             return state.setAndContinue(state.isMoving() ? DefaultAnimations.WALK : DefaultAnimations.IDLE);
         }));
     }
