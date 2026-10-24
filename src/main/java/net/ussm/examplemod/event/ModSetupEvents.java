@@ -35,10 +35,15 @@ public class ModSetupEvents {
     // Où chaque mob peut apparaître tout seul (les listes de mobs sont dans les JSON des biomes)
     @SubscribeEvent
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
-        for (EntityType<? extends Mob> type : List.of(ModEntities.BUTTERFLY.get(), ModEntities.CRAB.get(), ModEntities.GECKO.get(),
-                ModEntities.HERMIT_CRAB.get(), ModEntities.POISON_FROG.get(), ModEntities.SEAGULL.get(), ModEntities.TOUCAN.get())) {
+        event.register(ModEntities.BUTTERFLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SpawnRules::onSandOrGrass, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        for (EntityType<? extends Mob> type : List.of(ModEntities.CRAB.get(), ModEntities.HERMIT_CRAB.get(), ModEntities.SEAGULL.get())) {
             event.register(type, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                    SpawnRules::onSandOrGrass, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                    SpawnRules::onSand, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        }
+        for (EntityType<? extends Mob> type : List.of(ModEntities.GECKO.get(), ModEntities.POISON_FROG.get(), ModEntities.TOUCAN.get())) {
+            event.register(type, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                    SpawnRules::onGrass, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         }
         event.register(ModEntities.JELLYFISH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SpawnRules::inLagoon, RegisterSpawnPlacementsEvent.Operation.REPLACE);

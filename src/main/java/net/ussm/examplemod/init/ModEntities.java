@@ -37,12 +37,12 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<Seagull>> SEAGULL = register("seagull", Seagull::new, MobCategory.CREATURE, 0.5F, 0.6F);
     public static final DeferredHolder<EntityType<?>, EntityType<Toucan>> TOUCAN = register("toucan", Toucan::new, MobCategory.CREATURE, 0.45F, 0.6F);
 
-    // Gloom : les grottes, faune des abysses (hostiles)
-    public static final DeferredHolder<EntityType<?>, EntityType<AbyssalAngler>> ABYSSAL_ANGLER = register("abyssal_angler", AbyssalAngler::new, MobCategory.MONSTER, 1.1F, 1.0F);
-    public static final DeferredHolder<EntityType<?>, EntityType<GulperEel>> GULPER_EEL = register("gulper_eel", GulperEel::new, MobCategory.MONSTER, 0.8F, 0.5F);
-    public static final DeferredHolder<EntityType<?>, EntityType<Dragonfish>> DRAGONFISH = register("dragonfish", Dragonfish::new, MobCategory.MONSTER, 0.5F, 0.4F);
-    public static final DeferredHolder<EntityType<?>, EntityType<GiantIsopod>> GIANT_ISOPOD = register("giant_isopod", GiantIsopod::new, MobCategory.MONSTER, 0.9F, 0.45F);
-    public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.MONSTER, 0.6F, 1.1F);
+    // Gloom : faune des abysses (hostiles), dans la catégorie des eaux profondes pour ne pas en avoir 70 autour du joueur
+    public static final DeferredHolder<EntityType<?>, EntityType<AbyssalAngler>> ABYSSAL_ANGLER = register("abyssal_angler", AbyssalAngler::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.1F, 1.0F);
+    public static final DeferredHolder<EntityType<?>, EntityType<GulperEel>> GULPER_EEL = register("gulper_eel", GulperEel::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.8F, 0.5F);
+    public static final DeferredHolder<EntityType<?>, EntityType<Dragonfish>> DRAGONFISH = register("dragonfish", Dragonfish::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.5F, 0.4F);
+    public static final DeferredHolder<EntityType<?>, EntityType<GiantIsopod>> GIANT_ISOPOD = register("giant_isopod", GiantIsopod::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.9F, 0.45F);
+    public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.6F, 1.1F);
 
     // Léviathan d'Oesphy (taille et suivi propres)
     public static final DeferredHolder<EntityType<?>, EntityType<LeviathanEntity>> LEVIATHAN =
