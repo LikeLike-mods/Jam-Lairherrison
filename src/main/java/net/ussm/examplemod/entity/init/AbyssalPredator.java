@@ -28,7 +28,7 @@ public abstract class AbyssalPredator extends SwimmingMobs implements Enemy {
         this.wanderSpeed = wanderSpeed;
         this.wanderInterval = wanderInterval;
         this.xpReward = 5;
-        this.goalSelector.addGoal(4, new DeepSwimmingGoal(this, this.wanderSpeed, this.wanderInterval, 40));
+        this.goalSelector.addGoal(4, new DeepSwimmingGoal(this, this.wanderSpeed, this.wanderInterval));
     }
 
     @Override
@@ -36,6 +36,19 @@ public abstract class AbyssalPredator extends SwimmingMobs implements Enemy {
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isInDetectionRange));
+    }
+
+    @Override
+    public boolean canAttack(LivingEntity target) {
+        return super.canAttack(target) && SpawnRules.inAbyss(this.level(), target.blockPosition());
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (!this.level().isClientSide && this.isInWater() && !SpawnRules.inAbyss(this.level(), this.blockPosition())) {
+            this.setDeltaMovement(this.getDeltaMovement().add(0.0, -0.01, 0.0));
+        }
     }
 
     private boolean isInDetectionRange(LivingEntity target) {
