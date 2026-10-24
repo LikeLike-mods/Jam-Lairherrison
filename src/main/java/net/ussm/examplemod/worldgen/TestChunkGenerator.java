@@ -44,12 +44,6 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     public static final Codec<TestChunkGenerator> FULL_CODEC = CODEC.codec();
 
-    private static int seed;
-
-    public static void setSeed(long worldSeed) {
-        seed = Long.hashCode(worldSeed);
-    }
-
     public TestChunkGenerator(BiomeSource biomeSource) {
         super(biomeSource);
     }
@@ -100,7 +94,7 @@ public class TestChunkGenerator extends ChunkGenerator {
     }
 
     public static float getHeight(float posX, float posZ, float bonus) {
-        net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(seed + 200);
+        net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
         float h;
 
         noise.SetFrequency(0.0001f);
@@ -115,7 +109,7 @@ public class TestChunkGenerator extends ChunkGenerator {
         if (lines > 10f/12f) lines2 *= 2.5f;
         if (lines > 0.5f) lines2 += 0.5f;
 
-        noise.SetSeed(seed + 201);
+        noise.SetSeed(201);
         noise.SetFrequency(0.001f);
         noise.SetFractalType(FastNoiseLite.FractalType.FBm);
         noise.SetFractalOctaves(5);
@@ -123,7 +117,7 @@ public class TestChunkGenerator extends ChunkGenerator {
         float islands = noise.GetNoise(posX, posZ);
         islands += 1f; islands *= lines2; islands -= 1f;
 
-        noise.SetSeed(seed + 201);
+        noise.SetSeed(201);
         noise.SetFrequency(0.01f);
         noise.SetFractalType(FastNoiseLite.FractalType.Ridged);
         noise.SetFractalOctaves(1);
@@ -163,7 +157,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                 stratum = Math.clamp(stratum, 0, 8);
 
                 // Blocks hashes
-                net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(seed + 202);
+                net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(202);
                 noise.SetFrequency(0.1f);
                 noise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
                 float hash1 = noise.GetNoise(x + (chunk.getPos().x * 16), z + (chunk.getPos().z * 16));
