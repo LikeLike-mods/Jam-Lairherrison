@@ -13,6 +13,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,6 +49,28 @@ public class CoconutBlock extends Block implements Fallable {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(HANGING);
+    }
+
+    // Posée par un joueur : suspendue si on la colle sous des feuilles ou un tronc, sinon posée au sol
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        boolean hanging = context.getClickedFace() == Direction.DOWN && hasBranch(context.getLevel(), context.getClickedPos());
+        BlockState state = this.defaultBlockState().setValue(HANGING, hanging);
+        return state.canSurvive(context.getLevel(), context.getClickedPos()) ? state : null;
+    }
+
+    // Un coup de hache sur une noix posée au sol : elle s'ouvre en deux demi-noix
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (state.getValue(HANGING) || !stack.canPerformAction(ItemAbilities.AXE_DIG)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        if (!level.isClientSide) {
+            level.destroyBlock(pos, false, player);
+            Block.popResource(level, pos, new ItemStack(ModItems.COCONUT_HALF.get(), 2));
+            stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override

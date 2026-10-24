@@ -46,6 +46,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.LIGHT_SAND_WET);
                         output.accept(ModBlocks.GREY_GRANITE);
                         output.accept(ModItems.COCONUT);
+                        output.accept(ModItems.COCONUT_HALF);
+                        output.accept(ModItems.COCONUT_SHELL);
                         output.accept(ModBlocks.MESSAGE_BOTTLE);
                         output.accept(ModBlocks.HIBISCUS);
                         output.accept(ModBlocks.BIRD_OF_PARADISE);

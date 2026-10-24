@@ -67,5 +67,7 @@
   "item.examplemod.giant_isopod_spawn_egg": "Œuf d'apparition d'isopode géant",
   "item.examplemod.vampire_squid_spawn_egg": "Œuf d'apparition de calmar vampire",
   "block.examplemod.palm_sapling": "Pousse de palmier",
-  "block.examplemod.potted_palm_sapling": "Pousse de palmier en pot"
+  "block.examplemod.potted_palm_sapling": "Pousse de palmier en pot",
+  "item.examplemod.coconut_half": "Demi-noix de coco",
+  "item.examplemod.coconut_shell": "Coque de noix de coco"
 }

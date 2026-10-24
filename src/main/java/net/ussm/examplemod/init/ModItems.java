@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.HoneyBottleItem;
@@ -16,6 +17,7 @@ import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
+import net.ussm.examplemod.items.CoconutHalfItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +26,18 @@ import java.util.function.Supplier;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ExampleMod.MOD_ID);
 
+    // Noix de coco entière : se pose (au sol ou suspendue sous des feuilles) ; un coup de hache dessus l'ouvre en deux
     public static final DeferredItem<Item> COCONUT = ITEMS.register("coconut",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-                    .nutrition(4)
-                    .saturationModifier(0.4f)
+            () -> new BlockItem(ModBlocks.COCONUT.get(), new Item.Properties()));
+    // Coque vide : donne un bol à l'établi, brûle dans le four, se composte (déclarée avant la demi-noix qui la rend)
+    public static final DeferredItem<Item> COCONUT_SHELL = ITEMS.register("coconut_shell",
+            () -> new Item(new Item.Properties()));
+    // Demi-noix : se boit (lait qui soigne le poison) et se mange, laisse une coque vide
+    public static final DeferredItem<Item> COCONUT_HALF = ITEMS.register("coconut_half",
+            () -> new CoconutHalfItem(new Item.Properties().food(new FoodProperties.Builder()
+                    .nutrition(3)
+                    .saturationModifier(0.5f)
+                    .usingConvertsTo(ModItems.COCONUT_SHELL.get())
                     .build())));
 
 

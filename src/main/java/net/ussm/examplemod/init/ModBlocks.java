@@ -170,7 +170,7 @@ public class ModBlocks {
                     .randomTicks()
                     .pushReaction(PushReaction.DESTROY)));
 
-    // Pas d'item "bloc" : en cassant la noix on récupère l'item mangeable ModItems.COCONUT
+    // Son item est ModItems.COCONUT (déclaré à part pour pouvoir le poser au sol ou suspendu)
     public static final DeferredBlock<CoconutBlock> COCONUT = BLOCKS.register("coconut",
             () -> new CoconutBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BROWN)

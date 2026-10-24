@@ -67,5 +67,7 @@
   "item.examplemod.giant_isopod_spawn_egg": "Giant Isopod Spawn Egg",
   "item.examplemod.vampire_squid_spawn_egg": "Vampire Squid Spawn Egg",
   "block.examplemod.palm_sapling": "Palm Sapling",
-  "block.examplemod.potted_palm_sapling": "Potted Palm Sapling"
+  "block.examplemod.potted_palm_sapling": "Potted Palm Sapling",
+  "item.examplemod.coconut_half": "Coconut Half",
+  "item.examplemod.coconut_shell": "Coconut Shell"
 }
