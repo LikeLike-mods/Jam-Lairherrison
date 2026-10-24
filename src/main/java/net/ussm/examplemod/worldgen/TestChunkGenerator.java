@@ -174,7 +174,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                     top2Land = ModBlocks.BROWNSTONE.get().defaultBlockState();
                     topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
                 }
-                if (h >= 0f) bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
+                if (h >= 64f) bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
 
                 //Building
                 while (y <= a || y <= 64) {
