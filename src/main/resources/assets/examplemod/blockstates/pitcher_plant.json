@@ -1,10 +1,38 @@
 {
   "variants": {
-    "filled=false": {
-      "model": "examplemod:block/pitcher_plant"
-    },
-    "filled=true": {
-      "model": "examplemod:block/pitcher_plant_filled"
-    }
+    "filled=false": [
+      {
+        "model": "examplemod:block/pitcher_plant"
+      },
+      {
+        "model": "examplemod:block/pitcher_plant",
+        "y": 90
+      },
+      {
+        "model": "examplemod:block/pitcher_plant",
+        "y": 180
+      },
+      {
+        "model": "examplemod:block/pitcher_plant",
+        "y": 270
+      }
+    ],
+    "filled=true": [
+      {
+        "model": "examplemod:block/pitcher_plant_filled"
+      },
+      {
+        "model": "examplemod:block/pitcher_plant_filled",
+        "y": 90
+      },
+      {
+        "model": "examplemod:block/pitcher_plant_filled",
+        "y": 180
+      },
+      {
+        "model": "examplemod:block/pitcher_plant_filled",
+        "y": 270
+      }
+    ]
   }
 }
