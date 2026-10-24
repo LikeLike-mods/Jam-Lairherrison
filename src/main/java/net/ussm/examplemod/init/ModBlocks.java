@@ -5,7 +5,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.ColoredFallingBlock;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
@@ -61,8 +63,9 @@ public class ModBlocks {
                     .strength(2f, 3f)
                     .ignitedByLava()
                     .sound(SoundType.WOOD)));
+    // Sable clair : tombe comme le sable vanilla (le sable mouillé, lui, tient en place)
     public static final DeferredBlock<Block> LIGHT_SAND = registerBlock("light_sand",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new ColoredFallingBlock(new ColorRGBA(0xE6D8BC), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)
                     .strength(0.5f, 0.5f)
                     .sound(SoundType.SAND)));
