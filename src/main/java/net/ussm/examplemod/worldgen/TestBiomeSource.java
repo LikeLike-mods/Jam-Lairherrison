@@ -14,6 +14,8 @@ public class TestBiomeSource extends BiomeSource {
 
     public static final MapCodec<TestBiomeSource> CODEC =
             RecordCodecBuilder.mapCodec(instance -> instance.group(
+                    Biome.CODEC.fieldOf("abyss")
+                            .forGetter(source -> source.abyss),
                     Biome.CODEC.fieldOf("sea")
                             .forGetter(source -> source.sea),
                     Biome.CODEC.fieldOf("shore")
@@ -24,12 +26,14 @@ public class TestBiomeSource extends BiomeSource {
                             .forGetter(source -> source.mountain)
             ).apply(instance, TestBiomeSource::new));
 
+    private final Holder<Biome> abyss;
     private final Holder<Biome> sea;
     private final Holder<Biome> shore;
     private final Holder<Biome> inland;
     private final Holder<Biome> mountain;
 
-    public TestBiomeSource(Holder<Biome> sea, Holder<Biome> shore, Holder<Biome> inland, Holder<Biome> mountain) {
+    public TestBiomeSource(Holder<Biome> abyss, Holder<Biome> sea, Holder<Biome> shore, Holder<Biome> inland, Holder<Biome> mountain) {
+        this.abyss = abyss;
         this.sea = sea;
         this.shore = shore;
         this.inland = inland;
@@ -43,7 +47,7 @@ public class TestBiomeSource extends BiomeSource {
 
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.of(sea, shore, inland, mountain);
+        return Stream.of(abyss, sea, shore, inland, mountain);
     }
 
     private boolean inRange(float t, float a, float b) {
@@ -72,7 +76,10 @@ public class TestBiomeSource extends BiomeSource {
         slope *= 2f;
         if (slope > 1f) slope = 1f;
 
-        if (h < 65) return sea;
+        if (h < 65) {
+            if (blockY < 0) return abyss;
+            else return sea;
+        }
         if (inRange(h, 63f, 64f + 5f * slope)) return shore;
         return inland;
     }

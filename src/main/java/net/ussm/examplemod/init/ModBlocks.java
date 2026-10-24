@@ -10,14 +10,11 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.ussm.examplemod.blocks.CoconutBlock;
-import net.ussm.examplemod.blocks.DryGrassBlock;
-import net.ussm.examplemod.blocks.MessageBottleBlock;
+import net.ussm.examplemod.blocks.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
-import net.ussm.examplemod.blocks.ShortDryGrassBlock;
 
 import java.util.function.Supplier;
 
@@ -90,6 +87,13 @@ public class ModBlocks {
                     .sound(SoundType.WOOD)
                     .noOcclusion()
                     .randomTicks()
+                    .pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<FlytrapBlock> FLYTRAP = registerBlock("flytrap",
+            () -> new FlytrapBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .noCollission()
+                    .strength(0.2f)
+                    .sound(SoundType.GRASS)
                     .pushReaction(PushReaction.DESTROY)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block ) {

@@ -1,5 +1,6 @@
 package net.ussm.examplemod.worldgen;
 
+import net.minecraft.util.Mth;
 import net.ussm.examplemod.api.FastNoiseLite;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -7,14 +8,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -25,6 +24,7 @@ import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.blending.Blender;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.ussm.examplemod.init.ModBlocks;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -86,6 +86,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
         noise.SetFrequency(0.0001f);
         noise.SetFractalOctaves(1);
+        noise.SetFractalGain(0.5f);
         noise.SetFractalType(FastNoiseLite.FractalType.Ridged);
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
         float lines = noise.GetNoise(posX, posZ);
@@ -102,6 +103,17 @@ public class TestChunkGenerator extends ChunkGenerator {
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
         float islands = noise.GetNoise(posX, posZ);
         islands += 1f; islands *= lines2; islands -= 1f;
+
+        noise.SetSeed(201);
+        noise.SetFrequency(0.01f);
+        noise.SetFractalType(FastNoiseLite.FractalType.Ridged);
+        noise.SetFractalOctaves(1);
+        float trenches = noise.GetNoise(posX, posZ);
+        trenches += 1f; trenches *= (float)Mth.smoothstep(Math.clamp(-islands, 0f, 1f)); trenches /= 2f;
+        islands = Math.clamp(islands - 3f * trenches, islands - 1.2f, 1);
+
+        float mountains = Math.clamp(1.5f * islands - 1f, 0f, 1f);
+        islands += 3f * mountains;
 
         h = islands * 50f + 64f;
         return h;
@@ -124,7 +136,6 @@ public class TestChunkGenerator extends ChunkGenerator {
                 float w = getHeight(posX, posZ - 1, 0f);
                 float slope = length(n - s, e - w);
                 slope *= 2f;
-                if (slope > 1f) slope = 1f;
 
                 // Layers
                 int a = Math.round(h);
@@ -134,8 +145,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
 
                 // Blocks hashes
-                net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
-                noise.SetSeed(202);
+                net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(202);
                 noise.SetFrequency(0.1f);
                 noise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
                 float hash1 = noise.GetNoise(x + (chunk.getPos().x * 16), z + (chunk.getPos().z * 16));
@@ -153,18 +163,20 @@ public class TestChunkGenerator extends ChunkGenerator {
                 // Blocks used
                 BlockState topLand = Blocks.GRASS_BLOCK.defaultBlockState();
                 BlockState top2Land = Blocks.DIRT.defaultBlockState();
+                BlockState topWater = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
+                BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
 
-                if (inRange(h, 63f, 64f + 5f * slope)) {
-                    if (inRange(h, 64f, 64f + 5f * slope)) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
+                if (inRange(h, 63f, 64f + 5f * Math.min(slope, 1f))) {
+                    if (inRange(h, 64f, 64f + 5f * Math.min(slope, 1f))) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
                     else topLand = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
                     top2Land = ModBlocks.LIGHT_SAND.get().defaultBlockState();
                 }
-
-                BlockState topWater = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
-
-                BlockState rock = ModBlocks.BROWNSTONE.get().defaultBlockState();
-                BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
-
+                else if (slope >= 7f) {
+                    topLand = ModBlocks.BROWNSTONE.get().defaultBlockState();
+                    top2Land = ModBlocks.BROWNSTONE.get().defaultBlockState();
+                    topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
+                }
+                if (h >= 0f) bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
 
                 //Building
                 while (y <= a || y <= 64) {

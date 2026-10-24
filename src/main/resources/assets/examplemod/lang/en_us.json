@@ -11,6 +11,7 @@
   "biome.examplemod.palm_jungle": "Palm jungle",
   "item.examplemod.coconut": "Coconut",
   "block.examplemod.coconut": "Coconut",
+  "block.examplemod.flytrap": "Flytrap",
   "block.examplemod.message_bottle": "Washed-up Bottle",
   "block.examplemod.dry_grass": "Dry grass",
   "block.examplemod.short_dry_grass" : "Short dry grass"

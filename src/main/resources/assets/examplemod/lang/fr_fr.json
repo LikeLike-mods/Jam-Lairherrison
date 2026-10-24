@@ -11,6 +11,7 @@
   "biome.examplemod.palm_jungle": "Jungle de palmiers",
   "item.examplemod.coconut": "Noix de coco",
   "block.examplemod.coconut": "Noix de coco",
+  "block.examplemod.flytrap": "Dionée",
   "block.examplemod.message_bottle": "Bouteille échouée",
   "block.examplemod.dry_grass": "Herbes sèches",
   "block.examplemod.short_dry_grass" : "Herbes sèches courtes"
