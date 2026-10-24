@@ -39,38 +39,7 @@
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [
-      {
-        "type": "examplemod:abyssal_angler",
-        "weight": 4,
-        "minCount": 1,
-        "maxCount": 1
-      },
-      {
-        "type": "examplemod:gulper_eel",
-        "weight": 3,
-        "minCount": 1,
-        "maxCount": 1
-      },
-      {
-        "type": "examplemod:dragonfish",
-        "weight": 5,
-        "minCount": 1,
-        "maxCount": 2
-      },
-      {
-        "type": "examplemod:giant_isopod",
-        "weight": 4,
-        "minCount": 1,
-        "maxCount": 2
-      },
-      {
-        "type": "examplemod:vampire_squid",
-        "weight": 3,
-        "minCount": 1,
-        "maxCount": 1
-      }
-    ],
+    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [
       {

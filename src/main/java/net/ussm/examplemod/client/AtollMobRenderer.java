@@ -27,8 +27,10 @@ public class AtollMobRenderer<T extends Entity & GeoAnimatable> extends GeoEntit
         }
     }
 
+    // Faces visibles d'un seul côté (comme les mobs vanilla) : par défaut GeckoLib dessine les deux côtés,
+    // et les parties plates (nageoires, ailes, dents, cape) ou les cubes qui se touchent clignotent.
     @Override
     public RenderType getRenderType(T animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-        return translucent ? RenderType.entityTranslucent(texture) : super.getRenderType(animatable, texture, bufferSource, partialTick);
+        return translucent ? RenderType.entityTranslucentCull(texture) : RenderType.entityCutout(texture);
     }
 }

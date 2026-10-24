@@ -3,18 +3,14 @@
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 1
-    },
-    {
-      "type": "minecraft:count",
-      "count": 1
+      "chance": 3
     },
     {
       "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
-      "heightmap": "OCEAN_FLOOR"
+      "heightmap": "WORLD_SURFACE_WG"
     },
     {
       "type": "minecraft:block_predicate_filter",
@@ -32,7 +28,10 @@
               -1,
               0
             ],
-            "blocks": "examplemod:light_sand_wet"
+            "blocks": [
+              "examplemod:light_sand",
+              "examplemod:light_sand_wet"
+            ]
           }
         ]
       }

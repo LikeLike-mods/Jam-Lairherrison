@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "minecraft:block/allium"
+    "cross": "examplemod:block/shadow_lily"
   }
 }
