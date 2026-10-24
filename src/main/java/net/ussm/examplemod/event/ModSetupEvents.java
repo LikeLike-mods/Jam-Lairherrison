@@ -16,7 +16,7 @@ import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.ussm.examplemod.ExampleMod;
-import net.ussm.examplemod.entity.SpawnRules;
+import net.ussm.examplemod.entity.init.SpawnRules;
 import net.ussm.examplemod.init.ModBlocks;
 import net.ussm.examplemod.init.ModEntities;
 import net.ussm.examplemod.init.ModItems;

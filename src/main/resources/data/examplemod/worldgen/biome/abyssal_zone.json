@@ -58,7 +58,7 @@
       },
       {
         "type": "examplemod:giant_isopod",
-        "weight": 4,
+        "weight": 6,
         "minCount": 1,
         "maxCount": 2
       },

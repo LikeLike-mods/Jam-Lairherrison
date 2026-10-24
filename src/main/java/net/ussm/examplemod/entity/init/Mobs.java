@@ -1,4 +1,4 @@
-package net.ussm.examplemod.entity;
+package net.ussm.examplemod.entity.init;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;

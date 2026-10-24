@@ -37,7 +37,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.ussm.examplemod.entity.ai.LeviathanBiteCycle;
-import net.ussm.examplemod.entity.animation.LeviathanTurnState;
+import net.ussm.examplemod.entity.animations.LeviathanTurnState;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;

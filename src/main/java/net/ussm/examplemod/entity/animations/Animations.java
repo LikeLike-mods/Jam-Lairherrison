@@ -1,4 +1,4 @@
-package net.ussm.examplemod.entity;
+package net.ussm.examplemod.entity.animations;
 
 import software.bernie.geckolib.animation.RawAnimation;
 

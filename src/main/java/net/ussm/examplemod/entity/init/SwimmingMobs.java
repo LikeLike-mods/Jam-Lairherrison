@@ -1,4 +1,4 @@
-package net.ussm.examplemod.entity;
+package net.ussm.examplemod.entity.init;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;

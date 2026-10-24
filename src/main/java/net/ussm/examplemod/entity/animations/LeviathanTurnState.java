@@ -1,4 +1,4 @@
-package net.ussm.examplemod.entity.animation;
+package net.ussm.examplemod.entity.animations;
 
 import net.minecraft.util.Mth;
 

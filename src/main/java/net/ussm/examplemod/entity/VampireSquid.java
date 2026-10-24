@@ -11,6 +11,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import net.ussm.examplemod.entity.animations.Animations;
+import net.ussm.examplemod.entity.init.AbyssalPredator;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
@@ -31,13 +33,13 @@ public class VampireSquid extends AbyssalPredator {
                 .add(Attributes.FOLLOW_RANGE, 16.0);
     }
 
-    @Override
+    /*@Override
     public void aiStep() {
         super.aiStep();
         if (defendTicks > 0) {
             defendTicks--;
         }
-    }
+    }*/
 
     @Override
     public boolean hurt(DamageSource source, float amount) {

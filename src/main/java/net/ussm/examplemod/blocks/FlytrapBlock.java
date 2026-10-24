@@ -66,10 +66,6 @@ public class FlytrapBlock extends BushBlock {
         if (level.isClientSide || !state.getValue(OPEN) || !(entity instanceof LivingEntity living) || entity.isSteppingCarefully()) {
             return;
         }
-        if (entity instanceof Player player && player.getAbilities().instabuild) {
-            return;
-        }
-
         level.setBlock(pos, state.setValue(OPEN, false), Block.UPDATE_ALL);
         level.playSound(null, pos, SoundEvents.EVOKER_FANGS_ATTACK, SoundSource.BLOCKS, 0.8F, 1.3F);
         living.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DAMAGE)), 3.0F);

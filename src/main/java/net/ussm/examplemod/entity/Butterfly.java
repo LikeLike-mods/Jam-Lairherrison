@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.world.level.Level;
 import net.ussm.examplemod.entity.ai.VisitFlowerGoal;
+import net.ussm.examplemod.entity.init.FlyingMobs;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;

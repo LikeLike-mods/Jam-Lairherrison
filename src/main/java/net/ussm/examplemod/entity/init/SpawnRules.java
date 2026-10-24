@@ -1,4 +1,4 @@
-package net.ussm.examplemod.entity;
+package net.ussm.examplemod.entity.init;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
