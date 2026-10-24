@@ -1,5 +1,6 @@
 package net.ussm.examplemod;
 
+import net.ussm.examplemod.init.ModAttachments;
 import net.ussm.examplemod.init.ModBlocks;
 import net.ussm.examplemod.init.ModComponents;
 import net.ussm.examplemod.init.ModCreativeModeTabs;
@@ -32,6 +33,7 @@ public class ExampleMod {
         ModFeatures.FEATURES.register(modEventBus);
         ModEntities.register(modEventBus);
         ModComponents.register(modEventBus);
+        ModAttachments.register(modEventBus);
         ModSounds.register(modEventBus);
     }
 }
