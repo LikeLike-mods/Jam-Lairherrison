@@ -39,6 +39,11 @@ public abstract class AbyssalPredator extends AtollSwimmer implements Enemy {
     }
 
     @Override
+    protected int getBaseExperienceReward() {
+        return this.xpReward;
+    }
+
+    @Override
     public boolean shouldDespawnInPeaceful() {
         return true;
     }

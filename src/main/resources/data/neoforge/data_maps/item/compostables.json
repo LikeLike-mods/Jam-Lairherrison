@@ -1,0 +1,34 @@
+{
+  "values": {
+    "examplemod:palm_leaves": {
+      "chance": 0.3
+    },
+    "examplemod:dry_grass": {
+      "chance": 0.3
+    },
+    "examplemod:short_dry_grass": {
+      "chance": 0.3
+    },
+    "examplemod:hibiscus": {
+      "chance": 0.65
+    },
+    "examplemod:bird_of_paradise": {
+      "chance": 0.65
+    },
+    "examplemod:frangipani": {
+      "chance": 0.65
+    },
+    "examplemod:shadow_lily": {
+      "chance": 0.65
+    },
+    "examplemod:flytrap": {
+      "chance": 0.65
+    },
+    "examplemod:pitcher_plant": {
+      "chance": 0.65
+    },
+    "examplemod:coconut": {
+      "chance": 0.65
+    }
+  }
+}

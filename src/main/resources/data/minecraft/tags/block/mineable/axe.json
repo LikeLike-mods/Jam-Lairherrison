@@ -2,6 +2,22 @@
   "replace": false,
   "values": [
     "examplemod:palm_log",
-    "examplemod:coconut"
+    "examplemod:coconut",
+    "examplemod:palm_wood",
+    "examplemod:stripped_palm_log",
+    "examplemod:stripped_palm_wood",
+    "examplemod:palm_planks",
+    "examplemod:palm_stairs",
+    "examplemod:palm_slab",
+    "examplemod:palm_fence",
+    "examplemod:palm_fence_gate",
+    "examplemod:palm_door",
+    "examplemod:palm_trapdoor",
+    "examplemod:palm_pressure_plate",
+    "examplemod:palm_button",
+    "examplemod:palm_sign",
+    "examplemod:palm_wall_sign",
+    "examplemod:palm_hanging_sign",
+    "examplemod:palm_wall_hanging_sign"
   ]
 }

@@ -16,6 +16,11 @@ public abstract class AtollCreature extends PathfinderMob implements GeoEntity {
     }
 
     @Override
+    protected int getBaseExperienceReward() {
+        return 1 + this.level().random.nextInt(3);
+    }
+
+    @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
