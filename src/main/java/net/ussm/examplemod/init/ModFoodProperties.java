@@ -17,4 +17,10 @@ public class ModFoodProperties {
             .saturationModifier(0.5f)
             .usingConvertsTo(ModItems.COCONUT_SHELL.get())
             .build();
+
+    public static FoodProperties RESTONE_PEPPER = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.1f)
+            .fast()
+            .build();
 }

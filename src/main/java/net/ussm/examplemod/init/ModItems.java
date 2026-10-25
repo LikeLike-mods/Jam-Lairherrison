@@ -36,6 +36,10 @@ import net.ussm.examplemod.item.LightsaberItem;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ExampleMod.MOD_ID);
 
+    public static final DeferredItem<Item> SAINT_ITEM_TEST = ITEMS.register("saint_item_test",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+
+
     // Noix de coco entière : se pose (au sol ou suspendue sous des feuilles) ; un coup de hache dessus l'ouvre en deux
     public static final DeferredItem<Item> COCONUT = ITEMS.register("coconut",
             () -> new BlockItem(ModBlocks.COCONUT.get(), new Item.Properties()));
@@ -47,34 +51,6 @@ public class ModItems {
             () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperies car C PLUS PROPRE
 
 
-
-    public static final DeferredItem<Item> ABYSSAL_SCALE = ITEMS.register("abyssal_scale",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> DIAMOND_ABYSS_HELMET = ITEMS.register("diamond_abyss_helmet",
-            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diamond", 3, 2, 0)), 10));
-    public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
-            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
-
-    // Protection du casque-crâne, la même que le casque vanilla qu'on a fusionné dedans
-    private static ItemAttributeModifiers helmet(String name, double armor, double toughness, double knockbackResistance) {
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, name + "_abyss_helmet");
-        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder()
-                .add(Attributes.ARMOR, new AttributeModifier(id, armor, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD)
-                .add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(id, toughness, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD);
-        if (knockbackResistance > 0) {
-            builder.add(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(id, knockbackResistance, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD);
-        }
-        return builder.build();
-    }
-
-    // Nectar de népenthès : se boit comme du miel, donne un super saut
-    public static final DeferredItem<Item> NECTAR = ITEMS.register("nectar",
-            () -> new HoneyBottleItem(new Item.Properties()
-                    .craftRemainder(Items.GLASS_BOTTLE)
-                    .stacksTo(16)
-                    .food(ModFoodProperties.NECTAR))); // + Propre car voilà, go check ModFoodProperties
-
-    // Bois de palmier : pancartes et bateaux (le type de bateau vient de ModBoats)
     public static final DeferredItem<Item> PALM_SIGN = ITEMS.register("palm_sign",
             () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.PALM_SIGN.get(), ModBlocks.PALM_WALL_SIGN.get()));
     public static final DeferredItem<Item> PALM_HANGING_SIGN = ITEMS.register("palm_hanging_sign",
@@ -83,6 +59,32 @@ public class ModItems {
             () -> new BoatItem(false, ModBoats.PALM.getValue(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> PALM_CHEST_BOAT = ITEMS.register("palm_chest_boat",
             () -> new BoatItem(true, ModBoats.PALM.getValue(), new Item.Properties().stacksTo(1)));
+
+
+
+
+    // Nectar de népenthès : se boit comme du miel, donne un super saut
+    public static final DeferredItem<Item> NECTAR = ITEMS.register("nectar",
+            () -> new HoneyBottleItem(new Item.Properties()
+                    .craftRemainder(Items.GLASS_BOTTLE)
+                    .stacksTo(16)
+                    .food(ModFoodProperties.NECTAR))); // + Propre car voilà, go check ModFoodProperties
+
+    public static final DeferredItem<Item> RESTONE_PEPPER = ITEMS.register("restone_pepper",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.RESTONE_PEPPER)));
+
+
+
+
+
+    public static final DeferredItem<Item> ABYSSAL_SCALE = ITEMS.register("abyssal_scale",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> DIAMOND_ABYSS_HELMET = ITEMS.register("diamond_abyss_helmet",
+            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diamond", 3, 2, 0)), 10));
+    public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
+            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
+
+
 
     // Oeufs d'apparition des mobs (couleurs prises sur leurs textures)
     public static final List<DeferredItem<Item>> SPAWN_EGGS = new ArrayList<>();
@@ -100,19 +102,30 @@ public class ModItems {
     public static final DeferredItem<Item> GIANT_ISOPOD_SPAWN_EGG = spawnEgg("giant_isopod", ModEntities.GIANT_ISOPOD, 0x988EA4, 0xC87CFF);
     public static final DeferredItem<Item> VAMPIRE_SQUID_SPAWN_EGG = spawnEgg("vampire_squid", ModEntities.VAMPIRE_SQUID, 0x600E24, 0xEC282C);
 
+    public static final DeferredItem<DeferredSpawnEggItem> LEVIATHAN_SPAWN_EGG = ITEMS.register("leviathan_spawn_egg",
+            () -> new DeferredSpawnEggItem(ModEntities.LEVIATHAN, 0xFFFFFF, 0xFFFFFF,
+                    new Item.Properties().rarity(Rarity.EPIC)));
+
+
     private static DeferredItem<Item> spawnEgg(String name, Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight) {
         DeferredItem<Item> egg = ITEMS.register(name + "_spawn_egg", () -> new DeferredSpawnEggItem(type, background, highlight, new Item.Properties()));
         SPAWN_EGGS.add(egg);
         return egg;
     }
 
-    // Ajouts d'Oesphy : item de test --> magnifique items, oeuf du léviathan, sabres laser
-    public static final DeferredItem<Item> SAINT_ITEM_TEST = ITEMS.register("saint_item_test",
-        () -> new Item(new Item.Properties().stacksTo(1)));
+    // Protection du casque-crâne, la même que le casque vanilla qu'on a fusionné dedans
+    private static ItemAttributeModifiers helmet(String name, double armor, double toughness, double knockbackResistance) {
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, name + "_abyss_helmet");
+        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder()
+                .add(Attributes.ARMOR, new AttributeModifier(id, armor, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD)
+                .add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(id, toughness, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD);
+        if (knockbackResistance > 0) {
+            builder.add(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(id, knockbackResistance, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD);
+        }
+        return builder.build();
+    }
 
-    public static final DeferredItem<DeferredSpawnEggItem> LEVIATHAN_SPAWN_EGG = ITEMS.register("leviathan_spawn_egg",
-        () -> new DeferredSpawnEggItem(ModEntities.LEVIATHAN, 0xFFFFFF, 0xFFFFFF,
-                new Item.Properties().rarity(Rarity.EPIC)));
+    // Ajouts d'Oesphy : item de test --> magnifique items, oeuf du léviathan, sabres laser
 
     public static final DeferredItem<LightsaberItem> SHADOW_SABER_SWORD = ITEMS.register("lightsaber_shadow_sword_white",
         () -> new LightsaberItem("lightsaber_sword", "lightsaber_shadow_sword_white",

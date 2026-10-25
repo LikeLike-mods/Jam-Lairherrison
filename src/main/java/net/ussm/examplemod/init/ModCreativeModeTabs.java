@@ -1,6 +1,5 @@
 package net.ussm.examplemod.init;
 
-import net.minecraft.world.item.Items;
 import net.ussm.examplemod.ExampleMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -48,6 +47,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COCONUT);
                         output.accept(ModItems.COCONUT_HALF);
                         output.accept(ModItems.COCONUT_SHELL);
+                        output.accept(ModItems.RESTONE_PEPPER);
                         output.accept(ModBlocks.MESSAGE_BOTTLE);
                         output.accept(ModBlocks.ABYSS_SKULL);
                         output.accept(ModItems.ABYSSAL_SCALE);
