@@ -9,7 +9,13 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.HoneyBottleItem;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.resources.ResourceLocation;
+import net.ussm.examplemod.items.AbyssHelmetItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SignItem;
 import net.neoforged.bus.api.IEventBus;
@@ -46,6 +52,25 @@ public class ModItems {
 
 
     // Nectar de népenthès : se boit comme du miel, donne un super saut
+    public static final DeferredItem<Item> ABYSSAL_SCALE = ITEMS.register("abyssal_scale",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> DIAMOND_ABYSS_HELMET = ITEMS.register("diamond_abyss_helmet",
+            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diamond", 3, 2, 0)), 10));
+    public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
+            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
+
+    // Protection du casque-crâne, la même que le casque vanilla qu'on a fusionné dedans
+    private static ItemAttributeModifiers helmet(String name, double armor, double toughness, double knockbackResistance) {
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, name + "_abyss_helmet");
+        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder()
+                .add(Attributes.ARMOR, new AttributeModifier(id, armor, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD)
+                .add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(id, toughness, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD);
+        if (knockbackResistance > 0) {
+            builder.add(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(id, knockbackResistance, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HEAD);
+        }
+        return builder.build();
+    }
+
     public static final DeferredItem<Item> NECTAR = ITEMS.register("nectar",
             () -> new HoneyBottleItem(new Item.Properties()
                     .craftRemainder(Items.GLASS_BOTTLE)

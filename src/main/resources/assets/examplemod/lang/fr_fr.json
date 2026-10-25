@@ -81,5 +81,11 @@
   "item.examplemod.lightsaber_shadow_sickle_violet": "Sabre laser d'ombre",
   "item.examplemod.lightsaber_shadow_hammer_violet": "Sabre laser d'ombre",
   "creativetab.examplemod.test": "Example Mod Tab",
-  "entity.examplemod.leviathan": "Léviathan"
+  "entity.examplemod.leviathan": "Léviathan",
+  "block.examplemod.abyss_skull": "Crâne des abysses",
+  "block.examplemod.living_abyss_skull": "Crâne des abysses vivant",
+  "block.examplemod.abyss_light": "Lumière abyssale",
+  "item.examplemod.abyssal_scale": "Écaille des abysses",
+  "item.examplemod.diamond_abyss_helmet": "Crâne des abysses en diamant",
+  "item.examplemod.netherite_abyss_helmet": "Crâne des abysses en netherite"
 }

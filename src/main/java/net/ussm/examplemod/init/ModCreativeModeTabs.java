@@ -49,6 +49,11 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COCONUT_HALF);
                         output.accept(ModItems.COCONUT_SHELL);
                         output.accept(ModBlocks.MESSAGE_BOTTLE);
+                        output.accept(ModBlocks.ABYSS_SKULL);
+                        output.accept(ModItems.ABYSSAL_SCALE);
+                        output.accept(ModBlocks.LIVING_ABYSS_SKULL);
+                        output.accept(ModItems.DIAMOND_ABYSS_HELMET);
+                        output.accept(ModItems.NETHERITE_ABYSS_HELMET);
                         output.accept(ModBlocks.HIBISCUS);
                         output.accept(ModBlocks.BIRD_OF_PARADISE);
                         output.accept(ModBlocks.FRANGIPANI);

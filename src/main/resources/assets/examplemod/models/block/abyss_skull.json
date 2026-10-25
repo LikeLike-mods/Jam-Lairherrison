@@ -1,0 +1,138 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "skull": "examplemod:block/abyss_skull",
+    "particle": "examplemod:block/abyss_skull"
+  },
+  "elements": [
+    {
+      "name": "crane",
+      "from": [
+        4,
+        2,
+        4
+      ],
+      "to": [
+        12,
+        7,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            8,
+            5
+          ],
+          "texture": "#skull"
+        },
+        "south": {
+          "uv": [
+            8,
+            5,
+            16,
+            10
+          ],
+          "texture": "#skull"
+        },
+        "east": {
+          "uv": [
+            8,
+            0,
+            15,
+            5
+          ],
+          "texture": "#skull"
+        },
+        "west": {
+          "uv": [
+            8,
+            0,
+            15,
+            5
+          ],
+          "texture": "#skull"
+        },
+        "up": {
+          "uv": [
+            0,
+            5,
+            8,
+            12
+          ],
+          "texture": "#skull"
+        }
+      }
+    },
+    {
+      "name": "machoire",
+      "from": [
+        4,
+        0,
+        3
+      ],
+      "to": [
+        12,
+        2,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            12,
+            8,
+            14
+          ],
+          "texture": "#skull"
+        },
+        "south": {
+          "uv": [
+            8,
+            12,
+            16,
+            14
+          ],
+          "texture": "#skull"
+        },
+        "east": {
+          "uv": [
+            8,
+            10,
+            16,
+            12
+          ],
+          "texture": "#skull"
+        },
+        "west": {
+          "uv": [
+            8,
+            10,
+            16,
+            12
+          ],
+          "texture": "#skull"
+        },
+        "up": {
+          "uv": [
+            0,
+            5,
+            8,
+            13
+          ],
+          "texture": "#skull"
+        },
+        "down": {
+          "uv": [
+            0,
+            5,
+            8,
+            13
+          ],
+          "texture": "#skull"
+        }
+      }
+    }
+  ]
+}

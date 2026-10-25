@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "examplemod:block/living_abyss_skull"
+    },
+    "facing=east": {
+      "model": "examplemod:block/living_abyss_skull",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "examplemod:block/living_abyss_skull",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "examplemod:block/living_abyss_skull",
+      "y": 270
+    }
+  }
+}

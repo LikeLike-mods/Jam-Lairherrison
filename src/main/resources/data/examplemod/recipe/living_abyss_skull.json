@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "S#S",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "examplemod:abyssal_scale"
+    },
+    "#": {
+      "item": "examplemod:abyss_skull"
+    }
+  },
+  "result": {
+    "id": "examplemod:living_abyss_skull",
+    "count": 1
+  }
+}

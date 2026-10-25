@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bonemeal",
+  "ingredients": [
+    {
+      "item": "examplemod:abyss_skull"
+    }
+  ],
+  "result": {
+    "id": "minecraft:bone_meal",
+    "count": 9
+  }
+}

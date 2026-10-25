@@ -90,5 +90,11 @@
   "examplemod.configuration.items": "Item List",
   "examplemod.configuration.logDirtBlock": "Log Dirt Block",
   "examplemod.configuration.magicNumberIntroduction": "Magic Number Text",
-  "examplemod.configuration.magicNumber": "Magic Number"
+  "examplemod.configuration.magicNumber": "Magic Number",
+  "block.examplemod.abyss_skull": "Abyssal Skull",
+  "block.examplemod.living_abyss_skull": "Living Abyssal Skull",
+  "block.examplemod.abyss_light": "Abyssal Light",
+  "item.examplemod.abyssal_scale": "Abyssal Scale",
+  "item.examplemod.diamond_abyss_helmet": "Diamond Abyssal Skull",
+  "item.examplemod.netherite_abyss_helmet": "Netherite Abyssal Skull"
 }

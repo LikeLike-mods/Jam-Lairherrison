@@ -30,6 +30,8 @@ import net.ussm.examplemod.blocks.CoconutBlock;
 import net.ussm.examplemod.blocks.DryGrassBlock;
 import net.ussm.examplemod.blocks.FlytrapBlock;
 import net.ussm.examplemod.blocks.PitcherPlantBlock;
+import net.ussm.examplemod.blocks.AbyssLightBlock;
+import net.ussm.examplemod.blocks.AbyssSkullBlock;
 import net.ussm.examplemod.blocks.MessageBottleBlock;
 import net.ussm.examplemod.blocks.PalmSaplingBlock;
 import net.ussm.examplemod.blocks.TropicalFlowerBlock;
@@ -121,6 +123,15 @@ public class ModBlocks {
                     .sound(SoundType.GLASS)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<AbyssSkullBlock> ABYSS_SKULL = registerBlock("abyss_skull",
+            () -> new AbyssSkullBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(1.0f)
+                    .sound(SoundType.BONE_BLOCK).noOcclusion().pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<AbyssSkullBlock> LIVING_ABYSS_SKULL = registerBlock("living_abyss_skull",
+            () -> new AbyssSkullBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(1.0f)
+                    .sound(SoundType.MUD).lightLevel(state -> 15).noOcclusion().pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<AbyssLightBlock> ABYSS_LIGHT = BLOCKS.register("abyss_light",
+            () -> new AbyssLightBlock(BlockBehaviour.Properties.of().replaceable().noCollission().noLootTable().noOcclusion()
+                    .instabreak().lightLevel(state -> 14).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<DryGrassBlock> DRY_GRASS = registerBlock("dry_grass",
             () -> new DryGrassBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)

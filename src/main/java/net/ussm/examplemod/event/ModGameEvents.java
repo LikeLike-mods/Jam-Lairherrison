@@ -1,13 +1,18 @@
 package net.ussm.examplemod.event;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.examplemod.ExampleMod;
+import net.ussm.examplemod.blocks.AbyssLightBlock;
 import net.ussm.examplemod.init.ModBlocks;
 
 @EventBusSubscriber(modid = ExampleMod.MOD_ID)
@@ -22,6 +27,21 @@ public class ModGameEvents {
         else if (state.is(ModBlocks.PALM_WOOD.get())) stripped = ModBlocks.STRIPPED_PALM_WOOD.get();
         if (stripped != null && state.hasProperty(RotatedPillarBlock.AXIS)) {
             event.setFinalState(stripped.defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+        }
+    }
+
+    // Crâne vivant porté : une lumière invisible suit la tête du joueur (elle se retire seule quand il n'est plus là)
+    @SubscribeEvent
+    public static void headLight(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
+        if (player.level().isClientSide || player.tickCount % 4 != 0 || !AbyssLightBlock.wearsLight(player)) return;
+        BlockPos pos = BlockPos.containing(player.getEyePosition());
+        BlockState state = player.level().getBlockState(pos);
+        BlockState light = ModBlocks.ABYSS_LIGHT.get().defaultBlockState();
+        if (state.isAir()) {
+            player.level().setBlock(pos, light, Block.UPDATE_ALL);
+        } else if (state.is(Blocks.WATER) && state.getFluidState().isSource()) {
+            player.level().setBlock(pos, light.setValue(AbyssLightBlock.WATERLOGGED, true), Block.UPDATE_ALL);
         }
     }
 }
