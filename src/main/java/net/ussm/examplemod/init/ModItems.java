@@ -44,14 +44,10 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     // Demi-noix : se boit (lait qui soigne le poison) et se mange, laisse une coque vide
     public static final DeferredItem<Item> COCONUT_HALF = ITEMS.register("coconut_half",
-            () -> new CoconutHalfItem(new Item.Properties().food(new FoodProperties.Builder()
-                    .nutrition(3)
-                    .saturationModifier(0.5f)
-                    .usingConvertsTo(ModItems.COCONUT_SHELL.get())
-                    .build())));
+            () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperies car C PLUS PROPRE
 
 
-    // Nectar de népenthès : se boit comme du miel, donne un super saut
+
     public static final DeferredItem<Item> ABYSSAL_SCALE = ITEMS.register("abyssal_scale",
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> DIAMOND_ABYSS_HELMET = ITEMS.register("diamond_abyss_helmet",
@@ -71,16 +67,12 @@ public class ModItems {
         return builder.build();
     }
 
+    // Nectar de népenthès : se boit comme du miel, donne un super saut
     public static final DeferredItem<Item> NECTAR = ITEMS.register("nectar",
             () -> new HoneyBottleItem(new Item.Properties()
                     .craftRemainder(Items.GLASS_BOTTLE)
                     .stacksTo(16)
-                    .food(new FoodProperties.Builder()
-                            .nutrition(3)
-                            .saturationModifier(0.3f)
-                            .alwaysEdible()
-                            .effect(new MobEffectInstance(MobEffects.JUMP, 600, 1), 1.0f)
-                            .build())));
+                    .food(ModFoodProperties.NECTAR))); // + Propre car voilà, go check ModFoodProperties
 
     // Bois de palmier : pancartes et bateaux (le type de bateau vient de ModBoats)
     public static final DeferredItem<Item> PALM_SIGN = ITEMS.register("palm_sign",
@@ -114,7 +106,7 @@ public class ModItems {
         return egg;
     }
 
-    // Ajouts d'Oesphy : item de test, oeuf du léviathan, sabres laser
+    // Ajouts d'Oesphy : item de test --> magnifique items, oeuf du léviathan, sabres laser
     public static final DeferredItem<Item> SAINT_ITEM_TEST = ITEMS.register("saint_item_test",
         () -> new Item(new Item.Properties().stacksTo(1)));
 
