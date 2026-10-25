@@ -47,7 +47,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COCONUT);
                         output.accept(ModItems.COCONUT_HALF);
                         output.accept(ModItems.COCONUT_SHELL);
-                        output.accept(ModItems.RESTONE_PEPPER);
+                        output.accept(ModItems.REDSTONE_PEPPER);
                         output.accept(ModBlocks.MESSAGE_BOTTLE);
                         output.accept(ModBlocks.ABYSS_SKULL);
                         output.accept(ModItems.ABYSSAL_SCALE);

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "examplemod:item/restone_pepper"
+    "layer0": "examplemod:item/redstone_pepper"
   }
 }

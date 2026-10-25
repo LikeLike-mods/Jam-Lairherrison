@@ -2,9 +2,6 @@ package net.ussm.examplemod.init;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.HangingSignItem;
@@ -70,8 +67,8 @@ public class ModItems {
                     .stacksTo(16)
                     .food(ModFoodProperties.NECTAR))); // + Propre car voilà, go check ModFoodProperties
 
-    public static final DeferredItem<Item> RESTONE_PEPPER = ITEMS.register("restone_pepper",
-            () -> new Item(new Item.Properties().food(ModFoodProperties.RESTONE_PEPPER)));
+    public static final DeferredItem<Item> REDSTONE_PEPPER = ITEMS.register("redstone_pepper",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.REDSTONE_PEPPER)));
 
 
 
