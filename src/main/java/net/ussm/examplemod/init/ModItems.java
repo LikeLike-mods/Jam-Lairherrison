@@ -81,7 +81,7 @@ public class ModItems {
     public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
 
-    // Pince lâchée par le crabe (jusqu'à 99 par pile)
+    // Pince lâchée par le crabe (jusqu'à 99 par pile) : +4 de portée pour casser et poser des blocs tant qu'on en a une sur soi, elle s'use (voir CrabClawEvents)
     public static final DeferredItem<Item> CRAB_CLAW = ITEMS.register("crab_claw",
             () -> new Item(new Item.Properties().stacksTo(99)));
 
