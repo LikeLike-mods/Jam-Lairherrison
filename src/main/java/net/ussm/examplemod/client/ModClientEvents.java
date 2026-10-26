@@ -23,7 +23,7 @@ public class ModClientEvents {
         event.registerBlockEntityRenderer(ModBlockEntities.MESSAGE_BOTTLE.get(), MessageBottleRenderer::new);
         event.registerEntityRenderer(ModEntities.LEVIATHAN.get(), LeviathanRenderer::new);
         event.registerEntityRenderer(ModEntities.BUTTERFLY.get(), c -> new MobRenderers<>(c, "butterfly", 0.2F, false, false, false));
-        event.registerEntityRenderer(ModEntities.CRAB.get(), c -> new MobRenderers<>(c, "crab", 0.5F, false, false, false));
+        event.registerEntityRenderer(ModEntities.CRAB.get(), CrabRenderer::new);
         event.registerEntityRenderer(ModEntities.GECKO.get(), c -> new MobRenderers<>(c, "gecko", 0.25F, true, false, false));
         event.registerEntityRenderer(ModEntities.HERMIT_CRAB.get(), c -> new MobRenderers<>(c, "hermit_crab", 0.3F, false, false, false));
         event.registerEntityRenderer(ModEntities.JELLYFISH.get(), c -> new MobRenderers<>(c, "jellyfish", 0.0F, false, false, true));
