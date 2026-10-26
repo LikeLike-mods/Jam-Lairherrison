@@ -7,6 +7,7 @@ public final class Animations {
     public static final RawAnimation HIDE = RawAnimation.begin().thenPlayAndHold("misc.hide");
     public static final RawAnimation ROLL = RawAnimation.begin().thenPlayAndHold("misc.roll");
     public static final RawAnimation DEFEND = RawAnimation.begin().thenPlay("misc.defend");
+    public static final RawAnimation PINCH = RawAnimation.begin().thenPlay("attack.pinch");
 
     private Animations() {
     }

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.ussm.examplemod.entity.ai.SidewaysMoveControl;
+import net.ussm.examplemod.entity.animations.Animations;
 import net.ussm.examplemod.entity.init.Mobs;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.constant.DefaultAnimations;
@@ -44,6 +45,6 @@ public class Crab extends Mobs {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(DefaultAnimations.genericWalkIdleController(this));
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_STRIKE));
+        controllers.add(DefaultAnimations.genericAttackAnimation(this, Animations.PINCH));
     }
 }
