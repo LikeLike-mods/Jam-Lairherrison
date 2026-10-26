@@ -29,7 +29,7 @@ public class ModEntities {
 
     // Plage et jungle (paisibles)
     public static final DeferredHolder<EntityType<?>, EntityType<Butterfly>> BUTTERFLY = register("butterfly", Butterfly::new, MobCategory.AMBIENT, 0.5F, 0.3F);
-    public static final DeferredHolder<EntityType<?>, EntityType<Crab>> CRAB = register("crab", Crab::new, MobCategory.CREATURE, 0.6F, 0.4F);
+    public static final DeferredHolder<EntityType<?>, EntityType<Crab>> CRAB = register("crab", Crab::new, MobCategory.CREATURE, 0.9F, 0.55F);
     public static final DeferredHolder<EntityType<?>, EntityType<Gecko>> GECKO = register("gecko", Gecko::new, MobCategory.CREATURE, 0.4F, 0.2F);
     public static final DeferredHolder<EntityType<?>, EntityType<HermitCrab>> HERMIT_CRAB = register("hermit_crab", HermitCrab::new, MobCategory.CREATURE, 0.4F, 0.4F);
     public static final DeferredHolder<EntityType<?>, EntityType<Jellyfish>> JELLYFISH = register("jellyfish", Jellyfish::new, MobCategory.WATER_AMBIENT, 0.5F, 0.8F);
