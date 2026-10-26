@@ -61,6 +61,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.FLYTRAP);
                         output.accept(ModBlocks.PITCHER_PLANT);
                         output.accept(ModItems.NECTAR);
+                        output.accept(ModItems.CRAB_CLAW);
                         ModItems.SPAWN_EGGS.forEach(output::accept);
                         output.accept(ModItems.LEVIATHAN_SPAWN_EGG);
                         output.accept(ModItems.SHADOW_SABER_SWORD);
