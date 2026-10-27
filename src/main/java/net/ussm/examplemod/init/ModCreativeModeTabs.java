@@ -44,10 +44,11 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.LIGHT_SAND);
                         output.accept(ModBlocks.LIGHT_SAND_WET);
                         output.accept(ModBlocks.GREY_GRANITE);
-                        output.accept(ModItems.COCONUT);
+                        output.accept(ModBlocks.COCONUT);
                         output.accept(ModItems.COCONUT_HALF);
                         output.accept(ModItems.COCONUT_SHELL);
                         output.accept(ModItems.REDSTONE_PEPPER);
+                        output.accept(ModItems.REDSTONE_PEPPER_SEEDS);
                         output.accept(ModBlocks.MESSAGE_BOTTLE);
                         output.accept(ModBlocks.ABYSS_SKULL);
                         output.accept(ModItems.ABYSSAL_SCALE);

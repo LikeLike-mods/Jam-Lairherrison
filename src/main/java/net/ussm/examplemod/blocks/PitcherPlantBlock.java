@@ -33,7 +33,7 @@ public class PitcherPlantBlock extends BushBlock {
 
     public PitcherPlantBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FILLED, true));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FILLED, false));
     }
 
     @Override
@@ -57,8 +57,8 @@ public class PitcherPlantBlock extends BushBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
-                                              InteractionHand hand, BlockHitResult hitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+
         if (stack.is(Items.GLASS_BOTTLE) && state.getValue(FILLED)) {
             if (!level.isClientSide) {
                 player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(ModItems.NECTAR.get())));

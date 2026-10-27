@@ -1,5 +1,6 @@
 {
   "creativetab.examplemod.blocks": "Bloom and Gloom",
+
   "block.examplemod.brownstone": "Grès marron",
   "block.examplemod.palm_log": "Bûche de palmier",
   "block.examplemod.light_sand": "Sable clair",
@@ -42,7 +43,6 @@
   "biome.examplemod.tropical_beach": "Plage tropicale",
   "biome.examplemod.palm_jungle": "Jungle de palmiers",
 
-  "item.examplemod.coconut": "Noix de coco",
   "item.examplemod.nectar": "Nectar de népenthès",
   "item.examplemod.palm_boat": "Bateau en palmier",
   "item.examplemod.palm_chest_boat": "Bateau en palmier avec coffre",
@@ -76,6 +76,7 @@
   "item.examplemod.diamond_abyss_helmet": "Crâne des abysses en diamant",
   "item.examplemod.netherite_abyss_helmet": "Crâne des abysses en netherite",
   "item.examplemod.redstone_pepper": "Piment à Redstone",
+  "item.examplemod.redstone_pepper_seeds": "Graine de piment à Redstone",
   "item.examplemod.raw_crab_meat" : "Crabe cru",
   "item.examplemod.cooked_crab_meat" : "Crabe cuit",
 
@@ -107,5 +108,4 @@
   "examplemod.configuration.logDirtBlock": "Log Dirt Block",
   "examplemod.configuration.magicNumberIntroduction": "Magic Number Text",
   "examplemod.configuration.magicNumber": "Magic Number"
-
 }

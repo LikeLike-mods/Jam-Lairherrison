@@ -2,19 +2,13 @@ package net.ussm.examplemod.init;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BoatItem;
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.HoneyBottleItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.resources.ResourceLocation;
 import net.ussm.examplemod.items.AbyssHelmetItem;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SignItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -25,7 +19,7 @@ import net.ussm.examplemod.items.CoconutHalfItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-import net.minecraft.world.item.Rarity;
+
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.Unbreakable;
 import net.ussm.examplemod.item.LightsaberItem;
@@ -38,8 +32,6 @@ public class ModItems {
 
 
     // Noix de coco entière : se pose (au sol ou suspendue sous des feuilles) ; un coup de hache dessus l'ouvre en deux
-    public static final DeferredItem<Item> COCONUT = ITEMS.register("coconut",
-            () -> new BlockItem(ModBlocks.COCONUT.get(), new Item.Properties()));
     // Coque vide : donne un bol à l'établi, brûle dans le four, se composte (déclarée avant la demi-noix qui la rend)
     public static final DeferredItem<Item> COCONUT_SHELL = ITEMS.register("coconut_shell",
             () -> new Item(new Item.Properties()));
@@ -70,6 +62,9 @@ public class ModItems {
     public static final DeferredItem<Item> REDSTONE_PEPPER = ITEMS.register("redstone_pepper",
             () -> new Item(new Item.Properties().food(ModFoodProperties.REDSTONE_PEPPER)));
 
+    public static final DeferredItem<Item> REDSTONE_PEPPER_SEEDS = ITEMS.register("redstone_pepper_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.REDSTONE_PEPPER_CROP.get(), new Item.Properties()));
+
     public static final DeferredItem<Item> RAW_CRAB_MEAT = ITEMS.register("raw_crab_meat",
             () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_CRAB_MEAT)));
 
@@ -87,7 +82,6 @@ public class ModItems {
     public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
 
-    // Pince lâchée par le crabe (jusqu'à 1 par pile) : +4 de portée pour casser et poser des blocs tant qu'on en a une sur soi, elle s'use (voir CrabClawEvents)
     public static final DeferredItem<Item> CRAB_CLAW = ITEMS.register("crab_claw",
             () -> new Item(new Item.Properties().stacksTo(1)));
 

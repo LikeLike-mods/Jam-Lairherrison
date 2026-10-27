@@ -30,6 +30,7 @@ import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.ussm.examplemod.init.ModBlocks;
 import net.ussm.examplemod.init.ModItems;
 
 public class CoconutBlock extends Block implements Fallable {
@@ -131,6 +132,6 @@ public class CoconutBlock extends Block implements Fallable {
 
     @Override
     public void onBrokenAfterFall(Level level, BlockPos pos, FallingBlockEntity fallingBlock) {
-        Block.popResource(level, pos, new ItemStack(ModItems.COCONUT.get()));
+        Block.popResource(level, pos, new ItemStack(ModBlocks.COCONUT.get()));
     }
 }

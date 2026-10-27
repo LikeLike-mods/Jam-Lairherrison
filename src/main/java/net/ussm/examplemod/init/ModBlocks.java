@@ -22,6 +22,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.blocks.ShortDryGrassBlock;
+import net.ussm.examplemod.blocks.crops.RedstonePepperBlock;
 
 import java.util.function.Supplier;
 
@@ -92,12 +93,16 @@ public class ModBlocks {
 
     public static final DeferredBlock<SlabBlock> PALM_SLAB = registerBlock("palm_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PALM_PLANKS.get())));
+
     public static final DeferredBlock<FenceBlock> PALM_FENCE = registerBlock("palm_fence",
             () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_FENCE).mapColor(MapColor.SAND)));
+
     public static final DeferredBlock<FenceGateBlock> PALM_FENCE_GATE = registerBlock("palm_fence_gate",
             () -> new FenceGateBlock(ModWoodTypes.PALM, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_FENCE_GATE).mapColor(MapColor.SAND)));
+
     public static final DeferredBlock<DoorBlock> PALM_DOOR = registerBlock("palm_door",
             () -> new DoorBlock(ModWoodTypes.PALM_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_DOOR).mapColor(MapColor.SAND)));
+
     public static final DeferredBlock<TrapDoorBlock> PALM_TRAPDOOR = registerBlock("palm_trapdoor",
             () -> new TrapDoorBlock(ModWoodTypes.PALM_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_TRAPDOOR).mapColor(MapColor.SAND)));
     public static final DeferredBlock<PressurePlateBlock> PALM_PRESSURE_PLATE = registerBlock("palm_pressure_plate",
@@ -138,6 +143,7 @@ public class ModBlocks {
                     .offsetType(BlockBehaviour.OffsetType.XZ)
                     .ignitedByLava()
                     .pushReaction(PushReaction.DESTROY)));
+
     public static final DeferredBlock<ShortDryGrassBlock> SHORT_DRY_GRASS = registerBlock("short_dry_grass",
             () -> new ShortDryGrassBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)
@@ -166,6 +172,7 @@ public class ModBlocks {
                     .strength(0.2f)
                     .sound(SoundType.GRASS)
                     .pushReaction(PushReaction.DESTROY)));
+
     public static final DeferredBlock<PitcherPlantBlock> PITCHER_PLANT = registerBlock("pitcher_plant",
             () -> new PitcherPlantBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
@@ -175,7 +182,7 @@ public class ModBlocks {
                     .randomTicks()
                     .pushReaction(PushReaction.DESTROY)));
 
-    public static final DeferredBlock<CoconutBlock> COCONUT = BLOCKS.register("coconut",
+    public static final DeferredBlock<CoconutBlock> COCONUT = registerBlock("coconut",
             () -> new CoconutBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BROWN)
                     .strength(0.4f)
@@ -183,6 +190,10 @@ public class ModBlocks {
                     .noOcclusion()
                     .randomTicks()
                     .pushReaction(PushReaction.DESTROY)));
+
+
+    public static final DeferredBlock<RedstonePepperBlock> REDSTONE_PEPPER_CROP = registerBlock("redstone_pepper_crop",
+            () -> new RedstonePepperBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block ) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
