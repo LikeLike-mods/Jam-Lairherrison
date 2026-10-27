@@ -3,26 +3,8 @@ package net.ussm.examplemod.init;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.*;
 import net.minecraft.util.ColorRGBA;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.ColoredFallingBlock;
-import net.minecraft.world.level.block.CeilingHangingSignBlock;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.FenceBlock;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.PressurePlateBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.StandingSignBlock;
-import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.world.level.block.WallHangingSignBlock;
-import net.minecraft.world.level.block.WallSignBlock;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -68,17 +50,20 @@ public class ModBlocks {
                     .ignitedByLava()
                     .sound(SoundType.WOOD)));
 
-    public static final DeferredBlock<Block> LIGHT_SAND = registerBlock("light_sand",
-            () -> new ColoredFallingBlock(new ColorRGBA(0xE6D8BC), BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.SAND)
-                    .strength(0.5f, 0.5f)
-                    .sound(SoundType.SAND)));
 
     public static final DeferredBlock<Block> LIGHT_SAND_WET = registerBlock("light_sand_wet",
             () -> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)
                     .strength(0.6f, 0.6f)
                     .sound(SoundType.SAND)));
+
+
+    public static final DeferredBlock<Block> LIGHT_SAND = registerBlock("light_sand",
+            () -> new ConcretePowderBlock(LIGHT_SAND_WET.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.SAND)
+                    .strength(0.5f, 0.5f)
+                    .sound(SoundType.SAND)));
+
 
     public static final DeferredBlock<Block> PALM_LEAVES = registerBlock("palm_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LEAVES)

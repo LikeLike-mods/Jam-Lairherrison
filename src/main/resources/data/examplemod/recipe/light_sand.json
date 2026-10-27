@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "examplemod:light_sand_wet"
+  },
+  "result": {
+    "id": "examplemod:light_sand"
+  },
+  "experience": 0.05,
+  "cookingtime": 300
+}
