@@ -100,7 +100,6 @@
   "tooltip.examplemod.crab_claw.reach": "Portée +4 pour casser et poser des blocs",
   "tooltip.examplemod.crab_claw.wear": "Usure : %s / %s",
 
-
   "examplemod.configuration.title": "Example Mod Configs",
   "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",
   "examplemod.configuration.section.examplemod.common.toml.title": "Example Mod Configs",
