@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "examplemod:palm_log"
+    },
+    "title": {
+      "translate": "advancement.examplemod.root.title"
+    },
+    "description": {
+      "translate": "advancement.examplemod.root.description"
+    },
+    "background": "examplemod:textures/block/light_sand.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

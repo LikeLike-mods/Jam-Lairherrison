@@ -1,6 +1,12 @@
 {
   "creativetab.examplemod.blocks": "Bloom and Gloom",
 
+  "advancement.examplemod.root.title": "Title",
+  "advancement.examplemod.root.description" : "Welcome to the Amazing Digital Circus!",
+  "advancement.examplemod.flytrap_bite.title": "A Hungry Plant!",
+  "advancement.examplemod.flytrap_bite.description": "Be bite by a Venus Flytrap.",
+
+
   "block.examplemod.brownstone": "Brownstone",
   "block.examplemod.palm_log": "Palm log",
   "block.examplemod.light_sand": "Light sand",
