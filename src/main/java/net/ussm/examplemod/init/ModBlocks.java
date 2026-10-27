@@ -53,7 +53,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> LIGHT_SAND_WET = registerBlock("light_sand_wet",
             () -> new Block(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.SAND)
+                    .mapColor(MapColor.WOOD)
                     .strength(0.6f, 0.6f)
                     .sound(SoundType.SAND)));
 
