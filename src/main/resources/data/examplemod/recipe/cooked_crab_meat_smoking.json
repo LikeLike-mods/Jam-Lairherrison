@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "ingredient": {
+    "item": "examplemod:raw_crab_meat"
+  },
+  "result": {
+    "id": "examplemod:cooked_crab_meat"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

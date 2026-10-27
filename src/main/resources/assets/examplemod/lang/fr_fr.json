@@ -62,8 +62,6 @@
   "item.examplemod.coconut_half": "Demi-noix de coco",
   "item.examplemod.coconut_shell": "Coque de noix de coco",
   "item.examplemod.crab_claw": "Pince de crabe",
-  "tooltip.examplemod.crab_claw.reach": "Portée +4 pour casser et poser des blocs",
-  "tooltip.examplemod.crab_claw.wear": "Usure : %s / %s",
   "item.examplemod.leviathan_spawn_egg": "Œuf d'apparition de léviathan",
   "item.examplemod.lightsaber_shadow_sword_white": "Sabre laser d'ombre",
   "item.examplemod.lightsaber_shadow_sickle_white": "Sabre laser d'ombre",
@@ -78,6 +76,8 @@
   "item.examplemod.diamond_abyss_helmet": "Crâne des abysses en diamant",
   "item.examplemod.netherite_abyss_helmet": "Crâne des abysses en netherite",
   "item.examplemod.redstone_pepper": "Piment à Redstone",
+  "item.examplemod.raw_crab_meat" : "Crabe cru",
+  "item.examplemod.cooked_crab_meat" : "Crabe cuit",
 
   "entity.examplemod.butterfly": "Papillon",
   "entity.examplemod.crab": "Crabe",
@@ -96,6 +96,10 @@
 
   "death.attack.examplemod.flytrap": "%1$s a été dévoré par une dionée",
 
+  "tooltip.examplemod.crab_claw.reach": "Portée +4 pour casser et poser des blocs",
+  "tooltip.examplemod.crab_claw.wear": "Usure : %s / %s",
+
+
   "examplemod.configuration.title": "Example Mod Configs",
   "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",
   "examplemod.configuration.section.examplemod.common.toml.title": "Example Mod Configs",
@@ -103,4 +107,5 @@
   "examplemod.configuration.logDirtBlock": "Log Dirt Block",
   "examplemod.configuration.magicNumberIntroduction": "Magic Number Text",
   "examplemod.configuration.magicNumber": "Magic Number"
+
 }

@@ -74,11 +74,11 @@
   "item.examplemod.lightsaber_shadow_hammer_violet": "Shadow Lightsaber",
   "item.examplemod.abyssal_scale": "Abyssal Scale",
   "item.examplemod.crab_claw": "Crab Claw",
-  "tooltip.examplemod.crab_claw.reach": "+4 reach for breaking and placing blocks",
-  "tooltip.examplemod.crab_claw.wear": "Wear: %s / %s",
   "item.examplemod.diamond_abyss_helmet": "Diamond Abyssal Skull",
   "item.examplemod.netherite_abyss_helmet": "Netherite Abyssal Skull",
   "item.examplemod.redstone_pepper": "Redstone Pepper",
+  "item.examplemod.raw_crab_meat" : "Raw Crab",
+  "item.examplemod.cooked_crab_meat" : "Cooked Crab",
 
   "entity.examplemod.butterfly": "Butterfly",
   "entity.examplemod.crab": "Crab",
@@ -99,7 +99,8 @@
   "death.attack.examplemod.flytrap": "%1$s was devoured by a Venus flytrap",
 
 
-
+  "tooltip.examplemod.crab_claw.reach": "+4 reach for breaking and placing blocks",
+  "tooltip.examplemod.crab_claw.wear": "Wear: %s / %s",
 
   "examplemod.configuration.title": "Example Mod Configs",
   "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",

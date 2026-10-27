@@ -1,6 +1,8 @@
 package net.ussm.examplemod.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.AgeableMob;
@@ -22,6 +24,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.entity.ai.SidewaysMoveControl;
 import net.ussm.examplemod.entity.animations.Animations;
 import net.ussm.examplemod.init.ModEntities;

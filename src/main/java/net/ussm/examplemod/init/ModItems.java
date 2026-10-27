@@ -70,6 +70,12 @@ public class ModItems {
     public static final DeferredItem<Item> REDSTONE_PEPPER = ITEMS.register("redstone_pepper",
             () -> new Item(new Item.Properties().food(ModFoodProperties.REDSTONE_PEPPER)));
 
+    public static final DeferredItem<Item> RAW_CRAB_MEAT = ITEMS.register("raw_crab_meat",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_CRAB_MEAT)));
+
+    public static final DeferredItem<Item> COOKED_CRAB_MEAT = ITEMS.register("cooked_crab_meat",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_CRAB_MEAT)));
+
 
 
 
@@ -81,9 +87,9 @@ public class ModItems {
     public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
 
-    // Pince lâchée par le crabe (jusqu'à 99 par pile) : +4 de portée pour casser et poser des blocs tant qu'on en a une sur soi, elle s'use (voir CrabClawEvents)
+    // Pince lâchée par le crabe (jusqu'à 1 par pile) : +4 de portée pour casser et poser des blocs tant qu'on en a une sur soi, elle s'use (voir CrabClawEvents)
     public static final DeferredItem<Item> CRAB_CLAW = ITEMS.register("crab_claw",
-            () -> new Item(new Item.Properties().stacksTo(99)));
+            () -> new Item(new Item.Properties().stacksTo(1)));
 
 
 

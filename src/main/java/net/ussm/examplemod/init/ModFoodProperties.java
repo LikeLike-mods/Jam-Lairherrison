@@ -23,4 +23,15 @@ public class ModFoodProperties {
             .saturationModifier(0.1f)
             .fast()
             .build();
+
+    public  static FoodProperties RAW_CRAB_MEAT = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.3F)
+            .effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 1)
+            .build();
+
+    public static FoodProperties COOKED_CRAB_MEAT = new FoodProperties.Builder()
+            .nutrition(6)
+            .saturationModifier(0.6F)
+            .build();
 }

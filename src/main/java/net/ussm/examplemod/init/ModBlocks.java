@@ -53,47 +53,58 @@ public class ModBlocks {
                     .strength(1.5f, 6f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)));
+
     public static final DeferredBlock<Block> GREY_GRANITE = registerBlock("grey_granite",
             () -> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.DEEPSLATE)
                     .strength(1.8f, 6f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.DEEPSLATE)));
+
     public static final DeferredBlock<Block> PALM_LOG = registerBlock("palm_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.TERRACOTTA_BROWN)
                     .strength(2f, 3f)
                     .ignitedByLava()
                     .sound(SoundType.WOOD)));
+
     public static final DeferredBlock<Block> LIGHT_SAND = registerBlock("light_sand",
             () -> new ColoredFallingBlock(new ColorRGBA(0xE6D8BC), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)
                     .strength(0.5f, 0.5f)
                     .sound(SoundType.SAND)));
+
     public static final DeferredBlock<Block> LIGHT_SAND_WET = registerBlock("light_sand_wet",
             () -> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)
                     .strength(0.6f, 0.6f)
                     .sound(SoundType.SAND)));
+
     public static final DeferredBlock<Block> PALM_LEAVES = registerBlock("palm_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LEAVES)
                     .sound(SoundType.AZALEA_LEAVES)));
 
     public static final DeferredBlock<PalmSaplingBlock> PALM_SAPLING = registerBlock("palm_sapling",
             () -> new PalmSaplingBlock(PalmSaplingBlock.PALM_GROWER, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SAPLING)));
+
     public static final DeferredBlock<FlowerPotBlock> POTTED_PALM_SAPLING = BLOCKS.register("potted_palm_sapling",
             () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PALM_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_JUNGLE_SAPLING)));
 
     public static final DeferredBlock<Block> STRIPPED_PALM_LOG = registerBlock("stripped_palm_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_JUNGLE_LOG).mapColor(MapColor.SAND)));
+
     public static final DeferredBlock<Block> PALM_WOOD = registerBlock("palm_wood",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_WOOD).mapColor(MapColor.TERRACOTTA_BROWN)));
+
     public static final DeferredBlock<Block> STRIPPED_PALM_WOOD = registerBlock("stripped_palm_wood",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_JUNGLE_WOOD).mapColor(MapColor.SAND)));
+
     public static final DeferredBlock<Block> PALM_PLANKS = registerBlock("palm_planks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).mapColor(MapColor.SAND)));
+
     public static final DeferredBlock<StairBlock> PALM_STAIRS = registerBlock("palm_stairs",
             () -> new StairBlock(PALM_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PALM_PLANKS.get())));
+
     public static final DeferredBlock<SlabBlock> PALM_SLAB = registerBlock("palm_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(PALM_PLANKS.get())));
     public static final DeferredBlock<FenceBlock> PALM_FENCE = registerBlock("palm_fence",
