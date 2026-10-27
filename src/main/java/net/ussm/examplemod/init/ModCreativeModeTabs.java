@@ -49,6 +49,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COCONUT_SHELL);
                         output.accept(ModItems.REDSTONE_PEPPER);
                         output.accept(ModItems.REDSTONE_PEPPER_SEEDS);
+                        output.accept(ModItems.RAW_CRAB_MEAT);
+                        output.accept(ModItems.COOKED_CRAB_MEAT);
                         output.accept(ModBlocks.MESSAGE_BOTTLE);
                         output.accept(ModBlocks.ABYSS_SKULL);
                         output.accept(ModItems.ABYSSAL_SCALE);
