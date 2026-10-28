@@ -36,16 +36,16 @@
     [],
     [],
     [],
-    ["minecraft:spring_water"],
+    [
+      "minecraft:spring_water"
+    ],
     [
       "examplemod:trees_tropical_mangrove",
-      "minecraft:patch_grass_normal",
+      "minecraft:lush_caves_vegetation",
       "minecraft:patch_waterlily",
       "minecraft:seagrass_swamp",
-      "examplemod:flytrap_patch",
-      "minecraft:flower_warm",
-      "minecraft:patch_grass_jungle",
       "examplemod:jungle_flowers",
+      "examplemod:flytrap_patch",
       "examplemod:pitcher_plant_patch"
     ],
     []

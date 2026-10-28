@@ -102,11 +102,10 @@ public class TestChunkGenerator extends ChunkGenerator {
         return (t >= a) && (t <= b);
     }
 
-    // niveau de la mer, et le haut des abysses (64 blocs sous la mer)
     public static final int SEA = 100;
     public static final int ABYSS = SEA - 64;
 
-    public static float getHeight(float posX, float posZ, float bonus) {
+    public static float getHeight(float posX, float posZ) {
         net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
         float h;
 
@@ -141,11 +140,31 @@ public class TestChunkGenerator extends ChunkGenerator {
         float mountains = Math.clamp(1.5f * islands - 1f, 0f, 1f);
         islands += 3f * mountains;
 
-        // profondeur sous la mer, les fosses sont creusees encore plus
         float depth = -islands * 50f;
         if (depth > 40f) depth += (depth - 40f) * 1.2f;
         h = Math.max(-120f, SEA - depth);
         return h;
+    }
+
+    public static float getSwampiness(float posX, float posZ, float posY, float slope) {
+        net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
+
+        noise.SetFractalOctaves(1);
+        noise.SetSeed(203);
+        noise.SetFrequency(0.001f);
+        noise.SetFractalType(FastNoiseLite.FractalType.FBm);
+        noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+
+        float min = Math.min(SEA + 1f + 3f * slope, SEA + 16f);
+        float max = Math.max(SEA + 1f + 3f * slope, SEA + 16f);
+        float inRangeFloat = Math.min(posY - min ,max - posY);
+        inRangeFloat = 1f - 1f / (1f + Math.max(20f * inRangeFloat, 0f));
+
+        return Math.max(0f, noise.GetNoise(posX, posZ) * inRangeFloat);
+    }
+
+    public static float lerp(float a, float b, float t) {
+        return a - (b - a) * t;
     }
 
     private void placeMyStructure(ChunkAccess chunk) {
@@ -158,19 +177,13 @@ public class TestChunkGenerator extends ChunkGenerator {
                 int posX = x + (chunk.getPos().x * 16);
                 int posZ = z + (chunk.getPos().z * 16);
 
-                float h = getHeight(posX, posZ, 0f);
-                float n = getHeight(posX + 1, posZ, 0f);
-                float s = getHeight(posX - 1, posZ, 0f);
-                float e = getHeight(posX, posZ + 1, 0f);
-                float w = getHeight(posX, posZ - 1, 0f);
+                float h = getHeight(posX, posZ);
+                float n = getHeight(posX + 1, posZ);
+                float s = getHeight(posX - 1, posZ);
+                float e = getHeight(posX, posZ + 1);
+                float w = getHeight(posX, posZ - 1);
                 float slope = length(n - s, e - w);
                 slope *= 2f;
-
-                // Layers
-                int a = Math.round(h);
-                float b = h - (int)Math.floor(h - 0.5f) - 0.5f;
-                int stratum = (int)Math.floor(b * 8);
-                stratum = Math.clamp(stratum, 0, 8);
 
                 // Blocks hashes
                 net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(202);
@@ -193,17 +206,31 @@ public class TestChunkGenerator extends ChunkGenerator {
                 BlockState topWater = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
                 BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
 
-                if (inRange(h, SEA - 1f, SEA + 5f * Math.min(slope, 1f))) {
-                    if (inRange(h, SEA, SEA + 5f * Math.min(slope, 1f))) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
-                    else topLand = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
-                    top2Land = ModBlocks.LIGHT_SAND.get().defaultBlockState();
-                }
-                else if (slope >= 7f) {
+                float swampiness = getSwampiness(posX, posZ, h, Math.min(slope, 1f));
+                h = lerp(h, SEA + 1f + 3f * slope, (float)Math.pow(Math.max(2f * swampiness - 1f, 0f), 0.3f));
+
+                if (slope >= 7f) {
                     topLand = ModBlocks.BROWNSTONE.get().defaultBlockState();
                     top2Land = ModBlocks.BROWNSTONE.get().defaultBlockState();
                     topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
                 }
+                else if (swampiness >= 0.5f) {
+                    if (hash3 >= 0.75f) topLand = Blocks.MUD.defaultBlockState();
+                    else topLand = Blocks.WATER.defaultBlockState();
+                    top2Land = Blocks.MUD.defaultBlockState();
+                }
+                else if (inRange(h, SEA - 1f, SEA + 5f * Math.min(slope, 1f))) {
+                    if (inRange(h, SEA, SEA + 5f * Math.min(slope, 1f))) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
+                    else topLand = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
+                    top2Land = ModBlocks.LIGHT_SAND.get().defaultBlockState();
+                }
                 if (h >= SEA) bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
+
+                // Layers
+                int a = Math.round(h);
+                float b = h - (int)Math.floor(h - 0.5f) - 0.5f;
+                int stratum = (int)Math.floor(b * 8);
+                stratum = Math.clamp(stratum, 0, 8);
 
                 //Building
                 while (y <= a || y <= SEA) {

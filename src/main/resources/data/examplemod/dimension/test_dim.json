@@ -8,7 +8,6 @@
       "sea": "examplemod:tropical_ocean",
       "shore": "examplemod:tropical_beach",
       "inland": "examplemod:palm_jungle",
-      "mountain": "minecraft:badlands",
       "swamp": "examplemod:tropical_mangrove"
     }
   }

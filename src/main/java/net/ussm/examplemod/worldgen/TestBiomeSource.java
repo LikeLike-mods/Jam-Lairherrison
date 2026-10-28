@@ -10,6 +10,8 @@ import net.minecraft.world.level.biome.Climate;
 
 import java.util.stream.Stream;
 
+import static net.ussm.examplemod.worldgen.TestChunkGenerator.*;
+
 public class TestBiomeSource extends BiomeSource {
 
     public static final MapCodec<TestBiomeSource> CODEC =
@@ -22,22 +24,22 @@ public class TestBiomeSource extends BiomeSource {
                             .forGetter(source -> source.shore),
                     Biome.CODEC.fieldOf("inland")
                             .forGetter(source -> source.inland),
-                    Biome.CODEC.fieldOf("mountain")
-                            .forGetter(source -> source.mountain)
+                    Biome.CODEC.fieldOf("swamp")
+                            .forGetter(source -> source.swamp)
             ).apply(instance, TestBiomeSource::new));
 
     private final Holder<Biome> abyss;
     private final Holder<Biome> sea;
     private final Holder<Biome> shore;
     private final Holder<Biome> inland;
-    private final Holder<Biome> mountain;
+    private final Holder<Biome> swamp;
 
-    public TestBiomeSource(Holder<Biome> abyss, Holder<Biome> sea, Holder<Biome> shore, Holder<Biome> inland, Holder<Biome> mountain) {
+    public TestBiomeSource(Holder<Biome> abyss, Holder<Biome> sea, Holder<Biome> shore, Holder<Biome> inland, Holder<Biome> swamp) {
         this.abyss = abyss;
         this.sea = sea;
         this.shore = shore;
         this.inland = inland;
-        this.mountain = mountain;
+        this.swamp = swamp;
     }
 
     @Override
@@ -47,7 +49,7 @@ public class TestBiomeSource extends BiomeSource {
 
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.of(abyss, sea, shore, inland, mountain);
+        return Stream.of(abyss, sea, shore, inland, swamp);
     }
 
     private boolean inRange(float t, float a, float b) {
@@ -67,20 +69,23 @@ public class TestBiomeSource extends BiomeSource {
         int blockZ = z * 4;
         int blockY = y * 4;
 
-        float h = Math.round(TestChunkGenerator.getHeight(blockX, blockZ, 0f));
-        float n = TestChunkGenerator.getHeight(blockX + 1, blockZ, 0f);
-        float s = TestChunkGenerator.getHeight(blockX - 1, blockZ, 0f);
-        float e = TestChunkGenerator.getHeight(blockX, blockZ + 1, 0f);
-        float w = TestChunkGenerator.getHeight(blockX, blockZ - 1, 0f);
+        float h = Math.round(getHeight(blockX, blockZ));
+        float n = getHeight(blockX + 1, blockZ);
+        float s = getHeight(blockX - 1, blockZ);
+        float e = getHeight(blockX, blockZ + 1);
+        float w = getHeight(blockX, blockZ - 1);
         float slope = length(n - s, e - w);
         slope *= 2f;
         if (slope > 1f) slope = 1f;
 
-        if (h < TestChunkGenerator.SEA + 1) {
-            if (blockY < TestChunkGenerator.ABYSS) return abyss;
+        float swampiness = getSwampiness(blockX, blockZ, h, Math.min(slope, 1f));
+
+        if (h < SEA + 1f) {
+            if (blockY < ABYSS) return abyss;
             else return sea;
         }
-        if (inRange(h, TestChunkGenerator.SEA - 1f, TestChunkGenerator.SEA + 5f * slope)) return shore;
+        if (swampiness >= 0.5f) return swamp;
+        if (inRange(h, SEA - 1f, SEA + 5f * slope)) return shore;
         return inland;
     }
 }
