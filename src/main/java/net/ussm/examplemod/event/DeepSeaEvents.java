@@ -1,6 +1,9 @@
 package net.ussm.examplemod.event;
 
 import net.minecraft.network.chat.Component;
+import net.ussm.examplemod.init.ModBlocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,6 +46,7 @@ public class DeepSeaEvents {
         Player player = event.getEntity();
         boolean inWater = player.isInWater();
         heavyBoots(player, inWater && player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.DIVING_BOOTS.get()));
+        if (inWater) ventLift(player);
 
         if (!(player instanceof ServerPlayer serverPlayer)) return;
         if (player.isEyeInFluid(FluidTags.WATER)) breathe(player);
@@ -63,6 +67,21 @@ public class DeepSeaEvents {
         } else {
             if (walk != null) walk.removeModifier(WALK);
             if (speed != null) speed.removeModifier(HEAVY);
+        }
+    }
+
+    // au-dessus d'une grille d'aeration sous l'eau, les bulles font remonter
+    private static void ventLift(Player player) {
+        BlockPos pos = player.blockPosition();
+        for (int i = 0; i <= 6; i++) {
+            BlockState state = player.level().getBlockState(pos.below(i));
+            if (state.is(ModBlocks.AIR_VENT.get())) {
+                Vec3 v = player.getDeltaMovement();
+                player.setDeltaMovement(v.x, Math.min(0.5, v.y + 0.06), v.z);
+                player.resetFallDistance();
+                return;
+            }
+            if (!state.getFluidState().is(FluidTags.WATER)) return;
         }
     }
 
