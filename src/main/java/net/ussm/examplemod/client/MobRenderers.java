@@ -12,7 +12,6 @@ import net.ussm.examplemod.ExampleMod;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 
 public class MobRenderers<T extends Entity & GeoAnimatable> extends GeoEntityRenderer<T> {
     public enum SwimPose { NONE, PITCH, LEAN }
@@ -32,7 +31,7 @@ public class MobRenderers<T extends Entity & GeoAnimatable> extends GeoEntityRen
         this.translucent = translucent;
         this.swimPose = swimPose;
         if (glows) {
-            this.addRenderLayer(new AutoGlowingGeoLayer<>(this));
+            this.addRenderLayer(new EyesGlowLayer<>(this));
         }
     }
 

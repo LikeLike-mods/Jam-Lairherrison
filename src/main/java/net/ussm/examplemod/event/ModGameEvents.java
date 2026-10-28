@@ -3,7 +3,6 @@ package net.ussm.examplemod.event;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,13 +34,6 @@ public class ModGameEvents {
     public static void headLight(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         if (player.level().isClientSide || player.tickCount % 4 != 0 || !AbyssLightBlock.wearsLight(player)) return;
-        BlockPos pos = BlockPos.containing(player.getEyePosition());
-        BlockState state = player.level().getBlockState(pos);
-        BlockState light = ModBlocks.ABYSS_LIGHT.get().defaultBlockState();
-        if (state.isAir()) {
-            player.level().setBlock(pos, light, Block.UPDATE_ALL);
-        } else if (state.is(Blocks.WATER) && state.getFluidState().isSource()) {
-            player.level().setBlock(pos, light.setValue(AbyssLightBlock.WATERLOGGED, true), Block.UPDATE_ALL);
-        }
+        AbyssLightBlock.placeAt(player.level(), BlockPos.containing(player.getEyePosition()));
     }
 }
