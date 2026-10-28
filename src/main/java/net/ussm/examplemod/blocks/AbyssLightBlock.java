@@ -8,7 +8,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -31,6 +33,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.examplemod.ExampleMod;
+import net.ussm.examplemod.init.ModBlocks;
 
 // Lumière invisible posée à la tête du joueur qui porte un crâne vivant (ou un casque-crâne). Elle se retire toute seule
 // dès que plus personne ne la porte à côté : rien ne traîne après une déconnexion, une mort ou si on enlève le crâne.
@@ -38,6 +41,7 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<AbyssLightBlock> CODEC = simpleCodec(AbyssLightBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final TagKey<Item> HEAD_LIGHTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, "head_lights"));
+    public static final TagKey<EntityType<?>> LIGHT_EMITTERS = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, "light_emitters"));
 
     public AbyssLightBlock(Properties properties) {
         super(properties);
@@ -46,6 +50,22 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
 
     public static boolean wearsLight(Player player) {
         return player.getItemBySlot(EquipmentSlot.HEAD).is(HEAD_LIGHTS);
+    }
+
+    // Joueur qui porte un crâne lumineux, ou mob qui éclaire lui-même (poisson-loupiote)
+    public static boolean emitsLight(LivingEntity entity) {
+        return entity.getType().is(LIGHT_EMITTERS) || entity instanceof Player player && wearsLight(player);
+    }
+
+    // Pose la lumière à cet endroit s'il est libre (air ou eau, dans ce cas elle est noyée)
+    public static void placeAt(Level level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        BlockState light = ModBlocks.ABYSS_LIGHT.get().defaultBlockState();
+        if (state.isAir()) {
+            level.setBlock(pos, light, Block.UPDATE_ALL);
+        } else if (state.is(Blocks.WATER) && state.getFluidState().isSource()) {
+            level.setBlock(pos, light.setValue(WATERLOGGED, true), Block.UPDATE_ALL);
+        }
     }
 
     @Override
@@ -93,7 +113,7 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (level.getEntitiesOfClass(Player.class, new AABB(pos).inflate(1.5), AbyssLightBlock::wearsLight).isEmpty()) {
+        if (level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(2.0), AbyssLightBlock::emitsLight).isEmpty()) {
             level.setBlock(pos, state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
         } else {
             level.scheduleTick(pos, this, 10);

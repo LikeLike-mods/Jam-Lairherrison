@@ -32,7 +32,7 @@ public class PoisonFrog extends Mobs {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.JUMP_STRENGTH, 0.3);
+                .add(Attributes.JUMP_STRENGTH, 0.4);
     }
 
     @Override

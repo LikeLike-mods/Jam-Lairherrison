@@ -132,7 +132,7 @@ public class ModBlocks {
                     .sound(SoundType.MUD).lightLevel(state -> 15).noOcclusion().pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<AbyssLightBlock> ABYSS_LIGHT = BLOCKS.register("abyss_light",
             () -> new AbyssLightBlock(BlockBehaviour.Properties.of().replaceable().noCollission().noLootTable().noOcclusion()
-                    .instabreak().lightLevel(state -> 14).pushReaction(PushReaction.DESTROY)));
+                    .instabreak().lightLevel(state -> 15).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<DryGrassBlock> DRY_GRASS = registerBlock("dry_grass",
             () -> new DryGrassBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)

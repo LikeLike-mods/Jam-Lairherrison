@@ -1,6 +1,7 @@
 package net.ussm.examplemod.init;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -19,6 +20,13 @@ public class ModAttachments {
             .serialize(Codec.INT)
             .copyOnDeath()
             .sync((holder, to) -> holder == to, ByteBufCodecs.VAR_INT)
+            .build());
+
+    // Voyage vers l'atoll : où la conque ramène hors de l'atoll ("return") et où on était dans l'atoll ("atoll"), gardé à la mort
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<CompoundTag>> ATOLL_TRAVEL =
+        ATTACHMENT_TYPES.register("atoll_travel", () -> AttachmentType.builder(() -> new CompoundTag())
+            .serialize(CompoundTag.CODEC)
+            .copyOnDeath()
             .build());
 
     public static void register(IEventBus eventBus) {

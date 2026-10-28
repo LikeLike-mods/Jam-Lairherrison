@@ -1,6 +1,11 @@
 {
   "creativetab.examplemod.blocks": "Bloom and Gloom",
 
+  "advancement.examplemod.root.title": "Titre",
+  "advancement.examplemod.root.description" : "Bienvenue au Incroyable Cirque Numérique !",
+  "advancement.examplemod.flytrap_bite.title": "Miam ! Un joueur !",
+  "advancement.examplemod.flytrap_bite.description": "Etre mordu par une Vénus",
+
   "block.examplemod.brownstone": "Grès marron",
   "block.examplemod.palm_log": "Bûche de palmier",
   "block.examplemod.light_sand": "Sable clair",
@@ -62,6 +67,7 @@
   "item.examplemod.coconut_half": "Demi-noix de coco",
   "item.examplemod.coconut_shell": "Coque de noix de coco",
   "item.examplemod.crab_claw": "Pince de crabe",
+  "item.examplemod.conch": "Conque",
   "item.examplemod.leviathan_spawn_egg": "Œuf d'apparition de léviathan",
   "item.examplemod.lightsaber_shadow_sword_white": "Sabre laser d'ombre",
   "item.examplemod.lightsaber_shadow_sickle_white": "Sabre laser d'ombre",
@@ -99,6 +105,10 @@
 
   "tooltip.examplemod.crab_claw.reach": "Portée +4 pour casser et poser des blocs",
   "tooltip.examplemod.crab_claw.wear": "Usure : %s / %s",
+  "atoll.examplemod.drift.title": "Les courants t'emportent...",
+  "atoll.examplemod.drift.subtitle": "Tout devient noir",
+  "atoll.examplemod.shipwreck.title": "Échoué",
+  "atoll.examplemod.shipwreck.subtitle": "Tu te réveilles sur une plage inconnue",
 
   "examplemod.configuration.title": "Example Mod Configs",
   "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",

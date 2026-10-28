@@ -16,7 +16,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 // Crâne des poissons des abysses : se pose comme déco (face vers le joueur) et se porte sur la tête comme une citrouille.
 public class AbyssSkullBlock extends HorizontalDirectionalBlock implements Equipable {
     public static final MapCodec<AbyssSkullBlock> CODEC = simpleCodec(AbyssSkullBlock::new);
-    private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 8, 14);
+    private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 15, 15);
 
     public AbyssSkullBlock(Properties properties) {
         super(properties);
