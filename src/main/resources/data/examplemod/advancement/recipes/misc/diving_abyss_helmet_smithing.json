@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "examplemod:diving_abyss_helmet_smithing"
+      }
+    },
+    "has_living_abyss_skull": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "examplemod:living_abyss_skull"
+          }
+        ]
+      }
+    },
+    "has_diving_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "examplemod:diving_helmet"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_living_abyss_skull",
+      "has_diving_helmet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "examplemod:diving_abyss_helmet_smithing"
+    ]
+  }
+}

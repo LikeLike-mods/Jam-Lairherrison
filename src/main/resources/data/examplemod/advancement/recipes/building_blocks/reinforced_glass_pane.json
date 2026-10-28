@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "examplemod:reinforced_glass_pane"
+      }
+    },
+    "has_reinforced_glass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "examplemod:reinforced_glass"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_reinforced_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "examplemod:reinforced_glass_pane"
+    ]
+  }
+}

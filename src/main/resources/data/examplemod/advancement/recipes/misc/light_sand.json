@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "examplemod:light_sand"
+      }
+    },
+    "has_light_sand_wet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "examplemod:light_sand_wet"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_light_sand_wet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "examplemod:light_sand"
+    ]
+  }
+}

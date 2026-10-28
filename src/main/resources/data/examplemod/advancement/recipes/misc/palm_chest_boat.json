@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "examplemod:palm_chest_boat"
+      }
+    },
+    "has_palm_boat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "examplemod:palm_boat"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_palm_boat"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "examplemod:palm_chest_boat"
+    ]
+  }
+}

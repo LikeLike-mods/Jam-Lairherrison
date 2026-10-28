@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "examplemod:netherite_abyss_helmet_upgrade"
+      }
+    },
+    "has_diamond_abyss_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "examplemod:diamond_abyss_helmet"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_diamond_abyss_helmet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "examplemod:netherite_abyss_helmet_upgrade"
+    ]
+  }
+}
