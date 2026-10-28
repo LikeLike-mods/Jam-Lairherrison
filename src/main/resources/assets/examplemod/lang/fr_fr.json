@@ -136,9 +136,6 @@
   "item.examplemod.diving_boots": "Bottes lestées",
   "item.examplemod.diving_abyss_helmet": "Casque de scaphandre des abysses",
   "item.examplemod.submarine": "Sous-marin",
-  "entity.examplemod.submarine": "Sous-marin",
-  "pressure.examplemod.crushed": "Vous êtes en train d'être broyé !",
-  "death.attack.examplemod.pressure": "%1$s a été broyé par la pression",
   "item.examplemod.redstone_pepper": "Piment à Redstone",
   "item.examplemod.redstone_pepper_seeds": "Graine de piment à Redstone",
   "item.examplemod.raw_crab_meat" : "Crabe cru",
@@ -202,11 +199,15 @@
   "entity.examplemod.giant_isopod": "Isopode géant",
   "entity.examplemod.vampire_squid": "Calmar vampire",
   "entity.examplemod.leviathan": "Léviathan",
+  "entity.examplemod.submarine": "Sous-marin",
 
   "death.attack.examplemod.flytrap": "%1$s a été dévoré par une dionée",
+  "death.attack.examplemod.pressure": "%1$s a été broyé par la pression",
 
   "tooltip.examplemod.crab_claw.reach": "Portée +4 pour casser et poser des blocs",
   "tooltip.examplemod.crab_claw.wear": "Usure : %s / %s",
+
+  "pressure.examplemod.crushed": "Vous êtes en train d'être broyé !",
 
   "examplemod.configuration.title": "Example Mod Configs",
   "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",
