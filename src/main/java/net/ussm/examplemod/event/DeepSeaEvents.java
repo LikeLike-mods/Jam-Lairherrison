@@ -91,7 +91,7 @@ public class DeepSeaEvents {
             level = y < -90 ? 3 : y < -50 ? 2 : y < 0 ? 1 : 0;
         }
         int last = LAST_LEVEL.getOrDefault(player.getUUID(), 0);
-        if (level > last) player.displayClientMessage(Component.translatable("pressure.examplemod." + level), true);
+        if (level == 3 && last < 3) player.displayClientMessage(Component.translatable("pressure.examplemod.crushed"), true);
         LAST_LEVEL.put(player.getUUID(), level);
         if (level >= 1) player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0, true, false));
         if (level >= 2) {
