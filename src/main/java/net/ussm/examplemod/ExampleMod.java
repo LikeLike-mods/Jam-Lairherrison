@@ -1,5 +1,6 @@
 package net.ussm.examplemod;
 
+import net.ussm.examplemod.init.ModArmorMaterials;
 import net.ussm.examplemod.init.ModAttachments;
 import net.ussm.examplemod.init.ModBlockEntities;
 import net.ussm.examplemod.init.ModBlocks;
@@ -27,6 +28,7 @@ public class ExampleMod {
 
     public ExampleMod(IEventBus modEventBus, ModContainer modContainer) {
         ModCreativeModeTabs.register(modEventBus);
+        ModArmorMaterials.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModBlockEntities.register(modEventBus);

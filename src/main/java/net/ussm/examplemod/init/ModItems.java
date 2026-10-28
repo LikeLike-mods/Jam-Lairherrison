@@ -81,6 +81,18 @@ public class ModItems {
     public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
 
+    // scaphandre : le casque fait respirer, les bottes font couler, les 4 ensemble protegent de la pression
+    public static final DeferredItem<ArmorItem> DIVING_HELMET = ITEMS.register("diving_helmet",
+            () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))));
+    public static final DeferredItem<ArmorItem> DIVING_CHESTPLATE = ITEMS.register("diving_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
+    public static final DeferredItem<ArmorItem> DIVING_LEGGINGS = ITEMS.register("diving_leggings",
+            () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
+    public static final DeferredItem<ArmorItem> DIVING_BOOTS = ITEMS.register("diving_boots",
+            () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
+    public static final DeferredItem<Item> DIVING_ABYSS_HELMET = ITEMS.register("diving_abyss_helmet",
+            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diving", 2, 0, 0)), 9));
+
     public static final DeferredItem<Item> CONCH = ITEMS.register("conch",
             () -> new ConchItem(new Item.Properties().stacksTo(1)));
 

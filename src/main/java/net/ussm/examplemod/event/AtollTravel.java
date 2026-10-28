@@ -102,14 +102,14 @@ public class AtollTravel {
         }
     }
 
-    // plage la plus proche (hauteur entre 65 et 67)
+    // plage la plus proche (juste au-dessus de la mer)
     private static BlockPos findBeach(int x0, int z0) {
         for (int r = 0; r <= 4096; r += 16) {
             for (int dx = -r; dx <= r; dx += 16) {
                 for (int dz = -r; dz <= r; dz += 16) {
                     if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
-                    float h = TestChunkGenerator.getHeight(x0 + dx, z0 + dz);
-                    if (h >= 65f && h <= 67f) {
+                    float h = TestChunkGenerator.getHeight(x0 + dx, z0 + dz, 0f);
+                    if (h >= TestChunkGenerator.SEA + 1 && h <= TestChunkGenerator.SEA + 3) {
                         return new BlockPos(x0 + dx, 0, z0 + dz);
                     }
                 }

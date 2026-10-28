@@ -98,11 +98,15 @@ public class TestChunkGenerator extends ChunkGenerator {
         return (float)Math.sqrt(x*x + y*y);
     }
 
-    private static boolean inRange(float t, float a, float b) {
+    private boolean inRange(float t, float a, float b) {
         return (t >= a) && (t <= b);
     }
 
-    public static float getHeight(float posX, float posZ) {
+    // niveau de la mer, et le haut des abysses (64 blocs sous la mer)
+    public static final int SEA = 100;
+    public static final int ABYSS = SEA - 64;
+
+    public static float getHeight(float posX, float posZ, float bonus) {
         net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
         float h;
 
@@ -137,21 +141,11 @@ public class TestChunkGenerator extends ChunkGenerator {
         float mountains = Math.clamp(1.5f * islands - 1f, 0f, 1f);
         islands += 3f * mountains;
 
-        h = islands * 50f + 64f;
+        // profondeur sous la mer, les fosses sont creusees encore plus
+        float depth = -islands * 50f;
+        if (depth > 40f) depth += (depth - 40f) * 1.2f;
+        h = Math.max(-120f, SEA - depth);
         return h;
-    }
-
-    public static float getSwampiness(float posX, float posZ, float posY, float slope) {
-        net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
-
-        noise.SetFractalOctaves(1);
-        noise.SetSeed(203);
-        noise.SetFrequency(0.001f);
-        noise.SetFractalType(FastNoiseLite.FractalType.FBm);
-        noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
-
-        if (inRange(posY, 65f + 3f * slope, 80f)) return noise.GetNoise(posX, posZ);
-        return 0f;
     }
 
     private void placeMyStructure(ChunkAccess chunk) {
@@ -164,13 +158,19 @@ public class TestChunkGenerator extends ChunkGenerator {
                 int posX = x + (chunk.getPos().x * 16);
                 int posZ = z + (chunk.getPos().z * 16);
 
-                float h = getHeight(posX, posZ);
-                float n = getHeight(posX + 1, posZ);
-                float s = getHeight(posX - 1, posZ);
-                float e = getHeight(posX, posZ + 1);
-                float w = getHeight(posX, posZ - 1);
+                float h = getHeight(posX, posZ, 0f);
+                float n = getHeight(posX + 1, posZ, 0f);
+                float s = getHeight(posX - 1, posZ, 0f);
+                float e = getHeight(posX, posZ + 1, 0f);
+                float w = getHeight(posX, posZ - 1, 0f);
                 float slope = length(n - s, e - w);
                 slope *= 2f;
+
+                // Layers
+                int a = Math.round(h);
+                float b = h - (int)Math.floor(h - 0.5f) - 0.5f;
+                int stratum = (int)Math.floor(b * 8);
+                stratum = Math.clamp(stratum, 0, 8);
 
                 // Blocks hashes
                 net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(202);
@@ -193,13 +193,8 @@ public class TestChunkGenerator extends ChunkGenerator {
                 BlockState topWater = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
                 BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
 
-                if (getSwampiness(posX, posZ, h, Math.min(slope, 1f)) >= 0.5f) {
-                    if (hash3 >= 0.75f) topLand = Blocks.MUD.defaultBlockState();
-                    else topLand = Blocks.WATER.defaultBlockState();
-                    top2Land = Blocks.MUD.defaultBlockState();
-                }
-                else if (inRange(h, 63f, 64f + 5f * Math.min(slope, 1f))) {
-                    if (inRange(h, 64f, 64f + 5f * Math.min(slope, 1f))) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
+                if (inRange(h, SEA - 1f, SEA + 5f * Math.min(slope, 1f))) {
+                    if (inRange(h, SEA, SEA + 5f * Math.min(slope, 1f))) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
                     else topLand = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
                     top2Land = ModBlocks.LIGHT_SAND.get().defaultBlockState();
                 }
@@ -208,21 +203,15 @@ public class TestChunkGenerator extends ChunkGenerator {
                     top2Land = ModBlocks.BROWNSTONE.get().defaultBlockState();
                     topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
                 }
-                if (h >= 64f) bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
-
-                // Layers
-                int a = Math.round(h);
-                float b = h - (int)Math.floor(h - 0.5f) - 0.5f;
-                int stratum = (int)Math.floor(b * 8);
-                stratum = Math.clamp(stratum, 0, 8);
+                if (h >= SEA) bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
 
                 //Building
-                while (y <= a || y <= 64) {
+                while (y <= a || y <= SEA) {
                     pos.set(x, y, z);
 
                     if (y == -128) chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
                     else if (y == a) {
-                        if (y < 64) {
+                        if (y < SEA) {
                             chunk.setBlockState(pos, topWater, false);
                         }
                         else {
@@ -230,7 +219,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                         }
                     }
                     else if (y == a - 1) {
-                        if (y < 64) {
+                        if (y < SEA) {
                             chunk.setBlockState(pos, topWater, false);
                         }
                         else {
@@ -240,7 +229,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                     else if (y < a - 1){
                         chunk.setBlockState(pos, bottom, false);
                     }
-                    else if (y <= 64){
+                    else if (y <= SEA){
                         chunk.setBlockState(pos, Blocks.WATER.defaultBlockState(), false);
                     }
                     y += 1;
@@ -252,7 +241,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getSeaLevel() {
-        return 64;
+        return SEA;
     }
 
     @Override
