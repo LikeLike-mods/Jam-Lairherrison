@@ -1,6 +1,10 @@
 package net.ussm.examplemod.init;
 
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.sounds.SoundEvents;
+import net.ussm.examplemod.blocks.DecorBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -229,6 +233,45 @@ public class ModBlocks {
             () -> new SlidingDoorBlock(metal().noOcclusion().pushReaction(PushReaction.BLOCK), false));
     public static final DeferredBlock<SlidingDoorBlock> BROKEN_SLIDING_DOOR = registerBlock("broken_sliding_door",
             () -> new SlidingDoorBlock(metal().noOcclusion().pushReaction(PushReaction.BLOCK), true));
+
+    // encore des blocs pour les stations sous-marines
+    public static final BlockSetType STEEL_SET = BlockSetType.register(new BlockSetType(ExampleMod.MOD_ID + ":steel", true, true, false,
+            BlockSetType.PressurePlateSensitivity.MOBS, SoundType.METAL, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN,
+            SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF,
+            SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+    public static final DeferredBlock<Block> CHECKER_PLATE = registerBlock("checker_plate", () -> new Block(metal()));
+    public static final DeferredBlock<Block> RUSTY_CHECKER_PLATE = registerBlock("rusty_checker_plate", () -> new Block(metal()));
+    public static final DeferredBlock<Block> CORRUGATED_METAL = registerBlock("corrugated_metal", () -> new Block(metal()));
+    public static final DeferredBlock<Block> RUSTY_CORRUGATED_METAL = registerBlock("rusty_corrugated_metal", () -> new Block(metal()));
+    public static final DeferredBlock<Block> RIVETED_PANEL = registerBlock("riveted_panel", () -> new Block(metal()));
+    public static final DeferredBlock<Block> RUSTY_RIVETED_PANEL = registerBlock("rusty_riveted_panel", () -> new Block(metal()));
+    public static final DeferredBlock<Block> HAZARD_BLOCK = registerBlock("hazard_block", () -> new Block(metal()));
+    public static final DeferredBlock<Block> STATION_CONCRETE = registerBlock("station_concrete", () -> new Block(metal().strength(3f, 6f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> AIR_VENT = registerBlock("air_vent", () -> new Block(metal()));
+    public static final DeferredBlock<Block> METAL_CRATE = registerBlock("metal_crate", () -> new Block(metal()));
+    public static final DeferredBlock<TransparentBlock> PORTHOLE = registerBlock("porthole", () -> new TransparentBlock(seeThrough(metal())));
+    public static final DeferredBlock<RotatedPillarBlock> STEEL_BEAM = registerBlock("steel_beam", () -> new RotatedPillarBlock(metal()));
+    public static final DeferredBlock<RotatedPillarBlock> RUSTY_STEEL_BEAM = registerBlock("rusty_steel_beam", () -> new RotatedPillarBlock(metal()));
+    public static final DeferredBlock<WallBlock> METAL_PLATING_WALL = registerBlock("metal_plating_wall", () -> new WallBlock(metal().forceSolidOn()));
+    public static final DeferredBlock<WallBlock> RUSTY_METAL_PLATING_WALL = registerBlock("rusty_metal_plating_wall", () -> new WallBlock(metal().forceSolidOn()));
+    public static final DeferredBlock<StairBlock> METAL_GRATE_STAIRS = registerBlock("metal_grate_stairs", () -> new StairBlock(METAL_GRATE.get().defaultBlockState(), seeThrough(metal().sound(SoundType.COPPER_GRATE))));
+    public static final DeferredBlock<SlabBlock> METAL_GRATE_SLAB = registerBlock("metal_grate_slab", () -> new SlabBlock(seeThrough(metal().sound(SoundType.COPPER_GRATE))));
+    public static final DeferredBlock<StairBlock> RUSTY_METAL_GRATE_STAIRS = registerBlock("rusty_metal_grate_stairs", () -> new StairBlock(RUSTY_METAL_GRATE.get().defaultBlockState(), seeThrough(metal().sound(SoundType.COPPER_GRATE))));
+    public static final DeferredBlock<SlabBlock> RUSTY_METAL_GRATE_SLAB = registerBlock("rusty_metal_grate_slab", () -> new SlabBlock(seeThrough(metal().sound(SoundType.COPPER_GRATE))));
+    public static final DeferredBlock<TrapDoorBlock> STEEL_TRAPDOOR = registerBlock("steel_trapdoor", () -> new TrapDoorBlock(STEEL_SET, metal().noOcclusion().isValidSpawn(Blocks::never)));
+    public static final DeferredBlock<TrapDoorBlock> RUSTY_STEEL_TRAPDOOR = registerBlock("rusty_steel_trapdoor", () -> new TrapDoorBlock(STEEL_SET, metal().noOcclusion().isValidSpawn(Blocks::never)));
+    public static final DeferredBlock<LadderBlock> METAL_LADDER = registerBlock("metal_ladder", () -> new LadderBlock(metal().strength(2f).noOcclusion()));
+    public static final DeferredBlock<IronBarsBlock> REINFORCED_GLASS_PANE = registerBlock("reinforced_glass_pane", () -> new IronBarsBlock(seeThrough(metal().strength(5f, 1200f).sound(SoundType.GLASS))));
+    public static final DeferredBlock<DecorBlock> CONTROL_CONSOLE = registerBlock("control_console", () -> new DecorBlock(metal().lightLevel(s -> 6), Block.box(1, 0, 3, 15, 11, 16)));
+    public static final DeferredBlock<DecorBlock> MACHINE = registerBlock("machine", () -> new DecorBlock(metal(), Shapes.block()));
+    public static final DeferredBlock<DecorBlock> TANK = registerBlock("tank", () -> new DecorBlock(metal(), Block.box(1, 0, 1, 15, 16, 15)));
+    public static final DeferredBlock<DecorBlock> RUSTY_BARREL = registerBlock("rusty_barrel", () -> new DecorBlock(metal(), Block.box(2, 0, 2, 14, 14, 14)));
+    public static final DeferredBlock<DecorBlock> HANGING_CABLES = registerBlock("hanging_cables", () -> new DecorBlock(metal().strength(0.5f).sound(SoundType.CHAIN).noOcclusion(), Block.box(2, 0, 2, 14, 16, 14), false));
+    public static final DeferredBlock<DecorBlock> DANGER_SIGN = registerBlock("danger_sign", () -> new DecorBlock(metal().strength(1f).noOcclusion(), Block.box(1, 2, 15, 15, 14, 16), false));
+    public static final DeferredBlock<DecorBlock> LIGHT_STRIP = registerBlock("light_strip", () -> new DecorBlock(metal().strength(1f).noOcclusion().lightLevel(s -> 12), Block.box(0, 6, 14, 16, 10, 16), false));
+    public static final DeferredBlock<DecorBlock> FLOODLIGHT = registerBlock("floodlight", () -> new DecorBlock(metal().strength(2f).noOcclusion().lightLevel(s -> 15), Block.box(3, 0, 4, 13, 13, 12)));
+    public static final DeferredBlock<IndustrialLampBlock> EMERGENCY_LIGHT = registerBlock("emergency_light", () -> new IndustrialLampBlock(metal().strength(3f, 6f).lightLevel(s -> 10).noOcclusion()));
+    public static final DeferredBlock<IndustrialLampBlock> BROKEN_INDUSTRIAL_LAMP = registerBlock("broken_industrial_lamp", () -> new IndustrialLampBlock(metal().strength(3f, 6f).noOcclusion()));
 
     private static BlockBehaviour.Properties metal() {
         return BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(5f, 6f).requiresCorrectToolForDrops().sound(SoundType.METAL);

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "examplemod:metal_plating_slab",
-    "examplemod:rusty_metal_plating_slab"
+    "examplemod:rusty_metal_plating_slab",
+    "examplemod:metal_grate_slab",
+    "examplemod:rusty_metal_grate_slab"
   ]
 }

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "examplemod:metal_plating_stairs",
-    "examplemod:rusty_metal_plating_stairs"
+    "examplemod:rusty_metal_plating_stairs",
+    "examplemod:metal_grate_stairs",
+    "examplemod:rusty_metal_grate_stairs"
   ]
 }

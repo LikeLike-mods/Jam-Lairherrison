@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "examplemod:block/metal_grate",
+    "side": "examplemod:block/metal_grate",
+    "top": "examplemod:block/metal_grate"
+  },
+  "render_type": "minecraft:cutout"
+}

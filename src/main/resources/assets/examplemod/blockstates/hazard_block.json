@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "examplemod:block/hazard_block"
+    }
+  }
+}
