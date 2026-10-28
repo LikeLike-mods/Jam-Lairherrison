@@ -7,12 +7,16 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.blocks.MessageBottleBlockEntity;
+import net.ussm.examplemod.blocks.SlidingDoorBlockEntity;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ExampleMod.MOD_ID);
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MessageBottleBlockEntity>> MESSAGE_BOTTLE = BLOCK_ENTITIES.register("message_bottle",
             () -> BlockEntityType.Builder.of(MessageBottleBlockEntity::new, ModBlocks.MESSAGE_BOTTLE.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SlidingDoorBlockEntity>> SLIDING_DOOR = BLOCK_ENTITIES.register("sliding_door",
+            () -> BlockEntityType.Builder.of(SlidingDoorBlockEntity::new, ModBlocks.SLIDING_DOOR.get(), ModBlocks.BROKEN_SLIDING_DOOR.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

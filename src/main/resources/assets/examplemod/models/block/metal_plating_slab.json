@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "examplemod:block/metal_plating",
+    "side": "examplemod:block/metal_plating",
+    "top": "examplemod:block/metal_plating"
+  }
+}

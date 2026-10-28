@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "examplemod:block/metal_plating_slab"
+    },
+    "type=double": {
+      "model": "examplemod:block/metal_plating"
+    },
+    "type=top": {
+      "model": "examplemod:block/metal_plating_slab_top"
+    }
+  }
+}

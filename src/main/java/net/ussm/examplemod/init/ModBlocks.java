@@ -15,6 +15,10 @@ import net.ussm.examplemod.blocks.PitcherPlantBlock;
 import net.ussm.examplemod.blocks.AbyssLightBlock;
 import net.ussm.examplemod.blocks.AbyssSkullBlock;
 import net.ussm.examplemod.blocks.MessageBottleBlock;
+import net.ussm.examplemod.blocks.IndustrialLampBlock;
+import net.ussm.examplemod.blocks.MetalPipeBlock;
+import net.ussm.examplemod.blocks.SlidingDoorBlock;
+import net.ussm.examplemod.blocks.ValveBlock;
 import net.ussm.examplemod.blocks.PalmSaplingBlock;
 import net.ussm.examplemod.blocks.TropicalFlowerBlock;
 import net.neoforged.bus.api.IEventBus;
@@ -193,7 +197,47 @@ public class ModBlocks {
 
 
     public static final DeferredBlock<RedstonePepperBlock> REDSTONE_PEPPER_CROP = registerBlock("redstone_pepper_crop",
-            () -> new RedstonePepperBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)));
+            () -> new RedstonePepperBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .randomTicks()
+                    .instabreak()
+                    .sound(SoundType.CROP)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    // base sous-marine abandonnee
+    public static final DeferredBlock<Block> METAL_PLATING = registerBlock("metal_plating", () -> new Block(metal()));
+    public static final DeferredBlock<Block> RUSTY_METAL_PLATING = registerBlock("rusty_metal_plating", () -> new Block(metal()));
+    public static final DeferredBlock<StairBlock> METAL_PLATING_STAIRS = registerBlock("metal_plating_stairs",
+            () -> new StairBlock(METAL_PLATING.get().defaultBlockState(), metal()));
+    public static final DeferredBlock<SlabBlock> METAL_PLATING_SLAB = registerBlock("metal_plating_slab", () -> new SlabBlock(metal()));
+    public static final DeferredBlock<StairBlock> RUSTY_METAL_PLATING_STAIRS = registerBlock("rusty_metal_plating_stairs",
+            () -> new StairBlock(RUSTY_METAL_PLATING.get().defaultBlockState(), metal()));
+    public static final DeferredBlock<SlabBlock> RUSTY_METAL_PLATING_SLAB = registerBlock("rusty_metal_plating_slab", () -> new SlabBlock(metal()));
+    public static final DeferredBlock<WaterloggedTransparentBlock> METAL_GRATE = registerBlock("metal_grate",
+            () -> new WaterloggedTransparentBlock(seeThrough(metal().sound(SoundType.COPPER_GRATE))));
+    public static final DeferredBlock<WaterloggedTransparentBlock> RUSTY_METAL_GRATE = registerBlock("rusty_metal_grate",
+            () -> new WaterloggedTransparentBlock(seeThrough(metal().sound(SoundType.COPPER_GRATE))));
+    // verre blinde : resiste aux explosions comme l'obsidienne
+    public static final DeferredBlock<TransparentBlock> REINFORCED_GLASS = registerBlock("reinforced_glass",
+            () -> new TransparentBlock(seeThrough(metal().strength(5f, 1200f).sound(SoundType.GLASS))));
+    public static final DeferredBlock<IndustrialLampBlock> INDUSTRIAL_LAMP = registerBlock("industrial_lamp",
+            () -> new IndustrialLampBlock(metal().strength(3f, 6f).lightLevel(state -> 15).noOcclusion()));
+    public static final DeferredBlock<MetalPipeBlock> PIPE = registerBlock("pipe", () -> new MetalPipeBlock(metal().noOcclusion()));
+    public static final DeferredBlock<ValveBlock> VALVE = registerBlock("valve",
+            () -> new ValveBlock(metal().strength(2f, 6f).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<SlidingDoorBlock> SLIDING_DOOR = registerBlock("sliding_door",
+            () -> new SlidingDoorBlock(metal().noOcclusion().pushReaction(PushReaction.BLOCK), false));
+    public static final DeferredBlock<SlidingDoorBlock> BROKEN_SLIDING_DOOR = registerBlock("broken_sliding_door",
+            () -> new SlidingDoorBlock(metal().noOcclusion().pushReaction(PushReaction.BLOCK), true));
+
+    private static BlockBehaviour.Properties metal() {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(5f, 6f).requiresCorrectToolForDrops().sound(SoundType.METAL);
+    }
+
+    private static BlockBehaviour.Properties seeThrough(BlockBehaviour.Properties properties) {
+        return properties.noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor((s, l, p) -> false)
+                .isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> false);
+    }
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block ) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

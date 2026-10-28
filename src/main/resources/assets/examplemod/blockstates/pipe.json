@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "examplemod:block/pipe"
+    },
+    "axis=z": {
+      "model": "examplemod:block/pipe",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "examplemod:block/pipe",
+      "x": 90,
+      "y": 90
+    }
+  }
+}
