@@ -210,7 +210,7 @@
   "death.attack.examplemod.flytrap": "%1$s was devoured by a Venus flytrap",
   "death.attack.examplemod.pressure": "%1$s was crushed by the pressure",
 
-  "tooltip.examplemod.crab_claw.reach": "+4 reach for breaking and placing blocks",
+  "tooltip.examplemod.crab_claw.reach": "+10 reach for breaking and placing blocks",
   "tooltip.examplemod.crab_claw.wear": "Wear: %s / %s",
 
   "pressure.examplemod.crushed": "You are being crushed!",
