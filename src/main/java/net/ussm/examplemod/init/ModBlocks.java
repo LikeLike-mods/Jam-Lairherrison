@@ -5,6 +5,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.sounds.SoundEvents;
 import net.ussm.examplemod.blocks.DecorBlock;
+import net.ussm.examplemod.blocks.TankBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -264,7 +265,7 @@ public class ModBlocks {
     public static final DeferredBlock<IronBarsBlock> REINFORCED_GLASS_PANE = registerBlock("reinforced_glass_pane", () -> new IronBarsBlock(seeThrough(metal().strength(5f, 1200f).sound(SoundType.GLASS))));
     public static final DeferredBlock<DecorBlock> CONTROL_CONSOLE = registerBlock("control_console", () -> new DecorBlock(metal().lightLevel(s -> 6), Block.box(1, 0, 3, 15, 11, 16)));
     public static final DeferredBlock<DecorBlock> MACHINE = registerBlock("machine", () -> new DecorBlock(metal(), Shapes.block()));
-    public static final DeferredBlock<DecorBlock> TANK = registerBlock("tank", () -> new DecorBlock(metal(), Block.box(1, 0, 1, 15, 16, 15)));
+    public static final DeferredBlock<TankBlock> TANK = registerBlock("tank", () -> new TankBlock(metal()));
     public static final DeferredBlock<DecorBlock> RUSTY_BARREL = registerBlock("rusty_barrel", () -> new DecorBlock(metal(), Block.box(2, 0, 2, 14, 14, 14)));
     public static final DeferredBlock<DecorBlock> HANGING_CABLES = registerBlock("hanging_cables", () -> new DecorBlock(metal().strength(0.5f).sound(SoundType.CHAIN).noOcclusion(), Block.box(2, 0, 2, 14, 16, 14), false));
     public static final DeferredBlock<DecorBlock> DANGER_SIGN = registerBlock("danger_sign", () -> new DecorBlock(metal().strength(1f).noOcclusion(), Block.box(1, 2, 15, 15, 14, 16), false));

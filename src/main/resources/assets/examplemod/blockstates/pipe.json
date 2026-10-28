@@ -1,16 +1,62 @@
 {
-  "variants": {
-    "axis=y": {
-      "model": "examplemod:block/pipe"
+  "multipart": [
+    {
+      "apply": {
+        "model": "examplemod:block/pipe_core"
+      }
     },
-    "axis=z": {
-      "model": "examplemod:block/pipe",
-      "x": 90
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "examplemod:block/pipe_arm"
+      }
     },
-    "axis=x": {
-      "model": "examplemod:block/pipe",
-      "x": 90,
-      "y": 90
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "examplemod:block/pipe_arm",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "examplemod:block/pipe_arm",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "examplemod:block/pipe_arm",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "examplemod:block/pipe_arm",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "examplemod:block/pipe_arm",
+        "x": 90
+      }
     }
-  }
+  ]
 }

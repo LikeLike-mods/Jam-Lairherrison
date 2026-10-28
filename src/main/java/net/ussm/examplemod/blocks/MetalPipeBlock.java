@@ -2,11 +2,16 @@ package net.ussm.examplemod.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -15,39 +20,70 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.ussm.examplemod.ExampleMod;
 
-// tuyau qu'on pose dans les 3 axes comme une buche, marche aussi sous l'eau
-public class MetalPipeBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock {
+import java.util.HashMap;
+import java.util.Map;
+
+// tuyau qui se raccorde tout seul comme la redstone : aux autres tuyaux et aux blocs du tag pipe_connectable (cuves, machines...)
+public class MetalPipeBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final VoxelShape SHAPE_Y = Block.box(4, 0, 4, 12, 16, 12);
-    private static final VoxelShape SHAPE_X = Block.box(0, 4, 4, 16, 12, 12);
-    private static final VoxelShape SHAPE_Z = Block.box(4, 4, 0, 12, 12, 16);
+    public static final TagKey<Block> CONNECTABLE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, "pipe_connectable"));
+    private static final Map<Direction, BooleanProperty> SIDES = PipeBlock.PROPERTY_BY_DIRECTION;
+    private static final VoxelShape CORE = Block.box(5, 5, 5, 11, 11, 11);
+    private static final Map<Direction, VoxelShape> ARMS = Map.of(
+            Direction.NORTH, Block.box(4, 4, 0, 12, 12, 5), Direction.SOUTH, Block.box(4, 4, 11, 12, 12, 16),
+            Direction.WEST, Block.box(0, 4, 4, 5, 12, 12), Direction.EAST, Block.box(11, 4, 4, 16, 12, 12),
+            Direction.DOWN, Block.box(4, 0, 4, 12, 5, 12), Direction.UP, Block.box(4, 11, 4, 12, 16, 12));
+    private final Map<BlockState, VoxelShape> shapes = new HashMap<>();
 
     public MetalPipeBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
+        BlockState state = this.stateDefinition.any().setValue(WATERLOGGED, false);
+        for (BooleanProperty side : SIDES.values()) state = state.setValue(side, false);
+        this.registerDefaultState(state);
+        for (BlockState s : this.stateDefinition.getPossibleStates()) {
+            VoxelShape shape = CORE;
+            for (Direction d : Direction.values()) {
+                if (s.getValue(SIDES.get(d))) shape = Shapes.or(shape, ARMS.get(d));
+            }
+            shapes.put(s, shape);
+        }
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(WATERLOGGED);
+        builder.add(BlockStateProperties.NORTH, BlockStateProperties.EAST, BlockStateProperties.SOUTH, BlockStateProperties.WEST,
+                BlockStateProperties.UP, BlockStateProperties.DOWN, WATERLOGGED);
+    }
+
+    private static boolean connectsTo(BlockState state) {
+        return state.getBlock() instanceof MetalPipeBlock || state.is(CONNECTABLE);
     }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(AXIS)) {
-            case X -> SHAPE_X;
-            case Y -> SHAPE_Y;
-            case Z -> SHAPE_Z;
-        };
+        return shapes.get(state);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        boolean water = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
-        return super.getStateForPlacement(context).setValue(WATERLOGGED, water);
+        BlockPos pos = context.getClickedPos();
+        BlockState state = this.defaultBlockState().setValue(WATERLOGGED, context.getLevel().getFluidState(pos).getType() == Fluids.WATER);
+        for (Direction d : Direction.values()) {
+            state = state.setValue(SIDES.get(d), connectsTo(context.getLevel().getBlockState(pos.relative(d))));
+        }
+        return state;
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+        return state.setValue(SIDES.get(direction), connectsTo(neighborState));
     }
 
     @Override
@@ -56,10 +92,16 @@ public class MetalPipeBlock extends RotatedPillarBlock implements SimpleWaterlog
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (state.getValue(WATERLOGGED)) {
-            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        BlockState out = state;
+        for (Direction d : Direction.Plane.HORIZONTAL) out = out.setValue(SIDES.get(rotation.rotate(d)), state.getValue(SIDES.get(d)));
+        return out;
+    }
+
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        BlockState out = state;
+        for (Direction d : Direction.Plane.HORIZONTAL) out = out.setValue(SIDES.get(mirror.mirror(d)), state.getValue(SIDES.get(d)));
+        return out;
     }
 }

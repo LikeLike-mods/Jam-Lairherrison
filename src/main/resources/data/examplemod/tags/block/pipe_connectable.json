@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "examplemod:tank",
+    "examplemod:machine",
+    "examplemod:air_vent",
+    "examplemod:control_console",
+    "examplemod:metal_plating",
+    "examplemod:rusty_metal_plating",
+    "examplemod:riveted_panel",
+    "examplemod:rusty_riveted_panel"
+  ]
+}
