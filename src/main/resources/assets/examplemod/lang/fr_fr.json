@@ -67,6 +67,7 @@
   "item.examplemod.coconut_half": "Demi-noix de coco",
   "item.examplemod.coconut_shell": "Coque de noix de coco",
   "item.examplemod.crab_claw": "Pince de crabe",
+  "item.examplemod.conch": "Conque",
   "item.examplemod.leviathan_spawn_egg": "Œuf d'apparition de léviathan",
   "item.examplemod.lightsaber_shadow_sword_white": "Sabre laser d'ombre",
   "item.examplemod.lightsaber_shadow_sickle_white": "Sabre laser d'ombre",
@@ -104,6 +105,10 @@
 
   "tooltip.examplemod.crab_claw.reach": "Portée +4 pour casser et poser des blocs",
   "tooltip.examplemod.crab_claw.wear": "Usure : %s / %s",
+  "atoll.examplemod.drift.title": "Les courants t'emportent...",
+  "atoll.examplemod.drift.subtitle": "Tout devient noir",
+  "atoll.examplemod.shipwreck.title": "Échoué",
+  "atoll.examplemod.shipwreck.subtitle": "Tu te réveilles sur une plage inconnue",
 
 
   "examplemod.configuration.title": "Example Mod Configs",

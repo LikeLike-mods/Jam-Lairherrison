@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.resources.ResourceLocation;
 import net.ussm.examplemod.items.AbyssHelmetItem;
+import net.ussm.examplemod.items.ConchItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -81,6 +82,10 @@ public class ModItems {
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diamond", 3, 2, 0)), 10));
     public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
+
+    // Conque : on souffle dedans pour sortir de l'atoll (et y revenir quand on veut)
+    public static final DeferredItem<Item> CONCH = ITEMS.register("conch",
+            () -> new ConchItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> CRAB_CLAW = ITEMS.register("crab_claw",
             () -> new Item(new Item.Properties().stacksTo(1)));
