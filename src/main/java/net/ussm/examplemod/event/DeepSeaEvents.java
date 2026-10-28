@@ -22,6 +22,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.blocks.AbyssLightBlock;
+import net.ussm.examplemod.entity.Submarine;
 import net.ussm.examplemod.init.ModItems;
 import net.ussm.examplemod.worldgen.TestChunkGenerator;
 
@@ -87,7 +88,7 @@ public class DeepSeaEvents {
     private static void pressure(ServerPlayer player, boolean inWater) {
         int level = 0;
         if (inWater && player.level().dimension() == AtollTravel.ATOLL && !player.isCreative() && !player.isSpectator()
-                && !hasFullSuit(player)) {
+                && !hasFullSuit(player) && !(player.getVehicle() instanceof Submarine)) {
             double y = player.getY();
             int top = TestChunkGenerator.ABYSS;
             level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
