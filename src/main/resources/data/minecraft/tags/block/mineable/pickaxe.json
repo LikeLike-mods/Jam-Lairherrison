@@ -2,6 +2,20 @@
   "replace": false,
   "values": [
     "examplemod:brownstone",
-    "examplemod:grey_granite"
+    "examplemod:grey_granite",
+    "examplemod:metal_plating",
+    "examplemod:rusty_metal_plating",
+    "examplemod:metal_plating_stairs",
+    "examplemod:metal_plating_slab",
+    "examplemod:rusty_metal_plating_stairs",
+    "examplemod:rusty_metal_plating_slab",
+    "examplemod:metal_grate",
+    "examplemod:rusty_metal_grate",
+    "examplemod:reinforced_glass",
+    "examplemod:industrial_lamp",
+    "examplemod:pipe",
+    "examplemod:valve",
+    "examplemod:sliding_door",
+    "examplemod:broken_sliding_door"
   ]
 }
