@@ -12,13 +12,6 @@
       ],
       "conditions": [
         {
-          "condition": "minecraft:block_state_property",
-          "block": "examplemod:broken_sliding_door",
-          "properties": {
-            "half": "lower"
-          }
-        },
-        {
           "condition": "minecraft:survives_explosion"
         }
       ]
