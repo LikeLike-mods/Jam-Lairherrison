@@ -1,6 +1,7 @@
 package net.ussm.examplemod.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -19,7 +20,12 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 
-// machine = pompe a air : allumee, les joueurs sous l'eau a 6 blocs autour retrouvent tout leur air
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Set;
+
+// machine = pompe a air : allumee, les joueurs sous l'eau a 6 blocs autour retrouvent tout leur air,
+// et l'air part dans les tuyaux branches dessus : chaque grille d'aeration au bout fait respirer a 4 blocs autour d'elle
 public class MachineBlock extends DecorBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
@@ -54,10 +60,35 @@ public class MachineBlock extends DecorBlock {
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!state.getValue(POWERED)) return;
-        for (Player player : level.getEntitiesOfClass(Player.class, new AABB(pos).inflate(6.0))) {
+        giveAir(level, new AABB(pos).inflate(6.0));
+        for (BlockPos vent : connectedVents(level, pos)) giveAir(level, new AABB(vent).inflate(4.0));
+        level.scheduleTick(pos, this, 20);
+    }
+
+    private static void giveAir(Level level, AABB area) {
+        for (Player player : level.getEntitiesOfClass(Player.class, area)) {
             if (player.isEyeInFluid(FluidTags.WATER)) player.setAirSupply(player.getMaxAirSupply());
         }
-        level.scheduleTick(pos, this, 20);
+    }
+
+    // on suit les tuyaux depuis la machine (256 blocs max) et on garde les grilles collees a eux
+    private static Set<BlockPos> connectedVents(Level level, BlockPos start) {
+        Set<BlockPos> seen = new HashSet<>();
+        Set<BlockPos> vents = new HashSet<>();
+        ArrayDeque<BlockPos> todo = new ArrayDeque<>();
+        todo.add(start);
+        seen.add(start);
+        while (!todo.isEmpty() && seen.size() < 256) {
+            BlockPos p = todo.poll();
+            for (Direction d : Direction.values()) {
+                BlockPos n = p.relative(d);
+                if (!seen.add(n)) continue;
+                BlockState s = level.getBlockState(n);
+                if (s.getBlock() instanceof MetalPipeBlock) todo.add(n);
+                else if (s.getBlock() instanceof AirVentBlock) vents.add(n);
+            }
+        }
+        return vents;
     }
 
     @Override

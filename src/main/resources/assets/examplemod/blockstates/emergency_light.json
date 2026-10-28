@@ -1,210 +1,210 @@
 {
   "variants": {
-    "facing=up,waterlogged=false,lit=false,flash=false": {
+    "facing=up,waterlogged=false,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off"
     },
-    "facing=up,waterlogged=false,lit=false,flash=true": {
+    "facing=up,waterlogged=false,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off"
     },
-    "facing=up,waterlogged=false,lit=true,flash=false": {
+    "facing=up,waterlogged=false,alarm=true,flash=false": {
+      "model": "examplemod:block/emergency_light_off"
+    },
+    "facing=up,waterlogged=false,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light"
     },
-    "facing=up,waterlogged=false,lit=true,flash=true": {
+    "facing=up,waterlogged=true,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off"
     },
-    "facing=up,waterlogged=true,lit=false,flash=false": {
+    "facing=up,waterlogged=true,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off"
     },
-    "facing=up,waterlogged=true,lit=false,flash=true": {
+    "facing=up,waterlogged=true,alarm=true,flash=false": {
       "model": "examplemod:block/emergency_light_off"
     },
-    "facing=up,waterlogged=true,lit=true,flash=false": {
+    "facing=up,waterlogged=true,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light"
     },
-    "facing=up,waterlogged=true,lit=true,flash=true": {
-      "model": "examplemod:block/emergency_light_off"
-    },
-    "facing=down,waterlogged=false,lit=false,flash=false": {
+    "facing=down,waterlogged=false,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 180
     },
-    "facing=down,waterlogged=false,lit=false,flash=true": {
+    "facing=down,waterlogged=false,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 180
     },
-    "facing=down,waterlogged=false,lit=true,flash=false": {
+    "facing=down,waterlogged=false,alarm=true,flash=false": {
+      "model": "examplemod:block/emergency_light_off",
+      "x": 180
+    },
+    "facing=down,waterlogged=false,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 180
     },
-    "facing=down,waterlogged=false,lit=true,flash=true": {
+    "facing=down,waterlogged=true,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 180
     },
-    "facing=down,waterlogged=true,lit=false,flash=false": {
+    "facing=down,waterlogged=true,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 180
     },
-    "facing=down,waterlogged=true,lit=false,flash=true": {
+    "facing=down,waterlogged=true,alarm=true,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 180
     },
-    "facing=down,waterlogged=true,lit=true,flash=false": {
+    "facing=down,waterlogged=true,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 180
     },
-    "facing=down,waterlogged=true,lit=true,flash=true": {
-      "model": "examplemod:block/emergency_light_off",
-      "x": 180
-    },
-    "facing=north,waterlogged=false,lit=false,flash=false": {
+    "facing=north,waterlogged=false,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90
     },
-    "facing=north,waterlogged=false,lit=false,flash=true": {
+    "facing=north,waterlogged=false,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90
     },
-    "facing=north,waterlogged=false,lit=true,flash=false": {
+    "facing=north,waterlogged=false,alarm=true,flash=false": {
+      "model": "examplemod:block/emergency_light_off",
+      "x": 90
+    },
+    "facing=north,waterlogged=false,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 90
     },
-    "facing=north,waterlogged=false,lit=true,flash=true": {
+    "facing=north,waterlogged=true,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90
     },
-    "facing=north,waterlogged=true,lit=false,flash=false": {
+    "facing=north,waterlogged=true,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90
     },
-    "facing=north,waterlogged=true,lit=false,flash=true": {
+    "facing=north,waterlogged=true,alarm=true,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90
     },
-    "facing=north,waterlogged=true,lit=true,flash=false": {
+    "facing=north,waterlogged=true,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 90
     },
-    "facing=north,waterlogged=true,lit=true,flash=true": {
-      "model": "examplemod:block/emergency_light_off",
-      "x": 90
-    },
-    "facing=south,waterlogged=false,lit=false,flash=false": {
+    "facing=south,waterlogged=false,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 180
     },
-    "facing=south,waterlogged=false,lit=false,flash=true": {
+    "facing=south,waterlogged=false,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 180
     },
-    "facing=south,waterlogged=false,lit=true,flash=false": {
+    "facing=south,waterlogged=false,alarm=true,flash=false": {
+      "model": "examplemod:block/emergency_light_off",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=false,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 90,
       "y": 180
     },
-    "facing=south,waterlogged=false,lit=true,flash=true": {
+    "facing=south,waterlogged=true,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 180
     },
-    "facing=south,waterlogged=true,lit=false,flash=false": {
+    "facing=south,waterlogged=true,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 180
     },
-    "facing=south,waterlogged=true,lit=false,flash=true": {
+    "facing=south,waterlogged=true,alarm=true,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 180
     },
-    "facing=south,waterlogged=true,lit=true,flash=false": {
+    "facing=south,waterlogged=true,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 90,
       "y": 180
     },
-    "facing=south,waterlogged=true,lit=true,flash=true": {
-      "model": "examplemod:block/emergency_light_off",
-      "x": 90,
-      "y": 180
-    },
-    "facing=east,waterlogged=false,lit=false,flash=false": {
+    "facing=east,waterlogged=false,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 90
     },
-    "facing=east,waterlogged=false,lit=false,flash=true": {
+    "facing=east,waterlogged=false,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 90
     },
-    "facing=east,waterlogged=false,lit=true,flash=false": {
+    "facing=east,waterlogged=false,alarm=true,flash=false": {
+      "model": "examplemod:block/emergency_light_off",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=false,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 90,
       "y": 90
     },
-    "facing=east,waterlogged=false,lit=true,flash=true": {
+    "facing=east,waterlogged=true,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 90
     },
-    "facing=east,waterlogged=true,lit=false,flash=false": {
+    "facing=east,waterlogged=true,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 90
     },
-    "facing=east,waterlogged=true,lit=false,flash=true": {
+    "facing=east,waterlogged=true,alarm=true,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 90
     },
-    "facing=east,waterlogged=true,lit=true,flash=false": {
+    "facing=east,waterlogged=true,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 90,
       "y": 90
     },
-    "facing=east,waterlogged=true,lit=true,flash=true": {
-      "model": "examplemod:block/emergency_light_off",
-      "x": 90,
-      "y": 90
-    },
-    "facing=west,waterlogged=false,lit=false,flash=false": {
+    "facing=west,waterlogged=false,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 270
     },
-    "facing=west,waterlogged=false,lit=false,flash=true": {
+    "facing=west,waterlogged=false,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 270
     },
-    "facing=west,waterlogged=false,lit=true,flash=false": {
+    "facing=west,waterlogged=false,alarm=true,flash=false": {
+      "model": "examplemod:block/emergency_light_off",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=false,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
       "x": 90,
       "y": 270
     },
-    "facing=west,waterlogged=false,lit=true,flash=true": {
+    "facing=west,waterlogged=true,alarm=false,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 270
     },
-    "facing=west,waterlogged=true,lit=false,flash=false": {
+    "facing=west,waterlogged=true,alarm=false,flash=true": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 270
     },
-    "facing=west,waterlogged=true,lit=false,flash=true": {
+    "facing=west,waterlogged=true,alarm=true,flash=false": {
       "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 270
     },
-    "facing=west,waterlogged=true,lit=true,flash=false": {
+    "facing=west,waterlogged=true,alarm=true,flash=true": {
       "model": "examplemod:block/emergency_light",
-      "x": 90,
-      "y": 270
-    },
-    "facing=west,waterlogged=true,lit=true,flash=true": {
-      "model": "examplemod:block/emergency_light_off",
       "x": 90,
       "y": 270
     }

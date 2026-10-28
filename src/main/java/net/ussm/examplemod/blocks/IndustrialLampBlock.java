@@ -29,6 +29,7 @@ public class IndustrialLampBlock extends DirectionalBlock implements SimpleWater
     public static final MapCodec<IndustrialLampBlock> CODEC = simpleCodec(IndustrialLampBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     private static final VoxelShape UP = Block.box(4, 0, 4, 12, 8, 12);
     private static final VoxelShape DOWN = Block.box(4, 8, 4, 12, 16, 12);
     private static final VoxelShape NORTH = Block.box(4, 4, 8, 12, 12, 16);
@@ -40,7 +41,7 @@ public class IndustrialLampBlock extends DirectionalBlock implements SimpleWater
     public IndustrialLampBlock(Properties properties, boolean works) {
         super(properties);
         this.works = works;
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false).setValue(LIT, works));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false).setValue(LIT, works).setValue(POWERED, false));
     }
 
     public IndustrialLampBlock(Properties properties) {
@@ -54,7 +55,7 @@ public class IndustrialLampBlock extends DirectionalBlock implements SimpleWater
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, LIT);
+        builder.add(FACING, WATERLOGGED, LIT, POWERED);
     }
 
     @Override
@@ -92,6 +93,20 @@ public class IndustrialLampBlock extends DirectionalBlock implements SimpleWater
     }
 
     protected void onToggled(BlockState state, Level level, BlockPos pos) {
+    }
+
+    // une impulsion de redstone l'allume ou l'eteint, comme l'ampoule en cuivre
+    @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean movedByPiston) {
+        boolean signal = level.hasNeighborSignal(pos);
+        if (!works || signal == state.getValue(POWERED)) return;
+        BlockState next = state.setValue(POWERED, signal);
+        if (signal) {
+            next = next.cycle(LIT);
+            level.playSound(null, pos, next.getValue(LIT) ? SoundEvents.COPPER_BULB_TURN_ON : SoundEvents.COPPER_BULB_TURN_OFF, SoundSource.BLOCKS, 0.8F, 1.0F);
+        }
+        level.setBlock(pos, next, Block.UPDATE_ALL);
+        if (signal) onToggled(next, level, pos);
     }
 
     @Override

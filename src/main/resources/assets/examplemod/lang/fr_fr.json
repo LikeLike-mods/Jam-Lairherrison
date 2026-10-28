@@ -53,6 +53,7 @@
   "block.examplemod.metal_ladder": "Échelle en métal",
   "block.examplemod.reinforced_glass_pane": "Vitre blindée",
   "block.examplemod.control_console": "Console de contrôle",
+  "console.examplemod.sonar": "Sonar : %s créature(s) détectée(s)",
   "block.examplemod.machine": "Machine",
   "block.examplemod.tank": "Cuve",
   "block.examplemod.rusty_barrel": "Tonneau rouillé",
