@@ -76,11 +76,11 @@ public class TestBiomeSource extends BiomeSource {
         slope *= 2f;
         if (slope > 1f) slope = 1f;
 
-        if (h < 65) {
-            if (blockY < 0) return abyss;
+        if (h < TestChunkGenerator.SEA + 1) {
+            if (blockY < TestChunkGenerator.ABYSS) return abyss;
             else return sea;
         }
-        if (inRange(h, 63f, 64f + 5f * slope)) return shore;
+        if (inRange(h, TestChunkGenerator.SEA - 1f, TestChunkGenerator.SEA + 5f * slope)) return shore;
         return inland;
     }
 }

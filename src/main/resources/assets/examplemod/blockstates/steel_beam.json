@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "examplemod:block/steel_beam"
+    },
+    "axis=z": {
+      "model": "examplemod:block/steel_beam",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "examplemod:block/steel_beam",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

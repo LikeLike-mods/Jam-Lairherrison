@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "examplemod:block/rusty_metal_plating"
+  }
+}

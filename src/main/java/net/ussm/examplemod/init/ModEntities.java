@@ -23,6 +23,7 @@ import net.ussm.examplemod.entity.Seagull;
 import net.ussm.examplemod.entity.Toucan;
 import net.ussm.examplemod.entity.VampireSquid;
 import net.ussm.examplemod.entity.LeviathanEntity;
+import net.ussm.examplemod.entity.Submarine;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, ExampleMod.MOD_ID);
@@ -46,6 +47,8 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.6F, 1.1F);
 
     // leviathan d'Oesphy
+    public static final DeferredHolder<EntityType<?>, EntityType<Submarine>> SUBMARINE = register("submarine", Submarine::new, MobCategory.MISC, 2.0F, 1.5F);
+
     public static final DeferredHolder<EntityType<?>, EntityType<LeviathanEntity>> LEVIATHAN =
             ENTITY_TYPES.register("leviathan", () -> EntityType.Builder.of(LeviathanEntity::new, MobCategory.MONSTER)
                     .sized(2.6F * LeviathanEntity.SIZE_MULTIPLIER, 1.7F * LeviathanEntity.SIZE_MULTIPLIER)

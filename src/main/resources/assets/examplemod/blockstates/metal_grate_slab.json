@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "examplemod:block/metal_grate_slab"
+    },
+    "type=double": {
+      "model": "examplemod:block/metal_grate"
+    },
+    "type=top": {
+      "model": "examplemod:block/metal_grate_slab_top"
+    }
+  }
+}

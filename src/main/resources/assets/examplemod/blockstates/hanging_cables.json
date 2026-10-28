@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=north,waterlogged=false": {
+      "model": "examplemod:block/hanging_cables"
+    },
+    "facing=north,waterlogged=true": {
+      "model": "examplemod:block/hanging_cables"
+    },
+    "facing=east,waterlogged=false": {
+      "model": "examplemod:block/hanging_cables"
+    },
+    "facing=east,waterlogged=true": {
+      "model": "examplemod:block/hanging_cables"
+    },
+    "facing=south,waterlogged=false": {
+      "model": "examplemod:block/hanging_cables"
+    },
+    "facing=south,waterlogged=true": {
+      "model": "examplemod:block/hanging_cables"
+    },
+    "facing=west,waterlogged=false": {
+      "model": "examplemod:block/hanging_cables"
+    },
+    "facing=west,waterlogged=true": {
+      "model": "examplemod:block/hanging_cables"
+    }
+  }
+}
