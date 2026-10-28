@@ -86,4 +86,6 @@
         }
       ]
     }
-  ]
+  ],
+  "random_sequence": "examplemod:entities/crab"
+}

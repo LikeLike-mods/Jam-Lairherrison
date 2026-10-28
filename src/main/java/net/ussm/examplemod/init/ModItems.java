@@ -85,7 +85,7 @@ public class ModItems {
             () -> new ConchItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> CRAB_CLAW = ITEMS.register("crab_claw",
-            () -> new Item(new Item.Properties().stacksTo(1)));
+            () -> new Item(new Item.Properties()));
 
 
 
