@@ -24,11 +24,11 @@ import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.init.ModAttachments;
 import net.ussm.examplemod.init.ModItems;
 
-// pince dans l'inventaire = +4 de portee, chaque pince tient 12 blocs casses ou poses avec la portee en plus
+// pince dans l'inventaire = +10 de portee, chaque pince tient 12 blocs casses ou poses avec la portee en plus
 @EventBusSubscriber(modid = ExampleMod.MOD_ID)
 public class CrabClawEvents {
     private static final ResourceLocation REACH_ID = ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, "crab_claw_reach");
-    private static final double REACH_BONUS = 4.0;
+    private static final double REACH_BONUS = 10.0;
     private static final int MAX_WEAR = 12;
 
     private static boolean isClaw(ItemStack stack) {
