@@ -10,7 +10,6 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.resources.ResourceLocation;
 import net.ussm.examplemod.items.AbyssHelmetItem;
 import net.ussm.examplemod.items.ConchItem;
-import net.ussm.examplemod.items.SubmarineItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -93,9 +92,6 @@ public class ModItems {
             () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
     public static final DeferredItem<Item> DIVING_ABYSS_HELMET = ITEMS.register("diving_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diving", 2, 0, 0)), 9));
-
-    public static final DeferredItem<Item> SUBMARINE = ITEMS.register("submarine",
-            () -> new SubmarineItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> CONCH = ITEMS.register("conch",
             () -> new ConchItem(new Item.Properties().stacksTo(1)));

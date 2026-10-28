@@ -22,9 +22,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.blocks.AbyssLightBlock;
-import net.ussm.examplemod.entity.Submarine;
 import net.ussm.examplemod.init.ModItems;
-import net.ussm.examplemod.worldgen.TestChunkGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -84,14 +82,13 @@ public class DeepSeaEvents {
                 && player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.DIVING_BOOTS.get());
     }
 
-    // pression dans les abysses de l'atoll : lenteur de minage, puis nausee + lenteur 40 blocs plus bas, puis degats encore 40 plus bas
+    // pression dans les abysses de l'atoll : lenteur de minage sous 0, nausee + lenteur sous -50, degats sous -90
     private static void pressure(ServerPlayer player, boolean inWater) {
         int level = 0;
         if (inWater && player.level().dimension() == AtollTravel.ATOLL && !player.isCreative() && !player.isSpectator()
-                && !hasFullSuit(player) && !(player.getVehicle() instanceof Submarine)) {
+                && !hasFullSuit(player)) {
             double y = player.getY();
-            int top = TestChunkGenerator.ABYSS;
-            level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
+            level = y < -90 ? 3 : y < -50 ? 2 : y < 0 ? 1 : 0;
         }
         int last = LAST_LEVEL.getOrDefault(player.getUUID(), 0);
         if (level == 3 && last < 3) player.displayClientMessage(Component.translatable("pressure.examplemod.crushed"), true);

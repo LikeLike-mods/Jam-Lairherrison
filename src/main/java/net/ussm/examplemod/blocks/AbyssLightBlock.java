@@ -10,7 +10,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -53,7 +52,7 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     // joueur avec un crane lumineux ou mob qui eclaire (loupiote)
-    public static boolean emitsLight(Entity entity) {
+    public static boolean emitsLight(LivingEntity entity) {
         return entity.getType().is(LIGHT_EMITTERS) || entity instanceof Player player && wearsLight(player);
     }
 
@@ -112,7 +111,7 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (level.getEntitiesOfClass(Entity.class, new AABB(pos).inflate(2.0), AbyssLightBlock::emitsLight).isEmpty()) {
+        if (level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(2.0), AbyssLightBlock::emitsLight).isEmpty()) {
             level.setBlock(pos, state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
         } else {
             level.scheduleTick(pos, this, 10);
