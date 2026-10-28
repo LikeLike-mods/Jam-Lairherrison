@@ -101,7 +101,7 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
         return below.is(this) && below.getValue(HALF) == DoubleBlockHalf.LOWER;
     }
 
-    // les deux moities restent pareilles, et si une part l'autre part aussi (seule celle qu'on casse donne la porte)
+    // les deux moities restent pareilles, et si une part l'autre part aussi (seule celle du bas donne la porte, cf le loot)
     @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) {
@@ -112,9 +112,24 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
             if (neighborState.is(this) && neighborState.getValue(HALF) != half) {
                 return state.setValue(OPEN, neighborState.getValue(OPEN)).setValue(POWERED, neighborState.getValue(POWERED));
             }
-            return state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
+            return Blocks.AIR.defaultBlockState();
         }
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    }
+
+    // en creatif, casser le haut ne doit pas faire tomber la porte du bas
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide && player.isCreative() && state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+            BlockPos below = pos.below();
+            BlockState lower = level.getBlockState(below);
+            if (lower.is(this) && lower.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                BlockState replace = lower.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
+                level.setBlock(below, replace, Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
+                level.levelEvent(player, 2001, below, Block.getId(lower));
+            }
+        }
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override
