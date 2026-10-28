@@ -49,7 +49,9 @@ public class DeepSeaEvents {
         if (inWater) ventLift(player);
 
         if (!(player instanceof ServerPlayer serverPlayer)) return;
+
         if (player.isEyeInFluid(FluidTags.WATER)) breathe(player);
+
         if (player.tickCount % 20 == 0) pressure(serverPlayer, inWater);
     }
 
@@ -87,7 +89,9 @@ public class DeepSeaEvents {
 
     // casque de scaphandre = air infini, crane du poisson-loupiote = on perd l'air 2x moins vite
     private static void breathe(Player player) {
+
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+
         if (head.is(ModItems.DIVING_HELMET.get()) || head.is(ModItems.DIVING_ABYSS_HELMET.get())) {
             player.setAirSupply(player.getMaxAirSupply());
         } else if (head.is(AbyssLightBlock.HEAD_LIGHTS) && player.tickCount % 2 == 0) {
@@ -112,15 +116,22 @@ public class DeepSeaEvents {
             int top = TestChunkGenerator.ABYSS;
             level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
         }
+
         int last = LAST_LEVEL.getOrDefault(player.getUUID(), 0);
-        if (level == 3 && last < 3) player.displayClientMessage(Component.translatable("pressure.examplemod.crushed"), true);
-        LAST_LEVEL.put(player.getUUID(), level);
-        if (level >= 1) player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0, true, false));
+
+        if (level == 3 && last < 3) {
+            player.displayClientMessage(Component.translatable("pressure.examplemod.crushed"), true);
+            LAST_LEVEL.put(player.getUUID(), level);
+        }
+
+        if (level >= 1) {
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0, true, false));
+        }
         if (level >= 2) {
             player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0, true, false));
             player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0, true, false));
         }
-        if (level >= 3) {
+        if (level == 3) {
             player.hurt(new DamageSource(player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(PRESSURE)), 2.0F);
         }
     }

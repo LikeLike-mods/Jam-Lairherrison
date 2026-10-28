@@ -2,11 +2,15 @@
   "creativetab.examplemod.blocks": "Bloom and Gloom",
 
   "advancement.examplemod.root.title": "Title",
-  "advancement.examplemod.root.description" : "Welcome to the Amazing Digital Circus!",
+  "advancement.examplemod.root.description" : "Welcome to the on a pas encore de nom lol",
   "advancement.examplemod.flytrap_bite.title": "A Hungry Plant!",
   "advancement.examplemod.flytrap_bite.description": "Be bite by a Venus Flytrap.",
   "advancement.examplemod.hot_pepper.title" : "A spicy one!",
   "advancement.examplemod.hot_pepper.description": "Eat a ...\"delicious\"... pepper...",
+  "advancement.examplemod.pitcher_plant_nectar.title": "A stinky plant!",
+  "advancement.examplemod.pitcher_plant_nectar.description": "Harvest the nectar in a pitcher plant",
+  "advancement.examplemod.killer_team.title" : "A killer team!",
+  "advancement.examplemod.killer_team.description": "Obtain a flytrap and a pitcher plant.",
 
   "block.examplemod.brownstone": "Brownstone",
   "block.examplemod.palm_log": "Palm log",

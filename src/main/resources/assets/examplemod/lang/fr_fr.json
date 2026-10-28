@@ -7,6 +7,10 @@
   "advancement.examplemod.flytrap_bite.description": "Etre mordu par une Vénus",
   "advancement.examplemod.hot_pepper.title" : "C'est chaud !!!",
   "advancement.examplemod.hot_pepper.description": "Manger un piment ultra piquant !",
+  "advancement.examplemod.pitcher_plant_nectar.title": "Un drôle de nectar !",
+  "advancement.examplemod.pitcher_plant_nectar.description": "Récolter le nectar dans la Népenthès",
+  "advancement.examplemod.killer_team.title" : "Un duo mortel !",
+  "advancement.examplemod.killer_team.description": "Obtient une Dionée et une Népenthès.",
 
   "block.examplemod.brownstone": "Grès marron",
   "block.examplemod.palm_log": "Bûche de palmier",
