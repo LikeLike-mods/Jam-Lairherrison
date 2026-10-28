@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "examplemod:metal_grate"
+  },
+  "result": {
+    "id": "examplemod:metal_grate_stairs",
+    "count": 1
+  }
+}

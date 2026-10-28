@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "PPP",
+    "P P",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "examplemod:metal_plating"
+    }
+  },
+  "result": {
+    "id": "examplemod:metal_crate",
+    "count": 1
+  }
+}

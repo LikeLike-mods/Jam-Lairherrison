@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "examplemod:metal_plating"
+  },
+  "result": {
+    "id": "examplemod:corrugated_metal",
+    "count": 1
+  }
+}

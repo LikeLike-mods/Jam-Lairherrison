@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "examplemod:rusty_metal_plating"
+    }
+  },
+  "result": {
+    "id": "examplemod:rusty_metal_plating_stairs",
+    "count": 4
+  }
+}

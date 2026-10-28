@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " P ",
+    "PGP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "examplemod:metal_plating"
+    },
+    "G": {
+      "item": "examplemod:reinforced_glass"
+    }
+  },
+  "result": {
+    "id": "examplemod:porthole",
+    "count": 2
+  }
+}
