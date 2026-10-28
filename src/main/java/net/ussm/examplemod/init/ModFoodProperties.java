@@ -21,6 +21,7 @@ public class ModFoodProperties {
     public static FoodProperties REDSTONE_PEPPER = new FoodProperties.Builder()
             .nutrition(2)
             .saturationModifier(0.1f)
+            .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 50, 10), 1.0f)
             .fast()
             .build();
 

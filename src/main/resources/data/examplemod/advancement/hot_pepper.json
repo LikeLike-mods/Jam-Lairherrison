@@ -1,0 +1,27 @@
+{
+  "parent": "examplemod:root",
+  "display": {
+    "icon": {
+      "id": "examplemod:redstone_pepper"
+    },
+    "title": {
+      "translate": "advancement.examplemod.hot_pepper.title"
+    },
+    "description": {
+      "translate": "advancement.examplemod.hot_pepper.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "ate_pepper": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "examplemod:redstone_pepper"
+        }
+      }
+    }
+  }
+}
