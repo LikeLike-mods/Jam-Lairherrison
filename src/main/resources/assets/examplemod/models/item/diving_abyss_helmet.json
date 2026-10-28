@@ -1,0 +1,7 @@
+{
+  "parent": "examplemod:item/living_abyss_skull",
+  "textures": {
+    "skull": "examplemod:item/diving_abyss_helmet",
+    "particle": "examplemod:item/diving_abyss_helmet"
+  }
+}

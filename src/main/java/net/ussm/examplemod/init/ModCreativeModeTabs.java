@@ -57,6 +57,11 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.LIVING_ABYSS_SKULL);
                         output.accept(ModItems.DIAMOND_ABYSS_HELMET);
                         output.accept(ModItems.NETHERITE_ABYSS_HELMET);
+                        output.accept(ModItems.DIVING_HELMET);
+                        output.accept(ModItems.DIVING_CHESTPLATE);
+                        output.accept(ModItems.DIVING_LEGGINGS);
+                        output.accept(ModItems.DIVING_BOOTS);
+                        output.accept(ModItems.DIVING_ABYSS_HELMET);
                         output.accept(ModBlocks.HIBISCUS);
                         output.accept(ModBlocks.BIRD_OF_PARADISE);
                         output.accept(ModBlocks.FRANGIPANI);
