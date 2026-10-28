@@ -62,6 +62,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DIVING_LEGGINGS);
                         output.accept(ModItems.DIVING_BOOTS);
                         output.accept(ModItems.DIVING_ABYSS_HELMET);
+                        output.accept(ModItems.SUBMARINE);
                         output.accept(ModBlocks.HIBISCUS);
                         output.accept(ModBlocks.BIRD_OF_PARADISE);
                         output.accept(ModBlocks.FRANGIPANI);
