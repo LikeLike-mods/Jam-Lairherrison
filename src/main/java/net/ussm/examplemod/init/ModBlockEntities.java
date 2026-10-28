@@ -8,6 +8,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.blocks.MessageBottleBlockEntity;
 import net.ussm.examplemod.blocks.SlidingDoorBlockEntity;
+import net.ussm.examplemod.blocks.StorageBlockEntity;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ExampleMod.MOD_ID);
@@ -17,6 +18,9 @@ public class ModBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SlidingDoorBlockEntity>> SLIDING_DOOR = BLOCK_ENTITIES.register("sliding_door",
             () -> BlockEntityType.Builder.of(SlidingDoorBlockEntity::new, ModBlocks.SLIDING_DOOR.get(), ModBlocks.BROKEN_SLIDING_DOOR.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<StorageBlockEntity>> STORAGE = BLOCK_ENTITIES.register("storage",
+            () -> BlockEntityType.Builder.of(StorageBlockEntity::new, ModBlocks.METAL_CRATE.get(), ModBlocks.RUSTY_BARREL.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

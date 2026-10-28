@@ -1,0 +1,46 @@
+{
+  "parent": "examplemod:pitcher_plant_nectar",
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_axe"
+    },
+    "title": {
+      "translate": "advancement.examplemod.killer_team.title"
+    },
+    "description": {
+      "translate": "advancement.examplemod.killer_team.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "rewards": {
+      "experience": 50
+    }
+  },
+  "criteria": {
+    "has_pitcher": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "examplemod:pitcher_plant"
+          }
+        ]
+      }
+    },
+    "has_flytrap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "examplemod:flytrap"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_pitcher"],
+    ["has_flytrap"]
+  ]
+}

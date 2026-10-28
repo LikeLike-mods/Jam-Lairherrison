@@ -1,6 +1,9 @@
 package net.ussm.examplemod.event;
 
 import net.minecraft.network.chat.Component;
+import net.ussm.examplemod.init.ModBlocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,9 +46,12 @@ public class DeepSeaEvents {
         Player player = event.getEntity();
         boolean inWater = player.isInWater();
         heavyBoots(player, inWater && player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.DIVING_BOOTS.get()));
+        if (inWater) ventLift(player);
 
         if (!(player instanceof ServerPlayer serverPlayer)) return;
+
         if (player.isEyeInFluid(FluidTags.WATER)) breathe(player);
+
         if (player.tickCount % 20 == 0) pressure(serverPlayer, inWater);
     }
 
@@ -66,9 +72,26 @@ public class DeepSeaEvents {
         }
     }
 
+    // au-dessus d'une grille d'aeration sous l'eau, les bulles font remonter
+    private static void ventLift(Player player) {
+        BlockPos pos = player.blockPosition();
+        for (int i = 0; i <= 6; i++) {
+            BlockState state = player.level().getBlockState(pos.below(i));
+            if (state.is(ModBlocks.AIR_VENT.get())) {
+                Vec3 v = player.getDeltaMovement();
+                player.setDeltaMovement(v.x, Math.min(0.5, v.y + 0.06), v.z);
+                player.resetFallDistance();
+                return;
+            }
+            if (!state.getFluidState().is(FluidTags.WATER)) return;
+        }
+    }
+
     // casque de scaphandre = air infini, crane du poisson-loupiote = on perd l'air 2x moins vite
     private static void breathe(Player player) {
+
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+
         if (head.is(ModItems.DIVING_HELMET.get()) || head.is(ModItems.DIVING_ABYSS_HELMET.get())) {
             player.setAirSupply(player.getMaxAirSupply());
         } else if (head.is(AbyssLightBlock.HEAD_LIGHTS) && player.tickCount % 2 == 0) {
@@ -93,15 +116,22 @@ public class DeepSeaEvents {
             int top = TestChunkGenerator.ABYSS;
             level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
         }
+
         int last = LAST_LEVEL.getOrDefault(player.getUUID(), 0);
-        if (level == 3 && last < 3) player.displayClientMessage(Component.translatable("pressure.examplemod.crushed"), true);
-        LAST_LEVEL.put(player.getUUID(), level);
-        if (level >= 1) player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0, true, false));
+
+        if (level == 3 && last < 3) {
+            player.displayClientMessage(Component.translatable("pressure.examplemod.crushed"), true);
+            LAST_LEVEL.put(player.getUUID(), level);
+        }
+
+        if (level >= 1) {
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0, true, false));
+        }
         if (level >= 2) {
             player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0, true, false));
             player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0, true, false));
         }
-        if (level >= 3) {
+        if (level == 3) {
             player.hurt(new DamageSource(player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(PRESSURE)), 2.0F);
         }
     }

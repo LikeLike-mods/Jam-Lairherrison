@@ -2,11 +2,15 @@
   "creativetab.examplemod.blocks": "Bloom and Gloom",
 
   "advancement.examplemod.root.title": "Title",
-  "advancement.examplemod.root.description" : "Welcome to the Amazing Digital Circus!",
+  "advancement.examplemod.root.description" : "Welcome to the on a pas encore de nom lol",
   "advancement.examplemod.flytrap_bite.title": "A Hungry Plant!",
   "advancement.examplemod.flytrap_bite.description": "Be bite by a Venus Flytrap.",
   "advancement.examplemod.hot_pepper.title" : "A spicy one!",
   "advancement.examplemod.hot_pepper.description": "Eat a ...\"delicious\"... pepper...",
+  "advancement.examplemod.pitcher_plant_nectar.title": "A stinky plant!",
+  "advancement.examplemod.pitcher_plant_nectar.description": "Harvest the nectar in a pitcher plant",
+  "advancement.examplemod.killer_team.title" : "A killer team!",
+  "advancement.examplemod.killer_team.description": "Obtain a flytrap and a pitcher plant.",
 
   "block.examplemod.brownstone": "Brownstone",
   "block.examplemod.palm_log": "Palm log",
@@ -53,6 +57,7 @@
   "block.examplemod.metal_ladder": "Metal Ladder",
   "block.examplemod.reinforced_glass_pane": "Reinforced Glass Pane",
   "block.examplemod.control_console": "Control Console",
+  "console.examplemod.sonar": "Sonar: %s creature(s) detected",
   "block.examplemod.machine": "Machine",
   "block.examplemod.tank": "Tank",
   "block.examplemod.rusty_barrel": "Rusty Barrel",
@@ -136,9 +141,6 @@
   "item.examplemod.diving_boots": "Weighted Boots",
   "item.examplemod.diving_abyss_helmet": "Abyssal Diving Helmet",
   "item.examplemod.submarine": "Submarine",
-  "entity.examplemod.submarine": "Submarine",
-  "pressure.examplemod.crushed": "You are being crushed!",
-  "death.attack.examplemod.pressure": "%1$s was crushed by the pressure",
   "item.examplemod.redstone_pepper": "Redstone Pepper",
   "item.examplemod.redstone_pepper_seeds": "Redstone Pepper Seeds",
   "item.examplemod.raw_crab_meat" : "Raw Crab",
@@ -202,11 +204,15 @@
   "entity.examplemod.giant_isopod": "Giant Isopod",
   "entity.examplemod.vampire_squid": "Vampire Squid",
   "entity.examplemod.leviathan": "Leviathan",
+  "entity.examplemod.submarine": "Submarine",
 
   "death.attack.examplemod.flytrap": "%1$s was devoured by a Venus flytrap",
+  "death.attack.examplemod.pressure": "%1$s was crushed by the pressure",
 
-  "tooltip.examplemod.crab_claw.reach": "+4 reach for breaking and placing blocks",
+  "tooltip.examplemod.crab_claw.reach": "+10 reach for breaking and placing blocks",
   "tooltip.examplemod.crab_claw.wear": "Wear: %s / %s",
+
+  "pressure.examplemod.crushed": "You are being crushed!",
 
   "examplemod.configuration.title": "Example Mod Configs",
   "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",

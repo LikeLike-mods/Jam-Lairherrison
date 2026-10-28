@@ -5,6 +5,15 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.sounds.SoundEvents;
 import net.ussm.examplemod.blocks.DecorBlock;
+import net.ussm.examplemod.blocks.FloodlightBeamBlock;
+import net.ussm.examplemod.blocks.FloodlightBlock;
+import net.ussm.examplemod.blocks.EmergencyLightBlock;
+import net.ussm.examplemod.blocks.LightDecorBlock;
+import net.ussm.examplemod.blocks.CableBlock;
+import net.ussm.examplemod.blocks.MachineBlock;
+import net.ussm.examplemod.blocks.ConsoleBlock;
+import net.ussm.examplemod.blocks.StorageBlock;
+import net.ussm.examplemod.blocks.AirVentBlock;
 import net.ussm.examplemod.blocks.TankBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -225,8 +234,7 @@ public class ModBlocks {
     // verre blinde : resiste aux explosions comme l'obsidienne
     public static final DeferredBlock<TransparentBlock> REINFORCED_GLASS = registerBlock("reinforced_glass",
             () -> new TransparentBlock(seeThrough(metal().strength(5f, 1200f).sound(SoundType.GLASS))));
-    public static final DeferredBlock<IndustrialLampBlock> INDUSTRIAL_LAMP = registerBlock("industrial_lamp",
-            () -> new IndustrialLampBlock(metal().strength(3f, 6f).lightLevel(state -> 15).noOcclusion()));
+    public static final DeferredBlock<IndustrialLampBlock> INDUSTRIAL_LAMP = registerBlock("industrial_lamp", () -> new IndustrialLampBlock(metal().strength(3f, 6f).lightLevel(s -> s.getValue(IndustrialLampBlock.LIT) ? 15 : 0).noOcclusion()));
     public static final DeferredBlock<MetalPipeBlock> PIPE = registerBlock("pipe", () -> new MetalPipeBlock(metal().noOcclusion()));
     public static final DeferredBlock<ValveBlock> VALVE = registerBlock("valve",
             () -> new ValveBlock(metal().strength(2f, 6f).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
@@ -248,8 +256,8 @@ public class ModBlocks {
     public static final DeferredBlock<Block> RUSTY_RIVETED_PANEL = registerBlock("rusty_riveted_panel", () -> new Block(metal()));
     public static final DeferredBlock<Block> HAZARD_BLOCK = registerBlock("hazard_block", () -> new Block(metal()));
     public static final DeferredBlock<Block> STATION_CONCRETE = registerBlock("station_concrete", () -> new Block(metal().strength(3f, 6f).sound(SoundType.STONE)));
-    public static final DeferredBlock<Block> AIR_VENT = registerBlock("air_vent", () -> new Block(metal()));
-    public static final DeferredBlock<Block> METAL_CRATE = registerBlock("metal_crate", () -> new Block(metal()));
+    public static final DeferredBlock<AirVentBlock> AIR_VENT = registerBlock("air_vent", () -> new AirVentBlock(metal()));
+    public static final DeferredBlock<StorageBlock> METAL_CRATE = registerBlock("metal_crate", () -> new StorageBlock(metal(), Shapes.block()));
     public static final DeferredBlock<TransparentBlock> PORTHOLE = registerBlock("porthole", () -> new TransparentBlock(seeThrough(metal())));
     public static final DeferredBlock<RotatedPillarBlock> STEEL_BEAM = registerBlock("steel_beam", () -> new RotatedPillarBlock(metal()));
     public static final DeferredBlock<RotatedPillarBlock> RUSTY_STEEL_BEAM = registerBlock("rusty_steel_beam", () -> new RotatedPillarBlock(metal()));
@@ -263,16 +271,19 @@ public class ModBlocks {
     public static final DeferredBlock<TrapDoorBlock> RUSTY_STEEL_TRAPDOOR = registerBlock("rusty_steel_trapdoor", () -> new TrapDoorBlock(STEEL_SET, metal().noOcclusion().isValidSpawn(Blocks::never)));
     public static final DeferredBlock<LadderBlock> METAL_LADDER = registerBlock("metal_ladder", () -> new LadderBlock(metal().strength(2f).noOcclusion()));
     public static final DeferredBlock<IronBarsBlock> REINFORCED_GLASS_PANE = registerBlock("reinforced_glass_pane", () -> new IronBarsBlock(seeThrough(metal().strength(5f, 1200f).sound(SoundType.GLASS))));
-    public static final DeferredBlock<DecorBlock> CONTROL_CONSOLE = registerBlock("control_console", () -> new DecorBlock(metal().lightLevel(s -> 6), Block.box(1, 0, 3, 15, 11, 16)));
-    public static final DeferredBlock<DecorBlock> MACHINE = registerBlock("machine", () -> new DecorBlock(metal(), Shapes.block()));
+    public static final DeferredBlock<ConsoleBlock> CONTROL_CONSOLE = registerBlock("control_console", () -> new ConsoleBlock(metal().lightLevel(s -> s.getValue(ConsoleBlock.POWERED) ? 7 : 3)));
+    public static final DeferredBlock<MachineBlock> MACHINE = registerBlock("machine", () -> new MachineBlock(metal().lightLevel(s -> s.getValue(MachineBlock.POWERED) ? 6 : 0)));
     public static final DeferredBlock<TankBlock> TANK = registerBlock("tank", () -> new TankBlock(metal()));
-    public static final DeferredBlock<DecorBlock> RUSTY_BARREL = registerBlock("rusty_barrel", () -> new DecorBlock(metal(), Block.box(2, 0, 2, 14, 14, 14)));
-    public static final DeferredBlock<DecorBlock> HANGING_CABLES = registerBlock("hanging_cables", () -> new DecorBlock(metal().strength(0.5f).sound(SoundType.CHAIN).noOcclusion(), Block.box(2, 0, 2, 14, 16, 14), false));
+    public static final DeferredBlock<StorageBlock> RUSTY_BARREL = registerBlock("rusty_barrel", () -> new StorageBlock(metal(), Block.box(2, 0, 2, 14, 14, 14)));
+    public static final DeferredBlock<CableBlock> HANGING_CABLES = registerBlock("hanging_cables", () -> new CableBlock(metal().strength(0.5f).sound(SoundType.CHAIN).noOcclusion()));
     public static final DeferredBlock<DecorBlock> DANGER_SIGN = registerBlock("danger_sign", () -> new DecorBlock(metal().strength(1f).noOcclusion(), Block.box(1, 2, 15, 15, 14, 16), false));
-    public static final DeferredBlock<DecorBlock> LIGHT_STRIP = registerBlock("light_strip", () -> new DecorBlock(metal().strength(1f).noOcclusion().lightLevel(s -> 12), Block.box(0, 6, 14, 16, 10, 16), false));
-    public static final DeferredBlock<DecorBlock> FLOODLIGHT = registerBlock("floodlight", () -> new DecorBlock(metal().strength(2f).noOcclusion().lightLevel(s -> 15), Block.box(3, 0, 4, 13, 13, 12)));
-    public static final DeferredBlock<IndustrialLampBlock> EMERGENCY_LIGHT = registerBlock("emergency_light", () -> new IndustrialLampBlock(metal().strength(3f, 6f).lightLevel(s -> 10).noOcclusion()));
-    public static final DeferredBlock<IndustrialLampBlock> BROKEN_INDUSTRIAL_LAMP = registerBlock("broken_industrial_lamp", () -> new IndustrialLampBlock(metal().strength(3f, 6f).noOcclusion()));
+    public static final DeferredBlock<LightDecorBlock> LIGHT_STRIP = registerBlock("light_strip", () -> new LightDecorBlock(metal().strength(1f).noOcclusion().lightLevel(s -> s.getValue(LightDecorBlock.LIT) ? 12 : 0), Block.box(0, 6, 14, 16, 10, 16), false));
+    public static final DeferredBlock<FloodlightBlock> FLOODLIGHT = registerBlock("floodlight", () -> new FloodlightBlock(metal().strength(2f).noOcclusion().lightLevel(s -> s.getValue(LightDecorBlock.LIT) ? 15 : 0)));
+    public static final DeferredBlock<FloodlightBeamBlock> FLOODLIGHT_BEAM = BLOCKS.register("floodlight_beam",
+            () -> new FloodlightBeamBlock(BlockBehaviour.Properties.of().replaceable().noCollission().noLootTable().noOcclusion()
+                    .instabreak().lightLevel(state -> 14).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<EmergencyLightBlock> EMERGENCY_LIGHT = registerBlock("emergency_light", () -> new EmergencyLightBlock(metal().strength(3f, 6f).noOcclusion().lightLevel(s -> s.getValue(EmergencyLightBlock.ALARM) && s.getValue(EmergencyLightBlock.FLASH) ? 12 : 0)));
+    public static final DeferredBlock<IndustrialLampBlock> BROKEN_INDUSTRIAL_LAMP = registerBlock("broken_industrial_lamp", () -> new IndustrialLampBlock(metal().strength(3f, 6f).noOcclusion(), false));
 
     private static BlockBehaviour.Properties metal() {
         return BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(5f, 6f).requiresCorrectToolForDrops().sound(SoundType.METAL);
