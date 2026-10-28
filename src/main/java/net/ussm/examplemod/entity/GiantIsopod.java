@@ -1,5 +1,8 @@
 package net.ussm.examplemod.entity;
 
+import net.minecraft.world.level.block.state.BlockState;
+import net.ussm.examplemod.init.ModSounds;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -147,5 +150,30 @@ public class GiantIsopod extends Monster implements GeoEntity {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.mobSound(this, "ambient");
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return ModSounds.mobSound(this, "hurt");
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.mobSound(this, "death");
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        SoundEvent step = ModSounds.mobSound(this, "step");
+        if (step != null) {
+            playSound(step, 0.5F, 1.0F);
+        } else {
+            super.playStepSound(pos, state);
+        }
     }
 }

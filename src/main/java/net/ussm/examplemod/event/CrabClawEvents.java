@@ -24,8 +24,7 @@ import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.init.ModAttachments;
 import net.ussm.examplemod.init.ModItems;
 
-// Pince de crabe : avec une pince dans l'inventaire, +4 de portée pour casser et poser des blocs.
-// Chaque bloc cassé ou posé grâce à cette portée en plus use les pinces (l'usure est portée par le joueur).
+// pince dans l'inventaire = +4 de portee, ca l'use quand on s'en sert
 @EventBusSubscriber(modid = ExampleMod.MOD_ID)
 public class CrabClawEvents {
     private static final ResourceLocation REACH_ID = ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, "crab_claw_reach");
@@ -36,7 +35,6 @@ public class CrabClawEvents {
         return stack.is(ModItems.CRAB_CLAW.get());
     }
 
-    // Ajoute ou retire le bonus de portée selon que le joueur a une pince sur lui (+4 quel que soit le nombre)
     @SubscribeEvent
     public static void updateReach(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
@@ -64,7 +62,7 @@ public class CrabClawEvents {
         }
     }
 
-    // Même calcul que Player.canInteractWithBlock, avec la portée normale (sans le bonus)
+    // comme Player.canInteractWithBlock mais sans le bonus
     private static void wearIfExtraReach(Player player, BlockPos pos) {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
         if (player.isCreative() || player.isSpectator()) return;

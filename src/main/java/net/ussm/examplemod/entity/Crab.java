@@ -1,5 +1,9 @@
 package net.ussm.examplemod.entity;
 
+import net.minecraft.world.level.block.state.BlockState;
+import net.ussm.examplemod.init.ModSounds;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -89,5 +93,30 @@ public class Crab extends Animal implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(DefaultAnimations.genericWalkIdleController(this));
         controllers.add(DefaultAnimations.genericAttackAnimation(this, Animations.PINCH));
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.mobSound(this, "ambient");
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return ModSounds.mobSound(this, "hurt");
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.mobSound(this, "death");
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        SoundEvent step = ModSounds.mobSound(this, "step");
+        if (step != null) {
+            playSound(step, 0.5F, 1.0F);
+        } else {
+            super.playStepSound(pos, state);
+        }
     }
 }

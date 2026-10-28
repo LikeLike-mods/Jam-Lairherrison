@@ -16,7 +16,7 @@ import net.ussm.examplemod.init.ModBlocks;
 
 @EventBusSubscriber(modid = ExampleMod.MOD_ID)
 public class ModGameEvents {
-    // Écorcer le palmier à la hache, comme les bûches vanilla (on garde l'orientation)
+    // ecorcer le palmier
     @SubscribeEvent
     public static void stripPalm(BlockEvent.BlockToolModificationEvent event) {
         if (event.getItemAbility() != ItemAbilities.AXE_STRIP) return;
@@ -29,7 +29,7 @@ public class ModGameEvents {
         }
     }
 
-    // Crâne vivant porté : une lumière invisible suit la tête du joueur (elle se retire seule quand il n'est plus là)
+    // lumiere du crane quand on le porte
     @SubscribeEvent
     public static void headLight(PlayerTickEvent.Post event) {
         Player player = event.getEntity();

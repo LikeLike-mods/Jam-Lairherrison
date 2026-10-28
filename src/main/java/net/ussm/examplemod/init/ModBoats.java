@@ -9,8 +9,7 @@ import net.ussm.examplemod.ExampleMod;
 
 import java.util.function.Supplier;
 
-// Bateau en palmier : NeoForge ajoute ce type à Boat.Type (voir META-INF/enumextensions.json), donc le bateau,
-// son rendu et son modèle sont ceux du jeu ; la texture est textures/entity/boat/palm.png (et chest_boat/palm.png).
+// bateau en palmier (type ajoute dans enumextensions.json)
 public class ModBoats {
     public static final EnumProxy<Boat.Type> PALM = new EnumProxy<>(Boat.Type.class,
             (Supplier<Block>) () -> ModBlocks.PALM_PLANKS.get(),

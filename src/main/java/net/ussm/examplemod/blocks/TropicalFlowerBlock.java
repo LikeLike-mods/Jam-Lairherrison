@@ -8,7 +8,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-// Fleur de l'atoll : pousse sur la terre comme les fleurs vanilla, mais aussi sur le sable de la plage.
+// pousse aussi sur le sable
 public class TropicalFlowerBlock extends FlowerBlock {
     public TropicalFlowerBlock(Holder<MobEffect> stewEffect, float seconds, Properties properties) {
         super(stewEffect, seconds, properties);

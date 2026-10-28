@@ -9,8 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-// Crâne vivant fusionné avec un casque (table de forgeron) : il protège comme le casque, garde ses enchantements
-// (le forgeron recopie ceux du casque) et éclaire autour du joueur comme le crâne vivant.
+// crane + casque fusionnes au forgeron, garde les enchants
 public class AbyssHelmetItem extends Item implements Equipable {
     private final int enchantmentValue;
 

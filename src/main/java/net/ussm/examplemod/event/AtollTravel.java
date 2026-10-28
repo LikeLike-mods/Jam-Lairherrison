@@ -34,9 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-// Entrer dans l'atoll : se noyer dans un océan du monde normal ne tue pas, les courants emportent le joueur qui s'échoue
-// sur la plage de l'atoll la plus proche. On n'en sort pas en se noyant : il faut souffler dans une conque, qui ramène
-// là où on était avant (et permet ensuite de revenir dans l'atoll quand on veut).
+// on se noie dans l'ocean -> on s'echoue sur l'atoll. pour repartir faut la conque
 @EventBusSubscriber(modid = ExampleMod.MOD_ID)
 public class AtollTravel {
     public static final ResourceKey<Level> ATOLL = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, "test_dim"));
@@ -53,7 +51,7 @@ public class AtollTravel {
         if (player.level().dimension() != Level.OVERWORLD || !player.level().getBiome(player.blockPosition()).is(BiomeTags.IS_OCEAN)) return;
         if (event.getAmount() < player.getHealth() + player.getAbsorptionAmount()) return;
         event.setCanceled(true);
-        // on revient à la surface de l'océan, pas au fond (sinon on se renoierait aussitôt)
+        // a la surface sinon on se renoie direct
         BlockPos surface = player.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, player.blockPosition());
         setReturn(player, GlobalPos.of(Level.OVERWORLD, surface));
         DRIFTING.put(player.getUUID(), DRIFT_TICKS);
@@ -85,7 +83,6 @@ public class AtollTravel {
         title(player, "atoll.examplemod.shipwreck.title", "atoll.examplemod.shipwreck.subtitle");
     }
 
-    // Souffler dans la conque : dans l'atoll on repart d'où on venait, ailleurs on revient dans l'atoll
     public static void blowConch(ServerPlayer player) {
         ServerLevel atoll = player.server.getLevel(ATOLL);
         if (atoll == null) return;
@@ -105,7 +102,7 @@ public class AtollTravel {
         }
     }
 
-    // Plage de l'atoll la plus proche (sable : terrain entre 65 et 67), cherchée sur le terrain calculé, sans générer de chunks
+    // plage la plus proche (hauteur entre 65 et 67)
     private static BlockPos findBeach(int x0, int z0) {
         for (int r = 0; r <= 4096; r += 16) {
             for (int dx = -r; dx <= r; dx += 16) {
@@ -121,7 +118,6 @@ public class AtollTravel {
         return new BlockPos(x0, 0, z0);
     }
 
-    // Hauteur du sol à cet endroit (le chunk est chargé pour la connaître)
     private static BlockPos surface(ServerLevel level, BlockPos pos) {
         level.getChunk(pos.getX() >> 4, pos.getZ() >> 4);
         return new BlockPos(pos.getX(), level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()), pos.getZ());

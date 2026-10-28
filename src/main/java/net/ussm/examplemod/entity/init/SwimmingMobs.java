@@ -1,5 +1,8 @@
 package net.ussm.examplemod.entity.init;
 
+import net.ussm.examplemod.init.ModSounds;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
@@ -58,5 +61,20 @@ public abstract class SwimmingMobs extends WaterAnimal implements GeoEntity {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.mobSound(this, "ambient");
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return ModSounds.mobSound(this, "hurt");
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.mobSound(this, "death");
     }
 }

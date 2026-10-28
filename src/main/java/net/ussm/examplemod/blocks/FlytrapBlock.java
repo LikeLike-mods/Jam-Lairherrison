@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.ussm.examplemod.init.ModSounds;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -67,7 +68,8 @@ public class FlytrapBlock extends BushBlock {
             return;
         }
         level.setBlock(pos, state.setValue(OPEN, false), Block.UPDATE_ALL);
-        level.playSound(null, pos, SoundEvents.EVOKER_FANGS_ATTACK, SoundSource.BLOCKS, 0.8F, 1.3F);
+        level.playSound(null, pos, ModSounds.FLYTRAP_SNAP.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.playSound(null, pos, SoundEvents.EVOKER_FANGS_ATTACK, SoundSource.BLOCKS, 0.6F, 1.3F);
         living.hurt(new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DAMAGE)), 3.0F);
         living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 4));
         level.scheduleTick(pos, this, 80);

@@ -25,14 +25,14 @@ import java.util.List;
 
 @EventBusSubscriber(modid = ExampleMod.MOD_ID)
 public class ModSetupEvents {
-    // Les pancartes en palmier utilisent les block entities des pancartes vanilla (texte, rendu, édition)
+    // pancartes en palmier = block entities vanilla
     @SubscribeEvent
     public static void addSignBlocks(BlockEntityTypeAddBlocksEvent event) {
         event.modify(BlockEntityType.SIGN, ModBlocks.PALM_SIGN.get(), ModBlocks.PALM_WALL_SIGN.get());
         event.modify(BlockEntityType.HANGING_SIGN, ModBlocks.PALM_HANGING_SIGN.get(), ModBlocks.PALM_WALL_HANGING_SIGN.get());
     }
 
-    // Où chaque mob peut apparaître tout seul (les listes de mobs sont dans les JSON des biomes)
+    // regles de spawn
     @SubscribeEvent
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
         event.register(ModEntities.BUTTERFLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
@@ -65,7 +65,7 @@ public class ModSetupEvents {
         event.enqueueWork(() -> ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALM_SAPLING.getId(), ModBlocks.POTTED_PALM_SAPLING));
     }
 
-    // Ce qui brûle et se propage au feu (mêmes valeurs que les bois, feuilles et fleurs vanilla)
+    // ce qui brule
     private static void registerFlammables() {
         FireBlock fire = (FireBlock) Blocks.FIRE;
         fire.setFlammable(ModBlocks.PALM_LOG.get(), 5, 5);

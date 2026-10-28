@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// Crâne des poissons des abysses : se pose comme déco (face vers le joueur) et se porte sur la tête comme une citrouille.
+// crane des abysses : deco ou sur la tete
 public class AbyssSkullBlock extends HorizontalDirectionalBlock implements Equipable {
     public static final MapCodec<AbyssSkullBlock> CODEC = simpleCodec(AbyssSkullBlock::new);
     private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 15, 15);

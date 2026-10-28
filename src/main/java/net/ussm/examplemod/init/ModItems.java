@@ -32,11 +32,9 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(1)));
 
 
-    // Noix de coco entière : se pose (au sol ou suspendue sous des feuilles) ; un coup de hache dessus l'ouvre en deux
-    // Coque vide : donne un bol à l'établi, brûle dans le four, se composte (déclarée avant la demi-noix qui la rend)
+    // coco
     public static final DeferredItem<Item> COCONUT_SHELL = ITEMS.register("coconut_shell",
             () -> new Item(new Item.Properties()));
-    // Demi-noix : se boit (lait qui soigne le poison) et se mange, laisse une coque vide
     public static final DeferredItem<Item> COCONUT_HALF = ITEMS.register("coconut_half",
             () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperies car C PLUS PROPRE
 
@@ -53,7 +51,7 @@ public class ModItems {
 
 
 
-    // Nectar de népenthès : se boit comme du miel, donne un super saut
+    // nectar = super saut
     public static final DeferredItem<Item> NECTAR = ITEMS.register("nectar",
             () -> new HoneyBottleItem(new Item.Properties()
                     .craftRemainder(Items.GLASS_BOTTLE)
@@ -83,7 +81,6 @@ public class ModItems {
     public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).fireResistant().attributes(helmet("netherite", 3, 3, 0.1)), 15));
 
-    // Conque : on souffle dedans pour sortir de l'atoll (et y revenir quand on veut)
     public static final DeferredItem<Item> CONCH = ITEMS.register("conch",
             () -> new ConchItem(new Item.Properties().stacksTo(1)));
 
@@ -92,7 +89,7 @@ public class ModItems {
 
 
 
-    // Oeufs d'apparition des mobs (couleurs prises sur leurs textures)
+    // oeufs de spawn
     public static final List<DeferredItem<Item>> SPAWN_EGGS = new ArrayList<>();
     public static final DeferredItem<Item> BUTTERFLY_SPAWN_EGG = spawnEgg("butterfly", ModEntities.BUTTERFLY, 0x2E7BE6, 0x1A1A1A);
     public static final DeferredItem<Item> CRAB_SPAWN_EGG = spawnEgg("crab", ModEntities.CRAB, 0xC4502A, 0xEECC9E);
@@ -119,7 +116,7 @@ public class ModItems {
         return egg;
     }
 
-    // Protection du casque-crâne, la même que le casque vanilla qu'on a fusionné dedans
+    // meme protection que le casque vanilla
     private static ItemAttributeModifiers helmet(String name, double armor, double toughness, double knockbackResistance) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(ExampleMod.MOD_ID, name + "_abyss_helmet");
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder()
@@ -131,7 +128,7 @@ public class ModItems {
         return builder.build();
     }
 
-    // Ajouts d'Oesphy : item de test --> magnifique items, oeuf du léviathan, sabres laser
+    // trucs d'Oesphy
 
     public static final DeferredItem<LightsaberItem> SHADOW_SABER_SWORD = ITEMS.register("lightsaber_shadow_sword_white",
         () -> new LightsaberItem("lightsaber_sword", "lightsaber_shadow_sword_white",

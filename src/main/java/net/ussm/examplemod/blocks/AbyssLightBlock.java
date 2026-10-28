@@ -35,8 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.examplemod.ExampleMod;
 import net.ussm.examplemod.init.ModBlocks;
 
-// Lumière invisible posée à la tête du joueur qui porte un crâne vivant (ou un casque-crâne). Elle se retire toute seule
-// dès que plus personne ne la porte à côté : rien ne traîne après une déconnexion, une mort ou si on enlève le crâne.
+// lumiere invisible du crane, elle s'enleve toute seule quand y a plus personne
 public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<AbyssLightBlock> CODEC = simpleCodec(AbyssLightBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -52,12 +51,11 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
         return player.getItemBySlot(EquipmentSlot.HEAD).is(HEAD_LIGHTS);
     }
 
-    // Joueur qui porte un crâne lumineux, ou mob qui éclaire lui-même (poisson-loupiote)
+    // joueur avec un crane lumineux ou mob qui eclaire (loupiote)
     public static boolean emitsLight(LivingEntity entity) {
         return entity.getType().is(LIGHT_EMITTERS) || entity instanceof Player player && wearsLight(player);
     }
 
-    // Pose la lumière à cet endroit s'il est libre (air ou eau, dans ce cas elle est noyée)
     public static void placeAt(Level level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
         BlockState light = ModBlocks.ABYSS_LIGHT.get().defaultBlockState();

@@ -37,8 +37,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.examplemod.ExampleMod;
 
-// Bouteille échouée : se pose couchée (debout en étant accroupi) dans 16 directions comme un crâne, le bouchon vers où
-// on regarde. Clic droit les mains vides pour sortir ce qu'il y a dedans, avec un objet pour le mettre dedans.
+// bouteille couchee (ou debout si accroupi), 16 directions comme les cranes
 public class MessageBottleBlock extends Block implements EntityBlock {
     public static final MapCodec<MessageBottleBlock> CODEC = simpleCodec(MessageBottleBlock::new);
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
@@ -53,7 +52,7 @@ public class MessageBottleBlock extends Block implements EntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(ROTATION, 0).setValue(STANDING, false));
     }
 
-    // Contour pour chacune des 16 directions : le modèle de base a le bouchon à l'est (lacet 270°)
+    // le modele de base a le bouchon a l'est
     private static VoxelShape[] shapes(double x1, double x2, double z1, double z2, double height) {
         VoxelShape[] shapes = new VoxelShape[16];
         for (int r = 0; r < 16; r++) {
