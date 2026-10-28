@@ -108,7 +108,7 @@ public class AtollTravel {
             for (int dx = -r; dx <= r; dx += 16) {
                 for (int dz = -r; dz <= r; dz += 16) {
                     if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
-                    float h = TestChunkGenerator.getHeight(x0 + dx, z0 + dz, 0f);
+                    float h = TestChunkGenerator.getHeight(x0 + dx, z0 + dz);
                     if (h >= 65f && h <= 67f) {
                         return new BlockPos(x0 + dx, 0, z0 + dz);
                     }

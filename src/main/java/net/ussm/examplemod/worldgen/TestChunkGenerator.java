@@ -98,11 +98,11 @@ public class TestChunkGenerator extends ChunkGenerator {
         return (float)Math.sqrt(x*x + y*y);
     }
 
-    private boolean inRange(float t, float a, float b) {
+    private static boolean inRange(float t, float a, float b) {
         return (t >= a) && (t <= b);
     }
 
-    public static float getHeight(float posX, float posZ, float bonus) {
+    public static float getHeight(float posX, float posZ) {
         net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
         float h;
 
@@ -141,6 +141,19 @@ public class TestChunkGenerator extends ChunkGenerator {
         return h;
     }
 
+    public static float getSwampiness(float posX, float posZ, float posY, float slope) {
+        net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(200);
+
+        noise.SetFractalOctaves(1);
+        noise.SetSeed(203);
+        noise.SetFrequency(0.001f);
+        noise.SetFractalType(FastNoiseLite.FractalType.FBm);
+        noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+
+        if (inRange(posY, 65f + 3f * slope, 80f)) return noise.GetNoise(posX, posZ);
+        return 0f;
+    }
+
     private void placeMyStructure(ChunkAccess chunk) {
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
@@ -151,19 +164,13 @@ public class TestChunkGenerator extends ChunkGenerator {
                 int posX = x + (chunk.getPos().x * 16);
                 int posZ = z + (chunk.getPos().z * 16);
 
-                float h = getHeight(posX, posZ, 0f);
-                float n = getHeight(posX + 1, posZ, 0f);
-                float s = getHeight(posX - 1, posZ, 0f);
-                float e = getHeight(posX, posZ + 1, 0f);
-                float w = getHeight(posX, posZ - 1, 0f);
+                float h = getHeight(posX, posZ);
+                float n = getHeight(posX + 1, posZ);
+                float s = getHeight(posX - 1, posZ);
+                float e = getHeight(posX, posZ + 1);
+                float w = getHeight(posX, posZ - 1);
                 float slope = length(n - s, e - w);
                 slope *= 2f;
-
-                // Layers
-                int a = Math.round(h);
-                float b = h - (int)Math.floor(h - 0.5f) - 0.5f;
-                int stratum = (int)Math.floor(b * 8);
-                stratum = Math.clamp(stratum, 0, 8);
 
                 // Blocks hashes
                 net.ussm.examplemod.api.FastNoiseLite noise = new FastNoiseLite(202);
@@ -186,7 +193,12 @@ public class TestChunkGenerator extends ChunkGenerator {
                 BlockState topWater = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
                 BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
 
-                if (inRange(h, 63f, 64f + 5f * Math.min(slope, 1f))) {
+                if (getSwampiness(posX, posZ, h, Math.min(slope, 1f)) >= 0.5f) {
+                    if (hash3 >= 0.75f) topLand = Blocks.MUD.defaultBlockState();
+                    else topLand = Blocks.WATER.defaultBlockState();
+                    top2Land = Blocks.MUD.defaultBlockState();
+                }
+                else if (inRange(h, 63f, 64f + 5f * Math.min(slope, 1f))) {
                     if (inRange(h, 64f, 64f + 5f * Math.min(slope, 1f))) topLand = ModBlocks.LIGHT_SAND.get().defaultBlockState();
                     else topLand = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
                     top2Land = ModBlocks.LIGHT_SAND.get().defaultBlockState();
@@ -197,6 +209,12 @@ public class TestChunkGenerator extends ChunkGenerator {
                     topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
                 }
                 if (h >= 64f) bottom = ModBlocks.BROWNSTONE.get().defaultBlockState();
+
+                // Layers
+                int a = Math.round(h);
+                float b = h - (int)Math.floor(h - 0.5f) - 0.5f;
+                int stratum = (int)Math.floor(b * 8);
+                stratum = Math.clamp(stratum, 0, 8);
 
                 //Building
                 while (y <= a || y <= 64) {

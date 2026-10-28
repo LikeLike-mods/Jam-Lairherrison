@@ -1,0 +1,87 @@
+{
+  "carvers": {},
+  "downfall": 0.5,
+  "effects": {
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "replace_current_music": false,
+      "sound": "minecraft:music.overworld.jungle"
+    },
+    "sky_color": 16746815,
+    "fog_color": 15180488,
+    "water_color": 3832426,
+    "water_fog_color": 5077600,
+    "grass_color": 5884220,
+    "foliage_color": 3193611,
+    "particle": {
+      "options": {
+        "type": "minecraft:spore_blossom_air"
+      },
+      "probability": 0.004
+    }
+  },
+  "features": [
+    [],
+    [],
+    ["examplemod:brownstone_boulder"],
+    [],
+    [],
+    [],
+    [],
+    [],
+    ["minecraft:spring_water"],
+    [
+      "examplemod:trees_tropical_mangrove",
+      "minecraft:patch_grass_normal",
+      "minecraft:patch_waterlily",
+      "minecraft:seagrass_swamp",
+      "examplemod:flytrap_patch",
+      "minecraft:flower_warm",
+      "minecraft:patch_grass_jungle",
+      "examplemod:jungle_flowers",
+      "examplemod:pitcher_plant_patch"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "examplemod:poison_frog",
+        "weight": 10,
+        "minCount": 5,
+        "maxCount": 2
+      }
+    ],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [
+      {
+        "type": "minecraft:glow_squid",
+        "maxCount": 6,
+        "minCount": 4,
+        "weight": 10
+      }
+    ],
+    "water_ambient": [
+      {
+        "type": "minecraft:tropical_fish",
+        "maxCount": 8,
+        "minCount": 8,
+        "weight": 25
+      }
+    ],
+    "water_creature": []
+  },
+  "temperature": 0.95
+}
