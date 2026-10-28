@@ -20,7 +20,7 @@ public class CrabRenderer extends GeoEntityRenderer<Crab> {
         return RenderType.entityCutout(texture);
     }
 
-    // Les bébés ont leur propre petit modèle et leur texture (mêmes os et mêmes animations que l'adulte)
+    // modele a part pour les bebes
     private static class CrabModel extends DefaultedEntityGeoModel<Crab> {
         private final ResourceLocation babyModel;
         private final ResourceLocation babyTexture;

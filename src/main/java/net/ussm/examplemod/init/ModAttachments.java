@@ -14,7 +14,7 @@ public class ModAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
         DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, ExampleMod.MOD_ID);
 
-    // Usure des pinces de crabe, portée par le joueur (envoyée seulement à lui, gardée à sa mort)
+    // usure des pinces
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> CRAB_CLAW_WEAR =
         ATTACHMENT_TYPES.register("crab_claw_wear", () -> AttachmentType.builder(() -> 0)
             .serialize(Codec.INT)
@@ -22,7 +22,7 @@ public class ModAttachments {
             .sync((holder, to) -> holder == to, ByteBufCodecs.VAR_INT)
             .build());
 
-    // Voyage vers l'atoll : où la conque ramène hors de l'atoll ("return") et où on était dans l'atoll ("atoll"), gardé à la mort
+    // pour la conque
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<CompoundTag>> ATOLL_TRAVEL =
         ATTACHMENT_TYPES.register("atoll_travel", () -> AttachmentType.builder(() -> new CompoundTag())
             .serialize(CompoundTag.CODEC)

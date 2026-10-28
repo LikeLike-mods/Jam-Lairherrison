@@ -12,8 +12,7 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-// Ce qui brille (texture _glowmask) est rendu comme les yeux des endermans : en additif et en pleine lumière, donc bien
-// visible dans le noir des abysses.
+// glowmask rendu comme les yeux d'enderman
 public class EyesGlowLayer<T extends GeoAnimatable> extends GeoRenderLayer<T> {
     public EyesGlowLayer(GeoRenderer<T> renderer) {
         super(renderer);

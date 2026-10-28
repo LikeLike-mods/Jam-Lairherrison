@@ -16,7 +16,7 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> LIGHTSABER_EXTINGUISH = register("lightsaber_extinguish");
     public static final DeferredHolder<SoundEvent, SoundEvent> LIGHTSABER_HUM = register("lightsaber_hum");
 
-    // Ambiance de l'atoll (branchée dans les fichiers des biomes) : îles calmes (vrais enregistrements de vagues), abysses angoissants
+    // sons d'ambiance (dans les biomes)
     public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_ATOLL_WAVES = register("ambient.atoll.waves");
     public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_ATOLL_JUNGLE = register("ambient.atoll.jungle");
     public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_ABYSS_LOOP = register("ambient.abyss.loop");

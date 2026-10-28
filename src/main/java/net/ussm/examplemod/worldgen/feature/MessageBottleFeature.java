@@ -11,7 +11,6 @@ import net.ussm.examplemod.blocks.MessageBottleBlock;
 import net.ussm.examplemod.blocks.MessageBottleBlockEntity;
 import net.ussm.examplemod.init.ModBlocks;
 
-// Bouteille échouée couchée sur la plage, dans une direction au hasard, avec un trésor tiré comme celui d'un coffre.
 public class MessageBottleFeature extends Feature<NoneFeatureConfiguration> {
     public MessageBottleFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);

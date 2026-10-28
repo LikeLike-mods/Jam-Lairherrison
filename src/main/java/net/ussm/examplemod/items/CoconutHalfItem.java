@@ -7,8 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-// Demi-noix de coco : on boit le lait et on mange la chair. Le lait soigne le poison (grenouille, méduse) ;
-// il reste la coque vide (usingConvertsTo dans ModItems).
+// le lait soigne le poison
 public class CoconutHalfItem extends Item {
     public CoconutHalfItem(Properties properties) {
         super(properties);

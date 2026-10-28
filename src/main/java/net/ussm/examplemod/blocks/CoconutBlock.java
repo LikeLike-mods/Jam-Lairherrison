@@ -52,7 +52,7 @@ public class CoconutBlock extends Block implements Fallable {
         builder.add(HANGING);
     }
 
-    // Posée par un joueur : suspendue si on la colle sous des feuilles ou un tronc, sinon posée au sol
+    // suspendue si on la met sous des feuilles
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean hanging = context.getClickedFace() == Direction.DOWN && hasBranch(context.getLevel(), context.getClickedPos());
@@ -60,7 +60,7 @@ public class CoconutBlock extends Block implements Fallable {
         return state.canSurvive(context.getLevel(), context.getClickedPos()) ? state : null;
     }
 
-    // Un coup de hache sur une noix posée au sol : elle s'ouvre en deux demi-noix
+    // coup de hache = coco ouverte en 2
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (state.getValue(HANGING) || !stack.canPerformAction(ItemAbilities.AXE_DIG)) {
@@ -93,7 +93,7 @@ public class CoconutBlock extends Block implements Fallable {
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (state.getValue(HANGING)) {
             if (direction == Direction.UP && !hasBranch(level, pos)) {
-                level.scheduleTick(pos, this, 2);   // plus de feuilles au-dessus : elle tombe
+                level.scheduleTick(pos, this, 2);   // plus de feuilles donc elle tombe
             }
             return state;
         }

@@ -26,8 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-// Contenu de la bouteille, visible à travers le verre. Les bouteilles de la plage reçoivent un trésor tiré
-// comme celui d'un coffre (table + graine posées à la génération), révélé dès que le chunk est chargé.
+// contenu de la bouteille, loot de coffre pour celles de la plage
 public class MessageBottleBlockEntity extends BlockEntity {
     public static final int CAPACITY = 4;
     private final NonNullList<ItemStack> items = NonNullList.withSize(CAPACITY, ItemStack.EMPTY);

@@ -8,8 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-// Minecraft noircit le bas du ciel quand les yeux du joueur sont sous Y=63 (le niveau de la mer de l'Overworld).
-// Dans l'atoll la mer est à Y=0 : on met l'horizon tout en bas du monde pour garder un ciel bleu partout.
+// dans l'atoll la mer est a y=0, sinon le ciel devient noir sous y=63
 @Mixin(ClientLevel.ClientLevelData.class)
 public class ClientLevelDataMixin {
     @Inject(method = "getHorizonHeight", at = @At("HEAD"), cancellable = true)
