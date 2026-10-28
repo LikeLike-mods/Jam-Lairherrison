@@ -35,6 +35,7 @@ public class RedstonePepperBlock extends CropBlock {
         return MAX_AGE;
     }
 
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);

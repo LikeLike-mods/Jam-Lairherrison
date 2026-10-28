@@ -193,7 +193,12 @@ public class ModBlocks {
 
 
     public static final DeferredBlock<RedstonePepperBlock> REDSTONE_PEPPER_CROP = registerBlock("redstone_pepper_crop",
-            () -> new RedstonePepperBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)));
+            () -> new RedstonePepperBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .randomTicks()
+                    .instabreak()
+                    .sound(SoundType.CROP)
+                    .pushReaction(PushReaction.DESTROY)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block ) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
