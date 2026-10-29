@@ -100,6 +100,9 @@ public class ModBlocks {
                     .noOcclusion(),
                     Block.box(4, 0, 4, 12, 5, 12)));
 
+    public static final DeferredBlock<Block> SUBMARINE_WINDOW = registerBlock("submarine_window",
+            () -> new net.ussm.the_shell.blocks.SubmarineWindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).lightLevel(s -> 5)));
+
     // les minerais du jeu, version abysses
     public static final DeferredBlock<Block> ABYSSAL_COAL_ORE = registerBlock("abyssal_coal_ore",
             () -> new net.minecraft.world.level.block.DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COAL_ORE)));

@@ -281,5 +281,13 @@
   "block.the_shell.abyssal_redstone_ore": "Minerai de redstone abyssal",
   "block.the_shell.abyssal_lapis_ore": "Minerai de lapis-lazuli abyssal",
   "block.the_shell.abyssal_diamond_ore": "Minerai de diamant abyssal",
-  "block.the_shell.abyssal_emerald_ore": "Minerai d'émeraude abyssal"
+  "block.the_shell.abyssal_emerald_ore": "Minerai d'émeraude abyssal",
+  "item.the_shell.submarine_upgrade_iron": "Kit d'amélioration de sous-marin (fer)",
+  "item.the_shell.submarine_upgrade_diamond": "Kit d'amélioration de sous-marin (diamant)",
+  "item.the_shell.submarine_upgrade_netherite": "Kit d'amélioration de sous-marin (netherite)",
+  "block.the_shell.submarine_window": "Hublot de sous-marin",
+  "message.the_shell.submarine.upgraded": "Sous-marin amélioré au niveau %s : nouvelle pièce dans la cabine, et il va plus vite !",
+  "message.the_shell.submarine.upgrade_order": "Il faut d'abord le kit fer, puis diamant, puis netherite",
+  "hud.the_shell.sonar": "Sonar : faille à %s m %s",
+  "hud.the_shell.sonar.none": "Sonar : pas de faille proche"
 }

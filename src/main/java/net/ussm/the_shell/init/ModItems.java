@@ -46,6 +46,10 @@ public class ModItems {
     public static final DeferredItem<Item> DATES = ITEMS.register("dates", () -> new Item(new Item.Properties().food(ModFoodProperties.DATES)));
     public static final DeferredItem<Item> DATE_SYRUP = ITEMS.register("date_syrup", () -> new net.minecraft.world.item.HoneyBottleItem(new Item.Properties()
             .food(ModFoodProperties.DATE_SYRUP).craftRemainder(net.minecraft.world.item.Items.GLASS_BOTTLE).stacksTo(16)));
+    // kits pour ameliorer le sous-marin (fer, puis diamant, puis netherite)
+    public static final DeferredItem<Item> SUBMARINE_UPGRADE_IRON = ITEMS.register("submarine_upgrade_iron", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> SUBMARINE_UPGRADE_DIAMOND = ITEMS.register("submarine_upgrade_diamond", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> SUBMARINE_UPGRADE_NETHERITE = ITEMS.register("submarine_upgrade_netherite", () -> new Item(new Item.Properties().stacksTo(16).fireResistant()));
 
 
     public static final DeferredItem<Item> PALM_SIGN = ITEMS.register("palm_sign",

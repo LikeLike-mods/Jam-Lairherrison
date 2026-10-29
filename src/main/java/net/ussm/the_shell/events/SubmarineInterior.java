@@ -45,6 +45,43 @@ public class SubmarineInterior {
     private static final double ROOF = 11.5;
     private static final Map<UUID, Pending> PENDING = new HashMap<>();
     private static final Map<UUID, UUID> TO_CABIN = new HashMap<>();
+    private static final Map<UUID, UUID> SEAT_LATER = new HashMap<>();
+    // ou se collent les pieces ajoutees par les ameliorations (depuis le coin de la cabine)
+    private static final BlockPos[] EXTENSIONS = {new BlockPos(11, 5, 4), new BlockPos(11, 5, 12), new BlockPos(-6, 5, 12)};
+
+    public static void seatLater(ServerPlayer player, Submarine submarine) {
+        SEAT_LATER.put(player.getUUID(), submarine.getUUID());
+    }
+
+    // une amelioration ajoute sa piece tout de suite si la cabine existe deja (sinon elle viendra a sa construction)
+    public static void upgrade(Submarine submarine) {
+        if (!(submarine.level() instanceof ServerLevel level) || submarine.getInteriorId() < 0) return;
+        ServerLevel inside = level.getServer().getLevel(INTERIOR);
+        Cabins cabins = Cabins.get(level.getServer());
+        if (inside == null || !cabins.built.contains(submarine.getInteriorId())) return;
+        placeExtension(inside, submarine.getInteriorId(), submarine.getTier());
+        cabins.setExtended(submarine.getInteriorId(), submarine.getTier());
+    }
+
+    private static void placeExtension(ServerLevel inside, int cabin, int tier) {
+        BlockPos at = corner(cabin).offset(EXTENSIONS[tier - 1]);
+        inside.getStructureManager().get(id("submarine/extension_" + tier))
+                .ifPresent(t -> t.placeInWorld(inside, at, at, new StructurePlaceSettings(), inside.random, Block.UPDATE_CLIENTS));
+    }
+
+    // les hublots montrent la mer qu'il y a vraiment autour du sous-marin : claire pres de la surface, sombre au fond, noire dans les abysses
+    private static void updateWindows(ServerLevel inside, int cabin, CompoundTag where) {
+        String dim = where.getString("Dim");
+        int zone = dim.equals(AbyssTravel.ABYSS.location().toString()) ? 2
+                : dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > net.ussm.the_shell.worldgen.TestChunkGenerator.SEA - 24 ? 0 : 1;
+        BlockPos c = corner(cabin);
+        for (BlockPos p : BlockPos.betweenClosed(c.offset(-8, 0, 0), c.offset(22, 17, 24))) {
+            net.minecraft.world.level.block.state.BlockState st = inside.getBlockState(p);
+            if (st.is(net.ussm.the_shell.init.ModBlocks.SUBMARINE_WINDOW.get()) && st.getValue(net.ussm.the_shell.blocks.SubmarineWindowBlock.ZONE) != zone) {
+                inside.setBlock(p, st.setValue(net.ussm.the_shell.blocks.SubmarineWindowBlock.ZONE, zone), Block.UPDATE_CLIENTS);
+            }
+        }
+    }
 
     private record Pending(UUID submarine, long until) {
     }
@@ -66,9 +103,20 @@ public class SubmarineInterior {
         cabins.remember(cabin, submarine);
         BlockPos corner = corner(cabin);
         if (cabins.built.add(cabin)) {
+            cabins.extendedTo.remove(cabin);
             cabins.setDirty();
+            // les anciennes cabines avaient de l'eau et des poissons autour : on enleve les poissons
+            inside.getEntitiesOfClass(net.minecraft.world.entity.animal.WaterAnimal.class, new net.minecraft.world.phys.AABB(corner.offset(-8, -2, -2).getCenter(), corner.offset(24, 20, 26).getCenter()))
+                    .forEach(net.minecraft.world.entity.Entity::discard);
             inside.getStructureManager().get(CABIN).ifPresent(t -> t.placeInWorld(inside, corner, corner, new StructurePlaceSettings(), inside.random, Block.UPDATE_CLIENTS));
         }
+        for (int tier = 1; tier <= submarine.getTier(); tier++) {
+            if (cabins.extended(cabin) < tier) {
+                placeExtension(inside, cabin, tier);
+            }
+        }
+        cabins.setExtended(cabin, submarine.getTier());
+        updateWindows(inside, cabin, cabins.subs.get(cabin));
         player.setPortalCooldown(20);
         player.changeDimension(new DimensionTransition(inside, Vec3.atLowerCornerOf(corner).add(ARRIVAL), Vec3.ZERO, 180.0F, 0.0F, DimensionTransition.DO_NOTHING));
     }
@@ -142,6 +190,16 @@ public class SubmarineInterior {
     @SubscribeEvent
     public static void tick(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        UUID seat = SEAT_LATER.get(player.getUUID());
+        if (seat != null && !player.isShiftKeyDown()) {
+            SEAT_LATER.remove(player.getUUID());
+            if (player.serverLevel().getEntity(seat) instanceof Submarine sub && !sub.isVehicle() && player.distanceToSqr(sub) < 36) player.startRiding(sub);
+        }
+        if (player.level().dimension() == INTERIOR && player.tickCount % 100 == 0) {
+            int c = Math.floorDiv((int) Math.floor(player.getX()) + SPACING / 2, SPACING);
+            CompoundTag w = Cabins.get(player.server).subs.get(c);
+            if (w != null) updateWindows(player.serverLevel(), c, w);
+        }
         UUID back = TO_CABIN.remove(player.getUUID());
         if (back != null && !player.isPassenger() && player.serverLevel().getEntity(back) instanceof Submarine sub) enter(player, sub);
         Pending pending = PENDING.get(player.getUUID());
@@ -194,6 +252,16 @@ public class SubmarineInterior {
         int next = 1;
         final Map<Integer, CompoundTag> subs = new HashMap<>();
         final Set<Integer> built = new HashSet<>();
+        final Map<Integer, Integer> extendedTo = new HashMap<>();
+
+        int extended(int cabin) {
+            return built.contains(cabin) ? extendedTo.getOrDefault(cabin, 0) : 0;
+        }
+
+        void setExtended(int cabin, int tier) {
+            extendedTo.put(cabin, tier);
+            setDirty();
+        }
 
         static Cabins get(MinecraftServer server) {
             return server.overworld().getDataStorage().computeIfAbsent(new SavedData.Factory<>(Cabins::new, Cabins::load, null), "the_shell_submarines");
@@ -219,7 +287,9 @@ public class SubmarineInterior {
             cabins.next = Math.max(1, tag.getInt("Next"));
             CompoundTag subs = tag.getCompound("Subs");
             for (String key : subs.getAllKeys()) cabins.subs.put(Integer.parseInt(key), subs.getCompound(key));
-            for (int cabin : tag.getIntArray("Built2")) cabins.built.add(cabin);
+            for (int cabin : tag.getIntArray("Built3")) cabins.built.add(cabin);
+            CompoundTag ext = tag.getCompound("Extended");
+            for (String key : ext.getAllKeys()) cabins.extendedTo.put(Integer.parseInt(key), ext.getInt(key));
             return cabins;
         }
 
@@ -229,7 +299,10 @@ public class SubmarineInterior {
             CompoundTag subsTag = new CompoundTag();
             subs.forEach((cabin, where) -> subsTag.put(String.valueOf(cabin), where));
             tag.put("Subs", subsTag);
-            tag.putIntArray("Built2", built.stream().mapToInt(Integer::intValue).toArray());
+            tag.putIntArray("Built3", built.stream().mapToInt(Integer::intValue).toArray());
+            CompoundTag ext = new CompoundTag();
+            extendedTo.forEach((cabin, tier) -> ext.putInt(String.valueOf(cabin), tier));
+            tag.put("Extended", ext);
             return tag;
         }
     }

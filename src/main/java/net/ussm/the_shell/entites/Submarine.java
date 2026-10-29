@@ -33,6 +33,9 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     private int interiorId = -1;
     // batterie : un tick de moteur = 1, pleine = 5 minutes a fond
     public static final int MAX_ENERGY = 6000;
+    // niveau d'amelioration : 0 de base, 1 fer, 2 diamant, 3 netherite
+    private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> TIER =
+            net.minecraft.network.syncher.SynchedEntityData.defineId(Submarine.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
     private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> ENERGY =
             net.minecraft.network.syncher.SynchedEntityData.defineId(Submarine.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
 
@@ -54,6 +57,22 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(ENERGY, MAX_ENERGY);
+        builder.define(TIER, 0);
+    }
+
+    public int getTier() {
+        return this.entityData.get(TIER);
+    }
+
+    public void setTier(int tier) {
+        this.entityData.set(TIER, tier);
+    }
+
+    public static int kitTier(net.minecraft.world.item.ItemStack stack) {
+        if (stack.is(ModItems.SUBMARINE_UPGRADE_IRON.get())) return 1;
+        if (stack.is(ModItems.SUBMARINE_UPGRADE_DIAMOND.get())) return 2;
+        if (stack.is(ModItems.SUBMARINE_UPGRADE_NETHERITE.get())) return 3;
+        return 0;
     }
 
     public int getEnergy() {
@@ -90,12 +109,14 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     protected void readAdditionalSaveData(CompoundTag tag) {
         if (tag.contains("Interior")) interiorId = tag.getInt("Interior");
         if (tag.contains("Energy")) setEnergy(tag.getInt("Energy"));
+        setTier(tag.getInt("Tier"));
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag tag) {
         tag.putInt("Interior", interiorId);
         tag.putInt("Energy", getEnergy());
+        tag.putInt("Tier", getTier());
     }
 
     @Override
@@ -132,7 +153,27 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     // clic droit : on entre dans la cabine, et l'echelle du fond mene aux commandes
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
-        if (player.isSecondaryUseActive()) return InteractionResult.PASS;
+        // shift + clic droit : direct aux commandes (on s'assoit quand on lache shift, sinon le jeu nous refait descendre)
+        if (player.isSecondaryUseActive()) {
+            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer && !this.isVehicle()) net.ussm.the_shell.events.SubmarineInterior.seatLater(serverPlayer, this);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+        net.minecraft.world.item.ItemStack kit = player.getItemInHand(hand);
+        int niveau = kitTier(kit);
+        if (niveau > 0) {
+            if (!this.level().isClientSide) {
+                if (niveau == getTier() + 1) {
+                    setTier(niveau);
+                    kit.consume(1, player);
+                    net.ussm.the_shell.events.SubmarineInterior.upgrade(this);
+                    this.level().playSound(null, this.blockPosition(), net.minecraft.sounds.SoundEvents.SMITHING_TABLE_USE, net.minecraft.sounds.SoundSource.NEUTRAL, 1.0F, 1.0F);
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.upgraded", niveau), true);
+                } else if (niveau > getTier()) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.upgrade_order"), true);
+                }
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
         // avec du carburant en main on recharge la batterie au lieu d'entrer
         net.minecraft.world.item.ItemStack stack = player.getItemInHand(hand);
         int fuel = fuelValue(stack);
@@ -167,7 +208,8 @@ public class Submarine extends VehicleEntity implements GeoEntity {
                     this.setYRot(driver.getYRot());
                     Vec3 look = driver.getLookAngle();
                     Vec3 left = new Vec3(look.z, 0.0, -look.x).normalize();
-                    motion = motion.add(look.scale(driver.zza * 0.035)).add(left.scale(driver.xxa * 0.02));
+                    double boost = 1.0 + 0.15 * getTier();   // chaque amelioration le rend un peu plus rapide
+                    motion = motion.add(look.scale(driver.zza * 0.035 * boost)).add(left.scale(driver.xxa * 0.02 * boost));
                 }
             } else {
                 motion = new Vec3(motion.x * 0.8, motion.y - 0.04, motion.z * 0.8);

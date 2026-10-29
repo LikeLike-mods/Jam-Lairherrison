@@ -281,5 +281,13 @@
   "block.the_shell.abyssal_redstone_ore": "Abyssal Redstone Ore",
   "block.the_shell.abyssal_lapis_ore": "Abyssal Lapis Lazuli Ore",
   "block.the_shell.abyssal_diamond_ore": "Abyssal Diamond Ore",
-  "block.the_shell.abyssal_emerald_ore": "Abyssal Emerald Ore"
+  "block.the_shell.abyssal_emerald_ore": "Abyssal Emerald Ore",
+  "item.the_shell.submarine_upgrade_iron": "Submarine Upgrade Kit (Iron)",
+  "item.the_shell.submarine_upgrade_diamond": "Submarine Upgrade Kit (Diamond)",
+  "item.the_shell.submarine_upgrade_netherite": "Submarine Upgrade Kit (Netherite)",
+  "block.the_shell.submarine_window": "Submarine Window",
+  "message.the_shell.submarine.upgraded": "Submarine upgraded to level %s: a new room in the cabin, and it goes faster!",
+  "message.the_shell.submarine.upgrade_order": "Use the iron kit first, then diamond, then netherite",
+  "hud.the_shell.sonar": "Sonar: rift %s m %s",
+  "hud.the_shell.sonar.none": "Sonar: no rift nearby"
 }

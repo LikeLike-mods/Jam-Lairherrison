@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "zone=0": {
+      "model": "the_shell:block/submarine_window_clear"
+    },
+    "zone=1": {
+      "model": "the_shell:block/submarine_window_deep"
+    },
+    "zone=2": {
+      "model": "the_shell:block/submarine_window_abyss"
+    }
+  }
+}
