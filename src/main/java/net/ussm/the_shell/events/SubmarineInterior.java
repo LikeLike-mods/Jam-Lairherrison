@@ -69,6 +69,46 @@ public class SubmarineInterior {
                 .ifPresent(t -> t.placeInWorld(inside, at, at, new StructurePlaceSettings(), inside.random, Block.UPDATE_CLIENTS));
     }
 
+    // par les hublots on voit le vrai dehors : on recopie autour de la cabine les blocs qui entourent le sous-marin,
+    // tournes dans le meme sens que lui (son avant = l'avant de la cabine). des barrieres tout autour pour que l'eau reste en place
+    private static final int[][] DANS_LA_CABINE = {{3, 3, 3, 11, 14, 19}, {11, 5, 4, 19, 10, 10}, {11, 5, 12, 19, 10, 18}, {-6, 5, 12, 3, 10, 20}};
+
+    private static void mirror(ServerLevel inside, int cabin, CompoundTag where) {
+        ServerLevel world = inside.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(where.getString("Dim"))));
+        if (world == null) return;
+        BlockPos sub = BlockPos.containing(where.getDouble("X"), where.getDouble("Y"), where.getDouble("Z"));
+        world.getChunkSource().addRegionTicket(net.minecraft.server.level.TicketType.PORTAL, new net.minecraft.world.level.ChunkPos(sub), 2, sub);
+        net.minecraft.world.level.block.Rotation versCabine = switch (net.minecraft.core.Direction.fromYRot(where.getFloat("Yaw"))) {
+            case EAST -> net.minecraft.world.level.block.Rotation.COUNTERCLOCKWISE_90;
+            case SOUTH -> net.minecraft.world.level.block.Rotation.CLOCKWISE_180;
+            case WEST -> net.minecraft.world.level.block.Rotation.CLOCKWISE_90;
+            default -> net.minecraft.world.level.block.Rotation.NONE;
+        };
+        net.minecraft.world.level.block.Rotation versMonde = switch (versCabine) {
+            case COUNTERCLOCKWISE_90 -> net.minecraft.world.level.block.Rotation.CLOCKWISE_90;
+            case CLOCKWISE_90 -> net.minecraft.world.level.block.Rotation.COUNTERCLOCKWISE_90;
+            default -> versCabine;
+        };
+        BlockPos c = corner(cabin);
+        for (int lx = -12; lx <= 12; lx++) {
+            for (int ly = -8; ly <= 10; ly++) {
+                for (int lz = -16; lz <= 14; lz++) {
+                    int tx = 7 + lx, ty = 6 + ly, tz = 11 + lz;
+                    boolean cabine = false;
+                    for (int[] b : DANS_LA_CABINE) {
+                        if (tx >= b[0] && tx <= b[3] && ty >= b[1] && ty <= b[4] && tz >= b[2] && tz <= b[5]) { cabine = true; break; }
+                    }
+                    if (cabine) continue;
+                    boolean bord = Math.abs(lx) == 12 || ly == -8 || ly == 10 || lz == -16 || lz == 14;
+                    net.minecraft.world.level.block.state.BlockState st = bord ? net.minecraft.world.level.block.Blocks.BARRIER.defaultBlockState()
+                            : world.getBlockState(sub.offset(new BlockPos(lx, ly, lz).rotate(versMonde))).rotate(versCabine);
+                    BlockPos target = c.offset(tx, ty, tz);
+                    if (inside.getBlockState(target) != st) inside.setBlock(target, st, Block.UPDATE_CLIENTS);
+                }
+            }
+        }
+    }
+
     // les hublots montrent la mer qu'il y a vraiment autour du sous-marin : claire pres de la surface, sombre au fond, noire dans les abysses
     private static void updateWindows(ServerLevel inside, int cabin, CompoundTag where) {
         String dim = where.getString("Dim");
@@ -116,7 +156,7 @@ public class SubmarineInterior {
             }
         }
         cabins.setExtended(cabin, submarine.getTier());
-        updateWindows(inside, cabin, cabins.subs.get(cabin));
+        mirror(inside, cabin, cabins.subs.get(cabin));
         player.setPortalCooldown(20);
         player.changeDimension(new DimensionTransition(inside, Vec3.atLowerCornerOf(corner).add(ARRIVAL), Vec3.ZERO, 180.0F, 0.0F, DimensionTransition.DO_NOTHING));
     }
@@ -201,10 +241,10 @@ public class SubmarineInterior {
             SEAT_LATER.remove(player.getUUID());
             if (player.serverLevel().getEntity(seat) instanceof Submarine sub && !sub.isVehicle() && player.distanceToSqr(sub) < 36) player.startRiding(sub);
         }
-        if (player.level().dimension() == INTERIOR && player.tickCount % 100 == 0) {
+        if (player.level().dimension() == INTERIOR && player.tickCount % 40 == 0) {
             int c = Math.floorDiv((int) Math.floor(player.getX()) + SPACING / 2, SPACING);
             CompoundTag w = Cabins.get(player.server).subs.get(c);
-            if (w != null) updateWindows(player.serverLevel(), c, w);
+            if (w != null) mirror(player.serverLevel(), c, w);
         }
         UUID back = TO_CABIN.remove(player.getUUID());
         if (back != null && !player.isPassenger() && player.serverLevel().getEntity(back) instanceof Submarine sub) enter(player, sub);
@@ -309,7 +349,7 @@ public class SubmarineInterior {
             cabins.next = Math.max(1, tag.getInt("Next"));
             CompoundTag subs = tag.getCompound("Subs");
             for (String key : subs.getAllKeys()) cabins.subs.put(Integer.parseInt(key), subs.getCompound(key));
-            for (int cabin : tag.getIntArray("Built3")) cabins.built.add(cabin);
+            for (int cabin : tag.getIntArray("Built4")) cabins.built.add(cabin);
             CompoundTag ext = tag.getCompound("Extended");
             for (String key : ext.getAllKeys()) cabins.extendedTo.put(Integer.parseInt(key), ext.getInt(key));
             return cabins;
@@ -321,7 +361,7 @@ public class SubmarineInterior {
             CompoundTag subsTag = new CompoundTag();
             subs.forEach((cabin, where) -> subsTag.put(String.valueOf(cabin), where));
             tag.put("Subs", subsTag);
-            tag.putIntArray("Built3", built.stream().mapToInt(Integer::intValue).toArray());
+            tag.putIntArray("Built4", built.stream().mapToInt(Integer::intValue).toArray());
             CompoundTag ext = new CompoundTag();
             extendedTo.forEach((cabin, tier) -> ext.putInt(String.valueOf(cabin), tier));
             tag.put("Extended", ext);
