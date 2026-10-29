@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "the_shell:dates"
+    },
+    {
+      "item": "the_shell:dates"
+    },
+    {
+      "item": "the_shell:dates"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "result": {
+    "id": "the_shell:date_syrup",
+    "count": 1
+  }
+}

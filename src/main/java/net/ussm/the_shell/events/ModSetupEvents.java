@@ -62,6 +62,8 @@ public class ModSetupEvents {
     public static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(ModSetupEvents::registerFlammables);
         event.enqueueWork(() -> ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALM_SAPLING.getId(), ModBlocks.POTTED_PALM_SAPLING));
+        event.enqueueWork(() -> ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BANANA_SAPLING.getId(), ModBlocks.POTTED_BANANA_SAPLING));
+        event.enqueueWork(() -> ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.DATE_PALM_SAPLING.getId(), ModBlocks.POTTED_DATE_PALM_SAPLING));
     }
 
     private static void registerFlammables() {

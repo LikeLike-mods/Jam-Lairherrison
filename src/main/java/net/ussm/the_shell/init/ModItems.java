@@ -39,6 +39,14 @@ public class ModItems {
     public static final DeferredItem<Item> COCONUT_HALF = ITEMS.register("coconut_half",
             () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperies car C PLUS PROPRE
 
+    // banane et datte
+    public static final DeferredItem<Item> BANANA = ITEMS.register("banana", () -> new Item(new Item.Properties().food(ModFoodProperties.BANANA)));
+    public static final DeferredItem<Item> BANANA_BREAD = ITEMS.register("banana_bread", () -> new Item(new Item.Properties().food(ModFoodProperties.BANANA_BREAD)));
+    public static final DeferredItem<Item> BANANA_CHIPS = ITEMS.register("banana_chips", () -> new Item(new Item.Properties().food(ModFoodProperties.BANANA_CHIPS)));
+    public static final DeferredItem<Item> DATES = ITEMS.register("dates", () -> new Item(new Item.Properties().food(ModFoodProperties.DATES)));
+    public static final DeferredItem<Item> DATE_SYRUP = ITEMS.register("date_syrup", () -> new net.minecraft.world.item.HoneyBottleItem(new Item.Properties()
+            .food(ModFoodProperties.DATE_SYRUP).craftRemainder(net.minecraft.world.item.Items.GLASS_BOTTLE).stacksTo(16)));
+
 
     public static final DeferredItem<Item> PALM_SIGN = ITEMS.register("palm_sign",
             () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.PALM_SIGN.get(), ModBlocks.PALM_WALL_SIGN.get()));

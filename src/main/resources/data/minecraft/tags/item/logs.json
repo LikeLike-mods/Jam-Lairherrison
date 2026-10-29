@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_shell:palm_log"
+    "the_shell:palm_log",
+    "the_shell:banana_stem",
+    "the_shell:date_palm_log"
   ]
 }

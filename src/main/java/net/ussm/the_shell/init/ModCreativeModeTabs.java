@@ -23,6 +23,12 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.PALM_LOG);
                         output.accept(ModBlocks.PALM_LEAVES);
                         output.accept(ModBlocks.PALM_SAPLING);
+                        output.accept(ModBlocks.BANANA_STEM);
+                        output.accept(ModBlocks.BANANA_LEAVES);
+                        output.accept(ModBlocks.BANANA_SAPLING);
+                        output.accept(ModBlocks.DATE_PALM_LOG);
+                        output.accept(ModBlocks.DATE_PALM_LEAVES);
+                        output.accept(ModBlocks.DATE_PALM_SAPLING);
                         output.accept(ModBlocks.STRIPPED_PALM_LOG);
                         output.accept(ModBlocks.PALM_WOOD);
                         output.accept(ModBlocks.STRIPPED_PALM_WOOD);
@@ -57,6 +63,11 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.GREY_GRANITE);
                         output.accept(ModBlocks.COCONUT);
                         output.accept(ModItems.COCONUT_HALF);
+                        output.accept(ModItems.BANANA);
+                        output.accept(ModItems.BANANA_BREAD);
+                        output.accept(ModItems.BANANA_CHIPS);
+                        output.accept(ModItems.DATES);
+                        output.accept(ModItems.DATE_SYRUP);
                         output.accept(ModItems.COCONUT_SHELL);
                         output.accept(ModItems.REDSTONE_PEPPER);
                         output.accept(ModItems.REDSTONE_PEPPER_SEEDS);

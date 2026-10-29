@@ -6,18 +6,16 @@
   "key.categories.the_shell": "The Shell",
   "painting.the_shell.dancing_parrot.title": "Party Parrot",
   "painting.the_shell.dancing_parrot.author": "Anonymous",
-
   "advancement.the_shell.root.title": "Title",
-  "advancement.the_shell.root.description" : "Welcome to the on a pas encore de nom lol",
+  "advancement.the_shell.root.description": "Welcome to the on a pas encore de nom lol",
   "advancement.the_shell.flytrap_bite.title": "A Hungry Plant!",
   "advancement.the_shell.flytrap_bite.description": "Be bite by a Venus Flytrap.",
-  "advancement.the_shell.hot_pepper.title" : "A spicy one!",
+  "advancement.the_shell.hot_pepper.title": "A spicy one!",
   "advancement.the_shell.hot_pepper.description": "Eat a ...\"delicious\"... pepper...",
   "advancement.the_shell.pitcher_plant_nectar.title": "A stinky plant!",
   "advancement.the_shell.pitcher_plant_nectar.description": "Harvest the nectar in a pitcher plant",
-  "advancement.the_shell.killer_team.title" : "A killer team!",
+  "advancement.the_shell.killer_team.title": "A killer team!",
   "advancement.the_shell.killer_team.description": "Obtain a flytrap and a pitcher plant.",
-
   "block.the_shell.brownstone": "Brownstone",
   "block.the_shell.palm_log": "Palm log",
   "block.the_shell.light_sand": "Light sand",
@@ -119,11 +117,9 @@
   "block.the_shell.abyss_skull": "Abyssal Skull",
   "block.the_shell.living_abyss_skull": "Living Abyssal Skull",
   "block.the_shell.abyss_light": "Abyssal Light",
-
   "biome.the_shell.tropical_ocean": "Tropical ocean",
   "biome.the_shell.tropical_beach": "Tropical beach",
   "biome.the_shell.palm_jungle": "Palm jungle",
-
   "item.the_shell.nectar": "Pitcher Nectar",
   "item.the_shell.palm_boat": "Palm Boat",
   "item.the_shell.palm_chest_boat": "Palm Boat with Chest",
@@ -165,9 +161,8 @@
   "item.the_shell.submarine": "Submarine",
   "item.the_shell.redstone_pepper": "Redstone Pepper",
   "item.the_shell.redstone_pepper_seeds": "Redstone Pepper Seeds",
-  "item.the_shell.raw_crab_meat" : "Raw Crab",
-  "item.the_shell.cooked_crab_meat" : "Cooked Crab",
-
+  "item.the_shell.raw_crab_meat": "Raw Crab",
+  "item.the_shell.cooked_crab_meat": "Cooked Crab",
   "subtitles.the_shell.ambient.abyss.additions": "Something stirs in the deep",
   "subtitles.the_shell.entity.toucan.ambient": "Toucan croaks",
   "subtitles.the_shell.entity.toucan.hurt": "Toucan hurts",
@@ -211,7 +206,6 @@
   "subtitles.the_shell.entity.gulper_eel.hurt": "Gulper eel hurts",
   "subtitles.the_shell.entity.gulper_eel.death": "Gulper eel dies",
   "subtitles.the_shell.block.flytrap.snap": "Flytrap snaps",
-
   "entity.the_shell.butterfly": "Butterfly",
   "entity.the_shell.crab": "Crab",
   "entity.the_shell.gecko": "Gecko",
@@ -242,20 +236,32 @@
   "subtitles.the_shell.entity.colossal_squid.death": "Colossal Squid dies",
   "entity.the_shell.leviathan": "Leviathan",
   "entity.the_shell.submarine": "Submarine",
-
   "death.attack.the_shell.flytrap": "%1$s was devoured by a Venus flytrap",
   "death.attack.the_shell.pressure": "%1$s was crushed by the pressure",
-
   "tooltip.the_shell.crab_claw.reach": "+10 reach for breaking and placing blocks",
   "tooltip.the_shell.crab_claw.wear": "Wear: %s / %s",
-
   "pressure.the_shell.crushed": "You are being crushed!",
-
   "the_shell.configuration.title": "Example Mod Configs",
   "the_shell.configuration.section.the_shell.common.toml": "Example Mod Configs",
   "the_shell.configuration.section.the_shell.common.toml.title": "Example Mod Configs",
   "the_shell.configuration.items": "Item List",
   "the_shell.configuration.logDirtBlock": "Log Dirt Block",
   "the_shell.configuration.magicNumberIntroduction": "Magic Number Text",
-  "the_shell.configuration.magicNumber": "Magic Number"
+  "the_shell.configuration.magicNumber": "Magic Number",
+  "block.the_shell.banana_stem": "Banana Stem",
+  "block.the_shell.banana_leaves": "Banana Leaves",
+  "block.the_shell.banana_sapling": "Banana Sapling",
+  "block.the_shell.potted_banana_sapling": "Potted Banana Sapling",
+  "block.the_shell.banana_bunch": "Banana Bunch",
+  "block.the_shell.date_palm_log": "Date Palm Log",
+  "block.the_shell.date_palm_leaves": "Date Palm Leaves",
+  "block.the_shell.date_palm_sapling": "Date Palm Sapling",
+  "block.the_shell.potted_date_palm_sapling": "Potted Date Palm Sapling",
+  "block.the_shell.date_cluster": "Date Cluster",
+  "block.the_shell.abyssal_void": "Abyssal Void",
+  "item.the_shell.banana": "Banana",
+  "item.the_shell.banana_bread": "Banana Bread",
+  "item.the_shell.banana_chips": "Banana Chips",
+  "item.the_shell.dates": "Dates",
+  "item.the_shell.date_syrup": "Date Syrup"
 }

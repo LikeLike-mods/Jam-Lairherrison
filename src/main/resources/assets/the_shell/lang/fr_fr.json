@@ -6,18 +6,16 @@
   "key.categories.the_shell": "The Shell",
   "painting.the_shell.dancing_parrot.title": "Perroquet en fête",
   "painting.the_shell.dancing_parrot.author": "Anonyme",
-
   "advancement.the_shell.root.title": "Titre",
-  "advancement.the_shell.root.description" : "Bienvenue au Incroyable Cirque Numérique !",
+  "advancement.the_shell.root.description": "Bienvenue au Incroyable Cirque Numérique !",
   "advancement.the_shell.flytrap_bite.title": "Miam ! Un joueur !",
   "advancement.the_shell.flytrap_bite.description": "Etre mordu par une Vénus",
-  "advancement.the_shell.hot_pepper.title" : "C'est chaud !!!",
+  "advancement.the_shell.hot_pepper.title": "C'est chaud !!!",
   "advancement.the_shell.hot_pepper.description": "Manger un piment ultra piquant !",
   "advancement.the_shell.pitcher_plant_nectar.title": "Un drôle de nectar !",
   "advancement.the_shell.pitcher_plant_nectar.description": "Récolter le nectar dans la Népenthès",
-  "advancement.the_shell.killer_team.title" : "Un duo mortel !",
+  "advancement.the_shell.killer_team.title": "Un duo mortel !",
   "advancement.the_shell.killer_team.description": "Obtient une Dionée et une Népenthès.",
-
   "block.the_shell.brownstone": "Grès marron",
   "block.the_shell.palm_log": "Bûche de palmier",
   "block.the_shell.light_sand": "Sable clair",
@@ -119,11 +117,9 @@
   "block.the_shell.abyss_skull": "Crâne des abysses",
   "block.the_shell.living_abyss_skull": "Crâne des abysses vivant",
   "block.the_shell.abyss_light": "Lumière abyssale",
-
   "biome.the_shell.tropical_ocean": "Océan tropical",
   "biome.the_shell.tropical_beach": "Plage tropicale",
   "biome.the_shell.palm_jungle": "Jungle de palmiers",
-
   "item.the_shell.nectar": "Nectar de népenthès",
   "item.the_shell.palm_boat": "Bateau en palmier",
   "item.the_shell.palm_chest_boat": "Bateau en palmier avec coffre",
@@ -165,9 +161,8 @@
   "item.the_shell.submarine": "Sous-marin",
   "item.the_shell.redstone_pepper": "Piment à Redstone",
   "item.the_shell.redstone_pepper_seeds": "Graine de piment à Redstone",
-  "item.the_shell.raw_crab_meat" : "Crabe cru",
-  "item.the_shell.cooked_crab_meat" : "Crabe cuit",
-
+  "item.the_shell.raw_crab_meat": "Crabe cru",
+  "item.the_shell.cooked_crab_meat": "Crabe cuit",
   "subtitles.the_shell.ambient.abyss.additions": "Quelque chose remue au fond",
   "subtitles.the_shell.entity.toucan.ambient": "Le toucan croasse",
   "subtitles.the_shell.entity.toucan.hurt": "Le toucan est blessé",
@@ -211,7 +206,6 @@
   "subtitles.the_shell.entity.gulper_eel.hurt": "Le grandgousier est blessé",
   "subtitles.the_shell.entity.gulper_eel.death": "Le grandgousier meurt",
   "subtitles.the_shell.block.flytrap.snap": "La dionée claque",
-
   "entity.the_shell.butterfly": "Papillon",
   "entity.the_shell.crab": "Crabe",
   "entity.the_shell.gecko": "Gecko",
@@ -242,20 +236,32 @@
   "subtitles.the_shell.entity.colossal_squid.death": "Calmar colossal meurt",
   "entity.the_shell.leviathan": "Léviathan",
   "entity.the_shell.submarine": "Sous-marin",
-
   "death.attack.the_shell.flytrap": "%1$s a été dévoré par une dionée",
   "death.attack.the_shell.pressure": "%1$s a été broyé par la pression",
-
   "tooltip.the_shell.crab_claw.reach": "Portée +10 pour casser et poser des blocs",
   "tooltip.the_shell.crab_claw.wear": "Usure : %s / %s",
-
   "pressure.the_shell.crushed": "Vous êtes en train d'être broyé !",
-
   "the_shell.configuration.title": "Example Mod Configs",
   "the_shell.configuration.section.the_shell.common.toml": "Example Mod Configs",
   "the_shell.configuration.section.the_shell.common.toml.title": "Example Mod Configs",
   "the_shell.configuration.items": "Item List",
   "the_shell.configuration.logDirtBlock": "Log Dirt Block",
   "the_shell.configuration.magicNumberIntroduction": "Magic Number Text",
-  "the_shell.configuration.magicNumber": "Magic Number"
+  "the_shell.configuration.magicNumber": "Magic Number",
+  "block.the_shell.banana_stem": "Tronc de bananier",
+  "block.the_shell.banana_leaves": "Feuilles de bananier",
+  "block.the_shell.banana_sapling": "Pousse de bananier",
+  "block.the_shell.potted_banana_sapling": "Pousse de bananier en pot",
+  "block.the_shell.banana_bunch": "Régime de bananes",
+  "block.the_shell.date_palm_log": "Bûche de palmier dattier",
+  "block.the_shell.date_palm_leaves": "Feuilles de palmier dattier",
+  "block.the_shell.date_palm_sapling": "Pousse de palmier dattier",
+  "block.the_shell.potted_date_palm_sapling": "Pousse de palmier dattier en pot",
+  "block.the_shell.date_cluster": "Grappe de dattes",
+  "block.the_shell.abyssal_void": "Vide abyssal",
+  "item.the_shell.banana": "Banane",
+  "item.the_shell.banana_bread": "Pain à la banane",
+  "item.the_shell.banana_chips": "Chips de banane",
+  "item.the_shell.dates": "Dattes",
+  "item.the_shell.date_syrup": "Sirop de dattes"
 }

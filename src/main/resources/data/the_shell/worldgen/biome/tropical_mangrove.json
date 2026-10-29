@@ -30,7 +30,9 @@
   "features": [
     [],
     [],
-    ["the_shell:brownstone_boulder"],
+    [
+      "the_shell:brownstone_boulder"
+    ],
     [],
     [],
     [],
@@ -59,8 +61,8 @@
       {
         "type": "the_shell:poison_frog",
         "weight": 10,
-        "minCount": 5,
-        "maxCount": 2
+        "minCount": 2,
+        "maxCount": 5
       }
     ],
     "misc": [],

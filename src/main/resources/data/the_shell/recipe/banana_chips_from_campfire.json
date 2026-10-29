@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "the_shell:banana"
+  },
+  "result": {
+    "id": "the_shell:banana_chips"
+  },
+  "experience": 0.2,
+  "cookingtime": 600
+}

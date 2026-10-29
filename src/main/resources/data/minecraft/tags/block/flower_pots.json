@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_shell:potted_palm_sapling"
+    "the_shell:potted_palm_sapling",
+    "the_shell:potted_banana_sapling",
+    "the_shell:potted_date_palm_sapling"
   ]
 }

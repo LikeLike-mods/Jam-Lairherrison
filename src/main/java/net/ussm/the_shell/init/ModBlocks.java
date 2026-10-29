@@ -249,6 +249,36 @@ public class ModBlocks {
                     .randomTicks()
                     .pushReaction(PushReaction.DESTROY)));
 
+    // bananier
+    public static final DeferredBlock<Block> BANANA_STEM = registerBlock("banana_stem",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5f).ignitedByLava().sound(SoundType.BAMBOO_WOOD)));
+    public static final DeferredBlock<Block> BANANA_LEAVES = registerBlock("banana_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LEAVES).sound(SoundType.AZALEA_LEAVES)));
+    public static final DeferredBlock<PalmSaplingBlock> BANANA_SAPLING = registerBlock("banana_sapling",
+            () -> new PalmSaplingBlock(PalmSaplingBlock.BANANA_GROWER, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SAPLING)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_BANANA_SAPLING = BLOCKS.register("potted_banana_sapling",
+            () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BANANA_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_JUNGLE_SAPLING)));
+    public static final DeferredBlock<net.ussm.the_shell.blocks.HangingFruitBlock> BANANA_BUNCH = BLOCKS.register("banana_bunch",
+            () -> new net.ussm.the_shell.blocks.HangingFruitBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.2f)
+                    .sound(SoundType.GRASS).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
+
+    // palmier dattier (ses buches donnent des planches de palmier)
+    public static final DeferredBlock<Block> DATE_PALM_LOG = registerBlock("date_palm_log",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).strength(2f, 3f).ignitedByLava().sound(SoundType.WOOD)));
+    public static final DeferredBlock<Block> DATE_PALM_LEAVES = registerBlock("date_palm_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LEAVES).sound(SoundType.AZALEA_LEAVES)));
+    public static final DeferredBlock<PalmSaplingBlock> DATE_PALM_SAPLING = registerBlock("date_palm_sapling",
+            () -> new PalmSaplingBlock(PalmSaplingBlock.DATE_PALM_GROWER, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SAPLING)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_DATE_PALM_SAPLING = BLOCKS.register("potted_date_palm_sapling",
+            () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DATE_PALM_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_JUNGLE_SAPLING)));
+    public static final DeferredBlock<net.ussm.the_shell.blocks.HangingFruitBlock> DATE_CLUSTER = BLOCKS.register("date_cluster",
+            () -> new net.ussm.the_shell.blocks.HangingFruitBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.2f)
+                    .sound(SoundType.GRASS).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
+
+    // tout en haut des abysses a la place de la bedrock : du noir
+    public static final DeferredBlock<Block> ABYSSAL_VOID = registerBlock("abyssal_void",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BEDROCK).mapColor(MapColor.COLOR_BLACK)));
+
     public static final DeferredBlock<CoconutBlock> COCONUT = registerBlock("coconut",
             () -> new CoconutBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BROWN)

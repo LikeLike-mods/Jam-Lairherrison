@@ -2,7 +2,6 @@
   "carvers": {},
   "downfall": 0.5,
   "effects": {
-    "ambient_sound": "the_shell:ambient.atoll.waves",
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,

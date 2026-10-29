@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "the_shell:block/banana_stem"
+    },
+    "axis=z": {
+      "model": "the_shell:block/banana_stem",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "the_shell:block/banana_stem",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

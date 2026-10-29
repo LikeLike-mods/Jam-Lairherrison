@@ -19,6 +19,14 @@ public class PalmSaplingBlock extends SaplingBlock {
     public static final TreeGrower PALM_GROWER = new TreeGrower(TheShell.MOD_ID + ":palm", Optional.empty(),
             Optional.of(ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "palm"))),
             Optional.empty());
+    public static final TreeGrower BANANA_GROWER = grower("banana");
+    public static final TreeGrower DATE_PALM_GROWER = grower("date_palm");
+
+    private static TreeGrower grower(String name) {
+        return new TreeGrower(TheShell.MOD_ID + ":" + name, Optional.empty(),
+                Optional.of(ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, name))), Optional.empty());
+    }
+
     public static final MapCodec<PalmSaplingBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             TreeGrower.CODEC.fieldOf("tree").forGetter(block -> block.treeGrower),
             propertiesCodec()

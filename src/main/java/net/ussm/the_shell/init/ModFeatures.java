@@ -14,6 +14,10 @@ import net.ussm.the_shell.worldgen.feature.PalmFeature;
 public class ModFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, TheShell.MOD_ID);
 
+    public static final DeferredHolder<Feature<?>, net.ussm.the_shell.worldgen.feature.FruitTreeFeature> BANANA = FEATURES.register("banana",
+            () -> new net.ussm.the_shell.worldgen.feature.FruitTreeFeature(net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration.CODEC, false));
+    public static final DeferredHolder<Feature<?>, net.ussm.the_shell.worldgen.feature.FruitTreeFeature> DATE_PALM = FEATURES.register("date_palm",
+            () -> new net.ussm.the_shell.worldgen.feature.FruitTreeFeature(net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration.CODEC, true));
     public static final DeferredHolder<Feature<?>, PalmFeature> PALM = FEATURES.register("palm",
             () -> new PalmFeature(NoneFeatureConfiguration.CODEC, false));
     public static final DeferredHolder<Feature<?>, PalmFeature> PALM_WITH_VINES = FEATURES.register("palm_with_vines",

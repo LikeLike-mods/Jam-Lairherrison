@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "the_shell:banana_stem"
+    }
+  ],
+  "result": {
+    "id": "minecraft:string",
+    "count": 3
+  }
+}
