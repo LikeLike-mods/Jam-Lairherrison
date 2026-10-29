@@ -123,6 +123,9 @@ public class ModItems {
     public static final DeferredItem<Item> DRAGONFISH_SPAWN_EGG = spawnEgg("dragonfish", ModEntities.DRAGONFISH, 0x100E16, 0x6EC8FF);
     public static final DeferredItem<Item> GIANT_ISOPOD_SPAWN_EGG = spawnEgg("giant_isopod", ModEntities.GIANT_ISOPOD, 0x988EA4, 0xC87CFF);
     public static final DeferredItem<Item> VAMPIRE_SQUID_SPAWN_EGG = spawnEgg("vampire_squid", ModEntities.VAMPIRE_SQUID, 0x600E24, 0xEC282C);
+    public static final DeferredItem<Item> YETI_CRAB_SPAWN_EGG = spawnEgg("yeti_crab", ModEntities.YETI_CRAB, 0xE8DCC8, 0xF4F4EC);
+    public static final DeferredItem<Item> HATCHETFISH_SPAWN_EGG = spawnEgg("hatchetfish", ModEntities.HATCHETFISH, 0xB8C4CC, 0x7FD8FF);
+    public static final DeferredItem<Item> COLOSSAL_SQUID_SPAWN_EGG = spawnEgg("colossal_squid", ModEntities.COLOSSAL_SQUID, 0x8A1E22, 0x6FD0FF);
 
     public static final DeferredItem<DeferredSpawnEggItem> LEVIATHAN_SPAWN_EGG = ITEMS.register("leviathan_spawn_egg",
             () -> new DeferredSpawnEggItem(ModEntities.LEVIATHAN, 0xFFFFFF, 0xFFFFFF,

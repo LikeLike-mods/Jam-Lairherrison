@@ -69,7 +69,14 @@
         "maxCount": 2
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "the_shell:hatchetfish",
+        "weight": 14,
+        "minCount": 4,
+        "maxCount": 8
+      }
+    ],
     "water_creature": []
   }
 }

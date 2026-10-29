@@ -7,7 +7,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -21,7 +20,7 @@ import net.ussm.the_shell.init.ModItems;
 import net.ussm.the_shell.items.DivingBootsItem;
 import org.lwjgl.glfw.GLFW;
 
-// bottes lestees cote joueur : la touche pour lacher le lingot, le petit saut au fond de l'eau, et la texture lestee
+// bottes lestees cote joueur : la touche pour lacher le lingot et la texture lestee (le saut est dans DeepSeaEvents)
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class WeightedBootsClient {
     public static final KeyMapping DROP_WEIGHT = new KeyMapping("key.the_shell.drop_weight", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.the_shell");
@@ -44,11 +43,6 @@ public class WeightedBootsClient {
         boolean lestees = DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET));
         while (DROP_WEIGHT.consumeClick()) {
             if (lestees && player.isInWater()) PacketDistributor.sendToServer(new DropWeightPayload());
-        }
-        // au fond avec les bottes lestees on peut quand meme sauter d'un bloc
-        if (lestees && player.isInWater() && player.onGround() && player.input.jumping) {
-            Vec3 v = player.getDeltaMovement();
-            player.setDeltaMovement(v.x, 0.55, v.z);
         }
     }
 }

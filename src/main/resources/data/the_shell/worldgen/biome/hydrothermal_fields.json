@@ -51,6 +51,12 @@
         "weight": 10,
         "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "the_shell:yeti_crab",
+        "weight": 14,
+        "minCount": 3,
+        "maxCount": 5
       }
     ],
     "creature": [],

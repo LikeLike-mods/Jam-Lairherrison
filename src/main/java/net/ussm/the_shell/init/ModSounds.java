@@ -40,7 +40,9 @@ public final class ModSounds {
                 "giant_isopod.hurt", "giant_isopod.death", "giant_isopod.step", "vampire_squid.ambient",
                 "vampire_squid.hurt", "vampire_squid.death", "abyssal_angler.ambient", "abyssal_angler.hurt",
                 "abyssal_angler.death", "dragonfish.ambient", "dragonfish.hurt", "dragonfish.death",
-                "gulper_eel.ambient", "gulper_eel.hurt", "gulper_eel.death")) {
+                "gulper_eel.ambient", "gulper_eel.hurt", "gulper_eel.death", "yeti_crab.ambient", "yeti_crab.hurt",
+                "yeti_crab.death", "hatchetfish.ambient", "hatchetfish.hurt", "hatchetfish.death",
+                "colossal_squid.ambient", "colossal_squid.hurt", "colossal_squid.death")) {
             register("entity." + name);
         }
     }

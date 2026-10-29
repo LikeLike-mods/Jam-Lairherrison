@@ -41,6 +41,18 @@ public class DeepSeaEvents {
     private static final ResourceLocation WALK = ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "diving_boots_walk");
     private static final Map<UUID, Integer> LAST_LEVEL = new HashMap<>();
 
+    // au fond avec les bottes lestees on peut quand meme sauter d'un bloc. ca se fait avant le tick :
+    // des qu'on appuie sur saut l'eau nous decolle un peu, et apres on n'est plus "au sol"
+    @SubscribeEvent
+    public static void jump(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        if (!player.onGround() || !player.isInWater() || !isJumping(player)) return;
+        if (!net.ussm.the_shell.items.DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET))) return;
+        Vec3 v = player.getDeltaMovement();
+        player.setDeltaMovement(v.x, 0.34, v.z);
+        JUMP_TICK.put(player, player.tickCount);
+    }
+
     @SubscribeEvent
     public static void tick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
@@ -55,6 +67,28 @@ public class DeepSeaEvents {
         if (player.tickCount % 20 == 0) pressure(serverPlayer, inWater);
     }
 
+    // le champ "jumping" n'a pas de getter : c'est lui qui dit si le joueur appuie sur saut
+    private static final java.lang.reflect.Field JUMPING = jumpingField();
+    private static final Map<Player, Integer> JUMP_TICK = new java.util.WeakHashMap<>();
+
+    private static java.lang.reflect.Field jumpingField() {
+        try {
+            java.lang.reflect.Field f = net.minecraft.world.entity.LivingEntity.class.getDeclaredField("jumping");
+            f.setAccessible(true);
+            return f;
+        } catch (ReflectiveOperationException e) {
+            return null;
+        }
+    }
+
+    private static boolean isJumping(Player player) {
+        try {
+            return JUMPING != null && JUMPING.getBoolean(player);
+        } catch (IllegalAccessException e) {
+            return false;
+        }
+    }
+
     // bottes lestees : on coule et on marche au fond, un peu plus lentement
     private static void heavyBoots(Player player, boolean on) {
         AttributeInstance walk = player.getAttribute(Attributes.WATER_MOVEMENT_EFFICIENCY);
@@ -62,9 +96,11 @@ public class DeepSeaEvents {
         if (on) {
             if (walk != null) walk.addOrUpdateTransientModifier(new AttributeModifier(WALK, 0.6, AttributeModifier.Operation.ADD_VALUE));
             if (speed != null) speed.addOrUpdateTransientModifier(new AttributeModifier(HEAVY, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-            if (!player.onGround() && !player.getAbilities().flying) {
+            // on coule, sauf juste apres un saut (sinon on ne decolle pas)
+            boolean saut = player.tickCount - JUMP_TICK.getOrDefault(player, -100) < 3;
+            if (!player.onGround() && !player.getAbilities().flying && !saut) {
                 Vec3 v = player.getDeltaMovement();
-                player.setDeltaMovement(v.x, v.y - 0.035, v.z);
+                player.setDeltaMovement(v.x, v.y - 0.05, v.z);
             }
         } else {
             if (walk != null) walk.removeModifier(WALK);

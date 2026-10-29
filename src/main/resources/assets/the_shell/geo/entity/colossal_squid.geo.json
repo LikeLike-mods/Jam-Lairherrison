@@ -1,0 +1,485 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.colossal_squid",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3.0,
+        "visible_bounds_height": 3.0,
+        "visible_bounds_offset": [
+          0,
+          1.5,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "mantle",
+          "pivot": [
+            0,
+            25,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                25,
+                -5
+              ],
+              "size": [
+                10,
+                16,
+                10
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -3,
+                41,
+                -3
+              ],
+              "size": [
+                6,
+                4,
+                6
+              ],
+              "uv": [
+                40,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fin_left",
+          "pivot": [
+            5,
+            36,
+            0
+          ],
+          "parent": "mantle",
+          "cubes": [
+            {
+              "origin": [
+                5,
+                32,
+                -3
+              ],
+              "size": [
+                4,
+                8,
+                0
+              ],
+              "uv": [
+                64,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fin_right",
+          "pivot": [
+            -5,
+            36,
+            0
+          ],
+          "parent": "mantle",
+          "cubes": [
+            {
+              "origin": [
+                -9,
+                32,
+                -3
+              ],
+              "size": [
+                4,
+                8,
+                0
+              ],
+              "uv": [
+                74,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "head",
+          "pivot": [
+            0,
+            23,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                20,
+                -4
+              ],
+              "size": [
+                8,
+                5,
+                8
+              ],
+              "uv": [
+                84,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_0",
+          "pivot": [
+            3.0,
+            20,
+            0.0
+          ],
+          "parent": "head",
+          "rotation": [
+            0.0,
+            0,
+            -12.0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                2.0,
+                9,
+                -1.0
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ],
+              "uv": [
+                116,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_1",
+          "pivot": [
+            2.1,
+            20,
+            2.1
+          ],
+          "parent": "head",
+          "rotation": [
+            8.5,
+            0,
+            -8.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1.1,
+                9,
+                1.1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ],
+              "uv": [
+                0,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_2",
+          "pivot": [
+            0.0,
+            20,
+            3.0
+          ],
+          "parent": "head",
+          "rotation": [
+            12.0,
+            0,
+            -0.0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.0,
+                9,
+                2.0
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ],
+              "uv": [
+                8,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_3",
+          "pivot": [
+            -2.1,
+            20,
+            2.1
+          ],
+          "parent": "head",
+          "rotation": [
+            8.5,
+            0,
+            8.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3.1,
+                9,
+                1.1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ],
+              "uv": [
+                16,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_4",
+          "pivot": [
+            -3.0,
+            20,
+            0.0
+          ],
+          "parent": "head",
+          "rotation": [
+            0.0,
+            0,
+            12.0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4.0,
+                9,
+                -1.0
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ],
+              "uv": [
+                24,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_5",
+          "pivot": [
+            -2.1,
+            20,
+            -2.1
+          ],
+          "parent": "head",
+          "rotation": [
+            -8.5,
+            0,
+            8.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3.1,
+                9,
+                -3.1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ],
+              "uv": [
+                32,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_6",
+          "pivot": [
+            -0.0,
+            20,
+            -3.0
+          ],
+          "parent": "head",
+          "rotation": [
+            -12.0,
+            0,
+            0.0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.0,
+                9,
+                -4.0
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ],
+              "uv": [
+                40,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_7",
+          "pivot": [
+            2.1,
+            20,
+            -2.1
+          ],
+          "parent": "head",
+          "rotation": [
+            -8.5,
+            0,
+            -8.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1.1,
+                9,
+                -3.1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ],
+              "uv": [
+                48,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tentacle_0",
+          "pivot": [
+            2.0,
+            20,
+            -1
+          ],
+          "parent": "head",
+          "cubes": [
+            {
+              "origin": [
+                1.5,
+                2,
+                -1.5
+              ],
+              "size": [
+                1,
+                18,
+                1
+              ],
+              "uv": [
+                56,
+                26
+              ]
+            },
+            {
+              "origin": [
+                1.0,
+                0,
+                -2
+              ],
+              "size": [
+                2,
+                3,
+                2
+              ],
+              "uv": [
+                60,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tentacle_1",
+          "pivot": [
+            -2.0,
+            20,
+            -1
+          ],
+          "parent": "head",
+          "cubes": [
+            {
+              "origin": [
+                -2.5,
+                2,
+                -1.5
+              ],
+              "size": [
+                1,
+                18,
+                1
+              ],
+              "uv": [
+                68,
+                26
+              ]
+            },
+            {
+              "origin": [
+                -3.0,
+                0,
+                -2
+              ],
+              "size": [
+                2,
+                3,
+                2
+              ],
+              "uv": [
+                72,
+                26
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

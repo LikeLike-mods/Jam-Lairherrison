@@ -48,7 +48,8 @@ public class ModSetupEvents {
         event.register(ModEntities.JELLYFISH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SpawnRules::inLagoon, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         for (EntityType<? extends Mob> type : List.of(ModEntities.ABYSSAL_ANGLER.get(), ModEntities.GULPER_EEL.get(),
-                ModEntities.DRAGONFISH.get(), ModEntities.GIANT_ISOPOD.get(), ModEntities.VAMPIRE_SQUID.get())) {
+                ModEntities.DRAGONFISH.get(), ModEntities.GIANT_ISOPOD.get(), ModEntities.VAMPIRE_SQUID.get(),
+                ModEntities.YETI_CRAB.get(), ModEntities.HATCHETFISH.get(), ModEntities.COLOSSAL_SQUID.get())) {
             event.register(type, SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                     SpawnRules::inDeepWater, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         }

@@ -62,6 +62,12 @@
         "weight": 3,
         "minCount": 1,
         "maxCount": 1
+      },
+      {
+        "type": "the_shell:colossal_squid",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
       }
     ],
     "water_ambient": [],

@@ -45,6 +45,10 @@ public class ModEntities {
     // isopode dans sa propre categorie
     public static final DeferredHolder<EntityType<?>, EntityType<GiantIsopod>> GIANT_ISOPOD = register("giant_isopod", GiantIsopod::new, MobCategory.AXOLOTLS, 0.9F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.6F, 1.1F);
+    // mobs de la dimension des abysses
+    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entity.YetiCrab>> YETI_CRAB = register("yeti_crab", net.ussm.the_shell.entity.YetiCrab::new, MobCategory.AXOLOTLS, 0.8F, 0.45F);
+    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entity.Hatchetfish>> HATCHETFISH = register("hatchetfish", net.ussm.the_shell.entity.Hatchetfish::new, MobCategory.WATER_AMBIENT, 0.35F, 0.45F);
+    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entity.ColossalSquid>> COLOSSAL_SQUID = register("colossal_squid", net.ussm.the_shell.entity.ColossalSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.6F, 2.8F);
 
     // leviathan d'Oesphy
     public static final DeferredHolder<EntityType<?>, EntityType<Submarine>> SUBMARINE = register("submarine", Submarine::new, MobCategory.MISC, 2.0F, 1.5F);
@@ -76,6 +80,9 @@ public class ModEntities {
         event.put(DRAGONFISH.get(), Dragonfish.createAttributes().build());
         event.put(GIANT_ISOPOD.get(), GiantIsopod.createAttributes().build());
         event.put(VAMPIRE_SQUID.get(), VampireSquid.createAttributes().build());
+        event.put(YETI_CRAB.get(), net.ussm.the_shell.entity.YetiCrab.createAttributes().build());
+        event.put(HATCHETFISH.get(), net.minecraft.world.entity.animal.AbstractFish.createAttributes().build());
+        event.put(COLOSSAL_SQUID.get(), net.ussm.the_shell.entity.ColossalSquid.createAttributes().build());
         event.put(LEVIATHAN.get(), LeviathanEntity.createAttributes().build());
     }
 
