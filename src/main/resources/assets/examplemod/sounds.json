@@ -14,10 +14,10 @@
     ]
   },
   "ambient.atoll.waves": {
-    "sounds": [{"name": "examplemod:ambient/atoll_waves", "stream": true, "volume": 0.5}]
+    "sounds": [{"name": "examplemod:ambient/atoll_waves", "stream": true, "volume": 0.25}]
   },
   "ambient.atoll.jungle": {
-    "sounds": [{"name": "examplemod:ambient/atoll_jungle", "stream": true, "volume": 0.4}]
+    "sounds": [{"name": "examplemod:ambient/atoll_jungle", "stream": true, "volume": 0.25}]
   },
   "ambient.abyss.loop": {
     "sounds": [{"name": "examplemod:ambient/abyss_loop", "stream": true, "volume": 0.7}]
@@ -36,9 +36,9 @@
   "entity.toucan.ambient": {"subtitle": "subtitles.examplemod.entity.toucan.ambient", "sounds": [{"name": "minecraft:mob/parrot/idle1", "pitch": 0.75, "volume": 0.7}, {"name": "minecraft:mob/parrot/idle2", "pitch": 0.75, "volume": 0.7}, {"name": "minecraft:mob/parrot/idle3", "pitch": 0.75, "volume": 0.7}, {"name": "minecraft:mob/parrot/idle4", "pitch": 0.75, "volume": 0.7}, {"name": "minecraft:mob/parrot/idle5", "pitch": 0.75, "volume": 0.7}, {"name": "minecraft:mob/parrot/idle6", "pitch": 0.75, "volume": 0.7}]},
   "entity.toucan.hurt": {"subtitle": "subtitles.examplemod.entity.toucan.hurt", "sounds": [{"name": "minecraft:mob/parrot/hurt1", "pitch": 0.8}, {"name": "minecraft:mob/parrot/hurt2", "pitch": 0.8}]},
   "entity.toucan.death": {"subtitle": "subtitles.examplemod.entity.toucan.death", "sounds": [{"name": "minecraft:mob/parrot/death1", "pitch": 0.8}, {"name": "minecraft:mob/parrot/death2", "pitch": 0.8}, {"name": "minecraft:mob/parrot/death3", "pitch": 0.8}, {"name": "minecraft:mob/parrot/death4", "pitch": 0.8}]},
-  "entity.seagull.ambient": {"subtitle": "subtitles.examplemod.entity.seagull.ambient", "sounds": [{"name": "examplemod:entity/seagull/call1", "volume": 0.6}, {"name": "examplemod:entity/seagull/call2", "volume": 0.6}, {"name": "examplemod:entity/seagull/call3", "volume": 0.6}]},
-  "entity.seagull.hurt": {"subtitle": "subtitles.examplemod.entity.seagull.hurt", "sounds": [{"name": "examplemod:entity/seagull/call2", "pitch": 1.25, "volume": 0.6}]},
-  "entity.seagull.death": {"subtitle": "subtitles.examplemod.entity.seagull.death", "sounds": [{"name": "examplemod:entity/seagull/call1", "pitch": 0.8, "volume": 0.6}]},
+  "entity.seagull.ambient": {"subtitle": "subtitles.examplemod.entity.seagull.ambient", "sounds": [{"name": "examplemod:entity/seagull/call1", "volume": 0.3}, {"name": "examplemod:entity/seagull/call2", "volume": 0.3}, {"name": "examplemod:entity/seagull/call3", "volume": 0.3}]},
+  "entity.seagull.hurt": {"subtitle": "subtitles.examplemod.entity.seagull.hurt", "sounds": [{"name": "examplemod:entity/seagull/call2", "pitch": 1.25, "volume": 0.4}]},
+  "entity.seagull.death": {"subtitle": "subtitles.examplemod.entity.seagull.death", "sounds": [{"name": "examplemod:entity/seagull/call1", "pitch": 0.8, "volume": 0.4}]},
   "entity.crab.ambient": {"subtitle": "subtitles.examplemod.entity.crab.ambient", "sounds": [{"name": "examplemod:entity/crab/click1", "volume": 0.5}, {"name": "examplemod:entity/crab/click2", "volume": 0.5}, {"name": "examplemod:entity/crab/click3", "volume": 0.5}]},
   "entity.crab.hurt": {"subtitle": "subtitles.examplemod.entity.crab.hurt", "sounds": [{"name": "minecraft:mob/armadillo/hurt1", "pitch": 1.5}, {"name": "minecraft:mob/armadillo/hurt2", "pitch": 1.5}, {"name": "minecraft:mob/armadillo/hurt3", "pitch": 1.5}, {"name": "minecraft:mob/armadillo/hurt4", "pitch": 1.5}, {"name": "minecraft:mob/armadillo/hurt5", "pitch": 1.5}]},
   "entity.crab.death": {"subtitle": "subtitles.examplemod.entity.crab.death", "sounds": [{"name": "minecraft:mob/armadillo/death1", "pitch": 1.5}, {"name": "minecraft:mob/armadillo/death2", "pitch": 1.5}, {"name": "minecraft:mob/armadillo/death3", "pitch": 1.5}, {"name": "minecraft:mob/armadillo/death4", "pitch": 1.5}]},

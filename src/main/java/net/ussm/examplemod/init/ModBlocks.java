@@ -83,6 +83,16 @@ public class ModBlocks {
                     .strength(0.5f, 0.5f)
                     .sound(SoundType.SAND)));
 
+    // dalles de terre et d'herbe : le generateur les pose sur les marches d'un bloc pour lisser les pentes
+    public static final DeferredBlock<SlabBlock> DIRT_SLAB = registerBlock("dirt_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
+
+    public static final DeferredBlock<SlabBlock> GRASS_SLAB = registerBlock("grass_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)
+                    .mapColor(MapColor.GRASS)
+                    .strength(0.6f)
+                    .sound(SoundType.GRASS)));
+
 
     public static final DeferredBlock<Block> PALM_LEAVES = registerBlock("palm_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LEAVES)

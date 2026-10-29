@@ -258,6 +258,14 @@ public class TestChunkGenerator extends ChunkGenerator {
                     }
                     y += 1;
                 }
+
+                // dalle en bas des marches d'un bloc pour lisser les pentes douces (pas sur le plat, sinon plus de fleurs ni d'arbres)
+                if (a >= SEA && topLand.is(Blocks.GRASS_BLOCK)
+                        && (Math.round(n) == a + 1 || Math.round(s) == a + 1 || Math.round(e) == a + 1 || Math.round(w) == a + 1)) {
+                    BlockState slab = (slope > 4f ? ModBlocks.DIRT_SLAB : ModBlocks.GRASS_SLAB).get().defaultBlockState();
+                    chunk.setBlockState(pos.set(x, a, z), Blocks.DIRT.defaultBlockState(), false);
+                    chunk.setBlockState(pos.set(x, a + 1, z), slab, false);
+                }
             }
         }
 

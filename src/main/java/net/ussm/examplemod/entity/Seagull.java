@@ -22,6 +22,12 @@ public class Seagull extends FlyingMobs {
                 .add(Attributes.MOVEMENT_SPEED, 0.25);
     }
 
+    // elles criaient tout le temps : un cri toutes les 12 s en moyenne au lieu de 4
+    @Override
+    public int getAmbientSoundInterval() {
+        return 240;
+    }
+
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "move", 4, state -> {

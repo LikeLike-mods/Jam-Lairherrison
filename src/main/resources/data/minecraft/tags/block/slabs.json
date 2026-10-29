@@ -4,6 +4,8 @@
     "examplemod:metal_plating_slab",
     "examplemod:rusty_metal_plating_slab",
     "examplemod:metal_grate_slab",
-    "examplemod:rusty_metal_grate_slab"
+    "examplemod:rusty_metal_grate_slab",
+    "examplemod:dirt_slab",
+    "examplemod:grass_slab"
   ]
 }

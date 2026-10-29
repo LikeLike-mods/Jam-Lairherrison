@@ -41,6 +41,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.PALM_CHEST_BOAT);
                         output.accept(ModBlocks.DRY_GRASS);
                         output.accept(ModBlocks.SHORT_DRY_GRASS);
+                        output.accept(ModBlocks.DIRT_SLAB);
+                        output.accept(ModBlocks.GRASS_SLAB);
                         output.accept(ModBlocks.LIGHT_SAND);
                         output.accept(ModBlocks.LIGHT_SAND_WET);
                         output.accept(ModBlocks.GREY_GRANITE);
