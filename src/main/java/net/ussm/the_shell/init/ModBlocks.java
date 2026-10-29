@@ -83,15 +83,6 @@ public class ModBlocks {
                     .strength(0.5f, 0.5f)
                     .sound(SoundType.SAND)));
 
-    public static final DeferredBlock<SlabBlock> DIRT_SLAB = registerBlock("dirt_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
-
-    public static final DeferredBlock<SlabBlock> GRASS_SLAB = registerBlock("grass_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)
-                    .mapColor(MapColor.GRASS)
-                    .strength(0.6f)
-                    .sound(SoundType.GRASS)));
-
     public static final DeferredBlock<Block> ABYSSAL_STONE = registerBlock("abyssal_stone",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(2.0f, 6.0f)
                     .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
