@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "the_shell:abyssal_warehouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 32,
+    "separation": 12,
+    "salt": 51829364
+  }
+}

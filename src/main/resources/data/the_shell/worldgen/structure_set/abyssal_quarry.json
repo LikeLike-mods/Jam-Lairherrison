@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "the_shell:abyssal_quarry",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 26,
+    "separation": 10,
+    "salt": 77210843
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:submarine_depot/submarine_depot",
+        "projection": "rigid",
+        "processors": "the_shell:station_new"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:submarine_depot/submarine_depot_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    }
+  ]
+}

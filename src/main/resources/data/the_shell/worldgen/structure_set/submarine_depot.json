@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "the_shell:submarine_depot",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 40,
+    "separation": 16,
+    "salt": 39058217
+  }
+}
