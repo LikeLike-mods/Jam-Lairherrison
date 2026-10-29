@@ -140,9 +140,7 @@ public class TestChunkGenerator extends ChunkGenerator {
         float mountains = Math.clamp(1.5f * islands - 1f, 0f, 1f);
         islands += 3f * mountains;
 
-        float depth = -islands * 50f;
-        if (depth > 40f) depth += (depth - 40f) * 1.2f;
-        h = Math.max(-120f, SEA - depth);
+        h = islands * 50f + SEA;
         return h;
     }
 
@@ -207,7 +205,6 @@ public class TestChunkGenerator extends ChunkGenerator {
                 BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
 
                 float swampiness = getSwampiness(posX, posZ, h, Math.min(slope, 1f));
-                h = lerp(h, SEA + 1f + 3f * slope, (float)Math.pow(Math.max(2f * swampiness - 1f, 0f), 0.3f));
 
                 if (slope >= 7f) {
                     topLand = ModBlocks.BROWNSTONE.get().defaultBlockState();
