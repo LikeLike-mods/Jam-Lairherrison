@@ -145,6 +145,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BROKEN_INDUSTRIAL_LAMP);
                         ModItems.SPAWN_EGGS.forEach(output::accept);
                         output.accept(ModItems.LEVIATHAN_SPAWN_EGG);
+                        output.accept(ModItems.LEVIATHAN_EGG);
+                        output.accept(ModItems.FRIED_LEVIATHAN_EGG);
                         output.accept(ModItems.SHADOW_SABER_SWORD);
                         output.accept(ModItems.SHADOW_SABER_SWORD_VIOLET);
                         output.accept(ModItems.LIGHT_SABER_SWORD);

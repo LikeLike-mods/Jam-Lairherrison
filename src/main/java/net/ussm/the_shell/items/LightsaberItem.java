@@ -36,6 +36,10 @@ import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.List;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.TooltipFlag;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -77,6 +81,12 @@ public class LightsaberItem extends Item implements GeoItem {
         this.nextForm = nextForm;
 
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
+        tooltip.add(Component.translatable("tooltip.the_shell.lightsaber.change_mode").withStyle(ChatFormatting.GRAY));
     }
 
     public static boolean isActive(ItemStack stack) {

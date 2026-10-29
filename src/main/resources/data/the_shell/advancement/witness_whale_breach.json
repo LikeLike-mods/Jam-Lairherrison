@@ -1,0 +1,22 @@
+{
+  "parent": "the_shell:root",
+  "display": {
+    "icon": {
+      "id": "minecraft:spyglass"
+    },
+    "title": {
+      "translate": "advancement.the_shell.witness_whale_breach.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.witness_whale_breach.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "witnessed": {
+      "trigger": "the_shell:witness_whale_breach"
+    }
+  }
+}

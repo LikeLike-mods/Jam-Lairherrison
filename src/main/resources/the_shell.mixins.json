@@ -11,6 +11,7 @@
   },
   "client": [
     "ClientLevelDataMixin",
-    "client.ItemInHandRendererMixin"
+    "client.ItemInHandRendererMixin",
+    "client.GameRendererMixin"
   ]
 }

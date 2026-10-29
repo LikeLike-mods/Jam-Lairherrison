@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_egg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:leviathan_egg"
+          }
+        ]
+      }
+    },
+    "has_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:fried_leviathan_egg"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_egg",
+      "has_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:fried_leviathan_egg"
+    ]
+  }
+}

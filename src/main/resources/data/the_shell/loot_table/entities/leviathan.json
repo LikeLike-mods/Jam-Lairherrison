@@ -25,6 +25,15 @@
           "name": "minecraft:brain_coral"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "the_shell:leviathan_egg"
+        }
+      ]
     }
   ]
 }

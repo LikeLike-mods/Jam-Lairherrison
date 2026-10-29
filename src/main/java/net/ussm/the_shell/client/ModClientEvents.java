@@ -8,6 +8,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.client.renderers.*;
+import net.ussm.the_shell.entites.animations.SwimmingTurnProfiles;
 import net.ussm.the_shell.init.ModBlockEntities;
 import net.ussm.the_shell.init.ModEntities;
 import net.ussm.the_shell.init.ModWoodTypes;
@@ -25,6 +26,11 @@ public class ModClientEvents {
         event.registerBlockEntityRenderer(ModBlockEntities.SLIDING_DOOR.get(), context -> new SlidingDoorRenderer());
         event.registerEntityRenderer(ModEntities.LEVIATHAN.get(), LeviathanRenderer::new);
         event.registerEntityRenderer(ModEntities.SUBMARINE.get(), SubmarineRenderer::new);
+        event.registerEntityRenderer(ModEntities.BASILOSAURUS.get(), c -> new CetaceanRenderer<>(c, "basilosaurus",
+                net.ussm.the_shell.entites.BasilosaurusEntity.SIZE_MULTIPLIER, 1.5F, SwimmingTurnProfiles.BASILOSAURUS));
+        event.registerEntityRenderer(ModEntities.BLUE_WHALE.get(), c -> new CetaceanRenderer<>(c, "blue_whale",
+                net.ussm.the_shell.entites.BlueWhaleEntity.SIZE_MULTIPLIER,
+                1.4F * net.ussm.the_shell.entites.BlueWhaleEntity.GEOMETRY_SCALE, SwimmingTurnProfiles.BLUE_WHALE));
         event.registerEntityRenderer(ModEntities.BUTTERFLY.get(), c -> new MobRenderers<>(c, "butterfly", 0.2F, false, false, false));
         event.registerEntityRenderer(ModEntities.CRAB.get(), CrabRenderer::new);
         event.registerEntityRenderer(ModEntities.GECKO.get(), c -> new MobRenderers<>(c, "gecko", 0.25F, true, false, false));

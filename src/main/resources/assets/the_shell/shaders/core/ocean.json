@@ -1,0 +1,324 @@
+{
+  "vertex": "the_shell:ocean",
+  "fragment": "the_shell:ocean",
+  "samplers": [
+    {
+      "name": "Sampler0"
+    },
+    {
+      "name": "Sampler2"
+    },
+    {
+      "name": "ShoreMap"
+    }
+  ],
+  "uniforms": [
+    {
+      "name": "ModelViewMat",
+      "type": "matrix4x4",
+      "count": 16,
+      "values": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "ProjMat",
+      "type": "matrix4x4",
+      "count": 16,
+      "values": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "name": "ChunkOffset",
+      "type": "float",
+      "count": 3,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ColorModulator",
+      "type": "float",
+      "count": 4,
+      "values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "FogStart",
+      "type": "float",
+      "count": 1,
+      "values": [
+        0.0
+      ]
+    },
+    {
+      "name": "FogEnd",
+      "type": "float",
+      "count": 1,
+      "values": [
+        1.0
+      ]
+    },
+    {
+      "name": "FogColor",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "FogShape",
+      "type": "int",
+      "count": 1,
+      "values": [
+        0
+      ]
+    },
+    {
+      "name": "MapInfo",
+      "type": "float",
+      "count": 3,
+      "values": [
+        0.0,
+        0.0,
+        256.0
+      ]
+    },
+    {
+      "name": "WavePhase",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "WaveAmplitude",
+      "type": "float",
+      "count": 1,
+      "values": [
+        0.28
+      ]
+    },
+    {
+      "name": "SeaOffset",
+      "type": "float",
+      "count": 1,
+      "values": [
+        0.0
+      ]
+    },
+    {
+      "name": "PixelOrigin",
+      "type": "float",
+      "count": 2,
+      "values": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "FoamStrength",
+      "type": "float",
+      "count": 1,
+      "values": [
+        0.85
+      ]
+    },
+    {
+      "name": "AboveWater",
+      "type": "float",
+      "count": 1,
+      "values": [
+        1.0
+      ]
+    },
+    {
+      "name": "WaterStill",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "WaterFlow",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "WaterOverlay",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Impact0",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Impact1",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Impact2",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Impact3",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Impact4",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Impact5",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Impact6",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Impact7",
+      "type": "float",
+      "count": 4,
+      "values": [
+        0.0,
+        0.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ImpactRadii0",
+      "type": "float",
+      "count": 4,
+      "values": [
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    },
+    {
+      "name": "ImpactRadii1",
+      "type": "float",
+      "count": 4,
+      "values": [
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ]
+    }
+  ]
+}

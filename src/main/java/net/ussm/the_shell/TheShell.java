@@ -13,6 +13,10 @@ import net.ussm.the_shell.init.ModChunkGenerators;
 import net.ussm.the_shell.init.ModFeatures;
 import net.ussm.the_shell.init.ModSounds;
 import org.slf4j.Logger;
+import net.ussm.the_shell.config.ClientConfig;
+import net.ussm.the_shell.init.ModNetworking;
+import net.neoforged.fml.config.ModConfig;
+import net.ussm.the_shell.init.ModCriteriaTriggers;
 
 import com.mojang.logging.LogUtils;
 
@@ -27,6 +31,8 @@ public class TheShell {
 
 
     public TheShell(IEventBus modEventBus, ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
+        ModNetworking.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         ModArmorMaterials.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
@@ -40,5 +46,6 @@ public class TheShell {
         ModComponents.register(modEventBus);
         ModAttachments.register(modEventBus);
         ModSounds.register(modEventBus);
+        ModCriteriaTriggers.register(modEventBus);
     }
 }

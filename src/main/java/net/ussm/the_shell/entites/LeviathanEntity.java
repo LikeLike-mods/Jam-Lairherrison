@@ -1,6 +1,8 @@
 package net.ussm.the_shell.entites;
 
 import java.util.EnumSet;
+import java.util.List;
+import net.ussm.the_shell.entites.hitbox.AnimatedHitboxRig.Section;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -37,7 +39,13 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.entites.ai.LeviathanBiteCycle;
-import net.ussm.the_shell.entites.animations.LeviathanTurnState;
+import net.ussm.the_shell.entites.animations.TurnBendState;
+import net.ussm.the_shell.entites.animations.SwimmingTurnProfiles;
+import net.ussm.the_shell.entites.animations.TurnBendProfile;
+import net.ussm.the_shell.entites.hitbox.AnimatedHitbox;
+import net.ussm.the_shell.entites.hitbox.AnimatedHitboxEntity;
+import net.ussm.the_shell.entites.hitbox.AnimatedHitboxPart;
+import net.minecraft.world.phys.AABB;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
@@ -45,10 +53,20 @@ import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class LeviathanEntity extends Monster implements GeoEntity {
+public class LeviathanEntity extends Monster implements GeoEntity, AnimatedHitboxEntity {
+    private static final List<Section> HITBOXES = List.of(
+            Section.of("head", "neck", "head", "jaw"),
+            Section.of("body", "body"),
+            Section.of("tail_base", "tail1", "tail2"),
+            Section.of("tail_middle", "tail3"),
+            Section.of("tail_tip", "tail4", "tail_fin")
+    );
+
     public static final float SIZE_MULTIPLIER = 3.0F;
     public static final int MAX_TURN_PER_TICK = 5;
 
+    private static final EntityDataAccessor<Long> POSE_START =
+            SynchedEntityData.defineId(LeviathanEntity.class, EntityDataSerializers.LONG);
     private static final EntityDataAccessor<Boolean> BITING =
             SynchedEntityData.defineId(LeviathanEntity.class, EntityDataSerializers.BOOLEAN);
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.leviathan.idle");
@@ -58,9 +76,10 @@ public class LeviathanEntity extends Monster implements GeoEntity {
     private static final double BITE_HIT_RANGE = 4.0 * SIZE_MULTIPLIER;
     private static final float BITE_HALF_ANGLE = 45.0F;
 
+    private final AnimatedHitbox<LeviathanEntity> hitbox;
     private final AnimatableInstanceCache animationCache = GeckoLibUtil.createInstanceCache(this);
     private final LeviathanBiteCycle biteCycle = new LeviathanBiteCycle();
-    private final LeviathanTurnState turnState = new LeviathanTurnState(MAX_TURN_PER_TICK);
+    private final TurnBendState turnState = new TurnBendState(MAX_TURN_PER_TICK);
     @Nullable
     private LivingEntity biteTarget;
 
@@ -72,6 +91,44 @@ public class LeviathanEntity extends Monster implements GeoEntity {
         setPathfindingMalus(PathType.WATER_BORDER, 0.0F);
         xpReward = 100;
         setPersistenceRequired();
+        hitbox = new AnimatedHitbox<>(this);
+        setId(ENTITY_COUNTER.getAndAdd(hitbox.parts().length + 1) + 1);
+    }
+
+    @Override public String getModelName() { return "leviathan"; }
+    @Override public float getModelScale() { return SIZE_MULTIPLIER; }
+    @Override public double getModelYOffset() { return 0; }
+    @Override public TurnBendProfile getTurnProfile() { return SwimmingTurnProfiles.LEVIATHAN; }
+    @Override public List<Section> getHitboxSections() { return HITBOXES; }
+    @Override public boolean isPlayingSpecialPose() { return entityData.get(BITING); }
+    @Override public String getHitboxAnimation() {
+        return "animation.leviathan." + (entityData.get(BITING) ? "bite"
+                : isInWater() && getDeltaMovement().lengthSqr() > 0.000025 ? "swim" : "idle");
+    }
+    @Override public double getHitboxAnimationTick(float partialTick) {
+        return isPlayingSpecialPose() ? Math.max(0, level().getGameTime() - entityData.get(POSE_START) + partialTick)
+                : tickCount + partialTick;
+    }
+
+    @Override public boolean isMultipartEntity() { return true; }
+    @Override public AnimatedHitboxPart[] getParts() { return hitbox == null ? null : hitbox.parts(); }
+
+    @Override public void setId(int id) {
+        super.setId(id);
+        if (hitbox != null) hitbox.setId(id);
+    }
+
+    @Override public void setPos(double x, double y, double z) {
+        super.setPos(x, y, z);
+        if (hitbox != null) updateHitParts(1);
+    }
+
+    public void updateHitParts(float partialTick) {
+        if (hitbox != null) hitbox.update(partialTick);
+    }
+
+    @Override public AABB getBoundingBoxForCulling() {
+        return hitbox.cullingBounds(super.getBoundingBoxForCulling());
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -90,6 +147,7 @@ public class LeviathanEntity extends Monster implements GeoEntity {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(BITING, false);
+        builder.define(POSE_START, 0L);
     }
 
     @Override
@@ -156,10 +214,10 @@ public class LeviathanEntity extends Monster implements GeoEntity {
 
     @Override
     public void tick() {
+        hitbox.beginTick();
         super.tick();
-        if (level().isClientSide) {
-            turnState.update(yBodyRot, yBodyRotO);
-        } else {
+        turnState.update(yBodyRot, yBodyRotO);
+        if (!level().isClientSide) {
             if (!isAlive()) {
                 cancelBite();
             } else {
@@ -175,6 +233,7 @@ public class LeviathanEntity extends Monster implements GeoEntity {
                 }
             }
         }
+        updateHitParts(1);
     }
 
     @Override
@@ -187,6 +246,7 @@ public class LeviathanEntity extends Monster implements GeoEntity {
         return result;
     }
 
+    @Override
     public float getTurnBend(float partialTick) {
         return turnState.getBend(partialTick);
     }
@@ -294,6 +354,7 @@ public class LeviathanEntity extends Monster implements GeoEntity {
                 stopAndFaceTarget();
                 if (isFacingBiteTarget(target) && biteCycle.start()) {
                     biteTarget = target;
+                    entityData.set(POSE_START, level().getGameTime());
                     entityData.set(BITING, true);
                     playSound(SoundEvents.RAVAGER_ATTACK, 1.5F, 0.65F);
                 }

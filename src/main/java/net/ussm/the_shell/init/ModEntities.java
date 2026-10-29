@@ -24,6 +24,8 @@ import net.ussm.the_shell.entites.Toucan;
 import net.ussm.the_shell.entites.VampireSquid;
 import net.ussm.the_shell.entites.LeviathanEntity;
 import net.ussm.the_shell.entites.Submarine;
+import net.ussm.the_shell.entites.BasilosaurusEntity;
+import net.ussm.the_shell.entites.BlueWhaleEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, TheShell.MOD_ID);
@@ -55,11 +57,21 @@ public class ModEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<LeviathanEntity>> LEVIATHAN =
             ENTITY_TYPES.register("leviathan", () -> EntityType.Builder.of(LeviathanEntity::new, MobCategory.MONSTER)
-                    .sized(2.6F * LeviathanEntity.SIZE_MULTIPLIER, 1.7F * LeviathanEntity.SIZE_MULTIPLIER)
-                    .eyeHeight(1.2F * LeviathanEntity.SIZE_MULTIPLIER)
+                    .sized(3.4F, 3.7F)
+                    .eyeHeight(2.6F)
                     .clientTrackingRange(12)
                     .updateInterval(3)
                     .build(TheShell.MOD_ID + ":leviathan"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<BasilosaurusEntity>> BASILOSAURUS =
+            ENTITY_TYPES.register("basilosaurus", () -> EntityType.Builder.of(BasilosaurusEntity::new, MobCategory.MONSTER)
+                    .sized(0.5F * BasilosaurusEntity.SIZE_MULTIPLIER, 0.5F * BasilosaurusEntity.SIZE_MULTIPLIER)
+                    .eyeHeight(0.34F * BasilosaurusEntity.SIZE_MULTIPLIER)
+                    .clientTrackingRange(12).updateInterval(3).build(TheShell.MOD_ID + ":basilosaurus"));
+    public static final DeferredHolder<EntityType<?>, EntityType<BlueWhaleEntity>> BLUE_WHALE =
+            ENTITY_TYPES.register("blue_whale", () -> EntityType.Builder.of(BlueWhaleEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(4.75F, 4.75F).eyeHeight(3.5F)
+                    .clientTrackingRange(16).updateInterval(3).build(TheShell.MOD_ID + ":blue_whale"));
 
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.EntityFactory<T> factory,
                                                                                            MobCategory category, float width, float height) {
@@ -83,6 +95,8 @@ public class ModEntities {
         event.put(YETI_CRAB.get(), net.ussm.the_shell.entites.YetiCrab.createAttributes().build());
         event.put(HATCHETFISH.get(), net.minecraft.world.entity.animal.AbstractFish.createAttributes().build());
         event.put(COLOSSAL_SQUID.get(), net.ussm.the_shell.entites.ColossalSquid.createAttributes().build());
+        event.put(BASILOSAURUS.get(), BasilosaurusEntity.createAttributes().build());
+        event.put(BLUE_WHALE.get(), BlueWhaleEntity.createAttributes().build());
         event.put(LEVIATHAN.get(), LeviathanEntity.createAttributes().build());
     }
 

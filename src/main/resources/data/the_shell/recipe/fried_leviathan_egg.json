@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "ingredient": {
+    "item": "the_shell:leviathan_egg"
+  },
+  "result": {
+    "id": "the_shell:fried_leviathan_egg",
+    "count": 1
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}
