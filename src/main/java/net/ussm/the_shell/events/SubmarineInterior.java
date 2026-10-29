@@ -171,6 +171,12 @@ public class SubmarineInterior {
             player.changeDimension(new DimensionTransition(spawn, Vec3.atBottomCenterOf(spawn.getSharedSpawnPos()), Vec3.ZERO, player.getYRot(), 0.0F, DimensionTransition.DO_NOTHING));
             return;
         }
+        // un seul pilote : si quelqu'un est deja aux commandes on redescend l'echelle
+        if (drive && level.getEntity(where.getUUID("Sub")) instanceof Submarine sub && sub.isVehicle()) {
+            player.teleportTo(player.getX(), BOTTOM + 6.0, player.getZ());
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.occupied"), true);
+            return;
+        }
         float yaw = where.getFloat("Yaw");
         Vec3 pos = new Vec3(where.getDouble("X"), where.getDouble("Y"), where.getDouble("Z"));
         if (!drive) pos = pos.add(Vec3.directionFromRotation(0.0F, yaw + 90.0F).scale(2.5));
@@ -216,6 +222,22 @@ public class SubmarineInterior {
         double y = player.getY() - BOTTOM;
         if (y < HATCH) leave(player, false);
         else if (y > ROOF) leave(player, true);
+    }
+
+    // aux commandes : clic droit avec du carburant en main = on recharge sans sortir
+    @SubscribeEvent
+    public static void refuelFromSeat(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickItem event) {
+        if (!(event.getEntity().getVehicle() instanceof Submarine sub)) return;
+        int fuel = Submarine.fuelValue(event.getItemStack());
+        if (fuel <= 0) return;
+        if (!event.getLevel().isClientSide && sub.getEnergy() < Submarine.MAX_ENERGY) {
+            sub.setEnergy(sub.getEnergy() + fuel);
+            event.getItemStack().consume(1, event.getEntity());
+            event.getLevel().playSound(null, sub.blockPosition(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, net.minecraft.sounds.SoundSource.NEUTRAL, 0.6F, 1.4F);
+            event.getEntity().displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", sub.getEnergy() * 100 / Submarine.MAX_ENERGY), true);
+        }
+        event.setCanceled(true);
+        event.setCancellationResult(net.minecraft.world.InteractionResult.SUCCESS);
     }
 
     // aux commandes on pilote : on ne casse pas, on ne pose pas et on ne tape pas ce qu'il y a dehors

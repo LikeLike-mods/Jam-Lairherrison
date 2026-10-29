@@ -289,5 +289,6 @@
   "message.the_shell.submarine.upgraded": "Sous-marin amélioré au niveau %s : nouvelle pièce dans la cabine, et il va plus vite !",
   "message.the_shell.submarine.upgrade_order": "Il faut d'abord le kit fer, puis diamant, puis netherite",
   "hud.the_shell.sonar": "Sonar : faille à %s m %s",
-  "hud.the_shell.sonar.none": "Sonar : pas de faille proche"
+  "hud.the_shell.sonar.none": "Sonar : pas de faille proche",
+  "message.the_shell.submarine.occupied": "Quelqu'un est déjà aux commandes"
 }
