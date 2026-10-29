@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "the_shell:tank",
+    "the_shell:machine",
+    "the_shell:air_vent",
+    "the_shell:control_console",
+    "the_shell:metal_plating",
+    "the_shell:rusty_metal_plating",
+    "the_shell:riveted_panel",
+    "the_shell:rusty_riveted_panel"
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "theshell:dry_grass",
-    "theshell:short_dry_grass",
-    "theshell:flytrap",
-    "theshell:pitcher_plant"
+    "the_shell:dry_grass",
+    "the_shell:short_dry_grass",
+    "the_shell:flytrap",
+    "the_shell:pitcher_plant"
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:barrel"
+    },
+    {
+      "item": "the_shell:rusty_metal_plating"
+    }
+  ],
+  "result": {
+    "id": "the_shell:rusty_barrel",
+    "count": 1
+  }
+}

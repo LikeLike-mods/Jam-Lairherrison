@@ -1,0 +1,303 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false,
+  "textures": {
+    "bottle": "the_shell:block/message_bottle",
+    "particle": "the_shell:block/message_bottle"
+  },
+  "elements": [
+    {
+      "name": "corps",
+      "from": [
+        5,
+        0,
+        5
+      ],
+      "to": [
+        11,
+        8,
+        11
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          0,
+          8
+        ],
+        "axis": "y",
+        "angle": -22.5
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            8,
+            6
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            8,
+            6
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "east": {
+          "uv": [
+            0,
+            6,
+            8,
+            12
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "west": {
+          "uv": [
+            0,
+            6,
+            8,
+            12
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            8,
+            0,
+            14,
+            6
+          ],
+          "texture": "#bottle"
+        },
+        "down": {
+          "uv": [
+            8,
+            0,
+            14,
+            6
+          ],
+          "texture": "#bottle"
+        }
+      }
+    },
+    {
+      "name": "epaule",
+      "from": [
+        6,
+        8,
+        6
+      ],
+      "to": [
+        10,
+        9,
+        10
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          0,
+          8
+        ],
+        "axis": "y",
+        "angle": -22.5
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            14,
+            0,
+            15,
+            4
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "south": {
+          "uv": [
+            14,
+            0,
+            15,
+            4
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "east": {
+          "uv": [
+            14,
+            0,
+            15,
+            4
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "west": {
+          "uv": [
+            14,
+            0,
+            15,
+            4
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            8,
+            6,
+            12,
+            10
+          ],
+          "texture": "#bottle"
+        }
+      }
+    },
+    {
+      "name": "goulot",
+      "from": [
+        7,
+        9,
+        7
+      ],
+      "to": [
+        9,
+        12,
+        9
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          0,
+          8
+        ],
+        "axis": "y",
+        "angle": -22.5
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            6,
+            15,
+            8
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "south": {
+          "uv": [
+            12,
+            6,
+            15,
+            8
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "east": {
+          "uv": [
+            12,
+            6,
+            15,
+            8
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "west": {
+          "uv": [
+            12,
+            6,
+            15,
+            8
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "name": "bouchon",
+      "from": [
+        7,
+        12,
+        7
+      ],
+      "to": [
+        9,
+        14,
+        9
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          0,
+          8
+        ],
+        "axis": "y",
+        "angle": -22.5
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            8,
+            14,
+            10
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "south": {
+          "uv": [
+            12,
+            8,
+            14,
+            10
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "east": {
+          "uv": [
+            12,
+            8,
+            14,
+            10
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "west": {
+          "uv": [
+            12,
+            8,
+            14,
+            10
+          ],
+          "texture": "#bottle",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            14,
+            8,
+            16,
+            10
+          ],
+          "texture": "#bottle"
+        }
+      }
+    }
+  ]
+}

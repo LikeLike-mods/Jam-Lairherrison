@@ -1,0 +1,83 @@
+{
+  "carvers": {},
+  "downfall": 0.5,
+  "effects": {
+    "ambient_sound": "the_shell:ambient.abyss.loop",
+    "additions_sound": {
+      "sound": "the_shell:ambient.abyss.additions",
+      "tick_chance": 0.006
+    },
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "sky_color": 16746815,
+    "fog_color": 15180488,
+    "water_color": 76,
+    "water_fog_color": 51,
+    "grass_color": 5884220,
+    "foliage_color": 329011
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:seagrass_deep_warm"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [
+      {
+        "type": "the_shell:giant_isopod",
+        "weight": 6,
+        "minCount": 2,
+        "maxCount": 3
+      }
+    ],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [
+      {
+        "type": "the_shell:abyssal_angler",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "the_shell:gulper_eel",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "the_shell:dragonfish",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "the_shell:vampire_squid",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.95
+}

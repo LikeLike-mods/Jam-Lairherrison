@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:bone_meal_from_abyss_skull"
+      }
+    },
+    "has_abyss_skull": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:abyss_skull"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_abyss_skull"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:bone_meal_from_abyss_skull"
+    ]
+  }
+}

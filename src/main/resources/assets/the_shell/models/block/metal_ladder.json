@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/ladder",
+  "textures": {
+    "particle": "the_shell:block/metal_ladder",
+    "texture": "the_shell:block/metal_ladder"
+  },
+  "render_type": "minecraft:cutout"
+}

@@ -2,10 +2,10 @@
   "entries": [
     {
       "enum": "net/minecraft/world/entity/vehicle/Boat$Type",
-      "name": "EXAMPLEMOD_PALM",
+      "name": "THE_SHELL_PALM",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "net/ussm/theshell/init/ModBoats",
+        "class": "net/ussm/the_shell/init/ModBoats",
         "field": "PALM"
       }
     }

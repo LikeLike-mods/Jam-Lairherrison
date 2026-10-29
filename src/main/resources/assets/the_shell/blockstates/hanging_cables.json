@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=north,waterlogged=false": {
+      "model": "the_shell:block/hanging_cables"
+    },
+    "facing=north,waterlogged=true": {
+      "model": "the_shell:block/hanging_cables"
+    },
+    "facing=east,waterlogged=false": {
+      "model": "the_shell:block/hanging_cables"
+    },
+    "facing=east,waterlogged=true": {
+      "model": "the_shell:block/hanging_cables"
+    },
+    "facing=south,waterlogged=false": {
+      "model": "the_shell:block/hanging_cables"
+    },
+    "facing=south,waterlogged=true": {
+      "model": "the_shell:block/hanging_cables"
+    },
+    "facing=west,waterlogged=false": {
+      "model": "the_shell:block/hanging_cables"
+    },
+    "facing=west,waterlogged=true": {
+      "model": "the_shell:block/hanging_cables"
+    }
+  }
+}

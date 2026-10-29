@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "the_shell:metal_plating"
+  },
+  "result": {
+    "id": "the_shell:riveted_panel",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "the_shell:metal_plating"
+    }
+  },
+  "result": {
+    "id": "the_shell:metal_plating_wall",
+    "count": 6
+  }
+}

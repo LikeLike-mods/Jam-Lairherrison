@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "theshell:diamond_abyss_helmet",
-    "theshell:netherite_abyss_helmet",
-    "theshell:diving_helmet"
+    "the_shell:diamond_abyss_helmet",
+    "the_shell:netherite_abyss_helmet",
+    "the_shell:diving_helmet"
   ]
 }

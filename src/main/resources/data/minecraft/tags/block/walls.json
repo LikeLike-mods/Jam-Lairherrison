@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "theshell:metal_plating_wall",
-    "theshell:rusty_metal_plating_wall"
+    "the_shell:metal_plating_wall",
+    "the_shell:rusty_metal_plating_wall"
   ]
 }

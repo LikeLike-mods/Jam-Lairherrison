@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "PP",
+    "PS",
+    "PP"
+  ],
+  "key": {
+    "P": {
+      "item": "the_shell:metal_plating"
+    },
+    "S": {
+      "item": "minecraft:piston"
+    }
+  },
+  "result": {
+    "id": "the_shell:sliding_door",
+    "count": 2
+  }
+}

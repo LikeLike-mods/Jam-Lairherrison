@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "the_shell:block/rusty_steel_beam"
+    },
+    "axis=z": {
+      "model": "the_shell:block/rusty_steel_beam",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "the_shell:block/rusty_steel_beam",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

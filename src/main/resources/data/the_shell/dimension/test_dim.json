@@ -1,0 +1,14 @@
+{
+  "type": "the_shell:test_type",
+  "generator": {
+    "type": "the_shell:test_chunk_generator",
+    "biome_source": {
+      "type": "the_shell:test_biome_source",
+      "abyss": "the_shell:abyssal_zone",
+      "sea": "the_shell:tropical_ocean",
+      "shore": "the_shell:tropical_beach",
+      "inland": "the_shell:palm_jungle",
+      "swamp": "the_shell:tropical_mangrove"
+    }
+  }
+}

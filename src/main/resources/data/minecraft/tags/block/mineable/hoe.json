@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "theshell:palm_leaves",
-    "theshell:flytrap",
-    "theshell:pitcher_plant"
+    "the_shell:palm_leaves",
+    "the_shell:flytrap",
+    "the_shell:pitcher_plant"
   ]
 }

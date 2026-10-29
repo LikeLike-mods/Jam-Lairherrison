@@ -1,0 +1,7 @@
+{
+  "parent": "the_shell:item/living_abyss_skull",
+  "textures": {
+    "skull": "the_shell:item/diamond_abyss_helmet",
+    "particle": "the_shell:item/diamond_abyss_helmet"
+  }
+}

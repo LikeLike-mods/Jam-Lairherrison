@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "the_shell:block/steel_beam_top",
+    "side": "the_shell:block/steel_beam"
+  }
+}

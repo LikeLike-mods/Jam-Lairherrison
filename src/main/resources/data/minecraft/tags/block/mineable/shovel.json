@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "theshell:light_sand",
-    "theshell:light_sand_wet",
-    "theshell:dirt_slab",
-    "theshell:grass_slab"
+    "the_shell:light_sand",
+    "the_shell:light_sand_wet",
+    "the_shell:dirt_slab",
+    "the_shell:grass_slab"
   ]
 }

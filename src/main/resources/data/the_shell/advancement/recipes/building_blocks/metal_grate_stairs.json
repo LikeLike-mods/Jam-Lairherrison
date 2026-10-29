@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:metal_grate_stairs"
+      }
+    },
+    "has_metal_grate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:metal_grate"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_metal_grate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:metal_grate_stairs"
+    ]
+  }
+}

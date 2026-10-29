@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "the_shell:block/grass_slab"
+    },
+    "type=top": {
+      "model": "the_shell:block/grass_slab_top"
+    },
+    "type=double": {
+      "model": "minecraft:block/grass_block"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "the_shell:rusty_metal_plating"
+  },
+  "result": {
+    "id": "the_shell:rusty_corrugated_metal",
+    "count": 1
+  }
+}

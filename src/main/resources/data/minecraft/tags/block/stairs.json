@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "theshell:metal_plating_stairs",
-    "theshell:rusty_metal_plating_stairs",
-    "theshell:metal_grate_stairs",
-    "theshell:rusty_metal_grate_stairs"
+    "the_shell:metal_plating_stairs",
+    "the_shell:rusty_metal_plating_stairs",
+    "the_shell:metal_grate_stairs",
+    "the_shell:rusty_metal_grate_stairs"
   ]
 }

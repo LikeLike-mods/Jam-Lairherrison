@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "the_shell:block/palm_log"
+    },
+    "axis=z": {
+      "model": "the_shell:block/palm_log",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "the_shell:block/palm_log",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_side",
-  "textures": {
-    "pane": "theshell:block/reinforced_glass",
-    "edge": "theshell:block/reinforced_glass_pane_top"
-  },
-  "render_type": "minecraft:translucent"
-}

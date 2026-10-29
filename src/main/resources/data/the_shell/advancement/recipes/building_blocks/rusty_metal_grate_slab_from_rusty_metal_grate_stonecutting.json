@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:rusty_metal_grate_slab_from_rusty_metal_grate_stonecutting"
+      }
+    },
+    "has_rusty_metal_grate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:rusty_metal_grate"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rusty_metal_grate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:rusty_metal_grate_slab_from_rusty_metal_grate_stonecutting"
+    ]
+  }
+}

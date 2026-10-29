@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "the_shell:block/metal_grate",
+    "side": "the_shell:block/metal_grate",
+    "top": "the_shell:block/metal_grate"
+  },
+  "render_type": "minecraft:cutout"
+}

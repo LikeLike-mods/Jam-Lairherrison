@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "the_shell:living_abyss_skull"
+  },
+  "base": {
+    "item": "minecraft:netherite_helmet"
+  },
+  "addition": [],
+  "result": {
+    "id": "the_shell:netherite_abyss_helmet",
+    "count": 1
+  }
+}

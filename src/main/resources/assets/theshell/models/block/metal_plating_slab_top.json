@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "theshell:block/metal_plating",
-    "side": "theshell:block/metal_plating",
-    "top": "theshell:block/metal_plating"
-  }
-}

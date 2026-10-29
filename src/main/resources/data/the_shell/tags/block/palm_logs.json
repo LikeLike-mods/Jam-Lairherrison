@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "the_shell:palm_log",
+    "the_shell:palm_wood",
+    "the_shell:stripped_palm_log",
+    "the_shell:stripped_palm_wood"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " P ",
+    "PLG",
+    " I "
+  ],
+  "key": {
+    "P": {
+      "item": "the_shell:metal_plating"
+    },
+    "L": {
+      "item": "minecraft:glowstone"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "the_shell:floodlight",
+    "count": 1
+  }
+}

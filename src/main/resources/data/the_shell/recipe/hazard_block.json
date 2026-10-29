@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "PY",
+    "KP"
+  ],
+  "key": {
+    "P": {
+      "item": "the_shell:metal_plating"
+    },
+    "Y": {
+      "item": "minecraft:yellow_dye"
+    },
+    "K": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "id": "the_shell:hazard_block",
+    "count": 2
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "the_shell:block/palm_log_top",
+    "side": "the_shell:block/palm_log"
+  }
+}

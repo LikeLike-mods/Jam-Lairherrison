@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:metal_plating_stairs"
+      }
+    },
+    "has_metal_plating": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:metal_plating"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_metal_plating"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:metal_plating_stairs"
+    ]
+  }
+}

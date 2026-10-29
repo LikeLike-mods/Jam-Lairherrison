@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "theshell:metal_plating_slab",
-    "theshell:rusty_metal_plating_slab",
-    "theshell:metal_grate_slab",
-    "theshell:rusty_metal_grate_slab",
-    "theshell:dirt_slab",
-    "theshell:grass_slab"
+    "the_shell:metal_plating_slab",
+    "the_shell:rusty_metal_plating_slab",
+    "the_shell:metal_grate_slab",
+    "the_shell:rusty_metal_grate_slab",
+    "the_shell:dirt_slab",
+    "the_shell:grass_slab"
   ]
 }

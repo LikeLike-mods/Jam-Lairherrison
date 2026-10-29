@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "theshell:diving_helmet",
-    "theshell:diving_chestplate",
-    "theshell:diving_leggings",
-    "theshell:diving_boots"
+    "the_shell:diving_helmet",
+    "the_shell:diving_chestplate",
+    "the_shell:diving_leggings",
+    "the_shell:diving_boots"
   ]
 }

@@ -1,42 +1,42 @@
 {
   "values": {
-    "theshell:palm_leaves": {
+    "the_shell:palm_leaves": {
       "chance": 0.3
     },
-    "theshell:dry_grass": {
+    "the_shell:dry_grass": {
       "chance": 0.3
     },
-    "theshell:short_dry_grass": {
+    "the_shell:short_dry_grass": {
       "chance": 0.3
     },
-    "theshell:hibiscus": {
+    "the_shell:hibiscus": {
       "chance": 0.65
     },
-    "theshell:bird_of_paradise": {
+    "the_shell:bird_of_paradise": {
       "chance": 0.65
     },
-    "theshell:frangipani": {
+    "the_shell:frangipani": {
       "chance": 0.65
     },
-    "theshell:shadow_lily": {
+    "the_shell:shadow_lily": {
       "chance": 0.65
     },
-    "theshell:flytrap": {
+    "the_shell:flytrap": {
       "chance": 0.65
     },
-    "theshell:pitcher_plant": {
+    "the_shell:pitcher_plant": {
       "chance": 0.65
     },
-    "theshell:coconut": {
+    "the_shell:coconut": {
       "chance": 0.65
     },
-    "theshell:palm_sapling": {
+    "the_shell:palm_sapling": {
       "chance": 0.3
     },
-    "theshell:coconut_half": {
+    "the_shell:coconut_half": {
       "chance": 0.65
     },
-    "theshell:coconut_shell": {
+    "the_shell:coconut_shell": {
       "chance": 0.3
     }
   }

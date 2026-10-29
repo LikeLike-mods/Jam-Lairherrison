@@ -1,0 +1,108 @@
+{
+  "variants": {
+    "facing=up,waterlogged=false,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp"
+    },
+    "facing=up,waterlogged=false,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp"
+    },
+    "facing=up,waterlogged=true,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp"
+    },
+    "facing=up,waterlogged=true,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp"
+    },
+    "facing=down,waterlogged=false,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 180
+    },
+    "facing=down,waterlogged=false,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 180
+    },
+    "facing=down,waterlogged=true,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 180
+    },
+    "facing=down,waterlogged=true,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 180
+    },
+    "facing=north,waterlogged=false,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90
+    },
+    "facing=north,waterlogged=false,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90
+    },
+    "facing=north,waterlogged=true,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90
+    },
+    "facing=north,waterlogged=true,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90
+    },
+    "facing=south,waterlogged=false,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=false,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=true,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=true,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 180
+    },
+    "facing=east,waterlogged=false,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=false,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=true,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=true,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,waterlogged=false,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=false,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=true,lit=false": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=true,lit=true": {
+      "model": "the_shell:block/broken_industrial_lamp",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

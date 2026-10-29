@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "the_shell:reinforced_glass"
+    }
+  },
+  "result": {
+    "id": "the_shell:reinforced_glass_pane",
+    "count": 16
+  }
+}

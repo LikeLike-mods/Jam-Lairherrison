@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:palm_hanging_sign"
+      }
+    },
+    "has_stripped_palm_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:stripped_palm_log"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stripped_palm_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:palm_hanging_sign"
+    ]
+  }
+}

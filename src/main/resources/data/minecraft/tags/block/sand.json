@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "theshell:light_sand",
-    "theshell:light_sand_wet"
+    "the_shell:light_sand",
+    "the_shell:light_sand_wet"
   ]
 }

@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "theshell:crab",
-    "theshell:hermit_crab",
-    "theshell:giant_isopod",
-    "theshell:leviathan"
+    "the_shell:crab",
+    "the_shell:hermit_crab",
+    "the_shell:giant_isopod",
+    "the_shell:leviathan"
   ]
 }

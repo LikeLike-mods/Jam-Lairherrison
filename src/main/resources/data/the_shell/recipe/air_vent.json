@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " B ",
+    "BPB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "P": {
+      "item": "the_shell:metal_plating"
+    }
+  },
+  "result": {
+    "id": "the_shell:air_vent",
+    "count": 2
+  }
+}

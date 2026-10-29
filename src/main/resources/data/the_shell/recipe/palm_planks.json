@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "the_shell:palm_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "the_shell:palm_planks"
+  }
+}

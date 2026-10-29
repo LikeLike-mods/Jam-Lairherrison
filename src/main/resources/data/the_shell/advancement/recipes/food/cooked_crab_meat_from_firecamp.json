@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:cooked_crab_meat_from_firecamp"
+      }
+    },
+    "has_raw_crab_meat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:raw_crab_meat"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_crab_meat"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:cooked_crab_meat_from_firecamp"
+    ]
+  }
+}

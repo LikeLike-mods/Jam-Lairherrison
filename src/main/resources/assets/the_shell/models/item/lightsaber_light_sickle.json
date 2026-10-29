@@ -1,0 +1,6 @@
+{
+  "parent": "the_shell:item/lightsaber_sickle",
+  "textures": {
+    "particle": "the_shell:item/lightsaber_light_sickle"
+  }
+}

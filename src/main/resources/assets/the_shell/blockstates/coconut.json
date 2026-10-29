@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=true": {
+      "model": "the_shell:block/coconut_hanging"
+    },
+    "hanging=false": {
+      "model": "the_shell:block/coconut"
+    }
+  }
+}

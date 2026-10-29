@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:broken_industrial_lamp"
+      }
+    },
+    "has_industrial_lamp": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:industrial_lamp"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_industrial_lamp"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:broken_industrial_lamp"
+    ]
+  }
+}

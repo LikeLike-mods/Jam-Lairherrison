@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "the_shell:metal_grate"
+    }
+  },
+  "result": {
+    "id": "the_shell:metal_grate_stairs",
+    "count": 4
+  }
+}

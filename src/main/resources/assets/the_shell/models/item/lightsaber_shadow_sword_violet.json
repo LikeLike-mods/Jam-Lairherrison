@@ -1,0 +1,6 @@
+{
+  "parent": "the_shell:item/lightsaber_sword",
+  "textures": {
+    "particle": "the_shell:item/lightsaber_shadow_sword_violet"
+  }
+}

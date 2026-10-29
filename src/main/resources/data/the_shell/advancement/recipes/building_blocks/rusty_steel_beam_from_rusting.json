@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:rusty_steel_beam_from_rusting"
+      }
+    },
+    "has_steel_beam": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:steel_beam"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_steel_beam"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:rusty_steel_beam_from_rusting"
+    ]
+  }
+}

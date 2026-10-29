@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "PPP",
+    "P P",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "the_shell:metal_plating"
+    }
+  },
+  "result": {
+    "id": "the_shell:metal_crate",
+    "count": 1
+  }
+}

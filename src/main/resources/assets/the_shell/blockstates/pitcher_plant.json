@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "filled=false": [
+      {
+        "model": "the_shell:block/pitcher_plant"
+      },
+      {
+        "model": "the_shell:block/pitcher_plant",
+        "y": 90
+      },
+      {
+        "model": "the_shell:block/pitcher_plant",
+        "y": 180
+      },
+      {
+        "model": "the_shell:block/pitcher_plant",
+        "y": 270
+      }
+    ],
+    "filled=true": [
+      {
+        "model": "the_shell:block/pitcher_plant_filled"
+      },
+      {
+        "model": "the_shell:block/pitcher_plant_filled",
+        "y": 90
+      },
+      {
+        "model": "the_shell:block/pitcher_plant_filled",
+        "y": 180
+      },
+      {
+        "model": "the_shell:block/pitcher_plant_filled",
+        "y": 270
+      }
+    ]
+  }
+}

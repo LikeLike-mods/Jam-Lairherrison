@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,waterlogged=false,powered=false": {
+      "model": "the_shell:block/machine"
+    },
+    "facing=north,waterlogged=false,powered=true": {
+      "model": "the_shell:block/machine_on"
+    },
+    "facing=north,waterlogged=true,powered=false": {
+      "model": "the_shell:block/machine"
+    },
+    "facing=north,waterlogged=true,powered=true": {
+      "model": "the_shell:block/machine_on"
+    },
+    "facing=east,waterlogged=false,powered=false": {
+      "model": "the_shell:block/machine",
+      "y": 90
+    },
+    "facing=east,waterlogged=false,powered=true": {
+      "model": "the_shell:block/machine_on",
+      "y": 90
+    },
+    "facing=east,waterlogged=true,powered=false": {
+      "model": "the_shell:block/machine",
+      "y": 90
+    },
+    "facing=east,waterlogged=true,powered=true": {
+      "model": "the_shell:block/machine_on",
+      "y": 90
+    },
+    "facing=south,waterlogged=false,powered=false": {
+      "model": "the_shell:block/machine",
+      "y": 180
+    },
+    "facing=south,waterlogged=false,powered=true": {
+      "model": "the_shell:block/machine_on",
+      "y": 180
+    },
+    "facing=south,waterlogged=true,powered=false": {
+      "model": "the_shell:block/machine",
+      "y": 180
+    },
+    "facing=south,waterlogged=true,powered=true": {
+      "model": "the_shell:block/machine_on",
+      "y": 180
+    },
+    "facing=west,waterlogged=false,powered=false": {
+      "model": "the_shell:block/machine",
+      "y": 270
+    },
+    "facing=west,waterlogged=false,powered=true": {
+      "model": "the_shell:block/machine_on",
+      "y": 270
+    },
+    "facing=west,waterlogged=true,powered=false": {
+      "model": "the_shell:block/machine",
+      "y": 270
+    },
+    "facing=west,waterlogged=true,powered=true": {
+      "model": "the_shell:block/machine_on",
+      "y": 270
+    }
+  }
+}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "theshell:block/rusty_checker_plate"
-  }
-}
