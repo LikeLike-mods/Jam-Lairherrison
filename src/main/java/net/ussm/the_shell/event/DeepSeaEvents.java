@@ -110,11 +110,12 @@ public class DeepSeaEvents {
     // pression dans les abysses de l'atoll : lenteur de minage, puis nausee + lenteur 40 blocs plus bas, puis degats encore 40 plus bas
     private static void pressure(ServerPlayer player, boolean inWater) {
         int level = 0;
-        if (inWater && player.level().dimension() == AtollTravel.ATOLL && !player.isCreative() && !player.isSpectator()
-                && !hasFullSuit(player) && !(player.getVehicle() instanceof Submarine)) {
+        if (inWater && !player.isCreative() && !player.isSpectator() && !hasFullSuit(player) && !(player.getVehicle() instanceof Submarine)) {
             double y = player.getY();
             int top = TestChunkGenerator.ABYSS;
-            level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
+            if (player.level().dimension() == AtollTravel.ATOLL) level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
+            // dans la dimension des abysses c'est deja tres profond, et dans les fosses ca broie
+            else if (player.level().dimension() == AbyssTravel.ABYSS) level = y < net.ussm.the_shell.worldgen.AbyssTerrain.FLOOR - 16 ? 3 : 2;
         }
 
         // on retient le niveau a chaque fois, sinon le message ne s'affichait qu'une fois par partie

@@ -49,6 +49,13 @@
     "the_shell:light_strip",
     "the_shell:floodlight",
     "the_shell:emergency_light",
-    "the_shell:broken_industrial_lamp"
+    "the_shell:broken_industrial_lamp",
+    "the_shell:abyssal_stone",
+    "the_shell:abyssal_basalt",
+    "the_shell:hydrothermal_chimney",
+    "the_shell:kyber_ore",
+    "the_shell:sulfur_block",
+    "the_shell:glowing_coral_block",
+    "the_shell:manganese_nodule"
   ]
 }

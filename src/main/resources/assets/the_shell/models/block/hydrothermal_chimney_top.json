@@ -1,0 +1,80 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "the_shell:block/hydrothermal_chimney",
+    "side": "the_shell:block/hydrothermal_chimney",
+    "end": "the_shell:block/hydrothermal_chimney_end",
+    "mouth": "the_shell:block/hydrothermal_chimney_mouth"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        16,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#side",
+          "uv": [
+            3,
+            0,
+            13,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#side",
+          "uv": [
+            3,
+            0,
+            13,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#side",
+          "uv": [
+            3,
+            0,
+            13,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#side",
+          "uv": [
+            3,
+            0,
+            13,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#end",
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#mouth",
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ]
+        }
+      }
+    }
+  ]
+}

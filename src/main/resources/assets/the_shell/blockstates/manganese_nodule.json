@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "the_shell:block/manganese_nodule",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "the_shell:block/manganese_nodule",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "the_shell:block/manganese_nodule",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "the_shell:block/manganese_nodule",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:iron_nuggets_from_manganese_nodule"
+      }
+    },
+    "has_manganese_nodule": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:manganese_nodule"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_manganese_nodule"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:iron_nuggets_from_manganese_nodule"
+    ]
+  }
+}

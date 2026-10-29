@@ -20,9 +20,15 @@ public class DeepSeaFog {
     @SubscribeEvent
     public static void fog(ViewportEvent.RenderFog event) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.level == null || mc.level.dimension() != AtollTravel.ATOLL || event.getCamera().getFluidInCamera() != FogType.WATER) return;
-        int top = TestChunkGenerator.ABYSS;
-        float t = Mth.clamp((float) (top - event.getCamera().getPosition().y) / (top + 100), 0.0F, 1.0F);
+        if (mc.level == null || event.getCamera().getFluidInCamera() != FogType.WATER) return;
+        float t;
+        if (mc.level.dimension() == AtollTravel.ATOLL) {
+            int top = TestChunkGenerator.ABYSS;
+            t = Mth.clamp((float) (top - event.getCamera().getPosition().y) / (top + 100), 0.0F, 1.0F);
+        } else if (mc.level.dimension() == net.ussm.the_shell.event.AbyssTravel.ABYSS) {
+            // dans les abysses on y voit encore moins, et presque rien au fond des fosses
+            t = 0.8F + 0.2F * Mth.clamp((float) (net.ussm.the_shell.worldgen.AbyssTerrain.CEILING - event.getCamera().getPosition().y) / 190F, 0.0F, 1.0F);
+        } else return;
         if (t <= 0) return;
         float far = Mth.lerp((float) Math.sqrt(t), event.getFarPlaneDistance(), 10.0F);
         float time = mc.level.getGameTime() + (float) event.getPartialTick();

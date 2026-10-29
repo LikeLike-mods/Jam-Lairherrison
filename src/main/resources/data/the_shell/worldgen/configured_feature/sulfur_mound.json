@@ -1,0 +1,22 @@
+{
+  "type": "the_shell:abyss_blob",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "weight": 3,
+          "data": {
+            "Name": "the_shell:sulfur_block"
+          }
+        },
+        {
+          "weight": 2,
+          "data": {
+            "Name": "the_shell:abyssal_basalt"
+          }
+        }
+      ]
+    }
+  }
+}

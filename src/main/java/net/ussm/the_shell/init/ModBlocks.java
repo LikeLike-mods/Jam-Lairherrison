@@ -93,6 +93,39 @@ public class ModBlocks {
                     .strength(0.6f)
                     .sound(SoundType.GRASS)));
 
+    // abysses : la roche, la vase et le basalte du fond, et la faille qui y mene (on ne peut pas la casser)
+    public static final DeferredBlock<Block> ABYSSAL_STONE = registerBlock("abyssal_stone",
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(2.0f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
+    public static final DeferredBlock<Block> ABYSSAL_SILT = registerBlock("abyssal_silt",
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(0.6f).sound(SoundType.MUD)));
+    public static final DeferredBlock<Block> ABYSSAL_BASALT = registerBlock("abyssal_basalt",
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(1.5f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.BASALT)));
+    public static final DeferredBlock<net.ussm.the_shell.blocks.RiftBlock> RIFT = BLOCKS.register("rift",
+            () -> new net.ussm.the_shell.blocks.RiftBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noCollission()
+                    .noLootTable().noOcclusion().strength(-1.0f, 3600000.0f).lightLevel(s -> 12).pushReaction(PushReaction.BLOCK)));
+    // le decor des abysses
+    public static final DeferredBlock<net.ussm.the_shell.blocks.ChimneyBlock> HYDROTHERMAL_CHIMNEY = registerBlock("hydrothermal_chimney",
+            () -> new net.ussm.the_shell.blocks.ChimneyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(1.5f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.BASALT).noOcclusion()
+                    .lightLevel(s -> s.getValue(net.ussm.the_shell.blocks.ChimneyBlock.TOP) ? 6 : 0)));
+    public static final DeferredBlock<net.ussm.the_shell.blocks.AbyssPlantBlock> TUBE_WORMS = registerBlock("tube_worms",
+            () -> new net.ussm.the_shell.blocks.AbyssPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SEAGRASS).lightLevel(s -> 3), false));
+    public static final DeferredBlock<net.ussm.the_shell.blocks.AbyssPlantBlock> GLOWING_ANEMONE = registerBlock("glowing_anemone",
+            () -> new net.ussm.the_shell.blocks.AbyssPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SEAGRASS).lightLevel(s -> 10), true));
+    public static final DeferredBlock<DecorBlock> MANGANESE_NODULE = registerBlock("manganese_nodule",
+            () -> new DecorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(1.0f).sound(SoundType.TUFF).noOcclusion(),
+                    Block.box(4, 0, 4, 12, 5, 12)));
+    public static final DeferredBlock<Block> KYBER_ORE = registerBlock("kyber_ore",
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).strength(4.0f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.AMETHYST).lightLevel(s -> 7)));
+    public static final DeferredBlock<Block> SULFUR_BLOCK = registerBlock("sulfur_block",
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(1.0f).requiresCorrectToolForDrops().sound(SoundType.TUFF)));
+    public static final DeferredBlock<Block> GLOWING_CORAL_BLOCK = registerBlock("glowing_coral_block",
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).strength(1.5f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.CORAL_BLOCK).lightLevel(s -> 8)));
+
 
     public static final DeferredBlock<Block> PALM_LEAVES = registerBlock("palm_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LEAVES)

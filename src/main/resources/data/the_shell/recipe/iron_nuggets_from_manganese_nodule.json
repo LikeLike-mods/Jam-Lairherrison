@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.2,
+  "ingredient": {
+    "item": "the_shell:manganese_nodule"
+  },
+  "result": {
+    "id": "minecraft:iron_nugget",
+    "count": 3
+  }
+}

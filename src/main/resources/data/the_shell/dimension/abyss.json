@@ -1,0 +1,13 @@
+{
+  "type": "the_shell:abyss",
+  "generator": {
+    "type": "the_shell:abyss_chunk_generator",
+    "biome_source": {
+      "type": "the_shell:abyss_biome_source",
+      "plains": "the_shell:abyssal_plains",
+      "vents": "the_shell:hydrothermal_fields",
+      "trench": "the_shell:abyssal_trench",
+      "reef": "the_shell:glowing_reef"
+    }
+  }
+}

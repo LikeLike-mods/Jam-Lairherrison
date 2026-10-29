@@ -15,4 +15,7 @@ public class ModChunkGenerators {
 
     public static final Supplier<MapCodec<TestChunkGenerator>> LOBBY_CHUNK_GENERATOR =
             CHUNK_GENERATORS.register("test_chunk_generator", () -> TestChunkGenerator.CODEC);
+
+    public static final Supplier<MapCodec<net.ussm.the_shell.worldgen.AbyssChunkGenerator>> ABYSS_CHUNK_GENERATOR =
+            CHUNK_GENERATORS.register("abyss_chunk_generator", () -> net.ussm.the_shell.worldgen.AbyssChunkGenerator.CODEC);
 }

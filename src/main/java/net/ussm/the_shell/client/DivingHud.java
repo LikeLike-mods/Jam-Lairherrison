@@ -49,6 +49,8 @@ public class DivingHud {
         RenderSystem.enableDepthTest();
 
         float depth = player.isEyeInFluid(FluidTags.WATER) ? Math.max(0.0F, player.level().getSeaLevel() - (float) player.getEyeY()) : 0.0F;
+        // la dimension des abysses est sous le fond de l'atoll : le manometre est a fond
+        if (depth > 0 && player.level().dimension() == net.ussm.the_shell.event.AbyssTravel.ABYSS) depth += MAX_DEPTH;
         float fill = Mth.clamp(depth / MAX_DEPTH, 0.0F, 1.0F);
         boolean safe = DeepSeaEvents.hasFullSuit(player) || player.getVehicle() instanceof Submarine;
 

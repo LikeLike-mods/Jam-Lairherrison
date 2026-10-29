@@ -105,6 +105,27 @@ public class TestChunkGenerator extends ChunkGenerator {
     public static final int SEA = 100;
     public static final int ABYSS = SEA - 64;
 
+    // failles : de longues crevasses fines tout au fond des abysses, la faille (le portail) est en bas, juste sur la bedrock
+    public static final int RIFT_TOP = -126;
+    private static final FastNoiseLite RIFT_LINES = riftNoise(210, 0.0025f, FastNoiseLite.FractalType.Ridged);
+    private static final FastNoiseLite RIFT_PIECES = riftNoise(211, 0.004f, FastNoiseLite.FractalType.FBm);
+
+    private static FastNoiseLite riftNoise(int seed, float freq, FastNoiseLite.FractalType type) {
+        FastNoiseLite n = new FastNoiseLite(seed);
+        n.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+        n.SetFrequency(freq);
+        n.SetFractalType(type);
+        n.SetFractalOctaves(1);
+        return n;
+    }
+
+    // la meme fonction sert a la dimension des abysses pour mettre la faille du retour pile en dessous
+    public static boolean isRift(int x, int z) {
+        if ((RIFT_LINES.GetNoise(x, z) + 1f) * 0.5f < 0.988f) return false;
+        if (RIFT_PIECES.GetNoise(x, z) < 0.1f) return false;
+        return getHeight(x, z) < ABYSS - 100;
+    }
+
     public static float getHeight(float posX, float posZ) {
         net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(200);
         float h;
@@ -140,7 +161,10 @@ public class TestChunkGenerator extends ChunkGenerator {
         float mountains = Math.clamp(1.5f * islands - 1f, 0f, 1f);
         islands += 3f * mountains;
 
-        h = islands * 50f + SEA;
+        // profondeur sous la mer, les fosses sont creusees encore plus (il faut ca pour les failles vers les abysses)
+        float depth = -islands * 50f;
+        if (depth > 40f) depth += (depth - 40f) * 1.2f;
+        h = Math.max(-120f, SEA - depth);
         return h;
     }
 
@@ -265,6 +289,13 @@ public class TestChunkGenerator extends ChunkGenerator {
                     BlockState slab = (slope > 4f ? ModBlocks.DIRT_SLAB : ModBlocks.GRASS_SLAB).get().defaultBlockState();
                     chunk.setBlockState(pos.set(x, a, z), Blocks.DIRT.defaultBlockState(), false);
                     chunk.setBlockState(pos.set(x, a + 1, z), slab, false);
+                }
+
+                // la faille : on creuse jusqu'en bas et on met le portail sur la bedrock
+                if (isRift(posX, posZ)) {
+                    for (int y2 = -127; y2 <= a; y2++) {
+                        chunk.setBlockState(pos.set(x, y2, z), y2 <= RIFT_TOP ? ModBlocks.RIFT.get().defaultBlockState() : Blocks.WATER.defaultBlockState(), false);
+                    }
                 }
             }
         }

@@ -15,4 +15,7 @@ public class ModBiomeSources {
 
     public static final Supplier<MapCodec<TestBiomeSource>> LOBBY_BIOME_SOURCE =
             BIOME_SOURCES.register("test_biome_source", () -> TestBiomeSource.CODEC);
+
+    public static final Supplier<MapCodec<net.ussm.the_shell.worldgen.AbyssBiomeSource>> ABYSS_BIOME_SOURCE =
+            BIOME_SOURCES.register("abyss_biome_source", () -> net.ussm.the_shell.worldgen.AbyssBiomeSource.CODEC);
 }

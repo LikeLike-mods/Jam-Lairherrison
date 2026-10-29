@@ -43,6 +43,17 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.SHORT_DRY_GRASS);
                         output.accept(ModBlocks.DIRT_SLAB);
                         output.accept(ModBlocks.GRASS_SLAB);
+                        output.accept(ModBlocks.ABYSSAL_STONE);
+                        output.accept(ModBlocks.ABYSSAL_SILT);
+                        output.accept(ModBlocks.ABYSSAL_BASALT);
+                        output.accept(ModBlocks.HYDROTHERMAL_CHIMNEY);
+                        output.accept(ModBlocks.TUBE_WORMS);
+                        output.accept(ModBlocks.GLOWING_ANEMONE);
+                        output.accept(ModBlocks.MANGANESE_NODULE);
+                        output.accept(ModBlocks.KYBER_ORE);
+                        output.accept(ModBlocks.SULFUR_BLOCK);
+                        output.accept(ModBlocks.GLOWING_CORAL_BLOCK);
+                        output.accept(ModItems.KYBER_CRYSTAL);
                         output.accept(ModBlocks.LIGHT_SAND);
                         output.accept(ModBlocks.LIGHT_SAND_WET);
                         output.accept(ModBlocks.GREY_GRANITE);

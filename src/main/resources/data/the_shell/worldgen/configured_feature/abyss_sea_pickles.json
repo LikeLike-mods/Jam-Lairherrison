@@ -1,0 +1,93 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 16,
+    "xz_spread": 5,
+    "y_spread": 2,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "weight": 4,
+                "data": {
+                  "Name": "minecraft:sea_pickle",
+                  "Properties": {
+                    "pickles": "1",
+                    "waterlogged": "true"
+                  }
+                }
+              },
+              {
+                "weight": 3,
+                "data": {
+                  "Name": "minecraft:sea_pickle",
+                  "Properties": {
+                    "pickles": "2",
+                    "waterlogged": "true"
+                  }
+                }
+              },
+              {
+                "weight": 2,
+                "data": {
+                  "Name": "minecraft:sea_pickle",
+                  "Properties": {
+                    "pickles": "3",
+                    "waterlogged": "true"
+                  }
+                }
+              },
+              {
+                "weight": 1,
+                "data": {
+                  "Name": "minecraft:sea_pickle",
+                  "Properties": {
+                    "pickles": "4",
+                    "waterlogged": "true"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:water"
+              },
+              {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "minecraft:sea_pickle",
+                  "Properties": {
+                    "pickles": "1",
+                    "waterlogged": "true"
+                  }
+                }
+              },
+              {
+                "type": "minecraft:has_sturdy_face",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "direction": "up"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "the_shell:abyss_blob",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "the_shell:glowing_coral_block"
+      }
+    }
+  }
+}

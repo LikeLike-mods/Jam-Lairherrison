@@ -1,5 +1,9 @@
 {
   "values": [
-    "the_shell:abyssal_zone"
+    "the_shell:abyssal_zone",
+    "the_shell:abyssal_plains",
+    "the_shell:hydrothermal_fields",
+    "the_shell:abyssal_trench",
+    "the_shell:glowing_reef"
   ]
 }

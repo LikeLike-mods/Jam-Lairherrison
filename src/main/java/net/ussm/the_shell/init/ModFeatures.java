@@ -26,4 +26,8 @@ public class ModFeatures {
             () -> new BeachRockFeature(NoneFeatureConfiguration.CODEC));
     public static final DeferredHolder<Feature<?>, MessageBottleFeature> MESSAGE_BOTTLE = FEATURES.register("message_bottle",
             () -> new MessageBottleFeature(NoneFeatureConfiguration.CODEC));
+    public static final DeferredHolder<Feature<?>, net.ussm.the_shell.worldgen.feature.HydrothermalChimneyFeature> HYDROTHERMAL_CHIMNEY =
+            FEATURES.register("hydrothermal_chimney", () -> new net.ussm.the_shell.worldgen.feature.HydrothermalChimneyFeature(NoneFeatureConfiguration.CODEC));
+    public static final DeferredHolder<Feature<?>, net.ussm.the_shell.worldgen.feature.AbyssBlobFeature> ABYSS_BLOB = FEATURES.register("abyss_blob",
+            () -> new net.ussm.the_shell.worldgen.feature.AbyssBlobFeature(net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration.CODEC));
 }

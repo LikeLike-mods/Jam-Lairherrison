@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "top=false": {
+      "model": "the_shell:block/hydrothermal_chimney"
+    },
+    "top=true": {
+      "model": "the_shell:block/hydrothermal_chimney_top"
+    }
+  }
+}
