@@ -273,5 +273,13 @@
   "item.the_shell.date_syrup": "Sirop de dattes",
   "message.the_shell.submarine.energy": "Batterie du sous-marin : %s %%",
   "message.the_shell.submarine.empty": "Batterie à plat ! Recharge-la (charbon, redstone, kyber)",
-  "hud.the_shell.submarine.energy": "Batterie %s %%"
+  "hud.the_shell.submarine.energy": "Batterie %s %%",
+  "block.the_shell.abyssal_coal_ore": "Minerai de charbon abyssal",
+  "block.the_shell.abyssal_iron_ore": "Minerai d'fer abyssal",
+  "block.the_shell.abyssal_copper_ore": "Minerai de cuivre abyssal",
+  "block.the_shell.abyssal_gold_ore": "Minerai de or abyssal",
+  "block.the_shell.abyssal_redstone_ore": "Minerai de redstone abyssal",
+  "block.the_shell.abyssal_lapis_ore": "Minerai de lapis-lazuli abyssal",
+  "block.the_shell.abyssal_diamond_ore": "Minerai de diamant abyssal",
+  "block.the_shell.abyssal_emerald_ore": "Minerai d'émeraude abyssal"
 }

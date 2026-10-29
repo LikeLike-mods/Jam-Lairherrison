@@ -56,6 +56,14 @@
     "the_shell:kyber_ore",
     "the_shell:sulfur_block",
     "the_shell:glowing_coral_block",
-    "the_shell:manganese_nodule"
+    "the_shell:manganese_nodule",
+    "the_shell:abyssal_coal_ore",
+    "the_shell:abyssal_iron_ore",
+    "the_shell:abyssal_copper_ore",
+    "the_shell:abyssal_gold_ore",
+    "the_shell:abyssal_redstone_ore",
+    "the_shell:abyssal_lapis_ore",
+    "the_shell:abyssal_diamond_ore",
+    "the_shell:abyssal_emerald_ore"
   ]
 }

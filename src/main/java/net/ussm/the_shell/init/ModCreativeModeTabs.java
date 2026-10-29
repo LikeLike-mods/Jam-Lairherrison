@@ -55,6 +55,14 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.GLOWING_ANEMONE);
                         output.accept(ModBlocks.MANGANESE_NODULE);
                         output.accept(ModBlocks.KYBER_ORE);
+                        output.accept(ModBlocks.ABYSSAL_COAL_ORE);
+                        output.accept(ModBlocks.ABYSSAL_IRON_ORE);
+                        output.accept(ModBlocks.ABYSSAL_COPPER_ORE);
+                        output.accept(ModBlocks.ABYSSAL_GOLD_ORE);
+                        output.accept(ModBlocks.ABYSSAL_REDSTONE_ORE);
+                        output.accept(ModBlocks.ABYSSAL_LAPIS_ORE);
+                        output.accept(ModBlocks.ABYSSAL_DIAMOND_ORE);
+                        output.accept(ModBlocks.ABYSSAL_EMERALD_ORE);
                         output.accept(ModBlocks.SULFUR_BLOCK);
                         output.accept(ModBlocks.GLOWING_CORAL_BLOCK);
                         output.accept(ModItems.KYBER_CRYSTAL);

@@ -273,5 +273,13 @@
   "item.the_shell.date_syrup": "Date Syrup",
   "message.the_shell.submarine.energy": "Submarine battery: %s%%",
   "message.the_shell.submarine.empty": "Battery empty! Recharge it (coal, redstone, kyber)",
-  "hud.the_shell.submarine.energy": "Battery %s%%"
+  "hud.the_shell.submarine.energy": "Battery %s%%",
+  "block.the_shell.abyssal_coal_ore": "Abyssal Coal Ore",
+  "block.the_shell.abyssal_iron_ore": "Abyssal Iron Ore",
+  "block.the_shell.abyssal_copper_ore": "Abyssal Copper Ore",
+  "block.the_shell.abyssal_gold_ore": "Abyssal Gold Ore",
+  "block.the_shell.abyssal_redstone_ore": "Abyssal Redstone Ore",
+  "block.the_shell.abyssal_lapis_ore": "Abyssal Lapis Lazuli Ore",
+  "block.the_shell.abyssal_diamond_ore": "Abyssal Diamond Ore",
+  "block.the_shell.abyssal_emerald_ore": "Abyssal Emerald Ore"
 }

@@ -45,6 +45,9 @@
     "the_shell:light_strip",
     "the_shell:floodlight",
     "the_shell:emergency_light",
-    "the_shell:broken_industrial_lamp"
+    "the_shell:broken_industrial_lamp",
+    "the_shell:abyssal_iron_ore",
+    "the_shell:abyssal_copper_ore",
+    "the_shell:abyssal_lapis_ore"
   ]
 }
