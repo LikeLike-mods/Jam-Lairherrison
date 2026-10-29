@@ -78,7 +78,7 @@ public class TestBiomeSource extends BiomeSource {
         slope *= 2f;
         if (slope > 1f) slope = 1f;
 
-        float swampiness = getSwampiness(blockX, blockZ, h, Math.min(slope, 1f));
+        float swampiness = getSwampiness(blockX, blockZ, h);
 
         if (h < SEA + 1f) {
             if (blockY < ABYSS) return abyss;

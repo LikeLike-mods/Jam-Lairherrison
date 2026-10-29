@@ -169,21 +169,22 @@ public class TestChunkGenerator extends ChunkGenerator {
         return h;
     }
 
-    public static float getSwampiness(float posX, float posZ, float posY, float slope) {
-        net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(200);
+    // niveau du marais : toute la mangrove est a cette hauteur, comme ca l'eau ne coule nulle part
+    public static final int SWAMP_LEVEL = SEA + 2;
 
-        noise.SetFractalOctaves(1);
-        noise.SetSeed(203);
+    // 0 = pas de mangrove, 1 = plein marais. seulement sur les terres basses : plus le terrain est haut moins on aplatit,
+    // comme ca le bord du marais remonte en pente douce au lieu de faire des marches
+    public static float getSwampiness(float posX, float posZ, float posY) {
+        net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(203);
         noise.SetFrequency(0.001f);
         noise.SetFractalType(FastNoiseLite.FractalType.FBm);
+        noise.SetFractalOctaves(1);
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
 
-        float min = Math.min(SEA + 1f + 3f * slope, SEA + 16f);
-        float max = Math.max(SEA + 1f + 3f * slope, SEA + 16f);
-        float inRangeFloat = Math.min(posY - min ,max - posY);
-        inRangeFloat = 1f - 1f / (1f + Math.max(20f * inRangeFloat, 0f));
-
-        return Math.max(0f, noise.GetNoise(posX, posZ) * inRangeFloat);
+        float marais = Math.clamp((noise.GetNoise(posX, posZ) - 0.35f) / 0.25f, 0f, 1f);
+        float bas = Math.clamp(1f - (posY - SWAMP_LEVEL) / 8f, 0f, 1f);
+        float terre = Math.clamp(posY - SEA, 0f, 1f); // pas dans la mer
+        return (float) (Mth.smoothstep(marais) * Mth.smoothstep(bas)) * terre;
     }
 
     public static float lerp(float a, float b, float t) {
@@ -192,6 +193,19 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     private void placeMyStructure(ChunkAccess chunk) {
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        int cx = chunk.getPos().x * 16;
+        int cz = chunk.getPos().z * 16;
+
+        // hauteurs du chunk + une colonne autour. dans la mangrove le terrain descend au niveau du marais
+        float[][] ground = new float[18][18];
+        float[][] swamp = new float[18][18];
+        for (int i = 0; i < 18; i++) {
+            for (int j = 0; j < 18; j++) {
+                float raw = getHeight(cx + i - 1, cz + j - 1);
+                swamp[i][j] = getSwampiness(cx + i - 1, cz + j - 1, raw);
+                ground[i][j] = raw + (SWAMP_LEVEL - raw) * swamp[i][j];
+            }
+        }
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -200,11 +214,11 @@ public class TestChunkGenerator extends ChunkGenerator {
                 int posX = x + (chunk.getPos().x * 16);
                 int posZ = z + (chunk.getPos().z * 16);
 
-                float h = getHeight(posX, posZ);
-                float n = getHeight(posX + 1, posZ);
-                float s = getHeight(posX - 1, posZ);
-                float e = getHeight(posX, posZ + 1);
-                float w = getHeight(posX, posZ - 1);
+                float h = ground[x + 1][z + 1];
+                float n = ground[x + 2][z + 1];
+                float s = ground[x][z + 1];
+                float e = ground[x + 1][z + 2];
+                float w = ground[x + 1][z];
                 float slope = length(n - s, e - w);
                 slope *= 2f;
 
@@ -229,7 +243,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                 BlockState topWater = ModBlocks.LIGHT_SAND_WET.get().defaultBlockState();
                 BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
 
-                float swampiness = getSwampiness(posX, posZ, h, Math.min(slope, 1f));
+                float swampiness = swamp[x + 1][z + 1];
 
                 if (slope >= 7f) {
                     topLand = ModBlocks.BROWNSTONE.get().defaultBlockState();
@@ -237,8 +251,11 @@ public class TestChunkGenerator extends ChunkGenerator {
                     topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
                 }
                 else if (swampiness >= 0.5f) {
-                    if (hash3 >= 0.75f) topLand = Blocks.MUD.defaultBlockState();
-                    else topLand = Blocks.WATER.defaultBlockState();
+                    // de l'eau seulement au coeur du marais, et si les 4 voisins sont au moins aussi hauts (sinon elle coule)
+                    boolean bassin = swampiness >= 0.9f && Math.round(h) == SWAMP_LEVEL && Math.round(n) >= SWAMP_LEVEL
+                            && Math.round(s) >= SWAMP_LEVEL && Math.round(e) >= SWAMP_LEVEL && Math.round(w) >= SWAMP_LEVEL;
+                    if (bassin && hash3 < 0.75f) topLand = Blocks.WATER.defaultBlockState();
+                    else topLand = Blocks.MUD.defaultBlockState();
                     top2Land = Blocks.MUD.defaultBlockState();
                 }
                 else if (inRange(h, SEA - 1f, SEA + 5f * Math.min(slope, 1f))) {
