@@ -100,6 +100,8 @@ public class ModBlocks {
                     .noOcclusion(),
                     Block.box(4, 0, 4, 12, 5, 12)));
 
+    public static final DeferredBlock<Block> AIR_BUBBLE = registerBlock("air_bubble",
+            () -> new net.ussm.the_shell.blocks.AirBubbleBlock(BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.GLASS).noOcclusion().lightLevel(s -> 6)));
     public static final DeferredBlock<Block> SUBMARINE_WINDOW = registerBlock("submarine_window",
             () -> new net.ussm.the_shell.blocks.SubmarineWindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).lightLevel(s -> 5)));
 

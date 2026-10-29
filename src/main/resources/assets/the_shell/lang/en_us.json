@@ -292,5 +292,9 @@
   "hud.the_shell.sonar.none": "Sonar: no rift nearby",
   "message.the_shell.submarine.occupied": "Someone is already at the controls",
   "pressure.the_shell.crushed_hard": "The pressure is crushing you! Go up or wear the full diving suit",
-  "item.the_shell.iron_abyss_helmet": "Iron Abyss Helmet"
+  "item.the_shell.iron_abyss_helmet": "Iron Abyss Helmet",
+  "item.the_shell.black_pearl": "Black Pearl",
+  "item.the_shell.grappling_hook": "Grappling Hook",
+  "item.the_shell.pocket_sonar": "Pocket Sonar",
+  "block.the_shell.air_bubble": "Air Bubble"
 }

@@ -141,6 +141,10 @@ public class DeepSeaEvents {
         if (!player.isEyeInFluid(FluidTags.WATER) || bubbles || player.getVehicle() instanceof Submarine) setOxygen(player, oxygen + 24);
     }
 
+    public static void giveOxygen(Player player, int amount) {
+        setOxygen(player, player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN) + amount);
+    }
+
     private static void setOxygen(Player player, int oxygen) {
         oxygen = Math.max(0, Math.min(net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN, oxygen));
         int old = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);

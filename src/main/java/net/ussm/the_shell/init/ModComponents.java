@@ -24,6 +24,11 @@ public class ModComponents {
         COMPONENTS.registerComponentType("weighted",
             builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
+    // le bloc ou le grappin s'est accroche
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<net.minecraft.core.BlockPos>> GRAPPLE_TARGET =
+        COMPONENTS.registerComponentType("grapple_target",
+            builder -> builder.networkSynchronized(net.minecraft.core.BlockPos.STREAM_CODEC));
+
     public static void register(IEventBus eventBus) {
         COMPONENTS.register(eventBus);
     }

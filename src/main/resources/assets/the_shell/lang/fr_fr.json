@@ -292,5 +292,9 @@
   "hud.the_shell.sonar.none": "Sonar : pas de faille proche",
   "message.the_shell.submarine.occupied": "Quelqu'un est déjà aux commandes",
   "pressure.the_shell.crushed_hard": "La pression vous écrase ! Remontez ou mettez le scaphandre complet",
-  "item.the_shell.iron_abyss_helmet": "Crâne des abysses en fer"
+  "item.the_shell.iron_abyss_helmet": "Crâne des abysses en fer",
+  "item.the_shell.black_pearl": "Perle noire",
+  "item.the_shell.grappling_hook": "Grappin",
+  "item.the_shell.pocket_sonar": "Sonar de poche",
+  "block.the_shell.air_bubble": "Bulle d'air"
 }
