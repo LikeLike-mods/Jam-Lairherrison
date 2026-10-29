@@ -290,5 +290,6 @@
   "message.the_shell.submarine.upgrade_order": "Use the iron kit first, then diamond, then netherite",
   "hud.the_shell.sonar": "Sonar: rift %s m %s",
   "hud.the_shell.sonar.none": "Sonar: no rift nearby",
-  "message.the_shell.submarine.occupied": "Someone is already at the controls"
+  "message.the_shell.submarine.occupied": "Someone is already at the controls",
+  "pressure.the_shell.crushed_hard": "The pressure is crushing you! Go up or wear the full diving suit"
 }

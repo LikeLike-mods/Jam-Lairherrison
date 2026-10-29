@@ -290,5 +290,6 @@
   "message.the_shell.submarine.upgrade_order": "Il faut d'abord le kit fer, puis diamant, puis netherite",
   "hud.the_shell.sonar": "Sonar : faille à %s m %s",
   "hud.the_shell.sonar.none": "Sonar : pas de faille proche",
-  "message.the_shell.submarine.occupied": "Quelqu'un est déjà aux commandes"
+  "message.the_shell.submarine.occupied": "Quelqu'un est déjà aux commandes",
+  "pressure.the_shell.crushed_hard": "La pression vous écrase ! Remontez ou mettez le scaphandre complet"
 }

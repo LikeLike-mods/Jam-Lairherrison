@@ -49,7 +49,9 @@ public class DivingHud {
 
         float depth = player.isEyeInFluid(FluidTags.WATER) ? Math.max(0.0F, player.level().getSeaLevel() - (float) player.getEyeY()) : 0.0F;
         if (depth > 0 && player.level().dimension() == net.ussm.the_shell.events.AbyssTravel.ABYSS) depth += MAX_DEPTH;
-        float fill = Mth.clamp(depth / MAX_DEPTH, 0.0F, 1.0F);
+        // la jauge suit le palier de pression (0 a 5)
+        int palier = DeepSeaEvents.pressureLevel(player, player.isInWater());
+        float fill = palier / 5.0F;
         boolean safe = DeepSeaEvents.hasFullSuit(player) || player.getVehicle() instanceof Submarine;
 
         int x = w - 22;
@@ -59,13 +61,11 @@ public class DivingHud {
         g.fill(x - 2, top - 2, x + 10, bottom + 2, 0xFFC18B47);
         g.fill(x, top, x + 8, bottom, 0xFF0D1114);
         int level = bottom - Math.round((bottom - top) * fill);
-        int color = fill < 0.4F ? 0xFF4FD16A : fill < 0.7F ? 0xFFE3C13B : 0xFFE0482F;
-        if (!safe && fill >= 0.7F && (player.tickCount / 5) % 2 == 0) color = 0xFF7A1A12;
+        int color = palier <= 1 ? 0xFF4FD16A : palier == 2 ? 0xFFE3C13B : palier == 3 ? 0xFFE08A2F : 0xFFE0482F;
+        if (!safe && palier >= 3 && (player.tickCount / 5) % 2 == 0) color = 0xFF7A1A12;
         g.fill(x + 1, level, x + 7, bottom, color);
-        int abyss = TestChunkGenerator.ABYSS;
-        for (int y : new int[]{abyss, abyss - 40, abyss - 80}) {
-            float f = Mth.clamp((TestChunkGenerator.SEA - y) / MAX_DEPTH, 0.0F, 1.0F);
-            int ty = bottom - Math.round((bottom - top) * f);
+        for (int k = 1; k < 5; k++) {
+            int ty = bottom - Math.round((bottom - top) * k / 5.0F);
             g.fill(x - 2, ty, x + 10, ty + 1, 0xFF6B4A22);
         }
         // la bouteille d'oxygene, a gauche du manometre
