@@ -134,7 +134,7 @@ public class SubmarineInterior {
     @SubscribeEvent
     public static void leaveSeat(net.neoforged.neoforge.event.entity.EntityMountEvent event) {
         if (event.isDismounting() && event.getEntityMounting() instanceof ServerPlayer player && event.getEntityBeingMounted() instanceof Submarine sub
-                && player.isShiftKeyDown() && sub.isAlive()) {
+                && !player.isOnPortalCooldown() && sub.isAlive()) {
             TO_CABIN.put(player.getUUID(), sub.getUUID());
         }
     }
