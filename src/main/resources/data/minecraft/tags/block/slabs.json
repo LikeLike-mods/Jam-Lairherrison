@@ -4,8 +4,6 @@
     "the_shell:metal_plating_slab",
     "the_shell:rusty_metal_plating_slab",
     "the_shell:metal_grate_slab",
-    "the_shell:rusty_metal_grate_slab",
-    "the_shell:dirt_slab",
-    "the_shell:grass_slab"
+    "the_shell:rusty_metal_grate_slab"
   ]
 }
