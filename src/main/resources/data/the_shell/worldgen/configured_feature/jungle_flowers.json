@@ -22,6 +22,18 @@
                 "data": {
                   "Name": "the_shell:bird_of_paradise"
                 }
+              },
+              {
+                "weight": 3,
+                "data": {
+                  "Name": "the_shell:tropical_orchid"
+                }
+              },
+              {
+                "weight": 2,
+                "data": {
+                  "Name": "the_shell:jade_flower"
+                }
               }
             ]
           }

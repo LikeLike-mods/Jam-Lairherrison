@@ -1,5 +1,7 @@
 {
   "creativetab.the_shell.blocks": "The Shell",
+  "painting.the_shell.dancing_parrot.title": "Perroquet en fête",
+  "painting.the_shell.dancing_parrot.author": "Anonyme",
 
   "advancement.the_shell.root.title": "Titre",
   "advancement.the_shell.root.description" : "Bienvenue au Incroyable Cirque Numérique !",
@@ -78,6 +80,8 @@
   "block.the_shell.bird_of_paradise": "Oiseau de paradis",
   "block.the_shell.frangipani": "Frangipanier",
   "block.the_shell.shadow_lily": "Lys d'ombre",
+  "block.the_shell.tropical_orchid": "Orchidée",
+  "block.the_shell.jade_flower": "Fleur de jade",
   "block.the_shell.pitcher_plant": "Népenthès",
   "block.the_shell.stripped_palm_log": "Bûche de palmier écorcée",
   "block.the_shell.palm_wood": "Bois de palmier",

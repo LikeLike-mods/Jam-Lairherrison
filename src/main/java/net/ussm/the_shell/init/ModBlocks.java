@@ -192,6 +192,10 @@ public class ModBlocks {
     public static final DeferredBlock<TropicalFlowerBlock> SHADOW_LILY = registerBlock("shadow_lily",
             () -> new TropicalFlowerBlock(MobEffects.NIGHT_VISION, 5.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
                     .lightLevel(state -> 6)));
+    public static final DeferredBlock<TropicalFlowerBlock> TROPICAL_ORCHID = registerBlock("tropical_orchid",
+            () -> new TropicalFlowerBlock(MobEffects.ABSORPTION, 5.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)));
+    public static final DeferredBlock<TropicalFlowerBlock> JADE_FLOWER = registerBlock("jade_flower",
+            () -> new TropicalFlowerBlock(MobEffects.WATER_BREATHING, 8.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)));
 
     public static final DeferredBlock<FlytrapBlock> FLYTRAP = registerBlock("flytrap",
             () -> new FlytrapBlock(BlockBehaviour.Properties.of()

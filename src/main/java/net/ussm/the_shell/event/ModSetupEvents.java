@@ -84,6 +84,8 @@ public class ModSetupEvents {
         fire.setFlammable(ModBlocks.BIRD_OF_PARADISE.get(), 60, 100);
         fire.setFlammable(ModBlocks.FRANGIPANI.get(), 60, 100);
         fire.setFlammable(ModBlocks.SHADOW_LILY.get(), 60, 100);
+        fire.setFlammable(ModBlocks.TROPICAL_ORCHID.get(), 60, 100);
+        fire.setFlammable(ModBlocks.JADE_FLOWER.get(), 60, 100);
         fire.setFlammable(ModBlocks.FLYTRAP.get(), 60, 100);
         fire.setFlammable(ModBlocks.PITCHER_PLANT.get(), 60, 100);
     }

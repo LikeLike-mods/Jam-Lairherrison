@@ -1,5 +1,7 @@
 {
   "creativetab.the_shell.blocks": "The Shell",
+  "painting.the_shell.dancing_parrot.title": "Party Parrot",
+  "painting.the_shell.dancing_parrot.author": "Anonymous",
 
   "advancement.the_shell.root.title": "Title",
   "advancement.the_shell.root.description" : "Welcome to the on a pas encore de nom lol",
@@ -78,6 +80,8 @@
   "block.the_shell.bird_of_paradise": "Bird of Paradise",
   "block.the_shell.frangipani": "Frangipani",
   "block.the_shell.shadow_lily": "Shadow Lily",
+  "block.the_shell.tropical_orchid": "Orchid",
+  "block.the_shell.jade_flower": "Jade Flower",
   "block.the_shell.pitcher_plant": "Pitcher Plant",
   "block.the_shell.stripped_palm_log": "Stripped Palm Log",
   "block.the_shell.palm_wood": "Palm Wood",

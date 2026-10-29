@@ -12,6 +12,12 @@
     "the_shell:hibiscus": {
       "chance": 0.65
     },
+    "the_shell:tropical_orchid": {
+      "chance": 0.65
+    },
+    "the_shell:jade_flower": {
+      "chance": 0.65
+    },
     "the_shell:bird_of_paradise": {
       "chance": 0.65
     },

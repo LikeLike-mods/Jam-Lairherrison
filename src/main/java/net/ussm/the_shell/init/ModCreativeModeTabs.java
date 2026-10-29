@@ -69,6 +69,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BIRD_OF_PARADISE);
                         output.accept(ModBlocks.FRANGIPANI);
                         output.accept(ModBlocks.SHADOW_LILY);
+                        output.accept(ModBlocks.TROPICAL_ORCHID);
+                        output.accept(ModBlocks.JADE_FLOWER);
                         output.accept(ModBlocks.FLYTRAP);
                         output.accept(ModBlocks.PITCHER_PLANT);
                         output.accept(ModItems.NECTAR);
