@@ -160,6 +160,27 @@ public class SubmarineInterior {
         else if (y > ROOF) leave(player, true);
     }
 
+    // aux commandes on pilote : on ne casse pas, on ne pose pas et on ne tape pas ce qu'il y a dehors
+    @SubscribeEvent
+    public static void noBreakFromSeat(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock event) {
+        if (event.getEntity().getVehicle() instanceof Submarine) event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void noUseFromSeat(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+        if (event.getEntity().getVehicle() instanceof Submarine) event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void noHitFromSeat(net.neoforged.neoforge.event.entity.player.AttackEntityEvent event) {
+        if (event.getEntity().getVehicle() instanceof Submarine) event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void noBreakFromSeat(BlockEvent.BreakEvent event) {
+        if (event.getPlayer().getVehicle() instanceof Submarine) event.setCanceled(true);
+    }
+
     // on ne casse pas la coque, sinon on tombe dans le vide
     @SubscribeEvent
     public static void protect(BlockEvent.BreakEvent event) {

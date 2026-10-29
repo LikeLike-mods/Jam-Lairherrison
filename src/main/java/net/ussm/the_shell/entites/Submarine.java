@@ -126,7 +126,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
 
     @Override
     protected Vec3 getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
-        return new Vec3(0.0, 0.3, 0.3);
+        return new Vec3(0.0, 0.15, 0.25);
     }
 
     // clic droit : on entre dans la cabine, et l'echelle du fond mene aux commandes

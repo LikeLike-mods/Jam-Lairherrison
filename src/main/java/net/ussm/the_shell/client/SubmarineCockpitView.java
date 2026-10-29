@@ -50,7 +50,7 @@ public class SubmarineCockpitView {
         pose.pushPose();
         pose.mulPose(Axis.YP.rotationDegrees(-yaw));
         // le sol : des plaques de metal sous le siege (avec leurs joints), du verre devant pour voir en dessous
-        box(vc, pose, -1.1F, -1.27F, -1.0F, 1.1F, -1.22F, 0.5F, METAL, lumiere);
+        plaques(vc, pose, -1.1F, -1.27F, -1.0F, 1.1F, -1.22F, 0.5F, METAL, lumiere);
         for (float z = -0.9F; z < 0.5F; z += 0.35F) box(vc, pose, -1.1F, -1.22F, z, 1.1F, -1.215F, z + 0.02F, METAL_SOMBRE, lumiere);
         box(vc, pose, -1.1F, -1.27F, 0.5F, 1.1F, -1.25F, 1.7F, SOL_VERRE, lumiere);
         // la bulle
@@ -60,9 +60,9 @@ public class SubmarineCockpitView {
         box(vc, pose, -1.2F, 0.9F, -0.4F, 1.2F, 0.92F, 1.7F, VERRE, lumiere);
         // les montants, avec un liseré clair et des rivets
         for (float x : new float[]{-1.2F, 1.2F}) {
-            box(vc, pose, x - 0.04F, -1.24F, 1.66F, x + 0.04F, 0.94F, 1.74F, CADRE, lumiere);
+            plaques(vc, pose, x - 0.04F, -1.24F, 1.66F, x + 0.04F, 0.94F, 1.74F, CADRE, lumiere);
             box(vc, pose, x - 0.045F, -1.24F, 1.655F, x + 0.045F, 0.94F, 1.665F, CADRE_CLAIR, lumiere);
-            box(vc, pose, x - 0.04F, 0.88F, -0.4F, x + 0.04F, 0.96F, 1.74F, CADRE, lumiere);
+            plaques(vc, pose, x - 0.04F, 0.88F, -0.4F, x + 0.04F, 0.96F, 1.74F, CADRE, lumiere);
             box(vc, pose, x - 0.04F, -1.24F, -0.4F, x + 0.04F, -1.16F, 1.74F, CADRE, lumiere);
             for (float y = -1.0F; y < 0.9F; y += 0.4F) box(vc, pose, x - 0.05F, y, 1.64F, x + 0.05F, y + 0.03F, 1.66F, CADRE_CLAIR, lumiere);
         }
@@ -71,12 +71,12 @@ public class SubmarineCockpitView {
         box(vc, pose, -1.24F, 0.88F, 0.56F, 1.24F, 0.96F, 0.64F, CADRE, lumiere);
         box(vc, pose, -1.24F, 0.875F, 0.55F, 1.24F, 0.885F, 0.65F, CADRE_CLAIR, lumiere);
         // derriere : le mur de la cabine avec la trappe qui descend
-        box(vc, pose, -1.2F, -1.22F, -0.42F, 1.2F, 0.92F, -0.38F, METAL, lumiere);
+        plaques(vc, pose, -1.2F, -1.22F, -0.42F, 1.2F, 0.92F, -0.38F, METAL, lumiere);
         box(vc, pose, -0.44F, -1.22F, -0.375F, 0.44F, 0.24F, -0.365F, CADRE_CLAIR, lumiere);
         box(vc, pose, -0.4F, -1.22F, -0.37F, 0.4F, 0.2F, -0.36F, 0xFF1C2024, lumiere);
 
         // le tableau de bord : un caisson avec un rebord clair et une facade plus sombre
-        box(vc, pose, -0.7F, -0.95F, 1.05F, 0.7F, -0.6F, 1.45F, 0xFF2F353D, lumiere);
+        plaques(vc, pose, -0.7F, -0.95F, 1.05F, 0.7F, -0.6F, 1.45F, 0xFF2F353D, lumiere);
         box(vc, pose, -0.72F, -0.6F, 1.03F, 0.72F, -0.57F, 1.47F, CADRE_CLAIR, lumiere);
         box(vc, pose, -0.66F, -0.92F, 1.045F, 0.66F, -0.63F, 1.05F, 0xFF22272D, lumiere);
         box(vc, pose, -0.23F, -0.79F, 1.035F, 0.23F, -0.63F, 1.045F, 0xFF101418, lumiere);
@@ -127,6 +127,22 @@ public class SubmarineCockpitView {
         pose.popPose();
         pose.popPose();
         buffers.endBatch(TYPE);
+    }
+
+    // une surface en metal decoupee en petites plaques, chacune d'un gris un tout petit peu different
+    private static void plaques(VertexConsumer vc, PoseStack pose, float x0, float y0, float z0, float x1, float y1, float z1, int argb, int light) {
+        float pas = 0.18F;
+        int nx = Math.max(1, Math.round((x1 - x0) / pas)), ny = Math.max(1, Math.round((y1 - y0) / pas)), nz = Math.max(1, Math.round((z1 - z0) / pas));
+        for (int i = 0; i < nx; i++) {
+            for (int j = 0; j < ny; j++) {
+                for (int k = 0; k < nz; k++) {
+                    int h = (i * 73856093) ^ (j * 19349663) ^ (k * 83492791) ^ argb;
+                    float f = 0.9F + ((h >>> 8) & 255) / 255.0F * 0.18F;
+                    box(vc, pose, x0 + (x1 - x0) * i / nx, y0 + (y1 - y0) * j / ny, z0 + (z1 - z0) * k / nz,
+                            x0 + (x1 - x0) * (i + 1) / nx, y0 + (y1 - y0) * (j + 1) / ny, z0 + (z1 - z0) * (k + 1) / nz, teinte(argb, f), light);
+                }
+            }
+        }
     }
 
     // chaque face a sa propre lumiere (dessus clair, dessous sombre) pour que ca ait du relief
