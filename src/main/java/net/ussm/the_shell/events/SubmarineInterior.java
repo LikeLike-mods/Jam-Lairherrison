@@ -69,6 +69,32 @@ public class SubmarineInterior {
                 .ifPresent(t -> t.placeInWorld(inside, at, at, new StructurePlaceSettings(), inside.random, Block.UPDATE_CLIENTS));
     }
 
+    // des poissons qui nagent dans l'eau recopiee, selon ou est le sous-marin (jusqu'a 7, un de plus toutes les 2 secondes)
+    private static void fishes(ServerLevel inside, int cabin, CompoundTag where) {
+        BlockPos c = corner(cabin);
+        net.minecraft.world.phys.AABB zone = new net.minecraft.world.phys.AABB(c.getX() - 5, c.getY() - 2, c.getZ() - 5, c.getX() + 20, c.getY() + 17, c.getZ() + 26);
+        if (inside.getEntitiesOfClass(net.minecraft.world.entity.animal.WaterAnimal.class, zone).size() >= 7) return;
+        String dim = where.getString("Dim");
+        boolean abysses = dim.equals(AbyssTravel.ABYSS.location().toString());
+        boolean clair = dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > net.ussm.the_shell.worldgen.TestChunkGenerator.SEA - 24;
+        net.minecraft.world.entity.EntityType<?>[] types = abysses
+                ? new net.minecraft.world.entity.EntityType<?>[]{net.ussm.the_shell.init.ModEntities.HATCHETFISH.get(), net.ussm.the_shell.init.ModEntities.HATCHETFISH.get(),
+                        net.minecraft.world.entity.EntityType.GLOW_SQUID, net.ussm.the_shell.init.ModEntities.ABYSSAL_ANGLER.get()}
+                : clair ? new net.minecraft.world.entity.EntityType<?>[]{net.minecraft.world.entity.EntityType.TROPICAL_FISH, net.minecraft.world.entity.EntityType.TROPICAL_FISH,
+                        net.minecraft.world.entity.EntityType.COD, net.minecraft.world.entity.EntityType.SALMON, net.minecraft.world.entity.EntityType.PUFFERFISH}
+                : new net.minecraft.world.entity.EntityType<?>[]{net.minecraft.world.entity.EntityType.COD, net.minecraft.world.entity.EntityType.SQUID, net.minecraft.world.entity.EntityType.GLOW_SQUID};
+        net.minecraft.util.RandomSource r = inside.random;
+        for (int essai = 0; essai < 12; essai++) {
+            BlockPos p = c.offset(-4 + r.nextInt(23), r.nextInt(17), -4 + r.nextInt(29));
+            if (!inside.getFluidState(p).is(net.minecraft.tags.FluidTags.WATER) || !inside.getFluidState(p.above()).is(net.minecraft.tags.FluidTags.WATER)) continue;
+            if (!(types[r.nextInt(types.length)].create(inside) instanceof net.minecraft.world.entity.Mob mob)) return;
+            mob.moveTo(p.getX() + 0.5, p.getY() + 0.2, p.getZ() + 0.5, r.nextFloat() * 360.0F, 0.0F);
+            net.neoforged.neoforge.event.EventHooks.finalizeMobSpawn(mob, inside, inside.getCurrentDifficultyAt(p), net.minecraft.world.entity.MobSpawnType.NATURAL, null);
+            inside.addFreshEntity(mob);
+            return;
+        }
+    }
+
     // par les hublots on voit le vrai dehors : on recopie autour de la cabine les blocs qui entourent le sous-marin,
     // tournes dans le meme sens que lui (son avant = l'avant de la cabine). des barrieres tout autour pour que l'eau reste en place
     private static final int[][] DANS_LA_CABINE = {{3, 3, 3, 11, 14, 19}, {11, 5, 4, 19, 10, 10}, {11, 5, 12, 19, 10, 18}, {-6, 5, 12, 3, 10, 20}};
@@ -244,7 +270,10 @@ public class SubmarineInterior {
         if (player.level().dimension() == INTERIOR && player.tickCount % 40 == 0) {
             int c = Math.floorDiv((int) Math.floor(player.getX()) + SPACING / 2, SPACING);
             CompoundTag w = Cabins.get(player.server).subs.get(c);
-            if (w != null) mirror(player.serverLevel(), c, w);
+            if (w != null) {
+                mirror(player.serverLevel(), c, w);
+                fishes(player.serverLevel(), c, w);
+            }
         }
         UUID back = TO_CABIN.remove(player.getUUID());
         if (back != null && !player.isPassenger() && player.serverLevel().getEntity(back) instanceof Submarine sub) enter(player, sub);
