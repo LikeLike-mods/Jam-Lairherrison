@@ -108,7 +108,7 @@ public class TestChunkGenerator extends ChunkGenerator {
     // failles : de longues crevasses au fond des abysses, assez larges pour un sous-marin. pas de portail : en nageant
     // sous RIFT_DOWN on passe dans les abysses (AbyssTravel)
     public static final int RIFT_DOWN = -118;
-    private static final FastNoiseLite RIFT_LINES = riftNoise(210, 0.0025f, FastNoiseLite.FractalType.Ridged);
+    private static final FastNoiseLite RIFT_LINES = riftNoise(210, 0.004f, FastNoiseLite.FractalType.Ridged);
     private static final FastNoiseLite RIFT_PIECES = riftNoise(211, 0.004f, FastNoiseLite.FractalType.FBm);
 
     private static FastNoiseLite riftNoise(int seed, float freq, FastNoiseLite.FractalType type) {
@@ -122,9 +122,9 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     // la meme fonction sert a la dimension des abysses pour mettre la faille du retour pile en dessous
     public static boolean isRift(int x, int z) {
-        if ((RIFT_LINES.GetNoise(x, z) + 1f) * 0.5f < 0.95f) return false;
-        if (RIFT_PIECES.GetNoise(x, z) < 0.1f) return false;
-        return getHeight(x, z) < ABYSS - 100;
+        if ((RIFT_LINES.GetNoise(x, z) + 1f) * 0.5f < 0.92f) return false;
+        if (RIFT_PIECES.GetNoise(x, z) < -0.25f) return false;
+        return getHeight(x, z) < ABYSS - 80;
     }
 
     public static float getHeight(float posX, float posZ) {
