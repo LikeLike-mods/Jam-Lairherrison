@@ -83,11 +83,11 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.entityData.set(ENERGY, Math.max(0, Math.min(MAX_ENERGY, energy)));
     }
 
-    // ce que vaut chaque carburant
+    // ce que vaut chaque carburant : le charbon et la redstone depannent, le kyber des abysses recharge a fond
     public static int fuelValue(net.minecraft.world.item.ItemStack stack) {
-        if (stack.is(net.minecraft.world.item.Items.COAL) || stack.is(net.minecraft.world.item.Items.CHARCOAL)) return 900;
-        if (stack.is(net.minecraft.world.item.Items.REDSTONE)) return 400;
-        if (stack.is(net.minecraft.world.item.Items.REDSTONE_BLOCK)) return 3600;
+        if (stack.is(net.minecraft.world.item.Items.COAL) || stack.is(net.minecraft.world.item.Items.CHARCOAL)) return 150;
+        if (stack.is(net.minecraft.world.item.Items.REDSTONE)) return 100;
+        if (stack.is(net.minecraft.world.item.Items.REDSTONE_BLOCK)) return 900;
         if (stack.is(ModItems.KYBER_CRYSTAL.get())) return MAX_ENERGY;
         return 0;
     }
