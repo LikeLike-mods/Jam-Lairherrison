@@ -46,14 +46,17 @@ public class FloodlightBeamBlock extends Block implements SimpleWaterloggedBlock
         }
     }
 
+    // on remonte jusqu'au projecteur, mais un mur entre les deux coupe le faisceau (sinon ca eclairait derriere les murs)
     private static boolean lit(LevelReader level, BlockPos pos) {
         for (Direction d : Direction.Plane.HORIZONTAL) {
             for (int k = 1; k <= FloodlightBlock.RANGE; k++) {
-                BlockState s = level.getBlockState(pos.relative(d.getOpposite(), k));
+                BlockPos p = pos.relative(d.getOpposite(), k);
+                BlockState s = level.getBlockState(p);
                 if (s.is(ModBlocks.FLOODLIGHT.get())) {
                     if (s.getValue(FloodlightBlock.FACING) == d && s.getValue(FloodlightBlock.LIT)) return true;
                     break;
                 }
+                if (s.isSolidRender(level, p)) break;
             }
         }
         return false;

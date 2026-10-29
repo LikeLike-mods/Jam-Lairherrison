@@ -46,6 +46,7 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape SHAPE_NS = Block.box(0, 0, 7, 16, 16, 9);
     private static final VoxelShape SHAPE_EW = Block.box(7, 0, 0, 9, 16, 16);
+    private static final int USE_COOLDOWN = 12;   // le temps de l'animation
     private final boolean broken;
 
     public SlidingDoorBlock(Properties properties, boolean broken) {
@@ -135,6 +136,12 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;
+        // on attend qu'elle ait fini de glisser avant de pouvoir recliquer (sinon on pouvait la spammer)
+        BlockPos lowerPos = state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
+        if (level.getBlockEntity(lowerPos) instanceof SlidingDoorBlockEntity door) {
+            if (level.getGameTime() - door.lastUse < USE_COOLDOWN) return InteractionResult.CONSUME;
+            door.lastUse = level.getGameTime();
+        }
         if (broken) {
             level.playSound(null, pos, SoundEvents.IRON_DOOR_CLOSE, SoundSource.BLOCKS, 1.0F, 0.5F);
             level.playSound(null, pos, SoundEvents.ANVIL_PLACE, SoundSource.BLOCKS, 0.25F, 1.6F);

@@ -117,11 +117,12 @@ public class DeepSeaEvents {
             level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
         }
 
+        // on retient le niveau a chaque fois, sinon le message ne s'affichait qu'une fois par partie
         int last = LAST_LEVEL.getOrDefault(player.getUUID(), 0);
+        LAST_LEVEL.put(player.getUUID(), level);
 
         if (level == 3 && last < 3) {
             player.displayClientMessage(Component.translatable("pressure.examplemod.crushed"), true);
-            LAST_LEVEL.put(player.getUUID(), level);
         }
 
         if (level >= 1) {

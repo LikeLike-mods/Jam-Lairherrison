@@ -23,6 +23,8 @@ public class SlidingDoorBlockEntity extends BlockEntity implements GeoBlockEntit
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private Boolean lastOpen;
     private boolean moved;
+    // dernier clic (en ticks du monde), pour ne pas pouvoir la spammer
+    long lastUse = Long.MIN_VALUE / 2;
 
     public SlidingDoorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SLIDING_DOOR.get(), pos, state);
