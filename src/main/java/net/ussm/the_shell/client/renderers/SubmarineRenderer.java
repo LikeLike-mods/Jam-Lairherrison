@@ -26,6 +26,16 @@ public class SubmarineRenderer extends GeoEntityRenderer<Submarine> {
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - Mth.rotLerp(partialTick, submarine.yRotO, submarine.getYRot())));
     }
 
+    // a la 1re personne aux commandes on cache la bulle de verre (elle bouche la vue), on garde la coque sous soi
+    @Override
+    public void render(Submarine submarine, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+        boolean dedans = mc.options.getCameraType().isFirstPerson() && submarine.hasPassenger(mc.getCameraEntity());
+        getGeoModel().getBone("dome").ifPresent(bone -> bone.setHidden(dedans));
+        super.render(submarine, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        getGeoModel().getBone("dome").ifPresent(bone -> bone.setHidden(false));
+    }
+
     @Override
     public RenderType getRenderType(Submarine submarine, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
         return RenderType.entityTranslucent(texture);
