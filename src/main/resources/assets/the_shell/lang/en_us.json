@@ -291,5 +291,6 @@
   "hud.the_shell.sonar": "Sonar: rift %s m %s",
   "hud.the_shell.sonar.none": "Sonar: no rift nearby",
   "message.the_shell.submarine.occupied": "Someone is already at the controls",
-  "pressure.the_shell.crushed_hard": "The pressure is crushing you! Go up or wear the full diving suit"
+  "pressure.the_shell.crushed_hard": "The pressure is crushing you! Go up or wear the full diving suit",
+  "item.the_shell.iron_abyss_helmet": "Iron Abyss Helmet"
 }

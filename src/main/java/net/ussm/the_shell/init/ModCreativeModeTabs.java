@@ -85,6 +85,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.ABYSS_SKULL);
                         output.accept(ModItems.ABYSSAL_SCALE);
                         output.accept(ModBlocks.LIVING_ABYSS_SKULL);
+                        output.accept(ModItems.IRON_ABYSS_HELMET);
                         output.accept(ModItems.DIAMOND_ABYSS_HELMET);
                         output.accept(ModItems.NETHERITE_ABYSS_HELMET);
                         output.accept(ModItems.DIVING_HELMET);

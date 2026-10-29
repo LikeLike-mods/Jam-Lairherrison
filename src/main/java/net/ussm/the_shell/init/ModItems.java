@@ -92,6 +92,8 @@ public class ModItems {
     // cristal kyber : on le trouve au fond des abysses, les naufrages n'ont jamais su s'en servir
     public static final DeferredItem<Item> KYBER_CRYSTAL = ITEMS.register("kyber_crystal",
             () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final DeferredItem<Item> IRON_ABYSS_HELMET = ITEMS.register("iron_abyss_helmet",
+            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("iron", 2, 0, 0)), 9));
     public static final DeferredItem<Item> DIAMOND_ABYSS_HELMET = ITEMS.register("diamond_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diamond", 3, 2, 0)), 10));
     public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",
