@@ -104,8 +104,14 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     }
 
     @Override
+    // quand quelqu'un est dedans on ne peut plus viser le sous-marin : sinon le pilote tape dedans au lieu de miner et ca le fait sortir
     public boolean isPickable() {
-        return !this.isRemoved();
+        return !this.isRemoved() && !this.isVehicle();
+    }
+
+    @Override
+    public boolean skipAttackInteraction(Entity attacker) {
+        return this.hasPassenger(attacker);
     }
 
     @Override
