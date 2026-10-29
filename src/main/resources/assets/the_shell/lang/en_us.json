@@ -270,5 +270,8 @@
   "item.the_shell.banana_bread": "Banana Bread",
   "item.the_shell.banana_chips": "Banana Chips",
   "item.the_shell.dates": "Dates",
-  "item.the_shell.date_syrup": "Date Syrup"
+  "item.the_shell.date_syrup": "Date Syrup",
+  "message.the_shell.submarine.energy": "Submarine battery: %s%%",
+  "message.the_shell.submarine.empty": "Battery empty! Recharge it (coal, redstone, kyber)",
+  "hud.the_shell.submarine.energy": "Battery %s%%"
 }

@@ -1,28 +1,37 @@
 package net.ussm.the_shell.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.entites.Submarine;
 
-// quand on conduit le sous-marin en vue 1re personne : le cadre du hublot sur les bords, le milieu reste libre
+// aux commandes du sous-marin : la batterie en bas a droite, et pas de main qui traine devant la vitre
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class SubmarineCockpitHud {
-    private static final ResourceLocation FRAME = ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "textures/gui/submarine_cockpit.png");
 
     @SubscribeEvent
-    public static void draw(RenderGuiEvent.Pre event) {
+    public static void draw(RenderGuiEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null || !(mc.player.getVehicle() instanceof Submarine) || !mc.options.getCameraType().isFirstPerson()) return;
+        if (mc.player == null || !(mc.player.getVehicle() instanceof Submarine sub)) return;
         GuiGraphics g = event.getGuiGraphics();
-        RenderSystem.enableBlend();
-        g.blit(FRAME, 0, 0, g.guiWidth(), g.guiHeight(), 0, 0, 320, 180, 320, 180);
-        RenderSystem.disableBlend();
+        float energy = sub.getEnergy() / (float) Submarine.MAX_ENERGY;
+        int w = 60, x = g.guiWidth() - w - 8, y = g.guiHeight() - 22;
+        g.fill(x - 2, y - 2, x + w + 2, y + 8, 0xFF2B3036);
+        g.fill(x, y, x + w, y + 6, 0xFF0D1114);
+        int color = energy > 0.25F ? 0xFF5FE07A : energy > 0 && (mc.player.tickCount / 6) % 2 == 0 ? 0xFFE0482F : 0xFF7A1A12;
+        g.fill(x + 1, y + 1, x + 1 + Math.round((w - 2) * energy), y + 5, color);
+        g.drawString(mc.font, Component.translatable("hud.the_shell.submarine.energy", Math.round(energy * 100)), x, y - 11, 0xFFD8E2E8);
+    }
+
+    @SubscribeEvent
+    public static void hand(RenderHandEvent event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player != null && mc.player.getVehicle() instanceof Submarine) event.setCanceled(true);
     }
 }

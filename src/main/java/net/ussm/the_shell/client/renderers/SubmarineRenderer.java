@@ -27,13 +27,6 @@ public class SubmarineRenderer extends GeoEntityRenderer<Submarine> {
     }
 
     @Override
-    public void render(Submarine submarine, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-        if (mc.options.getCameraType().isFirstPerson() && submarine.hasPassenger(mc.getCameraEntity())) return;
-        super.render(submarine, entityYaw, partialTick, poseStack, bufferSource, packedLight);
-    }
-
-    @Override
     public RenderType getRenderType(Submarine submarine, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
         return RenderType.entityTranslucent(texture);
     }

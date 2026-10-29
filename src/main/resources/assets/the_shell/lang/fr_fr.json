@@ -270,5 +270,8 @@
   "item.the_shell.banana_bread": "Pain à la banane",
   "item.the_shell.banana_chips": "Chips de banane",
   "item.the_shell.dates": "Dattes",
-  "item.the_shell.date_syrup": "Sirop de dattes"
+  "item.the_shell.date_syrup": "Sirop de dattes",
+  "message.the_shell.submarine.energy": "Batterie du sous-marin : %s %%",
+  "message.the_shell.submarine.empty": "Batterie à plat ! Recharge-la (charbon, redstone, kyber)",
+  "hud.the_shell.submarine.energy": "Batterie %s %%"
 }

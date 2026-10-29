@@ -60,6 +60,7 @@ public class DeepSeaEvents {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
 
         if (player.isEyeInFluid(FluidTags.WATER)) breathe(player);
+        refillOxygen(player, inWater && player.level().getBlockState(player.blockPosition().below()).is(ModBlocks.AIR_VENT.get()));
 
         if (player.tickCount % 20 == 0) pressure(serverPlayer, inWater);
     }
@@ -122,10 +123,35 @@ public class DeepSeaEvents {
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
 
         if (head.is(ModItems.DIVING_HELMET.get()) || head.is(ModItems.DIVING_ABYSS_HELMET.get())) {
-            player.setAirSupply(player.getMaxAirSupply());
+            // le casque respire dans la bouteille d'oxygene, quand elle est vide on se noie comme d'habitude
+            int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+            if (oxygen > 0) {
+                player.setAirSupply(player.getMaxAirSupply());
+                if (!(player.getVehicle() instanceof Submarine)) setOxygen(player, oxygen - 1);
+            }
         } else if (head.is(AbyssLightBlock.HEAD_LIGHTS) && player.tickCount % 2 == 0) {
             player.setAirSupply(Math.min(player.getMaxAirSupply(), player.getAirSupply() + 1));
         }
+    }
+
+    // la bouteille se remplit des qu'on a la tete hors de l'eau (surface, station, cabine du sous-marin) ou dans les bulles d'une grille
+    private static void refillOxygen(Player player, boolean bubbles) {
+        int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+        if (oxygen >= net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN) return;
+        if (!player.isEyeInFluid(FluidTags.WATER) || bubbles || player.getVehicle() instanceof Submarine) setOxygen(player, oxygen + 24);
+    }
+
+    private static void setOxygen(Player player, int oxygen) {
+        oxygen = Math.max(0, Math.min(net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN, oxygen));
+        int old = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+        player.setData(net.ussm.the_shell.init.ModAttachments.OXYGEN, oxygen);
+        if (old / 40 != oxygen / 40 || oxygen == 0) player.syncData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+    }
+
+    // dans le sous-marin les poissons ne peuvent pas nous toucher
+    @SubscribeEvent
+    public static void subShield(net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent event) {
+        if (event.getEntity().getVehicle() instanceof Submarine && event.getSource().getEntity() != null) event.setCanceled(true);
     }
 
     public static boolean hasFullSuit(Player player) {

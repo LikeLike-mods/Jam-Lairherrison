@@ -39,9 +39,10 @@ public class SubmarineInterior {
     private static final int SPACING = 64;
     private static final int BOTTOM = 64;
     // reperes dans la cabine depuis son coin : on arrive au milieu, sous 1.5 on est tombe par la trappe, au-dessus de 8.5 on a monte l'echelle
-    private static final Vec3 ARRIVAL = new Vec3(4.5, 3.0, 9.5);
-    private static final double HATCH = 1.5;
-    private static final double ROOF = 8.5;
+    // (la coque est decalee de 3 dans le fichier : tout autour il y a de l'eau avec des poissons, puis du noir)
+    private static final Vec3 ARRIVAL = new Vec3(7.5, 6.0, 12.5);
+    private static final double HATCH = 4.5;
+    private static final double ROOF = 11.5;
     private static final Map<UUID, Pending> PENDING = new HashMap<>();
 
     private record Pending(UUID submarine, long until) {
@@ -64,10 +65,46 @@ public class SubmarineInterior {
         cabins.remember(cabin, submarine);
         BlockPos corner = corner(cabin);
         if (cabins.built.add(cabin)) {
+            cabins.setDirty();
             inside.getStructureManager().get(CABIN).ifPresent(t -> t.placeInWorld(inside, corner, corner, new StructurePlaceSettings(), inside.random, Block.UPDATE_CLIENTS));
         }
         player.setPortalCooldown(20);
         player.changeDimension(new DimensionTransition(inside, Vec3.atLowerCornerOf(corner).add(ARRIVAL), Vec3.ZERO, 180.0F, 0.0F, DimensionTransition.DO_NOTHING));
+    }
+
+    // carburant mis dans les moteurs de la cabine : le sous-marin le prend a son prochain passage
+    public static int takeFuel(Submarine submarine) {
+        if (!(submarine.level() instanceof ServerLevel level)) return 0;
+        CompoundTag where = Cabins.get(level.getServer()).subs.get(submarine.getInteriorId());
+        if (where == null || !where.contains("Fuel")) return 0;
+        int fuel = where.getInt("Fuel");
+        where.remove("Fuel");
+        return fuel;
+    }
+
+    @SubscribeEvent
+    public static void useInside(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+        if (!(event.getEntity() instanceof ServerPlayer player) || player.level().dimension() != INTERIOR) return;
+        net.minecraft.world.level.block.state.BlockState state = player.level().getBlockState(event.getPos());
+        int cabin = Math.floorDiv((int) Math.floor(player.getX()) + SPACING / 2, SPACING);
+        Cabins cabins = Cabins.get(player.server);
+        CompoundTag where = cabins.subs.get(cabin);
+        if (where == null) return;
+        int energy = where.getInt("Energy") + where.getInt("Fuel");
+        if (state.is(net.ussm.the_shell.init.ModBlocks.MACHINE.get())) {
+            // on recharge la batterie en mettant du carburant dans les moteurs
+            int fuel = Submarine.fuelValue(event.getItemStack());
+            if (fuel <= 0) return;
+            where.putInt("Fuel", where.getInt("Fuel") + fuel);
+            cabins.setDirty();
+            event.getItemStack().consume(1, player);
+            player.level().playSound(null, event.getPos(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, net.minecraft.sounds.SoundSource.BLOCKS, 0.6F, 1.4F);
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", Math.min(100, (energy + fuel) * 100 / Submarine.MAX_ENERGY)), true);
+            event.setCanceled(true);
+        } else if (state.is(net.ussm.the_shell.init.ModBlocks.CONTROL_CONSOLE.get())) {
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", Math.min(100, energy * 100 / Submarine.MAX_ENERGY)), true);
+            event.setCanceled(true);
+        }
     }
 
     public static void remember(Submarine submarine) {
@@ -137,6 +174,9 @@ public class SubmarineInterior {
             tag.putDouble("Y", submarine.getY());
             tag.putDouble("Z", submarine.getZ());
             tag.putFloat("Yaw", submarine.getYRot());
+            tag.putInt("Energy", submarine.getEnergy());
+            CompoundTag old = subs.get(cabin);
+            if (old != null && old.contains("Fuel")) tag.putInt("Fuel", old.getInt("Fuel"));
             subs.put(cabin, tag);
             setDirty();
         }
@@ -146,7 +186,7 @@ public class SubmarineInterior {
             cabins.next = Math.max(1, tag.getInt("Next"));
             CompoundTag subs = tag.getCompound("Subs");
             for (String key : subs.getAllKeys()) cabins.subs.put(Integer.parseInt(key), subs.getCompound(key));
-            for (int cabin : tag.getIntArray("Built")) cabins.built.add(cabin);
+            for (int cabin : tag.getIntArray("Built2")) cabins.built.add(cabin);
             return cabins;
         }
 
@@ -156,7 +196,7 @@ public class SubmarineInterior {
             CompoundTag subsTag = new CompoundTag();
             subs.forEach((cabin, where) -> subsTag.put(String.valueOf(cabin), where));
             tag.put("Subs", subsTag);
-            tag.putIntArray("Built", built.stream().mapToInt(Integer::intValue).toArray());
+            tag.putIntArray("Built2", built.stream().mapToInt(Integer::intValue).toArray());
             return tag;
         }
     }

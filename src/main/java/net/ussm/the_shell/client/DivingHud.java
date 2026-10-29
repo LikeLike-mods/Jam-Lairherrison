@@ -68,6 +68,16 @@ public class DivingHud {
             int ty = bottom - Math.round((bottom - top) * f);
             g.fill(x - 2, ty, x + 10, ty + 1, 0xFF6B4A22);
         }
+        // la bouteille d'oxygene, a gauche du manometre
+        float o2 = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN) / (float) net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN;
+        int ox = x - 18;
+        g.fill(ox - 3, top - 3, ox + 9, bottom + 3, 0xFF2E4A5A);
+        g.fill(ox - 2, top - 2, ox + 8, bottom + 2, 0xFF6FA9C2);
+        g.fill(ox, top, ox + 6, bottom, 0xFF0D1114);
+        int o2Color = o2 > 0.25F ? 0xFF5FD3F0 : (player.tickCount / 5) % 2 == 0 ? 0xFFE0482F : 0xFF7A1A12;
+        g.fill(ox + 1, bottom - Math.round((bottom - top) * o2), ox + 5, bottom, o2Color);
+        g.drawCenteredString(mc.font, "O2", ox + 3, bottom + 6, 0xFF9FD8EA);
+        g.drawCenteredString(mc.font, Math.round(o2 * 100) + "%", ox + 3, bottom + 16, 0xFF6FA9C2);
         String bar = String.format("%.1f", 1.0F + depth / 10.0F);
         g.drawCenteredString(mc.font, bar, x + 4, bottom + 6, 0xFFE9C58A);
         g.drawCenteredString(mc.font, "bar", x + 4, bottom + 16, 0xFFB08A55);

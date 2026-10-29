@@ -31,6 +31,10 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     private static final RawAnimation PROPELLER = RawAnimation.begin().thenLoop("move.propeller");
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private int interiorId = -1;
+    // batterie : un tick de moteur = 1, pleine = 5 minutes a fond
+    public static final int MAX_ENERGY = 6000;
+    private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> ENERGY =
+            net.minecraft.network.syncher.SynchedEntityData.defineId(Submarine.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
 
     public Submarine(EntityType<? extends Submarine> type, Level level) {
         super(type, level);
@@ -44,6 +48,29 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.xo = x;
         this.yo = y;
         this.zo = z;
+    }
+
+    @Override
+    protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ENERGY, MAX_ENERGY);
+    }
+
+    public int getEnergy() {
+        return this.entityData.get(ENERGY);
+    }
+
+    public void setEnergy(int energy) {
+        this.entityData.set(ENERGY, Math.max(0, Math.min(MAX_ENERGY, energy)));
+    }
+
+    // ce que vaut chaque carburant
+    public static int fuelValue(net.minecraft.world.item.ItemStack stack) {
+        if (stack.is(net.minecraft.world.item.Items.COAL) || stack.is(net.minecraft.world.item.Items.CHARCOAL)) return 900;
+        if (stack.is(net.minecraft.world.item.Items.REDSTONE)) return 400;
+        if (stack.is(net.minecraft.world.item.Items.REDSTONE_BLOCK)) return 3600;
+        if (stack.is(ModItems.KYBER_CRYSTAL.get())) return MAX_ENERGY;
+        return 0;
     }
 
     public int getInteriorId() {
@@ -62,11 +89,13 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
         if (tag.contains("Interior")) interiorId = tag.getInt("Interior");
+        if (tag.contains("Energy")) setEnergy(tag.getInt("Energy"));
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag tag) {
         tag.putInt("Interior", interiorId);
+        tag.putInt("Energy", getEnergy());
     }
 
     @Override
@@ -91,13 +120,25 @@ public class Submarine extends VehicleEntity implements GeoEntity {
 
     @Override
     protected Vec3 getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
-        return new Vec3(0.0, 0.3, 0.0);
+        return new Vec3(0.0, 0.3, 0.3);
     }
 
     // clic droit : on entre dans la cabine, et l'echelle du fond mene aux commandes
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         if (player.isSecondaryUseActive()) return InteractionResult.PASS;
+        // avec du carburant en main on recharge la batterie au lieu d'entrer
+        net.minecraft.world.item.ItemStack stack = player.getItemInHand(hand);
+        int fuel = fuelValue(stack);
+        if (fuel > 0) {
+            if (!this.level().isClientSide && getEnergy() < MAX_ENERGY) {
+                setEnergy(getEnergy() + fuel);
+                stack.consume(1, player);
+                this.level().playSound(null, this.blockPosition(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, net.minecraft.sounds.SoundSource.NEUTRAL, 0.6F, 1.4F);
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", getEnergy() * 100 / MAX_ENERGY), true);
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
         if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
             net.ussm.the_shell.events.SubmarineInterior.enter(serverPlayer, this);
         }
@@ -108,12 +149,15 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     public void tick() {
         super.tick();
         net.ussm.the_shell.events.AbyssTravel.check(this);
-        if (!this.level().isClientSide && interiorId >= 0 && this.tickCount % 40 == 0) net.ussm.the_shell.events.SubmarineInterior.remember(this);
+        if (!this.level().isClientSide && interiorId >= 0 && this.tickCount % 40 == 0) {
+            setEnergy(getEnergy() + net.ussm.the_shell.events.SubmarineInterior.takeFuel(this));
+            net.ussm.the_shell.events.SubmarineInterior.remember(this);
+        }
         if (this.isControlledByLocalInstance()) {
             Vec3 motion = this.getDeltaMovement();
             if (this.isInWater()) {
                 motion = motion.scale(0.9);
-                if (this.getControllingPassenger() instanceof Player driver) {
+                if (this.getControllingPassenger() instanceof Player driver && getEnergy() > 0) {
                     this.setYRot(driver.getYRot());
                     Vec3 look = driver.getLookAngle();
                     Vec3 left = new Vec3(look.z, 0.0, -look.x).normalize();
@@ -137,7 +181,12 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             for (Entity passenger : this.getPassengers()) {
                 passenger.setAirSupply(passenger.getMaxAirSupply());
             }
-            if (this.isInWater() && this.tickCount % 4 == 0) {
+            // le moteur use la batterie, et a plat le sous-marin ne repart plus
+            if (this.getControllingPassenger() instanceof Player driver && (driver.zza != 0 || driver.xxa != 0) && getEnergy() > 0) {
+                setEnergy(getEnergy() - 1);
+                if (getEnergy() == 0) driver.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.empty"), true);
+            }
+            if (this.isInWater() && this.tickCount % 4 == 0 && getEnergy() > 0) {
                 Vec3 front = this.position().add(Vec3.directionFromRotation(0.0F, this.getYRot()).scale(1.8)).add(0.0, 0.6, 0.0);
                 AbyssLightBlock.placeAt(this.level(), BlockPos.containing(front));
                 LivingEntity driver = this.getControllingPassenger();
