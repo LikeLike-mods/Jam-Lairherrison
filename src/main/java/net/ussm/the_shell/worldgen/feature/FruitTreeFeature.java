@@ -40,18 +40,25 @@ public class FruitTreeFeature extends Feature<NoneFeatureConfiguration> {
         BlockState leaves = (datePalm ? ModBlocks.DATE_PALM_LEAVES : ModBlocks.BANANA_LEAVES).get().defaultBlockState();
         BlockState fruit = (datePalm ? ModBlocks.DATE_CLUSTER : ModBlocks.BANANA_BUNCH).get().defaultBlockState();
 
-        int height = datePalm ? 7 + random.nextInt(4) : 3 + random.nextInt(2);
+        int height = datePalm ? 8 + random.nextInt(3) : 5 + random.nextInt(2);
         Map<BlockPos, BlockState> blocks = new LinkedHashMap<>();
         for (int y = 0; y < height; y++) blocks.put(origin.above(y), log);
         BlockPos top = origin.above(height - 1);
 
-        // une palme par direction qui part du haut et retombe au bout, plus des petites entre deux
-        int[][] frond = datePalm ? new int[][]{{1, 0}, {2, 0}, {3, 0}, {3, -1}, {4, -1}, {4, -2}} : new int[][]{{1, 0}, {2, 0}, {3, 0}, {3, -1}};
+        // chaque palme : {pas devant, pas sur le cote, hauteur}. elles montent un peu puis retombent
+        // (jamais plus de 6 blocs du tronc en passant par les feuilles, sinon elles pourrissent)
+        int[][] frond = datePalm
+                ? new int[][]{{1, 0, 0}, {1, 0, 1}, {2, 0, 1}, {3, 0, 1}, {3, 0, 0}, {4, 0, 0}}
+                : new int[][]{{1, 0, 0}, {1, 0, 1}, {2, 0, 1}, {2, 0, 0}, {3, 0, 0}, {3, 0, -1}};
+        int[][] between = datePalm
+                ? new int[][]{{1, 1, 0}, {2, 1, 0}, {2, 2, 0}, {2, 2, -1}, {3, 2, -1}}
+                : new int[][]{{1, 1, 0}, {1, 1, -1}};
         blocks.putIfAbsent(top.above(), leaves);
+        blocks.putIfAbsent(top.above(2), leaves);
         for (Direction d : Direction.Plane.HORIZONTAL) {
-            for (int[] f : frond) blocks.putIfAbsent(top.relative(d, f[0]).above(f[1]), leaves);
-            blocks.putIfAbsent(top.relative(d).relative(d.getClockWise()), leaves);
-            if (datePalm) blocks.putIfAbsent(top.relative(d, 2).relative(d.getClockWise()), leaves);
+            Direction c = d.getClockWise();
+            for (int[] f : frond) blocks.putIfAbsent(top.relative(d, f[0]).relative(c, f[1]).above(f[2]), leaves);
+            for (int[] f : between) blocks.putIfAbsent(top.relative(d, f[0]).relative(c, f[1]).above(f[2]), leaves);
         }
 
         for (BlockPos pos : blocks.keySet()) {
