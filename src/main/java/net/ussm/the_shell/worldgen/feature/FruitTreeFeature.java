@@ -48,7 +48,7 @@ public class FruitTreeFeature extends Feature<NoneFeatureConfiguration> {
         // chaque palme : {pas devant, pas sur le cote, hauteur}. elles montent un peu puis retombent
         // (jamais plus de 6 blocs du tronc en passant par les feuilles, sinon elles pourrissent)
         int[][] frond = datePalm
-                ? new int[][]{{1, 0, 0}, {1, 0, 1}, {2, 0, 1}, {3, 0, 1}, {3, 0, 0}, {4, 0, 0}}
+                ? new int[][]{{1, 0, 0}, {2, 0, 0}, {3, 0, 0}, {3, 0, -1}, {4, 0, -1}, {4, 0, -2}, {1, 0, 1}, {1, 0, 2}}
                 : new int[][]{{1, 0, 0}, {1, 0, 1}, {2, 0, 1}, {2, 0, 0}, {3, 0, 0}, {3, 0, -1}};
         int[][] between = datePalm
                 ? new int[][]{{1, 1, 0}, {2, 1, 0}, {2, 2, 0}, {2, 2, -1}, {3, 2, -1}}
