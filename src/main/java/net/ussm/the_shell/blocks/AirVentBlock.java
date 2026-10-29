@@ -8,7 +8,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-// grille d'aeration : sous l'eau elle souffle des bulles qui font remonter (la poussee est dans DeepSeaEvents)
 public class AirVentBlock extends Block {
 
     public AirVentBlock(Properties properties) {

@@ -84,7 +84,6 @@ public class PitcherPlantBlock extends BushBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        // goutte de nectar de temps en temps
         if (state.getValue(FILLED) && random.nextInt(10) == 0) {
             level.addParticle(ParticleTypes.DRIPPING_HONEY, pos.getX() + 0.3 + random.nextDouble() * 0.4, pos.getY() + 0.62,
                     pos.getZ() + 0.3 + random.nextDouble() * 0.4, 0, 0, 0);

@@ -9,7 +9,6 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.init.ModBlocks;
 
-// la dalle d'herbe prend la couleur de l'herbe du biome, comme le bloc d'herbe
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class GrassSlabColors {
 

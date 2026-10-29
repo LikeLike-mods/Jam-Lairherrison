@@ -3,7 +3,7 @@ package net.ussm.the_shell.client.model;
 import net.minecraft.resources.ResourceLocation;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.client.animation.LeviathanTurnBend;
-import net.ussm.the_shell.entity.LeviathanEntity;
+import net.ussm.the_shell.entites.LeviathanEntity;
 import software.bernie.geckolib.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 

@@ -22,14 +22,14 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.the_shell.TheShell;
 
-// ce qui fait vieillir les stations quand elles se posent dans le monde
+// Here we make stations old & rusty
 public class StationProcessors {
     public static final DeferredRegister<StructureProcessorType<?>> PROCESSORS = DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, TheShell.MOD_ID);
 
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<Rust>> RUST = PROCESSORS.register("station_rust", () -> () -> Rust.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<Flood>> FLOOD = PROCESSORS.register("station_flood", () -> () -> Flood.CODEC);
 
-    // change un bloc en un autre (le rouille, la lampe cassee...) en gardant toutes ses proprietes : orientation, eau, allume...
+    // This part of code change randomly the blockstates
     public static class Rust extends StructureProcessor {
         public static final MapCodec<Rust> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
                 BuiltInRegistries.BLOCK.byNameCodec().fieldOf("from").forGetter(p -> p.from),
@@ -68,7 +68,7 @@ public class StationProcessors {
         return to;
     }
 
-    // certains modules sont inondes en entier : l'air devient de l'eau et les blocs qui peuvent etre mouilles le sont
+    // This part of code flood randomly part of the station
     public static class Flood extends StructureProcessor {
         public static final MapCodec<Flood> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
                 Codec.floatRange(0, 1).fieldOf("chance").forGetter(p -> p.chance)

@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-// le lait soigne le poison
 public class CoconutHalfItem extends Item {
     public CoconutHalfItem(Properties properties) {
         super(properties);

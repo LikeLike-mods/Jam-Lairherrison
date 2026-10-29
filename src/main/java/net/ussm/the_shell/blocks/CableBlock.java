@@ -9,7 +9,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-// cables arraches : ca fait des etincelles de temps en temps
 public class CableBlock extends DecorBlock {
 
     public CableBlock(Properties properties) {

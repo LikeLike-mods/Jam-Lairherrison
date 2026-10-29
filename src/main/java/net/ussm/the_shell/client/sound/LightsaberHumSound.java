@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.ussm.the_shell.init.ModSounds;
-import net.ussm.the_shell.item.LightsaberItem;
+import net.ussm.the_shell.items.LightsaberItem;
 
 final class LightsaberHumSound extends AbstractTickableSoundInstance {
     private static final double AUDIBLE_DISTANCE_SQUARED = 16.0 * 16.0;

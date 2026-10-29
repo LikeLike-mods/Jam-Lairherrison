@@ -26,7 +26,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.the_shell.init.ModBlocks;
 
-// lumiere invisible du faisceau d'un projecteur, elle part toute seule si plus aucun projecteur allume ne vise ici
 public class FloodlightBeamBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<FloodlightBeamBlock> CODEC = simpleCodec(FloodlightBeamBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -46,7 +45,6 @@ public class FloodlightBeamBlock extends Block implements SimpleWaterloggedBlock
         }
     }
 
-    // on remonte jusqu'au projecteur, mais un mur entre les deux coupe le faisceau (sinon ca eclairait derriere les murs)
     private static boolean lit(LevelReader level, BlockPos pos) {
         for (Direction d : Direction.Plane.HORIZONTAL) {
             for (int k = 1; k <= FloodlightBlock.RANGE; k++) {
@@ -114,7 +112,6 @@ public class FloodlightBeamBlock extends Block implements SimpleWaterloggedBlock
         }
     }
 
-    // un peu de poussiere qui brille dans le faisceau
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (random.nextInt(5) == 0) {

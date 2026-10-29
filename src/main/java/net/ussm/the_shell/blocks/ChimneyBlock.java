@@ -24,7 +24,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// cheminee hydrothermale : des blocs empiles, celui du haut crache de la fumee chaude et brule si on marche dessus
 public class ChimneyBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<ChimneyBlock> CODEC = simpleCodec(ChimneyBlock::new);
     public static final BooleanProperty TOP = BooleanProperty.create("top");
@@ -70,7 +69,6 @@ public class ChimneyBlock extends Block implements SimpleWaterloggedBlock {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
-    // comme le bloc de magma : ca brule les pieds, sauf si on avance accroupi
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         if (state.getValue(TOP) && !entity.isSteppingCarefully() && entity instanceof LivingEntity) {

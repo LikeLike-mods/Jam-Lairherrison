@@ -14,7 +14,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.ussm.the_shell.blocks.ChimneyBlock;
 import net.ussm.the_shell.init.ModBlocks;
 
-// un groupe de cheminees hydrothermales : une grande au milieu, des petites autour, sur une croute de basalte et de soufre
 public class HydrothermalChimneyFeature extends Feature<NoneFeatureConfiguration> {
     public HydrothermalChimneyFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
@@ -49,10 +48,8 @@ public class HydrothermalChimneyFeature extends Feature<NoneFeatureConfiguration
         return true;
     }
 
-    // une cheminee : seul le bloc du haut fume, et chaque bloc garde l'eau ou il est pose
     private void column(WorldGenLevel level, BlockPos base, int height) {
         BlockPos.MutableBlockPos p = base.mutable();
-        // on cale le pied sur le fond, meme si le sol n'est pas a la meme hauteur qu'au milieu
         for (int i = 0; i < 4 && level.getBlockState(p.below()).is(Blocks.WATER); i++) p.move(Direction.DOWN);
         for (int i = 0; i < 4 && !level.getBlockState(p).is(Blocks.WATER); i++) p.move(Direction.UP);
         if (!level.getBlockState(p).is(Blocks.WATER) || !level.getBlockState(p.below()).isFaceSturdy(level, p.below(), Direction.UP)) return;

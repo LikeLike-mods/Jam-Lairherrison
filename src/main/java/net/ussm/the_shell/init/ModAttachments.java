@@ -14,7 +14,6 @@ public class ModAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
         DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, TheShell.MOD_ID);
 
-    // usure des pinces
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> CRAB_CLAW_WEAR =
         ATTACHMENT_TYPES.register("crab_claw_wear", () -> AttachmentType.builder(() -> 0)
             .serialize(Codec.INT)
@@ -22,7 +21,6 @@ public class ModAttachments {
             .sync((holder, to) -> holder == to, ByteBufCodecs.VAR_INT)
             .build());
 
-    // pour la conque
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<CompoundTag>> ATOLL_TRAVEL =
         ATTACHMENT_TYPES.register("atoll_travel", () -> AttachmentType.builder(() -> new CompoundTag())
             .serialize(CompoundTag.CODEC)

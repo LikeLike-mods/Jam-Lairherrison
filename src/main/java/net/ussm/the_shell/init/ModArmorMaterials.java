@@ -19,7 +19,6 @@ import java.util.List;
 public class ModArmorMaterials {
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, TheShell.MOD_ID);
 
-    // scaphandre : protege comme le fer, se repare au cuivre
     public static final DeferredHolder<ArmorMaterial, ArmorMaterial> DIVING = ARMOR_MATERIALS.register("diving", () -> new ArmorMaterial(
             Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 2);

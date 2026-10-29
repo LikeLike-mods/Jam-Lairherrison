@@ -9,7 +9,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;
 import net.ussm.the_shell.TheShell;
 
-// les abysses : pas de ciel, pas de nuages, un brouillard presque noir
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class AbyssSkyEffects {
 

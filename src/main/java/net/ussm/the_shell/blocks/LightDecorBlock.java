@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// projecteur, bande lumineuse : clic droit ou impulsion de redstone pour allumer/eteindre (comme l'ampoule en cuivre)
 public class LightDecorBlock extends DecorBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;

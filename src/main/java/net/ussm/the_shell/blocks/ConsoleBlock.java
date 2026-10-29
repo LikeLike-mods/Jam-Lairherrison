@@ -25,7 +25,6 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
 
-// console = sonar : on appuie, ping, et toutes les creatures a 32 blocs brillent 6 secondes (on les voit a travers le noir des abysses)
 public class ConsoleBlock extends DecorBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     private static final double RANGE = 32.0;
@@ -72,7 +71,6 @@ public class ConsoleBlock extends DecorBlock {
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
-    // pendant le ping elle envoie aussi une impulsion de redstone
     @Override
     protected boolean isSignalSource(BlockState state) {
         return true;

@@ -24,7 +24,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// lampe dans une cage, se fixe sur n'importe quelle face (sol, mur, plafond), meme sous l'eau. clic droit = allumer/eteindre
 public class IndustrialLampBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<IndustrialLampBlock> CODEC = simpleCodec(IndustrialLampBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -79,7 +78,6 @@ public class IndustrialLampBlock extends DirectionalBlock implements SimpleWater
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!works) {
-            // la cassee gresille juste un peu
             level.playSound(player, pos, SoundEvents.COPPER_BULB_TURN_OFF, SoundSource.BLOCKS, 0.4F, 1.8F);
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
@@ -95,7 +93,6 @@ public class IndustrialLampBlock extends DirectionalBlock implements SimpleWater
     protected void onToggled(BlockState state, Level level, BlockPos pos) {
     }
 
-    // une impulsion de redstone l'allume ou l'eteint, comme l'ampoule en cuivre
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean movedByPiston) {
         boolean signal = level.hasNeighborSignal(pos);

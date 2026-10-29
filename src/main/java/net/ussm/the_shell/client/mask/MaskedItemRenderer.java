@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
+/*
  * Renderer d'item GeckoLib avec découpe par les volumes mask.
  * Les noms exacts des os à découper sont fournis au constructeur, descendants inclus.
  */

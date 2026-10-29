@@ -9,7 +9,6 @@ import net.minecraft.world.level.biome.Climate;
 
 import java.util.stream.Stream;
 
-// biomes des abysses : on suit les zones du terrain (AbyssTerrain), comme ca une fosse est toujours dans le biome fosse
 public class AbyssBiomeSource extends BiomeSource {
     public static final MapCodec<AbyssBiomeSource> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Biome.CODEC.fieldOf("plains").forGetter(s -> s.plains),

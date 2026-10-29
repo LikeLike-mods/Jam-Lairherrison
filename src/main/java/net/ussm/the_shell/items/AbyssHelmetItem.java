@@ -9,7 +9,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-// crane + casque fusionnes au forgeron, garde les enchants
 public class AbyssHelmetItem extends Item implements Equipable {
     private final int enchantmentValue;
 

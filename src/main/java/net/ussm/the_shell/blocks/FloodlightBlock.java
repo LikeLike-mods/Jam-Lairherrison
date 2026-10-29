@@ -8,7 +8,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-// projecteur : eclaire loin devant lui (jusqu'a 24 blocs) avec une rangee de lumieres invisibles, s'arrete au premier mur
 public class FloodlightBlock extends LightDecorBlock {
     public static final int RANGE = 24;
 

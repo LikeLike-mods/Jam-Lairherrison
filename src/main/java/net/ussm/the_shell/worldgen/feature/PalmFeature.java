@@ -24,15 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// Palmiers en trois tailles, tous avec un pied d'un seul bloc :
-// - moyen : le palmier construit à la main en jeu, tronc plus ou moins haut ;
-// - petit : jeune palmier, tronc court, petite couronne en étoile ;
-// - grand : tronc haut qui penche en plusieurs marches, grande couronne avec des palmes qui retombent.
-// Chacun est tourné et mis en miroir au hasard.
 public class PalmFeature extends Feature<NoneFeatureConfiguration> {
     private static final int LOG = 0, LEAVES = 1;
     private static final int AXIS_Y = 0, AXIS_X = 1, AXIS_Z = 2;
-    // {dx, dy, dz, type, axe} depuis le pied du tronc
     private static final int[][] MEDIUM = {
             {0, 0, 0, 0, 0}, {0, 1, 0, 0, 0}, {0, 2, 0, 0, 0},
             {0, 3, 0, 0, 0}, {0, 3, 1, 0, 0}, {0, 4, 1, 0, 0}, {0, 4, 2, 0, 0}, {0, 5, 2, 0, 0}, {-1, 6, 1, 1, 0},
@@ -53,7 +47,6 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
         this.vines = vines;
     }
 
-    // ---------------------------------------------------------------- formes
 
     private static List<int[]> medium(RandomSource random) {
         int extra = random.nextInt(3);
@@ -65,7 +58,6 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
         return shape;
     }
 
-    // Tronc vertical d'un bloc de large ; aux hauteurs "steps", il fait une marche d'un bloc vers +z (comme le modèle).
     private static int[] trunk(List<int[]> shape, int height, int... steps) {
         int z = 0;
         for (int y = 0; y < height; y++) {
@@ -109,7 +101,6 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
                 if (Math.max(Math.abs(dx), Math.abs(dz)) <= 2 && Math.abs(dx) + Math.abs(dz) <= 3) shape.add(new int[]{tx + dx, ty + 1, tz + dz, LEAVES, 0});
             }
         }
-        // les palmes qui retombent, un bloc plus bas, toujours collées à la couronne (sinon elles pourriraient)
         for (Direction d : Direction.Plane.HORIZONTAL) {
             Direction c = d.getClockWise();
             shape.add(new int[]{tx + 4 * d.getStepX(), ty - 1, tz + 4 * d.getStepZ(), LEAVES, 0});
@@ -118,8 +109,6 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
         shape.add(new int[]{tx, ty + 2, tz, LEAVES, 0});
         return shape;
     }
-
-    // ---------------------------------------------------------------- placement
 
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
@@ -139,14 +128,12 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
             if (b[3] == LOG && (top == null || b[1] >= top[1])) top = b;
         }
 
-        // On ne pousse pas à travers un autre arbre ou un rocher
         for (BlockPos pos : blocks.keySet()) {
             if (!level.isStateAtPosition(pos, s -> s.isAir() || s.is(BlockTags.REPLACEABLE_BY_TREES))) {
                 return false;
             }
         }
 
-        // Distance de chaque feuille à la bûche la plus proche, pour qu'elles ne pourrissent pas toutes seules
         Map<BlockPos, Integer> distance = new HashMap<>();
         ArrayDeque<BlockPos> queue = new ArrayDeque<>();
         blocks.forEach((pos, state) -> {
@@ -173,7 +160,6 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
             this.setBlock(level, pos, state);
         });
 
-        // Lianes (version jungle) : elles pendent des feuilles du bord de la couronne
         if (vines) {
             blocks.forEach((leaf, state) -> {
                 if (!state.is(ModBlocks.PALM_LEAVES.get()) || blocks.containsKey(leaf.below())) return;
@@ -188,7 +174,6 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
             });
         }
 
-        // Noix de coco accrochées sous la couronne, autour de la dernière bûche
         BlockState hanging = ModBlocks.COCONUT.get().defaultBlockState();
         int[][] spots = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {0, 0}};
         for (int[] c : spots) {
@@ -199,9 +184,7 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
-        // Parfois une noix déjà tombée sur le sable, sous la couronne
         if (random.nextFloat() < 0.4F) {
-            // on cherche le sol près de la hauteur du pied (le heightmap compterait la couronne)
             BlockPos column = at(origin, rotation, mirror, top[0] + random.nextInt(5) - 2, 0, top[2] + random.nextInt(5) - 2);
             for (int dy = 2; dy >= -4; dy--) {
                 BlockPos pos = column.above(dy);
@@ -231,7 +214,6 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
         } else {
             state = ModBlocks.PALM_LEAVES.get().defaultBlockState();
         }
-        // une bûche gagne toujours sur une feuille au même endroit
         if (type == LOG || !blocks.containsKey(pos)) {
             blocks.put(pos, state);
         }

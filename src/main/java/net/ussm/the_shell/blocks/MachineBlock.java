@@ -24,8 +24,6 @@ import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Set;
 
-// machine = pompe a air : allumee, les joueurs sous l'eau a 6 blocs autour retrouvent tout leur air,
-// et l'air part dans les tuyaux branches dessus : chaque grille d'aeration au bout fait respirer a 4 blocs autour d'elle
 public class MachineBlock extends DecorBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
@@ -71,7 +69,6 @@ public class MachineBlock extends DecorBlock {
         }
     }
 
-    // on suit les tuyaux depuis la machine (256 blocs max) et on garde les grilles collees a eux
     private static Set<BlockPos> connectedVents(Level level, BlockPos start) {
         Set<BlockPos> seen = new HashSet<>();
         Set<BlockPos> vents = new HashSet<>();

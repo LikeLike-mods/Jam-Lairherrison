@@ -23,7 +23,6 @@ public class SlidingDoorBlockEntity extends BlockEntity implements GeoBlockEntit
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private Boolean lastOpen;
     private boolean moved;
-    // dernier clic (en ticks du monde), pour ne pas pouvoir la spammer
     long lastUse = Long.MIN_VALUE / 2;
 
     public SlidingDoorBlockEntity(BlockPos pos, BlockState state) {
@@ -35,7 +34,6 @@ public class SlidingDoorBlockEntity extends BlockEntity implements GeoBlockEntit
         controllers.add(new AnimationController<>(this, "door", 0, this::animate).triggerableAnim("jammed", JAMMED));
     }
 
-    // au chargement la porte est directement dans la bonne position, elle glisse seulement quand on l'ouvre/ferme
     private PlayState animate(AnimationState<SlidingDoorBlockEntity> state) {
         BlockState block = getBlockState();
         if (block.getBlock() instanceof SlidingDoorBlock door && door.isBroken()) {

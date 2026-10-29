@@ -8,8 +8,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.SeagrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-// plantes du fond des abysses (vers tubicoles, anemones) : comme les herbes marines, toujours pleines d'eau,
-// mais l'engrais ne les fait pas grandir et elles brillent un peu
 public class AbyssPlantBlock extends SeagrassBlock {
     private final boolean glows;
 

@@ -11,9 +11,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.ussm.the_shell.event.AtollTravel;
+import net.ussm.the_shell.events.AtollTravel;
 
-// conque : sortir de l'atoll ou y retourner, 30s de cooldown
 public class ConchItem extends Item {
     private static final int BLOW_TICKS = 40;
     private static final int COOLDOWN = 600;
@@ -26,7 +25,6 @@ public class ConchItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         player.startUsingItem(hand);
         player.getCooldowns().addCooldown(this, COOLDOWN);
-        // son joue apres la tp sinon on l'entend pas
         if (player instanceof ServerPlayer serverPlayer) {
             AtollTravel.blowConch(serverPlayer);
             serverPlayer.level().playSound(null, serverPlayer, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(0).value(), SoundSource.PLAYERS, 1.0F, 1.3F);

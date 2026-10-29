@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.AABB;
 
-// lampe d'urgence = detecteur : allumee, elle se met a clignoter et donne du courant quand un monstre approche (12 blocs)
 public class EmergencyLightBlock extends IndustrialLampBlock {
     public static final BooleanProperty FLASH = BooleanProperty.create("flash");
     public static final BooleanProperty ALARM = BooleanProperty.create("alarm");
@@ -54,7 +53,6 @@ public class EmergencyLightBlock extends IndustrialLampBlock {
         if (state.getValue(LIT)) level.scheduleTick(pos, this, 10);
     }
 
-    // elle donne elle-meme du courant, donc pas de bascule par redstone (sinon elle s'eteindrait toute seule)
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean movedByPiston) {
     }

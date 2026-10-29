@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.ussm.the_shell.init.ModBlockEntities;
 
-// peut aussi recevoir une table de loot (pour les stations abandonnees plus tard)
 public class StorageBlockEntity extends RandomizableContainerBlockEntity {
     private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
 

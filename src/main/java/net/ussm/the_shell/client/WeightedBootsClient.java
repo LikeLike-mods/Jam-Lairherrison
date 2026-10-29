@@ -15,12 +15,11 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.event.DropWeightPayload;
+import net.ussm.the_shell.events.DropWeightPayload;
 import net.ussm.the_shell.init.ModItems;
 import net.ussm.the_shell.items.DivingBootsItem;
 import org.lwjgl.glfw.GLFW;
 
-// bottes lestees cote joueur : la touche pour lacher le lingot et la texture lestee (le saut est dans DeepSeaEvents)
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class WeightedBootsClient {
     public static final KeyMapping DROP_WEIGHT = new KeyMapping("key.the_shell.drop_weight", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.the_shell");

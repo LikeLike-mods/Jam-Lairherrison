@@ -17,8 +17,6 @@ import net.ussm.the_shell.init.ModComponents;
 
 import java.util.List;
 
-// bottes de scaphandre : pas lestees au craft. clic droit dessus dans l'inventaire avec un lingot de fer pour les lester,
-// et une touche pour lacher le lingot sous l'eau et remonter
 public class DivingBootsItem extends ArmorItem {
     public DivingBootsItem(Holder<ArmorMaterial> material, Properties properties) {
         super(material, Type.BOOTS, properties);

@@ -9,7 +9,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 
-// une petite boule irreguliere d'un bloc posee sur le fond (corail lumineux du recif, tas de soufre...)
 public class AbyssBlobFeature extends Feature<SimpleBlockConfiguration> {
     public AbyssBlobFeature(Codec<SimpleBlockConfiguration> codec) {
         super(codec);

@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-// la dimension des abysses : de l'eau partout entre un fond et un plafond de roche,
-// avec en haut les failles qui ramenent dans l'atoll (aux memes x z que les failles de l'atoll)
 public class AbyssChunkGenerator extends ChunkGenerator {
     public static final MapCodec<AbyssChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BiomeSource.CODEC.fieldOf("biome_source").forGetter(gen -> gen.biomeSource)
@@ -47,7 +45,7 @@ public class AbyssChunkGenerator extends ChunkGenerator {
         return CODEC;
     }
 
-    // ce qui recouvre le fond selon la zone
+    // Surface material
     private static BlockState surface(AbyssTerrain.Zone zone) {
         return switch (zone) {
             case VENTS -> ModBlocks.ABYSSAL_BASALT.get().defaultBlockState();
@@ -56,7 +54,7 @@ public class AbyssChunkGenerator extends ChunkGenerator {
         };
     }
 
-    // un bloc de la colonne x z a la hauteur y (sert aussi pour getBaseColumn)
+    // Give the material based on the coordinates
     private static BlockState at(int x, int y, int z, int floor, int ceiling, boolean rift, AbyssTerrain.Zone zone) {
         if (y <= AbyssTerrain.MIN_Y || y >= AbyssTerrain.TOP) return Blocks.BEDROCK.defaultBlockState();
         if (y <= floor) {
@@ -65,7 +63,7 @@ public class AbyssChunkGenerator extends ChunkGenerator {
             return ModBlocks.ABYSSAL_STONE.get().defaultBlockState();
         }
         if (y < ceiling) return Blocks.WATER.defaultBlockState();
-        // le puits de la faille remonte dans le plafond jusqu'en haut : en y nageant on retourne dans l'atoll
+        // Rifts
         if (rift) return Blocks.WATER.defaultBlockState();
         return ModBlocks.ABYSSAL_STONE.get().defaultBlockState();
     }

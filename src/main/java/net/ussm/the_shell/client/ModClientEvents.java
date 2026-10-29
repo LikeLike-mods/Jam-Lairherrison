@@ -7,6 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.ussm.the_shell.TheShell;
+import net.ussm.the_shell.client.renderers.*;
 import net.ussm.the_shell.init.ModBlockEntities;
 import net.ussm.the_shell.init.ModEntities;
 import net.ussm.the_shell.init.ModWoodTypes;

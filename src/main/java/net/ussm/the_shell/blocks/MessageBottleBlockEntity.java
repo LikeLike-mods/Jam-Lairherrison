@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-// contenu de la bouteille, loot de coffre pour celles de la plage
 public class MessageBottleBlockEntity extends BlockEntity {
     public static final int CAPACITY = 4;
     private final NonNullList<ItemStack> items = NonNullList.withSize(CAPACITY, ItemStack.EMPTY);

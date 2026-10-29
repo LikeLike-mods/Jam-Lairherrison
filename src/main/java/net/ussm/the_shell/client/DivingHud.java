@@ -16,12 +16,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.entity.Submarine;
-import net.ussm.the_shell.event.DeepSeaEvents;
+import net.ussm.the_shell.entites.Submarine;
+import net.ussm.the_shell.events.DeepSeaEvents;
 import net.ussm.the_shell.init.ModItems;
 import net.ussm.the_shell.worldgen.TestChunkGenerator;
 
-// avec le casque de scaphandre : on voit a travers le hublot, et un manometre monte avec la pression
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class DivingHud {
     private static final ResourceLocation OVERLAY = ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "textures/misc/diving_helmet.png");
@@ -49,12 +48,10 @@ public class DivingHud {
         RenderSystem.enableDepthTest();
 
         float depth = player.isEyeInFluid(FluidTags.WATER) ? Math.max(0.0F, player.level().getSeaLevel() - (float) player.getEyeY()) : 0.0F;
-        // la dimension des abysses est sous le fond de l'atoll : le manometre est a fond
-        if (depth > 0 && player.level().dimension() == net.ussm.the_shell.event.AbyssTravel.ABYSS) depth += MAX_DEPTH;
+        if (depth > 0 && player.level().dimension() == net.ussm.the_shell.events.AbyssTravel.ABYSS) depth += MAX_DEPTH;
         float fill = Mth.clamp(depth / MAX_DEPTH, 0.0F, 1.0F);
         boolean safe = DeepSeaEvents.hasFullSuit(player) || player.getVehicle() instanceof Submarine;
 
-        // manometre a droite, dans le noir autour du hublot
         int x = w - 22;
         int top = h / 5;
         int bottom = h - h / 5;
@@ -65,7 +62,6 @@ public class DivingHud {
         int color = fill < 0.4F ? 0xFF4FD16A : fill < 0.7F ? 0xFFE3C13B : 0xFFE0482F;
         if (!safe && fill >= 0.7F && (player.tickCount / 5) % 2 == 0) color = 0xFF7A1A12;
         g.fill(x + 1, level, x + 7, bottom, color);
-        // traits aux paliers de pression
         int abyss = TestChunkGenerator.ABYSS;
         for (int y : new int[]{abyss, abyss - 40, abyss - 80}) {
             float f = Mth.clamp((TestChunkGenerator.SEA - y) / MAX_DEPTH, 0.0F, 1.0F);

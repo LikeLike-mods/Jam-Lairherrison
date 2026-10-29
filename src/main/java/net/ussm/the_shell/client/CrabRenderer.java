@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.entity.Crab;
+import net.ussm.the_shell.entites.Crab;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
@@ -20,7 +20,6 @@ public class CrabRenderer extends GeoEntityRenderer<Crab> {
         return RenderType.entityCutout(texture);
     }
 
-    // modele a part pour les bebes
     private static class CrabModel extends DefaultedEntityGeoModel<Crab> {
         private final ResourceLocation babyModel;
         private final ResourceLocation babyTexture;

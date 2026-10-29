@@ -18,7 +18,6 @@ import net.ussm.the_shell.init.ModBlocks;
 import java.util.ArrayList;
 import java.util.List;
 
-// Tronc de palmier couché au sol : bois flotté sur la plage, ou palmier tombé avec sa couronne dans la jungle.
 public class FallenLogFeature extends Feature<NoneFeatureConfiguration> {
     private final int minLength, maxLength;
     private final boolean withCrown;
@@ -46,7 +45,6 @@ public class FallenLogFeature extends Feature<NoneFeatureConfiguration> {
         Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
         int length = minLength + random.nextInt(maxLength - minLength + 1);
 
-        // le tronc suit le sol à plat : on s'arrête au premier trou ou obstacle
         List<BlockPos> logs = new ArrayList<>();
         for (int i = 0; i < length; i++) {
             BlockPos pos = origin.relative(direction, i);
@@ -59,7 +57,6 @@ public class FallenLogFeature extends Feature<NoneFeatureConfiguration> {
         for (BlockPos pos : logs) this.setBlock(level, pos, log);
 
         if (withCrown) {
-            // la couronne écrasée au bout du tronc, posée au sol
             BlockState leaves = ModBlocks.PALM_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
             BlockPos head = logs.get(logs.size() - 1).relative(direction);
             for (int a = -1; a <= 2; a++) {

@@ -26,7 +26,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// vanne : on la tourne au clic droit, ca donne du courant comme un levier (pour ouvrir les portes par ex)
 public class ValveBlock extends FaceAttachedHorizontalDirectionalBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<ValveBlock> CODEC = simpleCodec(ValveBlock::new);
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;

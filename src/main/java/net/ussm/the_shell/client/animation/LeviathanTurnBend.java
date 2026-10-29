@@ -1,6 +1,6 @@
 package net.ussm.the_shell.client.animation;
 
-//rotations smooth
+// Smooth rotations
 public final class LeviathanTurnBend {
     public static final float SIGN = 1.0F;
 
@@ -35,7 +35,7 @@ public final class LeviathanTurnBend {
             bones.add("fin_left", 0.0F, -Math.min(signedBend, 0.0F) * FIN_TUCK_DEG * DEG_TO_RAD, 0.0F);
         }
 
-        float pitch = Math.max(-PITCH_MAX_DEG, Math.min(PITCH_MAX_DEG, pitchDeg)) * PITCH_FACTOR;
+        float pitch = Math.clamp(pitchDeg, -PITCH_MAX_DEG, PITCH_MAX_DEG) * PITCH_FACTOR;
         if (signedBend != 0.0F || pitch != 0.0F) {
             bones.add("body", -pitch * DEG_TO_RAD, 0.0F, -signedBend * BANK_DEG * DEG_TO_RAD);
         }

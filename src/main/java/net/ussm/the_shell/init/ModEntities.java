@@ -9,21 +9,21 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.entity.AbyssalAngler;
-import net.ussm.the_shell.entity.Butterfly;
-import net.ussm.the_shell.entity.Crab;
-import net.ussm.the_shell.entity.Dragonfish;
-import net.ussm.the_shell.entity.Gecko;
-import net.ussm.the_shell.entity.GiantIsopod;
-import net.ussm.the_shell.entity.GulperEel;
-import net.ussm.the_shell.entity.HermitCrab;
-import net.ussm.the_shell.entity.Jellyfish;
-import net.ussm.the_shell.entity.PoisonFrog;
-import net.ussm.the_shell.entity.Seagull;
-import net.ussm.the_shell.entity.Toucan;
-import net.ussm.the_shell.entity.VampireSquid;
-import net.ussm.the_shell.entity.LeviathanEntity;
-import net.ussm.the_shell.entity.Submarine;
+import net.ussm.the_shell.entites.AbyssalAngler;
+import net.ussm.the_shell.entites.Butterfly;
+import net.ussm.the_shell.entites.Crab;
+import net.ussm.the_shell.entites.Dragonfish;
+import net.ussm.the_shell.entites.Gecko;
+import net.ussm.the_shell.entites.GiantIsopod;
+import net.ussm.the_shell.entites.GulperEel;
+import net.ussm.the_shell.entites.HermitCrab;
+import net.ussm.the_shell.entites.Jellyfish;
+import net.ussm.the_shell.entites.PoisonFrog;
+import net.ussm.the_shell.entites.Seagull;
+import net.ussm.the_shell.entites.Toucan;
+import net.ussm.the_shell.entites.VampireSquid;
+import net.ussm.the_shell.entites.LeviathanEntity;
+import net.ussm.the_shell.entites.Submarine;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, TheShell.MOD_ID);
@@ -46,9 +46,9 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<GiantIsopod>> GIANT_ISOPOD = register("giant_isopod", GiantIsopod::new, MobCategory.AXOLOTLS, 0.9F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.6F, 1.1F);
     // mobs de la dimension des abysses
-    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entity.YetiCrab>> YETI_CRAB = register("yeti_crab", net.ussm.the_shell.entity.YetiCrab::new, MobCategory.AXOLOTLS, 0.8F, 0.45F);
-    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entity.Hatchetfish>> HATCHETFISH = register("hatchetfish", net.ussm.the_shell.entity.Hatchetfish::new, MobCategory.WATER_AMBIENT, 0.35F, 0.45F);
-    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entity.ColossalSquid>> COLOSSAL_SQUID = register("colossal_squid", net.ussm.the_shell.entity.ColossalSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.6F, 2.8F);
+    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.YetiCrab>> YETI_CRAB = register("yeti_crab", net.ussm.the_shell.entites.YetiCrab::new, MobCategory.AXOLOTLS, 0.8F, 0.45F);
+    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.Hatchetfish>> HATCHETFISH = register("hatchetfish", net.ussm.the_shell.entites.Hatchetfish::new, MobCategory.WATER_AMBIENT, 0.35F, 0.45F);
+    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ColossalSquid>> COLOSSAL_SQUID = register("colossal_squid", net.ussm.the_shell.entites.ColossalSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.6F, 2.8F);
 
     // leviathan d'Oesphy
     public static final DeferredHolder<EntityType<?>, EntityType<Submarine>> SUBMARINE = register("submarine", Submarine::new, MobCategory.MISC, 2.0F, 1.5F);
@@ -80,9 +80,9 @@ public class ModEntities {
         event.put(DRAGONFISH.get(), Dragonfish.createAttributes().build());
         event.put(GIANT_ISOPOD.get(), GiantIsopod.createAttributes().build());
         event.put(VAMPIRE_SQUID.get(), VampireSquid.createAttributes().build());
-        event.put(YETI_CRAB.get(), net.ussm.the_shell.entity.YetiCrab.createAttributes().build());
+        event.put(YETI_CRAB.get(), net.ussm.the_shell.entites.YetiCrab.createAttributes().build());
         event.put(HATCHETFISH.get(), net.minecraft.world.entity.animal.AbstractFish.createAttributes().build());
-        event.put(COLOSSAL_SQUID.get(), net.ussm.the_shell.entity.ColossalSquid.createAttributes().build());
+        event.put(COLOSSAL_SQUID.get(), net.ussm.the_shell.entites.ColossalSquid.createAttributes().build());
         event.put(LEVIATHAN.get(), LeviathanEntity.createAttributes().build());
     }
 

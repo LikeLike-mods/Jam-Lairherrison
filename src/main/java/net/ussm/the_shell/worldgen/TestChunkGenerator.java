@@ -105,8 +105,7 @@ public class TestChunkGenerator extends ChunkGenerator {
     public static final int SEA = 100;
     public static final int ABYSS = SEA - 64;
 
-    // failles : de longues crevasses au fond des abysses, assez larges pour un sous-marin. pas de portail : en nageant
-    // sous RIFT_DOWN on passe dans les abysses (AbyssTravel)
+    // Rifts
     public static final int RIFT_DOWN = -118;
     private static final FastNoiseLite RIFT_LINES = riftNoise(210, 0.004f, FastNoiseLite.FractalType.Ridged);
     private static final FastNoiseLite RIFT_PIECES = riftNoise(211, 0.004f, FastNoiseLite.FractalType.FBm);
@@ -120,7 +119,6 @@ public class TestChunkGenerator extends ChunkGenerator {
         return n;
     }
 
-    // la meme fonction sert a la dimension des abysses pour mettre la faille du retour pile en dessous
     public static boolean isRift(int x, int z) {
         if ((RIFT_LINES.GetNoise(x, z) + 1f) * 0.5f < 0.92f) return false;
         if (RIFT_PIECES.GetNoise(x, z) < -0.25f) return false;
@@ -162,18 +160,16 @@ public class TestChunkGenerator extends ChunkGenerator {
         float mountains = Math.clamp(1.5f * islands - 1f, 0f, 1f);
         islands += 3f * mountains;
 
-        // profondeur sous la mer, les fosses sont creusees encore plus (il faut ca pour les failles vers les abysses)
         float depth = -islands * 50f;
         if (depth > 40f) depth += (depth - 40f) * 1.2f;
         h = Math.max(-120f, SEA - depth);
         return h;
     }
 
-    // niveau du marais : toute la mangrove est a cette hauteur, comme ca l'eau ne coule nulle part
+    // Swamps height
     public static final int SWAMP_LEVEL = SEA + 2;
 
-    // 0 = pas de mangrove, 1 = plein marais. seulement sur les terres basses : plus le terrain est haut moins on aplatit,
-    // comme ca le bord du marais remonte en pente douce au lieu de faire des marches
+    // To swamp or not to swamp, that is the question
     public static float getSwampiness(float posX, float posZ, float posY) {
         net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(203);
         noise.SetFrequency(0.001f);
@@ -183,7 +179,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
         float marais = Math.clamp((noise.GetNoise(posX, posZ) - 0.35f) / 0.25f, 0f, 1f);
         float bas = Math.clamp(1f - (posY - SWAMP_LEVEL) / 8f, 0f, 1f);
-        float terre = Math.clamp(posY - SEA, 0f, 1f); // pas dans la mer
+        float terre = Math.clamp(posY - SEA, 0f, 1f); // On land only
         return (float) (Mth.smoothstep(marais) * Mth.smoothstep(bas)) * terre;
     }
 
@@ -196,7 +192,6 @@ public class TestChunkGenerator extends ChunkGenerator {
         int cx = chunk.getPos().x * 16;
         int cz = chunk.getPos().z * 16;
 
-        // hauteurs du chunk + une colonne autour. dans la mangrove le terrain descend au niveau du marais
         float[][] ground = new float[18][18];
         float[][] swamp = new float[18][18];
         for (int i = 0; i < 18; i++) {
@@ -251,7 +246,6 @@ public class TestChunkGenerator extends ChunkGenerator {
                     topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
                 }
                 else if (swampiness >= 0.5f) {
-                    // de l'eau seulement au coeur du marais, et si les 4 voisins sont au moins aussi hauts (sinon elle coule)
                     boolean bassin = swampiness >= 0.9f && Math.round(h) == SWAMP_LEVEL && Math.round(n) >= SWAMP_LEVEL
                             && Math.round(s) >= SWAMP_LEVEL && Math.round(e) >= SWAMP_LEVEL && Math.round(w) >= SWAMP_LEVEL;
                     if (bassin && hash3 < 0.75f) topLand = Blocks.WATER.defaultBlockState();
@@ -301,15 +295,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                     y += 1;
                 }
 
-                // dalle en bas des marches d'un bloc pour lisser les pentes douces (pas sur le plat, sinon plus de fleurs ni d'arbres)
-                if (a >= SEA && topLand.is(Blocks.GRASS_BLOCK)
-                        && (Math.round(n) == a + 1 || Math.round(s) == a + 1 || Math.round(e) == a + 1 || Math.round(w) == a + 1)) {
-                    BlockState slab = (slope > 4f ? ModBlocks.DIRT_SLAB : ModBlocks.GRASS_SLAB).get().defaultBlockState();
-                    chunk.setBlockState(pos.set(x, a, z), Blocks.DIRT.defaultBlockState(), false);
-                    chunk.setBlockState(pos.set(x, a + 1, z), slab, false);
-                }
-
-                // la faille : on creuse jusqu'a la bedrock
+                // Rifts
                 if (isRift(posX, posZ)) {
                     for (int y2 = -127; y2 <= a; y2++) {
                         chunk.setBlockState(pos.set(x, y2, z), Blocks.WATER.defaultBlockState(), false);

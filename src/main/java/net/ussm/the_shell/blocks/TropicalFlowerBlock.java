@@ -8,7 +8,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-// pousse aussi sur le sable
 public class TropicalFlowerBlock extends FlowerBlock {
     public TropicalFlowerBlock(Holder<MobEffect> stewEffect, float seconds, Properties properties) {
         super(stewEffect, seconds, properties);

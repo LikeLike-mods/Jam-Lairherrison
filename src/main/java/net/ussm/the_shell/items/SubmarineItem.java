@@ -12,9 +12,8 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.ussm.the_shell.entity.Submarine;
+import net.ussm.the_shell.entites.Submarine;
 
-// se pose comme un bateau, la ou on vise (l'eau compte)
 public class SubmarineItem extends Item {
 
     public SubmarineItem(Properties properties) {

@@ -9,7 +9,6 @@ import net.ussm.the_shell.TheShell;
 
 import java.util.function.Supplier;
 
-// bateau en palmier (type ajoute dans enumextensions.json)
 public class ModBoats {
     public static final EnumProxy<Boat.Type> PALM = new EnumProxy<>(Boat.Type.class,
             (Supplier<Block>) () -> ModBlocks.PALM_PLANKS.get(),

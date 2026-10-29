@@ -36,7 +36,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.init.ModBlocks;
 
-// lumiere invisible du crane, elle s'enleve toute seule quand y a plus personne
 public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<AbyssLightBlock> CODEC = simpleCodec(AbyssLightBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -52,7 +51,6 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
         return player.getItemBySlot(EquipmentSlot.HEAD).is(HEAD_LIGHTS);
     }
 
-    // joueur avec un crane lumineux ou mob qui eclaire (loupiote)
     public static boolean emitsLight(Entity entity) {
         return entity.getType().is(LIGHT_EMITTERS) || entity instanceof Player player && wearsLight(player);
     }

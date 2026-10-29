@@ -27,7 +27,6 @@ import net.ussm.the_shell.TheShell;
 import java.util.HashMap;
 import java.util.Map;
 
-// tuyau qui se raccorde tout seul comme la redstone : aux autres tuyaux et aux blocs du tag pipe_connectable (cuves, machines...)
 public class MetalPipeBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final TagKey<Block> CONNECTABLE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "pipe_connectable"));

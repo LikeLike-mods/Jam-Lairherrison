@@ -24,7 +24,7 @@ import java.util.function.Supplier;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.Unbreakable;
-import net.ussm.the_shell.item.LightsaberItem;
+import net.ussm.the_shell.items.LightsaberItem;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TheShell.MOD_ID);

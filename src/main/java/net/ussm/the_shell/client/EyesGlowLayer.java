@@ -12,7 +12,6 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-// glowmask rendu comme les yeux d'enderman
 public class EyesGlowLayer<T extends GeoAnimatable> extends GeoRenderLayer<T> {
     public EyesGlowLayer(GeoRenderer<T> renderer) {
         super(renderer);

@@ -83,7 +83,6 @@ public class ModBlocks {
                     .strength(0.5f, 0.5f)
                     .sound(SoundType.SAND)));
 
-    // dalles de terre et d'herbe : le generateur les pose sur les marches d'un bloc pour lisser les pentes
     public static final DeferredBlock<SlabBlock> DIRT_SLAB = registerBlock("dirt_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
 
@@ -93,7 +92,6 @@ public class ModBlocks {
                     .strength(0.6f)
                     .sound(SoundType.GRASS)));
 
-    // abysses : la roche, la vase et le basalte du fond
     public static final DeferredBlock<Block> ABYSSAL_STONE = registerBlock("abyssal_stone",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(2.0f, 6.0f)
                     .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
@@ -102,7 +100,6 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ABYSSAL_BASALT = registerBlock("abyssal_basalt",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(1.5f, 6.0f)
                     .requiresCorrectToolForDrops().sound(SoundType.BASALT)));
-    // le decor des abysses
     public static final DeferredBlock<net.ussm.the_shell.blocks.ChimneyBlock> HYDROTHERMAL_CHIMNEY = registerBlock("hydrothermal_chimney",
             () -> new net.ussm.the_shell.blocks.ChimneyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(1.5f, 6.0f)
                     .requiresCorrectToolForDrops().sound(SoundType.BASALT).noOcclusion()
@@ -262,7 +259,6 @@ public class ModBlocks {
                     .sound(SoundType.CROP)
                     .pushReaction(PushReaction.DESTROY)));
 
-    // base sous-marine abandonnee
     public static final DeferredBlock<Block> METAL_PLATING = registerBlock("metal_plating", () -> new Block(metal()));
     public static final DeferredBlock<Block> RUSTY_METAL_PLATING = registerBlock("rusty_metal_plating", () -> new Block(metal()));
     public static final DeferredBlock<StairBlock> METAL_PLATING_STAIRS = registerBlock("metal_plating_stairs",
@@ -287,7 +283,6 @@ public class ModBlocks {
     public static final DeferredBlock<SlidingDoorBlock> BROKEN_SLIDING_DOOR = registerBlock("broken_sliding_door",
             () -> new SlidingDoorBlock(metal().noOcclusion().pushReaction(PushReaction.BLOCK), true));
 
-    // encore des blocs pour les stations sous-marines
     public static final BlockSetType STEEL_SET = BlockSetType.register(new BlockSetType(TheShell.MOD_ID + ":steel", true, true, false,
             BlockSetType.PressurePlateSensitivity.MOBS, SoundType.METAL, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN,
             SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF,

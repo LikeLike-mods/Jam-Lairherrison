@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// caisse et tonneau de la station : on range dedans comme dans un coffre (27 places)
 public class StorageBlock extends DecorBlock implements EntityBlock {
 
     public StorageBlock(Properties properties, VoxelShape north) {

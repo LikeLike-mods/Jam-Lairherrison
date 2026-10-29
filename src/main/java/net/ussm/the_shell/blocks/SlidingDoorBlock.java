@@ -37,7 +37,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// porte coulissante de 2 blocs (clic droit ou redstone), animee avec geckolib. la cassee reste coincee
 public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -102,7 +101,6 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
         return below.is(this) && below.getValue(HALF) == DoubleBlockHalf.LOWER;
     }
 
-    // les deux moities restent pareilles, et si une part l'autre part aussi (seule celle du bas donne la porte, cf le loot)
     @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) {
@@ -118,7 +116,6 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
-    // en creatif, casser le haut ne doit pas faire tomber la porte du bas
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide && player.isCreative() && state.getValue(HALF) == DoubleBlockHalf.UPPER) {
@@ -136,7 +133,6 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;
-        // on attend qu'elle ait fini de glisser avant de pouvoir recliquer (sinon on pouvait la spammer)
         BlockPos lowerPos = state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
         if (level.getBlockEntity(lowerPos) instanceof SlidingDoorBlockEntity door) {
             if (level.getGameTime() - door.lastUse < USE_COOLDOWN) return InteractionResult.CONSUME;
@@ -193,7 +189,6 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
-    // seule la moitie du bas a le block entity, elle dessine toute la porte
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return state.getValue(HALF) == DoubleBlockHalf.LOWER ? RenderShape.ENTITYBLOCK_ANIMATED : RenderShape.INVISIBLE;

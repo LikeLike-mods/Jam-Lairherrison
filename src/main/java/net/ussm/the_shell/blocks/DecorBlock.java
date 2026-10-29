@@ -23,7 +23,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.EnumMap;
 import java.util.Map;
 
-// bloc deco de la base : tourne vers le joueur, se pose sous l'eau, forme donnee pour la face nord (tournee pour les autres)
 public class DecorBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private final Map<Direction, VoxelShape> shapes = new EnumMap<>(Direction.class);

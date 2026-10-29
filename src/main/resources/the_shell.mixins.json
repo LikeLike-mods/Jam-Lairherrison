@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.ussm.the_shell.mixin",
+  "package": "net.ussm.the_shell.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "injectors": {
