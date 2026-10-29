@@ -93,7 +93,7 @@ public class ModBlocks {
                     .strength(0.6f)
                     .sound(SoundType.GRASS)));
 
-    // abysses : la roche, la vase et le basalte du fond, et la faille qui y mene (on ne peut pas la casser)
+    // abysses : la roche, la vase et le basalte du fond
     public static final DeferredBlock<Block> ABYSSAL_STONE = registerBlock("abyssal_stone",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(2.0f, 6.0f)
                     .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
@@ -102,9 +102,6 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ABYSSAL_BASALT = registerBlock("abyssal_basalt",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(1.5f, 6.0f)
                     .requiresCorrectToolForDrops().sound(SoundType.BASALT)));
-    public static final DeferredBlock<net.ussm.the_shell.blocks.RiftBlock> RIFT = BLOCKS.register("rift",
-            () -> new net.ussm.the_shell.blocks.RiftBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).noCollission()
-                    .noLootTable().noOcclusion().strength(-1.0f, 3600000.0f).lightLevel(s -> 12).pushReaction(PushReaction.BLOCK)));
     // le decor des abysses
     public static final DeferredBlock<net.ussm.the_shell.blocks.ChimneyBlock> HYDROTHERMAL_CHIMNEY = registerBlock("hydrothermal_chimney",
             () -> new net.ussm.the_shell.blocks.ChimneyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(1.5f, 6.0f)

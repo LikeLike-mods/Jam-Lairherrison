@@ -1,0 +1,44 @@
+{
+  "processors": [
+    {
+      "processor_type": "the_shell:station_rust",
+      "from": "the_shell:metal_plating",
+      "to": "the_shell:rusty_metal_plating",
+      "chance": 0.35
+    },
+    {
+      "processor_type": "the_shell:station_rust",
+      "from": "the_shell:checker_plate",
+      "to": "the_shell:rusty_checker_plate",
+      "chance": 0.4
+    },
+    {
+      "processor_type": "the_shell:station_rust",
+      "from": "the_shell:riveted_panel",
+      "to": "the_shell:rusty_riveted_panel",
+      "chance": 0.3
+    },
+    {
+      "processor_type": "the_shell:station_rust",
+      "from": "the_shell:corrugated_metal",
+      "to": "the_shell:rusty_corrugated_metal",
+      "chance": 0.35
+    },
+    {
+      "processor_type": "the_shell:station_rust",
+      "from": "the_shell:metal_grate_slab",
+      "to": "the_shell:rusty_metal_grate_slab",
+      "chance": 0.4
+    },
+    {
+      "processor_type": "the_shell:station_rust",
+      "from": "the_shell:industrial_lamp",
+      "to": "the_shell:broken_industrial_lamp",
+      "chance": 0.3
+    },
+    {
+      "processor_type": "the_shell:station_flood",
+      "chance": 0.2
+    }
+  ]
+}

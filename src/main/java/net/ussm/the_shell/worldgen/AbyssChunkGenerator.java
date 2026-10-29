@@ -65,11 +65,8 @@ public class AbyssChunkGenerator extends ChunkGenerator {
             return ModBlocks.ABYSSAL_STONE.get().defaultBlockState();
         }
         if (y < ceiling) return Blocks.WATER.defaultBlockState();
-        if (rift) {
-            // le puits de la faille remonte dans le plafond, la faille elle-meme est tout en haut
-            if (y >= AbyssTerrain.TOP - 3) return ModBlocks.RIFT.get().defaultBlockState();
-            return Blocks.WATER.defaultBlockState();
-        }
+        // le puits de la faille remonte dans le plafond jusqu'en haut : en y nageant on retourne dans l'atoll
+        if (rift) return Blocks.WATER.defaultBlockState();
         return ModBlocks.ABYSSAL_STONE.get().defaultBlockState();
     }
 

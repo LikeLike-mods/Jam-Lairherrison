@@ -1,5 +1,9 @@
 {
   "creativetab.the_shell.blocks": "The Shell",
+  "tooltip.the_shell.diving_boots.light": "Pas lestées : clic droit dessus avec un lingot de fer pour les lester",
+  "tooltip.the_shell.diving_boots.weighted": "Lestées : tu coules. Touche G sous l'eau pour lâcher le lingot",
+  "key.the_shell.drop_weight": "Lâcher le lest des bottes",
+  "key.categories.the_shell": "The Shell",
   "painting.the_shell.dancing_parrot.title": "Perroquet en fête",
   "painting.the_shell.dancing_parrot.author": "Anonyme",
 
@@ -22,7 +26,6 @@
   "block.the_shell.abyssal_stone": "Roche abyssale",
   "block.the_shell.abyssal_silt": "Vase abyssale",
   "block.the_shell.abyssal_basalt": "Basalte abyssal",
-  "block.the_shell.rift": "Faille",
   "block.the_shell.hydrothermal_chimney": "Cheminée hydrothermale",
   "block.the_shell.tube_worms": "Vers tubicoles",
   "block.the_shell.glowing_anemone": "Anémone luminescente",

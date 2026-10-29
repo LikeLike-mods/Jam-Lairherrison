@@ -16,7 +16,7 @@
     "sky_color": 16746815,
     "fog_color": 15180488,
     "water_color": 76,
-    "water_fog_color": 51,
+    "water_fog_color": 0,
     "grass_color": 5884220,
     "foliage_color": 329011
   },

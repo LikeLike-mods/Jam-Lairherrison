@@ -93,7 +93,7 @@ public class ModItems {
     public static final DeferredItem<ArmorItem> DIVING_LEGGINGS = ITEMS.register("diving_leggings",
             () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
     public static final DeferredItem<ArmorItem> DIVING_BOOTS = ITEMS.register("diving_boots",
-            () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
+            () -> new net.ussm.the_shell.items.DivingBootsItem(ModArmorMaterials.DIVING, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
     public static final DeferredItem<Item> DIVING_ABYSS_HELMET = ITEMS.register("diving_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diving", 2, 0, 0)), 9));
 

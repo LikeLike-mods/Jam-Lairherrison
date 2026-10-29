@@ -45,7 +45,7 @@ public class DeepSeaEvents {
     public static void tick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         boolean inWater = player.isInWater();
-        heavyBoots(player, inWater && player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.DIVING_BOOTS.get()));
+        heavyBoots(player, inWater && net.ussm.the_shell.items.DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET)));
         if (inWater) ventLift(player);
 
         if (!(player instanceof ServerPlayer serverPlayer)) return;

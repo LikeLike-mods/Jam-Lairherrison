@@ -105,8 +105,9 @@ public class TestChunkGenerator extends ChunkGenerator {
     public static final int SEA = 100;
     public static final int ABYSS = SEA - 64;
 
-    // failles : de longues crevasses fines tout au fond des abysses, la faille (le portail) est en bas, juste sur la bedrock
-    public static final int RIFT_TOP = -126;
+    // failles : de longues crevasses au fond des abysses, assez larges pour un sous-marin. pas de portail : en nageant
+    // sous RIFT_DOWN on passe dans les abysses (AbyssTravel)
+    public static final int RIFT_DOWN = -118;
     private static final FastNoiseLite RIFT_LINES = riftNoise(210, 0.0025f, FastNoiseLite.FractalType.Ridged);
     private static final FastNoiseLite RIFT_PIECES = riftNoise(211, 0.004f, FastNoiseLite.FractalType.FBm);
 
@@ -121,7 +122,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     // la meme fonction sert a la dimension des abysses pour mettre la faille du retour pile en dessous
     public static boolean isRift(int x, int z) {
-        if ((RIFT_LINES.GetNoise(x, z) + 1f) * 0.5f < 0.988f) return false;
+        if ((RIFT_LINES.GetNoise(x, z) + 1f) * 0.5f < 0.95f) return false;
         if (RIFT_PIECES.GetNoise(x, z) < 0.1f) return false;
         return getHeight(x, z) < ABYSS - 100;
     }
@@ -291,10 +292,10 @@ public class TestChunkGenerator extends ChunkGenerator {
                     chunk.setBlockState(pos.set(x, a + 1, z), slab, false);
                 }
 
-                // la faille : on creuse jusqu'en bas et on met le portail sur la bedrock
+                // la faille : on creuse jusqu'a la bedrock
                 if (isRift(posX, posZ)) {
                     for (int y2 = -127; y2 <= a; y2++) {
-                        chunk.setBlockState(pos.set(x, y2, z), y2 <= RIFT_TOP ? ModBlocks.RIFT.get().defaultBlockState() : Blocks.WATER.defaultBlockState(), false);
+                        chunk.setBlockState(pos.set(x, y2, z), Blocks.WATER.defaultBlockState(), false);
                     }
                 }
             }

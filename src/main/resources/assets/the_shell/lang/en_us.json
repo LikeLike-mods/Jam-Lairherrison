@@ -1,5 +1,9 @@
 {
   "creativetab.the_shell.blocks": "The Shell",
+  "tooltip.the_shell.diving_boots.light": "Not weighted: right-click it with an iron ingot to weigh it down",
+  "tooltip.the_shell.diving_boots.weighted": "Weighted: you sink. Press G underwater to drop the ingot",
+  "key.the_shell.drop_weight": "Drop boot weight",
+  "key.categories.the_shell": "The Shell",
   "painting.the_shell.dancing_parrot.title": "Party Parrot",
   "painting.the_shell.dancing_parrot.author": "Anonymous",
 
@@ -22,7 +26,6 @@
   "block.the_shell.abyssal_stone": "Abyssal Stone",
   "block.the_shell.abyssal_silt": "Abyssal Silt",
   "block.the_shell.abyssal_basalt": "Abyssal Basalt",
-  "block.the_shell.rift": "Rift",
   "block.the_shell.hydrothermal_chimney": "Hydrothermal Chimney",
   "block.the_shell.tube_worms": "Tube Worms",
   "block.the_shell.glowing_anemone": "Glowing Anemone",

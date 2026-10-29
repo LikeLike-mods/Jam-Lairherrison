@@ -18,7 +18,7 @@
     "sky_color": 0,
     "fog_color": 0,
     "water_color": 666163,
-    "water_fog_color": 136216
+    "water_fog_color": 0
   },
   "features": [
     [],

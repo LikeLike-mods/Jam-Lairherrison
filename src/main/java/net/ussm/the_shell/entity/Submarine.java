@@ -95,6 +95,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
+        net.ussm.the_shell.event.AbyssTravel.check(this);
         if (this.isControlledByLocalInstance()) {
             Vec3 motion = this.getDeltaMovement();
             if (this.isInWater()) {

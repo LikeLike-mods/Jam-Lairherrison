@@ -19,6 +19,11 @@ public class ModComponents {
         COMPONENTS.registerComponentType("active",
             builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
+    // bottes de scaphandre lestees ou pas
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WEIGHTED =
+        COMPONENTS.registerComponentType("weighted",
+            builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
+
     public static void register(IEventBus eventBus) {
         COMPONENTS.register(eventBus);
     }

@@ -1,0 +1,86 @@
+{
+  "fallback": "the_shell:station/caps",
+  "elements": [
+    {
+      "weight": 6,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_straight",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_corner",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_t",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_cross",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_storage",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_lab",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_dorm",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_reactor",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/airlock",
+        "projection": "rigid",
+        "processors": "the_shell:station_decay"
+      }
+    }
+  ]
+}
