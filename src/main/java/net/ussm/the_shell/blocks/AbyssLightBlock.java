@@ -1,5 +1,6 @@
 package net.ussm.the_shell.blocks;
 
+import net.minecraft.world.phys.Vec3;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -65,6 +66,28 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
         }
     }
 
+    // lampe torche : des lumieres en ligne devant, on s'arrete au premier bloc plein
+    public static void lightAhead(Level level, Vec3 from, Vec3 dir, int range) {
+        for (int d = 3; d <= range; d += 4) {
+            BlockPos pos = BlockPos.containing(from.add(dir.scale(d)));
+            BlockState state = level.getBlockState(pos);
+            if (!state.isAir() && !state.is(Blocks.WATER) && !state.is(ModBlocks.ABYSS_LIGHT.get())) return;
+            placeAt(level, pos);
+        }
+    }
+
+    // une lumiere reste si quelqu'un qui eclaire est tout pres, ou si elle est dans son faisceau
+    private static boolean stillLit(ServerLevel level, BlockPos pos) {
+        Vec3 c = Vec3.atCenterOf(pos);
+        for (Entity e : level.getEntitiesOfClass(Entity.class, new AABB(pos).inflate(24.0), AbyssLightBlock::emitsLight)) {
+            if (e.distanceToSqr(c) < 9.0) return true;
+            Vec3 look = e instanceof net.ussm.the_shell.entites.Submarine sub && sub.getControllingPassenger() != null
+                    ? sub.getControllingPassenger().getLookAngle() : e.getLookAngle();
+            if (c.subtract(e.getEyePosition()).normalize().dot(look) > 0.9) return true;
+        }
+        return false;
+    }
+
     @Override
     protected MapCodec<? extends Block> codec() {
         return CODEC;
@@ -110,7 +133,7 @@ public class AbyssLightBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (level.getEntitiesOfClass(Entity.class, new AABB(pos).inflate(2.0), AbyssLightBlock::emitsLight).isEmpty()) {
+        if (!stillLit(level, pos)) {
             level.setBlock(pos, state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
         } else {
             level.scheduleTick(pos, this, 10);

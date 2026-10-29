@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "the_shell:metal_plating",
+    "the_shell:riveted_panel",
+    "the_shell:checker_plate",
+    "the_shell:porthole",
+    "the_shell:hazard_block",
+    "the_shell:metal_ladder",
+    "the_shell:steel_trapdoor",
+    "the_shell:metal_plating_stairs"
+  ]
+}

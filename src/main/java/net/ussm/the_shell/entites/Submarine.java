@@ -30,6 +30,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class Submarine extends VehicleEntity implements GeoEntity {
     private static final RawAnimation PROPELLER = RawAnimation.begin().thenLoop("move.propeller");
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private int interiorId = -1;
 
     public Submarine(EntityType<? extends Submarine> type, Level level) {
         super(type, level);
@@ -45,6 +46,14 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.zo = z;
     }
 
+    public int getInteriorId() {
+        return interiorId;
+    }
+
+    public void setInteriorId(int id) {
+        this.interiorId = id;
+    }
+
     @Override
     protected Item getDropItem() {
         return ModItems.SUBMARINE.get();
@@ -52,15 +61,17 @@ public class Submarine extends VehicleEntity implements GeoEntity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
+        if (tag.contains("Interior")) interiorId = tag.getInt("Interior");
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag tag) {
+        tag.putInt("Interior", interiorId);
     }
 
     @Override
     public boolean canBeCollidedWith() {
-        return true;
+        return false;
     }
 
     @Override
@@ -83,19 +94,21 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         return new Vec3(0.0, 0.3, 0.0);
     }
 
+    // clic droit : on entre dans la cabine, et l'echelle du fond mene aux commandes
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
-        if (player.isSecondaryUseActive() || this.isVehicle()) return InteractionResult.PASS;
-        if (!this.level().isClientSide) {
-            return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
+        if (player.isSecondaryUseActive()) return InteractionResult.PASS;
+        if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+            net.ussm.the_shell.events.SubmarineInterior.enter(serverPlayer, this);
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.sidedSuccess(this.level().isClientSide);
     }
 
     @Override
     public void tick() {
         super.tick();
         net.ussm.the_shell.events.AbyssTravel.check(this);
+        if (!this.level().isClientSide && interiorId >= 0 && this.tickCount % 40 == 0) net.ussm.the_shell.events.SubmarineInterior.remember(this);
         if (this.isControlledByLocalInstance()) {
             Vec3 motion = this.getDeltaMovement();
             if (this.isInWater()) {
@@ -127,6 +140,8 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             if (this.isInWater() && this.tickCount % 4 == 0) {
                 Vec3 front = this.position().add(Vec3.directionFromRotation(0.0F, this.getYRot()).scale(1.8)).add(0.0, 0.6, 0.0);
                 AbyssLightBlock.placeAt(this.level(), BlockPos.containing(front));
+                LivingEntity driver = this.getControllingPassenger();
+                AbyssLightBlock.lightAhead(this.level(), front, driver != null ? driver.getLookAngle() : Vec3.directionFromRotation(0.0F, this.getYRot()), 22);
             }
         }
     }

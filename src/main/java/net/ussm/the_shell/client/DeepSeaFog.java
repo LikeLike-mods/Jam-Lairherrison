@@ -30,6 +30,8 @@ public class DeepSeaFog {
             if (t <= 0) return;
             far = Math.min(event.getFarPlaneDistance(), Mth.lerp((float) Math.sqrt(t), event.getFarPlaneDistance(), 28.0F));
         }
+        if (mc.player != null && mc.player.getVehicle() instanceof net.ussm.the_shell.entites.Submarine) far *= 2.2F;
+        else if (mc.player != null && net.ussm.the_shell.blocks.AbyssLightBlock.wearsLight(mc.player)) far *= 1.7F;
         float time = mc.level.getGameTime() + (float) event.getPartialTick();
         far *= 1.0F + 0.05F * Mth.sin(time * 0.08F);
         event.setFarPlaneDistance(far);

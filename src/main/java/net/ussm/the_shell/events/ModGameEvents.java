@@ -33,5 +33,6 @@ public class ModGameEvents {
         Player player = event.getEntity();
         if (player.level().isClientSide || player.tickCount % 4 != 0 || !AbyssLightBlock.wearsLight(player)) return;
         AbyssLightBlock.placeAt(player.level(), BlockPos.containing(player.getEyePosition()));
+        AbyssLightBlock.lightAhead(player.level(), player.getEyePosition(), player.getLookAngle(), 15);
     }
 }
