@@ -45,6 +45,11 @@ public class YetiCrab extends PathfinderMob implements GeoEntity {
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
     }
 
+    @Override
+    public boolean checkSpawnObstruction(net.minecraft.world.level.LevelReader level) {
+        return level.isUnobstructed(this);
+    }
+
     // il vit au fond, il ne se noie pas
     @Override
     public boolean canDrownInFluidType(net.neoforged.neoforge.fluids.FluidType type) {

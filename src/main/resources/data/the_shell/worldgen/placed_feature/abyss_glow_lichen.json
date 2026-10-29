@@ -1,0 +1,31 @@
+{
+  "feature": "the_shell:abyss_glow_lichen",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 24,
+        "max_inclusive": 40
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": {
+          "absolute": -60
+        },
+        "max_inclusive": {
+          "absolute": 130
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
