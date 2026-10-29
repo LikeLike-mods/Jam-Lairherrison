@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "examplemod:palm_leaves",
-    "examplemod:flytrap",
-    "examplemod:pitcher_plant"
+    "theshell:palm_leaves",
+    "theshell:flytrap",
+    "theshell:pitcher_plant"
   ]
 }

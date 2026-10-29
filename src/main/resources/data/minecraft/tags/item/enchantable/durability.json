@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "examplemod:diving_helmet",
-    "examplemod:diving_chestplate",
-    "examplemod:diving_leggings",
-    "examplemod:diving_boots"
+    "theshell:diving_helmet",
+    "theshell:diving_chestplate",
+    "theshell:diving_leggings",
+    "theshell:diving_boots"
   ]
 }

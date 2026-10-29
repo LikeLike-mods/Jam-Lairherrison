@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "theshell:rusty_metal_plating"
+    }
+  },
+  "result": {
+    "id": "theshell:rusty_metal_plating_slab",
+    "count": 6
+  }
+}

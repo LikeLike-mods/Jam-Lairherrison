@@ -1,42 +1,42 @@
 {
   "values": {
-    "examplemod:palm_leaves": {
+    "theshell:palm_leaves": {
       "chance": 0.3
     },
-    "examplemod:dry_grass": {
+    "theshell:dry_grass": {
       "chance": 0.3
     },
-    "examplemod:short_dry_grass": {
+    "theshell:short_dry_grass": {
       "chance": 0.3
     },
-    "examplemod:hibiscus": {
+    "theshell:hibiscus": {
       "chance": 0.65
     },
-    "examplemod:bird_of_paradise": {
+    "theshell:bird_of_paradise": {
       "chance": 0.65
     },
-    "examplemod:frangipani": {
+    "theshell:frangipani": {
       "chance": 0.65
     },
-    "examplemod:shadow_lily": {
+    "theshell:shadow_lily": {
       "chance": 0.65
     },
-    "examplemod:flytrap": {
+    "theshell:flytrap": {
       "chance": 0.65
     },
-    "examplemod:pitcher_plant": {
+    "theshell:pitcher_plant": {
       "chance": 0.65
     },
-    "examplemod:coconut": {
+    "theshell:coconut": {
       "chance": 0.65
     },
-    "examplemod:palm_sapling": {
+    "theshell:palm_sapling": {
       "chance": 0.3
     },
-    "examplemod:coconut_half": {
+    "theshell:coconut_half": {
       "chance": 0.65
     },
-    "examplemod:coconut_shell": {
+    "theshell:coconut_shell": {
       "chance": 0.3
     }
   }

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "theshell:living_abyss_skull"
+  },
+  "base": {
+    "item": "theshell:diving_helmet"
+  },
+  "addition": [],
+  "result": {
+    "id": "theshell:diving_abyss_helmet",
+    "count": 1
+  }
+}

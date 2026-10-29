@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "examplemod:light_sand",
-    "examplemod:light_sand_wet",
-    "examplemod:dirt_slab",
-    "examplemod:grass_slab"
+    "theshell:light_sand",
+    "theshell:light_sand_wet",
+    "theshell:dirt_slab",
+    "theshell:grass_slab"
   ]
 }

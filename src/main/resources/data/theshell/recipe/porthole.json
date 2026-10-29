@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " P ",
+    "PGP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "theshell:metal_plating"
+    },
+    "G": {
+      "item": "theshell:reinforced_glass"
+    }
+  },
+  "result": {
+    "id": "theshell:porthole",
+    "count": 2
+  }
+}

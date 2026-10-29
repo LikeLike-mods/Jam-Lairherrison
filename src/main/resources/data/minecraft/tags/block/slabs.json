@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "examplemod:metal_plating_slab",
-    "examplemod:rusty_metal_plating_slab",
-    "examplemod:metal_grate_slab",
-    "examplemod:rusty_metal_grate_slab",
-    "examplemod:dirt_slab",
-    "examplemod:grass_slab"
+    "theshell:metal_plating_slab",
+    "theshell:rusty_metal_plating_slab",
+    "theshell:metal_grate_slab",
+    "theshell:rusty_metal_grate_slab",
+    "theshell:dirt_slab",
+    "theshell:grass_slab"
   ]
 }

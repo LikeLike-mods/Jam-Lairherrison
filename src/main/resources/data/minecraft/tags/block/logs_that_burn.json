@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "examplemod:palm_log",
-    "#examplemod:palm_logs"
+    "theshell:palm_log",
+    "#theshell:palm_logs"
   ]
 }

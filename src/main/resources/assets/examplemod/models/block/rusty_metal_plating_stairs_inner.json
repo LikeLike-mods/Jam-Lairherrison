@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "examplemod:block/rusty_metal_plating",
-    "side": "examplemod:block/rusty_metal_plating",
-    "top": "examplemod:block/rusty_metal_plating"
-  }
-}

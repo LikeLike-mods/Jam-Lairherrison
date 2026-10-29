@@ -1,0 +1,7 @@
+{
+  "parent": "theshell:item/living_abyss_skull",
+  "textures": {
+    "skull": "theshell:item/netherite_abyss_helmet",
+    "particle": "theshell:item/netherite_abyss_helmet"
+  }
+}

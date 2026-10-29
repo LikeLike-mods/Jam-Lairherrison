@@ -1,7 +1,0 @@
-{
-  "parent": "examplemod:item/living_abyss_skull",
-  "textures": {
-    "skull": "examplemod:item/netherite_abyss_helmet",
-    "particle": "examplemod:item/netherite_abyss_helmet"
-  }
-}

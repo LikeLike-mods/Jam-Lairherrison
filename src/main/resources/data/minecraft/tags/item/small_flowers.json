@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "examplemod:hibiscus",
-    "examplemod:bird_of_paradise",
-    "examplemod:frangipani",
-    "examplemod:shadow_lily"
+    "theshell:hibiscus",
+    "theshell:bird_of_paradise",
+    "theshell:frangipani",
+    "theshell:shadow_lily"
   ]
 }

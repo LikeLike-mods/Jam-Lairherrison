@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "examplemod:diamond_abyss_helmet",
-    "examplemod:netherite_abyss_helmet",
-    "examplemod:diving_helmet",
-    "examplemod:diving_chestplate",
-    "examplemod:diving_leggings",
-    "examplemod:diving_boots"
+    "theshell:diamond_abyss_helmet",
+    "theshell:netherite_abyss_helmet",
+    "theshell:diving_helmet",
+    "theshell:diving_chestplate",
+    "theshell:diving_leggings",
+    "theshell:diving_boots"
   ]
 }

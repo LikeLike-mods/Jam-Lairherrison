@@ -1,0 +1,27 @@
+{
+  "parent": "theshell:root",
+  "display": {
+    "icon": {
+      "id": "theshell:redstone_pepper"
+    },
+    "title": {
+      "translate": "advancement.theshell.hot_pepper.title"
+    },
+    "description": {
+      "translate": "advancement.theshell.hot_pepper.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "ate_pepper": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "theshell:redstone_pepper"
+        }
+      }
+    }
+  }
+}

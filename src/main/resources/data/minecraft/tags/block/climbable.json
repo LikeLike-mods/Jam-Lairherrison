@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "examplemod:metal_ladder",
-    "examplemod:hanging_cables"
+    "theshell:metal_ladder",
+    "theshell:hanging_cables"
   ]
 }

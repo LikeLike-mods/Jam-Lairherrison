@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "examplemod:dry_grass",
-    "examplemod:short_dry_grass",
-    "examplemod:flytrap",
-    "examplemod:pitcher_plant"
+    "theshell:dry_grass",
+    "theshell:short_dry_grass",
+    "theshell:flytrap",
+    "theshell:pitcher_plant"
   ]
 }

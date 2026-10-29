@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "theshell:palm_log"
+    },
+    "title": {
+      "translate": "advancement.theshell.root.title"
+    },
+    "description": {
+      "translate": "advancement.theshell.root.description"
+    },
+    "background": "theshell:textures/block/light_sand.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

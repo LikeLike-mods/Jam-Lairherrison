@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "theshell:netherite_abyss_helmet_smithing"
+      }
+    },
+    "has_living_abyss_skull": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "theshell:living_abyss_skull"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_living_abyss_skull"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "theshell:netherite_abyss_helmet_smithing"
+    ]
+  }
+}

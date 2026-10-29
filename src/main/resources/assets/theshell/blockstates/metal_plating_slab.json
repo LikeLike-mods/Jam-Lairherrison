@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "theshell:block/metal_plating_slab"
+    },
+    "type=double": {
+      "model": "theshell:block/metal_plating"
+    },
+    "type=top": {
+      "model": "theshell:block/metal_plating_slab_top"
+    }
+  }
+}

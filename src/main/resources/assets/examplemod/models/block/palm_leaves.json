@@ -1,7 +1,0 @@
-{
-  "render_type": "minecraft:cutout_mipped",
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "examplemod:block/palm_leaves"
-  }
-}

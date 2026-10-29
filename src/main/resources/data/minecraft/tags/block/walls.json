@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "examplemod:metal_plating_wall",
-    "examplemod:rusty_metal_plating_wall"
+    "theshell:metal_plating_wall",
+    "theshell:rusty_metal_plating_wall"
   ]
 }

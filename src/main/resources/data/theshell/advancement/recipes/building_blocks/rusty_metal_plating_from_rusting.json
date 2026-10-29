@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "theshell:rusty_metal_plating_from_rusting"
+      }
+    },
+    "has_metal_plating": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "theshell:metal_plating"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_metal_plating"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "theshell:rusty_metal_plating_from_rusting"
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "examplemod:dirt_slab",
-    "examplemod:grass_slab"
+    "theshell:dirt_slab",
+    "theshell:grass_slab"
   ]
 }

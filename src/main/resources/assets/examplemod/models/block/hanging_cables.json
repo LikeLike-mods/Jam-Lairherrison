@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "examplemod:block/hanging_cables"
-  },
-  "render_type": "minecraft:cutout"
-}

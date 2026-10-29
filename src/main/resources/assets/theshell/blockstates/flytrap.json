@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "open=true": [
+      {
+        "model": "theshell:block/flytrap"
+      },
+      {
+        "model": "theshell:block/flytrap",
+        "y": 90
+      },
+      {
+        "model": "theshell:block/flytrap",
+        "y": 180
+      },
+      {
+        "model": "theshell:block/flytrap",
+        "y": 270
+      }
+    ],
+    "open=false": [
+      {
+        "model": "theshell:block/flytrap_closed"
+      },
+      {
+        "model": "theshell:block/flytrap_closed",
+        "y": 90
+      },
+      {
+        "model": "theshell:block/flytrap_closed",
+        "y": 180
+      },
+      {
+        "model": "theshell:block/flytrap_closed",
+        "y": 270
+      }
+    ]
+  }
+}

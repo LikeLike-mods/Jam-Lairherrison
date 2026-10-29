@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "examplemod:block/metal_plating",
-    "side": "examplemod:block/metal_plating",
-    "top": "examplemod:block/metal_plating"
-  }
-}

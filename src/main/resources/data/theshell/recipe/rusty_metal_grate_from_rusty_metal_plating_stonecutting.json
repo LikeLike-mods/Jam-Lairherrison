@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "theshell:rusty_metal_plating"
+  },
+  "result": {
+    "id": "theshell:rusty_metal_grate",
+    "count": 1
+  }
+}

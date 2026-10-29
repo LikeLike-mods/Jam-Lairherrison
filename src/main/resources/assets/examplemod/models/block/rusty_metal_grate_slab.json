@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "examplemod:block/rusty_metal_grate",
-    "side": "examplemod:block/rusty_metal_grate",
-    "top": "examplemod:block/rusty_metal_grate"
-  },
-  "render_type": "minecraft:cutout"
-}

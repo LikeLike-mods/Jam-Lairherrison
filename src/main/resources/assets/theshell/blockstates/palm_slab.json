@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "theshell:block/palm_slab"
+    },
+    "type=double": {
+      "model": "theshell:block/palm_planks"
+    },
+    "type=top": {
+      "model": "theshell:block/palm_slab_top"
+    }
+  }
+}

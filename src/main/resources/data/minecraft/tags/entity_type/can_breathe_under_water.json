@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "examplemod:crab",
-    "examplemod:hermit_crab",
-    "examplemod:giant_isopod",
-    "examplemod:leviathan"
+    "theshell:crab",
+    "theshell:hermit_crab",
+    "theshell:giant_isopod",
+    "theshell:leviathan"
   ]
 }

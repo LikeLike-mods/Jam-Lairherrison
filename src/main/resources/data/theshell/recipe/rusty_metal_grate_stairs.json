@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "theshell:rusty_metal_grate"
+    }
+  },
+  "result": {
+    "id": "theshell:rusty_metal_grate_stairs",
+    "count": 4
+  }
+}

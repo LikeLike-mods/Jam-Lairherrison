@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "theshell:palm_wood"
+      }
+    },
+    "has_palm_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "theshell:palm_log"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_palm_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "theshell:palm_wood"
+    ]
+  }
+}

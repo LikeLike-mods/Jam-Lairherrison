@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "examplemod:steel_trapdoor",
-    "examplemod:rusty_steel_trapdoor"
+    "theshell:steel_trapdoor",
+    "theshell:rusty_steel_trapdoor"
   ]
 }

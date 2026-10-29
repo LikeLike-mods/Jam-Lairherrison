@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "theshell:palm_pressure_plate"
+      }
+    },
+    "has_palm_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "theshell:palm_planks"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_palm_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "theshell:palm_pressure_plate"
+    ]
+  }
+}
