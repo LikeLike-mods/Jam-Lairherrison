@@ -5,8 +5,8 @@
       "description": {
         "identifier": "geometry.submarine",
         "texture_width": 128,
-        "texture_height": 128,
-        "visible_bounds_width": 4,
+        "texture_height": 256,
+        "visible_bounds_width": 5,
         "visible_bounds_height": 3,
         "visible_bounds_offset": [
           0,
@@ -37,22 +37,6 @@
               "uv": [
                 0,
                 0
-              ]
-            },
-            {
-              "origin": [
-                -8,
-                4,
-                -19
-              ],
-              "size": [
-                16,
-                10,
-                4
-              ],
-              "uv": [
-                0,
-                69
               ]
             },
             {
@@ -134,51 +118,8 @@
                 18,
                 83
               ]
-            },
-            {
-              "origin": [
-                -3,
-                7,
-                -20
-              ],
-              "size": [
-                6,
-                4,
-                1
-              ],
-              "uv": [
-                92,
-                69
-              ]
             }
           ]
-        },
-        {
-          "name": "dome",
-          "pivot": [
-            0,
-            16,
-            -4
-          ],
-          "cubes": [
-            {
-              "origin": [
-                -7,
-                16,
-                -12
-              ],
-              "size": [
-                14,
-                11,
-                14
-              ],
-              "uv": [
-                0,
-                44
-              ]
-            }
-          ],
-          "parent": "body"
         },
         {
           "name": "propeller",
@@ -238,6 +179,226 @@
             }
           ],
           "parent": "body"
+        },
+        {
+          "name": "cockpit",
+          "parent": "body",
+          "pivot": [
+            0,
+            4,
+            -15
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8,
+                4,
+                -28
+              ],
+              "size": [
+                16,
+                24,
+                14
+              ],
+              "uv": [
+                0,
+                128
+              ]
+            },
+            {
+              "origin": [
+                -7.95,
+                4.05,
+                -21
+              ],
+              "size": [
+                15.9,
+                1,
+                7
+              ],
+              "uv": [
+                64,
+                128
+              ]
+            },
+            {
+              "origin": [
+                -3,
+                5,
+                -19
+              ],
+              "size": [
+                6,
+                3,
+                4
+              ],
+              "uv": [
+                64,
+                140
+              ]
+            },
+            {
+              "origin": [
+                -3,
+                8,
+                -16
+              ],
+              "size": [
+                6,
+                7,
+                1
+              ],
+              "uv": [
+                88,
+                140
+              ]
+            }
+          ]
+        },
+        {
+          "name": "dashboard",
+          "parent": "cockpit",
+          "pivot": [
+            0,
+            8,
+            -26.5
+          ],
+          "rotation": [
+            20,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -6,
+                8,
+                -27.5
+              ],
+              "size": [
+                12,
+                5,
+                2
+              ],
+              "uv": [
+                0,
+                168
+              ]
+            },
+            {
+              "origin": [
+                -1.5,
+                9,
+                -25.55
+              ],
+              "size": [
+                3,
+                2.5,
+                0.1
+              ],
+              "uv": [
+                40,
+                168
+              ]
+            }
+          ]
+        },
+        {
+          "name": "needle_l",
+          "parent": "dashboard",
+          "pivot": [
+            -3.5,
+            10.5,
+            -25.45
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3.65,
+                10.5,
+                -25.55
+              ],
+              "size": [
+                0.3,
+                2,
+                0.1
+              ],
+              "uv": [
+                30,
+                168
+              ]
+            }
+          ]
+        },
+        {
+          "name": "needle_r",
+          "parent": "dashboard",
+          "pivot": [
+            3.5,
+            10.5,
+            -25.45
+          ],
+          "cubes": [
+            {
+              "origin": [
+                3.35,
+                10.5,
+                -25.55
+              ],
+              "size": [
+                0.3,
+                2,
+                0.1
+              ],
+              "uv": [
+                34,
+                168
+              ]
+            }
+          ]
+        },
+        {
+          "name": "stick",
+          "parent": "cockpit",
+          "pivot": [
+            0,
+            5,
+            -23
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -0.5,
+                5,
+                -23.5
+              ],
+              "size": [
+                1,
+                6,
+                1
+              ],
+              "uv": [
+                50,
+                168
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                11,
+                -24
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                56,
+                168
+              ]
+            }
+          ]
         }
       ]
     }

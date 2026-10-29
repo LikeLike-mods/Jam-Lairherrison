@@ -44,6 +44,7 @@ public class SubmarineInterior {
     private static final double HATCH = 4.5;
     private static final double ROOF = 11.5;
     private static final Map<UUID, Pending> PENDING = new HashMap<>();
+    private static final Map<UUID, UUID> TO_CABIN = new HashMap<>();
 
     private record Pending(UUID submarine, long until) {
     }
@@ -129,9 +130,20 @@ public class SubmarineInterior {
         if (drive) PENDING.put(player.getUUID(), new Pending(where.getUUID("Sub"), level.getGameTime() + 100));
     }
 
+    // shift aux commandes : on retourne dans la cabine, pas dehors
+    @SubscribeEvent
+    public static void leaveSeat(net.neoforged.neoforge.event.entity.EntityMountEvent event) {
+        if (event.isDismounting() && event.getEntityMounting() instanceof ServerPlayer player && event.getEntityBeingMounted() instanceof Submarine sub
+                && player.isShiftKeyDown() && sub.isAlive()) {
+            TO_CABIN.put(player.getUUID(), sub.getUUID());
+        }
+    }
+
     @SubscribeEvent
     public static void tick(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        UUID back = TO_CABIN.remove(player.getUUID());
+        if (back != null && !player.isPassenger() && player.serverLevel().getEntity(back) instanceof Submarine sub) enter(player, sub);
         Pending pending = PENDING.get(player.getUUID());
         if (pending != null) {
             // le chunk du sous-marin vient de charger, on attend qu'il soit la pour monter dedans
