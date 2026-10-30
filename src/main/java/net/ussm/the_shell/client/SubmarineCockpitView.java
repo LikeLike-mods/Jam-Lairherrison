@@ -137,8 +137,8 @@ public class SubmarineCockpitView {
         pose.pushPose();
         pose.mulPose(Axis.YP.rotationDegrees(-yaw));
         // les epaules au bord de l'ecran, une main de chaque cote de la poignee
-        bras(bras, pose, new org.joml.Vector3f(-0.32F, -0.62F, 0.05F), new org.joml.Vector3f(poignee).add(-0.07F, -0.03F, -0.02F), 40, 16, lumierePeau);
-        bras(bras, pose, new org.joml.Vector3f(0.32F, -0.62F, 0.05F), new org.joml.Vector3f(poignee).add(0.07F, -0.03F, -0.02F), 32, 48, lumierePeau);
+        bras(bras, pose, new org.joml.Vector3f(-0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(-0.07F, -0.03F, -0.02F), 40, 16, lumierePeau);
+        bras(bras, pose, new org.joml.Vector3f(0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(0.07F, -0.03F, -0.02F), 32, 48, lumierePeau);
         pose.popPose();
         buffers.endBatch(peau);
     }
