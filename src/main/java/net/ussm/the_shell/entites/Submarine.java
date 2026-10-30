@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.blocks.AbyssLightBlock;
 import net.ussm.the_shell.init.ModEntities;
@@ -33,6 +34,8 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     private int interiorId = -1;
     // batterie : un tick de moteur = 1, pleine = 5 minutes a fond
     public static final int MAX_ENERGY = 6000;
+    // cote client : ctrl tenu par le pilote (regard libre), puis le sous-marin qui se remet dans l'axe
+    public static boolean regardLibre, rattrapage;
     // niveau d'amelioration : 0 de base, 1 fer, 2 diamant, 3 netherite
     private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> TIER =
             net.minecraft.network.syncher.SynchedEntityData.defineId(Submarine.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
@@ -235,8 +238,19 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             if (this.isInWater()) {
                 motion = motion.scale(0.9);
                 if (this.getControllingPassenger() instanceof Player driver && getEnergy() > 0) {
-                    this.setYRot(driver.getYRot());
-                    Vec3 look = driver.getLookAngle();
+                    // ctrl : le pilote regarde autour, le sous-marin garde son cap et avance tout droit.
+                    // en lachant ctrl il se remet doucement dans l'axe du regard
+                    boolean libre = this.level().isClientSide && regardLibre;
+                    if (!libre) {
+                        float ecart = Mth.wrapDegrees(driver.getYRot() - this.getYRot());
+                        if (rattrapage && this.level().isClientSide) {
+                            this.setYRot(this.getYRot() + Mth.clamp(ecart, -9.0F, 9.0F));
+                            if (Math.abs(ecart) < 9.0F) rattrapage = false;
+                        } else {
+                            this.setYRot(driver.getYRot());
+                        }
+                    }
+                    Vec3 look = libre || rattrapage ? Vec3.directionFromRotation(0.0F, this.getYRot()) : driver.getLookAngle();
                     Vec3 left = new Vec3(look.z, 0.0, -look.x).normalize();
                     double boost = 1.0 + 0.15 * getTier();   // chaque amelioration le rend un peu plus rapide
                     motion = motion.add(look.scale(driver.zza * 0.035 * boost)).add(left.scale(driver.xxa * 0.02 * boost));

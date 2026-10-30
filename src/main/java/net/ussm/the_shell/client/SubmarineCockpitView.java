@@ -112,13 +112,16 @@ public class SubmarineCockpitView {
             boolean allume = i != 2 || (sub.tickCount / 10) % 2 == 0;
             box(vc, pose, x - 0.02F, -0.9F, 1.04F, x + 0.02F, -0.86F, 1.045F, allume ? voyants[i] : 0xFF30343A, plein);
         }
-        // le bouton pour descendre dans la cabine, sous l'ecran : cadre jaune et noir, il s'allume quand on le vise
+        // a droite du siege : une petite console avec le bouton pour descendre dans la cabine (ctrl pour tourner la tete vers elle).
+        // le bouton s'allume quand on le vise. en pixels de la grille : cadre 7x5, bouton 5x3, une fleche de 3 puis 1 pixel vers la trappe
         boolean vise = regardeBouton(mc, sub);
-        // (en pixels de la grille : cadre 7x4, bouton 5x2, une fleche de 3 puis 1 pixel)
-        box(vc, pose, -3 * P, -29 * P, 1.035F, 4 * P, -25 * P, 1.045F, 0xFFE6B53A, lumiere);
-        box(vc, pose, -2 * P, -28 * P, 1.02F, 3 * P, -26 * P, 1.032F, vise ? 0xFFFFE27A : 0xFFC8962A, vise ? plein : lumiere);
-        box(vc, pose, -P, -27 * P, 1.016F, 2 * P, -26 * P, 1.018F, 0xFF1A1A1A, plein);
-        box(vc, pose, 0.0F, -28 * P, 1.016F, P, -27 * P, 1.018F, 0xFF1A1A1A, plein);
+        plaques(vc, pose, -36 * P, -39 * P, 0.0F, -22 * P, -24 * P, 20 * P, 0xFF2F353D, lumiere);
+        box(vc, pose, -37 * P, -24 * P, -P, -21 * P, -23 * P, 21 * P, CADRE_CLAIR, lumiere);
+        float dessus = -23 * P;
+        box(vc, pose, -32 * P, dessus, 6 * P, -25 * P, dessus + 0.01F, 11 * P, 0xFFE6B53A, lumiere);
+        box(vc, pose, -31 * P, dessus, 7 * P, -26 * P, dessus + 0.025F, 10 * P, vise ? 0xFFFFE27A : 0xFFC8962A, vise ? plein : lumiere);
+        box(vc, pose, -30 * P, dessus, 8 * P, -27 * P, dessus + 0.03F, 9 * P, 0xFF1A1A1A, plein);
+        box(vc, pose, -29 * P, dessus, 7 * P, -28 * P, dessus + 0.03F, 8 * P, 0xFF1A1A1A, plein);
         // le manche : un socle, une tige, une poignee avec ses bagues et un bouton rouge dessus
         pose.pushPose();
         pose.translate(0.0F, -1.22F, 0.55F);
@@ -142,9 +145,9 @@ public class SubmarineCockpitView {
         int lumierePeau = LightTexture.pack(13, 13);
         pose.pushPose();
         pose.mulPose(Axis.YP.rotationDegrees(-yaw));
-        // les epaules au bord de l'ecran, une main de chaque cote de la poignee
-        bras(bras, pose, new org.joml.Vector3f(-0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(-0.07F, -0.03F, -0.02F), 40, 16, lumierePeau);
-        bras(bras, pose, new org.joml.Vector3f(0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(0.07F, -0.03F, -0.02F), 32, 48, lumierePeau);
+        // les epaules sous les coins de l'ecran (comme la main vanilla), un poing de chaque cote de la poignee
+        bras(bras, pose, new org.joml.Vector3f(-0.4F, -0.65F, -0.1F), new org.joml.Vector3f(poignee).add(-0.13F, -0.03F, -0.02F), 40, 16, lumierePeau);
+        bras(bras, pose, new org.joml.Vector3f(0.4F, -0.65F, -0.1F), new org.joml.Vector3f(poignee).add(0.13F, -0.03F, -0.02F), 32, 48, lumierePeau);
         pose.popPose();
         buffers.endBatch(peau);
     }
@@ -153,9 +156,20 @@ public class SubmarineCockpitView {
     public static boolean regardeBouton(Minecraft mc, Submarine sub) {
         if (!mc.options.getCameraType().isFirstPerson()) return false;
         org.joml.Vector3f vue = mc.player.getViewVector(1.0F).toVector3f().rotateY((float) Math.toRadians(sub.getYRot()));
-        if (vue.z < 0.1F) return false;
-        float t = 1.03F / vue.z, x = vue.x * t, y = vue.y * t;
-        return x > -3 * P && x < 4 * P && y > -29 * P && y < -25 * P;
+        // le bouton est sur le dessus de la console de droite
+        if (vue.y > -0.05F) return false;
+        float t = -23 * P / vue.y, x = vue.x * t, z = vue.z * t;
+        return x > -32 * P && x < -25 * P && z > 6 * P && z < 11 * P;
+    }
+
+    // ctrl (la touche pour sprinter) : regard libre aux commandes, le sous-marin garde son cap
+    @SubscribeEvent
+    public static void regard(net.neoforged.neoforge.client.event.ClientTickEvent.Post event) {
+        Minecraft mc = Minecraft.getInstance();
+        boolean ctrl = mc.player != null && mc.player.getVehicle() instanceof Submarine && mc.options.keySprint.isDown();
+        if (Submarine.regardLibre && !ctrl) Submarine.rattrapage = true;
+        if (ctrl || mc.player == null || !(mc.player.getVehicle() instanceof Submarine)) Submarine.rattrapage = false;
+        Submarine.regardLibre = ctrl;
     }
 
     // clic droit sur le bouton : on previent le serveur
@@ -176,11 +190,11 @@ public class SubmarineCockpitView {
         pose.translate(epaule.x, epaule.y, epaule.z);
         pose.mulPose(new org.joml.Quaternionf().rotationTo(new org.joml.Vector3f(0.0F, 0.0F, 1.0F), dir.normalize()));
         PoseStack.Pose p = pose.last();
-        // 4 pixels de skin de large = 4 pixels de la grille du cockpit
-        float w = 2 * P;
-        // les 4 faces longues et le bout du poing. les 12 pixels du skin font 12 pixels de grille depuis la main (pas etires),
+        // les proportions du bras vanilla : 4 pixels de large pour 12 de long, un pixel = 1/16 de bloc comme les blocs du monde
+        float px = 1.0F / 16.0F, w = 2 * px;
+        // les 4 faces longues et le bout du poing. les 12 pixels du skin partent de la main sans etre etires,
         // et plus haut (jusque derriere l'epaule, pour qu'on ne voie jamais ou il commence) on prolonge la rangee du haut
-        float coude = l - 12 * P;
+        float coude = l - 12 * px;
         float[][] cotes = {{-w, -w, -w, w}, {-w, w, w, w}, {w, w, w, -w}, {w, -w, -w, -w}};
         for (int i = 0; i < 4; i++) {
             float[] c = cotes[i];
