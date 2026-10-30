@@ -10,12 +10,15 @@
       "translate": "advancement.the_shell.root.description"
     },
     "background": "the_shell:textures/block/light_sand.png",
-    "show_toast": false,
-    "announce_to_chat": false
+    "show_toast": true,
+    "announce_to_chat": true
   },
   "criteria": {
-    "tick": {
-      "trigger": "minecraft:tick"
+    "entered_shell": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "the_shell:test_dim"
+      }
     }
   }
 }

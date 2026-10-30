@@ -52,9 +52,9 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.Hatchetfish>> HATCHETFISH = register("hatchetfish", net.ussm.the_shell.entites.Hatchetfish::new, MobCategory.WATER_AMBIENT, 0.35F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ColossalSquid>> COLOSSAL_SQUID = register("colossal_squid", net.ussm.the_shell.entites.ColossalSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.6F, 2.8F);
 
-    // leviathan d'Oesphy
-    public static final DeferredHolder<EntityType<?>, EntityType<Submarine>> SUBMARINE = register("submarine", Submarine::new, MobCategory.MISC, 2.0F, 1.5F);
 
+    public static final DeferredHolder<EntityType<?>, EntityType<Submarine>> SUBMARINE = register("submarine", Submarine::new, MobCategory.MISC, 2.0F, 1.5F);
+    // leviathan d'Oesphy
     public static final DeferredHolder<EntityType<?>, EntityType<LeviathanEntity>> LEVIATHAN =
             ENTITY_TYPES.register("leviathan", () -> EntityType.Builder.of(LeviathanEntity::new, MobCategory.MONSTER)
                     .sized(3.4F, 3.7F)
