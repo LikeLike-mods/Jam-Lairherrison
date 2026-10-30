@@ -41,12 +41,26 @@ public class NotchAltarBlock extends Block {
             player.displayClientMessage(Component.translatable("message.the_shell.notch.tier", niveau), true);
             return InteractionResult.SUCCESS;
         }
+        if (!state.getValue(RESOLU) && precedentPasFait((ServerLevel) level, pos, state.getValue(NIVEAU))) {
+            player.sendSystemMessage(Component.literal("<Notch> ").append(Component.translatable("message.the_shell.notch.order").withStyle(ChatFormatting.GRAY)));
+            return InteractionResult.SUCCESS;
+        }
         if (state.getValue(RESOLU)) {
             player.sendSystemMessage(Component.literal("<Notch> ").append(Component.translatable("message.the_shell.notch.done").withStyle(ChatFormatting.GRAY)));
         } else {
             TempleQuiz.poser((ServerPlayer) player, pos, state.getValue(NIVEAU));
         }
         return InteractionResult.SUCCESS;
+    }
+
+    // un autel du niveau d'avant pas encore reussi dans le temple ?
+    private static boolean precedentPasFait(ServerLevel level, BlockPos pos, int niveau) {
+        if (niveau == 1) return false;
+        for (BlockPos p : BlockPos.betweenClosed(pos.offset(-24, -32, -24), pos.offset(24, 32, 24))) {
+            BlockState s = level.getBlockState(p);
+            if (s.getBlock() instanceof NotchAltarBlock && s.getValue(NIVEAU) == niveau - 1 && !s.getValue(RESOLU)) return true;
+        }
+        return false;
     }
 
     public static void resolu(ServerLevel level, BlockPos pos) {

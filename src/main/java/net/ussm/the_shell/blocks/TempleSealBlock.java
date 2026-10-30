@@ -51,8 +51,9 @@ public class TempleSealBlock extends Block {
         if (level instanceof ServerLevel serveur && level.hasNeighborSignal(pos)) ouvrir(serveur, pos);
     }
 
-    // toute la porte (les sceaux colles les uns aux autres) disparait d'un coup
+    // toute la porte (les sceaux du meme niveau colles les uns aux autres) disparait d'un coup
     public static void ouvrir(ServerLevel level, BlockPos depart) {
+        int niveau = level.getBlockState(depart).getValue(NIVEAU);
         Set<BlockPos> vus = new HashSet<>();
         ArrayDeque<BlockPos> file = new ArrayDeque<>();
         file.add(depart);
@@ -61,7 +62,8 @@ public class TempleSealBlock extends Block {
             BlockPos p = file.poll();
             for (Direction d : Direction.values()) {
                 BlockPos v = p.relative(d);
-                if (!vus.contains(v) && level.getBlockState(v).getBlock() instanceof TempleSealBlock) {
+                BlockState s = level.getBlockState(v);
+                if (!vus.contains(v) && s.getBlock() instanceof TempleSealBlock && s.getValue(NIVEAU) == niveau) {
                     vus.add(v);
                     file.add(v);
                 }

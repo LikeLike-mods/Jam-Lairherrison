@@ -284,6 +284,7 @@
   "message.the_shell.notch.intro.1": "Première épreuve, la plus facile. Réponds dans le chat :",
   "message.the_shell.notch.intro.2": "Deuxième épreuve. Ça se corse un peu :",
   "message.the_shell.notch.intro.3": "Dernière épreuve. Seuls les vrais joueurs la réussissent :",
+  "message.the_shell.notch.order": "Pas si vite ! Réussis d'abord l'épreuve d'avant.",
   "message.the_shell.notch.tier": "Autel de niveau %s",
   "message.the_shell.notch.wrong": "Raté ! Essaie encore avec celle-là :",
   "message.the_shell.seal.tier.0": "Sceau : seulement la redstone",

@@ -284,6 +284,7 @@
   "message.the_shell.notch.intro.1": "First trial, the easiest one. Answer in the chat:",
   "message.the_shell.notch.intro.2": "Second trial. It gets a bit harder:",
   "message.the_shell.notch.intro.3": "Final trial. Only true players pass it:",
+  "message.the_shell.notch.order": "Not so fast! Pass the previous trial first.",
   "message.the_shell.notch.tier": "Level %s altar",
   "message.the_shell.notch.wrong": "Wrong! Try this one instead:",
   "message.the_shell.seal.tier.0": "Seal: redstone only",
