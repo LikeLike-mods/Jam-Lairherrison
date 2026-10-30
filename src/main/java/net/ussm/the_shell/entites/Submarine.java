@@ -147,7 +147,8 @@ public class Submarine extends VehicleEntity implements GeoEntity {
 
     @Override
     protected Vec3 getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
-        return new Vec3(0.0, 0.5, 0.31);   // assis dans la bulle : jambes cachees dans la coque, tete sous le verre
+        // assis dans la bulle (jambes cachees dans la coque, tete sous le verre), et ca tourne avec le sous-marin
+        return new Vec3(0.0, 0.45, 0.31).yRot((float) Math.toRadians(-this.getYRot()));
     }
 
     // clic droit : on entre dans la cabine, et l'echelle du fond mene aux commandes
