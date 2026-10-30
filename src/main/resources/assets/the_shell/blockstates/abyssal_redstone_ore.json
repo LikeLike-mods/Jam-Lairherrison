@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "the_shell:block/abyssal_redstone_ore"
+    },
+    "lit=true": {
+      "model": "the_shell:block/abyssal_redstone_ore"
+    }
+  }
+}

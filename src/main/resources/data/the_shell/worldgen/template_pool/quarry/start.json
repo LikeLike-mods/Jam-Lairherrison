@@ -1,0 +1,23 @@
+{
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:quarry/quarry",
+        "projection": "rigid",
+        "processors": "the_shell:station_new"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:quarry/quarry_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    }
+  ]
+}

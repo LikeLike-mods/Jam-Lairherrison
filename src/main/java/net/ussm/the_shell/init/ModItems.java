@@ -46,6 +46,10 @@ public class ModItems {
     public static final DeferredItem<Item> DATES = ITEMS.register("dates", () -> new Item(new Item.Properties().food(ModFoodProperties.DATES)));
     public static final DeferredItem<Item> DATE_SYRUP = ITEMS.register("date_syrup", () -> new net.minecraft.world.item.HoneyBottleItem(new Item.Properties()
             .food(ModFoodProperties.DATE_SYRUP).craftRemainder(net.minecraft.world.item.Items.GLASS_BOTTLE).stacksTo(16)));
+    // kits pour ameliorer le sous-marin (fer, puis diamant, puis netherite)
+    public static final DeferredItem<Item> SUBMARINE_UPGRADE_IRON = ITEMS.register("submarine_upgrade_iron", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> SUBMARINE_UPGRADE_DIAMOND = ITEMS.register("submarine_upgrade_diamond", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> SUBMARINE_UPGRADE_NETHERITE = ITEMS.register("submarine_upgrade_netherite", () -> new Item(new Item.Properties().stacksTo(16).fireResistant()));
 
 
     public static final DeferredItem<Item> PALM_SIGN = ITEMS.register("palm_sign",
@@ -88,6 +92,12 @@ public class ModItems {
     // cristal kyber : on le trouve au fond des abysses, les naufrages n'ont jamais su s'en servir
     public static final DeferredItem<Item> KYBER_CRYSTAL = ITEMS.register("kyber_crystal",
             () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    // objets des abysses
+    public static final DeferredItem<Item> BLACK_PEARL = ITEMS.register("black_pearl", () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+    public static final DeferredItem<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook", () -> new net.ussm.the_shell.items.GrapplingHookItem(new Item.Properties().durability(128)));
+    public static final DeferredItem<Item> POCKET_SONAR = ITEMS.register("pocket_sonar", () -> new net.ussm.the_shell.items.PocketSonarItem(new Item.Properties().durability(96)));
+    public static final DeferredItem<Item> IRON_ABYSS_HELMET = ITEMS.register("iron_abyss_helmet",
+            () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("iron", 2, 0, 0)), 9));
     public static final DeferredItem<Item> DIAMOND_ABYSS_HELMET = ITEMS.register("diamond_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("diamond", 3, 2, 0)), 10));
     public static final DeferredItem<Item> NETHERITE_ABYSS_HELMET = ITEMS.register("netherite_abyss_helmet",

@@ -7,7 +7,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "the_shell:station/cap",
         "projection": "rigid",
-        "processors": "the_shell:station_decay"
+        "processors": "the_shell:station_new"
       }
     }
   ]

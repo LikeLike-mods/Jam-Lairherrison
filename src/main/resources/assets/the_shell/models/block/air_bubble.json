@@ -1,0 +1,72 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "socle": "the_shell:block/air_vent",
+    "dome": "the_shell:block/reinforced_glass",
+    "particle": "the_shell:block/reinforced_glass"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        4,
+        14
+      ],
+      "faces": {
+        "north": {
+          "texture": "#socle"
+        },
+        "south": {
+          "texture": "#socle"
+        },
+        "east": {
+          "texture": "#socle"
+        },
+        "west": {
+          "texture": "#socle"
+        },
+        "up": {
+          "texture": "#socle"
+        },
+        "down": {
+          "texture": "#socle"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        4,
+        4
+      ],
+      "to": [
+        12,
+        10,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dome"
+        },
+        "south": {
+          "texture": "#dome"
+        },
+        "east": {
+          "texture": "#dome"
+        },
+        "west": {
+          "texture": "#dome"
+        },
+        "up": {
+          "texture": "#dome"
+        }
+      }
+    }
+  ]
+}

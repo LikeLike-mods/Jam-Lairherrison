@@ -26,11 +26,13 @@ public class SubmarineRenderer extends GeoEntityRenderer<Submarine> {
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - Mth.rotLerp(partialTick, submarine.yRotO, submarine.getYRot())));
     }
 
+    // aux commandes a la 1re personne on ne dessine pas le sous-marin, c'est SubmarineCockpitView qui fait le cockpit autour de la camera
     @Override
     public void render(Submarine submarine, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
         if (mc.options.getCameraType().isFirstPerson() && submarine.hasPassenger(mc.getCameraEntity())) return;
         super.render(submarine, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+
     }
 
     @Override

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "size": 8,
+    "discard_chance_on_air_exposure": 0.0,
+    "targets": [
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "the_shell:abyssal_stone"
+        },
+        "state": {
+          "Name": "the_shell:abyssal_redstone_ore",
+          "Properties": {
+            "lit": "false"
+          }
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "the_shell:abyssal_basalt"
+        },
+        "state": {
+          "Name": "the_shell:abyssal_redstone_ore",
+          "Properties": {
+            "lit": "false"
+          }
+        }
+      }
+    ]
+  }
+}

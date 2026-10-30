@@ -8,6 +8,7 @@
     "the_shell:hazard_block",
     "the_shell:metal_ladder",
     "the_shell:steel_trapdoor",
-    "the_shell:metal_plating_stairs"
+    "the_shell:metal_plating_stairs",
+    "the_shell:submarine_window"
   ]
 }

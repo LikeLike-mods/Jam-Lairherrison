@@ -60,6 +60,7 @@ public class DeepSeaEvents {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
 
         if (player.isEyeInFluid(FluidTags.WATER)) breathe(player);
+        refillOxygen(player, inWater && player.level().getBlockState(player.blockPosition().below()).is(ModBlocks.AIR_VENT.get()));
 
         if (player.tickCount % 20 == 0) pressure(serverPlayer, inWater);
     }
@@ -122,10 +123,39 @@ public class DeepSeaEvents {
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
 
         if (head.is(ModItems.DIVING_HELMET.get()) || head.is(ModItems.DIVING_ABYSS_HELMET.get())) {
-            player.setAirSupply(player.getMaxAirSupply());
+            // le casque respire dans la bouteille d'oxygene, quand elle est vide on se noie comme d'habitude
+            int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+            if (oxygen > 0) {
+                player.setAirSupply(player.getMaxAirSupply());
+                if (!(player.getVehicle() instanceof Submarine)) setOxygen(player, oxygen - 1);
+            }
         } else if (head.is(AbyssLightBlock.HEAD_LIGHTS) && player.tickCount % 2 == 0) {
             player.setAirSupply(Math.min(player.getMaxAirSupply(), player.getAirSupply() + 1));
         }
+    }
+
+    // la bouteille se remplit des qu'on a la tete hors de l'eau (surface, station, cabine du sous-marin) ou dans les bulles d'une grille
+    private static void refillOxygen(Player player, boolean bubbles) {
+        int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+        if (oxygen >= net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN) return;
+        if (!player.isEyeInFluid(FluidTags.WATER) || bubbles || player.getVehicle() instanceof Submarine) setOxygen(player, oxygen + 24);
+    }
+
+    public static void giveOxygen(Player player, int amount) {
+        setOxygen(player, player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN) + amount);
+    }
+
+    private static void setOxygen(Player player, int oxygen) {
+        oxygen = Math.max(0, Math.min(net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN, oxygen));
+        int old = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+        player.setData(net.ussm.the_shell.init.ModAttachments.OXYGEN, oxygen);
+        if (old / 40 != oxygen / 40 || oxygen == 0) player.syncData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+    }
+
+    // dans le sous-marin les poissons ne peuvent pas nous toucher
+    @SubscribeEvent
+    public static void subShield(net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent event) {
+        if (event.getEntity().getVehicle() instanceof Submarine && event.getSource().getEntity() != null) event.setCanceled(true);
     }
 
     public static boolean hasFullSuit(Player player) {
@@ -136,31 +166,42 @@ public class DeepSeaEvents {
                 && player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.DIVING_BOOTS.get());
     }
 
-    private static void pressure(ServerPlayer player, boolean inWater) {
+    // palier de pression : 0 rien, 1-2 genant, 3 a 5 on se fait broyer de plus en plus fort.
+    // l'atoll va jusqu'au 3 tout au fond, les abysses sont au 4 et au 5 sous y=40.
+    // chaque paire de pieces de scaphandre enleve un palier, le scaphandre complet ou le sous-marin protegent de tout
+    public static int pressureLevel(Player player, boolean inWater) {
+        if (!inWater || player.isCreative() || player.isSpectator() || player.getVehicle() instanceof Submarine) return 0;
+        double y = player.getY();
+        int top = TestChunkGenerator.ABYSS;
         int level = 0;
-        if (inWater && !player.isCreative() && !player.isSpectator() && !hasFullSuit(player) && !(player.getVehicle() instanceof Submarine)) {
-            double y = player.getY();
-            int top = TestChunkGenerator.ABYSS;
-            if (player.level().dimension() == AtollTravel.ATOLL) level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
-            else if (player.level().dimension() == AbyssTravel.ABYSS) level = y < net.ussm.the_shell.worldgen.AbyssTerrain.FLOOR - 16 ? 3 : 2;
-        }
+        if (player.level().dimension() == AtollTravel.ATOLL) level = y < top - 80 ? 3 : y < top - 40 ? 2 : y < top ? 1 : 0;
+        else if (player.level().dimension() == AbyssTravel.ABYSS) level = y < 40 ? 5 : 4;
+        ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+        int pieces = (head.is(ModItems.DIVING_HELMET.get()) || head.is(ModItems.DIVING_ABYSS_HELMET.get()) ? 1 : 0)
+                + (player.getItemBySlot(EquipmentSlot.CHEST).is(ModItems.DIVING_CHESTPLATE.get()) ? 1 : 0)
+                + (player.getItemBySlot(EquipmentSlot.LEGS).is(ModItems.DIVING_LEGGINGS.get()) ? 1 : 0)
+                + (player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.DIVING_BOOTS.get()) ? 1 : 0);
+        if (pieces == 4) return 0;
+        return Math.max(0, level - pieces / 2);
+    }
 
+    private static void pressure(ServerPlayer player, boolean inWater) {
+        int level = pressureLevel(player, inWater);
         int last = LAST_LEVEL.getOrDefault(player.getUUID(), 0);
         LAST_LEVEL.put(player.getUUID(), level);
 
-        if (level == 3 && last < 3) {
-            player.displayClientMessage(Component.translatable("pressure.the_shell.crushed"), true);
-        }
+        if (level >= 3 && last < 3) player.displayClientMessage(Component.translatable("pressure.the_shell.crushed"), true);
+        if (level == 5 && last < 5) player.displayClientMessage(Component.translatable("pressure.the_shell.crushed_hard"), true);
 
-        if (level >= 1) {
-            player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0, true, false));
-        }
+        if (level >= 1) player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0, true, false));
         if (level >= 2) {
-            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0, true, false));
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, level >= 4 ? 1 : 0, true, false));
             player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0, true, false));
         }
-        if (level == 3) {
-            player.hurt(new DamageSource(player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(PRESSURE)), 2.0F);
+        if (level >= 4) player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 60, 0, true, false));
+        if (level == 5) player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 60, 0, true, false));
+        if (level >= 3) {
+            player.hurt(new DamageSource(player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(PRESSURE)), level == 3 ? 2.0F : level == 4 ? 4.0F : 6.0F);
         }
     }
 }

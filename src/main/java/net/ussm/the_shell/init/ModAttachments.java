@@ -27,6 +27,14 @@ public class ModAttachments {
             .copyOnDeath()
             .build());
 
+    // reserve d'oxygene du scaphandre, en ticks
+    public static final int MAX_OXYGEN = 4800;
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> OXYGEN =
+        ATTACHMENT_TYPES.register("oxygen", () -> AttachmentType.builder(() -> MAX_OXYGEN)
+            .serialize(Codec.INT)
+            .sync((holder, to) -> holder == to, ByteBufCodecs.VAR_INT)
+            .build());
+
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
     }

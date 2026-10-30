@@ -82,129 +82,113 @@
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 0.2
+          "chance": 0.35
         }
       ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:written_book",
-          "weight": 1,
+          "name": "minecraft:trident",
+          "weight": 2,
           "functions": [
             {
-              "function": "minecraft:set_book_cover",
-              "title": {
-                "raw": "Journal des naufragés I"
-              },
-              "author": "Un naufragé",
-              "generation": 0
-            },
-            {
-              "function": "minecraft:set_written_book_pages",
-              "mode": "replace_all",
-              "pages": [
-                {
-                  "text": "Jour 1.\n\nLa Coquille s'est fendue derrière nous. Le passage est fermé, on ne peut plus rentrer.\n\nLes vieilles stations des Bâtisseurs tiennent encore debout au fond. On va s'installer dans la plus proche."
-                }
-              ]
+              "function": "minecraft:set_damage",
+              "damage": {
+                "type": "minecraft:uniform",
+                "min": 0.4,
+                "max": 0.9
+              }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:written_book",
-          "weight": 1,
+          "name": "minecraft:heart_of_the_sea",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nautilus_shell",
+          "weight": 6,
           "functions": [
             {
-              "function": "minecraft:set_book_cover",
-              "title": {
-                "raw": "Journal des naufragés II"
-              },
-              "author": "Un naufragé",
-              "generation": 0
-            },
-            {
-              "function": "minecraft:set_written_book_pages",
-              "mode": "replace_all",
-              "pages": [
-                {
-                  "text": "Jour 40.\n\nOn a rafistolé les murs avec de la fonte. La pompe à air remarche, on respire.\n\nMarin dit qu'il a vu une ombre immense passer devant le hublot du couloir est. Personne ne l'a cru."
-                }
-              ]
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:written_book",
-          "weight": 1,
+          "name": "minecraft:book",
+          "weight": 4,
           "functions": [
             {
-              "function": "minecraft:set_book_cover",
-              "title": {
-                "raw": "Journal des naufragés III"
-              },
-              "author": "Un naufragé",
-              "generation": 0
-            },
-            {
-              "function": "minecraft:set_written_book_pages",
-              "mode": "replace_all",
-              "pages": [
-                {
-                  "text": "Jour 112.\n\nDes cristaux qui brillent tout seuls dans la roche des fosses. Kyber, d'après les gravures des Bâtisseurs.\n\nIls s'en servaient pour quelque chose de grand. Nous, on ne comprend rien."
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:respiration": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 3
                 }
-              ]
+              }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:written_book",
-          "weight": 1,
+          "name": "minecraft:book",
+          "weight": 4,
           "functions": [
             {
-              "function": "minecraft:set_book_cover",
-              "title": {
-                "raw": "Journal des naufragés IV"
-              },
-              "author": "Un naufragé",
-              "generation": 0
-            },
-            {
-              "function": "minecraft:set_written_book_pages",
-              "mode": "replace_all",
-              "pages": [
-                {
-                  "text": "Jour 230.\n\nLe léviathan a arraché le couloir est. Trois d'entre nous étaient de l'autre côté de la porte.\n\nOn l'a fermée quand même."
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:depth_strider": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 3
                 }
-              ]
+              }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:written_book",
+          "name": "minecraft:book",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:aqua_affinity": {
+                  "type": "minecraft:uniform",
+                  "min": 1,
+                  "max": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:book",
           "weight": 1,
           "functions": [
             {
-              "function": "minecraft:set_book_cover",
-              "title": {
-                "raw": "Journal des naufragés V"
-              },
-              "author": "Un naufragé",
-              "generation": 0
-            },
-            {
-              "function": "minecraft:set_written_book_pages",
-              "mode": "replace_all",
-              "pages": [
-                {
-                  "text": "Je suis le dernier.\n\nSi quelqu'un trouve ce journal : la Coquille se répare. Les Bâtisseurs la renforçaient avec de l'émeraude.\n\nNe restez pas ici."
-                }
-              ]
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:mending": 1
+              }
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "the_shell:kyber_crystal",
+          "weight": 3
         }
       ]
     }

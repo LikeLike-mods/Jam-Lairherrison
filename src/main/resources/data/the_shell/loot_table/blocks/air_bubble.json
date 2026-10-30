@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "the_shell:air_bubble"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "the_shell:air_bubble",
+          "properties": {
+            "age": "0"
+          }
+        }
+      ]
+    }
+  ],
+  "random_sequence": "the_shell:blocks/air_bubble"
+}

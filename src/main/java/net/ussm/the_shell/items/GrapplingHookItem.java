@@ -1,0 +1,81 @@
+package net.ussm.the_shell.items;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.ussm.the_shell.init.ModComponents;
+import org.joml.Vector3f;
+
+// grappin : on vise un bloc jusqu'a 32 blocs, et tant qu'on garde clic droit il nous tire jusqu'a lui, dans l'eau aussi
+public class GrapplingHookItem extends Item {
+    private static final double RANGE = 32.0;
+    private static final DustParticleOptions CORDE = new DustParticleOptions(new Vector3f(0.45F, 0.33F, 0.2F), 0.6F);
+
+    public GrapplingHookItem(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        Vec3 eye = player.getEyePosition();
+        BlockHitResult hit = level.clip(new ClipContext(eye, eye.add(player.getLookAngle().scale(RANGE)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+        if (hit.getType() != HitResult.Type.BLOCK) return InteractionResultHolder.fail(stack);
+        stack.set(ModComponents.GRAPPLE_TARGET.get(), hit.getBlockPos());
+        level.playSound(player, player.blockPosition(), SoundEvents.FISHING_BOBBER_THROW, SoundSource.PLAYERS, 1.0F, 0.8F);
+        if (!level.isClientSide) stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+        player.startUsingItem(hand);
+        return InteractionResultHolder.consume(stack);
+    }
+
+    @Override
+    public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remaining) {
+        BlockPos target = stack.get(ModComponents.GRAPPLE_TARGET.get());
+        if (target == null) return;
+        Vec3 depart = entity.position().add(0.0, entity.getBbHeight() * 0.6, 0.0);
+        Vec3 vers = Vec3.atCenterOf(target).subtract(depart);
+        double dist = vers.length();
+        if (dist < 1.6) {
+            entity.setDeltaMovement(entity.getDeltaMovement().scale(0.3));
+        } else {
+            double vitesse = entity.isInWater() ? 0.7 : 1.0;
+            entity.setDeltaMovement(vers.normalize().scale(Math.min(vitesse, dist * 0.25)));
+        }
+        entity.resetFallDistance();
+        // la corde
+        if (level.isClientSide) {
+            for (int i = 1; i < 10; i++) {
+                Vec3 p = depart.add(vers.scale(i / 10.0));
+                level.addParticle(CORDE, p.x, p.y, p.z, 0.0, 0.0, 0.0);
+            }
+        }
+    }
+
+    @Override
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+        stack.remove(ModComponents.GRAPPLE_TARGET.get());
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+        return 72000;
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BOW;
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "K",
+    "R",
+    "I"
+  ],
+  "key": {
+    "K": {
+      "item": "the_shell:kyber_crystal"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "the_shell:lightsaber_shadow_sword_white",
+    "count": 1
+  }
+}

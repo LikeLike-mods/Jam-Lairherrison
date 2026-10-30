@@ -100,6 +100,29 @@ public class ModBlocks {
                     .noOcclusion(),
                     Block.box(4, 0, 4, 12, 5, 12)));
 
+    public static final DeferredBlock<Block> AIR_BUBBLE = registerBlock("air_bubble",
+            () -> new net.ussm.the_shell.blocks.AirBubbleBlock(BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.GLASS).noOcclusion().lightLevel(s -> 6)));
+    public static final DeferredBlock<Block> SUBMARINE_WINDOW = registerBlock("submarine_window",
+            () -> new net.ussm.the_shell.blocks.SubmarineWindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).lightLevel(s -> 5)));
+
+    // les minerais du jeu, version abysses
+    public static final DeferredBlock<Block> ABYSSAL_COAL_ORE = registerBlock("abyssal_coal_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COAL_ORE)));
+    public static final DeferredBlock<Block> ABYSSAL_IRON_ORE = registerBlock("abyssal_iron_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(net.minecraft.util.valueproviders.ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)));
+    public static final DeferredBlock<Block> ABYSSAL_COPPER_ORE = registerBlock("abyssal_copper_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(net.minecraft.util.valueproviders.ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE)));
+    public static final DeferredBlock<Block> ABYSSAL_GOLD_ORE = registerBlock("abyssal_gold_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(net.minecraft.util.valueproviders.ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_GOLD_ORE)));
+    public static final DeferredBlock<Block> ABYSSAL_REDSTONE_ORE = registerBlock("abyssal_redstone_ore",
+            () -> new net.minecraft.world.level.block.RedStoneOreBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_REDSTONE_ORE)));
+    public static final DeferredBlock<Block> ABYSSAL_LAPIS_ORE = registerBlock("abyssal_lapis_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(2, 5), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_LAPIS_ORE)));
+    public static final DeferredBlock<Block> ABYSSAL_DIAMOND_ORE = registerBlock("abyssal_diamond_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(3, 7), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final DeferredBlock<Block> ABYSSAL_EMERALD_ORE = registerBlock("abyssal_emerald_ore",
+            () -> new net.minecraft.world.level.block.DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(3, 7), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_EMERALD_ORE)));
+
     public static final DeferredBlock<Block> KYBER_ORE = registerBlock("kyber_ore",
             () -> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_CYAN)

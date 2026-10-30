@@ -26,19 +26,9 @@
     },
     {
       "processor_type": "the_shell:station_rust",
-      "from": "the_shell:metal_grate_slab",
-      "to": "the_shell:rusty_metal_grate_slab",
-      "chance": 0.4
-    },
-    {
-      "processor_type": "the_shell:station_rust",
       "from": "the_shell:industrial_lamp",
       "to": "the_shell:broken_industrial_lamp",
       "chance": 0.3
-    },
-    {
-      "processor_type": "the_shell:station_flood",
-      "chance": 0.2
     }
   ]
 }
