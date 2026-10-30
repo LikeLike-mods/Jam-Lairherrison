@@ -297,13 +297,11 @@ public class SubmarineInterior {
         if (drive) PENDING.put(player.getUUID(), new Pending(where.getUUID("Sub"), level.getGameTime() + 100));
     }
 
-    // shift aux commandes : on retourne dans la cabine, pas dehors
-    @SubscribeEvent
-    public static void leaveSeat(net.neoforged.neoforge.event.entity.EntityMountEvent event) {
-        if (event.isDismounting() && event.getEntityMounting() instanceof ServerPlayer player && event.getEntityBeingMounted() instanceof Submarine sub
-                && !player.isOnPortalCooldown() && sub.isAlive()) {
-            TO_CABIN.put(player.getUUID(), sub.getUUID());
-        }
+    // le bouton du tableau de bord : on lache les commandes et on descend dans la cabine (shift tout seul fait sortir dehors)
+    public static void downFromSeat(ServerPlayer player) {
+        if (player.isOnPortalCooldown() || !(player.getVehicle() instanceof Submarine sub) || !sub.isAlive()) return;
+        player.stopRiding();
+        TO_CABIN.put(player.getUUID(), sub.getUUID());
     }
 
     @SubscribeEvent

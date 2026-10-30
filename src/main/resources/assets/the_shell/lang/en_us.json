@@ -296,5 +296,6 @@
   "item.the_shell.black_pearl": "Black Pearl",
   "item.the_shell.grappling_hook": "Grappling Hook",
   "item.the_shell.pocket_sonar": "Pocket Sonar",
-  "block.the_shell.air_bubble": "Air Bubble"
+  "block.the_shell.air_bubble": "Air Bubble",
+  "hud.the_shell.submarine.cabin_button": "Right-click: go down to the cabin"
 }

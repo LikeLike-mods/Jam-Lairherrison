@@ -112,6 +112,17 @@ public class SubmarineCockpitView {
             boolean allume = i != 2 || (sub.tickCount / 10) % 2 == 0;
             box(vc, pose, x - 0.02F, -0.9F, 1.04F, x + 0.02F, -0.86F, 1.045F, allume ? voyants[i] : 0xFF30343A, plein);
         }
+        // le bouton pour descendre dans la cabine, sous l'ecran : cadre jaune et noir, il s'allume quand on le vise
+        boolean vise = regardeBouton(mc, sub);
+        box(vc, pose, -0.09F, -0.915F, 1.035F, 0.09F, -0.815F, 1.045F, 0xFF1A1A1A, lumiere);
+        for (int i = 0; i < 6; i++) {
+            float x = -0.085F + i * 0.03F;
+            box(vc, pose, x, -0.91F, 1.032F, x + 0.015F, -0.82F, 1.035F, 0xFFE6B53A, lumiere);
+        }
+        box(vc, pose, -0.055F, -0.895F, 1.02F, 0.055F, -0.835F, 1.032F, vise ? 0xFFFFE27A : 0xFFC8962A, vise ? plein : lumiere);
+        // la fleche vers le bas dessus
+        box(vc, pose, -0.006F, -0.875F, 1.018F, 0.006F, -0.85F, 1.02F, 0xFF1A1A1A, plein);
+        box(vc, pose, -0.02F, -0.882F, 1.018F, 0.02F, -0.875F, 1.02F, 0xFF1A1A1A, plein);
         // le manche : un socle, une tige, une poignee avec ses bagues et un bouton rouge dessus
         pose.pushPose();
         pose.translate(0.0F, -1.22F, 0.55F);
@@ -141,6 +152,25 @@ public class SubmarineCockpitView {
         bras(bras, pose, new org.joml.Vector3f(0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(0.07F, -0.03F, -0.02F), 32, 48, lumierePeau);
         pose.popPose();
         buffers.endBatch(peau);
+    }
+
+    // on vise le bouton ? on ramene le regard dans le repere du sous-marin et on regarde ou il touche la facade
+    public static boolean regardeBouton(Minecraft mc, Submarine sub) {
+        if (!mc.options.getCameraType().isFirstPerson()) return false;
+        org.joml.Vector3f vue = mc.player.getViewVector(1.0F).toVector3f().rotateY((float) Math.toRadians(sub.getYRot()));
+        if (vue.z < 0.1F) return false;
+        float t = 1.03F / vue.z, x = vue.x * t, y = vue.y * t;
+        return Math.abs(x) < 0.1F && y > -0.93F && y < -0.8F;
+    }
+
+    // clic droit sur le bouton : on previent le serveur
+    @SubscribeEvent
+    public static void clic(net.neoforged.neoforge.client.event.InputEvent.InteractionKeyMappingTriggered event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (!event.isUseItem() || mc.player == null || !(mc.player.getVehicle() instanceof Submarine sub) || !regardeBouton(mc, sub)) return;
+        event.setCanceled(true);
+        event.setSwingHand(false);
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(net.ussm.the_shell.network.CabinButtonPayload.INSTANCE);
     }
 
     // un bras = une boite de l'epaule a la main, avec les uv du bras du skin (u, v = coin du bras dans le skin 64x64)

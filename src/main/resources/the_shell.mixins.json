@@ -2,7 +2,9 @@
   "required": true,
   "package": "net.ussm.the_shell.mixins",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "ServerLevelMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

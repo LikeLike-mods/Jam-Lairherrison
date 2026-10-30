@@ -151,14 +151,9 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         return new Vec3(0.0, 0.45, 0.31).yRot((float) Math.toRadians(-this.getYRot()));
     }
 
-    // clic droit : on entre dans la cabine, et l'echelle du fond mene aux commandes
+    // clic droit : aux commandes, le bouton du tableau de bord mene a la cabine
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
-        // shift + clic droit : direct aux commandes (on s'assoit quand on lache shift, sinon le jeu nous refait descendre)
-        if (player.isSecondaryUseActive()) {
-            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer && !this.isVehicle()) net.ussm.the_shell.events.SubmarineInterior.seatLater(serverPlayer, this);
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
-        }
         net.minecraft.world.item.ItemStack kit = player.getItemInHand(hand);
         int niveau = kitTier(kit);
         if (niveau > 0) {
@@ -187,8 +182,12 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
+        // clic droit : direct aux commandes (avec shift on s'assoit quand on le lache, sinon le jeu nous refait descendre).
+        // si quelqu'un pilote deja on descend dans la cabine
         if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-            net.ussm.the_shell.events.SubmarineInterior.enter(serverPlayer, this);
+            if (this.isVehicle()) net.ussm.the_shell.events.SubmarineInterior.enter(serverPlayer, this);
+            else if (player.isSecondaryUseActive()) net.ussm.the_shell.events.SubmarineInterior.seatLater(serverPlayer, this);
+            else player.startRiding(this);
         }
         return InteractionResult.sidedSuccess(this.level().isClientSide);
     }
