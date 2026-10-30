@@ -246,6 +246,7 @@
   "message.the_shell.submarine.console_far": "Batterie %s %% · hauteur Y %s · aucune faille à moins de 600 blocs",
   "message.the_shell.submarine.empty": "Batterie à plat ! Recharge-la (charbon, redstone, kyber)",
   "message.the_shell.submarine.energy": "Batterie du sous-marin : %s %%",
+  "message.the_shell.submarine.no_room": "Pas la place pour un sous-marin ici",
   "message.the_shell.submarine.occupied": "Quelqu'un est déjà aux commandes",
   "message.the_shell.submarine.oxygen": "Oxygène rechargé",
   "message.the_shell.submarine.upgrade_order": "Il faut d'abord le kit fer, puis diamant, puis netherite",

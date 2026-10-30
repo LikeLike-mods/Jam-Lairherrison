@@ -246,6 +246,7 @@
   "message.the_shell.submarine.console_far": "Battery %s %% · height Y %s · no rift within 600 blocks",
   "message.the_shell.submarine.empty": "Battery empty! Recharge it (coal, redstone, kyber)",
   "message.the_shell.submarine.energy": "Submarine battery: %s%%",
+  "message.the_shell.submarine.no_room": "No room for a submarine in here",
   "message.the_shell.submarine.occupied": "Someone is already at the controls",
   "message.the_shell.submarine.oxygen": "Oxygen refilled",
   "message.the_shell.submarine.upgrade_order": "Use the iron kit first, then diamond, then netherite",
