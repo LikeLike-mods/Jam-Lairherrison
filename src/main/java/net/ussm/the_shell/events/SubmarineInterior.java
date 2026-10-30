@@ -66,7 +66,7 @@ public class SubmarineInterior {
     private static void placeExtension(ServerLevel inside, int cabin, int tier) {
         BlockPos at = corner(cabin).offset(EXTENSIONS[tier - 1]);
         inside.getStructureManager().get(id("submarine/extension_" + tier))
-                .ifPresent(t -> t.placeInWorld(inside, at, at, new StructurePlaceSettings(), inside.random, Block.UPDATE_CLIENTS));
+                .ifPresent(t -> t.placeInWorld(inside, at, at, sec(), inside.random, Block.UPDATE_CLIENTS));
     }
 
     // des poissons qui nagent dans l'eau recopiee, selon ou est le sous-marin (jusqu'a 7, un de plus toutes les 2 secondes)
@@ -159,6 +159,27 @@ public class SubmarineInterior {
         return ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, path);
     }
 
+    // on pose la cabine et ses pieces sans les mouiller (sinon l'eau d'avant reste dans les lampes, les escaliers...)
+    private static StructurePlaceSettings sec() {
+        return new StructurePlaceSettings().setLiquidSettings(net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings.IGNORE_WATERLOGGING);
+    }
+
+    // et on seche ce qui a deja ete mouille dans les cabines faites avant
+    private static void secher(ServerLevel inside, int cabin) {
+        BlockPos c = corner(cabin);
+        for (int[] b : DANS_LA_CABINE) {
+            for (BlockPos p : BlockPos.betweenClosed(c.offset(b[0], b[1], b[2]), c.offset(b[3], b[4], b[5]))) {
+                net.minecraft.world.level.block.state.BlockState st = inside.getBlockState(p);
+                if (st.is(net.minecraft.world.level.block.Blocks.WATER)) {
+                    inside.setBlock(p, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+                } else if (st.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED)
+                        && st.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED)) {
+                    inside.setBlock(p, st.setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED, false), Block.UPDATE_CLIENTS);
+                }
+            }
+        }
+    }
+
     private static BlockPos corner(int cabin) {
         return new BlockPos(cabin * SPACING, BOTTOM, 0);
     }
@@ -177,7 +198,7 @@ public class SubmarineInterior {
             // les anciennes cabines avaient de l'eau et des poissons autour : on enleve les poissons
             inside.getEntitiesOfClass(net.minecraft.world.entity.animal.WaterAnimal.class, new net.minecraft.world.phys.AABB(corner.offset(-8, -2, -2).getCenter(), corner.offset(24, 20, 26).getCenter()))
                     .forEach(net.minecraft.world.entity.Entity::discard);
-            inside.getStructureManager().get(CABIN).ifPresent(t -> t.placeInWorld(inside, corner, corner, new StructurePlaceSettings(), inside.random, Block.UPDATE_CLIENTS));
+            inside.getStructureManager().get(CABIN).ifPresent(t -> t.placeInWorld(inside, corner, corner, sec(), inside.random, Block.UPDATE_CLIENTS));
         }
         for (int tier = 1; tier <= submarine.getTier(); tier++) {
             if (cabins.extended(cabin) < tier) {
@@ -185,6 +206,7 @@ public class SubmarineInterior {
             }
         }
         cabins.setExtended(cabin, submarine.getTier());
+        secher(inside, cabin);
         // les anciennes cabines avaient des hublots qui donnaient sur les pieces d'amelioration : on les bouche
         for (BlockPos h : new BlockPos[]{new BlockPos(11, 7, 7), new BlockPos(11, 7, 15), new BlockPos(3, 7, 15)}) {
             if (inside.getBlockState(corner.offset(h)).is(net.ussm.the_shell.init.ModBlocks.REINFORCED_GLASS.get())) {
