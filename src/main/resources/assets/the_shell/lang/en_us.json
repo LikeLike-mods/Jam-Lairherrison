@@ -200,6 +200,9 @@
   "entity.the_shell.vampire_squid": "Vampire Squid",
   "entity.the_shell.yeti_crab": "Yeti Crab",
 
+  "gamerule.theShellTempleProtection": "Jungle temple protection",
+  "gamerule.theShellTempleProtection.description": "Prevents breaking and placing blocks in the jungle temple until Notch's trials are solved (always on in the Grand Temple).",
+
   "hud.the_shell.sonar": "Sonar: rift %s m %s",
   "hud.the_shell.sonar.none": "Sonar: no rift nearby",
   "hud.the_shell.submarine.cabin_button": "Right-click: go down to the cabin",

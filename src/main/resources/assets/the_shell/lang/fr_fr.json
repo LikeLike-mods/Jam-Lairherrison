@@ -200,6 +200,9 @@
   "entity.the_shell.vampire_squid": "Calmar vampire",
   "entity.the_shell.yeti_crab": "Crabe yéti",
 
+  "gamerule.theShellTempleProtection": "Protection du temple de la jungle",
+  "gamerule.theShellTempleProtection.description": "Empêche de casser et de poser des blocs dans le temple de la jungle tant que les épreuves de Notch ne sont pas réussies (toujours actif dans le Grand Temple).",
+
   "hud.the_shell.sonar": "Sonar : faille à %s m %s",
   "hud.the_shell.sonar.none": "Sonar : pas de faille proche",
   "hud.the_shell.submarine.cabin_button": "Clic droit : descendre dans la cabine",
