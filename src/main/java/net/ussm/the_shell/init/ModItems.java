@@ -95,6 +95,7 @@ public class ModItems {
     // objets des abysses
     public static final DeferredItem<Item> BLACK_PEARL = ITEMS.register("black_pearl", () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
     public static final DeferredItem<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook", () -> new net.ussm.the_shell.items.GrapplingHookItem(new Item.Properties().durability(128)));
+    public static final DeferredItem<Item> OXYGEN_BOTTLE = ITEMS.register("oxygen_bottle", () -> new net.ussm.the_shell.items.OxygenBottleItem(new Item.Properties().durability(4)));
     public static final DeferredItem<Item> POCKET_SONAR = ITEMS.register("pocket_sonar", () -> new net.ussm.the_shell.items.PocketSonarItem(new Item.Properties().durability(96)));
     public static final DeferredItem<Item> IRON_ABYSS_HELMET = ITEMS.register("iron_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties().stacksTo(1).attributes(helmet("iron", 2, 0, 0)), 9));

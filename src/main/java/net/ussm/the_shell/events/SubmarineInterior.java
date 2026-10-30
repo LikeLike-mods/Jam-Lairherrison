@@ -264,9 +264,36 @@ public class SubmarineInterior {
             player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", Math.min(100, (energy + fuel) * 100 / Submarine.MAX_ENERGY)), true);
             event.setCanceled(true);
         } else if (state.is(net.ussm.the_shell.init.ModBlocks.CONTROL_CONSOLE.get())) {
-            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", Math.min(100, energy * 100 / Submarine.MAX_ENERGY)), true);
+            // la console : batterie, hauteur du sous-marin et la faille la plus proche
+            int sx = (int) Math.floor(where.getDouble("X")), sy = (int) Math.floor(where.getDouble("Y")), sz = (int) Math.floor(where.getDouble("Z"));
+            int batterie = Math.min(100, energy * 100 / Submarine.MAX_ENERGY);
+            int[] faille = nearestRift(sx, sz);
+            player.displayClientMessage(faille == null
+                    ? net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console_far", batterie, sy)
+                    : net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console", batterie, sy, faille[0], faille[1],
+                            (int) Math.sqrt((faille[0] - sx) * (faille[0] - sx) + (faille[1] - sz) * (faille[1] - sz))), false);
+            event.setCanceled(true);
+        } else if (state.is(net.ussm.the_shell.init.ModBlocks.TANK.get())) {
+            // le reservoir d'air : le plein de la combi, et de la bouteille d'oxygene si on l'a en main
+            DeepSeaEvents.giveOxygen(player, net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN);
+            if (event.getItemStack().is(net.ussm.the_shell.init.ModItems.OXYGEN_BOTTLE.get())) event.getItemStack().setDamageValue(0);
+            player.level().playSound(null, event.getPos(), net.minecraft.sounds.SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 0.9F);
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.oxygen"), true);
             event.setCanceled(true);
         }
+    }
+
+    // on balaie en carres de plus en plus grands (pas de 8 blocs) jusqu'a 600 blocs
+    public static int[] nearestRift(int x, int z) {
+        for (int r = 0; r <= 600; r += 8) {
+            for (int dx = -r; dx <= r; dx += 8) {
+                for (int dz = -r; dz <= r; dz += 8) {
+                    if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
+                    if (net.ussm.the_shell.worldgen.TestChunkGenerator.isRift(x + dx, z + dz)) return new int[]{x + dx, z + dz};
+                }
+            }
+        }
+        return null;
     }
 
     public static void remember(Submarine submarine) {

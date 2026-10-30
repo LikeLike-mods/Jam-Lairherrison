@@ -69,6 +69,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.BLACK_PEARL);
                         output.accept(ModItems.GRAPPLING_HOOK);
                         output.accept(ModItems.POCKET_SONAR);
+                        output.accept(ModItems.OXYGEN_BOTTLE);
                         output.accept(ModBlocks.AIR_BUBBLE);
                         output.accept(ModBlocks.LIGHT_SAND);
                         output.accept(ModBlocks.LIGHT_SAND_WET);

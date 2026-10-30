@@ -42,7 +42,7 @@ public class SubmarineCockpitHud {
         long now = mc.level.getGameTime();
         if (recherche == null && now - derniere > 60) {
             int sx = sub.getBlockX(), sz = sub.getBlockZ();
-            recherche = java.util.concurrent.CompletableFuture.supplyAsync(() -> chercher(sx, sz));
+            recherche = java.util.concurrent.CompletableFuture.supplyAsync(() -> net.ussm.the_shell.events.SubmarineInterior.nearestRift(sx, sz));
             derniere = now;
         }
         if (recherche != null && recherche.isDone()) {
@@ -60,19 +60,6 @@ public class SubmarineCockpitHud {
             texte = Component.translatable("hud.the_shell.sonar", (int) Math.sqrt(dx * dx + dz * dz), fleches[i]);
         }
         g.drawString(mc.font, texte, droite - mc.font.width(texte), y, 0xFF7FE3FF);
-    }
-
-    // on balaie en carres de plus en plus grands (pas de 8 blocs) jusqu'a 600 blocs
-    private static int[] chercher(int x, int z) {
-        for (int r = 0; r <= 600; r += 8) {
-            for (int dx = -r; dx <= r; dx += 8) {
-                for (int dz = -r; dz <= r; dz += 8) {
-                    if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
-                    if (net.ussm.the_shell.worldgen.TestChunkGenerator.isRift(x + dx, z + dz)) return new int[]{x + dx, z + dz};
-                }
-            }
-        }
-        return null;
     }
 
     @SubscribeEvent
