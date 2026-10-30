@@ -313,8 +313,30 @@ public class SubmarineInterior {
         CompoundTag where = cabins.subs.get(cabin);
         if (where == null || !where.getBoolean("Stored")) return false;
         where.remove("Stored");
+        where.remove("Gone");
         cabins.setDirty();
         return true;
+    }
+
+    // le sous-marin n'existe plus (casse, tue, tombe dans le vide...) : sa cabine n'a plus de sous-marin
+    public static void lost(Submarine submarine) {
+        if (!(submarine.level() instanceof ServerLevel level) || submarine.getInteriorId() < 0) return;
+        Cabins cabins = Cabins.get(level.getServer());
+        CompoundTag where = cabins.subs.get(submarine.getInteriorId());
+        if (where == null) return;
+        where.putBoolean("Gone", true);
+        cabins.setDirty();
+    }
+
+    // mort avec son lit dans une cabine dont le sous-marin n'existe plus (ou est range dans un objet) : on reapparait au spawn
+    @SubscribeEvent
+    public static void respawnSansSousMarin(net.neoforged.neoforge.event.entity.living.LivingDeathEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player) || player.getRespawnDimension() != INTERIOR || player.getRespawnPosition() == null) return;
+        int cabin = Math.floorDiv(player.getRespawnPosition().getX() + SPACING / 2, SPACING);
+        CompoundTag where = Cabins.get(player.server).subs.get(cabin);
+        if (where != null && !where.getBoolean("Stored") && !where.getBoolean("Gone")) return;
+        player.setRespawnPosition(Level.OVERWORLD, null, 0.0F, false, false);
+        player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.respawn_lost"));
     }
 
     public static void remember(Submarine submarine) {

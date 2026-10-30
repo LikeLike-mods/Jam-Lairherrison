@@ -126,6 +126,13 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         }
     }
 
+    // vraiment detruit (pas juste decharge avec son chunk) : on le note pour sa cabine (son lit ne fait plus reapparaitre)
+    @Override
+    public void remove(net.minecraft.world.entity.Entity.RemovalReason reason) {
+        super.remove(reason);
+        if (reason.shouldDestroy()) net.ussm.the_shell.events.SubmarineInterior.lost(this);
+    }
+
     // pas pousse par les explosions non plus
     @Override
     public boolean ignoreExplosion(net.minecraft.world.level.Explosion explosion) {

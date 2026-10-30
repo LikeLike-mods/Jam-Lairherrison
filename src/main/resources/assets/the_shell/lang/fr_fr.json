@@ -281,6 +281,7 @@
   "message.the_shell.submarine.no_room": "Pas la place pour un sous-marin ici",
   "message.the_shell.submarine.occupied": "Quelqu'un est déjà aux commandes",
   "message.the_shell.submarine.oxygen": "Oxygène rechargé",
+  "message.the_shell.submarine.respawn_lost": "Le sous-marin de ton lit n'existe plus : tu réapparais au point de départ du monde.",
   "message.the_shell.submarine.upgrade_order": "Il faut d'abord le kit fer, puis diamant, puis netherite",
   "message.the_shell.submarine.upgraded": "Sous-marin amélioré au niveau %s : nouvelle pièce dans la cabine, et il va plus vite !",
 

@@ -281,6 +281,7 @@
   "message.the_shell.submarine.no_room": "No room for a submarine in here",
   "message.the_shell.submarine.occupied": "Someone is already at the controls",
   "message.the_shell.submarine.oxygen": "Oxygen refilled",
+  "message.the_shell.submarine.respawn_lost": "The submarine with your bed is gone: you respawn at the world spawn.",
   "message.the_shell.submarine.upgrade_order": "Use the iron kit first, then diamond, then netherite",
   "message.the_shell.submarine.upgraded": "Submarine upgraded to level %s: a new room in the cabin, and it goes faster!",
 
