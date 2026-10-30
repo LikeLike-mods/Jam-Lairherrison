@@ -165,9 +165,10 @@ public class SubmarineInterior {
     }
 
     // et on seche ce qui a deja ete mouille dans les cabines faites avant
-    private static void secher(ServerLevel inside, int cabin) {
+    private static void secher(ServerLevel inside, int cabin, int tier) {
         BlockPos c = corner(cabin);
-        for (int[] b : DANS_LA_CABINE) {
+        for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
+            int[] b = DANS_LA_CABINE[n];
             for (BlockPos p : BlockPos.betweenClosed(c.offset(b[0], b[1], b[2]), c.offset(b[3], b[4], b[5]))) {
                 net.minecraft.world.level.block.state.BlockState st = inside.getBlockState(p);
                 if (st.is(net.minecraft.world.level.block.Blocks.WATER)) {
@@ -206,7 +207,7 @@ public class SubmarineInterior {
             }
         }
         cabins.setExtended(cabin, submarine.getTier());
-        secher(inside, cabin);
+        secher(inside, cabin, submarine.getTier());
         // les anciennes cabines avaient des hublots qui donnaient sur les pieces d'amelioration : on les bouche
         for (BlockPos h : new BlockPos[]{new BlockPos(11, 7, 7), new BlockPos(11, 7, 15), new BlockPos(3, 7, 15)}) {
             if (inside.getBlockState(corner.offset(h)).is(net.ussm.the_shell.init.ModBlocks.REINFORCED_GLASS.get())) {
