@@ -136,8 +136,9 @@ public class SubmarineCockpitView {
         int lumierePeau = LightTexture.pack(13, 13);
         pose.pushPose();
         pose.mulPose(Axis.YP.rotationDegrees(-yaw));
-        bras(bras, pose, new org.joml.Vector3f(-0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(-0.05F, 0.0F, 0.0F), 40, 16, lumierePeau);
-        bras(bras, pose, new org.joml.Vector3f(0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(0.05F, 0.0F, 0.0F), 32, 48, lumierePeau);
+        // epaules assez bas et en avant (sinon les bras font des spaghettis), une main de chaque cote de la poignee
+        bras(bras, pose, new org.joml.Vector3f(-0.26F, -0.74F, 0.14F), new org.joml.Vector3f(poignee).add(-0.07F, -0.03F, -0.02F), 40, 16, lumierePeau);
+        bras(bras, pose, new org.joml.Vector3f(0.26F, -0.74F, 0.14F), new org.joml.Vector3f(poignee).add(0.07F, -0.03F, -0.02F), 32, 48, lumierePeau);
         pose.popPose();
         buffers.endBatch(peau);
     }
@@ -150,7 +151,7 @@ public class SubmarineCockpitView {
         pose.translate(epaule.x, epaule.y, epaule.z);
         pose.mulPose(new org.joml.Quaternionf().rotationTo(new org.joml.Vector3f(0.0F, 0.0F, 1.0F), dir.normalize()));
         PoseStack.Pose p = pose.last();
-        float w = 0.07F;
+        float w = 0.055F;
         // les 4 faces longues (de l'epaule en haut du skin a la main en bas) et le bout du poing
         float[][] cotes = {{-w, -w, -w, w}, {-w, w, w, w}, {w, w, w, -w}, {w, -w, -w, -w}};
         for (int i = 0; i < 4; i++) {
