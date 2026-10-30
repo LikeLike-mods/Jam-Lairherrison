@@ -47,6 +47,7 @@ public class ModFoodProperties {
             .fast()
             .build();
 
+
     public static FoodProperties DATE_SYRUP = new FoodProperties.Builder()
             .nutrition(4)
             .saturationModifier(0.3f)
