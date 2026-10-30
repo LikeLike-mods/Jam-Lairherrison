@@ -13,10 +13,10 @@
   "painting.the_shell.dancing_parrot.title": "Party Parrot",
   "painting.the_shell.dancing_parrot.author": "Anonymous",
 
-  "console.the_shell.sonar": "Sonar: %s creature(s) detected",
+  "console.the_shell.sonar": "Sonar: %s creatures detected",
 
-  "advancement.the_shell.root.title": "Title",
-  "advancement.the_shell.root.description": "Welcome to the on a pas encore de nom lol",
+  "advancement.the_shell.root.title": "The Shell",
+  "advancement.the_shell.root.description": "Sunshine place...",
   "advancement.the_shell.flytrap_bite.title": "A Hungry Plant!",
   "advancement.the_shell.flytrap_bite.description": "Be bite by a Venus Flytrap.",
   "advancement.the_shell.hot_pepper.title": "A spicy one!",
