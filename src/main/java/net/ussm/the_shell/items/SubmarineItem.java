@@ -37,9 +37,9 @@ public class SubmarineItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (level.dimension() == SubmarineInterior.INTERIOR) {
             if (!level.isClientSide) player.displayClientMessage(Component.translatable("message.the_shell.submarine.no_room"), true);
-            if (player instanceof ServerPlayer joueur) {
-                AdvancementHolder succes = joueur.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath("the_shell", "inception"));
-                if (succes != null) joueur.getAdvancements().award(succes, "inception");
+            if (player instanceof ServerPlayer serverPlayer) {
+                AdvancementHolder advancement = serverPlayer.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath("the_shell", "inception"));
+                if (advancement != null) serverPlayer.getAdvancements().award(advancement, "inception");
             }
             return InteractionResultHolder.fail(stack);
         }

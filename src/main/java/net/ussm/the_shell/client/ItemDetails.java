@@ -21,27 +21,27 @@ public class ItemDetails {
     public static void details(ItemTooltipEvent event) {
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(event.getItemStack().getItem());
         if (!id.getNamespace().equals(TheShell.MOD_ID)) return;
-        String cle = "tooltip.the_shell." + id.getPath() + ".details";
-        if (!I18n.exists(cle)) return;
+        String key = "tooltip.the_shell." + id.getPath() + ".details";
+        if (!I18n.exists(key)) return;
         if (!Screen.hasControlDown()) {
             event.getToolTip().add(Component.translatable("tooltip.the_shell.details_hint").withStyle(ChatFormatting.DARK_GRAY));
             return;
         }
-        for (String ligne : decoupe(I18n.get(cle), 42)) event.getToolTip().add(Component.literal(ligne).withStyle(ChatFormatting.GRAY));
+        for (String line : cutout(I18n.get(key), 42)) event.getToolTip().add(Component.literal(line).withStyle(ChatFormatting.GRAY));
     }
 
-    private static List<String> decoupe(String texte, int n) {
-        List<String> lignes = new ArrayList<>();
-        StringBuilder ligne = new StringBuilder();
-        for (String mot : texte.split(" ")) {
-            if (ligne.length() > 0 && ligne.length() + mot.length() + 1 > n) {
-                lignes.add(ligne.toString());
-                ligne.setLength(0);
+    private static List<String> cutout(String text, int n) {
+        List<String> lines = new ArrayList<>();
+        StringBuilder line = new StringBuilder();
+        for (String word : text.split(" ")) {
+            if (line.length() > 0 && line.length() + word.length() + 1 > n) {
+                lines.add(line.toString());
+                line.setLength(0);
             }
-            if (ligne.length() > 0) ligne.append(' ');
-            ligne.append(mot);
+            if (line.length() > 0) line.append(' ');
+            line.append(word);
         }
-        if (ligne.length() > 0) lignes.add(ligne.toString());
-        return lignes;
+        if (line.length() > 0) lines.add(line.toString());
+        return lines;
     }
 }

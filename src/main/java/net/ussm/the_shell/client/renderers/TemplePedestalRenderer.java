@@ -16,15 +16,15 @@ public class TemplePedestalRenderer implements BlockEntityRenderer<TemplePedesta
     }
 
     @Override
-    public void render(TemplePedestalBlockEntity socle, float partialTick, PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
-        if (socle.objet().isEmpty() || socle.getLevel() == null) return;
-        float t = socle.getLevel().getGameTime() + partialTick;
+    public void render(TemplePedestalBlockEntity pedestal, float partialTick, PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
+        if (pedestal.item().isEmpty() || pedestal.getLevel() == null) return;
+        float t = pedestal.getLevel().getGameTime() + partialTick;
         pose.pushPose();
         pose.translate(0.5, 1.25 + Math.sin(t * 0.08) * 0.06, 0.5);
         pose.mulPose(Axis.YP.rotationDegrees(t * 2.0F));
         pose.scale(0.7F, 0.7F, 0.7F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(socle.objet(), ItemDisplayContext.GROUND, LightTexture.FULL_BRIGHT,
-                OverlayTexture.NO_OVERLAY, pose, buffers, socle.getLevel(), (int) socle.getBlockPos().asLong());
+        Minecraft.getInstance().getItemRenderer().renderStatic(pedestal.item(), ItemDisplayContext.GROUND, LightTexture.FULL_BRIGHT,
+                OverlayTexture.NO_OVERLAY, pose, buffers, pedestal.getLevel(), (int) pedestal.getBlockPos().asLong());
         pose.popPose();
     }
 }

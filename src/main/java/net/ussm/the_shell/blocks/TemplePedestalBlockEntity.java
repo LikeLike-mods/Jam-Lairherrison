@@ -13,18 +13,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.ussm.the_shell.init.ModBlockEntities;
 
 public class TemplePedestalBlockEntity extends BlockEntity {
-    private ItemStack objet = ItemStack.EMPTY;
+    private ItemStack item = ItemStack.EMPTY;
 
     public TemplePedestalBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.TEMPLE_PEDESTAL.get(), pos, state);
     }
 
-    public ItemStack objet() {
-        return objet;
+    public ItemStack item() {
+        return item;
     }
 
-    public void poser(ItemStack stack) {
-        objet = stack;
+    public void place(ItemStack stack) {
+        item = stack;
         setChanged();
         if (level != null) level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
     }
@@ -32,13 +32,13 @@ public class TemplePedestalBlockEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        if (!objet.isEmpty()) tag.put("Item", objet.save(registries));
+        if (!item.isEmpty()) tag.put("Item", item.save(registries));
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        objet = tag.contains("Item") ? ItemStack.parseOptional(registries, tag.getCompound("Item")) : ItemStack.EMPTY;
+        item = tag.contains("Item") ? ItemStack.parseOptional(registries, tag.getCompound("Item")) : ItemStack.EMPTY;
     }
 
     @Override

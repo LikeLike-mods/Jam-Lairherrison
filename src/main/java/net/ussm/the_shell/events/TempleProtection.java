@@ -20,7 +20,7 @@ import net.ussm.the_shell.blocks.NotchAltarBlock;
 public class TempleProtection {
     private static final ResourceKey<Structure> TEMPLE = ResourceKey.create(Registries.STRUCTURE, ResourceLocation.withDefaultNamespace("jungle_pyramid"));
 
-    private static boolean verrouille(ServerLevel level, BlockPos pos) {
+    private static boolean isLocked(ServerLevel level, BlockPos pos) {
         Structure structure = level.registryAccess().registryOrThrow(Registries.STRUCTURE).get(TEMPLE);
         if (structure == null) return false;
         StructureStart temple = level.structureManager().getStructureWithPieceAt(pos, structure);
@@ -28,24 +28,24 @@ public class TempleProtection {
         for (BlockPos p : BlockPos.betweenClosed(temple.getBoundingBox().minX(), temple.getBoundingBox().minY(), temple.getBoundingBox().minZ(),
                 temple.getBoundingBox().maxX(), temple.getBoundingBox().maxY(), temple.getBoundingBox().maxZ())) {
             BlockState s = level.getBlockState(p);
-            if (s.getBlock() instanceof NotchAltarBlock && !s.getValue(NotchAltarBlock.RESOLU)) return true;
+            if (s.getBlock() instanceof NotchAltarBlock && !s.getValue(NotchAltarBlock.SOLVED)) return true;
         }
         return false;
     }
 
     private static boolean refuse(Player player, ServerLevel level, BlockPos pos) {
-        if (player.isCreative() || !verrouille(level, pos)) return false;
+        if (player.isCreative() || !isLocked(level, pos)) return false;
         player.displayClientMessage(Component.translatable("message.the_shell.temple.locked"), true);
         return true;
     }
 
     @SubscribeEvent
-    public static void casser(BlockEvent.BreakEvent event) {
+    public static void blockBreak(BlockEvent.BreakEvent event) {
         if (event.getLevel() instanceof ServerLevel level && refuse(event.getPlayer(), level, event.getPos())) event.setCanceled(true);
     }
 
     @SubscribeEvent
-    public static void poser(BlockEvent.EntityPlaceEvent event) {
+    public static void blockPlace(BlockEvent.EntityPlaceEvent event) {
         if (event.getLevel() instanceof ServerLevel level && event.getEntity() instanceof Player player && refuse(player, level, event.getPos())) event.setCanceled(true);
     }
 }

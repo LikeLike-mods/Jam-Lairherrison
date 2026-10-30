@@ -47,9 +47,9 @@ public final class MaskState {
             state.captureTree(stack, root, false, clippedBoneNames, warning);
         }
         if (!state.hasClippedBone) {
-            warning.accept("Aucun os à découper parmi " + clippedBoneNames + " : aucune surface ne sera découpée.");
+            warning.accept("None of the bones to cut exist among " + clippedBoneNames + ": nothing will be cut.");
         }
-        if (!state.hasMask) warning.accept("Aucun os mask ou mask_* : le modèle est rendu sans découpe.");
+        if (!state.hasMask) warning.accept("No mask or mask_* bone: the model is rendered without cutting.");
         return state;
     }
 
@@ -80,7 +80,7 @@ public final class MaskState {
             for (GeoVertex vertex : quad.vertices()) {
                 Vector3f p = vertex.position();
                 if (!Float.isFinite(p.x()) || !Float.isFinite(p.y()) || !Float.isFinite(p.z())) {
-                    warning.accept("Coordonnées non finies dans un cube de " + bone.getName() + "; volume ignoré.");
+                    warning.accept("Non-finite coordinates in a cube of " + bone.getName() + "; volume ignored.");
                     return;
                 }
                 minX = Math.min(minX, p.x()); maxX = Math.max(maxX, p.x());
@@ -89,7 +89,7 @@ public final class MaskState {
             }
         }
         if (!(maxX > minX && maxY > minY && maxZ > minZ)) {
-            warning.accept("Cube plat, vide ou faces insuffisantes dans " + bone.getName() + "; volume ignoré.");
+            warning.accept("Flat, empty or incomplete cube in " + bone.getName() + "; volume ignored.");
             return;
         }
         stack.pushPose();
@@ -100,7 +100,7 @@ public final class MaskState {
             float[] matrix = stack.last().pose().get(new float[16]);
             for (float value : matrix) {
                 if (!Float.isFinite(value)) {
-                    warning.accept("Transformation non finie de " + bone.getName() + "; volume ignoré.");
+                    warning.accept("Non-finite transform for " + bone.getName() + "; volume ignored.");
                     return;
                 }
             }

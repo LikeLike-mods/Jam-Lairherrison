@@ -41,7 +41,7 @@ public class BananaPeelBlock extends Block {
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity vivant) || vivant.isShiftKeyDown() || !vivant.onGround() || entity.getData(net.ussm.the_shell.init.ModAttachments.SLIPPED)) return;
+        if (!(entity instanceof LivingEntity living) || living.isShiftKeyDown() || !living.onGround() || entity.getData(net.ussm.the_shell.init.ModAttachments.SLIPPED)) return;
         boolean player = entity instanceof Player;
         if (player ? !(level.isClientSide && ((Player) entity).isLocalPlayer()) : level.isClientSide) return;
         Vec3 v = entity.getDeltaMovement();

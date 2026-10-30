@@ -14,12 +14,12 @@ public class BananaItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        ItemStack reste = super.finishUsingItem(stack, level, entity);
+        ItemStack rest = super.finishUsingItem(stack, level, entity);
         if (entity instanceof Player player && !player.getAbilities().instabuild) {
-            ItemStack peau = new ItemStack(ModBlocks.BANANA_PEEL.get());
-            if (reste.isEmpty()) return peau;
-            if (!player.getInventory().add(peau)) player.drop(peau, false);
+            ItemStack peel = new ItemStack(ModBlocks.BANANA_PEEL.get());
+            if (rest.isEmpty()) return peel;
+            if (!player.getInventory().add(peel)) player.drop(peel, false);
         }
-        return reste;
+        return rest;
     }
 }

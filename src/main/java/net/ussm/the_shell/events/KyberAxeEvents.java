@@ -12,18 +12,18 @@ import net.ussm.the_shell.items.LightsaberItem;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class KyberAxeEvents {
-    private static boolean enCours;
+    private static boolean felling;
 
     @SubscribeEvent
-    public static void abattre(BlockEvent.BreakEvent event) {
-        if (enCours || !(event.getLevel() instanceof ServerLevel level) || !event.getState().is(BlockTags.LOGS)) return;
+    public static void fellTree(BlockEvent.BreakEvent event) {
+        if (felling || !(event.getLevel() instanceof ServerLevel level) || !event.getState().is(BlockTags.LOGS)) return;
         ItemStack main = event.getPlayer().getMainHandItem();
-        if (!(main.getItem() instanceof KyberAxeItem) || !LightsaberItem.isActive(main) || !KyberAxeItem.abatArbre(main) || event.getPlayer().isShiftKeyDown()) return;
-        enCours = true;
+        if (!(main.getItem() instanceof KyberAxeItem) || !LightsaberItem.isActive(main) || !KyberAxeItem.fellsWholeTree(main) || event.getPlayer().isShiftKeyDown()) return;
+        felling = true;
         try {
-            KyberAxeItem.abattre(level, event.getPos(), event.getPlayer());
+            KyberAxeItem.fellTree(level, event.getPos(), event.getPlayer());
         } finally {
-            enCours = false;
+            felling = false;
         }
     }
 }

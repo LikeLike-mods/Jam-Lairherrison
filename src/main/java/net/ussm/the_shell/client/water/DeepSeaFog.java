@@ -33,7 +33,7 @@ public class DeepSeaFog {
             float d = Mth.clamp((float) (net.ussm.the_shell.worldgen.AbyssTerrain.CEILING - y) / 190F, 0.0F, 1.0F);
             far = Mth.lerp(d, 56.0F, 32.0F);
         } else {
-            float t = profondeur(mc, y);
+            float t = depth(mc, y);
             if (t <= 0) return;
             far = Math.min(event.getFarPlaneDistance(), Mth.lerp((float) Math.sqrt(t), event.getFarPlaneDistance(), 28.0F));
         }
@@ -46,7 +46,7 @@ public class DeepSeaFog {
         event.setCanceled(true);
     }
 
-    private static float profondeur(Minecraft mc, double y) {
+    private static float depth(Minecraft mc, double y) {
         if (mc.level.dimension() == AtollTravel.ATOLL) {
             int top = TestChunkGenerator.ABYSS;
             return Mth.clamp((float) (top - y) / (top + 100), 0.0F, 1.0F);
@@ -58,7 +58,7 @@ public class DeepSeaFog {
     }
 
     @SubscribeEvent
-    public static void couleur(ViewportEvent.ComputeFogColor event) {
+    public static void colour(ViewportEvent.ComputeFogColor event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null && mc.level.dimension() == net.ussm.the_shell.events.SubmarineInterior.INTERIOR) {
             event.setRed(0.02F);
@@ -67,7 +67,7 @@ public class DeepSeaFog {
             return;
         }
         if (mc.level == null || event.getCamera().getFluidInCamera() != FogType.WATER) return;
-        float t = profondeur(mc, event.getCamera().getPosition().y);
+        float t = depth(mc, event.getCamera().getPosition().y);
         if (t <= 0) return;
         float k = 1.0F - Mth.clamp(t * 1.4F, 0.0F, 1.0F);
         event.setRed(event.getRed() * k);

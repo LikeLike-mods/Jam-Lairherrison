@@ -14,11 +14,11 @@ import net.ussm.the_shell.init.ModSounds;
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class SlipEvents {
 
-    public static void received(ServerPlayer player, boolean allonge) {
-        if (player.getData(ModAttachments.SLIPPED) == allonge) return;
-        player.setData(ModAttachments.SLIPPED, allonge);
+    public static void received(ServerPlayer player, boolean lyingDown) {
+        if (player.getData(ModAttachments.SLIPPED) == lyingDown) return;
+        player.setData(ModAttachments.SLIPPED, lyingDown);
         player.syncData(ModAttachments.SLIPPED);
-        if (allonge) player.level().playSound(player, player.blockPosition(), ModSounds.BANANA_SLIP.get(), SoundSource.PLAYERS, 1.0F, 0.95F + player.getRandom().nextFloat() * 0.1F);
+        if (lyingDown) player.level().playSound(player, player.blockPosition(), ModSounds.BANANA_SLIP.get(), SoundSource.PLAYERS, 1.0F, 0.95F + player.getRandom().nextFloat() * 0.1F);
     }
 
     @SubscribeEvent

@@ -37,9 +37,9 @@ public class SubmarineRenderer extends GeoEntityRenderer<Submarine> {
     @Override
     public void preRender(PoseStack poseStack, Submarine submarine, software.bernie.geckolib.cache.object.BakedGeoModel model, MultiBufferSource bufferSource,
                           com.mojang.blaze3d.vertex.VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
-        for (int niveau = 1; niveau <= 3; niveau++) {
-            boolean cache = submarine.getTier() < niveau;
-            model.getBone("tier" + niveau).ifPresent(os -> os.setHidden(cache));
+        for (int altarTier = 1; altarTier <= 3; altarTier++) {
+            boolean cache = submarine.getTier() < altarTier;
+            model.getBone("tier" + altarTier).ifPresent(bone -> bone.setHidden(cache));
         }
         super.preRender(poseStack, submarine, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
     }

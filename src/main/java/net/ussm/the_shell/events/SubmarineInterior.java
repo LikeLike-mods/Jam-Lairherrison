@@ -61,38 +61,38 @@ public class SubmarineInterior {
     private static void placeExtension(ServerLevel inside, int cabin, int tier) {
         BlockPos at = corner(cabin).offset(EXTENSIONS[tier - 1]);
         inside.getStructureManager().get(id("submarine/extension_" + tier))
-                .ifPresent(t -> t.placeInWorld(inside, at, at, sec(), inside.random, Block.UPDATE_CLIENTS));
+                .ifPresent(t -> t.placeInWorld(inside, at, at, isDry(), inside.random, Block.UPDATE_CLIENTS));
     }
 
     private static void fishes(ServerLevel inside, int cabin, CompoundTag where) {
         BlockPos c = corner(cabin);
         net.minecraft.world.phys.AABB zone = new net.minecraft.world.phys.AABB(c.getX() - 13, c.getY() - 10, c.getZ() - 13, c.getX() + 28, c.getY() + 25, c.getZ() + 34);
-        net.minecraft.world.phys.AABB tout = new net.minecraft.world.phys.AABB(c.getX() - 48, c.getY() - 20, c.getZ() - 44, c.getX() + 56, c.getY() + 34, c.getZ() + 52);
-        java.util.List<net.minecraft.world.entity.Mob> poissons = inside.getEntitiesOfClass(net.minecraft.world.entity.Mob.class, tout,
+        net.minecraft.world.phys.AABB zoneBox = new net.minecraft.world.phys.AABB(c.getX() - 48, c.getY() - 20, c.getZ() - 44, c.getX() + 56, c.getY() + 34, c.getZ() + 52);
+        java.util.List<net.minecraft.world.entity.Mob> fish = inside.getEntitiesOfClass(net.minecraft.world.entity.Mob.class, zoneBox,
                 m -> !m.hasCustomName() && (m instanceof net.minecraft.world.entity.animal.WaterAnimal || m.getType() == net.ussm.the_shell.init.ModEntities.ABYSSAL_ANGLER.get()));
-        int restants = 0;
-        for (net.minecraft.world.entity.Mob m : poissons) {
-            if (zone.contains(m.position()) && restants < 7) restants++;
+        int remaining = 0;
+        for (net.minecraft.world.entity.Mob m : fish) {
+            if (zone.contains(m.position()) && remaining < 7) remaining++;
             else m.discard();
         }
-        for (net.minecraft.world.entity.item.ItemEntity item : inside.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, tout)) {
+        for (net.minecraft.world.entity.item.ItemEntity item : inside.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, zoneBox)) {
             BlockPos ip = item.blockPosition().subtract(c);
-            boolean dedans = false;
-            for (int[] b : DANS_LA_CABINE) dedans |= ip.getX() >= b[0] && ip.getX() <= b[3] && ip.getY() >= b[1] && ip.getY() <= b[4] && ip.getZ() >= b[2] && ip.getZ() <= b[5];
-            if (!dedans) item.discard();
+            boolean isInside = false;
+            for (int[] b : IN_CABIN) isInside |= ip.getX() >= b[0] && ip.getX() <= b[3] && ip.getY() >= b[1] && ip.getY() <= b[4] && ip.getZ() >= b[2] && ip.getZ() <= b[5];
+            if (!isInside) item.discard();
         }
-        if (restants >= 7) return;
+        if (remaining >= 7) return;
         String dim = where.getString("Dim");
         boolean abysses = dim.equals(AbyssTravel.ABYSS.location().toString());
-        boolean clair = dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > net.ussm.the_shell.worldgen.TestChunkGenerator.SEA - 24;
+        boolean bright = dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > net.ussm.the_shell.worldgen.TestChunkGenerator.SEA - 24;
         net.minecraft.world.entity.EntityType<?>[] types = abysses
                 ? new net.minecraft.world.entity.EntityType<?>[]{net.ussm.the_shell.init.ModEntities.HATCHETFISH.get(), net.ussm.the_shell.init.ModEntities.HATCHETFISH.get(),
                         net.minecraft.world.entity.EntityType.GLOW_SQUID, net.ussm.the_shell.init.ModEntities.ABYSSAL_ANGLER.get()}
-                : clair ? new net.minecraft.world.entity.EntityType<?>[]{net.minecraft.world.entity.EntityType.TROPICAL_FISH, net.minecraft.world.entity.EntityType.TROPICAL_FISH,
+                : bright ? new net.minecraft.world.entity.EntityType<?>[]{net.minecraft.world.entity.EntityType.TROPICAL_FISH, net.minecraft.world.entity.EntityType.TROPICAL_FISH,
                         net.minecraft.world.entity.EntityType.COD, net.minecraft.world.entity.EntityType.SALMON, net.minecraft.world.entity.EntityType.PUFFERFISH}
                 : new net.minecraft.world.entity.EntityType<?>[]{net.minecraft.world.entity.EntityType.COD, net.minecraft.world.entity.EntityType.SQUID, net.minecraft.world.entity.EntityType.GLOW_SQUID};
         net.minecraft.util.RandomSource r = inside.random;
-        for (int essai = 0; essai < 12; essai++) {
+        for (int attempt = 0; attempt < 12; attempt++) {
             BlockPos p = c.offset(-4 + r.nextInt(23), r.nextInt(17), -4 + r.nextInt(29));
             if (!inside.getFluidState(p).is(net.minecraft.tags.FluidTags.WATER) || !inside.getFluidState(p.above()).is(net.minecraft.tags.FluidTags.WATER)) continue;
             if (!(types[r.nextInt(types.length)].create(inside) instanceof net.minecraft.world.entity.Mob mob)) return;
@@ -103,43 +103,43 @@ public class SubmarineInterior {
         }
     }
 
-    private static final int[][] DANS_LA_CABINE = {{3, 3, 3, 11, 14, 19}, {11, 5, 4, 19, 10, 10}, {11, 5, 12, 19, 10, 18}, {-6, 5, 12, 3, 10, 20}};
+    private static final int[][] IN_CABIN = {{3, 3, 3, 11, 14, 19}, {11, 5, 4, 19, 10, 10}, {11, 5, 12, 19, 10, 18}, {-6, 5, 12, 3, 10, 20}};
 
-    private static void mirror(ServerLevel inside, int cabin, CompoundTag where, int tier, int passe) {
+    private static void mirror(ServerLevel inside, int cabin, CompoundTag where, int tier, int pass) {
         ServerLevel world = inside.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(where.getString("Dim"))));
         if (world == null) return;
         BlockPos sub = BlockPos.containing(where.getDouble("X"), where.getDouble("Y"), where.getDouble("Z"));
         world.getChunkSource().addRegionTicket(net.minecraft.server.level.TicketType.PORTAL, new net.minecraft.world.level.ChunkPos(sub), 3, sub);
-        net.minecraft.world.level.block.Rotation versCabine = switch (net.minecraft.core.Direction.fromYRot(where.getFloat("Yaw"))) {
+        net.minecraft.world.level.block.Rotation toCabin = switch (net.minecraft.core.Direction.fromYRot(where.getFloat("Yaw"))) {
             case EAST -> net.minecraft.world.level.block.Rotation.COUNTERCLOCKWISE_90;
             case SOUTH -> net.minecraft.world.level.block.Rotation.CLOCKWISE_180;
             case WEST -> net.minecraft.world.level.block.Rotation.CLOCKWISE_90;
             default -> net.minecraft.world.level.block.Rotation.NONE;
         };
-        net.minecraft.world.level.block.Rotation versMonde = switch (versCabine) {
+        net.minecraft.world.level.block.Rotation toWorld = switch (toCabin) {
             case COUNTERCLOCKWISE_90 -> net.minecraft.world.level.block.Rotation.CLOCKWISE_90;
             case CLOCKWISE_90 -> net.minecraft.world.level.block.Rotation.COUNTERCLOCKWISE_90;
-            default -> versCabine;
+            default -> toCabin;
         };
         BlockPos c = corner(cabin);
-        net.minecraft.world.level.block.state.BlockState vide = world.getFluidState(sub).is(net.minecraft.tags.FluidTags.WATER)
+        net.minecraft.world.level.block.state.BlockState empty = world.getFluidState(sub).is(net.minecraft.tags.FluidTags.WATER)
                 ? net.minecraft.world.level.block.Blocks.WATER.defaultBlockState() : net.minecraft.world.level.block.Blocks.AIR.defaultBlockState();
         for (int lx = -40; lx <= 40; lx++) {
-            if (Math.floorMod(lx, 8) != passe) continue;
+            if (Math.floorMod(lx, 8) != pass) continue;
             for (int ly = -16; ly <= 24; ly++) {
                 for (int lz = -36; lz <= 37; lz++) {
                     int tx = 7 + lx, ty = 3 + ly, tz = 11 + lz;
-                    int proche = 99;
-                    for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
-                        int[] b = DANS_LA_CABINE[n];
+                    int near = 99;
+                    for (int n = 0; n <= tier && n < IN_CABIN.length; n++) {
+                        int[] b = IN_CABIN[n];
                         int d = Math.max(Math.max(Math.max(b[0] - tx, tx - b[3]), Math.max(b[1] - ty, ty - b[4])), Math.max(b[2] - tz, tz - b[5]));
-                        proche = Math.min(proche, d);
+                        near = Math.min(near, d);
                     }
-                    if (proche <= 0) continue;
-                    boolean bord = Math.abs(lx) == 40 || ly == -16 || ly == 24 || lz == -36 || lz == 37;
-                    net.minecraft.world.level.block.state.BlockState st = bord ? net.minecraft.world.level.block.Blocks.BARRIER.defaultBlockState()
-                            : world.getBlockState(sub.offset(new BlockPos(lx, ly, lz).rotate(versMonde))).rotate(versCabine);
-                    if (!bord && proche <= 3 && !st.isAir() && st.getFluidState().isEmpty()) st = vide;
+                    if (near <= 0) continue;
+                    boolean edge = Math.abs(lx) == 40 || ly == -16 || ly == 24 || lz == -36 || lz == 37;
+                    net.minecraft.world.level.block.state.BlockState st = edge ? net.minecraft.world.level.block.Blocks.BARRIER.defaultBlockState()
+                            : world.getBlockState(sub.offset(new BlockPos(lx, ly, lz).rotate(toWorld))).rotate(toCabin);
+                    if (!edge && near <= 3 && !st.isAir() && st.getFluidState().isEmpty()) st = empty;
                     BlockPos target = c.offset(tx, ty, tz);
                     if (inside.getBlockState(target) != st) inside.setBlock(target, st, Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_SUPPRESS_DROPS);
                 }
@@ -167,14 +167,14 @@ public class SubmarineInterior {
         return ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, path);
     }
 
-    private static StructurePlaceSettings sec() {
+    private static StructurePlaceSettings isDry() {
         return new StructurePlaceSettings().setLiquidSettings(net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings.IGNORE_WATERLOGGING);
     }
 
-    private static void secher(ServerLevel inside, int cabin, int tier) {
+    private static void dryOut(ServerLevel inside, int cabin, int tier) {
         BlockPos c = corner(cabin);
-        for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
-            int[] b = DANS_LA_CABINE[n];
+        for (int n = 0; n <= tier && n < IN_CABIN.length; n++) {
+            int[] b = IN_CABIN[n];
             for (BlockPos p : BlockPos.betweenClosed(c.offset(b[0], b[1], b[2]), c.offset(b[3], b[4], b[5]))) {
                 net.minecraft.world.level.block.state.BlockState st = inside.getBlockState(p);
                 if (st.is(net.minecraft.world.level.block.Blocks.WATER)) {
@@ -204,7 +204,7 @@ public class SubmarineInterior {
             cabins.setDirty();
             inside.getEntitiesOfClass(net.minecraft.world.entity.animal.WaterAnimal.class, new net.minecraft.world.phys.AABB(corner.offset(-8, -2, -2).getCenter(), corner.offset(24, 20, 26).getCenter()))
                     .forEach(net.minecraft.world.entity.Entity::discard);
-            inside.getStructureManager().get(CABIN).ifPresent(t -> t.placeInWorld(inside, corner, corner, sec(), inside.random, Block.UPDATE_CLIENTS));
+            inside.getStructureManager().get(CABIN).ifPresent(t -> t.placeInWorld(inside, corner, corner, isDry(), inside.random, Block.UPDATE_CLIENTS));
         }
         for (int tier = 1; tier <= submarine.getTier(); tier++) {
             if (cabins.extended(cabin) < tier) {
@@ -212,13 +212,13 @@ public class SubmarineInterior {
             }
         }
         cabins.setExtended(cabin, submarine.getTier());
-        secher(inside, cabin, submarine.getTier());
+        dryOut(inside, cabin, submarine.getTier());
         for (BlockPos h : new BlockPos[]{new BlockPos(11, 7, 7), new BlockPos(11, 7, 15), new BlockPos(3, 7, 15)}) {
             if (inside.getBlockState(corner.offset(h)).is(net.ussm.the_shell.init.ModBlocks.REINFORCED_GLASS.get())) {
                 inside.setBlock(corner.offset(h), net.ussm.the_shell.init.ModBlocks.METAL_PLATING.get().defaultBlockState(), Block.UPDATE_CLIENTS);
             }
         }
-        for (int passe = 0; passe < 8; passe++) mirror(inside, cabin, cabins.subs.get(cabin), cabins.extended(cabin), passe);
+        for (int pass = 0; pass < 8; pass++) mirror(inside, cabin, cabins.subs.get(cabin), cabins.extended(cabin), pass);
         player.setPortalCooldown(20);
         player.changeDimension(new DimensionTransition(inside, Vec3.atLowerCornerOf(corner).add(ARRIVAL), Vec3.ZERO, 180.0F, 0.0F, DimensionTransition.DO_NOTHING));
     }
@@ -252,12 +252,12 @@ public class SubmarineInterior {
             event.setCanceled(true);
         } else if (state.is(net.ussm.the_shell.init.ModBlocks.CONTROL_CONSOLE.get())) {
             int sx = (int) Math.floor(where.getDouble("X")), sy = (int) Math.floor(where.getDouble("Y")), sz = (int) Math.floor(where.getDouble("Z"));
-            int batterie = Math.min(100, energy * 100 / Submarine.MAX_ENERGY);
-            int[] faille = nearestRift(sx, sz);
-            player.displayClientMessage(faille == null
-                    ? net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console_far", batterie, sy)
-                    : net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console", batterie, sy, faille[0], faille[1],
-                            (int) Math.sqrt((faille[0] - sx) * (faille[0] - sx) + (faille[1] - sz) * (faille[1] - sz))), false);
+            int battery = Math.min(100, energy * 100 / Submarine.MAX_ENERGY);
+            int[] rift = nearestRift(sx, sz);
+            player.displayClientMessage(rift == null
+                    ? net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console_far", battery, sy)
+                    : net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console", battery, sy, rift[0], rift[1],
+                            (int) Math.sqrt((rift[0] - sx) * (rift[0] - sx) + (rift[1] - sz) * (rift[1] - sz))), false);
             event.setCanceled(true);
         }
     }
@@ -302,7 +302,7 @@ public class SubmarineInterior {
     }
 
     @SubscribeEvent
-    public static void respawnSansSousMarin(net.neoforged.neoforge.event.entity.living.LivingDeathEvent event) {
+    public static void respawnWithoutSub(net.neoforged.neoforge.event.entity.living.LivingDeathEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.getRespawnDimension() != INTERIOR || player.getRespawnPosition() == null) return;
         int cabin = Math.floorDiv(player.getRespawnPosition().getX() + SPACING / 2, SPACING);
         CompoundTag where = Cabins.get(player.server).subs.get(cabin);

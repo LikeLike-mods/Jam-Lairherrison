@@ -49,8 +49,8 @@ public class MobRenderers<T extends Entity & GeoAnimatable> extends GeoEntityRen
         if (swimPose == SwimPose.PITCH) {
             angle = -Mth.lerp(partialTick, animatable.xRotO, animatable.getXRot());
         } else {
-            double vitesse = Math.hypot(animatable.getX() - animatable.xo, animatable.getZ() - animatable.zo);
-            angle = -(float) Math.min(70.0, vitesse * 600.0);
+            double speed = Math.hypot(animatable.getX() - animatable.xo, animatable.getZ() - animatable.zo);
+            angle = -(float) Math.min(70.0, speed * 600.0);
         }
         float centre = animatable.getBbHeight() / 2.0F;
         poseStack.translate(0.0F, centre, 0.0F);

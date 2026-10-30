@@ -66,13 +66,13 @@ public final class AbyssTerrain {
         float y = FLOOR + 3f * ROLL.GetNoise(x, z) + 1.5f * BUMPS.GetNoise(x, z);
         // Staircase plateaus
         float e = Mth.clamp((PLATEAU.GetNoise(x, z) + 0.15f) * 1.6f, 0f, 0.999f) * 3f;
-        int marche = (int) e;
-        y += (marche + Mth.clamp((e - marche - 0.9f) * 10f, 0f, 1f)) * 22f;
+        int stair = (int) e;
+        y += (stair + Mth.clamp((e - stair - 0.9f) * 10f, 0f, 1f)) * 22f;
         // Peaks
-        float taille = PEAK_SIZE.GetNoise(x, z);
-        if (taille > 0.35f) {
+        float size = PEAK_SIZE.GetNoise(x, z);
+        if (size > 0.35f) {
             float cone = Mth.clamp(1f - (PEAK_DIST.GetNoise(x, z) + 1f) / 0.3f, 0f, 1f);
-            y += (float) Math.pow(cone, 1.6) * (30f + 45f * taille);
+            y += (float) Math.pow(cone, 1.6) * (30f + 45f * size);
         }
         float region = REGION.GetNoise(x, z);
         if (region < -0.3f) y += 5f * Mth.clamp((-region - 0.3f) * 4f, 0f, 1f) * (1f + BUMPS.GetNoise(x * 2, z * 2));

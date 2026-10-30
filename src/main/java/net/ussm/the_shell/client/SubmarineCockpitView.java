@@ -75,8 +75,8 @@ public class SubmarineCockpitView {
         box(vc, pose, -0.21F, -0.77F, 1.03F, 0.21F, -0.65F, 1.035F, 0xFF2BAFD8, plein);
         float t = sub.tickCount + pt;
         for (int i = 0; i < 2; i++) {
-            float larg = 0.06F + 0.24F * (0.5F + 0.5F * (float) Math.sin(t * 0.13 + i * 1.7));
-            box(vc, pose, -6 * P, -24 * P + i * 2 * P, 1.028F, -6 * P + larg, -23 * P + i * 2 * P, 1.03F, 0xFF9FF4FF, plein);
+            float width = 0.06F + 0.24F * (0.5F + 0.5F * (float) Math.sin(t * 0.13 + i * 1.7));
+            box(vc, pose, -6 * P, -24 * P + i * 2 * P, 1.028F, -6 * P + width, -23 * P + i * 2 * P, 1.03F, 0xFF9FF4FF, plein);
         }
         float[] hand = {(float) Math.sin(t * 0.07) * 0.9F + (float) Math.sin(t * 0.31) * 0.15F, 1.2F - 2.4F * sub.getEnergy() / Submarine.MAX_ENERGY};
         float[] places = {-0.45F, 0.45F};
@@ -156,7 +156,7 @@ public class SubmarineCockpitView {
     }
 
     @SubscribeEvent
-    public static void clic(net.neoforged.neoforge.client.event.InputEvent.InteractionKeyMappingTriggered event) {
+    public static void onClick(net.neoforged.neoforge.client.event.InputEvent.InteractionKeyMappingTriggered event) {
         Minecraft mc = Minecraft.getInstance();
         if (!event.isUseItem() || mc.player == null || !(mc.player.getVehicle() instanceof Submarine sub) || !seeButton(mc, sub)) return;
         event.setCanceled(true);

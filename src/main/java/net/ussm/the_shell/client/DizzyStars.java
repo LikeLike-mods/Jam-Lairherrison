@@ -26,10 +26,10 @@ import net.ussm.the_shell.init.ModAttachments;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class DizzyStars {
-    private static final ResourceLocation ETOILE = ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "textures/misc/dizzy_star.png");
+    private static final ResourceLocation STAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "textures/misc/dizzy_star.png");
 
     @SubscribeEvent
-    public static void ecran(RenderGuiEvent.Post event) {
+    public static void drawScreen(RenderGuiEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || !mc.player.getData(ModAttachments.SLIPPED) || !mc.options.getCameraType().isFirstPerson() || mc.options.hideGui) return;
         GuiGraphics g = event.getGuiGraphics();
@@ -38,30 +38,30 @@ public class DizzyStars {
         RenderSystem.enableBlend();
         for (int i = 0; i < 5; i++) {
             double a = t + i * Math.PI * 2 / 5;
-            boolean devant = Math.sin(a) > 0;
-            int taille = devant ? 32 : 16;
-            int x = cx + (int) (Math.cos(a) * g.guiWidth() * 0.13) - taille / 2;
-            int y = cy + (int) (Math.sin(a) * g.guiHeight() * 0.05) - taille / 2;
-            g.blit(ETOILE, x, y, taille, taille, 0, 0, 16, 16, 16, 16);
+            boolean ahead = Math.sin(a) > 0;
+            int size = ahead ? 32 : 16;
+            int x = cx + (int) (Math.cos(a) * g.guiWidth() * 0.13) - size / 2;
+            int y = cy + (int) (Math.sin(a) * g.guiHeight() * 0.05) - size / 2;
+            g.blit(STAR_TEXTURE, x, y, size, size, 0, 0, 16, 16, 16, 16);
         }
         RenderSystem.disableBlend();
     }
 
     @SubscribeEvent
-    public static void remonte(net.neoforged.neoforge.client.event.RenderPlayerEvent.Pre event) {
+    public static void ascend(net.neoforged.neoforge.client.event.RenderPlayerEvent.Pre event) {
         event.getPoseStack().pushPose();
         if (event.getEntity().getData(ModAttachments.SLIPPED)) event.getPoseStack().translate(0.0F, 0.28F, 0.0F);
     }
 
     @SubscribeEvent
-    public static void redescend(net.neoforged.neoforge.client.event.RenderPlayerEvent.Post event) {
+    public static void descend(net.neoforged.neoforge.client.event.RenderPlayerEvent.Post event) {
         event.getPoseStack().popPose();
     }
 
     @SubscribeEvent
-    public static void couches(EntityRenderersEvent.AddLayers event) {
-        for (PlayerSkin.Model modele : event.getSkins()) {
-            if (event.getSkin(modele) instanceof PlayerRenderer renderer) renderer.addLayer(new Couronne(renderer));
+    public static void layers(EntityRenderersEvent.AddLayers event) {
+        for (PlayerSkin.Model model : event.getSkins()) {
+            if (event.getSkin(model) instanceof PlayerRenderer renderer) renderer.addLayer(new Couronne(renderer));
         }
     }
 
@@ -74,34 +74,34 @@ public class DizzyStars {
         public void render(PoseStack pose, MultiBufferSource buffers, int light, AbstractClientPlayer player, float limbSwing, float limbSwingAmount,
                            float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
             if (!player.getData(ModAttachments.SLIPPED)) return;
-            VertexConsumer vc = buffers.getBuffer(RenderType.entityCutoutNoCull(ETOILE));
+            VertexConsumer vc = buffers.getBuffer(RenderType.entityCutoutNoCull(STAR_TEXTURE));
             pose.pushPose();
             getParentModel().head.translateAndRotate(pose);
             pose.translate(0.0F, -0.25F, 0.0F);
-            org.joml.Vector3f tete = pose.last().pose().transformPosition(new org.joml.Vector3f());
+            org.joml.Vector3f head = pose.last().pose().transformPosition(new org.joml.Vector3f());
             pose.popPose();
-            PoseStack monde = new PoseStack();
-            monde.translate(tete.x, tete.y, tete.z);
+            PoseStack world = new PoseStack();
+            world.translate(head.x, head.y, head.z);
             for (int i = 0; i < 5; i++) {
                 double a = ageInTicks * 0.2 + i * Math.PI * 2 / 5;
-                monde.pushPose();
-                monde.translate(Math.cos(a) * 0.42, 0.4 + Math.sin(ageInTicks * 0.3 + i) * 0.03, Math.sin(a) * 0.42);
-                PoseStack.Pose p = monde.last();
+                world.pushPose();
+                world.translate(Math.cos(a) * 0.42, 0.4 + Math.sin(ageInTicks * 0.3 + i) * 0.03, Math.sin(a) * 0.42);
+                PoseStack.Pose p = world.last();
                 float s = 0.11F;
-                carre(vc, p, -s, s, 0, s, -s, 0);
-                carre(vc, p, 0, s, -s, 0, -s, s);
-                monde.popPose();
+                square(vc, p, -s, s, 0, s, -s, 0);
+                square(vc, p, 0, s, -s, 0, -s, s);
+                world.popPose();
             }
         }
 
-        private static void carre(VertexConsumer vc, PoseStack.Pose p, float x0, float y0, float z0, float x1, float y1, float z1) {
-            sommet(vc, p, x0, y1, z0, 0, 1);
-            sommet(vc, p, x1, y1, z1, 1, 1);
-            sommet(vc, p, x1, y0, z1, 1, 0);
-            sommet(vc, p, x0, y0, z0, 0, 0);
+        private static void square(VertexConsumer vc, PoseStack.Pose p, float x0, float y0, float z0, float x1, float y1, float z1) {
+            summit(vc, p, x0, y1, z0, 0, 1);
+            summit(vc, p, x1, y1, z1, 1, 1);
+            summit(vc, p, x1, y0, z1, 1, 0);
+            summit(vc, p, x0, y0, z0, 0, 0);
         }
 
-        private static void sommet(VertexConsumer vc, PoseStack.Pose p, float x, float y, float z, float u, float v) {
+        private static void summit(VertexConsumer vc, PoseStack.Pose p, float x, float y, float z, float u, float v) {
             vc.addVertex(p, x, y, z).setColor(0xFFFFFFFF).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(p, 0, 1, 0);
         }
     }

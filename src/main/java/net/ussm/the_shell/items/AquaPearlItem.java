@@ -23,10 +23,10 @@ public class AquaPearlItem extends EnderpearlItem {
                 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         player.getCooldowns().addCooldown(this, 20);
         if (!level.isClientSide) {
-            ThrownAquaPearl perle = new ThrownAquaPearl(level, player);
-            perle.setItem(stack);
-            perle.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
-            level.addFreshEntity(perle);
+            ThrownAquaPearl pearl = new ThrownAquaPearl(level, player);
+            pearl.setItem(stack);
+            pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+            level.addFreshEntity(pearl);
         }
         player.awardStat(Stats.ITEM_USED.get(this));
         stack.consume(1, player);

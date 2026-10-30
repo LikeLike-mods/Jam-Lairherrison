@@ -53,8 +53,8 @@ public class DivingHud {
         }
         float depth = player.isEyeInFluid(FluidTags.WATER) ? Math.max(0.0F, player.level().getSeaLevel() - (float) player.getEyeY()) : 0.0F;
         if (depth > 0 && player.level().dimension() == net.ussm.the_shell.events.AbyssTravel.ABYSS) depth += MAX_DEPTH;
-        int palier = DeepSeaEvents.pressureLevel(player, player.isInWater());
-        float fill = palier / 5.0F;
+        int stage = DeepSeaEvents.pressureLevel(player, player.isInWater());
+        float fill = stage / 5.0F;
         boolean safe = DeepSeaEvents.hasFullSuit(player) || player.getVehicle() instanceof Submarine;
 
         int x = w - 22;
@@ -64,8 +64,8 @@ public class DivingHud {
         g.fill(x - 2, top - 2, x + 10, bottom + 2, 0xFFC18B47);
         g.fill(x, top, x + 8, bottom, 0xFF0D1114);
         int level = bottom - Math.round((bottom - top) * fill);
-        int color = palier <= 1 ? 0xFF4FD16A : palier == 2 ? 0xFFE3C13B : palier == 3 ? 0xFFE08A2F : 0xFFE0482F;
-        if (!safe && palier >= 3 && (player.tickCount / 5) % 2 == 0) color = 0xFF7A1A12;
+        int color = stage <= 1 ? 0xFF4FD16A : stage == 2 ? 0xFFE3C13B : stage == 3 ? 0xFFE08A2F : 0xFFE0482F;
+        if (!safe && stage >= 3 && (player.tickCount / 5) % 2 == 0) color = 0xFF7A1A12;
         g.fill(x + 1, level, x + 7, bottom, color);
         for (int k = 1; k < 5; k++) {
             int ty = bottom - Math.round((bottom - top) * k / 5.0F);

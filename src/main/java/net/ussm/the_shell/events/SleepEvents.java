@@ -20,35 +20,35 @@ import net.ussm.the_shell.TheShell;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class SleepEvents {
-    public static final Set<ResourceKey<Level>> MEME_MONDE = Set.of(Level.OVERWORLD, AtollTravel.ATOLL, AbyssTravel.ABYSS, SubmarineInterior.INTERIOR);
+    public static final Set<ResourceKey<Level>> SAME_WORLD = Set.of(Level.OVERWORLD, AtollTravel.ATOLL, AbyssTravel.ABYSS, SubmarineInterior.INTERIOR);
 
     @SubscribeEvent
     public static void canSleep(CanPlayerSleepEvent event) {
-        if (event.getProblem() != null || !MEME_MONDE.contains(event.getLevel().dimension())) return;
+        if (event.getProblem() != null || !SAME_WORLD.contains(event.getLevel().dimension())) return;
         if (event.getEntity().server.overworld().isDay()) event.setProblem(Player.BedSleepingProblem.NOT_POSSIBLE_NOW);
     }
 
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
         MinecraftServer server = event.getServer();
-        List<ServerPlayer> joueurs = server.getPlayerList().getPlayers().stream()
-                .filter(p -> !p.isSpectator() && MEME_MONDE.contains(p.level().dimension())).toList();
-        long dorment = joueurs.stream().filter(LivingEntity::isSleeping).count();
-        if (dorment == 0) return;
-        ServerLevel monde = server.overworld();
-        int besoin = Math.max(1, Mth.ceil(joueurs.size() * monde.getGameRules().getInt(GameRules.RULE_PLAYERS_SLEEPING_PERCENTAGE) / 100.0F));
-        if (joueurs.stream().filter(Player::isSleepingLongEnough).count() < besoin) {
-            if (joueurs.size() > 1 && server.getTickCount() % 20 == 0) {
-                Component texte = Component.translatable("sleep.players_sleeping", dorment, besoin);
-                joueurs.forEach(p -> p.displayClientMessage(texte, true));
+        List<ServerPlayer> players = server.getPlayerList().getPlayers().stream()
+                .filter(p -> !p.isSpectator() && SAME_WORLD.contains(p.level().dimension())).toList();
+        long sleeping = players.stream().filter(LivingEntity::isSleeping).count();
+        if (sleeping == 0) return;
+        ServerLevel world = server.overworld();
+        int needed = Math.max(1, Mth.ceil(players.size() * world.getGameRules().getInt(GameRules.RULE_PLAYERS_SLEEPING_PERCENTAGE) / 100.0F));
+        if (players.stream().filter(Player::isSleepingLongEnough).count() < needed) {
+            if (players.size() > 1 && server.getTickCount() % 20 == 0) {
+                Component text = Component.translatable("sleep.players_sleeping", sleeping, needed);
+                players.forEach(p -> p.displayClientMessage(text, true));
             }
             return;
         }
-        if (monde.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT)) {
-            long j = monde.getDayTime() + 24000L;
-            monde.setDayTime(net.neoforged.neoforge.event.EventHooks.onSleepFinished(monde, j - j % 24000L, monde.getDayTime()));
+        if (world.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT)) {
+            long j = world.getDayTime() + 24000L;
+            world.setDayTime(net.neoforged.neoforge.event.EventHooks.onSleepFinished(world, j - j % 24000L, world.getDayTime()));
         }
-        joueurs.stream().filter(LivingEntity::isSleeping).forEach(p -> p.stopSleepInBed(false, false));
-        if (monde.getGameRules().getBoolean(GameRules.RULE_WEATHER_CYCLE) && monde.isRaining()) monde.setWeatherParameters(0, 0, false, false);
+        players.stream().filter(LivingEntity::isSleeping).forEach(p -> p.stopSleepInBed(false, false));
+        if (world.getGameRules().getBoolean(GameRules.RULE_WEATHER_CYCLE) && world.isRaining()) world.setWeatherParameters(0, 0, false, false);
     }
 }

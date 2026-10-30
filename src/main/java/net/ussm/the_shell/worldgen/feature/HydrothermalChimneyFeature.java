@@ -31,16 +31,16 @@ public class HydrothermalChimneyFeature extends Feature<NoneFeatureConfiguration
         for (int dx = -3; dx <= 3; dx++) {
             for (int dz = -3; dz <= 3; dz++) {
                 if (dx * dx + dz * dz > 9 + random.nextInt(3)) continue;
-                BlockPos sol = origin.offset(dx, -1, dz);
-                if (level.getBlockState(sol).isFaceSturdy(level, sol, Direction.UP) && !level.getBlockState(sol).is(Blocks.BEDROCK)) {
-                    level.setBlock(sol, random.nextInt(4) == 0 ? ModBlocks.SULFUR_BLOCK.get().defaultBlockState() : ModBlocks.ABYSSAL_BASALT.get().defaultBlockState(), 2);
+                BlockPos ground = origin.offset(dx, -1, dz);
+                if (level.getBlockState(ground).isFaceSturdy(level, ground, Direction.UP) && !level.getBlockState(ground).is(Blocks.BEDROCK)) {
+                    level.setBlock(ground, random.nextInt(4) == 0 ? ModBlocks.SULFUR_BLOCK.get().defaultBlockState() : ModBlocks.ABYSSAL_BASALT.get().defaultBlockState(), 2);
                 }
             }
         }
 
         column(level, origin, 4 + random.nextInt(7));
-        int petites = random.nextInt(4);
-        for (int i = 0; i < petites; i++) {
+        int small = random.nextInt(4);
+        for (int i = 0; i < small; i++) {
             BlockPos p = origin.offset(random.nextInt(5) - 2, 0, random.nextInt(5) - 2);
             if (!p.equals(origin)) column(level, p, 2 + random.nextInt(3));
         }

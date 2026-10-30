@@ -21,7 +21,7 @@ import org.joml.Vector3f;
 
 public class GrapplingHookItem extends Item {
     private static final double RANGE = 32.0;
-    private static final DustParticleOptions CORDE = new DustParticleOptions(new Vector3f(0.45F, 0.33F, 0.2F), 0.6F);
+    private static final DustParticleOptions ROPE_DUST = new DustParticleOptions(new Vector3f(0.45F, 0.33F, 0.2F), 0.6F);
 
     public GrapplingHookItem(Properties properties) {
         super(properties);
@@ -44,20 +44,20 @@ public class GrapplingHookItem extends Item {
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remaining) {
         BlockPos target = stack.get(ModComponents.GRAPPLE_TARGET.get());
         if (target == null) return;
-        Vec3 depart = entity.position().add(0.0, entity.getBbHeight() * 0.6, 0.0);
-        Vec3 vers = Vec3.atCenterOf(target).subtract(depart);
-        double dist = vers.length();
+        Vec3 start = entity.position().add(0.0, entity.getBbHeight() * 0.6, 0.0);
+        Vec3 towards = Vec3.atCenterOf(target).subtract(start);
+        double dist = towards.length();
         if (dist < 1.6) {
             entity.setDeltaMovement(entity.getDeltaMovement().scale(0.3));
         } else {
-            double vitesse = entity.isInWater() ? 0.7 : 1.0;
-            entity.setDeltaMovement(vers.normalize().scale(Math.min(vitesse, dist * 0.25)));
+            double speed = entity.isInWater() ? 0.7 : 1.0;
+            entity.setDeltaMovement(towards.normalize().scale(Math.min(speed, dist * 0.25)));
         }
         entity.resetFallDistance();
         if (level.isClientSide) {
             for (int i = 1; i < 10; i++) {
-                Vec3 p = depart.add(vers.scale(i / 10.0));
-                level.addParticle(CORDE, p.x, p.y, p.z, 0.0, 0.0, 0.0);
+                Vec3 p = start.add(towards.scale(i / 10.0));
+                level.addParticle(ROPE_DUST, p.x, p.y, p.z, 0.0, 0.0, 0.0);
             }
         }
     }

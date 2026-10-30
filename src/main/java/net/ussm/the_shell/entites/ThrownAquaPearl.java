@@ -14,10 +14,10 @@ public class ThrownAquaPearl extends ThrownEnderpearl {
         super(type, level);
     }
 
-    public ThrownAquaPearl(Level level, LivingEntity lanceur) {
+    public ThrownAquaPearl(Level level, LivingEntity thrower) {
         super(ModEntities.AQUA_PEARL.get(), level);
-        setOwner(lanceur);
-        setPos(lanceur.getX(), lanceur.getEyeY() - 0.1, lanceur.getZ());
+        setOwner(thrower);
+        setPos(thrower.getX(), thrower.getEyeY() - 0.1, thrower.getZ());
     }
 
     @Override
@@ -27,9 +27,9 @@ public class ThrownAquaPearl extends ThrownEnderpearl {
 
     @Override
     public void tick() {
-        Vec3 avant = getDeltaMovement();
-        boolean eau = isInWater();
+        Vec3 velocity = getDeltaMovement();
+        boolean water = isInWater();
         super.tick();
-        if (eau && !isRemoved()) setDeltaMovement(avant.scale(0.99).add(0.0, -getGravity() * 0.5, 0.0));
+        if (water && !isRemoved()) setDeltaMovement(velocity.scale(0.99).add(0.0, -getGravity() * 0.5, 0.0));
     }
 }

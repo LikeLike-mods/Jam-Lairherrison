@@ -27,19 +27,19 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.the_shell.events.TempleQuiz;
 
 public class NotchAltarBlock extends Block {
-    public static final IntegerProperty NIVEAU = IntegerProperty.create("tier", 1, 3);
-    public static final BooleanProperty RESOLU = BooleanProperty.create("solved");
+    public static final IntegerProperty TIER = IntegerProperty.create("tier", 1, 3);
+    public static final BooleanProperty SOLVED = BooleanProperty.create("solved");
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    private static final VoxelShape FORME = Shapes.or(Block.box(0, 0, 0, 16, 2, 16), Block.box(2, 2, 2, 14, 12, 14), Block.box(1, 12, 1, 15, 15, 15));
+    private static final VoxelShape SHAPE = Shapes.or(Block.box(0, 0, 0, 16, 2, 16), Block.box(2, 2, 2, 14, 12, 14), Block.box(1, 12, 1, 15, 15, 15));
 
     public NotchAltarBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(NIVEAU, 1).setValue(RESOLU, false).setValue(FACING, Direction.NORTH));
+        registerDefaultState(stateDefinition.any().setValue(TIER, 1).setValue(SOLVED, false).setValue(FACING, Direction.NORTH));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NIVEAU, RESOLU, FACING);
+        builder.add(TIER, SOLVED, FACING);
     }
 
     @Override
@@ -59,41 +59,41 @@ public class NotchAltarBlock extends Block {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return FORME;
+        return SHAPE;
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (player.isCreative() && player.isShiftKeyDown()) {
-            int niveau = state.getValue(NIVEAU) % 3 + 1;
-            level.setBlock(pos, state.setValue(NIVEAU, niveau).setValue(RESOLU, false), Block.UPDATE_ALL);
-            player.displayClientMessage(Component.translatable("message.the_shell.notch.tier", niveau), true);
+            int altarTier = state.getValue(TIER) % 3 + 1;
+            level.setBlock(pos, state.setValue(TIER, altarTier).setValue(SOLVED, false), Block.UPDATE_ALL);
+            player.displayClientMessage(Component.translatable("message.the_shell.notch.tier", altarTier), true);
             return InteractionResult.SUCCESS;
         }
-        if (!state.getValue(RESOLU) && precedentPasFait((ServerLevel) level, pos, state.getValue(NIVEAU))) {
+        if (!state.getValue(SOLVED) && earlierTierUnsolved((ServerLevel) level, pos, state.getValue(TIER))) {
             player.sendSystemMessage(Component.literal("<Notch> ").append(Component.translatable("message.the_shell.notch.order").withStyle(ChatFormatting.GRAY)));
             return InteractionResult.SUCCESS;
         }
-        if (state.getValue(RESOLU)) {
+        if (state.getValue(SOLVED)) {
             player.sendSystemMessage(Component.literal("<Notch> ").append(Component.translatable("message.the_shell.notch.done").withStyle(ChatFormatting.GRAY)));
         } else {
-            TempleQuiz.poser((ServerPlayer) player, pos, state.getValue(NIVEAU));
+            TempleQuiz.askQuestion((ServerPlayer) player, pos, state.getValue(TIER));
         }
         return InteractionResult.SUCCESS;
     }
 
-    private static boolean precedentPasFait(ServerLevel level, BlockPos pos, int niveau) {
-        if (niveau == 1) return false;
+    private static boolean earlierTierUnsolved(ServerLevel level, BlockPos pos, int altarTier) {
+        if (altarTier == 1) return false;
         for (BlockPos p : BlockPos.betweenClosed(pos.offset(-24, -32, -24), pos.offset(24, 32, 24))) {
             BlockState s = level.getBlockState(p);
-            if (s.getBlock() instanceof NotchAltarBlock && s.getValue(NIVEAU) == niveau - 1 && !s.getValue(RESOLU)) return true;
+            if (s.getBlock() instanceof NotchAltarBlock && s.getValue(TIER) == altarTier - 1 && !s.getValue(SOLVED)) return true;
         }
         return false;
     }
 
-    public static void resolu(ServerLevel level, BlockPos pos) {
+    public static void markSolved(ServerLevel level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        if (state.getBlock() instanceof NotchAltarBlock) level.setBlock(pos, state.setValue(RESOLU, true), Block.UPDATE_ALL);
+        if (state.getBlock() instanceof NotchAltarBlock) level.setBlock(pos, state.setValue(SOLVED, true), Block.UPDATE_ALL);
     }
 }

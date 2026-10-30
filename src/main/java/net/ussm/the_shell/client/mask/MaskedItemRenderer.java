@@ -39,11 +39,11 @@ public class MaskedItemRenderer<T extends Item & GeoAnimatable> extends GeoItemR
     public MaskedItemRenderer(GeoModel<T> model, String... clippedBoneNames) {
         super(model);
         if (clippedBoneNames.length == 0) {
-            throw new IllegalArgumentException("Au moins un nom d'os à découper est requis.");
+            throw new IllegalArgumentException("At least one bone name to cut is required.");
         }
         for (String name : clippedBoneNames) {
             if (name == null || name.isBlank()) {
-                throw new IllegalArgumentException("Les noms d'os à découper ne peuvent pas être vides.");
+                throw new IllegalArgumentException("Bone names to cut can't be empty.");
             }
         }
         this.clippedBoneNames = Set.copyOf(List.of(clippedBoneNames));

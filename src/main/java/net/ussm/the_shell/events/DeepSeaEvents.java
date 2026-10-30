@@ -92,8 +92,8 @@ public class DeepSeaEvents {
         if (on) {
             if (walk != null) walk.addOrUpdateTransientModifier(new AttributeModifier(WALK, 0.6, AttributeModifier.Operation.ADD_VALUE));
             if (speed != null) speed.addOrUpdateTransientModifier(new AttributeModifier(HEAVY, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-            boolean saut = player.tickCount - JUMP_TICK.getOrDefault(player, -100) < 3;
-            if (!player.onGround() && !player.getAbilities().flying && !saut) {
+            boolean leap = player.tickCount - JUMP_TICK.getOrDefault(player, -100) < 3;
+            if (!player.onGround() && !player.getAbilities().flying && !leap) {
                 Vec3 v = player.getDeltaMovement();
                 player.setDeltaMovement(v.x, v.y - 0.05, v.z);
             }

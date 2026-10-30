@@ -115,8 +115,8 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     @Override
     protected void removePassenger(net.minecraft.world.entity.Entity passenger) {
         super.removePassenger(passenger);
-        if (this.level() instanceof net.minecraft.server.level.ServerLevel serveur) {
-            serveur.getChunkSource().broadcast(this, new net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket(this));
+        if (this.level() instanceof net.minecraft.server.level.ServerLevel server) {
+            server.getChunkSource().broadcast(this, new net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket(this));
         }
     }
 
@@ -138,9 +138,9 @@ public class Submarine extends VehicleEntity implements GeoEntity {
 
     @Override
     public Vec3 getDismountLocationForPassenger(net.minecraft.world.entity.LivingEntity passenger) {
-        Vec3 cote = Vec3.directionFromRotation(0.0F, getYRot() + 90.0F).scale(2.2);
-        for (Vec3 essai : new Vec3[]{position().add(cote), position().subtract(cote), position().add(0.0, 2.0, 0.0)}) {
-            if (level().noCollision(passenger, passenger.getDimensions(net.minecraft.world.entity.Pose.STANDING).makeBoundingBox(essai))) return essai;
+        Vec3 side = Vec3.directionFromRotation(0.0F, getYRot() + 90.0F).scale(2.2);
+        for (Vec3 attempt : new Vec3[]{position().add(side), position().subtract(side), position().add(0.0, 2.0, 0.0)}) {
+            if (level().noCollision(passenger, passenger.getDimensions(net.minecraft.world.entity.Pose.STANDING).makeBoundingBox(attempt))) return attempt;
         }
         return super.getDismountLocationForPassenger(passenger);
     }
@@ -225,16 +225,16 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         net.minecraft.world.item.ItemStack kit = player.getItemInHand(hand);
-        int niveau = kitTier(kit);
-        if (niveau > 0) {
+        int altarTier = kitTier(kit);
+        if (altarTier > 0) {
             if (!this.level().isClientSide) {
-                if (niveau == getTier() + 1) {
-                    setTier(niveau);
+                if (altarTier == getTier() + 1) {
+                    setTier(altarTier);
                     kit.consume(1, player);
                     net.ussm.the_shell.events.SubmarineInterior.upgrade(this);
                     this.level().playSound(null, this.blockPosition(), net.minecraft.sounds.SoundEvents.SMITHING_TABLE_USE, net.minecraft.sounds.SoundSource.NEUTRAL, 1.0F, 1.0F);
-                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.upgraded", niveau), true);
-                } else if (niveau > getTier()) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.upgraded", altarTier), true);
+                } else if (altarTier > getTier()) {
                     player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.upgrade_order"), true);
                 }
             }
@@ -272,17 +272,17 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             if (this.isInWater()) {
                 motion = motion.scale(0.9);
                 if (this.getControllingPassenger() instanceof Player driver && getEnergy() > 0) {
-                    boolean libre = this.level().isClientSide && freeGaze;
-                    if (!libre) {
-                        float ecart = Mth.wrapDegrees(driver.getYRot() - this.getYRot());
+                    boolean free = this.level().isClientSide && freeGaze;
+                    if (!free) {
+                        float gap = Mth.wrapDegrees(driver.getYRot() - this.getYRot());
                         if (rattrapage && this.level().isClientSide) {
-                            this.setYRot(this.getYRot() + Mth.clamp(ecart, -9.0F, 9.0F));
-                            if (Math.abs(ecart) < 9.0F) rattrapage = false;
+                            this.setYRot(this.getYRot() + Mth.clamp(gap, -9.0F, 9.0F));
+                            if (Math.abs(gap) < 9.0F) rattrapage = false;
                         } else {
                             this.setYRot(driver.getYRot());
                         }
                     }
-                    Vec3 look = libre || rattrapage ? Vec3.directionFromRotation(0.0F, this.getYRot()) : driver.getLookAngle();
+                    Vec3 look = free || rattrapage ? Vec3.directionFromRotation(0.0F, this.getYRot()) : driver.getLookAngle();
                     Vec3 left = new Vec3(look.z, 0.0, -look.x).normalize();
                     double boost = 1.0 + 0.15 * getTier();
                     motion = motion.add(look.scale(driver.zza * 0.035 * boost)).add(left.scale(driver.xxa * 0.02 * boost));

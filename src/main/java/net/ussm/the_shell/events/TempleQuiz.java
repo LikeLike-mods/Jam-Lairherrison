@@ -22,7 +22,7 @@ import net.ussm.the_shell.blocks.TempleSealBlock;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class TempleQuiz {
-    private static final String[][][] REPONSES = {
+    private static final String[][][] ANSWERS = {
             {
                     {"creeper"}, {"10", "dix", "ten"}, {"pioche", "pickaxe"}, {"lapis", "lapis lazuli"},
                     {"mouton", "sheep"}, {"nether"}, {"lit", "bed"}, {"9", "neuf", "nine"}},
@@ -34,55 +34,55 @@ public class TempleQuiz {
                     {"20", "vingt", "twenty"}, {"319"}, {"2011"}, {"5", "cinq", "five", "v"},
                     {"4", "quatre", "four"}, {"markus", "markus persson"}, {"warden", "gardien"}, {"breeze", "brise"}},
     };
-    private static final Map<UUID, Question> EN_COURS = new HashMap<>();
+    private static final Map<UUID, Question> IN_PROGRESS = new HashMap<>();
 
-    private record Question(BlockPos autel, int niveau, int numero, long fin) {
+    private record Question(BlockPos altar, int altarTier, int number, long end) {
     }
 
-    private static Component notch(Component texte) {
-        return Component.literal("<Notch> ").append(texte);
+    private static Component notch(Component text) {
+        return Component.literal("<Notch> ").append(text);
     }
 
-    public static void poser(ServerPlayer player, BlockPos autel, int niveau) {
-        int numero = player.getRandom().nextInt(REPONSES[niveau - 1].length);
-        EN_COURS.put(player.getUUID(), new Question(autel.immutable(), niveau, numero, player.serverLevel().getGameTime() + 20 * 120));
-        player.sendSystemMessage(notch(Component.translatable("message.the_shell.notch.intro." + niveau)));
-        player.sendSystemMessage(notch(Component.translatable("quiz.the_shell." + niveau + "." + numero).withStyle(ChatFormatting.YELLOW)));
+    public static void askQuestion(ServerPlayer player, BlockPos altar, int altarTier) {
+        int number = player.getRandom().nextInt(ANSWERS[altarTier - 1].length);
+        IN_PROGRESS.put(player.getUUID(), new Question(altar.immutable(), altarTier, number, player.serverLevel().getGameTime() + 20 * 120));
+        player.sendSystemMessage(notch(Component.translatable("message.the_shell.notch.intro." + altarTier)));
+        player.sendSystemMessage(notch(Component.translatable("quiz.the_shell." + altarTier + "." + number).withStyle(ChatFormatting.YELLOW)));
     }
 
-    private static String propre(String s) {
+    private static String normalise(String s) {
         s = Normalizer.normalize(s.toLowerCase(), Normalizer.Form.NFD).replaceAll("\\p{M}", "");
         s = s.replaceAll("[^a-z0-9 ]", " ").replaceAll("\\b(le|la|les|l|un|une|des|du|de|the|a|an)\\b", " ");
         return s.trim().replaceAll(" +", " ");
     }
 
     @SubscribeEvent
-    public static void reponse(ServerChatEvent event) {
+    public static void answer(ServerChatEvent event) {
         ServerPlayer player = event.getPlayer();
-        Question q = EN_COURS.get(player.getUUID());
+        Question q = IN_PROGRESS.get(player.getUUID());
         if (q == null) return;
         ServerLevel level = player.serverLevel();
-        if (level.getGameTime() > q.fin() || player.blockPosition().distSqr(q.autel()) > 32 * 32) {
-            EN_COURS.remove(player.getUUID());
+        if (level.getGameTime() > q.end() || player.blockPosition().distSqr(q.altar()) > 32 * 32) {
+            IN_PROGRESS.remove(player.getUUID());
             return;
         }
         event.setCanceled(true);
-        EN_COURS.remove(player.getUUID());
+        IN_PROGRESS.remove(player.getUUID());
         player.sendSystemMessage(Component.literal("<" + player.getGameProfile().getName() + "> " + event.getRawText()).withStyle(ChatFormatting.GRAY));
-        String dit = propre(event.getRawText());
-        boolean juste = false;
-        for (String bonne : REPONSES[q.niveau() - 1][q.numero()]) juste |= propre(bonne).equals(dit);
-        if (juste) {
-            player.sendSystemMessage(notch(Component.translatable("message.the_shell.notch.correct." + q.niveau()).withStyle(ChatFormatting.GREEN)));
-            level.playSound(null, q.autel(), SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 1.0F, 1.0F);
-            NotchAltarBlock.resolu(level, q.autel());
-            TempleSealBlock.ouvrirNiveau(level, q.autel(), q.niveau());
+        String said = normalise(event.getRawText());
+        boolean answeredRight = false;
+        for (String correct : ANSWERS[q.altarTier() - 1][q.number()]) answeredRight |= normalise(correct).equals(said);
+        if (answeredRight) {
+            player.sendSystemMessage(notch(Component.translatable("message.the_shell.notch.correct." + q.altarTier()).withStyle(ChatFormatting.GREEN)));
+            level.playSound(null, q.altar(), SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 1.0F, 1.0F);
+            NotchAltarBlock.markSolved(level, q.altar());
+            TempleSealBlock.openTier(level, q.altar(), q.altarTier());
         } else {
             player.sendSystemMessage(notch(Component.translatable("message.the_shell.notch.wrong").withStyle(ChatFormatting.RED)));
             level.playSound(null, player.blockPosition(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 1.0F, 0.6F);
-            if (q.niveau() >= 2) player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
-            if (q.niveau() >= 3) player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
-            poser(player, q.autel(), q.niveau());
+            if (q.altarTier() >= 2) player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
+            if (q.altarTier() >= 3) player.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0));
+            askQuestion(player, q.altar(), q.altarTier());
         }
     }
 }

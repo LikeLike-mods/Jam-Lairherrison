@@ -31,7 +31,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class TemplePedestalBlock extends BaseEntityBlock {
     public static final MapCodec<TemplePedestalBlock> CODEC = simpleCodec(TemplePedestalBlock::new);
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-    private static final VoxelShape FORME = Shapes.or(Block.box(2, 0, 2, 14, 3, 14), Block.box(4, 3, 4, 12, 12, 12), Block.box(2, 12, 2, 14, 15, 14));
+    private static final VoxelShape SHAPE = Shapes.or(Block.box(2, 0, 2, 14, 3, 14), Block.box(4, 3, 4, 12, 12, 12), Block.box(2, 12, 2, 14, 15, 14));
 
     public TemplePedestalBlock(Properties properties) {
         super(properties);
@@ -55,7 +55,7 @@ public class TemplePedestalBlock extends BaseEntityBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return FORME;
+        return SHAPE;
     }
 
     @Override
@@ -65,11 +65,11 @@ public class TemplePedestalBlock extends BaseEntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!(level.getBlockEntity(pos) instanceof TemplePedestalBlockEntity socle) || !socle.objet().isEmpty()) {
+        if (!(level.getBlockEntity(pos) instanceof TemplePedestalBlockEntity pedestal) || !pedestal.item().isEmpty()) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
         if (!level.isClientSide) {
-            socle.poser(stack.copyWithCount(1));
+            pedestal.place(stack.copyWithCount(1));
             stack.consume(1, player);
             level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
@@ -78,11 +78,11 @@ public class TemplePedestalBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!(level.getBlockEntity(pos) instanceof TemplePedestalBlockEntity socle) || socle.objet().isEmpty()) return InteractionResult.PASS;
+        if (!(level.getBlockEntity(pos) instanceof TemplePedestalBlockEntity pedestal) || pedestal.item().isEmpty()) return InteractionResult.PASS;
         if (!level.isClientSide) {
-            ItemStack pris = socle.objet().copy();
-            socle.poser(ItemStack.EMPTY);
-            if (!player.getInventory().add(pris)) player.drop(pris, false);
+            ItemStack taken = pedestal.item().copy();
+            pedestal.place(ItemStack.EMPTY);
+            if (!player.getInventory().add(taken)) player.drop(taken, false);
             level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.5F, 1.0F);
             level.setBlock(pos, state.setValue(POWERED, true), Block.UPDATE_ALL);
             level.updateNeighborsAt(pos.below(), this);
@@ -115,7 +115,7 @@ public class TemplePedestalBlock extends BaseEntityBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (!(level.getBlockEntity(pos) instanceof TemplePedestalBlockEntity socle) || socle.objet().isEmpty()) return;
+        if (!(level.getBlockEntity(pos) instanceof TemplePedestalBlockEntity pedestal) || pedestal.item().isEmpty()) return;
         for (int i = 0; i < 2; i++) {
             double a = random.nextDouble() * Math.PI * 2;
             level.addParticle(random.nextInt(3) == 0 ? ParticleTypes.END_ROD : ParticleTypes.WAX_ON,

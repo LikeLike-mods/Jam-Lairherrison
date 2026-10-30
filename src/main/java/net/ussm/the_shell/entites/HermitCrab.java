@@ -46,9 +46,9 @@ public class HermitCrab extends Mobs {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        WaterAvoidingRandomStrollGoal balade = new WaterAvoidingRandomStrollGoal(this, 1.0);
-        balade.setInterval(30);
-        this.goalSelector.addGoal(1, balade);
+        WaterAvoidingRandomStrollGoal strollGoal = new WaterAvoidingRandomStrollGoal(this, 1.0);
+        strollGoal.setInterval(30);
+        this.goalSelector.addGoal(1, strollGoal);
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
     }
@@ -64,8 +64,8 @@ public class HermitCrab extends Mobs {
             Player player = this.level().getNearestPlayer(this, 4.0);
             if (player != null && !player.isSpectator() && !player.isShiftKeyDown()) {
                 double distance = player.distanceTo(this);
-                boolean approche = distance < lastPlayerDistance - 0.03;
-                if (distance < 3.0 && (approche || player.isSprinting())) hideTicks = 40;
+                boolean approaching = distance < lastPlayerDistance - 0.03;
+                if (distance < 3.0 && (approaching || player.isSprinting())) hideTicks = 40;
                 lastPlayerDistance = distance;
             } else {
                 lastPlayerDistance = Double.MAX_VALUE;
