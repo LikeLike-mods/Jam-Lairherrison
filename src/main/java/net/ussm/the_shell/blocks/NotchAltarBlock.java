@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -65,6 +66,10 @@ public class NotchAltarBlock extends Block {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (player.isCreative() && !player.isShiftKeyDown() && player.getMainHandItem().is(Items.STICK)) {
+            showDistances((ServerLevel) level, pos, state.getValue(TIER), player);
+            return InteractionResult.SUCCESS;
+        }
         if (player.isCreative() && player.isShiftKeyDown()) {
             int altarTier = state.getValue(TIER) % 3 + 1;
             level.setBlock(pos, state.setValue(TIER, altarTier).setValue(SOLVED, false), Block.UPDATE_ALL);
@@ -81,6 +86,25 @@ public class NotchAltarBlock extends Block {
             TempleQuiz.askQuestion((ServerPlayer) player, pos, state.getValue(TIER));
         }
         return InteractionResult.SUCCESS;
+    }
+
+    // creative + stick: distances to the other altars and how many seals of this tier are in range
+    private static void showDistances(ServerLevel level, BlockPos pos, int tier, Player player) {
+        int seals = 0;
+        for (BlockPos p : BlockPos.betweenClosed(pos.offset(-48, -48, -48), pos.offset(48, 48, 48))) {
+            BlockState s = level.getBlockState(p);
+            int dx = p.getX() - pos.getX(), dy = p.getY() - pos.getY(), dz = p.getZ() - pos.getZ();
+            if (s.getBlock() instanceof NotchAltarBlock && !p.equals(pos)) {
+                boolean inRange = Math.abs(dx) <= 24 && Math.abs(dz) <= 24 && Math.abs(dy) <= 32;
+                player.sendSystemMessage(Component.translatable("message.the_shell.notch.distance", s.getValue(TIER), dx, dy, dz,
+                        Component.translatable(inRange ? "message.the_shell.notch.in_range" : "message.the_shell.notch.too_far")
+                                .withStyle(inRange ? ChatFormatting.GREEN : ChatFormatting.RED)));
+            } else if (s.getBlock() instanceof TempleSealBlock && s.getValue(TempleSealBlock.TIER) == tier
+                    && Math.abs(dx) <= 24 && Math.abs(dz) <= 24 && dy >= -16 && dy <= 24) {
+                seals++;
+            }
+        }
+        player.sendSystemMessage(Component.translatable("message.the_shell.notch.seals_in_range", tier, seals));
     }
 
     private static boolean earlierTierUnsolved(ServerLevel level, BlockPos pos, int altarTier) {
