@@ -1,0 +1,24 @@
+{
+  "parent": "the_shell:root",
+  "display": {
+    "icon": {
+      "id": "the_shell:abyssal_stone"
+    },
+    "title": {
+      "translate": "advancement.the_shell.abyss.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.abyss.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "entered_shell": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "the_shell:abyss"
+      }
+    }
+  }
+}

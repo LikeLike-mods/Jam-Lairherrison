@@ -1,0 +1,27 @@
+{
+  "parent": "the_shell:abyss",
+  "display": {
+    "icon": {
+      "id": "the_shell:kyber_crystal"
+    },
+    "title": {
+      "translate": "advancement.the_shell.kyber.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.kyber.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "ate_pepper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "item": {
+          "items": "the_shell:kyber_crystal"
+        }
+      }
+    }
+  }
+}

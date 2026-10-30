@@ -1,0 +1,93 @@
+{
+  "parent": "the_shell:abyss",
+  "display": {
+    "icon": {
+      "id": "the_shell:abyss_skull"
+    },
+    "title": {
+      "translate": "advancement.the_shell.abyss_killer.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.abyss_killer.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+
+    "rewards": {
+      "experience": 75
+    }
+  },
+  "criteria": {
+    "gulper_eel": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "the_shell:gulper_eel"
+            }
+          }
+        ]
+      }
+    },
+    "vampire_squid": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "the_shell:vampire_squid"
+            }
+          }
+        ]
+      }
+    },
+    "abyssal_angler": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "the_shell:abyssal_angler"
+            }
+          }
+        ]
+      }
+    },
+    "colossal_squid": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "the_shell:colossal_squid"
+            }
+          }
+        ]
+      }
+    },
+    "giant_isopod": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "the_shell:giant_isopod"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
