@@ -16,7 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import net.ussm.the_shell.blocks.AbyssLightBlock;
+import net.ussm.the_shell.blocks.abyss.AbyssLightBlock;
 import net.ussm.the_shell.init.ModEntities;
 import net.ussm.the_shell.init.ModItems;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -35,7 +35,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     // batterie : un tick de moteur = 1, pleine = 5 minutes a fond
     public static final int MAX_ENERGY = 6000;
     // cote client : ctrl tenu par le pilote (regard libre), puis le sous-marin qui se remet dans l'axe
-    public static boolean regardLibre, rattrapage;
+    public static boolean freeGaze, rattrapage;
     // niveau d'amelioration : 0 de base, 1 fer, 2 diamant, 3 netherite
     private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> TIER =
             net.minecraft.network.syncher.SynchedEntityData.defineId(Submarine.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
@@ -288,7 +288,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
                 if (this.getControllingPassenger() instanceof Player driver && getEnergy() > 0) {
                     // ctrl : le pilote regarde autour, le sous-marin garde son cap et avance tout droit.
                     // en lachant ctrl il se remet doucement dans l'axe du regard
-                    boolean libre = this.level().isClientSide && regardLibre;
+                    boolean libre = this.level().isClientSide && freeGaze;
                     if (!libre) {
                         float ecart = Mth.wrapDegrees(driver.getYRot() - this.getYRot());
                         if (rattrapage && this.level().isClientSide) {

@@ -6,9 +6,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.blocks.MessageBottleBlockEntity;
-import net.ussm.the_shell.blocks.SlidingDoorBlockEntity;
-import net.ussm.the_shell.blocks.StorageBlockEntity;
+import net.ussm.the_shell.blocks.archipelago.MessageBottleBlockEntity;
+import net.ussm.the_shell.blocks.station.SlidingDoorBlockEntity;
+import net.ussm.the_shell.blocks.station.StorageBlockEntity;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, TheShell.MOD_ID);

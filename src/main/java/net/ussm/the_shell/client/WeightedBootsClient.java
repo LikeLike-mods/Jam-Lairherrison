@@ -39,9 +39,9 @@ public class WeightedBootsClient {
     public static void tick(ClientTickEvent.Post event) {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
-        boolean lestees = DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET));
+        boolean weighted = DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET));
         while (DROP_WEIGHT.consumeClick()) {
-            if (lestees && player.isInWater()) PacketDistributor.sendToServer(new DropWeightPayload());
+            if (weighted && player.isInWater()) PacketDistributor.sendToServer(new DropWeightPayload());
         }
     }
 }

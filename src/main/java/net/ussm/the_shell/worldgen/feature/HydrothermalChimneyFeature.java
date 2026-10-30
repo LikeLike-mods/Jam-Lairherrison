@@ -11,7 +11,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Fluids;
-import net.ussm.the_shell.blocks.ChimneyBlock;
+import net.ussm.the_shell.blocks.abyss.ChimneyBlock;
 import net.ussm.the_shell.init.ModBlocks;
 
 public class HydrothermalChimneyFeature extends Feature<NoneFeatureConfiguration> {

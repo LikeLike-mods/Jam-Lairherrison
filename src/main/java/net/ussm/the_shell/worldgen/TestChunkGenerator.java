@@ -104,11 +104,12 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     public static final int SEA = 100;
     public static final int ABYSS = SEA - 64;
+    public static final int SEED = 200;
 
     // Rifts
     public static final int RIFT_DOWN = -118;
-    private static final FastNoiseLite RIFT_LINES = riftNoise(210, 0.004f, FastNoiseLite.FractalType.Ridged);
-    private static final FastNoiseLite RIFT_PIECES = riftNoise(211, 0.004f, FastNoiseLite.FractalType.FBm);
+    private static final FastNoiseLite RIFT_LINES = riftNoise(SEED + 10, 0.004f, FastNoiseLite.FractalType.Ridged);
+    private static final FastNoiseLite RIFT_PIECES = riftNoise(SEED + 11, 0.004f, FastNoiseLite.FractalType.FBm);
 
     private static FastNoiseLite riftNoise(int seed, float freq, FastNoiseLite.FractalType type) {
         FastNoiseLite n = new FastNoiseLite(seed);
@@ -126,7 +127,7 @@ public class TestChunkGenerator extends ChunkGenerator {
     }
 
     public static float getHeight(float posX, float posZ) {
-        net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(200);
+        net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(SEED);
         float h;
 
         noise.SetFrequency(0.0001f);
@@ -141,7 +142,7 @@ public class TestChunkGenerator extends ChunkGenerator {
         if (lines > 10f/12f) lines2 *= 2.5f;
         if (lines > 0.5f) lines2 += 0.5f;
 
-        noise.SetSeed(201);
+        noise.SetSeed(SEED + 1);
         noise.SetFrequency(0.001f);
         noise.SetFractalType(FastNoiseLite.FractalType.FBm);
         noise.SetFractalOctaves(5);
@@ -149,7 +150,7 @@ public class TestChunkGenerator extends ChunkGenerator {
         float islands = noise.GetNoise(posX, posZ);
         islands += 1f; islands *= lines2; islands -= 1f;
 
-        noise.SetSeed(201);
+        noise.SetSeed(SEED + 2);
         noise.SetFrequency(0.01f);
         noise.SetFractalType(FastNoiseLite.FractalType.Ridged);
         noise.SetFractalOctaves(1);
@@ -171,7 +172,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     // To swamp or not to swamp, that is the question
     public static float getSwampiness(float posX, float posZ, float posY) {
-        net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(203);
+        net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(SEED + 3);
         noise.SetFrequency(0.001f);
         noise.SetFractalType(FastNoiseLite.FractalType.FBm);
         noise.SetFractalOctaves(1);
@@ -248,10 +249,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                 else if (swampiness >= 0.5f) {
                     boolean pool = Math.round(h) >= SWAMP_LEVEL && Math.round(n) >= Math.round(h) && Math.round(s) >= Math.round(h)
                             && Math.round(e) >= Math.round(h) && Math.round(w) >= Math.round(h);
-                    if (pool) {
-                        topLand = Blocks.WATER.defaultBlockState();
-                        h -= 1f;
-                    }
+                    if (pool) topLand = Blocks.WATER.defaultBlockState();
                     else topLand = Blocks.MUD.defaultBlockState();
                     top2Land = Blocks.MUD.defaultBlockState();
                 }

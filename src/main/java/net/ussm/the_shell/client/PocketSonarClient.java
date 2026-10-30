@@ -25,7 +25,6 @@ import net.ussm.the_shell.TheShell;
 import java.util.ArrayList;
 import java.util.List;
 
-// ce que montre le sonar de poche : un cadre de couleur autour des minerais et des coffres, visible a travers les murs
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class PocketSonarClient {
     private static final List<int[]> POINTS = new ArrayList<>();
@@ -83,7 +82,6 @@ public class PocketSonarClient {
         buffers.endBatch(Lignes.TYPE);
     }
 
-    // des lignes qui passent par-dessus les blocs (pas de test de profondeur)
     private static class Lignes extends RenderType {
         private Lignes(String name, VertexFormat format, VertexFormat.Mode mode, int size, boolean crumbling, boolean sort, Runnable setup, Runnable clear) {
             super(name, format, mode, size, crumbling, sort, setup, clear);
