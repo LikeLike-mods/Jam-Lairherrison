@@ -138,7 +138,19 @@ public class DeepSeaEvents {
     private static void refillOxygen(Player player, boolean bubbles) {
         int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
         if (oxygen >= net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN) return;
-        if (!player.isEyeInFluid(FluidTags.WATER) || bubbles || player.getVehicle() instanceof Submarine) setOxygen(player, oxygen + 24);
+        // pas a l'air libre : seulement sur une bouche d'aeration ou aux commandes du sous-marin (sinon reservoir, bouteille, bulle d'air)
+        if (bubbles || player.getVehicle() instanceof Submarine) setOxygen(player, oxygen + 24);
+    }
+
+    // le reservoir d'air (dans le sous-marin, ou pose a sa base) : le plein de la combi, et de la bouteille d'oxygene si on l'a en main
+    @SubscribeEvent
+    public static void useTank(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+        if (!(event.getEntity() instanceof ServerPlayer player) || !player.level().getBlockState(event.getPos()).is(ModBlocks.TANK.get())) return;
+        giveOxygen(player, net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN);
+        if (event.getItemStack().is(ModItems.OXYGEN_BOTTLE.get())) event.getItemStack().setDamageValue(0);
+        player.level().playSound(null, event.getPos(), net.minecraft.sounds.SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 0.9F);
+        player.displayClientMessage(Component.translatable("message.the_shell.submarine.oxygen"), true);
+        event.setCanceled(true);
     }
 
     public static void giveOxygen(Player player, int amount) {

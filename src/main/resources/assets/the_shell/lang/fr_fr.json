@@ -300,7 +300,7 @@
   "hud.the_shell.submarine.cabin_button": "Clic droit : descendre dans la cabine",
   "item.the_shell.oxygen_bottle": "Bouteille d'oxygène",
   "item.the_shell.oxygen_bottle.charges": "%s charge(s) d'une minute",
-  "item.the_shell.oxygen_bottle.empty": "Vide : à remplir au réservoir du sous-marin",
+  "item.the_shell.oxygen_bottle.empty": "Vide : à remplir à un réservoir d'air",
   "message.the_shell.submarine.oxygen": "Oxygène rechargé",
   "message.the_shell.submarine.console": "Batterie %s %% · hauteur Y %s · faille la plus proche en %s, %s (%s blocs)",
   "message.the_shell.submarine.console_far": "Batterie %s %% · hauteur Y %s · aucune faille à moins de 600 blocs"

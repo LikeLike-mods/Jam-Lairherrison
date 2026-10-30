@@ -273,13 +273,6 @@ public class SubmarineInterior {
                     : net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console", batterie, sy, faille[0], faille[1],
                             (int) Math.sqrt((faille[0] - sx) * (faille[0] - sx) + (faille[1] - sz) * (faille[1] - sz))), false);
             event.setCanceled(true);
-        } else if (state.is(net.ussm.the_shell.init.ModBlocks.TANK.get())) {
-            // le reservoir d'air : le plein de la combi, et de la bouteille d'oxygene si on l'a en main
-            DeepSeaEvents.giveOxygen(player, net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN);
-            if (event.getItemStack().is(net.ussm.the_shell.init.ModItems.OXYGEN_BOTTLE.get())) event.getItemStack().setDamageValue(0);
-            player.level().playSound(null, event.getPos(), net.minecraft.sounds.SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 0.9F);
-            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.oxygen"), true);
-            event.setCanceled(true);
         }
     }
 

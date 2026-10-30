@@ -300,7 +300,7 @@
   "hud.the_shell.submarine.cabin_button": "Right-click: go down to the cabin",
   "item.the_shell.oxygen_bottle": "Oxygen Bottle",
   "item.the_shell.oxygen_bottle.charges": "%s one-minute charge(s)",
-  "item.the_shell.oxygen_bottle.empty": "Empty: refill it at the submarine tank",
+  "item.the_shell.oxygen_bottle.empty": "Empty: refill it at an air tank",
   "message.the_shell.submarine.oxygen": "Oxygen refilled",
   "message.the_shell.submarine.console": "Battery %s %% · height Y %s · nearest rift at %s, %s (%s blocks)",
   "message.the_shell.submarine.console_far": "Battery %s %% · height Y %s · no rift within 600 blocks"
