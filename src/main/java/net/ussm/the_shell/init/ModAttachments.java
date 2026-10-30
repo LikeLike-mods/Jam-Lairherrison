@@ -27,7 +27,6 @@ public class ModAttachments {
             .copyOnDeath()
             .build());
 
-    // reserve d'oxygene du scaphandre, en ticks
     public static final int MAX_OXYGEN = 4800;
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> OXYGEN =
         ATTACHMENT_TYPES.register("oxygen", () -> AttachmentType.builder(() -> MAX_OXYGEN)
@@ -35,7 +34,6 @@ public class ModAttachments {
             .sync((holder, to) -> holder == to, ByteBufCodecs.VAR_INT)
             .build());
 
-    // deja descendu une fois par le bouton du cockpit : on n'affiche plus l'aide
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> CABIN_BUTTON_USED =
         ATTACHMENT_TYPES.register("cabin_button_used", () -> AttachmentType.builder(() -> false)
             .serialize(Codec.BOOL)
@@ -43,7 +41,6 @@ public class ModAttachments {
             .copyOnDeath()
             .build());
 
-    // allonge par terre apres avoir glisse sur une peau de banane (les autres joueurs doivent le voir)
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> SLIPPED =
         ATTACHMENT_TYPES.register("slipped", () -> AttachmentType.builder(() -> false)
             .sync((holder, to) -> true, ByteBufCodecs.BOOL)

@@ -26,7 +26,6 @@ public class SubmarineRenderer extends GeoEntityRenderer<Submarine> {
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - Mth.rotLerp(partialTick, submarine.yRotO, submarine.getYRot())));
     }
 
-    // aux commandes a la 1re personne on ne dessine pas le sous-marin, c'est SubmarineCockpitView qui fait le cockpit autour de la camera
     @Override
     public void render(Submarine submarine, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
@@ -35,7 +34,6 @@ public class SubmarineRenderer extends GeoEntityRenderer<Submarine> {
 
     }
 
-    // les pieces de chaque amelioration (fer, diamant, netherite) ne se montrent qu'a partir de leur niveau
     @Override
     public void preRender(PoseStack poseStack, Submarine submarine, software.bernie.geckolib.cache.object.BakedGeoModel model, MultiBufferSource bufferSource,
                           com.mojang.blaze3d.vertex.VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {

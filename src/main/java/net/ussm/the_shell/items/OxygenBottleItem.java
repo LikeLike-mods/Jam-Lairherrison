@@ -15,7 +15,6 @@ import net.minecraft.world.level.Level;
 import net.ussm.the_shell.events.DeepSeaEvents;
 import net.ussm.the_shell.init.ModAttachments;
 
-// une bouteille d'oxygen pour la combi : 4 charges d'une minute, on la remplit au reservoir du sous-marin
 public class OxygenBottleItem extends Item {
     private static final int CHARGE = ModAttachments.MAX_OXYGEN / 4;
 
@@ -26,13 +25,11 @@ public class OxygenBottleItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        // vide, ou la combi est deja pleine
         if (stack.getDamageValue() >= stack.getMaxDamage() || player.getData(ModAttachments.OXYGEN) > ModAttachments.MAX_OXYGEN - CHARGE / 4) {
             return InteractionResultHolder.fail(stack);
         }
         if (!level.isClientSide) {
             DeepSeaEvents.giveOxygen(player, CHARGE);
-            // pas hurtAndBreak : une bouteille vide reste dans l'inventaire
             stack.setDamageValue(stack.getDamageValue() + 1);
             level.playSound(null, player.blockPosition(), SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 1.0F, 1.2F);
         }

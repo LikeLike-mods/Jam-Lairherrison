@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-// sonar de poche : un ping qui fait briller les mobs autour a travers les murs, et qui montre les minerais et les coffres pendant 8 secondes
 public class PocketSonarItem extends Item {
 
     public PocketSonarItem(Properties properties) {

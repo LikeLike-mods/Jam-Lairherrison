@@ -9,9 +9,9 @@ import static net.ussm.the_shell.worldgen.TestChunkGenerator.SEED;
 public final class AbyssTerrain {
     public static final int MIN_Y = -64;
     public static final int HEIGHT = 256;
-    public static final int TOP = MIN_Y + HEIGHT - 1;   // 191
-    public static final int FLOOR = 0;                  // fond moyen des plaines
-    public static final int CEILING = 140;              // bas du plafond en moyenne
+    public static final int TOP = MIN_Y + HEIGHT - 1;
+    public static final int FLOOR = 0;
+    public static final int CEILING = 140;
 
     public enum Zone { PLAINS, VENTS, TRENCH, REEF }
 
@@ -48,7 +48,6 @@ public final class AbyssTerrain {
         return n;
     }
 
-    // 0 hors des fosses, 1 au milieu d'une fosse
     public static float trench(int x, int z) {
         float r = (TRENCH.GetNoise(x, z) + 1f) * 0.5f;
         return (float) Mth.smoothstep(Mth.clamp((r - 0.84f) / 0.07f, 0f, 1f));
@@ -76,7 +75,7 @@ public final class AbyssTerrain {
             y += (float) Math.pow(cone, 1.6) * (30f + 45f * taille);
         }
         float region = REGION.GetNoise(x, z);
-        if (region < -0.3f) y += 5f * Mth.clamp((-region - 0.3f) * 4f, 0f, 1f) * (1f + BUMPS.GetNoise(x * 2, z * 2));   // buttes autour des cheminees
+        if (region < -0.3f) y += 5f * Mth.clamp((-region - 0.3f) * 4f, 0f, 1f) * (1f + BUMPS.GetNoise(x * 2, z * 2));
         // Trenches
         y = Mth.lerp(trench(x, z), y, -54f + 2f * BUMPS.GetNoise(x, z));
         return Mth.floor(Math.min(y, CEILING - 25));

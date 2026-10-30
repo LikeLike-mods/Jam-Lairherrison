@@ -43,7 +43,7 @@ public class ConsoleBlock extends DecorBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (state.getValue(POWERED)) return InteractionResult.PASS;   // le sonar recharge
+        if (state.getValue(POWERED)) return InteractionResult.PASS;
         if (!level.isClientSide) {
             level.setBlock(pos, state.setValue(POWERED, true), Block.UPDATE_ALL);
             level.updateNeighborsAt(pos, this);

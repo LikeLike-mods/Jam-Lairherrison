@@ -28,7 +28,6 @@ public class HydrothermalChimneyFeature extends Feature<NoneFeatureConfiguration
             return false;
         }
 
-        // la croute autour du pied
         for (int dx = -3; dx <= 3; dx++) {
             for (int dz = -3; dz <= 3; dz++) {
                 if (dx * dx + dz * dz > 9 + random.nextInt(3)) continue;

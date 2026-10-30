@@ -21,8 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-// bananier (petit tronc, grandes feuilles qui retombent, un regime dessous)
-// et palmier dattier (grand tronc droit, couronne de palmes, des grappes de dattes)
 public class FruitTreeFeature extends Feature<NoneFeatureConfiguration> {
     private final boolean datePalm;
 
@@ -45,8 +43,6 @@ public class FruitTreeFeature extends Feature<NoneFeatureConfiguration> {
         for (int y = 0; y < height; y++) blocks.put(origin.above(y), log);
         BlockPos top = origin.above(height - 1);
 
-        // chaque palme : {pas devant, pas sur le cote, hauteur}. elles montent un peu puis retombent
-        // (jamais plus de 6 blocs du tronc en passant par les feuilles, sinon elles pourrissent)
         int[][] frond = datePalm
                 ? new int[][]{{1, 0, 0}, {2, 0, 0}, {3, 0, 0}, {3, 0, -1}, {4, 0, -1}, {4, 0, -2}, {1, 0, 1}, {1, 0, 2}}
                 : new int[][]{{1, 0, 0}, {1, 0, 1}, {2, 0, 1}, {2, 0, 0}, {3, 0, 0}, {3, 0, -1}};
@@ -65,7 +61,6 @@ public class FruitTreeFeature extends Feature<NoneFeatureConfiguration> {
             if (!level.isStateAtPosition(pos, s -> s.isAir() || s.is(BlockTags.REPLACEABLE_BY_TREES))) return false;
         }
 
-        // distance des feuilles = distance au tronc en passant par l'arbre (sinon elles pourrissent)
         Map<BlockPos, Integer> distance = new HashMap<>();
         ArrayDeque<BlockPos> queue = new ArrayDeque<>();
         blocks.forEach((pos, state) -> {
@@ -89,7 +84,6 @@ public class FruitTreeFeature extends Feature<NoneFeatureConfiguration> {
             this.setBlock(level, pos, state);
         });
 
-        // les fruits pendent juste sous la couronne
         List<Direction> sides = new ArrayList<>(Direction.Plane.HORIZONTAL.stream().toList());
         Collections.shuffle(sides, new java.util.Random(random.nextLong()));
         int fruits = datePalm ? 2 + random.nextInt(2) : 1 + random.nextInt(2);

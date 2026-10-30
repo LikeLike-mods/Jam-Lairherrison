@@ -92,7 +92,6 @@ public class DeepSeaEvents {
         if (on) {
             if (walk != null) walk.addOrUpdateTransientModifier(new AttributeModifier(WALK, 0.6, AttributeModifier.Operation.ADD_VALUE));
             if (speed != null) speed.addOrUpdateTransientModifier(new AttributeModifier(HEAVY, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-            // on coule, sauf juste apres un saut (sinon on ne decolle pas)
             boolean saut = player.tickCount - JUMP_TICK.getOrDefault(player, -100) < 3;
             if (!player.onGround() && !player.getAbilities().flying && !saut) {
                 Vec3 v = player.getDeltaMovement();
@@ -123,7 +122,6 @@ public class DeepSeaEvents {
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
 
         if (head.is(ModItems.DIVING_HELMET.get()) || head.is(ModItems.DIVING_ABYSS_HELMET.get())) {
-            // le casque respire dans la bouteille d'oxygene, quand elle est vide on se noie comme d'habitude
             int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
             if (oxygen > 0) {
                 player.setAirSupply(player.getMaxAirSupply());
@@ -134,16 +132,13 @@ public class DeepSeaEvents {
         }
     }
 
-    // la bouteille se remplit des qu'on a la tete hors de l'eau (surface, station, cabine du sous-marin) ou dans les bulles d'une grille
     private static void refillOxygen(Player player, boolean bubbles) {
         int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
         if (oxygen >= net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN) return;
-        // vite sur une bouche d'aeration ou aux commandes du sous-marin, tout doucement a l'air libre (3 min pour le plein)
         if (bubbles || player.getVehicle() instanceof Submarine) setOxygen(player, oxygen + 24);
         else if (!player.isEyeInFluid(FluidTags.WATER) && player.tickCount % 3 == 0) setOxygen(player, oxygen + 4);
     }
 
-    // le reservoir d'air (dans le sous-marin, ou pose a sa base) : le plein de la combi, et de la bouteille d'oxygene si on l'a en main
     @SubscribeEvent
     public static void useTank(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || !player.level().getBlockState(event.getPos()).is(ModBlocks.TANK.get())) return;
@@ -165,7 +160,6 @@ public class DeepSeaEvents {
         if (old / 40 != oxygen / 40 || oxygen == 0) player.syncData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
     }
 
-    // dans le sous-marin les poissons ne peuvent pas nous toucher
     @SubscribeEvent
     public static void subShield(net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent event) {
         if (event.getEntity().getVehicle() instanceof Submarine && event.getSource().getEntity() != null) event.setCanceled(true);
@@ -179,9 +173,6 @@ public class DeepSeaEvents {
                 && player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.DIVING_BOOTS.get());
     }
 
-    // palier de pression : 0 rien, 1-2 genant, 3 a 5 on se fait broyer de plus en plus fort.
-    // l'atoll va jusqu'au 3 tout au fond, les abysses sont au 4 et au 5 sous y=40.
-    // chaque paire de pieces de scaphandre enleve un palier, le scaphandre complet ou le sous-marin protegent de tout
     public static int pressureLevel(Player player, boolean inWater) {
         if (!inWater || player.isCreative() || player.isSpectator() || player.getVehicle() instanceof Submarine) return 0;
         double y = player.getY();

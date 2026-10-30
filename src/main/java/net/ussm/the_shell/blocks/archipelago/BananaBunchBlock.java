@@ -22,7 +22,6 @@ public class BananaBunchBlock extends HangingFruitBlock {
 
     public BananaBunchBlock(Properties properties) {
         super(properties);
-        // ceux de la generation sont deja murs
         registerDefaultState(stateDefinition.any().setValue(AGE, 3));
     }
 

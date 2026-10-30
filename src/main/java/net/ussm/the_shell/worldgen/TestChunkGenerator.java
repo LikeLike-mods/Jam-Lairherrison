@@ -57,12 +57,10 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     @Override
     public void applyCarvers(WorldGenRegion worldGenRegion, long l, RandomState randomState, BiomeManager biomeManager, StructureManager structureManager, ChunkAccess chunkAccess, GenerationStep.Carving carving) {
-
     }
 
     @Override
     public void buildSurface(WorldGenRegion worldGenRegion, StructureManager structureManager, RandomState randomState, ChunkAccess chunkAccess) {
-
     }
 
     @Override
@@ -298,7 +296,6 @@ public class TestChunkGenerator extends ChunkGenerator {
 
                 // Rifts
                 if (isRift(posX, posZ)) {
-                    // tout au fond de la faille du noir au lieu de la bedrock, on dirait que ca descend a l'infini
                     chunk.setBlockState(pos.set(x, -128, z), ModBlocks.ABYSSAL_VOID.get().defaultBlockState(), false);
                     for (int y2 = -127; y2 <= a; y2++) {
                         chunk.setBlockState(pos.set(x, y2, z), Blocks.WATER.defaultBlockState(), false);

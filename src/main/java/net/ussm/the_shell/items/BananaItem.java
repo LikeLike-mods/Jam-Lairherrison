@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.ussm.the_shell.init.ModBlocks;
 
-// une fois mangee il reste la peau (qu'on peut poser par terre pour faire glisser les autres)
 public class BananaItem extends Item {
     public BananaItem(Properties properties) {
         super(properties);

@@ -42,7 +42,6 @@ public class AbyssSpawner {
         MobCategory category = CATEGORIES[r.nextInt(CATEGORIES.length)];
         MobSpawnSettings.SpawnerData data = level.getBiome(pos).value().getMobSettings().getMobs(category).getRandom(r).orElse(null);
         if (data == null) return;
-        // ceux qui marchent (crabes, isopodes) on les pose au fond
         BlockPos at = category == MobCategory.AXOLOTLS ? floorBelow(level, pos) : pos;
         if (at == null) return;
         int count = data.minCount + r.nextInt(data.maxCount - data.minCount + 1);

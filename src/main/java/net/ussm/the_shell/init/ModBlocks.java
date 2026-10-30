@@ -109,7 +109,6 @@ public class ModBlocks {
     public static final DeferredBlock<Block> SUBMARINE_WINDOW = registerBlock("submarine_window",
             () -> new SubmarineWindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).lightLevel(s -> 5)));
 
-    // les minerais du jeu, version abysses
     public static final DeferredBlock<Block> ABYSSAL_COAL_ORE = registerBlock("abyssal_coal_ore",
             () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COAL_ORE)));
     public static final DeferredBlock<Block> ABYSSAL_IRON_ORE = registerBlock("abyssal_iron_ore",
@@ -278,7 +277,6 @@ public class ModBlocks {
                     .randomTicks()
                     .pushReaction(PushReaction.DESTROY)));
 
-    // bananier
     public static final DeferredBlock<Block> BANANA_STEM = registerBlock("banana_stem",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5f).ignitedByLava().sound(SoundType.BAMBOO_WOOD)));
     public static final DeferredBlock<Block> BANANA_LEAVES = registerBlock("banana_leaves",
@@ -295,7 +293,6 @@ public class ModBlocks {
             () -> new BananaPeelBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instabreak()
                     .sound(SoundType.SLIME_BLOCK).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
-    // bois de palmier dattier
     public static final DeferredBlock<Block> DATE_PALM_PLANKS = registerBlock("date_palm_planks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).mapColor(MapColor.TERRACOTTA_ORANGE)));
     public static final DeferredBlock<StairBlock> DATE_PALM_STAIRS = registerBlock("date_palm_stairs",
@@ -315,7 +312,6 @@ public class ModBlocks {
     public static final DeferredBlock<ButtonBlock> DATE_PALM_BUTTON = registerBlock("date_palm_button",
             () -> new ButtonBlock(ModWoodTypes.DATE_PALM_SET, 30, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_BUTTON)));
 
-    // bois de bananier
     public static final DeferredBlock<Block> BANANA_PLANKS = registerBlock("banana_planks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).mapColor(MapColor.COLOR_YELLOW)));
     public static final DeferredBlock<StairBlock> BANANA_STAIRS = registerBlock("banana_stairs",
@@ -335,7 +331,6 @@ public class ModBlocks {
     public static final DeferredBlock<ButtonBlock> BANANA_BUTTON = registerBlock("banana_button",
             () -> new ButtonBlock(ModWoodTypes.BANANA_SET, 30, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_BUTTON)));
 
-    // le temple de la jungle : autel de Notch (questions), sceau (porte qui s'ouvre), piedestal (la conque)
     public static final DeferredBlock<Block> NOTCH_ALTAR = registerBlock("notch_altar",
             () -> new net.ussm.the_shell.blocks.NotchAltarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).strength(-1.0F, 3600000.0F).noOcclusion()
                     .lightLevel(s -> s.getValue(net.ussm.the_shell.blocks.NotchAltarBlock.RESOLU) ? 13 : 5)));
@@ -344,7 +339,6 @@ public class ModBlocks {
     public static final DeferredBlock<Block> TEMPLE_PEDESTAL = registerBlock("temple_pedestal",
             () -> new net.ussm.the_shell.blocks.TemplePedestalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).noOcclusion()));
 
-    // palmier dattier (ses buches donnent ses propres planches)
     public static final DeferredBlock<Block> DATE_PALM_LOG = registerBlock("date_palm_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).strength(2f, 3f).ignitedByLava().sound(SoundType.WOOD)));
     public static final DeferredBlock<Block> DATE_PALM_LEAVES = registerBlock("date_palm_leaves",
@@ -357,7 +351,6 @@ public class ModBlocks {
             () -> new HangingFruitBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.2f)
                     .sound(SoundType.GRASS).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
-    // tout en haut des abysses a la place de la bedrock : du noir
     public static final DeferredBlock<Block> ABYSSAL_VOID = registerBlock("abyssal_void",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BEDROCK).mapColor(MapColor.COLOR_BLACK)));
 
@@ -403,7 +396,6 @@ public class ModBlocks {
     public static final DeferredBlock<WaterloggedTransparentBlock> RUSTY_METAL_GRATE = registerBlock("rusty_metal_grate",
             () -> new WaterloggedTransparentBlock(seeThrough(metal().sound(SoundType.COPPER_GRATE))));
 
-    // verre blinde : resiste aux explosions comme l'obsidienne
     public static final DeferredBlock<TransparentBlock> REINFORCED_GLASS = registerBlock("reinforced_glass",
             () -> new TransparentBlock(seeThrough(metal()
                     .strength(5f, 1200f)

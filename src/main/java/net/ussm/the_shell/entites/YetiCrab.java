@@ -49,7 +49,6 @@ public class YetiCrab extends PathfinderMob implements GeoEntity {
         return level.isUnobstructed(this);
     }
 
-    // il vit au fond, il ne se noie pas
     @Override
     public boolean canDrownInFluidType(net.neoforged.neoforge.fluids.FluidType type) {
         return false;

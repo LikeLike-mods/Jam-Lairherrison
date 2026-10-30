@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.ussm.the_shell.entites.ThrownAquaPearl;
 
-// comme une perle d'ender, mais elle lance la version qui file sous l'eau
 public class AquaPearlItem extends EnderpearlItem {
     public AquaPearlItem(Properties properties) {
         super(properties);

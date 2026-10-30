@@ -19,8 +19,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-// le sceau du temple : une porte indestructible. elle disparait quand l'autel de Notch du meme niveau est resolu,
-// ou quand elle recoit du courant (pour les salles d'enigmes de redstone). niveau 0 = seulement la redstone
 public class TempleSealBlock extends Block {
     public static final IntegerProperty NIVEAU = IntegerProperty.create("tier", 0, 3);
 
@@ -34,7 +32,6 @@ public class TempleSealBlock extends Block {
         builder.add(NIVEAU);
     }
 
-    // en creatif, accroupi + clic droit : on change le niveau du sceau
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!player.isCreative() || !player.isShiftKeyDown()) return InteractionResult.PASS;
@@ -51,7 +48,6 @@ public class TempleSealBlock extends Block {
         if (level instanceof ServerLevel serveur && level.hasNeighborSignal(pos)) ouvrir(serveur, pos);
     }
 
-    // toute la porte (les sceaux du meme niveau colles les uns aux autres) disparait d'un coup
     public static void ouvrir(ServerLevel level, BlockPos depart) {
         int niveau = level.getBlockState(depart).getValue(NIVEAU);
         Set<BlockPos> vus = new HashSet<>();
@@ -76,7 +72,6 @@ public class TempleSealBlock extends Block {
         level.playSound(null, depart, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, 1.0F, 0.6F);
     }
 
-    // l'autel d'un niveau est resolu : les sceaux de ce niveau autour s'ouvrent
     public static void ouvrirNiveau(ServerLevel level, BlockPos autel, int niveau) {
         for (BlockPos p : BlockPos.betweenClosed(autel.offset(-24, -16, -24), autel.offset(24, 24, 24))) {
             BlockState s = level.getBlockState(p);

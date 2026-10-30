@@ -45,7 +45,7 @@ public class SlidingDoorBlock extends Block implements EntityBlock, SimpleWaterl
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape SHAPE_NS = Block.box(0, 0, 7, 16, 16, 9);
     private static final VoxelShape SHAPE_EW = Block.box(7, 0, 0, 9, 16, 16);
-    private static final int USE_COOLDOWN = 12;   // le temps de l'animation
+    private static final int USE_COOLDOWN = 12;
     private final boolean broken;
 
     public SlidingDoorBlock(Properties properties, boolean broken) {

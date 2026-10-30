@@ -35,10 +35,8 @@ public class SubmarineItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        // pas de sous-marin dans un sous-marin dans un sous-marin...
         if (level.dimension() == SubmarineInterior.INTERIOR) {
             if (!level.isClientSide) player.displayClientMessage(Component.translatable("message.the_shell.submarine.no_room"), true);
-            // mais on a quand meme essaye : succes cache
             if (player instanceof ServerPlayer joueur) {
                 AdvancementHolder succes = joueur.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath("the_shell", "inception"));
                 if (succes != null) joueur.getAdvancements().award(succes, "inception");
@@ -51,7 +49,6 @@ public class SubmarineItem extends Item {
         Submarine submarine = new Submarine(level, pos.x, pos.y, pos.z, player.getYRot());
         if (!level.noCollision(submarine, submarine.getBoundingBox())) return InteractionResultHolder.fail(stack);
         if (!level.isClientSide) {
-            // un sous-marin deja casse une fois : il revient avec ses ameliorations, sa batterie et sa cabine
             CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
             if (tag.contains("Tier")) submarine.setTier(tag.getInt("Tier"));
             if (tag.contains("Energy")) submarine.setEnergy(tag.getInt("Energy"));

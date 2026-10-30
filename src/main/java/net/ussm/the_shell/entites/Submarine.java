@@ -32,11 +32,8 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     private static final RawAnimation PROPELLER = RawAnimation.begin().thenLoop("move.propeller");
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private int interiorId = -1;
-    // batterie : un tick de moteur = 1, pleine = 5 minutes a fond
     public static final int MAX_ENERGY = 6000;
-    // cote client : ctrl tenu par le pilote (regard libre), puis le sous-marin qui se remet dans l'axe
     public static boolean freeGaze, rattrapage;
-    // niveau d'amelioration : 0 de base, 1 fer, 2 diamant, 3 netherite
     private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> TIER =
             net.minecraft.network.syncher.SynchedEntityData.defineId(Submarine.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
     private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> ENERGY =
@@ -86,7 +83,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.entityData.set(ENERGY, Math.max(0, Math.min(MAX_ENERGY, energy)));
     }
 
-    // ce que vaut chaque carburant : le charbon et la redstone depannent, le kyber des abysses recharge a fond
     public static int fuelValue(net.minecraft.world.item.ItemStack stack) {
         if (stack.is(net.minecraft.world.item.Items.COAL) || stack.is(net.minecraft.world.item.Items.CHARCOAL)) return 150;
         if (stack.is(net.minecraft.world.item.Items.REDSTONE)) return 200;
@@ -103,7 +99,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.interiorId = id;
     }
 
-    // la position qu'envoie le serveur, rejointe en douceur dans tick()
     private double lerpX, lerpY, lerpZ;
     private float lerpYRot;
     private int lerpSteps;
@@ -117,7 +112,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         lerpSteps = Math.max(steps, 6);
     }
 
-    // quand le pilote sort, le serveur renvoie tout de suite la vraie position (sinon elle arrive une seconde apres et le sous-marin saute)
     @Override
     protected void removePassenger(net.minecraft.world.entity.Entity passenger) {
         super.removePassenger(passenger);
@@ -126,27 +120,22 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         }
     }
 
-    // vraiment detruit (pas juste decharge avec son chunk) : on le note pour sa cabine (son lit ne fait plus reapparaitre)
     @Override
     public void remove(net.minecraft.world.entity.Entity.RemovalReason reason) {
         super.remove(reason);
         if (reason.shouldDestroy()) net.ussm.the_shell.events.SubmarineInterior.lost(this);
     }
 
-    // pas pousse par les explosions non plus
     @Override
     public boolean ignoreExplosion(net.minecraft.world.level.Explosion explosion) {
         return true;
     }
 
-    // le modele (bulle, helice, ailerons) depasse de la hitbox : sans ca le jeu croit qu'il est hors de l'ecran
-    // quand on est colle dessus, et il disparait
     @Override
     public net.minecraft.world.phys.AABB getBoundingBoxForCulling() {
         return getBoundingBox().inflate(1.5, 0.8, 1.5);
     }
 
-    // en sortant on ressort sur le cote (pas dans la bulle de verre), sinon par-dessus
     @Override
     public Vec3 getDismountLocationForPassenger(net.minecraft.world.entity.LivingEntity passenger) {
         Vec3 cote = Vec3.directionFromRotation(0.0F, getYRot() + 90.0F).scale(2.2);
@@ -156,13 +145,10 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         return super.getDismountLocationForPassenger(passenger);
     }
 
-    // on ne le casse qu'accroupi : sinon un clic rate en minant a cote (ou en tapant un poisson) le fait disparaitre, d'un coup en creatif
     @Override
     public boolean hurt(net.minecraft.world.damagesource.DamageSource source, float amount) {
-        // les explosions ne lui font rien, meme declenchees par un joueur accroupi (cristal de l'end, tnt...)
         if (source.is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION)) return false;
         if (!(source.getEntity() instanceof Player player) || !player.isShiftKeyDown()) return false;
-        // en creatif le jeu le supprime sans rien lacher : on veut quand meme l'objet, sinon on perd la cabine
         if (player.getAbilities().instabuild && !this.level().isClientSide && !this.isRemoved()) {
             destroy(source);
             return true;
@@ -170,7 +156,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         return super.hurt(source, amount);
     }
 
-    // casse : l'objet garde les ameliorations, la batterie et la cabine (on la retrouve en le reposant)
     @Override
     protected void destroy(net.minecraft.world.damagesource.DamageSource source) {
         this.kill();
@@ -213,7 +198,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     }
 
     @Override
-    // quand quelqu'un est dedans on ne peut plus viser le sous-marin : sinon le pilote tape dedans au lieu de miner et ca le fait sortir
     public boolean isPickable() {
         return !this.isRemoved() && !this.isVehicle();
     }
@@ -235,11 +219,9 @@ public class Submarine extends VehicleEntity implements GeoEntity {
 
     @Override
     protected Vec3 getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
-        // assis dans la bulle (jambes cachees dans la coque, tete sous le verre), et ca tourne avec le sous-marin
         return new Vec3(0.0, 0.45, 0.31).yRot((float) Math.toRadians(-this.getYRot()));
     }
 
-    // clic droit : aux commandes, le bouton du tableau de bord mene a la cabine
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         net.minecraft.world.item.ItemStack kit = player.getItemInHand(hand);
@@ -258,7 +240,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
-        // avec du carburant en main on recharge la batterie au lieu d'entrer
         net.minecraft.world.item.ItemStack stack = player.getItemInHand(hand);
         int fuel = fuelValue(stack);
         if (fuel > 0) {
@@ -270,8 +251,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
-        // clic droit : direct aux commandes (avec shift on s'assoit quand on le lache, sinon le jeu nous refait descendre).
-        // si quelqu'un pilote deja on descend dans la cabine
         if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
             if (this.isVehicle()) net.ussm.the_shell.events.SubmarineInterior.enter(serverPlayer, this);
             else if (player.isSecondaryUseActive()) net.ussm.the_shell.events.SubmarineInterior.seatLater(serverPlayer, this);
@@ -293,8 +272,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             if (this.isInWater()) {
                 motion = motion.scale(0.9);
                 if (this.getControllingPassenger() instanceof Player driver && getEnergy() > 0) {
-                    // ctrl : le pilote regarde autour, le sous-marin garde son cap et avance tout droit.
-                    // en lachant ctrl il se remet doucement dans l'axe du regard
                     boolean libre = this.level().isClientSide && freeGaze;
                     if (!libre) {
                         float ecart = Mth.wrapDegrees(driver.getYRot() - this.getYRot());
@@ -307,7 +284,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
                     }
                     Vec3 look = libre || rattrapage ? Vec3.directionFromRotation(0.0F, this.getYRot()) : driver.getLookAngle();
                     Vec3 left = new Vec3(look.z, 0.0, -look.x).normalize();
-                    double boost = 1.0 + 0.15 * getTier();   // chaque amelioration le rend un peu plus rapide
+                    double boost = 1.0 + 0.15 * getTier();
                     motion = motion.add(look.scale(driver.zza * 0.035 * boost)).add(left.scale(driver.xxa * 0.02 * boost));
                 }
             } else {
@@ -318,7 +295,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             lerpSteps = 0;
         } else {
             this.setDeltaMovement(Vec3.ZERO);
-            // cote client : on glisse vers la position du serveur au lieu d'y sauter d'un coup (comme les bateaux)
             if (this.level().isClientSide && lerpSteps > 0) {
                 this.setPos(getX() + (lerpX - getX()) / lerpSteps, getY() + (lerpY - getY()) / lerpSteps, getZ() + (lerpZ - getZ()) / lerpSteps);
                 this.setYRot(this.getYRot() + Mth.wrapDegrees(lerpYRot - this.getYRot()) / lerpSteps);
@@ -335,7 +311,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             for (Entity passenger : this.getPassengers()) {
                 passenger.setAirSupply(passenger.getMaxAirSupply());
             }
-            // le moteur use la batterie, et a plat le sous-marin ne repart plus
             if (this.getControllingPassenger() instanceof Player driver && (driver.zza != 0 || driver.xxa != 0) && getEnergy() > 0) {
                 setEnergy(getEnergy() - 1);
                 if (getEnergy() == 0) driver.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.empty"), true);

@@ -19,17 +19,14 @@ public class ModComponents {
         COMPONENTS.registerComponentType("active",
             builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
-    // hache au kyber : abat tout l'arbre (true) ou coupe un bloc a la fois
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> FELL_TREE =
         COMPONENTS.registerComponentType("fell_tree",
             builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
-    // bottes de scaphandre lestees ou pas
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WEIGHTED =
         COMPONENTS.registerComponentType("weighted",
             builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
-    // le bloc ou le grappin s'est accroche
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<net.minecraft.core.BlockPos>> GRAPPLE_TARGET =
         COMPONENTS.registerComponentType("grapple_target",
             builder -> builder.networkSynchronized(net.minecraft.core.BlockPos.STREAM_CODEC));

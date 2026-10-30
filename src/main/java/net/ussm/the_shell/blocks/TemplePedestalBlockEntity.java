@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.ussm.the_shell.init.ModBlockEntities;
 
-// ce qui est pose sur le piedestal (garde dans le fichier du temple quand on l'exporte)
 public class TemplePedestalBlockEntity extends BlockEntity {
     private ItemStack objet = ItemStack.EMPTY;
 
@@ -44,7 +43,6 @@ public class TemplePedestalBlockEntity extends BlockEntity {
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        // jamais vide : un paquet vide est ignore par le client, qui garderait l'objet affiche
         CompoundTag tag = saveWithoutMetadata(registries);
         tag.putBoolean("Maj", true);
         return tag;

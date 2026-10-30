@@ -120,7 +120,6 @@ public class AbyssChunkGenerator extends ChunkGenerator {
     public void buildSurface(WorldGenRegion region, StructureManager structures, RandomState random, ChunkAccess chunk) {
     }
 
-    // comme dans l'atoll : les mobs des biomes apparaissent des la creation du chunk
     @Override
     public void spawnOriginalMobs(WorldGenRegion region) {
         ChunkPos chunkPos = region.getCenter();

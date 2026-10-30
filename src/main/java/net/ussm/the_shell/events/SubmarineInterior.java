@@ -30,8 +30,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-// l'interieur des sous-marins : une dimension vide ou chaque sous-marin a sa cabine, une tous les 64 blocs.
-// clic droit sur le sous-marin pour entrer, la trappe dans le sol ressort a cote, l'echelle du fond monte aux commandes
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class SubmarineInterior {
     public static final ResourceKey<Level> INTERIOR = ResourceKey.create(Registries.DIMENSION, id("submarine_interior"));
@@ -39,22 +37,18 @@ public class SubmarineInterior {
     private static final ResourceLocation CABIN = id("submarine/interior");
     private static final int SPACING = 128;
     private static final int BOTTOM = 64;
-    // reperes dans la cabine depuis son coin : on arrive au milieu, sous 1.5 on est tombe par la trappe, au-dessus de 8.5 on a monte l'echelle
-    // (la coque est decalee de 3 dans le fichier : tout autour il y a de l'eau avec des poissons, puis du noir)
     private static final Vec3 ARRIVAL = new Vec3(7.5, 6.0, 12.5);
     private static final double HATCH = 4.5;
     private static final double ROOF = 11.5;
     private static final Map<UUID, Pending> PENDING = new HashMap<>();
     private static final Map<UUID, UUID> TO_CABIN = new HashMap<>();
     private static final Map<UUID, UUID> SEAT_LATER = new HashMap<>();
-    // ou se collent les pieces ajoutees par les ameliorations (depuis le coin de la cabine)
     private static final BlockPos[] EXTENSIONS = {new BlockPos(11, 5, 4), new BlockPos(11, 5, 12), new BlockPos(-6, 5, 12)};
 
     public static void seatLater(ServerPlayer player, Submarine submarine) {
         SEAT_LATER.put(player.getUUID(), submarine.getUUID());
     }
 
-    // une amelioration ajoute sa piece tout de suite si la cabine existe deja (sinon elle viendra a sa construction)
     public static void upgrade(Submarine submarine) {
         if (!(submarine.level() instanceof ServerLevel level) || submarine.getInteriorId() < 0) return;
         ServerLevel inside = level.getServer().getLevel(INTERIOR);
@@ -70,11 +64,9 @@ public class SubmarineInterior {
                 .ifPresent(t -> t.placeInWorld(inside, at, at, sec(), inside.random, Block.UPDATE_CLIENTS));
     }
 
-    // des poissons qui nagent dans l'eau recopiee, selon ou est le sous-marin (jusqu'a 7, un de plus toutes les 2 secondes)
     private static void fishes(ServerLevel inside, int cabin, CompoundTag where) {
         BlockPos c = corner(cabin);
         net.minecraft.world.phys.AABB zone = new net.minecraft.world.phys.AABB(c.getX() - 13, c.getY() - 10, c.getZ() - 13, c.getX() + 28, c.getY() + 25, c.getZ() + 34);
-        // ceux qui s'eloignent des hublots disparaissent, sinon ils partent dans le paysage copie, on en refait et ils s'entassent
         net.minecraft.world.phys.AABB tout = new net.minecraft.world.phys.AABB(c.getX() - 48, c.getY() - 20, c.getZ() - 44, c.getX() + 56, c.getY() + 34, c.getZ() + 52);
         java.util.List<net.minecraft.world.entity.Mob> poissons = inside.getEntitiesOfClass(net.minecraft.world.entity.Mob.class, tout,
                 m -> !m.hasCustomName() && (m instanceof net.minecraft.world.entity.animal.WaterAnimal || m.getType() == net.ussm.the_shell.init.ModEntities.ABYSSAL_ANGLER.get()));
@@ -83,7 +75,6 @@ public class SubmarineInterior {
             if (zone.contains(m.position()) && restants < 7) restants++;
             else m.discard();
         }
-        // et les objets tombes dans le paysage copie (pas ceux poses dans les pieces de la cabine)
         for (net.minecraft.world.entity.item.ItemEntity item : inside.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, tout)) {
             BlockPos ip = item.blockPosition().subtract(c);
             boolean dedans = false;
@@ -112,11 +103,8 @@ public class SubmarineInterior {
         }
     }
 
-    // par les hublots on voit le vrai dehors : on recopie autour de la cabine les blocs qui entourent le sous-marin,
-    // tournes dans le meme sens que lui (son avant = l'avant de la cabine). des barrieres tout autour pour que l'eau reste en place
     private static final int[][] DANS_LA_CABINE = {{3, 3, 3, 11, 14, 19}, {11, 5, 4, 19, 10, 10}, {11, 5, 12, 19, 10, 18}, {-6, 5, 12, 3, 10, 20}};
 
-    // tout le volume est refait en 8 passes (une tranche sur 8 a chaque fois) pour ne pas faire ramer
     private static void mirror(ServerLevel inside, int cabin, CompoundTag where, int tier, int passe) {
         ServerLevel world = inside.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(where.getString("Dim"))));
         if (world == null) return;
@@ -134,15 +122,12 @@ public class SubmarineInterior {
             default -> versCabine;
         };
         BlockPos c = corner(cabin);
-        // la cabine est plus grosse que la coque : le terrain proche du vrai sous-marin tomberait contre les vitres.
-        // on garde une bulle de 3 blocs d'eau (ou d'air) autour des pieces, le reste est copie tel quel
         net.minecraft.world.level.block.state.BlockState vide = world.getFluidState(sub).is(net.minecraft.tags.FluidTags.WATER)
                 ? net.minecraft.world.level.block.Blocks.WATER.defaultBlockState() : net.minecraft.world.level.block.Blocks.AIR.defaultBlockState();
         for (int lx = -40; lx <= 40; lx++) {
             if (Math.floorMod(lx, 8) != passe) continue;
             for (int ly = -16; ly <= 24; ly++) {
                 for (int lz = -36; lz <= 37; lz++) {
-                    // le bas du vrai sous-marin = le sol de la cabine : le fond reste sous les pieces au lieu d'arriver aux hublots
                     int tx = 7 + lx, ty = 3 + ly, tz = 11 + lz;
                     int proche = 99;
                     for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
@@ -156,14 +141,12 @@ public class SubmarineInterior {
                             : world.getBlockState(sub.offset(new BlockPos(lx, ly, lz).rotate(versMonde))).rotate(versCabine);
                     if (!bord && proche <= 3 && !st.isAir() && st.getFluidState().isEmpty()) st = vide;
                     BlockPos target = c.offset(tx, ty, tz);
-                    // pas de mises a jour des voisins : sinon un cornichon de mer (ou une algue) pose avant son support casse et lache son objet
                     if (inside.getBlockState(target) != st) inside.setBlock(target, st, Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_SUPPRESS_DROPS);
                 }
             }
         }
     }
 
-    // les hublots montrent la mer qu'il y a vraiment autour du sous-marin : claire pres de la surface, sombre au fond, noire dans les abysses
     private static void updateWindows(ServerLevel inside, int cabin, CompoundTag where) {
         String dim = where.getString("Dim");
         int zone = dim.equals(AbyssTravel.ABYSS.location().toString()) ? 2
@@ -184,12 +167,10 @@ public class SubmarineInterior {
         return ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, path);
     }
 
-    // on pose la cabine et ses pieces sans les mouiller (sinon l'eau d'avant reste dans les lampes, les escaliers...)
     private static StructurePlaceSettings sec() {
         return new StructurePlaceSettings().setLiquidSettings(net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings.IGNORE_WATERLOGGING);
     }
 
-    // et on seche ce qui a deja ete mouille dans les cabines faites avant
     private static void secher(ServerLevel inside, int cabin, int tier) {
         BlockPos c = corner(cabin);
         for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
@@ -221,7 +202,6 @@ public class SubmarineInterior {
         if (cabins.built.add(cabin)) {
             cabins.extendedTo.remove(cabin);
             cabins.setDirty();
-            // les anciennes cabines avaient de l'eau et des poissons autour : on enleve les poissons
             inside.getEntitiesOfClass(net.minecraft.world.entity.animal.WaterAnimal.class, new net.minecraft.world.phys.AABB(corner.offset(-8, -2, -2).getCenter(), corner.offset(24, 20, 26).getCenter()))
                     .forEach(net.minecraft.world.entity.Entity::discard);
             inside.getStructureManager().get(CABIN).ifPresent(t -> t.placeInWorld(inside, corner, corner, sec(), inside.random, Block.UPDATE_CLIENTS));
@@ -233,7 +213,6 @@ public class SubmarineInterior {
         }
         cabins.setExtended(cabin, submarine.getTier());
         secher(inside, cabin, submarine.getTier());
-        // les anciennes cabines avaient des hublots qui donnaient sur les pieces d'amelioration : on les bouche
         for (BlockPos h : new BlockPos[]{new BlockPos(11, 7, 7), new BlockPos(11, 7, 15), new BlockPos(3, 7, 15)}) {
             if (inside.getBlockState(corner.offset(h)).is(net.ussm.the_shell.init.ModBlocks.REINFORCED_GLASS.get())) {
                 inside.setBlock(corner.offset(h), net.ussm.the_shell.init.ModBlocks.METAL_PLATING.get().defaultBlockState(), Block.UPDATE_CLIENTS);
@@ -244,7 +223,6 @@ public class SubmarineInterior {
         player.changeDimension(new DimensionTransition(inside, Vec3.atLowerCornerOf(corner).add(ARRIVAL), Vec3.ZERO, 180.0F, 0.0F, DimensionTransition.DO_NOTHING));
     }
 
-    // carburant mis dans les moteurs de la cabine : le sous-marin le prend a son prochain passage
     public static int takeFuel(Submarine submarine) {
         if (!(submarine.level() instanceof ServerLevel level)) return 0;
         CompoundTag where = Cabins.get(level.getServer()).subs.get(submarine.getInteriorId());
@@ -264,7 +242,6 @@ public class SubmarineInterior {
         if (where == null) return;
         int energy = where.getInt("Energy") + where.getInt("Fuel");
         if (state.is(net.ussm.the_shell.init.ModBlocks.MACHINE.get())) {
-            // on recharge la batterie en mettant du carburant dans les moteurs
             int fuel = Submarine.fuelValue(event.getItemStack());
             if (fuel <= 0) return;
             where.putInt("Fuel", where.getInt("Fuel") + fuel);
@@ -274,7 +251,6 @@ public class SubmarineInterior {
             player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", Math.min(100, (energy + fuel) * 100 / Submarine.MAX_ENERGY)), true);
             event.setCanceled(true);
         } else if (state.is(net.ussm.the_shell.init.ModBlocks.CONTROL_CONSOLE.get())) {
-            // la console : batterie, hauteur du sous-marin et la faille la plus proche
             int sx = (int) Math.floor(where.getDouble("X")), sy = (int) Math.floor(where.getDouble("Y")), sz = (int) Math.floor(where.getDouble("Z"));
             int batterie = Math.min(100, energy * 100 / Submarine.MAX_ENERGY);
             int[] faille = nearestRift(sx, sz);
@@ -286,7 +262,6 @@ public class SubmarineInterior {
         }
     }
 
-    // on balaie en carres de plus en plus grands (pas de 8 blocs) jusqu'a 600 blocs
     public static int[] nearestRift(int x, int z) {
         for (int r = 0; r <= 600; r += 8) {
             for (int dx = -r; dx <= r; dx += 8) {
@@ -299,7 +274,6 @@ public class SubmarineInterior {
         return null;
     }
 
-    // sous-marin casse : sa cabine attend dans l'objet
     public static void store(Submarine submarine) {
         if (!(submarine.level() instanceof ServerLevel level) || submarine.getInteriorId() < 0) return;
         Cabins cabins = Cabins.get(level.getServer());
@@ -308,7 +282,6 @@ public class SubmarineInterior {
         cabins.setDirty();
     }
 
-    // on le repose : il reprend sa cabine, sauf si elle est deja reprise (objet copie en creatif) et la il en aura une neuve
     public static boolean claim(ServerLevel level, int cabin) {
         Cabins cabins = Cabins.get(level.getServer());
         CompoundTag where = cabins.subs.get(cabin);
@@ -319,7 +292,6 @@ public class SubmarineInterior {
         return true;
     }
 
-    // le sous-marin n'existe plus (casse, tue, tombe dans le vide...) : sa cabine n'a plus de sous-marin
     public static void lost(Submarine submarine) {
         if (!(submarine.level() instanceof ServerLevel level) || submarine.getInteriorId() < 0) return;
         Cabins cabins = Cabins.get(level.getServer());
@@ -329,7 +301,6 @@ public class SubmarineInterior {
         cabins.setDirty();
     }
 
-    // mort avec son lit dans une cabine dont le sous-marin n'existe plus (ou est range dans un objet) : on reapparait au spawn
     @SubscribeEvent
     public static void respawnSansSousMarin(net.neoforged.neoforge.event.entity.living.LivingDeathEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.getRespawnDimension() != INTERIOR || player.getRespawnPosition() == null) return;
@@ -344,7 +315,6 @@ public class SubmarineInterior {
         if (submarine.level() instanceof ServerLevel level) Cabins.get(level.getServer()).remember(submarine.getInteriorId(), submarine);
     }
 
-    // on ressort a cote du sous-marin (trappe) ou dedans aux commandes (echelle)
     private static void leave(ServerPlayer player, boolean drive) {
         int cabin = Math.floorDiv((int) Math.floor(player.getX()) + SPACING / 2, SPACING);
         CompoundTag where = Cabins.get(player.server).subs.get(cabin);
@@ -355,7 +325,6 @@ public class SubmarineInterior {
             player.changeDimension(new DimensionTransition(spawn, Vec3.atBottomCenterOf(spawn.getSharedSpawnPos()), Vec3.ZERO, player.getYRot(), 0.0F, DimensionTransition.DO_NOTHING));
             return;
         }
-        // un seul pilote : si quelqu'un est deja aux commandes on redescend l'echelle
         if (drive && level.getEntity(where.getUUID("Sub")) instanceof Submarine sub && sub.isVehicle()) {
             player.teleportTo(player.getX(), BOTTOM + 6.0, player.getZ());
             player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.occupied"), true);
@@ -368,7 +337,6 @@ public class SubmarineInterior {
         if (drive) PENDING.put(player.getUUID(), new Pending(where.getUUID("Sub"), level.getGameTime() + 100));
     }
 
-    // le bouton du tableau de bord : on lache les commandes et on descend dans la cabine (shift tout seul fait sortir dehors)
     public static void downFromSeat(ServerPlayer player) {
         if (player.isOnPortalCooldown() || !(player.getVehicle() instanceof Submarine sub) || !sub.isAlive()) return;
         player.stopRiding();
@@ -399,7 +367,6 @@ public class SubmarineInterior {
         if (back != null && !player.isPassenger() && player.serverLevel().getEntity(back) instanceof Submarine sub) enter(player, sub);
         Pending pending = PENDING.get(player.getUUID());
         if (pending != null) {
-            // le chunk du sous-marin vient de charger, on attend qu'il soit la pour monter dedans
             if (player.serverLevel().getEntity(pending.submarine()) instanceof Submarine submarine && !submarine.isVehicle()) {
                 player.startRiding(submarine, true);
                 PENDING.remove(player.getUUID());
@@ -413,7 +380,6 @@ public class SubmarineInterior {
         else if (y > ROOF) leave(player, true);
     }
 
-    // aux commandes : clic droit avec du carburant en main = on recharge sans sortir
     @SubscribeEvent
     public static void refuelFromSeat(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickItem event) {
         if (!(event.getEntity().getVehicle() instanceof Submarine sub)) return;
@@ -429,7 +395,6 @@ public class SubmarineInterior {
         event.setCancellationResult(net.minecraft.world.InteractionResult.SUCCESS);
     }
 
-    // aux commandes on pilote : on ne casse pas, on ne pose pas et on ne tape pas ce qu'il y a dehors
     @SubscribeEvent
     public static void noBreakFromSeat(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock event) {
         if (event.getEntity().getVehicle() instanceof Submarine) event.setCanceled(true);
@@ -450,7 +415,6 @@ public class SubmarineInterior {
         if (event.getPlayer().getVehicle() instanceof Submarine) event.setCanceled(true);
     }
 
-    // on ne casse pas la coque, sinon on tombe dans le vide
     @SubscribeEvent
     public static void protect(BlockEvent.BreakEvent event) {
         if (event.getLevel() instanceof Level level && level.dimension() == INTERIOR && !event.getPlayer().isCreative() && event.getState().is(HULL)) {
@@ -458,13 +422,11 @@ public class SubmarineInterior {
         }
     }
 
-    // ni les explosions (creeper, cristal de l'end...) : dans la cabine elles ne cassent aucun bloc
     @SubscribeEvent
     public static void noExplosion(net.neoforged.neoforge.event.level.ExplosionEvent.Detonate event) {
         if (event.getLevel().dimension() == INTERIOR) event.getAffectedBlocks().clear();
     }
 
-    // quel sous-marin va avec quelle cabine, et ou il etait la derniere fois
     static class Cabins extends SavedData {
         int next = 1;
         final Map<Integer, CompoundTag> subs = new HashMap<>();

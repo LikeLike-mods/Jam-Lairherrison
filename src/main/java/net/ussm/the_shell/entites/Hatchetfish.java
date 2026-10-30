@@ -30,7 +30,6 @@ public class Hatchetfish extends AbstractSchoolingFish implements GeoEntity {
         return 8;
     }
 
-    // pas de seau pour lui : il ne survivrait pas a la remontee
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         return InteractionResult.PASS;

@@ -22,7 +22,6 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> LIGHTSABER_EXTINGUISH = register("lightsaber_extinguish");
     public static final DeferredHolder<SoundEvent, SoundEvent> LIGHTSABER_HUM = register("lightsaber_hum");
 
-    // sons d'ambiance (dans les biomes)
     public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_ATOLL_WAVES = register("ambient.atoll.waves");
     public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_ATOLL_JUNGLE = register("ambient.atoll.jungle");
     public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_ABYSS_LOOP = register("ambient.abyss.loop");
@@ -30,7 +29,6 @@ public final class ModSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> FLYTRAP_SNAP = register("block.flytrap.snap");
 
-    // sons des mobs, on les retrouve avec mobSound()
     static {
         for (String name : List.of(
                 "toucan.ambient", "toucan.hurt", "toucan.death", "seagull.ambient", "seagull.hurt", "seagull.death",
@@ -55,7 +53,6 @@ public final class ModSounds {
                 ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, name)));
     }
 
-    // null si le mob a pas ce son
     public static SoundEvent mobSound(Entity mob, String kind) {
         ResourceLocation id = EntityType.getKey(mob.getType());
         return BuiltInRegistries.SOUND_EVENT.get(id.withPath("entity." + id.getPath() + "." + kind));

@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-// dans le monde normal, les atolls, les abysses et le sous-marin, c'est SleepEvents qui decide pour tout le monde a la fois
 @Mixin(ServerLevel.class)
 public abstract class ServerLevelMixin {
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/SleepStatus;areEnoughDeepSleeping(ILjava/util/List;)Z"))

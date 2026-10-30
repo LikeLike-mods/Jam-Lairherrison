@@ -83,7 +83,6 @@ public class StationProcessors {
         @Override
         public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos offset, BlockPos pos, StructureTemplate.StructureBlockInfo original,
                                                                   StructureTemplate.StructureBlockInfo current, StructurePlaceSettings settings) {
-            // tout le module tire au sort pareil : on part de la position du module, pas du bloc
             if (RandomSource.create(Mth.getSeed(offset)).nextFloat() >= chance) return current;
             BlockState state = current.state();
             if (state.isAir()) return new StructureTemplate.StructureBlockInfo(current.pos(), Blocks.WATER.defaultBlockState(), null);

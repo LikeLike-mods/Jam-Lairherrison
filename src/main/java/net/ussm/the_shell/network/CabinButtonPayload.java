@@ -6,7 +6,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.ussm.the_shell.TheShell;
 
-// le pilote a appuye sur le bouton du tableau de bord : il descend dans la cabine
 public record CabinButtonPayload() implements CustomPacketPayload {
     public static final CabinButtonPayload INSTANCE = new CabinButtonPayload();
     public static final Type<CabinButtonPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "cabin_button"));

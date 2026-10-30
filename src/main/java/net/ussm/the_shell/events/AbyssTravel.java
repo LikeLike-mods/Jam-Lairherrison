@@ -26,7 +26,6 @@ public class AbyssTravel {
         check(event.getEntity());
     }
 
-    // appele par les joueurs et par le sous-marin (qui emmene son pilote avec lui)
     public static void check(Entity entity) {
         if (!(entity.level() instanceof ServerLevel level) || entity.isPassenger() || entity.isOnPortalCooldown()) return;
         boolean atoll = level.dimension() == AtollTravel.ATOLL;

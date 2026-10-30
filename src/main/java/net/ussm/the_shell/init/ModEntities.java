@@ -30,7 +30,6 @@ import net.ussm.the_shell.entites.BlueWhaleEntity;
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, TheShell.MOD_ID);
 
-    // plage / jungle
     public static final DeferredHolder<EntityType<?>, EntityType<Butterfly>> BUTTERFLY = register("butterfly", Butterfly::new, MobCategory.AMBIENT, 0.5F, 0.3F);
     public static final DeferredHolder<EntityType<?>, EntityType<Crab>> CRAB = register("crab", Crab::new, MobCategory.CREATURE, 0.9F, 0.55F);
     public static final DeferredHolder<EntityType<?>, EntityType<Gecko>> GECKO = register("gecko", Gecko::new, MobCategory.CREATURE, 0.4F, 0.2F);
@@ -40,14 +39,11 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<Seagull>> SEAGULL = register("seagull", Seagull::new, MobCategory.CREATURE, 0.5F, 0.6F);
     public static final DeferredHolder<EntityType<?>, EntityType<Toucan>> TOUCAN = register("toucan", Toucan::new, MobCategory.CREATURE, 0.45F, 0.6F);
 
-    // abysses (eaux profondes sinon y en a 70)
     public static final DeferredHolder<EntityType<?>, EntityType<AbyssalAngler>> ABYSSAL_ANGLER = register("abyssal_angler", AbyssalAngler::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.1F, 1.0F);
     public static final DeferredHolder<EntityType<?>, EntityType<GulperEel>> GULPER_EEL = register("gulper_eel", GulperEel::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.8F, 0.5F);
     public static final DeferredHolder<EntityType<?>, EntityType<Dragonfish>> DRAGONFISH = register("dragonfish", Dragonfish::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.5F, 0.4F);
-    // isopode dans sa propre categorie
     public static final DeferredHolder<EntityType<?>, EntityType<GiantIsopod>> GIANT_ISOPOD = register("giant_isopod", GiantIsopod::new, MobCategory.AXOLOTLS, 0.9F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.6F, 1.1F);
-    // mobs de la dimension des abysses
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.YetiCrab>> YETI_CRAB = register("yeti_crab", net.ussm.the_shell.entites.YetiCrab::new, MobCategory.AXOLOTLS, 0.8F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.Hatchetfish>> HATCHETFISH = register("hatchetfish", net.ussm.the_shell.entites.Hatchetfish::new, MobCategory.WATER_AMBIENT, 0.35F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ColossalSquid>> COLOSSAL_SQUID = register("colossal_squid", net.ussm.the_shell.entites.ColossalSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.6F, 2.8F);
@@ -73,7 +69,6 @@ public class ModEntities {
                     .sized(4.75F, 4.75F).eyeHeight(3.5F)
                     .clientTrackingRange(16).updateInterval(3).build(TheShell.MOD_ID + ":blue_whale"));
 
-    // perle d'ender sous-marine lancee
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ThrownAquaPearl>> AQUA_PEARL = ENTITY_TYPES.register("aqua_pearl",
             () -> EntityType.Builder.<net.ussm.the_shell.entites.ThrownAquaPearl>of(net.ussm.the_shell.entites.ThrownAquaPearl::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("aqua_pearl"));

@@ -16,8 +16,6 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.blocks.NotchAltarBlock;
 
-// dans le temple de la jungle on ne casse et on ne pose rien tant que les 3 epreuves de Notch ne sont pas reussies
-// (sinon on creuse jusqu'au tresor). en creatif on fait ce qu'on veut
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class TempleProtection {
     private static final ResourceKey<Structure> TEMPLE = ResourceKey.create(Registries.STRUCTURE, ResourceLocation.withDefaultNamespace("jungle_pyramid"));

@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.ussm.the_shell.blocks.TemplePedestalBlockEntity;
 
-// l'objet du piedestal flotte au-dessus, tourne doucement et monte et descend
 public class TemplePedestalRenderer implements BlockEntityRenderer<TemplePedestalBlockEntity> {
     public TemplePedestalRenderer(BlockEntityRendererProvider.Context context) {
     }

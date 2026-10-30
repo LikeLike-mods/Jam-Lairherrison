@@ -26,11 +26,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ussm.the_shell.events.TempleQuiz;
 
-// l'autel de Notch : niveau 1 (facile), 2 (moyen) ou 3 (difficile). clic droit = une question, et il s'allume quand on a bon
 public class NotchAltarBlock extends Block {
     public static final IntegerProperty NIVEAU = IntegerProperty.create("tier", 1, 3);
     public static final BooleanProperty RESOLU = BooleanProperty.create("solved");
-    // le visage de Notch regarde de ce cote
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape FORME = Shapes.or(Block.box(0, 0, 0, 16, 2, 16), Block.box(2, 2, 2, 14, 12, 14), Block.box(1, 12, 1, 15, 15, 15));
 
@@ -49,7 +47,6 @@ public class NotchAltarBlock extends Block {
         return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
-    // pour que l'autel tourne avec le temple
     @Override
     protected BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
@@ -68,7 +65,6 @@ public class NotchAltarBlock extends Block {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;
-        // en creatif, accroupi : on change le niveau de l'autel (pour le poser dans le temple)
         if (player.isCreative() && player.isShiftKeyDown()) {
             int niveau = state.getValue(NIVEAU) % 3 + 1;
             level.setBlock(pos, state.setValue(NIVEAU, niveau).setValue(RESOLU, false), Block.UPDATE_ALL);
@@ -87,7 +83,6 @@ public class NotchAltarBlock extends Block {
         return InteractionResult.SUCCESS;
     }
 
-    // un autel du niveau d'avant pas encore reussi dans le temple ?
     private static boolean precedentPasFait(ServerLevel level, BlockPos pos, int niveau) {
         if (niveau == 1) return false;
         for (BlockPos p : BlockPos.betweenClosed(pos.offset(-24, -32, -24), pos.offset(24, 32, 24))) {

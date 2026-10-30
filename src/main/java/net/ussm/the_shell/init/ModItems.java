@@ -29,13 +29,11 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(1)));
 
 
-    // coco
     public static final DeferredItem<Item> COCONUT_SHELL = ITEMS.register("coconut_shell",
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> COCONUT_HALF = ITEMS.register("coconut_half",
             () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperies car C PLUS PROPRE
 
-    // banane et datte
     public static final DeferredItem<Item> BANANA = ITEMS.register("banana", () -> new BananaItem(new Item.Properties().food(ModFoodProperties.BANANA)));
 
     public static final DeferredItem<Item> BANANA_BREAD = ITEMS.register("banana_bread", () -> new Item(new Item.Properties().food(ModFoodProperties.BANANA_BREAD)));
@@ -49,7 +47,6 @@ public class ModItems {
             .craftRemainder(Items.GLASS_BOTTLE)
             .stacksTo(16)));
 
-    // kits pour ameliorer le sous-marin (fer, puis diamant, puis netherite)
     public static final DeferredItem<Item> SUBMARINE_UPGRADE_IRON = ITEMS.register("submarine_upgrade_iron", () -> new Item(new Item.Properties()
             .stacksTo(16)));
 
@@ -79,7 +76,6 @@ public class ModItems {
 
 
 
-    // nectar = super saut
     public static final DeferredItem<Item> NECTAR = ITEMS.register("nectar",
             () -> new HoneyBottleItem(new Item.Properties()
                     .craftRemainder(Items.GLASS_BOTTLE)
@@ -104,10 +100,8 @@ public class ModItems {
 
     public static final DeferredItem<Item> ABYSSAL_SCALE = ITEMS.register("abyssal_scale",
             () -> new Item(new Item.Properties()));
-    // cristal kyber : on le trouve au fond des abysses, les naufrages n'ont jamais su s'en servir
     public static final DeferredItem<Item> KYBER_CRYSTAL = ITEMS.register("kyber_crystal",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-    // objets des abysses
     public static final DeferredItem<Item> BLACK_PEARL = ITEMS.register("black_pearl",
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
@@ -139,7 +133,6 @@ public class ModItems {
                     .attributes(helmet("netherite", 3, 3, 0.1)),
                     15));
 
-    // scaphandre : le casque fait respirer, les bottes font couler, les 4 ensemble protegent de la pression
     public static final DeferredItem<ArmorItem> DIVING_HELMET = ITEMS.register("diving_helmet",
             () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.HELMET, new Item.Properties()
                     .durability(ArmorItem.Type.HELMET.getDurability(15))));
@@ -173,7 +166,6 @@ public class ModItems {
 
 
 
-    // oeufs de spawn
     public static final List<DeferredItem<Item>> SPAWN_EGGS = new ArrayList<>();
     public static final DeferredItem<Item> BUTTERFLY_SPAWN_EGG = spawnEgg("butterfly", ModEntities.BUTTERFLY, 0x2E7BE6, 0x1A1A1A);
     public static final DeferredItem<Item> CRAB_SPAWN_EGG = spawnEgg("crab", ModEntities.CRAB, 0xC4502A, 0xEECC9E);
@@ -211,7 +203,6 @@ public class ModItems {
         return egg;
     }
 
-    // meme protection que le casque vanilla
     private static ItemAttributeModifiers helmet(String name, double armor, double toughness, double knockbackResistance) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, name + "_abyss_helmet");
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder()
@@ -222,8 +213,6 @@ public class ModItems {
         }
         return builder.build();
     }
-
-    // trucs d'Oesphy
 
     public static final DeferredItem<LightsaberItem> SHADOW_SABER_SWORD = ITEMS.register("lightsaber_shadow_sword_white",
         () -> new LightsaberItem("lightsaber_sword", "lightsaber_shadow_sword_white",

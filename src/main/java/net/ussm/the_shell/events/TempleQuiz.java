@@ -20,19 +20,17 @@ import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.blocks.NotchAltarBlock;
 import net.ussm.the_shell.blocks.TempleSealBlock;
 
-// les epreuves du temple : Notch pose une question de culture minecraft dans le chat, on repond en tapant (personne d'autre ne voit la reponse)
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class TempleQuiz {
-    // les bonnes reponses de chaque question (le texte est dans les fichiers de langue : quiz.the_shell.<niveau>.<numero>)
     private static final String[][][] REPONSES = {
-            { // facile
+            {
                     {"creeper"}, {"10", "dix", "ten"}, {"pioche", "pickaxe"}, {"lapis", "lapis lazuli"},
                     {"mouton", "sheep"}, {"nether"}, {"lit", "bed"}, {"9", "neuf", "nine"}},
-            { // moyen
+            {
                     {"15", "quinze", "fifteen"}, {"enderman"}, {"4", "quatre", "four"}, {"os", "bone"},
                     {"ancre de reapparition", "ancre", "respawn anchor"}, {"noye", "drowned"}, {"20", "vingt", "twenty"},
                     {"potion de faiblesse", "faiblesse", "weakness", "potion of weakness"}},
-            { // difficile
+            {
                     {"20", "vingt", "twenty"}, {"319"}, {"2011"}, {"5", "cinq", "five", "v"},
                     {"4", "quatre", "four"}, {"markus", "markus persson"}, {"warden", "gardien"}, {"breeze", "brise"}},
     };
@@ -45,7 +43,6 @@ public class TempleQuiz {
         return Component.literal("<Notch> ").append(texte);
     }
 
-    // clic droit sur un autel : Notch pose une question tiree au hasard dans la liste de son niveau
     public static void poser(ServerPlayer player, BlockPos autel, int niveau) {
         int numero = player.getRandom().nextInt(REPONSES[niveau - 1].length);
         EN_COURS.put(player.getUUID(), new Question(autel.immutable(), niveau, numero, player.serverLevel().getGameTime() + 20 * 120));
@@ -53,7 +50,6 @@ public class TempleQuiz {
         player.sendSystemMessage(notch(Component.translatable("quiz.the_shell." + niveau + "." + numero).withStyle(ChatFormatting.YELLOW)));
     }
 
-    // on compare sans les majuscules, les accents, la ponctuation ni les petits mots (le, la, un, the...)
     private static String propre(String s) {
         s = Normalizer.normalize(s.toLowerCase(), Normalizer.Form.NFD).replaceAll("\\p{M}", "");
         s = s.replaceAll("[^a-z0-9 ]", " ").replaceAll("\\b(le|la|les|l|un|une|des|du|de|the|a|an)\\b", " ");
@@ -70,7 +66,6 @@ public class TempleQuiz {
             EN_COURS.remove(player.getUUID());
             return;
         }
-        // la reponse ne part pas dans le chat de tout le monde : seul le joueur la voit
         event.setCanceled(true);
         EN_COURS.remove(player.getUUID());
         player.sendSystemMessage(Component.literal("<" + player.getGameProfile().getName() + "> " + event.getRawText()).withStyle(ChatFormatting.GRAY));
@@ -83,7 +78,6 @@ public class TempleQuiz {
             NotchAltarBlock.resolu(level, q.autel());
             TempleSealBlock.ouvrirNiveau(level, q.autel(), q.niveau());
         } else {
-            // Notch n'aime pas les mauvaises reponses, et plus c'est dur plus ca pique
             player.sendSystemMessage(notch(Component.translatable("message.the_shell.notch.wrong").withStyle(ChatFormatting.RED)));
             level.playSound(null, player.blockPosition(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 1.0F, 0.6F);
             if (q.niveau() >= 2) player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));

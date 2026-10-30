@@ -10,7 +10,6 @@ import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.items.KyberAxeItem;
 import net.ussm.the_shell.items.LightsaberItem;
 
-// une buche cassee avec la hache au kyber allumee : tout l'arbre tombe (accroupi on coupe juste le bloc)
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class KyberAxeEvents {
     private static boolean enCours;

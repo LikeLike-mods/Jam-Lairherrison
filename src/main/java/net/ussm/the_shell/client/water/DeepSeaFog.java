@@ -19,7 +19,6 @@ public class DeepSeaFog {
     @SubscribeEvent
     public static void fog(ViewportEvent.RenderFog event) {
         Minecraft mc = Minecraft.getInstance();
-        // dans la cabine du sous-marin : une brume d'eau sombre qui cache le bout du dehors recopie
         if (mc.level != null && mc.level.dimension() == net.ussm.the_shell.events.SubmarineInterior.INTERIOR) {
             event.setNearPlaneDistance(event.getMode() == FogRenderer.FogMode.FOG_SKY ? 0.0F : 14.0F);
             event.setFarPlaneDistance(30.0F);

@@ -23,14 +23,11 @@ import net.neoforged.neoforge.common.ItemAbility;
 import net.ussm.the_shell.init.ModComponents;
 import net.ussm.the_shell.init.ModSounds;
 
-// la hache au kyber : la meme techno que les sabres (lame qui s'allume, lueur, incassable).
-// allumee elle coupe vite tout ce qui se coupe a la hache, et une buche cassee fait tomber tout l'arbre (accroupi : un seul bloc)
 public class KyberAxeItem extends LightsaberItem {
     public KyberAxeItem(Item.Properties properties) {
         super("kyber_axe", "kyber_axe", 9, -3.0F, () -> null, properties);
     }
 
-    // clic droit allume / eteint, shift + clic droit change de mode comme les sabres (tout l'arbre / un bloc a la fois)
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
@@ -73,7 +70,6 @@ public class KyberAxeItem extends LightsaberItem {
         return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(ability);
     }
 
-    // tout l'arbre : les buches qui se touchent (diagonales comprises), puis les feuilles naturelles autour
     public static void abattre(ServerLevel level, BlockPos depart, Player player) {
         Set<BlockPos> buches = new HashSet<>();
         ArrayDeque<BlockPos> file = new ArrayDeque<>();

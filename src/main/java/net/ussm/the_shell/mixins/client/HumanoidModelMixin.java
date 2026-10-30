@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-// le pilote du sous-marin a les mains sur le manche : elles suivent la vitesse et les virages, et il se penche quand ca accelere
 @Mixin(HumanoidModel.class)
 public abstract class HumanoidModelMixin<T extends LivingEntity> {
     @Shadow @Final public ModelPart rightArm;

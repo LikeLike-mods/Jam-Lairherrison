@@ -18,13 +18,10 @@ import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.ussm.the_shell.TheShell;
 
-// le monde normal, les atolls, les abysses et le sous-marin ont la meme nuit : elle passe quand tout le monde dort
-// (les joueurs du nether, de l'end ou d'une autre dimension comptent pas, comme en vanilla)
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class SleepEvents {
     public static final Set<ResourceKey<Level>> MEME_MONDE = Set.of(Level.OVERWORLD, AtollTravel.ATOLL, AbyssTravel.ABYSS, SubmarineInterior.INTERIOR);
 
-    // les abysses et le sous-marin ont une heure fixe : on regarde l'heure du monde normal pour savoir si on peut dormir
     @SubscribeEvent
     public static void canSleep(CanPlayerSleepEvent event) {
         if (event.getProblem() != null || !MEME_MONDE.contains(event.getLevel().dimension())) return;
@@ -41,7 +38,6 @@ public class SleepEvents {
         ServerLevel monde = server.overworld();
         int besoin = Math.max(1, Mth.ceil(joueurs.size() * monde.getGameRules().getInt(GameRules.RULE_PLAYERS_SLEEPING_PERCENTAGE) / 100.0F));
         if (joueurs.stream().filter(Player::isSleepingLongEnough).count() < besoin) {
-            // le compteur des dormeurs, pour tous les joueurs concernes (seulement si on est plusieurs)
             if (joueurs.size() > 1 && server.getTickCount() % 20 == 0) {
                 Component texte = Component.translatable("sleep.players_sleeping", dorment, besoin);
                 joueurs.forEach(p -> p.displayClientMessage(texte, true));

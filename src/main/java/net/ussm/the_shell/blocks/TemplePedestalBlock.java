@@ -28,9 +28,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// le piedestal : l'objet pose dessus flotte et tourne, avec des petites etincelles autour.
-// clic droit pour le prendre, clic droit avec un objet pour en poser un. prendre l'objet envoie une impulsion de redstone
-// (comme un coffre piege) : dans le temple un fil part de derriere vers la TNT... il faut le couper avant
 public class TemplePedestalBlock extends BaseEntityBlock {
     public static final MapCodec<TemplePedestalBlock> CODEC = simpleCodec(TemplePedestalBlock::new);
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -87,7 +84,6 @@ public class TemplePedestalBlock extends BaseEntityBlock {
             socle.poser(ItemStack.EMPTY);
             if (!player.getInventory().add(pris)) player.drop(pris, false);
             level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.5F, 1.0F);
-            // l'impulsion de redstone, une seconde
             level.setBlock(pos, state.setValue(POWERED, true), Block.UPDATE_ALL);
             level.updateNeighborsAt(pos.below(), this);
             level.scheduleTick(pos, this, 20);
@@ -117,7 +113,6 @@ public class TemplePedestalBlock extends BaseEntityBlock {
         return state.getValue(POWERED) && direction == Direction.UP ? 15 : 0;
     }
 
-    // des petites etincelles qui montent autour de l'objet
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (!(level.getBlockEntity(pos) instanceof TemplePedestalBlockEntity socle) || socle.objet().isEmpty()) return;

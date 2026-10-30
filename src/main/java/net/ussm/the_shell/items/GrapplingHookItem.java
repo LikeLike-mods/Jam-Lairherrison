@@ -19,7 +19,6 @@ import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.init.ModComponents;
 import org.joml.Vector3f;
 
-// grappin : on vise un bloc jusqu'a 32 blocs, et tant qu'on garde clic droit il nous tire jusqu'a lui, dans l'eau aussi
 public class GrapplingHookItem extends Item {
     private static final double RANGE = 32.0;
     private static final DustParticleOptions CORDE = new DustParticleOptions(new Vector3f(0.45F, 0.33F, 0.2F), 0.6F);
@@ -55,7 +54,6 @@ public class GrapplingHookItem extends Item {
             entity.setDeltaMovement(vers.normalize().scale(Math.min(vitesse, dist * 0.25)));
         }
         entity.resetFallDistance();
-        // la corde
         if (level.isClientSide) {
             for (int i = 1; i < 10; i++) {
                 Vec3 p = depart.add(vers.scale(i / 10.0));
