@@ -1,0 +1,32 @@
+{
+  "parent": "the_shell:root",
+  "display": {
+    "icon": {
+      "id": "the_shell:submarine"
+    },
+    "title": {
+      "translate": "advancement.the_shell.yellow_submarine.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.yellow_submarine.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "has_submarine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:submarine"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_submarine"]
+  ]
+}

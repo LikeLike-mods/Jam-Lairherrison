@@ -177,10 +177,10 @@ public class TestChunkGenerator extends ChunkGenerator {
         noise.SetFractalOctaves(1);
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
 
-        float marais = Math.clamp((noise.GetNoise(posX, posZ) - 0.35f) / 0.25f, 0f, 1f);
-        float bas = Math.clamp(1f - (posY - SWAMP_LEVEL) / 8f, 0f, 1f);
-        float terre = Math.clamp(posY - SEA, 0f, 1f); // On land only
-        return (float) (Mth.smoothstep(marais) * Mth.smoothstep(bas)) * terre;
+        float swamp = Math.clamp(4f * noise.GetNoise(posX, posZ) - 1.4f, 0f, 1f);
+        float bottom = Math.clamp(1f - (posY - SWAMP_LEVEL) * 0.125f, 0f, 1f);
+        float land = Math.clamp(posY - SEA, 0f, 1f); // On land only
+        return (float)(Mth.smoothstep(swamp) * Mth.smoothstep(bottom)) * land;
     }
 
     public static float lerp(float a, float b, float t) {
@@ -246,9 +246,12 @@ public class TestChunkGenerator extends ChunkGenerator {
                     topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
                 }
                 else if (swampiness >= 0.5f) {
-                    boolean bassin = swampiness >= 0.9f && Math.round(h) == SWAMP_LEVEL && Math.round(n) >= SWAMP_LEVEL
-                            && Math.round(s) >= SWAMP_LEVEL && Math.round(e) >= SWAMP_LEVEL && Math.round(w) >= SWAMP_LEVEL;
-                    if (bassin && hash3 < 0.75f) topLand = Blocks.WATER.defaultBlockState();
+                    boolean pool = Math.round(h) >= SWAMP_LEVEL && Math.round(n) >= Math.round(h) && Math.round(s) >= Math.round(h)
+                            && Math.round(e) >= Math.round(h) && Math.round(w) >= Math.round(h);
+                    if (pool) {
+                        topLand = Blocks.WATER.defaultBlockState();
+                        h -= 1f;
+                    }
                     else topLand = Blocks.MUD.defaultBlockState();
                     top2Land = Blocks.MUD.defaultBlockState();
                 }
