@@ -253,6 +253,10 @@ public class ModItems {
     public static final DeferredItem<Item> AQUA_PEARL = ITEMS.register("aqua_pearl", () -> new AquaPearlItem(new Item.Properties()
             .stacksTo(16)));
 
+    public static final DeferredItem<LightsaberItem> KYBER_SICKLE = ITEMS.register("kyber_sickle",
+        () -> new LightsaberItem("lightsaber_sickle", "kyber_sickle",
+                6, -1.6F, ModItems.KYBER_AXE, createLightsaberProperties()));
+
     public static final DeferredItem<Item> KYBER_AXE = ITEMS.register("kyber_axe",
         () -> new KyberAxeItem(createLightsaberProperties()));
 
