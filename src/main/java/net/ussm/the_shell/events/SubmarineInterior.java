@@ -72,8 +72,17 @@ public class SubmarineInterior {
     // des poissons qui nagent dans l'eau recopiee, selon ou est le sous-marin (jusqu'a 7, un de plus toutes les 2 secondes)
     private static void fishes(ServerLevel inside, int cabin, CompoundTag where) {
         BlockPos c = corner(cabin);
-        net.minecraft.world.phys.AABB zone = new net.minecraft.world.phys.AABB(c.getX() - 5, c.getY() - 2, c.getZ() - 5, c.getX() + 20, c.getY() + 17, c.getZ() + 26);
-        if (inside.getEntitiesOfClass(net.minecraft.world.entity.animal.WaterAnimal.class, zone).size() >= 7) return;
+        net.minecraft.world.phys.AABB zone = new net.minecraft.world.phys.AABB(c.getX() - 13, c.getY() - 10, c.getZ() - 13, c.getX() + 28, c.getY() + 25, c.getZ() + 34);
+        // ceux qui s'eloignent des hublots disparaissent, sinon ils partent dans le paysage copie, on en refait et ils s'entassent
+        net.minecraft.world.phys.AABB tout = new net.minecraft.world.phys.AABB(c.getX() - 48, c.getY() - 20, c.getZ() - 44, c.getX() + 56, c.getY() + 34, c.getZ() + 52);
+        java.util.List<net.minecraft.world.entity.Mob> poissons = inside.getEntitiesOfClass(net.minecraft.world.entity.Mob.class, tout,
+                m -> !m.hasCustomName() && (m instanceof net.minecraft.world.entity.animal.WaterAnimal || m.getType() == net.ussm.the_shell.init.ModEntities.ABYSSAL_ANGLER.get()));
+        int restants = 0;
+        for (net.minecraft.world.entity.Mob m : poissons) {
+            if (zone.contains(m.position()) && restants < 7) restants++;
+            else m.discard();
+        }
+        if (restants >= 7) return;
         String dim = where.getString("Dim");
         boolean abysses = dim.equals(AbyssTravel.ABYSS.location().toString());
         boolean clair = dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > net.ussm.the_shell.worldgen.TestChunkGenerator.SEA - 24;
