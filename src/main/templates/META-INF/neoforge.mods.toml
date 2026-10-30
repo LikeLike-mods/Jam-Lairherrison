@@ -50,9 +50,9 @@ authors="LikeLike, Utumno, DrSupernovas, Oesphy"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Notre mod pour la Jam Lairherrison : un archipel tropical, des abysses, un sous-marin et plein d'autres trucs.
+A tropical sunshine coast, with deep space underneath
 
-Ctrl sur un objet du mod pour voir sa description.
+Lairherrison mod jam!
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

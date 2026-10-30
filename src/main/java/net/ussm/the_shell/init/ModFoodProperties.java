@@ -27,12 +27,32 @@ public class ModFoodProperties {
             .usingConvertsTo(ModItems.COCONUT_SHELL.get())
             .build();
 
-    public static FoodProperties BANANA = new FoodProperties.Builder().nutrition(4).saturationModifier(0.3f).build();
-    public static FoodProperties BANANA_BREAD = new FoodProperties.Builder().nutrition(7).saturationModifier(0.6f).build();
-    public static FoodProperties BANANA_CHIPS = new FoodProperties.Builder().nutrition(3).saturationModifier(0.4f).fast().build();
-    public static FoodProperties DATES = new FoodProperties.Builder().nutrition(2).saturationModifier(0.5f).fast().build();
-    public static FoodProperties DATE_SYRUP = new FoodProperties.Builder().nutrition(4).saturationModifier(0.3f)
-            .effect(() -> new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED, 300), 1.0f).build();
+    public static FoodProperties BANANA = new FoodProperties.Builder()
+            .nutrition(4)
+            .saturationModifier(0.3f)
+            .build();
+
+    public static FoodProperties BANANA_BREAD = new FoodProperties.Builder()
+            .nutrition(7)
+            .saturationModifier(0.6f)
+            .build();
+
+    public static FoodProperties BANANA_CHIPS = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.4f)
+            .fast()
+            .build();
+
+    public static FoodProperties DATES = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.5f)
+            .fast()
+            .build();
+
+
+    public static FoodProperties DATE_SYRUP = new FoodProperties.Builder()
+            .nutrition(4)
+            .saturationModifier(0.3f)
+            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300), 1.0f)
+            .build();
 
     public static FoodProperties REDSTONE_PEPPER = new FoodProperties.Builder()
             .nutrition(2)
