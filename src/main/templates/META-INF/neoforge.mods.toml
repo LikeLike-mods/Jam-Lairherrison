@@ -50,9 +50,13 @@ authors="LikeLike, Utumno, DrSupernovas, Oesphy"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-A tropical sunshine coast, with deep space underneath
+The Shell begins on a tropical archipelago, with its beaches, jungles and mangroves, and leads down through the sea to an abyss where the light fades.
 
-LairHisson mod jam!
+Going down takes preparation: a diving suit to breathe and withstand the pressure, and a submarine, larger on the inside than it looks, to cover the distance. At the bottom lie flooded stations, strange creatures and kyber, a crystal used to forge energy tools.
+
+The way in is a conch, kept at the bottom of the jungle temple, where Notch may ask a few questions before letting anyone through.
+
+Made for the LairHisson mod jam. Holding Ctrl over an item from the mod displays its description.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
