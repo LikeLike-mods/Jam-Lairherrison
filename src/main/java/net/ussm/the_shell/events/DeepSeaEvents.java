@@ -138,8 +138,9 @@ public class DeepSeaEvents {
     private static void refillOxygen(Player player, boolean bubbles) {
         int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
         if (oxygen >= net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN) return;
-        // pas a l'air libre : seulement sur une bouche d'aeration ou aux commandes du sous-marin (sinon reservoir, bouteille, bulle d'air)
+        // vite sur une bouche d'aeration ou aux commandes du sous-marin, tout doucement a l'air libre (3 min pour le plein)
         if (bubbles || player.getVehicle() instanceof Submarine) setOxygen(player, oxygen + 24);
+        else if (!player.isEyeInFluid(FluidTags.WATER) && player.tickCount % 3 == 0) setOxygen(player, oxygen + 4);
     }
 
     // le reservoir d'air (dans le sous-marin, ou pose a sa base) : le plein de la combi, et de la bouteille d'oxygene si on l'a en main
