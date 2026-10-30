@@ -5,10 +5,10 @@
       "id": "the_shell:submarine"
     },
     "title": {
-      "translate": "advancement.the_shell.killer_team.title"
+      "translate": "advancement.the_shell.yellow_submarine.title"
     },
     "description": {
-      "translate": "advancement.the_shell.killer_team.description"
+      "translate": "advancement.the_shell.yellow_submarine.description"
     },
     "frame": "task",
     "show_toast": true,

@@ -3,6 +3,8 @@ package net.ussm.the_shell.worldgen;
 import net.minecraft.util.Mth;
 import net.ussm.the_shell.api.FastNoiseLite;
 
+import static net.ussm.the_shell.worldgen.TestChunkGenerator.SEED;
+
 // Shape of the abyss terrain
 public final class AbyssTerrain {
     public static final int MIN_Y = -64;
@@ -13,16 +15,16 @@ public final class AbyssTerrain {
 
     public enum Zone { PLAINS, VENTS, TRENCH, REEF }
 
-    private static final FastNoiseLite ROLL = noise(301, 0.008f, FastNoiseLite.FractalType.FBm, 3);
-    private static final FastNoiseLite BUMPS = noise(302, 0.04f, FastNoiseLite.FractalType.FBm, 2);
-    private static final FastNoiseLite TRENCH = noise(303, 0.0016f, FastNoiseLite.FractalType.Ridged, 1);
-    private static final FastNoiseLite REGION = noise(304, 0.002f, FastNoiseLite.FractalType.FBm, 2);
-    private static final FastNoiseLite ROOF = noise(305, 0.01f, FastNoiseLite.FractalType.FBm, 3);
-    private static final FastNoiseLite DRIP = noise(306, 0.08f, FastNoiseLite.FractalType.None, 1);
-    private static final FastNoiseLite PLATEAU = noise(307, 0.0035f, FastNoiseLite.FractalType.FBm, 3);
+    private static final FastNoiseLite ROLL = noise(SEED + 101, 0.008f, FastNoiseLite.FractalType.FBm, 3);
+    private static final FastNoiseLite BUMPS = noise(SEED + 102, 0.04f, FastNoiseLite.FractalType.FBm, 2);
+    private static final FastNoiseLite TRENCH = noise(SEED + 103, 0.0016f, FastNoiseLite.FractalType.Ridged, 1);
+    private static final FastNoiseLite REGION = noise(SEED + 104, 0.002f, FastNoiseLite.FractalType.FBm, 2);
+    private static final FastNoiseLite ROOF = noise(SEED + 105, 0.01f, FastNoiseLite.FractalType.FBm, 3);
+    private static final FastNoiseLite DRIP = noise(SEED + 106, 0.08f, FastNoiseLite.FractalType.None, 1);
+    private static final FastNoiseLite PLATEAU = noise(SEED + 107, 0.0035f, FastNoiseLite.FractalType.FBm, 3);
     // Peaks with worley noise
-    private static final FastNoiseLite PEAK_DIST = cellular(308, FastNoiseLite.CellularReturnType.Distance);
-    private static final FastNoiseLite PEAK_SIZE = cellular(308, FastNoiseLite.CellularReturnType.CellValue);
+    private static final FastNoiseLite PEAK_DIST = cellular(SEED + 108, FastNoiseLite.CellularReturnType.Distance);
+    private static final FastNoiseLite PEAK_SIZE = cellular(SEED + 108, FastNoiseLite.CellularReturnType.CellValue);
 
     private AbyssTerrain() {
     }
