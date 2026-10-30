@@ -127,6 +127,51 @@ public class SubmarineCockpitView {
         pose.popPose();
         pose.popPose();
         buffers.endBatch(TYPE);
+
+        // les bras du pilote (avec son skin) qui tiennent la poignee du manche
+        org.joml.Vector3f poignee = new org.joml.Vector3f(0.0F, 0.5F, 0.0F)
+                .rotateZ((float) Math.toRadians(-mancheCote * 22.0F)).rotateX((float) Math.toRadians(mancheAvant * 22.0F)).add(0.0F, -1.22F, 0.55F);
+        RenderType peau = RenderType.entityTranslucent(mc.player.getSkin().texture());
+        VertexConsumer bras = buffers.getBuffer(peau);
+        int lumierePeau = LightTexture.pack(13, 13);
+        pose.pushPose();
+        pose.mulPose(Axis.YP.rotationDegrees(-yaw));
+        bras(bras, pose, new org.joml.Vector3f(-0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(-0.05F, 0.0F, 0.0F), 40, 16, lumierePeau);
+        bras(bras, pose, new org.joml.Vector3f(0.3F, -0.55F, -0.05F), new org.joml.Vector3f(poignee).add(0.05F, 0.0F, 0.0F), 32, 48, lumierePeau);
+        pose.popPose();
+        buffers.endBatch(peau);
+    }
+
+    // un bras = une boite de l'epaule a la main, avec les uv du bras du skin (u, v = coin du bras dans le skin 64x64)
+    private static void bras(VertexConsumer vc, PoseStack pose, org.joml.Vector3f epaule, org.joml.Vector3f main, int u, int v, int light) {
+        org.joml.Vector3f dir = new org.joml.Vector3f(main).sub(epaule);
+        float l = dir.length();
+        pose.pushPose();
+        pose.translate(epaule.x, epaule.y, epaule.z);
+        pose.mulPose(new org.joml.Quaternionf().rotationTo(new org.joml.Vector3f(0.0F, 0.0F, 1.0F), dir.normalize()));
+        PoseStack.Pose p = pose.last();
+        float w = 0.07F;
+        // les 4 faces longues (de l'epaule en haut du skin a la main en bas) et le bout du poing
+        float[][] cotes = {{-w, -w, -w, w}, {-w, w, w, w}, {w, w, w, -w}, {w, -w, -w, -w}};
+        for (int i = 0; i < 4; i++) {
+            float[] c = cotes[i];
+            float u0 = (u + i * 4) / 64.0F, u1 = (u + i * 4 + 4) / 64.0F, v0 = (v + 4) / 64.0F, v1 = (v + 16) / 64.0F;
+            float nx = (c[0] + c[2]) / 2, ny = (c[1] + c[3]) / 2;
+            sommet(vc, p, c[0], c[1], 0, u0, v0, light, nx, ny, 0);
+            sommet(vc, p, c[0], c[1], l, u0, v1, light, nx, ny, 0);
+            sommet(vc, p, c[2], c[3], l, u1, v1, light, nx, ny, 0);
+            sommet(vc, p, c[2], c[3], 0, u1, v0, light, nx, ny, 0);
+        }
+        float bu0 = (u + 8) / 64.0F, bu1 = (u + 12) / 64.0F, bv0 = v / 64.0F, bv1 = (v + 4) / 64.0F;
+        sommet(vc, p, -w, -w, l, bu0, bv0, light, 0, 0, 1);
+        sommet(vc, p, -w, w, l, bu0, bv1, light, 0, 0, 1);
+        sommet(vc, p, w, w, l, bu1, bv1, light, 0, 0, 1);
+        sommet(vc, p, w, -w, l, bu1, bv0, light, 0, 0, 1);
+        pose.popPose();
+    }
+
+    private static void sommet(VertexConsumer vc, PoseStack.Pose p, float x, float y, float z, float u, float v, int light, float nx, float ny, float nz) {
+        vc.addVertex(p, x, y, z).setColor(0xFFFFFFFF).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(p, nx, ny, nz);
     }
 
     // une surface en metal decoupee en petites plaques, chacune d'un gris un tout petit peu different
