@@ -322,6 +322,10 @@ public class SubmarineInterior {
         if (player.isOnPortalCooldown() || !(player.getVehicle() instanceof Submarine sub) || !sub.isAlive()) return;
         player.stopRiding();
         TO_CABIN.put(player.getUUID(), sub.getUUID());
+        if (!player.getData(net.ussm.the_shell.init.ModAttachments.CABIN_BUTTON_USED)) {
+            player.setData(net.ussm.the_shell.init.ModAttachments.CABIN_BUTTON_USED, true);
+            player.syncData(net.ussm.the_shell.init.ModAttachments.CABIN_BUTTON_USED);
+        }
     }
 
     @SubscribeEvent

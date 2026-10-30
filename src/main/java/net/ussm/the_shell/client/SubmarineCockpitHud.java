@@ -32,7 +32,7 @@ public class SubmarineCockpitHud {
         g.fill(x + 1, y + 1, x + 1 + Math.round((w - 2) * energy), y + 5, color);
         g.drawString(mc.font, Component.translatable("hud.the_shell.submarine.energy", Math.round(energy * 100)), x, y - 11, 0xFFD8E2E8);
         if (sub.getTier() >= 3) sonar(mc, g, sub, x + w, y - 24);
-        if (SubmarineCockpitView.regardeBouton(mc, sub)) {
+        if (!mc.player.getData(net.ussm.the_shell.init.ModAttachments.CABIN_BUTTON_USED) && SubmarineCockpitView.regardeBouton(mc, sub)) {
             Component aide = Component.translatable("hud.the_shell.submarine.cabin_button");
             g.drawString(mc.font, aide, (g.guiWidth() - mc.font.width(aide)) / 2, g.guiHeight() / 2 + 12, 0xFFFFE27A);
         }

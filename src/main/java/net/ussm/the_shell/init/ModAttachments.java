@@ -35,6 +35,14 @@ public class ModAttachments {
             .sync((holder, to) -> holder == to, ByteBufCodecs.VAR_INT)
             .build());
 
+    // deja descendu une fois par le bouton du cockpit : on n'affiche plus l'aide
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> CABIN_BUTTON_USED =
+        ATTACHMENT_TYPES.register("cabin_button_used", () -> AttachmentType.builder(() -> false)
+            .serialize(Codec.BOOL)
+            .sync((holder, to) -> holder == to, ByteBufCodecs.BOOL)
+            .copyOnDeath()
+            .build());
+
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
     }
