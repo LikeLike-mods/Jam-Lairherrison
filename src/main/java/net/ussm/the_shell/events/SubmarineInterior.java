@@ -99,11 +99,11 @@ public class SubmarineInterior {
     // tournes dans le meme sens que lui (son avant = l'avant de la cabine). des barrieres tout autour pour que l'eau reste en place
     private static final int[][] DANS_LA_CABINE = {{3, 3, 3, 11, 14, 19}, {11, 5, 4, 19, 10, 10}, {11, 5, 12, 19, 10, 18}, {-6, 5, 12, 3, 10, 20}};
 
-    private static void mirror(ServerLevel inside, int cabin, CompoundTag where) {
+    private static void mirror(ServerLevel inside, int cabin, CompoundTag where, int tier) {
         ServerLevel world = inside.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(where.getString("Dim"))));
         if (world == null) return;
         BlockPos sub = BlockPos.containing(where.getDouble("X"), where.getDouble("Y"), where.getDouble("Z"));
-        world.getChunkSource().addRegionTicket(net.minecraft.server.level.TicketType.PORTAL, new net.minecraft.world.level.ChunkPos(sub), 2, sub);
+        world.getChunkSource().addRegionTicket(net.minecraft.server.level.TicketType.PORTAL, new net.minecraft.world.level.ChunkPos(sub), 3, sub);
         net.minecraft.world.level.block.Rotation versCabine = switch (net.minecraft.core.Direction.fromYRot(where.getFloat("Yaw"))) {
             case EAST -> net.minecraft.world.level.block.Rotation.COUNTERCLOCKWISE_90;
             case SOUTH -> net.minecraft.world.level.block.Rotation.CLOCKWISE_180;
@@ -116,16 +116,17 @@ public class SubmarineInterior {
             default -> versCabine;
         };
         BlockPos c = corner(cabin);
-        for (int lx = -12; lx <= 12; lx++) {
-            for (int ly = -8; ly <= 10; ly++) {
-                for (int lz = -16; lz <= 14; lz++) {
+        for (int lx = -24; lx <= 24; lx++) {
+            for (int ly = -14; ly <= 16; ly++) {
+                for (int lz = -28; lz <= 26; lz++) {
                     int tx = 7 + lx, ty = 6 + ly, tz = 11 + lz;
                     boolean cabine = false;
-                    for (int[] b : DANS_LA_CABINE) {
+                    for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
+                        int[] b = DANS_LA_CABINE[n];
                         if (tx >= b[0] && tx <= b[3] && ty >= b[1] && ty <= b[4] && tz >= b[2] && tz <= b[5]) { cabine = true; break; }
                     }
                     if (cabine) continue;
-                    boolean bord = Math.abs(lx) == 12 || ly == -8 || ly == 10 || lz == -16 || lz == 14;
+                    boolean bord = Math.abs(lx) == 24 || ly == -14 || ly == 16 || lz == -28 || lz == 26;
                     net.minecraft.world.level.block.state.BlockState st = bord ? net.minecraft.world.level.block.Blocks.BARRIER.defaultBlockState()
                             : world.getBlockState(sub.offset(new BlockPos(lx, ly, lz).rotate(versMonde))).rotate(versCabine);
                     BlockPos target = c.offset(tx, ty, tz);
@@ -182,7 +183,13 @@ public class SubmarineInterior {
             }
         }
         cabins.setExtended(cabin, submarine.getTier());
-        mirror(inside, cabin, cabins.subs.get(cabin));
+        // les anciennes cabines avaient des hublots qui donnaient sur les pieces d'amelioration : on les bouche
+        for (BlockPos h : new BlockPos[]{new BlockPos(11, 7, 7), new BlockPos(11, 7, 15), new BlockPos(3, 7, 15)}) {
+            if (inside.getBlockState(corner.offset(h)).is(net.ussm.the_shell.init.ModBlocks.REINFORCED_GLASS.get())) {
+                inside.setBlock(corner.offset(h), net.ussm.the_shell.init.ModBlocks.METAL_PLATING.get().defaultBlockState(), Block.UPDATE_CLIENTS);
+            }
+        }
+        mirror(inside, cabin, cabins.subs.get(cabin), cabins.extended(cabin));
         player.setPortalCooldown(20);
         player.changeDimension(new DimensionTransition(inside, Vec3.atLowerCornerOf(corner).add(ARRIVAL), Vec3.ZERO, 180.0F, 0.0F, DimensionTransition.DO_NOTHING));
     }
@@ -267,11 +274,11 @@ public class SubmarineInterior {
             SEAT_LATER.remove(player.getUUID());
             if (player.serverLevel().getEntity(seat) instanceof Submarine sub && !sub.isVehicle() && player.distanceToSqr(sub) < 36) player.startRiding(sub);
         }
-        if (player.level().dimension() == INTERIOR && player.tickCount % 40 == 0) {
+        if (player.level().dimension() == INTERIOR && player.tickCount % 60 == 0) {
             int c = Math.floorDiv((int) Math.floor(player.getX()) + SPACING / 2, SPACING);
             CompoundTag w = Cabins.get(player.server).subs.get(c);
             if (w != null) {
-                mirror(player.serverLevel(), c, w);
+                mirror(player.serverLevel(), c, w, Cabins.get(player.server).extended(c));
                 fishes(player.serverLevel(), c, w);
             }
         }
