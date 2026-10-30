@@ -100,6 +100,13 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.interiorId = id;
     }
 
+    // on ne le casse qu'accroupi : sinon un clic rate en minant a cote (ou en tapant un poisson) le fait disparaitre, d'un coup en creatif
+    @Override
+    public boolean hurt(net.minecraft.world.damagesource.DamageSource source, float amount) {
+        if (!(source.getEntity() instanceof Player player) || !player.isShiftKeyDown()) return false;
+        return super.hurt(source, amount);
+    }
+
     @Override
     protected Item getDropItem() {
         return ModItems.SUBMARINE.get();
