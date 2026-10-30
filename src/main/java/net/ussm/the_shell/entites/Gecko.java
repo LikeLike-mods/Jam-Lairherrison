@@ -18,7 +18,7 @@ import net.ussm.the_shell.entites.init.Mobs;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.constant.DefaultAnimations;
 
-// This gecko use geckolib
+// This gecko uses GeckoLib
 public class Gecko extends Mobs {
     public Gecko(EntityType<? extends Gecko> type, Level level) {
         super(type, level);

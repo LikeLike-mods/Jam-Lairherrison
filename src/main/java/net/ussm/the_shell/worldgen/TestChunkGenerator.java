@@ -165,7 +165,7 @@ public class TestChunkGenerator extends ChunkGenerator {
         return h;
     }
 
-    // Swamps height
+    // Swamp height
     public static final int SWAMP_LEVEL = SEA + 2;
 
     // To swamp or not to swamp, that is the question
@@ -216,7 +216,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                 float slope = length(n - s, e - w);
                 slope *= 2f;
 
-                // Blocks hashes
+                // Block hashes
                 net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(202);
                 noise.SetFrequency(0.1f);
                 noise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);

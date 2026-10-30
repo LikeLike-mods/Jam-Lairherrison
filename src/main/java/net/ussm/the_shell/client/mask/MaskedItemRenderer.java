@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Set;
 
 /*
- * Renderer d'item GeckoLib avec découpe par les volumes mask.
- * Les noms exacts des os à découper sont fournis au constructeur, descendants inclus.
+ * GeckoLib item renderer that cuts the model along the mask volumes.
+ * The exact names of the bones to cut are passed to the constructor, children included.
  */
 
 public class MaskedItemRenderer<T extends Item & GeoAnimatable> extends GeoItemRenderer<T> {

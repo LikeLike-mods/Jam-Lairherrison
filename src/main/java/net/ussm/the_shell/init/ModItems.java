@@ -32,7 +32,7 @@ public class ModItems {
     public static final DeferredItem<Item> COCONUT_SHELL = ITEMS.register("coconut_shell",
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> COCONUT_HALF = ITEMS.register("coconut_half",
-            () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperies car C PLUS PROPRE
+            () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperties, it's WAY CLEANER
 
     public static final DeferredItem<Item> BANANA = ITEMS.register("banana", () -> new BananaItem(new Item.Properties().food(ModFoodProperties.BANANA)));
 
@@ -80,7 +80,7 @@ public class ModItems {
             () -> new HoneyBottleItem(new Item.Properties()
                     .craftRemainder(Items.GLASS_BOTTLE)
                     .stacksTo(16)
-                    .food(ModFoodProperties.NECTAR))); // + Propre car voilà, go check ModFoodProperties
+                    .food(ModFoodProperties.NECTAR))); // Cleaner this way, go check ModFoodProperties
 
     public static final DeferredItem<Item> REDSTONE_PEPPER = ITEMS.register("redstone_pepper",
             () -> new Item(new Item.Properties().food(ModFoodProperties.REDSTONE_PEPPER)));

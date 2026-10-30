@@ -32,7 +32,7 @@ public final class OceanRenderer {
     private static final ResourceLocation WATER_FLOW = ResourceLocation.withDefaultNamespace("block/water_flow");
     private static final ResourceLocation WATER_OVERLAY = ResourceLocation.withDefaultNamespace("block/water_overlay");
     private static final double TAU = Math.PI * 2;
-    // First air block above the atoll sea: the generator fills water up to and including SEA.
+    // First air block above the archipelago sea: the generator fills water up to and including SEA.
     private static final int SEA_LEVEL = TestChunkGenerator.SEA + 1;
     @Nullable private static ShaderInstance shader;
     @Nullable private static ShoreMap map;

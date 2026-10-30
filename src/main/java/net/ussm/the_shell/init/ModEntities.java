@@ -50,7 +50,7 @@ public class ModEntities {
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<Submarine>> SUBMARINE = register("submarine", Submarine::new, MobCategory.MISC, 2.0F, 1.5F);
-    // leviathan d'Oesphy
+    // Oesphy's leviathan
     public static final DeferredHolder<EntityType<?>, EntityType<LeviathanEntity>> LEVIATHAN =
             ENTITY_TYPES.register("leviathan", () -> EntityType.Builder.of(LeviathanEntity::new, MobCategory.MONSTER)
                     .sized(3.4F, 3.7F)

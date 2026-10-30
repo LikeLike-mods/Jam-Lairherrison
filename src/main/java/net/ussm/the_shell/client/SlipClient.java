@@ -34,7 +34,7 @@ public class SlipClient {
     }
 
     @SubscribeEvent
-    public static void woke(ClientTickEvent.Post event) { // Do you love Wokeboard ? (Wokist wakeboard)
+    public static void woke(ClientTickEvent.Post event) { // Do you love Wokeboard? (Wokist wakeboard)
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null || !player.getData(ModAttachments.SLIPPED)) return;
         if (!Minecraft.getInstance().options.keyJump.isDown()) {
