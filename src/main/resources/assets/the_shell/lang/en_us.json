@@ -152,6 +152,7 @@
   "death.attack.the_shell.pressure": "%1$s was crushed by the pressure",
 
   "entity.the_shell.abyssal_angler": "Abyssal Anglerfish",
+  "entity.the_shell.aqua_pearl": "Underwater Ender Pearl",
   "entity.the_shell.basilosaurus": "Basilosaurus",
   "entity.the_shell.blue_whale": "Blue Whale",
   "entity.the_shell.butterfly": "Butterfly",
@@ -179,6 +180,7 @@
 
   "item.the_shell.abyssal_angler_spawn_egg": "Abyssal Anglerfish Spawn Egg",
   "item.the_shell.abyssal_scale": "Abyssal Scale",
+  "item.the_shell.aqua_pearl": "Underwater Ender Pearl",
   "item.the_shell.banana": "Banana",
   "item.the_shell.banana_bread": "Banana Bread",
   "item.the_shell.banana_chips": "Banana Chips",
@@ -332,6 +334,7 @@
 
   "tooltip.the_shell.air_bubble.details": "Placed underwater, it creates an air pocket around it for about 3 minutes: you can breathe, your bottle refills, you mine at normal speed and see clearly. Then it pops.",
   "tooltip.the_shell.air_vent.details": "Underwater, an air vent pushes you up and quickly refills your diving suit's oxygen while you stand on it.",
+  "tooltip.the_shell.aqua_pearl.details": "An ender pearl made for water: a normal pearl stops dead as soon as it hits water, this one flies underwater like in the air and falls slower. Throw it to teleport far away, even on the seafloor. Recipe: an ender pearl surrounded by 4 prismarine shards.",
   "tooltip.the_shell.banana.details": "Once eaten, you keep the peel. Bunches grow under banana tree leaves: right-click a yellow bunch to harvest it, and it grows back.",
   "tooltip.the_shell.banana_peel.details": "Drop it on the ground: whoever walks on it slips and lands on their back (press space to get up). Mobs too! Sneak to walk over it safely.",
   "tooltip.the_shell.black_pearl.details": "Dropped by the colossal squid of the abyss. Used to craft the grappling hook.",

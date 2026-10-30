@@ -152,6 +152,7 @@
   "death.attack.the_shell.pressure": "%1$s a été broyé par la pression",
 
   "entity.the_shell.abyssal_angler": "Baudroie des abysses",
+  "entity.the_shell.aqua_pearl": "Perle d'ender sous-marine",
   "entity.the_shell.basilosaurus": "Basilosaure",
   "entity.the_shell.blue_whale": "Baleine bleue",
   "entity.the_shell.butterfly": "Papillon",
@@ -179,6 +180,7 @@
 
   "item.the_shell.abyssal_angler_spawn_egg": "Œuf d'apparition de baudroie des abysses",
   "item.the_shell.abyssal_scale": "Écaille des abysses",
+  "item.the_shell.aqua_pearl": "Perle d'ender sous-marine",
   "item.the_shell.banana": "Banane",
   "item.the_shell.banana_bread": "Pain à la banane",
   "item.the_shell.banana_chips": "Chips de banane",
@@ -332,6 +334,7 @@
 
   "tooltip.the_shell.air_bubble.details": "Posée sous l'eau, elle crée une poche d'air autour d'elle pendant environ 3 minutes : on respire, la bouteille se remplit, on mine normalement et on voit clair. Puis elle éclate.",
   "tooltip.the_shell.air_vent.details": "Sous l'eau, une grille d'aération vous fait remonter, et recharge vite l'oxygène du scaphandre tant que vous êtes dessus.",
+  "tooltip.the_shell.aqua_pearl.details": "Une perle d'ender faite pour l'eau : une perle normale est freinée net dès qu'elle touche l'eau, celle-ci file sous l'eau comme dans l'air et tombe moins vite. Lance-la pour te téléporter loin, même au fond. Recette : une perle d'ender entourée de 4 éclats de prismarine.",
   "tooltip.the_shell.banana.details": "Une fois mangée, il vous reste la peau. Les régimes poussent sous les feuilles des bananiers : clic droit sur un régime jaune pour le récolter, il repoussera.",
   "tooltip.the_shell.banana_peel.details": "Posez-la par terre : qui marche dessus glisse et se retrouve sur le dos (espace pour se relever). Les mobs aussi ! Accroupi, on passe dessus sans glisser.",
   "tooltip.the_shell.black_pearl.details": "Lâchée par le calmar colossal des abysses. Sert à fabriquer le grappin.",
