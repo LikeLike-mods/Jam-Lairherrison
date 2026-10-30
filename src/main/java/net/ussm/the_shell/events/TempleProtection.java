@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
@@ -75,11 +76,24 @@ public class TempleProtection {
         return null;
     }
 
-    // taking the conch (from a chest, a pedestal, the ground...) inside a temple lifts its protection
+    // conches each player had at the last check, so only a conch picked up inside the temple counts
+    private static final Map<UUID, Integer> CONCHES = new HashMap<>();
+
+    private static int conches(ServerPlayer player) {
+        int count = 0;
+        for (ItemStack stack : player.getInventory().items) if (stack.is(ModItems.CONCH.get())) count += stack.getCount();
+        for (ItemStack stack : player.getInventory().offhand) if (stack.is(ModItems.CONCH.get())) count += stack.getCount();
+        return count;
+    }
+
+    // getting a conch (from a chest, a pedestal, the ground...) inside a temple lifts its protection;
+    // walking in with one already on you does nothing
     @SubscribeEvent
     public static void conchTaken(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.tickCount % 20 != 0) return;
-        if (!player.getInventory().hasAnyOf(Set.<Item>of(ModItems.CONCH.get()))) return;
+        int now = conches(player);
+        Integer before = CONCHES.put(player.getUUID(), now);
+        if (before == null || now <= before) return;
         ServerLevel level = player.serverLevel();
         StructureStart temple = templeAt(level, player.blockPosition());
         if (temple == null || !unlocked(level).temples.add(temple.getChunkPos().toLong())) return;
