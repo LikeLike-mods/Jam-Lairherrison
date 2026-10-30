@@ -117,8 +117,8 @@ public class SubmarineCockpitView {
         pose.translate(0.0F, -1.22F, 0.55F);
         box(vc, pose, -0.09F, 0.0F, -0.09F, 0.09F, 0.03F, 0.09F, METAL_SOMBRE, lumiere);
         box(vc, pose, -0.05F, 0.03F, -0.05F, 0.05F, 0.06F, 0.05F, 0xFF1E2226, lumiere);
-        pose.mulPose(Axis.XP.rotationDegrees(mancheAvant * 22.0F));
-        pose.mulPose(Axis.ZP.rotationDegrees(-mancheCote * 22.0F));
+        pose.mulPose(Axis.XP.rotationDegrees(-mancheAvant * 22.0F));
+        pose.mulPose(Axis.ZP.rotationDegrees(mancheCote * 22.0F));
         box(vc, pose, -0.02F, 0.06F, -0.02F, 0.02F, 0.36F, 0.02F, 0xFF8C949C, lumiere);
         box(vc, pose, -0.04F, 0.36F, -0.04F, 0.04F, 0.52F, 0.04F, 0xFF22262B, lumiere);
         for (float y = 0.39F; y < 0.52F; y += 0.04F) box(vc, pose, -0.043F, y, -0.043F, 0.043F, y + 0.012F, 0.043F, 0xFF3A4048, lumiere);
@@ -130,7 +130,7 @@ public class SubmarineCockpitView {
 
         // les bras du pilote (avec son skin) qui tiennent la poignee du manche
         org.joml.Vector3f poignee = new org.joml.Vector3f(0.0F, 0.5F, 0.0F)
-                .rotateZ((float) Math.toRadians(-mancheCote * 22.0F)).rotateX((float) Math.toRadians(mancheAvant * 22.0F)).add(0.0F, -1.22F, 0.55F);
+                .rotateZ((float) Math.toRadians(mancheCote * 22.0F)).rotateX((float) Math.toRadians(-mancheAvant * 22.0F)).add(0.0F, -1.22F, 0.55F);
         RenderType peau = RenderType.entityTranslucent(mc.player.getSkin().texture());
         VertexConsumer bras = buffers.getBuffer(peau);
         int lumierePeau = LightTexture.pack(13, 13);
