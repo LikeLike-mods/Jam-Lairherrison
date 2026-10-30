@@ -133,41 +133,32 @@ public class SubmarineInterior {
             default -> versCabine;
         };
         BlockPos c = corner(cabin);
-        // la cabine est bien plus grande que la coque : on ecarte le dehors pour que ce qui touche le sous-marin touche la cabine,
-        // sinon une falaise a 8 blocs se retrouve collee aux hublots
-        int[] box = {99, 99, 99, -99, -99, -99};
-        for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
-            for (int k = 0; k < 3; k++) {
-                box[k] = Math.min(box[k], DANS_LA_CABINE[n][k]);
-                box[k + 3] = Math.max(box[k + 3], DANS_LA_CABINE[n][k + 3]);
-            }
-        }
+        // la cabine est plus grosse que la coque : le terrain proche du vrai sous-marin tomberait contre les vitres.
+        // on garde une bulle de 3 blocs d'eau (ou d'air) autour des pieces, le reste est copie tel quel
+        net.minecraft.world.level.block.state.BlockState vide = world.getFluidState(sub).is(net.minecraft.tags.FluidTags.WATER)
+                ? net.minecraft.world.level.block.Blocks.WATER.defaultBlockState() : net.minecraft.world.level.block.Blocks.AIR.defaultBlockState();
         for (int lx = -40; lx <= 40; lx++) {
             if (Math.floorMod(lx, 8) != passe) continue;
             for (int ly = -16; ly <= 24; ly++) {
                 for (int lz = -36; lz <= 37; lz++) {
                     int tx = 7 + lx, ty = 6 + ly, tz = 11 + lz;
-                    boolean cabine = false;
+                    int proche = 99;
                     for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
                         int[] b = DANS_LA_CABINE[n];
-                        if (tx >= b[0] && tx <= b[3] && ty >= b[1] && ty <= b[4] && tz >= b[2] && tz <= b[5]) { cabine = true; break; }
+                        int d = Math.max(Math.max(Math.max(b[0] - tx, tx - b[3]), Math.max(b[1] - ty, ty - b[4])), Math.max(b[2] - tz, tz - b[5]));
+                        proche = Math.min(proche, d);
                     }
-                    if (cabine) continue;
+                    if (proche <= 0) continue;
                     boolean bord = Math.abs(lx) == 40 || ly == -16 || ly == 24 || lz == -36 || lz == 37;
                     net.minecraft.world.level.block.state.BlockState st = bord ? net.minecraft.world.level.block.Blocks.BARRIER.defaultBlockState()
-                            : world.getBlockState(sub.offset(new BlockPos(ecarte(tx, box[0], box[3]), ecarte(ty, box[1], box[4]), ecarte(tz, box[2], box[5])).rotate(versMonde))).rotate(versCabine);
+                            : world.getBlockState(sub.offset(new BlockPos(lx, ly, lz).rotate(versMonde))).rotate(versCabine);
+                    if (!bord && proche <= 3 && !st.isAir() && st.getFluidState().isEmpty()) st = vide;
                     BlockPos target = c.offset(tx, ty, tz);
                     // pas de mises a jour des voisins : sinon un cornichon de mer (ou une algue) pose avant son support casse et lache son objet
                     if (inside.getBlockState(target) != st) inside.setBlock(target, st, Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_SUPPRESS_DROPS);
                 }
             }
         }
-    }
-
-    // dans la cabine on tasse tout sur la coque (1 bloc de chaque cote du centre), dehors on garde les vraies distances depuis la coque
-    private static int ecarte(int t, int min, int max) {
-        double mid = (min + max) / 2.0, half = (max - min) / 2.0, d = t - mid;
-        return (int) Math.round(Math.abs(d) <= half ? d / half : Math.signum(d) * (Math.abs(d) - half + 1));
     }
 
     // les hublots montrent la mer qu'il y a vraiment autour du sous-marin : claire pres de la surface, sombre au fond, noire dans les abysses
