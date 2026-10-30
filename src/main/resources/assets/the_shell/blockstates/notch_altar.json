@@ -1,22 +1,94 @@
 {
   "variants": {
-    "solved=false,tier=1": {
+    "facing=north,solved=false,tier=1": {
       "model": "the_shell:block/notch_altar_1"
     },
-    "solved=true,tier=1": {
+    "facing=east,solved=false,tier=1": {
+      "model": "the_shell:block/notch_altar_1",
+      "y": 90
+    },
+    "facing=south,solved=false,tier=1": {
+      "model": "the_shell:block/notch_altar_1",
+      "y": 180
+    },
+    "facing=west,solved=false,tier=1": {
+      "model": "the_shell:block/notch_altar_1",
+      "y": 270
+    },
+    "facing=north,solved=true,tier=1": {
       "model": "the_shell:block/notch_altar_1_solved"
     },
-    "solved=false,tier=2": {
+    "facing=east,solved=true,tier=1": {
+      "model": "the_shell:block/notch_altar_1_solved",
+      "y": 90
+    },
+    "facing=south,solved=true,tier=1": {
+      "model": "the_shell:block/notch_altar_1_solved",
+      "y": 180
+    },
+    "facing=west,solved=true,tier=1": {
+      "model": "the_shell:block/notch_altar_1_solved",
+      "y": 270
+    },
+    "facing=north,solved=false,tier=2": {
       "model": "the_shell:block/notch_altar_2"
     },
-    "solved=true,tier=2": {
+    "facing=east,solved=false,tier=2": {
+      "model": "the_shell:block/notch_altar_2",
+      "y": 90
+    },
+    "facing=south,solved=false,tier=2": {
+      "model": "the_shell:block/notch_altar_2",
+      "y": 180
+    },
+    "facing=west,solved=false,tier=2": {
+      "model": "the_shell:block/notch_altar_2",
+      "y": 270
+    },
+    "facing=north,solved=true,tier=2": {
       "model": "the_shell:block/notch_altar_2_solved"
     },
-    "solved=false,tier=3": {
+    "facing=east,solved=true,tier=2": {
+      "model": "the_shell:block/notch_altar_2_solved",
+      "y": 90
+    },
+    "facing=south,solved=true,tier=2": {
+      "model": "the_shell:block/notch_altar_2_solved",
+      "y": 180
+    },
+    "facing=west,solved=true,tier=2": {
+      "model": "the_shell:block/notch_altar_2_solved",
+      "y": 270
+    },
+    "facing=north,solved=false,tier=3": {
       "model": "the_shell:block/notch_altar_3"
     },
-    "solved=true,tier=3": {
+    "facing=east,solved=false,tier=3": {
+      "model": "the_shell:block/notch_altar_3",
+      "y": 90
+    },
+    "facing=south,solved=false,tier=3": {
+      "model": "the_shell:block/notch_altar_3",
+      "y": 180
+    },
+    "facing=west,solved=false,tier=3": {
+      "model": "the_shell:block/notch_altar_3",
+      "y": 270
+    },
+    "facing=north,solved=true,tier=3": {
       "model": "the_shell:block/notch_altar_3_solved"
+    },
+    "facing=east,solved=true,tier=3": {
+      "model": "the_shell:block/notch_altar_3_solved",
+      "y": 90
+    },
+    "facing=south,solved=true,tier=3": {
+      "model": "the_shell:block/notch_altar_3_solved",
+      "y": 180
+    },
+    "facing=west,solved=true,tier=3": {
+      "model": "the_shell:block/notch_altar_3_solved",
+      "y": 270
     }
   }
 }

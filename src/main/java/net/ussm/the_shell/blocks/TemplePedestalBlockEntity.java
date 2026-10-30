@@ -44,7 +44,10 @@ public class TemplePedestalBlockEntity extends BlockEntity {
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        return saveWithoutMetadata(registries);
+        // jamais vide : un paquet vide est ignore par le client, qui garderait l'objet affiche
+        CompoundTag tag = saveWithoutMetadata(registries);
+        tag.putBoolean("Maj", true);
+        return tag;
     }
 
     @Override

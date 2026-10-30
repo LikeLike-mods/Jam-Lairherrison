@@ -333,7 +333,7 @@ public class ModBlocks {
 
     // le temple de la jungle : autel de Notch (questions), sceau (porte qui s'ouvre), piedestal (la conque)
     public static final DeferredBlock<Block> NOTCH_ALTAR = registerBlock("notch_altar",
-            () -> new net.ussm.the_shell.blocks.NotchAltarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).strength(-1.0F, 3600000.0F)
+            () -> new net.ussm.the_shell.blocks.NotchAltarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).strength(-1.0F, 3600000.0F).noOcclusion()
                     .lightLevel(s -> s.getValue(net.ussm.the_shell.blocks.NotchAltarBlock.RESOLU) ? 13 : 5)));
     public static final DeferredBlock<Block> TEMPLE_SEAL = registerBlock("temple_seal",
             () -> new net.ussm.the_shell.blocks.TempleSealBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSSY_STONE_BRICKS).strength(-1.0F, 3600000.0F).lightLevel(s -> 4)));

@@ -1,8 +1,9 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "the_shell:block/notch_altar_base",
   "textures": {
+    "front": "the_shell:block/notch_altar_front_on",
+    "side": "the_shell:block/notch_altar_side_on",
     "top": "the_shell:block/notch_altar_top_3",
-    "bottom": "the_shell:block/notch_altar_bottom",
-    "side": "the_shell:block/notch_altar_side_on"
+    "bottom": "the_shell:block/notch_altar_bottom"
   }
 }
