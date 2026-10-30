@@ -18,6 +18,13 @@ public class DeepSeaFog {
     @SubscribeEvent
     public static void fog(ViewportEvent.RenderFog event) {
         Minecraft mc = Minecraft.getInstance();
+        // dans la cabine du sous-marin : une brume d'eau sombre qui cache le bout du dehors recopie
+        if (mc.level != null && mc.level.dimension() == net.ussm.the_shell.events.SubmarineInterior.INTERIOR) {
+            event.setNearPlaneDistance(event.getMode() == FogRenderer.FogMode.FOG_SKY ? 0.0F : 14.0F);
+            event.setFarPlaneDistance(30.0F);
+            event.setCanceled(true);
+            return;
+        }
         if (mc.level == null || event.getCamera().getFluidInCamera() != FogType.WATER) return;
         if (mc.player != null && (mc.player.isCreative() || mc.player.isSpectator())) return;
         double y = event.getCamera().getPosition().y;
@@ -53,6 +60,12 @@ public class DeepSeaFog {
     @SubscribeEvent
     public static void couleur(ViewportEvent.ComputeFogColor event) {
         Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null && mc.level.dimension() == net.ussm.the_shell.events.SubmarineInterior.INTERIOR) {
+            event.setRed(0.02F);
+            event.setGreen(0.05F);
+            event.setBlue(0.09F);
+            return;
+        }
         if (mc.level == null || event.getCamera().getFluidInCamera() != FogType.WATER) return;
         float t = profondeur(mc, event.getCamera().getPosition().y);
         if (t <= 0) return;

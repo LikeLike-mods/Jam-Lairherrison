@@ -36,7 +36,7 @@ public class SubmarineInterior {
     public static final ResourceKey<Level> INTERIOR = ResourceKey.create(Registries.DIMENSION, id("submarine_interior"));
     public static final TagKey<Block> HULL = TagKey.create(Registries.BLOCK, id("submarine_hull"));
     private static final ResourceLocation CABIN = id("submarine/interior");
-    private static final int SPACING = 64;
+    private static final int SPACING = 128;
     private static final int BOTTOM = 64;
     // reperes dans la cabine depuis son coin : on arrive au milieu, sous 1.5 on est tombe par la trappe, au-dessus de 8.5 on a monte l'echelle
     // (la coque est decalee de 3 dans le fichier : tout autour il y a de l'eau avec des poissons, puis du noir)
@@ -99,7 +99,8 @@ public class SubmarineInterior {
     // tournes dans le meme sens que lui (son avant = l'avant de la cabine). des barrieres tout autour pour que l'eau reste en place
     private static final int[][] DANS_LA_CABINE = {{3, 3, 3, 11, 14, 19}, {11, 5, 4, 19, 10, 10}, {11, 5, 12, 19, 10, 18}, {-6, 5, 12, 3, 10, 20}};
 
-    private static void mirror(ServerLevel inside, int cabin, CompoundTag where, int tier) {
+    // tout le volume est refait en 8 passes (une tranche sur 8 a chaque fois) pour ne pas faire ramer
+    private static void mirror(ServerLevel inside, int cabin, CompoundTag where, int tier, int passe) {
         ServerLevel world = inside.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(where.getString("Dim"))));
         if (world == null) return;
         BlockPos sub = BlockPos.containing(where.getDouble("X"), where.getDouble("Y"), where.getDouble("Z"));
@@ -116,9 +117,10 @@ public class SubmarineInterior {
             default -> versCabine;
         };
         BlockPos c = corner(cabin);
-        for (int lx = -24; lx <= 24; lx++) {
-            for (int ly = -14; ly <= 16; ly++) {
-                for (int lz = -28; lz <= 26; lz++) {
+        for (int lx = -40; lx <= 40; lx++) {
+            if (Math.floorMod(lx, 8) != passe) continue;
+            for (int ly = -16; ly <= 24; ly++) {
+                for (int lz = -36; lz <= 37; lz++) {
                     int tx = 7 + lx, ty = 6 + ly, tz = 11 + lz;
                     boolean cabine = false;
                     for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
@@ -126,7 +128,7 @@ public class SubmarineInterior {
                         if (tx >= b[0] && tx <= b[3] && ty >= b[1] && ty <= b[4] && tz >= b[2] && tz <= b[5]) { cabine = true; break; }
                     }
                     if (cabine) continue;
-                    boolean bord = Math.abs(lx) == 24 || ly == -14 || ly == 16 || lz == -28 || lz == 26;
+                    boolean bord = Math.abs(lx) == 40 || ly == -16 || ly == 24 || lz == -36 || lz == 37;
                     net.minecraft.world.level.block.state.BlockState st = bord ? net.minecraft.world.level.block.Blocks.BARRIER.defaultBlockState()
                             : world.getBlockState(sub.offset(new BlockPos(lx, ly, lz).rotate(versMonde))).rotate(versCabine);
                     BlockPos target = c.offset(tx, ty, tz);
@@ -189,7 +191,7 @@ public class SubmarineInterior {
                 inside.setBlock(corner.offset(h), net.ussm.the_shell.init.ModBlocks.METAL_PLATING.get().defaultBlockState(), Block.UPDATE_CLIENTS);
             }
         }
-        mirror(inside, cabin, cabins.subs.get(cabin), cabins.extended(cabin));
+        for (int passe = 0; passe < 8; passe++) mirror(inside, cabin, cabins.subs.get(cabin), cabins.extended(cabin), passe);
         player.setPortalCooldown(20);
         player.changeDimension(new DimensionTransition(inside, Vec3.atLowerCornerOf(corner).add(ARRIVAL), Vec3.ZERO, 180.0F, 0.0F, DimensionTransition.DO_NOTHING));
     }
@@ -274,12 +276,12 @@ public class SubmarineInterior {
             SEAT_LATER.remove(player.getUUID());
             if (player.serverLevel().getEntity(seat) instanceof Submarine sub && !sub.isVehicle() && player.distanceToSqr(sub) < 36) player.startRiding(sub);
         }
-        if (player.level().dimension() == INTERIOR && player.tickCount % 60 == 0) {
+        if (player.level().dimension() == INTERIOR && player.tickCount % 10 == 0) {
             int c = Math.floorDiv((int) Math.floor(player.getX()) + SPACING / 2, SPACING);
             CompoundTag w = Cabins.get(player.server).subs.get(c);
             if (w != null) {
-                mirror(player.serverLevel(), c, w, Cabins.get(player.server).extended(c));
-                fishes(player.serverLevel(), c, w);
+                mirror(player.serverLevel(), c, w, Cabins.get(player.server).extended(c), (player.tickCount / 10) % 8);
+                if (player.tickCount % 40 == 0) fishes(player.serverLevel(), c, w);
             }
         }
         UUID back = TO_CABIN.remove(player.getUUID());
@@ -385,7 +387,7 @@ public class SubmarineInterior {
             cabins.next = Math.max(1, tag.getInt("Next"));
             CompoundTag subs = tag.getCompound("Subs");
             for (String key : subs.getAllKeys()) cabins.subs.put(Integer.parseInt(key), subs.getCompound(key));
-            for (int cabin : tag.getIntArray("Built4")) cabins.built.add(cabin);
+            for (int cabin : tag.getIntArray("Built5")) cabins.built.add(cabin);
             CompoundTag ext = tag.getCompound("Extended");
             for (String key : ext.getAllKeys()) cabins.extendedTo.put(Integer.parseInt(key), ext.getInt(key));
             return cabins;
@@ -397,7 +399,7 @@ public class SubmarineInterior {
             CompoundTag subsTag = new CompoundTag();
             subs.forEach((cabin, where) -> subsTag.put(String.valueOf(cabin), where));
             tag.put("Subs", subsTag);
-            tag.putIntArray("Built4", built.stream().mapToInt(Integer::intValue).toArray());
+            tag.putIntArray("Built5", built.stream().mapToInt(Integer::intValue).toArray());
             CompoundTag ext = new CompoundTag();
             extendedTo.forEach((cabin, tier) -> ext.putInt(String.valueOf(cabin), tier));
             tag.put("Extended", ext);
