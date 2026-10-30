@@ -104,7 +104,30 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     @Override
     public boolean hurt(net.minecraft.world.damagesource.DamageSource source, float amount) {
         if (!(source.getEntity() instanceof Player player) || !player.isShiftKeyDown()) return false;
+        // en creatif le jeu le supprime sans rien lacher : on veut quand meme l'objet, sinon on perd la cabine
+        if (player.getAbilities().instabuild && !this.level().isClientSide && !this.isRemoved()) {
+            destroy(source);
+            return true;
+        }
         return super.hurt(source, amount);
+    }
+
+    // casse : l'objet garde les ameliorations, la batterie et la cabine (on la retrouve en le reposant)
+    @Override
+    protected void destroy(net.minecraft.world.damagesource.DamageSource source) {
+        this.kill();
+        if (!this.level().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOENTITYDROPS)) return;
+        net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(getDropItem());
+        stack.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, this.getCustomName());
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("Tier", getTier());
+        tag.putInt("Energy", getEnergy());
+        if (interiorId >= 0) {
+            tag.putInt("Interior", interiorId);
+            net.ussm.the_shell.events.SubmarineInterior.store(this);
+        }
+        stack.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(tag));
+        this.spawnAtLocation(stack);
     }
 
     @Override

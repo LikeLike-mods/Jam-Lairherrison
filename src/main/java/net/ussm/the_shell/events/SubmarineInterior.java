@@ -289,6 +289,25 @@ public class SubmarineInterior {
         return null;
     }
 
+    // sous-marin casse : sa cabine attend dans l'objet
+    public static void store(Submarine submarine) {
+        if (!(submarine.level() instanceof ServerLevel level) || submarine.getInteriorId() < 0) return;
+        Cabins cabins = Cabins.get(level.getServer());
+        cabins.remember(submarine.getInteriorId(), submarine);
+        cabins.subs.get(submarine.getInteriorId()).putBoolean("Stored", true);
+        cabins.setDirty();
+    }
+
+    // on le repose : il reprend sa cabine, sauf si elle est deja reprise (objet copie en creatif) et la il en aura une neuve
+    public static boolean claim(ServerLevel level, int cabin) {
+        Cabins cabins = Cabins.get(level.getServer());
+        CompoundTag where = cabins.subs.get(cabin);
+        if (where == null || !where.getBoolean("Stored")) return false;
+        where.remove("Stored");
+        cabins.setDirty();
+        return true;
+    }
+
     public static void remember(Submarine submarine) {
         if (submarine.level() instanceof ServerLevel level) Cabins.get(level.getServer()).remember(submarine.getInteriorId(), submarine);
     }
