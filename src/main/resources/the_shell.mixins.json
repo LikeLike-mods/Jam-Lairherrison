@@ -12,6 +12,7 @@
   "client": [
     "ClientLevelDataMixin",
     "client.ItemInHandRendererMixin",
-    "client.GameRendererMixin"
+    "client.GameRendererMixin",
+    "client.HumanoidModelMixin"
   ]
 }
