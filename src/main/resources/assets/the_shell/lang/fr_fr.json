@@ -200,6 +200,9 @@
   "entity.the_shell.vampire_squid": "Calmar vampire",
   "entity.the_shell.yeti_crab": "Crabe yéti",
 
+  "gamerule.theShellTempleProtection": "Protection du temple de la jungle",
+  "gamerule.theShellTempleProtection.description": "Empêche de casser et de poser des blocs dans le temple de la jungle tant que les épreuves de Notch ne sont pas réussies (toujours actif dans le Grand Temple).",
+
   "hud.the_shell.sonar": "Sonar : faille à %s m %s",
   "hud.the_shell.sonar.none": "Sonar : pas de faille proche",
   "hud.the_shell.submarine.cabin_button": "Clic droit : descendre dans la cabine",
@@ -311,6 +314,7 @@
   "message.the_shell.submarine.upgrade_order": "Il faut d'abord le kit fer, puis diamant, puis netherite",
   "message.the_shell.submarine.upgraded": "Sous-marin amélioré au niveau %s : nouvelle pièce dans la cabine, et il va plus vite !",
   "message.the_shell.temple.locked": "Le temple te protège : rien à casser ni à poser tant que les 3 épreuves de Notch ne sont pas réussies.",
+  "message.the_shell.temple.unlocked": "La conque est prise : le temple n'est plus protégé.",
 
   "painting.the_shell.dancing_parrot.author": "Anonyme",
   "painting.the_shell.dancing_parrot.title": "Perroquet en fête",

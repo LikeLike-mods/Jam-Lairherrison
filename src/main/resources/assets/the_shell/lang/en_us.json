@@ -200,6 +200,9 @@
   "entity.the_shell.vampire_squid": "Vampire Squid",
   "entity.the_shell.yeti_crab": "Yeti Crab",
 
+  "gamerule.theShellTempleProtection": "Jungle temple protection",
+  "gamerule.theShellTempleProtection.description": "Prevents breaking and placing blocks in the jungle temple until Notch's trials are solved (always on in the Grand Temple).",
+
   "hud.the_shell.sonar": "Sonar: rift %s m %s",
   "hud.the_shell.sonar.none": "Sonar: no rift nearby",
   "hud.the_shell.submarine.cabin_button": "Right-click: go down to the cabin",
@@ -311,6 +314,7 @@
   "message.the_shell.submarine.upgrade_order": "Use the iron kit first, then diamond, then netherite",
   "message.the_shell.submarine.upgraded": "Submarine upgraded to level %s: a new room in the cabin, and it goes faster!",
   "message.the_shell.temple.locked": "The temple protects itself: nothing can be broken or placed until Notch's 3 trials are passed.",
+  "message.the_shell.temple.unlocked": "The conch is taken: the temple is no longer protected.",
 
   "painting.the_shell.dancing_parrot.author": "Anonymous",
   "painting.the_shell.dancing_parrot.title": "Party Parrot",

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:redstone_wire",
+    "minecraft:tripwire",
+    "minecraft:tripwire_hook",
+    "minecraft:cobweb",
+    "minecraft:vine",
+    "minecraft:glow_lichen",
+    "minecraft:torch",
+    "minecraft:wall_torch",
+    "minecraft:redstone_torch",
+    "minecraft:redstone_wall_torch",
+    "minecraft:lantern"
+  ]
+}
