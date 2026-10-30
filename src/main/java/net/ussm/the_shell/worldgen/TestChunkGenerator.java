@@ -246,9 +246,12 @@ public class TestChunkGenerator extends ChunkGenerator {
                     topWater = ModBlocks.GREY_GRANITE.get().defaultBlockState();
                 }
                 else if (swampiness >= 0.5f) {
-                    boolean pool = Math.round(n) >= Math.round(h) && Math.round(s) >= Math.round(h)
+                    boolean pool = Math.round(h) >= SWAMP_LEVEL && Math.round(n) >= Math.round(h) && Math.round(s) >= Math.round(h)
                             && Math.round(e) >= Math.round(h) && Math.round(w) >= Math.round(h);
-                    if (pool) topLand = Blocks.WATER.defaultBlockState();
+                    if (pool) {
+                        topLand = Blocks.WATER.defaultBlockState();
+                        h -= 1f;
+                    }
                     else topLand = Blocks.MUD.defaultBlockState();
                     top2Land = Blocks.MUD.defaultBlockState();
                 }

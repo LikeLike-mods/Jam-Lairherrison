@@ -11,6 +11,8 @@
   "advancement.the_shell.pitcher_plant_nectar.description": "Récolter le nectar dans la Népenthès",
   "advancement.the_shell.witness_whale_breach.title": "Le Grand Bleu",
   "advancement.the_shell.witness_whale_breach.description": "Observez une baleine bleue sauter en regardant dans une longue-vue.",
+  "advancement.the_shell.yellow_submarine.title": "Yellow Submarine",
+  "advancement.the_shell.yellow_submarine.description": "Obtenir un sous-marin.",
   "advancement.the_shell.abyss.title": "Abysses",
   "advancement.the_shell.abyss.description" : "Un lieu mort?",
   "advancement.the_shell.abyss_depth.title": "No man's land",
@@ -355,5 +357,7 @@
   "tooltip.the_shell.submarine_upgrade_diamond.details": "Clic droit sur un sous-marin déjà amélioré en fer. Ajoute une deuxième pièce à la cabine et encore de la vitesse.",
   "tooltip.the_shell.submarine_upgrade_iron.details": "Clic droit sur un sous-marin pour l'améliorer. Les kits se posent dans l'ordre : fer, diamant, puis netherite. Celui-ci ajoute une pièce à la cabine et un peu de vitesse.",
   "tooltip.the_shell.submarine_upgrade_netherite.details": "Clic droit sur un sous-marin déjà amélioré en diamant. Ajoute une troisième pièce, encore de la vitesse, et un sonar qui indique depuis le cockpit la direction et la distance de la faille la plus proche.",
-  "tooltip.the_shell.tank.details": "Réservoir d'air : clic droit pour remplir à fond l'oxygène du scaphandre, et la bouteille d'oxygène que vous tenez en main. Il marche partout, posez-en un près de votre base."
+  "tooltip.the_shell.tank.details": "Réservoir d'air : clic droit pour remplir à fond l'oxygène du scaphandre, et la bouteille d'oxygène que vous tenez en main. Il marche partout, posez-en un près de votre base.",
+  "advancement.the_shel.yellow_submarine.title": "Yellow Submarine",
+  "advancement.the_shel.yellow_submarine.description": "Get a submarine."
 }
