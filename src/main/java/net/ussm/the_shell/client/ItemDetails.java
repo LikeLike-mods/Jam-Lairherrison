@@ -14,7 +14,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.ussm.the_shell.TheShell;
 
-// ctrl en survolant un objet du mod : sa description detaillee (cle tooltip.the_shell.<objet>.details dans les fichiers de langue)
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class ItemDetails {
 
@@ -31,7 +30,6 @@ public class ItemDetails {
         for (String ligne : decoupe(I18n.get(cle), 42)) event.getToolTip().add(Component.literal(ligne).withStyle(ChatFormatting.GRAY));
     }
 
-    // coupe le texte en lignes d'environ n caracteres, sans couper les mots
     private static List<String> decoupe(String texte, int n) {
         List<String> lignes = new ArrayList<>();
         StringBuilder ligne = new StringBuilder();

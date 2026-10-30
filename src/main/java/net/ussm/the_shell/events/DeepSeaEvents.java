@@ -24,7 +24,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.blocks.AbyssLightBlock;
+import net.ussm.the_shell.blocks.abyss.AbyssLightBlock;
 import net.ussm.the_shell.entites.Submarine;
 import net.ussm.the_shell.init.ModItems;
 import net.ussm.the_shell.worldgen.TestChunkGenerator;

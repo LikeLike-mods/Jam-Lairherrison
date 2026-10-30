@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.ussm.the_shell.blocks.MessageBottleBlock;
-import net.ussm.the_shell.blocks.MessageBottleBlockEntity;
+import net.ussm.the_shell.blocks.archipelago.MessageBottleBlock;
+import net.ussm.the_shell.blocks.archipelago.MessageBottleBlockEntity;
 import net.ussm.the_shell.init.ModBlocks;
 
 public class MessageBottleFeature extends Feature<NoneFeatureConfiguration> {

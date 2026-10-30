@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.ussm.the_shell.blocks.CoconutBlock;
+import net.ussm.the_shell.blocks.archipelago.CoconutBlock;
 import net.ussm.the_shell.init.ModBlocks;
 
 import java.util.ArrayDeque;

@@ -3,8 +3,8 @@ package net.ussm.the_shell.client.renderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.AABB;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.blocks.SlidingDoorBlock;
-import net.ussm.the_shell.blocks.SlidingDoorBlockEntity;
+import net.ussm.the_shell.blocks.station.SlidingDoorBlock;
+import net.ussm.the_shell.blocks.station.SlidingDoorBlockEntity;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 

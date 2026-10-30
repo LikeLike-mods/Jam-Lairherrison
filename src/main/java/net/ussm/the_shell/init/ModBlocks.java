@@ -15,7 +15,11 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.the_shell.TheShell;
+import net.ussm.the_shell.blocks.abyss.*;
+import net.ussm.the_shell.blocks.archipelago.*;
+import net.ussm.the_shell.blocks.crops.PalmSaplingBlock;
 import net.ussm.the_shell.blocks.crops.RedstonePepperBlock;
+import net.ussm.the_shell.blocks.station.*;
 
 import java.util.function.Supplier;
 
@@ -283,12 +287,12 @@ public class ModBlocks {
             () -> new PalmSaplingBlock(PalmSaplingBlock.BANANA_GROWER, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SAPLING)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_BANANA_SAPLING = BLOCKS.register("potted_banana_sapling",
             () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BANANA_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_JUNGLE_SAPLING)));
-    public static final DeferredBlock<net.ussm.the_shell.blocks.BananaBunchBlock> BANANA_BUNCH = BLOCKS.register("banana_bunch",
-            () -> new net.ussm.the_shell.blocks.BananaBunchBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.2f)
+    public static final DeferredBlock<BananaBunchBlock> BANANA_BUNCH = BLOCKS.register("banana_bunch",
+            () -> new BananaBunchBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.2f)
                     .sound(SoundType.GRASS).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
     public static final DeferredBlock<Block> BANANA_PEEL = registerBlock("banana_peel",
-            () -> new net.ussm.the_shell.blocks.BananaPeelBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instabreak()
+            () -> new BananaPeelBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instabreak()
                     .sound(SoundType.SLIME_BLOCK).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
     // bois de palmier dattier
@@ -349,8 +353,8 @@ public class ModBlocks {
             () -> new PalmSaplingBlock(PalmSaplingBlock.DATE_PALM_GROWER, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SAPLING)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_DATE_PALM_SAPLING = BLOCKS.register("potted_date_palm_sapling",
             () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DATE_PALM_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_JUNGLE_SAPLING)));
-    public static final DeferredBlock<net.ussm.the_shell.blocks.HangingFruitBlock> DATE_CLUSTER = BLOCKS.register("date_cluster",
-            () -> new net.ussm.the_shell.blocks.HangingFruitBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.2f)
+    public static final DeferredBlock<HangingFruitBlock> DATE_CLUSTER = BLOCKS.register("date_cluster",
+            () -> new HangingFruitBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.2f)
                     .sound(SoundType.GRASS).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
     // tout en haut des abysses a la place de la bedrock : du noir

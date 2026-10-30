@@ -21,6 +21,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.the_shell.TheShell;
+import net.ussm.the_shell.blocks.station.SubmarineWindowBlock;
 import net.ussm.the_shell.entites.Submarine;
 
 import java.util.HashMap;
@@ -170,8 +171,8 @@ public class SubmarineInterior {
         BlockPos c = corner(cabin);
         for (BlockPos p : BlockPos.betweenClosed(c.offset(-8, 0, 0), c.offset(22, 17, 24))) {
             net.minecraft.world.level.block.state.BlockState st = inside.getBlockState(p);
-            if (st.is(net.ussm.the_shell.init.ModBlocks.SUBMARINE_WINDOW.get()) && st.getValue(net.ussm.the_shell.blocks.SubmarineWindowBlock.ZONE) != zone) {
-                inside.setBlock(p, st.setValue(net.ussm.the_shell.blocks.SubmarineWindowBlock.ZONE, zone), Block.UPDATE_CLIENTS);
+            if (st.is(net.ussm.the_shell.init.ModBlocks.SUBMARINE_WINDOW.get()) && st.getValue(SubmarineWindowBlock.ZONE) != zone) {
+                inside.setBlock(p, st.setValue(SubmarineWindowBlock.ZONE, zone), Block.UPDATE_CLIENTS);
             }
         }
     }
