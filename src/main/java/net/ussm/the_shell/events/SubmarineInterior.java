@@ -82,6 +82,13 @@ public class SubmarineInterior {
             if (zone.contains(m.position()) && restants < 7) restants++;
             else m.discard();
         }
+        // et les objets tombes dans le paysage copie (pas ceux poses dans les pieces de la cabine)
+        for (net.minecraft.world.entity.item.ItemEntity item : inside.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, tout)) {
+            BlockPos ip = item.blockPosition().subtract(c);
+            boolean dedans = false;
+            for (int[] b : DANS_LA_CABINE) dedans |= ip.getX() >= b[0] && ip.getX() <= b[3] && ip.getY() >= b[1] && ip.getY() <= b[4] && ip.getZ() >= b[2] && ip.getZ() <= b[5];
+            if (!dedans) item.discard();
+        }
         if (restants >= 7) return;
         String dim = where.getString("Dim");
         boolean abysses = dim.equals(AbyssTravel.ABYSS.location().toString());
@@ -150,7 +157,8 @@ public class SubmarineInterior {
                     net.minecraft.world.level.block.state.BlockState st = bord ? net.minecraft.world.level.block.Blocks.BARRIER.defaultBlockState()
                             : world.getBlockState(sub.offset(new BlockPos(ecarte(tx, box[0], box[3]), ecarte(ty, box[1], box[4]), ecarte(tz, box[2], box[5])).rotate(versMonde))).rotate(versCabine);
                     BlockPos target = c.offset(tx, ty, tz);
-                    if (inside.getBlockState(target) != st) inside.setBlock(target, st, Block.UPDATE_CLIENTS);
+                    // pas de mises a jour des voisins : sinon un cornichon de mer (ou une algue) pose avant son support casse et lache son objet
+                    if (inside.getBlockState(target) != st) inside.setBlock(target, st, Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_SUPPRESS_DROPS);
                 }
             }
         }
