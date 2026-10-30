@@ -15,12 +15,14 @@
     "announce_to_chat": true
   },
   "criteria": {
-    "ate_pepper": {
+    "has_kyber": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": "the_shell:kyber_crystal"
-        }
+        "items": [
+          {
+            "items": "the_shell:kyber_crystal"
+          }
+        ]
       }
     }
   }

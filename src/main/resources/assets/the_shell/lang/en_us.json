@@ -301,6 +301,7 @@
   "message.the_shell.submarine.respawn_lost": "The submarine with your bed is gone: you respawn at the world spawn.",
   "message.the_shell.submarine.upgrade_order": "Use the iron kit first, then diamond, then netherite",
   "message.the_shell.submarine.upgraded": "Submarine upgraded to level %s: a new room in the cabin, and it goes faster!",
+  "message.the_shell.temple.locked": "The temple protects itself: nothing can be broken or placed until Notch's 3 trials are passed.",
 
   "painting.the_shell.dancing_parrot.author": "Anonymous",
   "painting.the_shell.dancing_parrot.title": "Party Parrot",
@@ -425,6 +426,6 @@
   "tooltip.the_shell.submarine_upgrade_iron.details": "Right-click a submarine to upgrade it. Kits go in order: iron, diamond, then netherite. This one adds a room to the cabin and a bit of speed.",
   "tooltip.the_shell.submarine_upgrade_netherite.details": "Right-click a submarine that already has the diamond upgrade. Adds a third room, more speed, and a sonar that shows the direction and distance of the nearest rift from the cockpit.",
   "tooltip.the_shell.tank.details": "Tank: right-click to fully refill your diving suit's oxygen, and the oxygen bottle in your hand. Works anywhere, place one near your base.",
-  "tooltip.the_shell.temple_pedestal.details": "The item on it floats and spins. Right-click to take it. In creative, right-click with an item to put it on.",
+  "tooltip.the_shell.temple_pedestal.details": "The item on it floats and spins. Right-click with an item to put it on, right-click empty-handed to take it back. Taking the item sends a redstone pulse, like a trapped chest... Careful in the temple. Recipe: a gold ingot on stone bricks.",
   "tooltip.the_shell.temple_seal.details": "An indestructible door. It disappears (along with every seal touching it) when the Notch altar of the same level is solved, or when it gets a redstone signal. In creative, sneak + right-click changes its level (0 = redstone only)."
 }

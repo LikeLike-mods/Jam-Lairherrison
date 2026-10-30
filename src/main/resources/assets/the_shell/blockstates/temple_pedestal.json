@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "powered=false": {
+      "model": "the_shell:block/temple_pedestal"
+    },
+    "powered=true": {
       "model": "the_shell:block/temple_pedestal"
     }
   }

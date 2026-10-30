@@ -301,6 +301,7 @@
   "message.the_shell.submarine.respawn_lost": "Le sous-marin de ton lit n'existe plus : tu réapparais au point de départ du monde.",
   "message.the_shell.submarine.upgrade_order": "Il faut d'abord le kit fer, puis diamant, puis netherite",
   "message.the_shell.submarine.upgraded": "Sous-marin amélioré au niveau %s : nouvelle pièce dans la cabine, et il va plus vite !",
+  "message.the_shell.temple.locked": "Le temple te protège : rien à casser ni à poser tant que les 3 épreuves de Notch ne sont pas réussies.",
 
   "painting.the_shell.dancing_parrot.author": "Anonyme",
   "painting.the_shell.dancing_parrot.title": "Perroquet en fête",
@@ -425,6 +426,6 @@
   "tooltip.the_shell.submarine_upgrade_iron.details": "Clic droit sur un sous-marin pour l'améliorer. Les kits se posent dans l'ordre : fer, diamant, puis netherite. Celui-ci ajoute une pièce à la cabine et un peu de vitesse.",
   "tooltip.the_shell.submarine_upgrade_netherite.details": "Clic droit sur un sous-marin déjà amélioré en diamant. Ajoute une troisième pièce, encore de la vitesse, et un sonar qui indique depuis le cockpit la direction et la distance de la faille la plus proche.",
   "tooltip.the_shell.tank.details": "La cuve : clic droit pour remplir à fond l'oxygène du scaphandre, et la bouteille d'oxygène que vous tenez en main. Il marche partout, posez-en un près de votre base.",
-  "tooltip.the_shell.temple_pedestal.details": "L'objet posé dessus flotte et tourne. Clic droit pour le prendre. En créatif, clic droit avec un objet pour le poser dessus.",
+  "tooltip.the_shell.temple_pedestal.details": "L'objet posé dessus flotte et tourne. Clic droit avec un objet pour le poser, clic droit les mains vides pour le reprendre. Quand on prend l'objet, le piédestal envoie une impulsion de redstone, comme un coffre piégé... Attention dans le temple. Recette : un lingot d'or sur des briques de pierre.",
   "tooltip.the_shell.temple_seal.details": "Une porte indestructible. Elle disparaît (avec tous les sceaux collés à elle) quand l'autel de Notch du même niveau est résolu, ou quand elle reçoit du courant de redstone. En créatif, accroupi + clic droit change son niveau (0 = seulement la redstone)."
 }
