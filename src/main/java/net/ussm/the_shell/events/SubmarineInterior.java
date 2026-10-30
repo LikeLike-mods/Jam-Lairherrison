@@ -141,7 +141,8 @@ public class SubmarineInterior {
             if (Math.floorMod(lx, 8) != passe) continue;
             for (int ly = -16; ly <= 24; ly++) {
                 for (int lz = -36; lz <= 37; lz++) {
-                    int tx = 7 + lx, ty = 6 + ly, tz = 11 + lz;
+                    // le bas du vrai sous-marin = le sol de la cabine : le fond reste sous les pieces au lieu d'arriver aux hublots
+                    int tx = 7 + lx, ty = 3 + ly, tz = 11 + lz;
                     int proche = 99;
                     for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
                         int[] b = DANS_LA_CABINE[n];
