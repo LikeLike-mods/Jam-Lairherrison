@@ -5,7 +5,10 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -35,6 +38,11 @@ public class SubmarineItem extends Item {
         // pas de sous-marin dans un sous-marin dans un sous-marin...
         if (level.dimension() == SubmarineInterior.INTERIOR) {
             if (!level.isClientSide) player.displayClientMessage(Component.translatable("message.the_shell.submarine.no_room"), true);
+            // mais on a quand meme essaye : succes cache
+            if (player instanceof ServerPlayer joueur) {
+                AdvancementHolder succes = joueur.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath("the_shell", "inception"));
+                if (succes != null) joueur.getAdvancements().award(succes, "inception");
+            }
             return InteractionResultHolder.fail(stack);
         }
         BlockHitResult hit = getPlayerPOVHitResult(level, player, ClipContext.Fluid.ANY);
