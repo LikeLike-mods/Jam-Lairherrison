@@ -118,10 +118,11 @@ public class SubmarineCockpitView {
         plaques(vc, pose, -36 * P, -39 * P, 0.0F, -22 * P, -24 * P, 20 * P, 0xFF2F353D, lumiere);
         box(vc, pose, -37 * P, -24 * P, -P, -21 * P, -23 * P, 21 * P, CADRE_CLAIR, lumiere);
         float dessus = -23 * P;
-        box(vc, pose, -32 * P, dessus, 6 * P, -25 * P, dessus + 0.01F, 11 * P, 0xFFE6B53A, lumiere);
-        box(vc, pose, -31 * P, dessus, 7 * P, -26 * P, dessus + 0.025F, 10 * P, vise ? 0xFFFFE27A : 0xFFC8962A, vise ? plein : lumiere);
-        box(vc, pose, -30 * P, dessus, 8 * P, -27 * P, dessus + 0.03F, 9 * P, 0xFF1A1A1A, plein);
-        box(vc, pose, -29 * P, dessus, 7 * P, -28 * P, dessus + 0.03F, 8 * P, 0xFF1A1A1A, plein);
+        // chaque couche commence un peu au-dessus de la precedente, sinon les faces se battent pour le meme plan et ca clignote
+        box(vc, pose, -32 * P, dessus + 0.002F, 6 * P, -25 * P, dessus + 0.01F, 11 * P, 0xFFE6B53A, lumiere);
+        box(vc, pose, -31 * P, dessus + 0.012F, 7 * P, -26 * P, dessus + 0.025F, 10 * P, vise ? 0xFFFFE27A : 0xFFC8962A, vise ? plein : lumiere);
+        box(vc, pose, -30 * P, dessus + 0.027F, 8 * P, -27 * P, dessus + 0.032F, 9 * P, 0xFF1A1A1A, plein);
+        box(vc, pose, -29 * P, dessus + 0.027F, 7 * P, -28 * P, dessus + 0.032F, 8 * P, 0xFF1A1A1A, plein);
         // le manche : un socle, une tige, une poignee avec ses bagues et un bouton rouge dessus
         pose.pushPose();
         pose.translate(0.0F, -1.22F, 0.55F);

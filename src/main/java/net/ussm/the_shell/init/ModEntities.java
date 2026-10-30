@@ -73,6 +73,11 @@ public class ModEntities {
                     .sized(4.75F, 4.75F).eyeHeight(3.5F)
                     .clientTrackingRange(16).updateInterval(3).build(TheShell.MOD_ID + ":blue_whale"));
 
+    // perle d'ender sous-marine lancee
+    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ThrownAquaPearl>> AQUA_PEARL = ENTITY_TYPES.register("aqua_pearl",
+            () -> EntityType.Builder.<net.ussm.the_shell.entites.ThrownAquaPearl>of(net.ussm.the_shell.entites.ThrownAquaPearl::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("aqua_pearl"));
+
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.EntityFactory<T> factory,
                                                                                            MobCategory category, float width, float height) {
         return ENTITY_TYPES.register(name, () -> EntityType.Builder.of(factory, category).sized(width, height).build(name));

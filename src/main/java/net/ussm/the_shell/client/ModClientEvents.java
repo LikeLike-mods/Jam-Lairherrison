@@ -26,6 +26,7 @@ public class ModClientEvents {
         event.registerBlockEntityRenderer(ModBlockEntities.SLIDING_DOOR.get(), context -> new SlidingDoorRenderer());
         event.registerEntityRenderer(ModEntities.LEVIATHAN.get(), LeviathanRenderer::new);
         event.registerEntityRenderer(ModEntities.SUBMARINE.get(), SubmarineRenderer::new);
+        event.registerEntityRenderer(ModEntities.AQUA_PEARL.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.BASILOSAURUS.get(), c -> new CetaceanRenderer<>(c, "basilosaurus",
                 net.ussm.the_shell.entites.BasilosaurusEntity.SIZE_MULTIPLIER, 1.5F, SwimmingTurnProfiles.BASILOSAURUS));
         event.registerEntityRenderer(ModEntities.BLUE_WHALE.get(), c -> new CetaceanRenderer<>(c, "blue_whale",

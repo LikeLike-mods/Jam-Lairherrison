@@ -4,10 +4,13 @@
   "ingredients": [
     {
       "item": "the_shell:banana_stem"
+    },
+    {
+      "item": "the_shell:banana_stem"
     }
   ],
   "result": {
     "id": "minecraft:string",
-    "count": 3
+    "count": 6
   }
 }

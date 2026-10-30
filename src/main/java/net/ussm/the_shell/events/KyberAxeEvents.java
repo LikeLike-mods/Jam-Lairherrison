@@ -19,7 +19,7 @@ public class KyberAxeEvents {
     public static void abattre(BlockEvent.BreakEvent event) {
         if (enCours || !(event.getLevel() instanceof ServerLevel level) || !event.getState().is(BlockTags.LOGS)) return;
         ItemStack main = event.getPlayer().getMainHandItem();
-        if (!(main.getItem() instanceof KyberAxeItem) || !LightsaberItem.isActive(main) || event.getPlayer().isShiftKeyDown()) return;
+        if (!(main.getItem() instanceof KyberAxeItem) || !LightsaberItem.isActive(main) || !KyberAxeItem.abatArbre(main) || event.getPlayer().isShiftKeyDown()) return;
         enCours = true;
         try {
             KyberAxeItem.abattre(level, event.getPos(), event.getPlayer());

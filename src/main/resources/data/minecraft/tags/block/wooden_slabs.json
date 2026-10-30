@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_shell:palm_slab"
+    "the_shell:palm_slab",
+    "the_shell:date_palm_slab",
+    "the_shell:banana_slab"
   ]
 }

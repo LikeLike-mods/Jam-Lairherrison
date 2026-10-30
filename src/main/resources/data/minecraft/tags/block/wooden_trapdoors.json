@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_shell:palm_trapdoor"
+    "the_shell:palm_trapdoor",
+    "the_shell:date_palm_trapdoor",
+    "the_shell:banana_trapdoor"
   ]
 }

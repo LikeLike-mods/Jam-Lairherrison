@@ -20,6 +20,24 @@
     "the_shell:palm_hanging_sign",
     "the_shell:palm_wall_hanging_sign",
     "the_shell:banana_stem",
-    "the_shell:date_palm_log"
+    "the_shell:date_palm_log",
+    "the_shell:date_palm_planks",
+    "the_shell:date_palm_stairs",
+    "the_shell:date_palm_slab",
+    "the_shell:date_palm_fence",
+    "the_shell:date_palm_fence_gate",
+    "the_shell:date_palm_door",
+    "the_shell:date_palm_trapdoor",
+    "the_shell:date_palm_pressure_plate",
+    "the_shell:date_palm_button",
+    "the_shell:banana_planks",
+    "the_shell:banana_stairs",
+    "the_shell:banana_slab",
+    "the_shell:banana_fence",
+    "the_shell:banana_fence_gate",
+    "the_shell:banana_door",
+    "the_shell:banana_trapdoor",
+    "the_shell:banana_pressure_plate",
+    "the_shell:banana_button"
   ]
 }

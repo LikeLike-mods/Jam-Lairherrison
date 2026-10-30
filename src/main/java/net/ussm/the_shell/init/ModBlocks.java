@@ -291,7 +291,47 @@ public class ModBlocks {
             () -> new net.ussm.the_shell.blocks.BananaPeelBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instabreak()
                     .sound(SoundType.SLIME_BLOCK).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
-    // palmier dattier (ses buches donnent des planches de palmier)
+    // bois de palmier dattier
+    public static final DeferredBlock<Block> DATE_PALM_PLANKS = registerBlock("date_palm_planks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<StairBlock> DATE_PALM_STAIRS = registerBlock("date_palm_stairs",
+            () -> new StairBlock(DATE_PALM_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(DATE_PALM_PLANKS.get())));
+    public static final DeferredBlock<SlabBlock> DATE_PALM_SLAB = registerBlock("date_palm_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(DATE_PALM_PLANKS.get())));
+    public static final DeferredBlock<FenceBlock> DATE_PALM_FENCE = registerBlock("date_palm_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_FENCE).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<FenceGateBlock> DATE_PALM_FENCE_GATE = registerBlock("date_palm_fence_gate",
+            () -> new FenceGateBlock(ModWoodTypes.DATE_PALM, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_FENCE_GATE).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<DoorBlock> DATE_PALM_DOOR = registerBlock("date_palm_door",
+            () -> new DoorBlock(ModWoodTypes.DATE_PALM_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_DOOR).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<TrapDoorBlock> DATE_PALM_TRAPDOOR = registerBlock("date_palm_trapdoor",
+            () -> new TrapDoorBlock(ModWoodTypes.DATE_PALM_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_TRAPDOOR).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<PressurePlateBlock> DATE_PALM_PRESSURE_PLATE = registerBlock("date_palm_pressure_plate",
+            () -> new PressurePlateBlock(ModWoodTypes.DATE_PALM_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<ButtonBlock> DATE_PALM_BUTTON = registerBlock("date_palm_button",
+            () -> new ButtonBlock(ModWoodTypes.DATE_PALM_SET, 30, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_BUTTON)));
+
+    // bois de bananier
+    public static final DeferredBlock<Block> BANANA_PLANKS = registerBlock("banana_planks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).mapColor(MapColor.COLOR_YELLOW)));
+    public static final DeferredBlock<StairBlock> BANANA_STAIRS = registerBlock("banana_stairs",
+            () -> new StairBlock(BANANA_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(BANANA_PLANKS.get())));
+    public static final DeferredBlock<SlabBlock> BANANA_SLAB = registerBlock("banana_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(BANANA_PLANKS.get())));
+    public static final DeferredBlock<FenceBlock> BANANA_FENCE = registerBlock("banana_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_FENCE).mapColor(MapColor.COLOR_YELLOW)));
+    public static final DeferredBlock<FenceGateBlock> BANANA_FENCE_GATE = registerBlock("banana_fence_gate",
+            () -> new FenceGateBlock(ModWoodTypes.BANANA, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_FENCE_GATE).mapColor(MapColor.COLOR_YELLOW)));
+    public static final DeferredBlock<DoorBlock> BANANA_DOOR = registerBlock("banana_door",
+            () -> new DoorBlock(ModWoodTypes.BANANA_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_DOOR).mapColor(MapColor.COLOR_YELLOW)));
+    public static final DeferredBlock<TrapDoorBlock> BANANA_TRAPDOOR = registerBlock("banana_trapdoor",
+            () -> new TrapDoorBlock(ModWoodTypes.BANANA_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_TRAPDOOR).mapColor(MapColor.COLOR_YELLOW)));
+    public static final DeferredBlock<PressurePlateBlock> BANANA_PRESSURE_PLATE = registerBlock("banana_pressure_plate",
+            () -> new PressurePlateBlock(ModWoodTypes.BANANA_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PRESSURE_PLATE).mapColor(MapColor.COLOR_YELLOW)));
+    public static final DeferredBlock<ButtonBlock> BANANA_BUTTON = registerBlock("banana_button",
+            () -> new ButtonBlock(ModWoodTypes.BANANA_SET, 30, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_BUTTON)));
+
+    // palmier dattier (ses buches donnent ses propres planches)
     public static final DeferredBlock<Block> DATE_PALM_LOG = registerBlock("date_palm_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).strength(2f, 3f).ignitedByLava().sound(SoundType.WOOD)));
     public static final DeferredBlock<Block> DATE_PALM_LEAVES = registerBlock("date_palm_leaves",

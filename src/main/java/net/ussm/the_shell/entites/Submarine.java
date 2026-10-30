@@ -103,10 +103,50 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.interiorId = id;
     }
 
+    // la position qu'envoie le serveur, rejointe en douceur dans tick()
+    private double lerpX, lerpY, lerpZ;
+    private float lerpYRot;
+    private int lerpSteps;
+
+    @Override
+    public void lerpTo(double x, double y, double z, float yRot, float xRot, int steps) {
+        lerpX = x;
+        lerpY = y;
+        lerpZ = z;
+        lerpYRot = yRot;
+        lerpSteps = Math.max(steps, 6);
+    }
+
+    // quand le pilote sort, le serveur renvoie tout de suite la vraie position (sinon elle arrive une seconde apres et le sous-marin saute)
+    @Override
+    protected void removePassenger(net.minecraft.world.entity.Entity passenger) {
+        super.removePassenger(passenger);
+        if (this.level() instanceof net.minecraft.server.level.ServerLevel serveur) {
+            serveur.getChunkSource().broadcast(this, new net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket(this));
+        }
+    }
+
     // pas pousse par les explosions non plus
     @Override
     public boolean ignoreExplosion(net.minecraft.world.level.Explosion explosion) {
         return true;
+    }
+
+    // le modele (bulle, helice, ailerons) depasse de la hitbox : sans ca le jeu croit qu'il est hors de l'ecran
+    // quand on est colle dessus, et il disparait
+    @Override
+    public net.minecraft.world.phys.AABB getBoundingBoxForCulling() {
+        return getBoundingBox().inflate(1.5, 0.8, 1.5);
+    }
+
+    // en sortant on ressort sur le cote (pas dans la bulle de verre), sinon par-dessus
+    @Override
+    public Vec3 getDismountLocationForPassenger(net.minecraft.world.entity.LivingEntity passenger) {
+        Vec3 cote = Vec3.directionFromRotation(0.0F, getYRot() + 90.0F).scale(2.2);
+        for (Vec3 essai : new Vec3[]{position().add(cote), position().subtract(cote), position().add(0.0, 2.0, 0.0)}) {
+            if (level().noCollision(passenger, passenger.getDimensions(net.minecraft.world.entity.Pose.STANDING).makeBoundingBox(essai))) return essai;
+        }
+        return super.getDismountLocationForPassenger(passenger);
     }
 
     // on ne le casse qu'accroupi : sinon un clic rate en minant a cote (ou en tapant un poisson) le fait disparaitre, d'un coup en creatif
@@ -268,8 +308,15 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             }
             this.setDeltaMovement(motion);
             this.move(MoverType.SELF, motion);
+            lerpSteps = 0;
         } else {
             this.setDeltaMovement(Vec3.ZERO);
+            // cote client : on glisse vers la position du serveur au lieu d'y sauter d'un coup (comme les bateaux)
+            if (this.level().isClientSide && lerpSteps > 0) {
+                this.setPos(getX() + (lerpX - getX()) / lerpSteps, getY() + (lerpY - getY()) / lerpSteps, getZ() + (lerpZ - getZ()) / lerpSteps);
+                this.setYRot(this.getYRot() + Mth.wrapDegrees(lerpYRot - this.getYRot()) / lerpSteps);
+                lerpSteps--;
+            }
         }
 
         if (this.level().isClientSide) {

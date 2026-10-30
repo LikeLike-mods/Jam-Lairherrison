@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_shell:palm_fence"
+    "the_shell:palm_fence",
+    "the_shell:date_palm_fence",
+    "the_shell:banana_fence"
   ]
 }

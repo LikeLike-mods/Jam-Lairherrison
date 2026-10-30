@@ -30,11 +30,18 @@ public class KyberAxeItem extends LightsaberItem {
         super("kyber_axe", "kyber_axe", 9, -3.0F, () -> null, properties);
     }
 
-    // clic droit allume / eteint (pas d'autres formes comme les sabres)
+    // clic droit allume / eteint, shift + clic droit change de mode comme les sabres (tout l'arbre / un bloc a la fois)
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (level.isClientSide()) return InteractionResultHolder.consume(stack);
+        if (player.isShiftKeyDown()) {
+            boolean arbre = !abatArbre(stack);
+            stack.set(ModComponents.FELL_TREE, arbre);
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.LIGHTSABER_IGNITE.get(), SoundSource.PLAYERS, 0.6F, arbre ? 0.7F : 1.2F);
+            player.displayClientMessage(Component.translatable(arbre ? "message.the_shell.kyber_axe.tree" : "message.the_shell.kyber_axe.single"), true);
+            return InteractionResultHolder.consume(stack);
+        }
         boolean active = !isActive(stack);
         stack.set(ModComponents.ACTIVE, active);
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
@@ -42,8 +49,13 @@ public class KyberAxeItem extends LightsaberItem {
         return InteractionResultHolder.consume(stack);
     }
 
+    public static boolean abatArbre(ItemStack stack) {
+        return stack.getOrDefault(ModComponents.FELL_TREE, true);
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.translatable(abatArbre(stack) ? "message.the_shell.kyber_axe.tree" : "message.the_shell.kyber_axe.single").withStyle(net.minecraft.ChatFormatting.AQUA));
     }
 
     @Override
