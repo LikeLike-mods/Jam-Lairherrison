@@ -435,6 +435,12 @@ public class SubmarineInterior {
         }
     }
 
+    // ni les explosions (creeper, cristal de l'end...) : dans la cabine elles ne cassent aucun bloc
+    @SubscribeEvent
+    public static void noExplosion(net.neoforged.neoforge.event.level.ExplosionEvent.Detonate event) {
+        if (event.getLevel().dimension() == INTERIOR) event.getAffectedBlocks().clear();
+    }
+
     // quel sous-marin va avec quelle cabine, et ou il etait la derniere fois
     static class Cabins extends SavedData {
         int next = 1;

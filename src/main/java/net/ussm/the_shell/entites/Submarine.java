@@ -103,9 +103,17 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.interiorId = id;
     }
 
+    // pas pousse par les explosions non plus
+    @Override
+    public boolean ignoreExplosion(net.minecraft.world.level.Explosion explosion) {
+        return true;
+    }
+
     // on ne le casse qu'accroupi : sinon un clic rate en minant a cote (ou en tapant un poisson) le fait disparaitre, d'un coup en creatif
     @Override
     public boolean hurt(net.minecraft.world.damagesource.DamageSource source, float amount) {
+        // les explosions ne lui font rien, meme declenchees par un joueur accroupi (cristal de l'end, tnt...)
+        if (source.is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION)) return false;
         if (!(source.getEntity() instanceof Player player) || !player.isShiftKeyDown()) return false;
         // en creatif le jeu le supprime sans rien lacher : on veut quand meme l'objet, sinon on perd la cabine
         if (player.getAbilities().instabuild && !this.level().isClientSide && !this.isRemoved()) {
