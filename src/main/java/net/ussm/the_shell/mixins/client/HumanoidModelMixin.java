@@ -29,12 +29,12 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
         float avant = (float) Mth.clamp(v.dot(devant) / 0.35, -1.0, 1.0);
         float cote = (float) Mth.clamp(v.dot(new Vec3(devant.z, 0.0, -devant.x)) / 0.2, -1.0, 1.0);
         float vibre = Mth.sin(ageInTicks * 0.6F) * 0.04F * Math.abs(avant);
-        this.rightArm.xRot = -1.1F + avant * 0.3F + vibre;
-        this.leftArm.xRot = -1.1F + avant * 0.3F - vibre;
+        this.rightArm.xRot = -1.1F - avant * 0.3F + vibre;
+        this.leftArm.xRot = -1.1F - avant * 0.3F - vibre;
         this.rightArm.yRot = -0.3F + cote * 0.15F;
         this.leftArm.yRot = 0.3F + cote * 0.15F;
-        this.rightArm.zRot = -cote * 0.15F;
-        this.leftArm.zRot = -cote * 0.15F;
+        this.rightArm.zRot = cote * 0.15F;
+        this.leftArm.zRot = cote * 0.15F;
         this.body.xRot = avant * 0.1F;
         this.head.zRot = -cote * 0.1F;
     }
