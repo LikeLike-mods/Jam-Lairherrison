@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "solved=false,tier=1": {
+      "model": "the_shell:block/notch_altar_1"
+    },
+    "solved=true,tier=1": {
+      "model": "the_shell:block/notch_altar_1_solved"
+    },
+    "solved=false,tier=2": {
+      "model": "the_shell:block/notch_altar_2"
+    },
+    "solved=true,tier=2": {
+      "model": "the_shell:block/notch_altar_2_solved"
+    },
+    "solved=false,tier=3": {
+      "model": "the_shell:block/notch_altar_3"
+    },
+    "solved=true,tier=3": {
+      "model": "the_shell:block/notch_altar_3_solved"
+    }
+  }
+}

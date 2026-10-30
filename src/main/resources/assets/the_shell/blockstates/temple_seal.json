@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "tier=0": {
+      "model": "the_shell:block/temple_seal"
+    },
+    "tier=1": {
+      "model": "the_shell:block/temple_seal"
+    },
+    "tier=2": {
+      "model": "the_shell:block/temple_seal"
+    },
+    "tier=3": {
+      "model": "the_shell:block/temple_seal"
+    }
+  }
+}

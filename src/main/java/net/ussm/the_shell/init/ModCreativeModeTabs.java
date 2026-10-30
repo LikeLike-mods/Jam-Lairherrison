@@ -91,6 +91,9 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.AQUA_PEARL);
                         output.accept(ModItems.OXYGEN_BOTTLE);
                         output.accept(ModBlocks.AIR_BUBBLE);
+                        output.accept(ModBlocks.NOTCH_ALTAR);
+                        output.accept(ModBlocks.TEMPLE_SEAL);
+                        output.accept(ModBlocks.TEMPLE_PEDESTAL);
                         output.accept(ModBlocks.LIGHT_SAND);
                         output.accept(ModBlocks.LIGHT_SAND_WET);
                         output.accept(ModBlocks.GREY_GRANITE);

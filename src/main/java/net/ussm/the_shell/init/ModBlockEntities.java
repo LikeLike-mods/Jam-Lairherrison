@@ -16,6 +16,9 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MessageBottleBlockEntity>> MESSAGE_BOTTLE = BLOCK_ENTITIES.register("message_bottle",
             () -> BlockEntityType.Builder.of(MessageBottleBlockEntity::new, ModBlocks.MESSAGE_BOTTLE.get()).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<net.ussm.the_shell.blocks.TemplePedestalBlockEntity>> TEMPLE_PEDESTAL = BLOCK_ENTITIES.register("temple_pedestal",
+            () -> BlockEntityType.Builder.of(net.ussm.the_shell.blocks.TemplePedestalBlockEntity::new, ModBlocks.TEMPLE_PEDESTAL.get()).build(null));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SlidingDoorBlockEntity>> SLIDING_DOOR = BLOCK_ENTITIES.register("sliding_door",
             () -> BlockEntityType.Builder.of(SlidingDoorBlockEntity::new, ModBlocks.SLIDING_DOOR.get(), ModBlocks.BROKEN_SLIDING_DOOR.get()).build(null));
 

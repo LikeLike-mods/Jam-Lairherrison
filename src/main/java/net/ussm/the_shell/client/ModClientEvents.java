@@ -23,6 +23,7 @@ public class ModClientEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.MESSAGE_BOTTLE.get(), MessageBottleRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.TEMPLE_PEDESTAL.get(), net.ussm.the_shell.client.renderers.TemplePedestalRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SLIDING_DOOR.get(), context -> new SlidingDoorRenderer());
         event.registerEntityRenderer(ModEntities.LEVIATHAN.get(), LeviathanRenderer::new);
         event.registerEntityRenderer(ModEntities.SUBMARINE.get(), SubmarineRenderer::new);

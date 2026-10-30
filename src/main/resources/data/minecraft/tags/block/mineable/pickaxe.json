@@ -64,6 +64,7 @@
     "the_shell:abyssal_redstone_ore",
     "the_shell:abyssal_lapis_ore",
     "the_shell:abyssal_diamond_ore",
-    "the_shell:abyssal_emerald_ore"
+    "the_shell:abyssal_emerald_ore",
+    "the_shell:temple_pedestal"
   ]
 }
