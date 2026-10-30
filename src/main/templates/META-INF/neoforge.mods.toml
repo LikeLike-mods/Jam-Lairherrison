@@ -50,11 +50,9 @@ authors="LikeLike, Utumno, DrSupernovas, Oesphy"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Des îles tropicales toutes pipou en surface, et en dessous des abysses où on voit rien.
+Notre mod pour la Jam Lairherrison : un archipel tropical, des abysses, un sous-marin et plein d'autres trucs.
 
-Plage, jungle, mangrove, cocos et bananes. Un scaphandre avec de l'oxygène et une pression qui écrase quand tu descends. Des failles vers les abysses, avec des stations englouties, du kyber et des bestioles pas très sympas. Un sous-marin jaune plus grand dedans que dehors. Et un temple de la jungle où Notch te pose des questions.
-
-Astuce : maintiens Ctrl sur un objet du mod pour lire sa description.
+Ctrl sur un objet du mod pour voir sa description.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

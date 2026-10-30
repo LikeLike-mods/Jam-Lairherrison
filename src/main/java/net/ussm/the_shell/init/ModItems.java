@@ -34,9 +34,6 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> COCONUT_HALF = ITEMS.register("coconut_half",
             () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperies car C PLUS PROPRE
-    // clic droit sur une coco : on l'epluche (la fibre fait de la ficelle, la coco epluchee se casse en deux a la main)
-    public static final DeferredItem<Item> COCONUT_FIBER = ITEMS.register("coconut_fiber", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PEELED_COCONUT = ITEMS.register("peeled_coconut", () -> new Item(new Item.Properties()));
 
     // banane et datte
     public static final DeferredItem<Item> BANANA = ITEMS.register("banana", () -> new BananaItem(new Item.Properties().food(ModFoodProperties.BANANA)));

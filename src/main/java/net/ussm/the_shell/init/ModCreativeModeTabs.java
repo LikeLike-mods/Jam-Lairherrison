@@ -98,9 +98,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.LIGHT_SAND_WET);
                         output.accept(ModBlocks.GREY_GRANITE);
                         output.accept(ModBlocks.COCONUT);
-                        output.accept(ModItems.PEELED_COCONUT);
                         output.accept(ModItems.COCONUT_HALF);
-                        output.accept(ModItems.COCONUT_FIBER);
                         output.accept(ModItems.BANANA);
                         output.accept(ModBlocks.BANANA_PEEL);
                         output.accept(ModItems.BANANA_BREAD);
