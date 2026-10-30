@@ -103,6 +103,29 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.interiorId = id;
     }
 
+    // la position qu'envoie le serveur, rejointe en douceur dans tick()
+    private double lerpX, lerpY, lerpZ;
+    private float lerpYRot;
+    private int lerpSteps;
+
+    @Override
+    public void lerpTo(double x, double y, double z, float yRot, float xRot, int steps) {
+        lerpX = x;
+        lerpY = y;
+        lerpZ = z;
+        lerpYRot = yRot;
+        lerpSteps = Math.max(steps, 6);
+    }
+
+    // quand le pilote sort, le serveur renvoie tout de suite la vraie position (sinon elle arrive une seconde apres et le sous-marin saute)
+    @Override
+    protected void removePassenger(net.minecraft.world.entity.Entity passenger) {
+        super.removePassenger(passenger);
+        if (this.level() instanceof net.minecraft.server.level.ServerLevel serveur) {
+            serveur.getChunkSource().broadcast(this, new net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket(this));
+        }
+    }
+
     // pas pousse par les explosions non plus
     @Override
     public boolean ignoreExplosion(net.minecraft.world.level.Explosion explosion) {
@@ -285,8 +308,15 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             }
             this.setDeltaMovement(motion);
             this.move(MoverType.SELF, motion);
+            lerpSteps = 0;
         } else {
             this.setDeltaMovement(Vec3.ZERO);
+            // cote client : on glisse vers la position du serveur au lieu d'y sauter d'un coup (comme les bateaux)
+            if (this.level().isClientSide && lerpSteps > 0) {
+                this.setPos(getX() + (lerpX - getX()) / lerpSteps, getY() + (lerpY - getY()) / lerpSteps, getZ() + (lerpZ - getZ()) / lerpSteps);
+                this.setYRot(this.getYRot() + Mth.wrapDegrees(lerpYRot - this.getYRot()) / lerpSteps);
+                lerpSteps--;
+            }
         }
 
         if (this.level().isClientSide) {
