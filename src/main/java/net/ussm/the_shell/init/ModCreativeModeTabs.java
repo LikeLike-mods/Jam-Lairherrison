@@ -77,6 +77,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.COCONUT);
                         output.accept(ModItems.COCONUT_HALF);
                         output.accept(ModItems.BANANA);
+                        output.accept(ModBlocks.BANANA_PEEL);
                         output.accept(ModItems.BANANA_BREAD);
                         output.accept(ModItems.BANANA_CHIPS);
                         output.accept(ModItems.DATES);

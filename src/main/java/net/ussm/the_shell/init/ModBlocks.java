@@ -281,9 +281,13 @@ public class ModBlocks {
             () -> new PalmSaplingBlock(PalmSaplingBlock.BANANA_GROWER, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SAPLING)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_BANANA_SAPLING = BLOCKS.register("potted_banana_sapling",
             () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BANANA_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_JUNGLE_SAPLING)));
-    public static final DeferredBlock<net.ussm.the_shell.blocks.HangingFruitBlock> BANANA_BUNCH = BLOCKS.register("banana_bunch",
-            () -> new net.ussm.the_shell.blocks.HangingFruitBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.2f)
+    public static final DeferredBlock<net.ussm.the_shell.blocks.BananaBunchBlock> BANANA_BUNCH = BLOCKS.register("banana_bunch",
+            () -> new net.ussm.the_shell.blocks.BananaBunchBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.2f)
                     .sound(SoundType.GRASS).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<Block> BANANA_PEEL = registerBlock("banana_peel",
+            () -> new net.ussm.the_shell.blocks.BananaPeelBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instabreak()
+                    .sound(SoundType.SLIME_BLOCK).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
     // palmier dattier (ses buches donnent des planches de palmier)
     public static final DeferredBlock<Block> DATE_PALM_LOG = registerBlock("date_palm_log",
