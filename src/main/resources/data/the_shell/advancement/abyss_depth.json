@@ -1,0 +1,42 @@
+{
+  "parent": "the_shell:abyss",
+  "display": {
+    "icon": {
+      "id": "the_shell:diving_helmet"
+    },
+    "title": {
+      "translate": "advancement.the_shell.abyss_depth.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.abyss_depth.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+
+  },
+  "criteria": {
+    "at_depth": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "dimension": "the_shell:abyss",
+                "position": {
+                  "y": {
+                    "min": -53,
+                    "max": -52
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
