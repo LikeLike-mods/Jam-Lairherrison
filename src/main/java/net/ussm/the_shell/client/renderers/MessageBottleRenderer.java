@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.ussm.the_shell.blocks.MessageBottleBlock;
-import net.ussm.the_shell.blocks.MessageBottleBlockEntity;
+import net.ussm.the_shell.blocks.archipelago.MessageBottleBlock;
+import net.ussm.the_shell.blocks.archipelago.MessageBottleBlockEntity;
 
 public class MessageBottleRenderer implements BlockEntityRenderer<MessageBottleBlockEntity> {
     private static final float SCALE = 0.25F;

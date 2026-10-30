@@ -6,7 +6,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import net.ussm.the_shell.blocks.AbyssLightBlock;
+import net.ussm.the_shell.blocks.abyss.AbyssLightBlock;
 import net.ussm.the_shell.entites.init.AbyssalPredator;
 import software.bernie.geckolib.constant.DefaultAnimations;
 

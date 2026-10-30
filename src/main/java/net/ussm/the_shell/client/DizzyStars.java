@@ -24,7 +24,6 @@ import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.init.ModAttachments;
 
-// etourdi apres une glissade : des etoiles de dessin anime qui tournent, en haut de l'ecran (1re personne) et autour de la tete (F5, les autres)
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class DizzyStars {
     private static final ResourceLocation ETOILE = ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "textures/misc/dizzy_star.png");
@@ -37,7 +36,6 @@ public class DizzyStars {
         float t = (mc.player.tickCount + event.getPartialTick().getGameTimeDeltaPartialTick(false)) * 0.12F;
         int cx = g.guiWidth() / 2, cy = g.guiHeight() / 4;
         RenderSystem.enableBlend();
-        // 5 etoiles sur une ellipse : celles du fond en petit (x1), celles de devant en grand (x2)
         for (int i = 0; i < 5; i++) {
             double a = t + i * Math.PI * 2 / 5;
             boolean devant = Math.sin(a) > 0;
@@ -49,7 +47,6 @@ public class DizzyStars {
         RenderSystem.disableBlend();
     }
 
-    // sans lit le jeu couche le modele au ras du sol (la moitie dedans) : on le remonte tant qu'il est allonge
     @SubscribeEvent
     public static void remonte(net.neoforged.neoforge.client.event.RenderPlayerEvent.Pre event) {
         event.getPoseStack().pushPose();
@@ -68,7 +65,6 @@ public class DizzyStars {
         }
     }
 
-    // la couronne d'etoiles, accrochee a la tete du modele (donc au bon endroit meme allonge)
     private static class Couronne extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
         Couronne(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent) {
             super(parent);
@@ -79,7 +75,6 @@ public class DizzyStars {
                            float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
             if (!player.getData(ModAttachments.SLIPPED)) return;
             VertexConsumer vc = buffers.getBuffer(RenderType.entityCutoutNoCull(ETOILE));
-            // on prend juste ou est le milieu de la tete (le modele est couche), et on fait la ronde bien a plat au-dessus
             pose.pushPose();
             getParentModel().head.translateAndRotate(pose);
             pose.translate(0.0F, -0.25F, 0.0F);
@@ -93,7 +88,6 @@ public class DizzyStars {
                 monde.translate(Math.cos(a) * 0.42, 0.4 + Math.sin(ageInTicks * 0.3 + i) * 0.03, Math.sin(a) * 0.42);
                 PoseStack.Pose p = monde.last();
                 float s = 0.11F;
-                // deux carres croises : on voit l'etoile de tous les cotes
                 carre(vc, p, -s, s, 0, s, -s, 0);
                 carre(vc, p, 0, s, -s, 0, -s, s);
                 monde.popPose();

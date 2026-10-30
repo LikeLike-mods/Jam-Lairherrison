@@ -47,14 +47,12 @@ public class DivingHud {
         RenderSystem.depthMask(true);
         RenderSystem.enableDepthTest();
 
-        // aux commandes du sous-marin il a son propre affichage (batterie, sonar) au meme endroit : pas de jauges par-dessus
         if (player.getVehicle() instanceof Submarine) {
             RenderSystem.disableBlend();
             return;
         }
         float depth = player.isEyeInFluid(FluidTags.WATER) ? Math.max(0.0F, player.level().getSeaLevel() - (float) player.getEyeY()) : 0.0F;
         if (depth > 0 && player.level().dimension() == net.ussm.the_shell.events.AbyssTravel.ABYSS) depth += MAX_DEPTH;
-        // la jauge suit le palier de pression (0 a 5)
         int palier = DeepSeaEvents.pressureLevel(player, player.isInWater());
         float fill = palier / 5.0F;
         boolean safe = DeepSeaEvents.hasFullSuit(player) || player.getVehicle() instanceof Submarine;
@@ -73,7 +71,6 @@ public class DivingHud {
             int ty = bottom - Math.round((bottom - top) * k / 5.0F);
             g.fill(x - 2, ty, x + 10, ty + 1, 0xFF6B4A22);
         }
-        // la bouteille d'oxygene, a gauche du manometre (assez loin pour que "100%" et les bars ne se marchent pas dessus)
         float o2 = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN) / (float) net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN;
         int ox = x - 34;
         g.fill(ox - 3, top - 3, ox + 9, bottom + 3, 0xFF2E4A5A);

@@ -11,7 +11,7 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.blocks.AbyssLightBlock;
+import net.ussm.the_shell.blocks.abyss.AbyssLightBlock;
 import net.ussm.the_shell.init.ModBlocks;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
