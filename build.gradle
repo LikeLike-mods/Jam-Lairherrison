@@ -36,6 +36,20 @@ repositories {
             includeGroup("com.eliotlash.mclib")
         }
     }
+    maven {
+        name = 'CaffeineMC'
+        url = 'https://maven.caffeinemc.net/releases'
+        content {
+            includeGroup("net.caffeinemc")
+        }
+    }
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
 }
 
 base {
@@ -126,6 +140,9 @@ configurations {
 dependencies {
     // GeckoLib : modèles et animations des mobs
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+
+    compileOnly "net.caffeinemc:sodium-neoforge-mod:${sodium_version}"
+    compileOnly "maven.modrinth:iris:${iris_version}"
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

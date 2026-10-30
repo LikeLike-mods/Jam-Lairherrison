@@ -17,5 +17,11 @@ public final class SwimmingTurnProfiles {
             .spine("tail1", 4).spine("tail2", 5).spine("tail3", 6).spine("flukes", 5)
             .fins("right_flipper", "left_flipper", 14).bank(10).build();
 
+    public static final TurnBendProfile PURUSSAURUS = TurnBendProfile.builder("body")
+            .spine("chest", -3).spine("neck", -4).spine("head", -3)
+            .spine("tail1", 3).spine("tail2", 4).spine("tail3", 5).spine("tail4", 6).spine("tail5", 6)
+            .spine("tail6", 6).spine("tail7", 5)
+            .bank(4).build();
+
     private SwimmingTurnProfiles() {}
 }

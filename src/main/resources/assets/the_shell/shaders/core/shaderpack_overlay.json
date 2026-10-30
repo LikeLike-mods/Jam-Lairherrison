@@ -1,0 +1,37 @@
+{
+  "vertex": "the_shell:shaderpack_overlay",
+  "fragment": "the_shell:shaderpack_overlay",
+  "samplers": [
+    { "name": "MainColor" },
+    { "name": "MainDepth" },
+    { "name": "ShoreMap" }
+  ],
+  "uniforms": [
+    {"name": "ProjInv", "type": "matrix4x4", "count": 16, "values": [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]},
+    {"name": "ViewInv", "type": "matrix4x4", "count": 16, "values": [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]},
+    {"name": "SkyColor", "type": "float", "count": 3, "values": [1.0, 0.54, 0.25]},
+    {"name": "HorizonColor", "type": "float", "count": 3, "values": [0.91, 0.64, 0.78]},
+    {"name": "SkyStrength", "type": "float", "count": 1, "values": [0.0]},
+    {"name": "OrangeHeight", "type": "float", "count": 1, "values": [0.5]},
+    {"name": "SeaOn", "type": "float", "count": 1, "values": [0.0]},
+    {"name": "FoamLight", "type": "float", "count": 3, "values": [1.0, 1.0, 1.0]},
+    {"name": "FoamFade", "type": "float", "count": 2, "values": [64.0, 128.0]},
+    {"name": "MapInfo", "type": "float", "count": 3, "values": [0.0, 0.0, 256.0]},
+    {"name": "WavePhase", "type": "float", "count": 4, "values": [0.0, 0.0, 0.0, 0.0]},
+    {"name": "WaveAmplitude", "type": "float", "count": 1, "values": [0.28]},
+    {"name": "SeaOffset", "type": "float", "count": 1, "values": [0.0]},
+    {"name": "PixelOrigin", "type": "float", "count": 2, "values": [0.0, 0.0]},
+    {"name": "FoamStrength", "type": "float", "count": 1, "values": [0.85]},
+    {"name": "AboveWater", "type": "float", "count": 1, "values": [1.0]},
+    {"name": "Impact0", "type": "float", "count": 4, "values": [0.0, 0.0, 10.0, 0.0]},
+    {"name": "Impact1", "type": "float", "count": 4, "values": [0.0, 0.0, 10.0, 0.0]},
+    {"name": "Impact2", "type": "float", "count": 4, "values": [0.0, 0.0, 10.0, 0.0]},
+    {"name": "Impact3", "type": "float", "count": 4, "values": [0.0, 0.0, 10.0, 0.0]},
+    {"name": "Impact4", "type": "float", "count": 4, "values": [0.0, 0.0, 10.0, 0.0]},
+    {"name": "Impact5", "type": "float", "count": 4, "values": [0.0, 0.0, 10.0, 0.0]},
+    {"name": "Impact6", "type": "float", "count": 4, "values": [0.0, 0.0, 10.0, 0.0]},
+    {"name": "Impact7", "type": "float", "count": 4, "values": [0.0, 0.0, 10.0, 0.0]},
+    {"name": "ImpactRadii0", "type": "float", "count": 4, "values": [6.0, 6.0, 6.0, 6.0]},
+    {"name": "ImpactRadii1", "type": "float", "count": 4, "values": [6.0, 6.0, 6.0, 6.0]}
+  ]
+}

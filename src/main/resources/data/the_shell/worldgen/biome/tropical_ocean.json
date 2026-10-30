@@ -39,7 +39,14 @@
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "the_shell:basilosaurus",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [
       {
@@ -61,6 +68,12 @@
         "maxCount": 2,
         "minCount": 1,
         "weight": 4
+      },
+      {
+        "type": "the_shell:blue_whale",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
       }
     ]
   },

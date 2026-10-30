@@ -1,0 +1,17 @@
+{
+  "required": false,
+  "package": "net.ussm.the_shell.mixins.compat",
+  "plugin": "net.ussm.the_shell.mixins.compat.CompatMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [],
+  "client": [
+    "iris.CommonUniformsMixin",
+    "iris.IrisRenderingPipelineMixin",
+    "iris.SodiumProgramsMixin",
+    "sodium.ShaderChunkRendererMixin",
+    "sodium.ShaderLoaderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

@@ -16,11 +16,15 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.control.LookControl;
 import net.ussm.the_shell.entites.ai.CetaceanMoveControl;
+import net.ussm.the_shell.init.ModSounds;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import javax.annotation.Nullable;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.ussm.the_shell.entites.ai.CetaceanSwimNodeEvaluator;
 import net.minecraft.world.phys.AABB;
@@ -47,7 +51,6 @@ public abstract class CetaceanEntity extends WaterAnimal implements GeoEntity, A
             }
         };
         setAirSupply(getMaxAirSupply());
-        setPersistenceRequired();
         hitbox = new AnimatedHitbox<>(this);
         setId(ENTITY_COUNTER.getAndAdd(hitbox.parts().length + 1) + 1);
     }
@@ -169,8 +172,10 @@ public abstract class CetaceanEntity extends WaterAnimal implements GeoEntity, A
     }
 
     @Override
-    public boolean checkSpawnRules(LevelAccessor level, MobSpawnType reason) {
-        return reason != MobSpawnType.NATURAL && reason != MobSpawnType.CHUNK_GENERATION;
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason,
+                                        @Nullable SpawnGroupData data) {
+        if (reason != MobSpawnType.NATURAL && reason != MobSpawnType.CHUNK_GENERATION) setPersistenceRequired();
+        return super.finalizeSpawn(level, difficulty, reason, data);
     }
 
     @Override
@@ -189,13 +194,24 @@ public abstract class CetaceanEntity extends WaterAnimal implements GeoEntity, A
     }
 
     @Override
+    public int getAmbientSoundInterval() {
+        return 300;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.mobSound(this, "ambient");
+    }
+
+    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.DOLPHIN_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.DOLPHIN_DEATH;
+        SoundEvent death = ModSounds.mobSound(this, "death");
+        return death != null ? death : SoundEvents.DOLPHIN_DEATH;
     }
 
     @Override

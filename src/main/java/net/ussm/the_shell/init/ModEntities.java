@@ -26,6 +26,7 @@ import net.ussm.the_shell.entites.LeviathanEntity;
 import net.ussm.the_shell.entites.Submarine;
 import net.ussm.the_shell.entites.BasilosaurusEntity;
 import net.ussm.the_shell.entites.BlueWhaleEntity;
+import net.ussm.the_shell.entites.PurussaurusEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, TheShell.MOD_ID);
@@ -68,6 +69,10 @@ public class ModEntities {
             ENTITY_TYPES.register("blue_whale", () -> EntityType.Builder.of(BlueWhaleEntity::new, MobCategory.WATER_CREATURE)
                     .sized(4.75F, 4.75F).eyeHeight(3.5F)
                     .clientTrackingRange(16).updateInterval(3).build(TheShell.MOD_ID + ":blue_whale"));
+    public static final DeferredHolder<EntityType<?>, EntityType<PurussaurusEntity>> PURUSSAURUS =
+            ENTITY_TYPES.register("purussaurus", () -> EntityType.Builder.of(PurussaurusEntity::new, MobCategory.MONSTER)
+                    .sized(2.2F, 1.3F).eyeHeight(0.9F)
+                    .clientTrackingRange(12).updateInterval(2).build(TheShell.MOD_ID + ":purussaurus"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ThrownAquaPearl>> AQUA_PEARL = ENTITY_TYPES.register("aqua_pearl",
             () -> EntityType.Builder.<net.ussm.the_shell.entites.ThrownAquaPearl>of(net.ussm.the_shell.entites.ThrownAquaPearl::new, MobCategory.MISC)
@@ -97,6 +102,7 @@ public class ModEntities {
         event.put(COLOSSAL_SQUID.get(), net.ussm.the_shell.entites.ColossalSquid.createAttributes().build());
         event.put(BASILOSAURUS.get(), BasilosaurusEntity.createAttributes().build());
         event.put(BLUE_WHALE.get(), BlueWhaleEntity.createAttributes().build());
+        event.put(PURUSSAURUS.get(), PurussaurusEntity.createAttributes().build());
         event.put(LEVIATHAN.get(), LeviathanEntity.createAttributes().build());
     }
 

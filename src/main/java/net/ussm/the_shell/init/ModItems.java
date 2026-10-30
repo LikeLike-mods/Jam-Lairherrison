@@ -188,18 +188,15 @@ public class ModItems {
     public static final DeferredItem<Item> HATCHETFISH_SPAWN_EGG = spawnEgg("hatchetfish", ModEntities.HATCHETFISH, 0xB8C4CC, 0x7FD8FF);
     public static final DeferredItem<Item> COLOSSAL_SQUID_SPAWN_EGG = spawnEgg("colossal_squid", ModEntities.COLOSSAL_SQUID, 0x8A1E22, 0x6FD0FF);
 
-    public static final DeferredItem<DeferredSpawnEggItem> LEVIATHAN_SPAWN_EGG = ITEMS.register("leviathan_spawn_egg",
-            () -> new DeferredSpawnEggItem(ModEntities.LEVIATHAN, 0x244D57, 0x4FE4DC,
-                    new Item.Properties().rarity(Rarity.EPIC)));
-
-
     public static final DeferredItem<Item> LEVIATHAN_EGG = ITEMS.register("leviathan_egg",
             () -> new Item(new Item.Properties().stacksTo(16).rarity(Rarity.RARE)));
     public static final DeferredItem<Item> FRIED_LEVIATHAN_EGG = ITEMS.register("fried_leviathan_egg",
             () -> new Item(new Item.Properties().stacksTo(16).rarity(Rarity.RARE).food(ModFoodProperties.FRIED_LEVIATHAN_EGG)));
 
+    public static final DeferredItem<Item> LEVIATHAN_SPAWN_EGG = spawnEgg("leviathan", ModEntities.LEVIATHAN, 0x1A1A1A, 0xFF0000);
     public static final DeferredItem<Item> BASILOSAURUS_SPAWN_EGG = spawnEgg("basilosaurus", ModEntities.BASILOSAURUS, 0x354744, 0xC3B995);
     public static final DeferredItem<Item> BLUE_WHALE_SPAWN_EGG = spawnEgg("blue_whale", ModEntities.BLUE_WHALE, 0x365969, 0xA4C3CD);
+    public static final DeferredItem<Item> PURUSSAURUS_SPAWN_EGG = spawnEgg("purussaurus", ModEntities.PURUSSAURUS, 0x40372E, 0xBDAD92);
 
     private static DeferredItem<Item> spawnEgg(String name, Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight) {
         DeferredItem<Item> egg = ITEMS.register(name + "_spawn_egg", () -> new DeferredSpawnEggItem(type, background, highlight, new Item.Properties()));

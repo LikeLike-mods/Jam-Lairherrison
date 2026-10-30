@@ -1031,5 +1031,77 @@
     "sounds": [
       "the_shell:banana_slip"
     ]
+  },
+  "entity.blue_whale.ambient": {
+    "subtitle": "subtitles.the_shell.entity.blue_whale.ambient",
+    "sounds": [
+      {
+        "name": "the_shell:entity/blue_whale/ambient",
+        "attenuation_distance": 48
+      }
+    ]
+  },
+  "entity.blue_whale.death": {
+    "subtitle": "subtitles.the_shell.entity.blue_whale.death",
+    "sounds": [
+      {
+        "name": "the_shell:entity/blue_whale/death",
+        "attenuation_distance": 48
+      }
+    ]
+  },
+  "entity.leviathan.ambient": {
+    "subtitle": "subtitles.the_shell.entity.leviathan.ambient",
+    "sounds": [
+      {
+        "name": "the_shell:entity/leviathan/ambient",
+        "attenuation_distance": 40
+      }
+    ]
+  },
+  "entity.leviathan.death": {
+    "subtitle": "subtitles.the_shell.entity.leviathan.death",
+    "sounds": [
+      {
+        "name": "the_shell:entity/leviathan/death",
+        "attenuation_distance": 40
+      }
+    ]
+  },
+  "entity.basilosaurus.ambient": {
+    "subtitle": "subtitles.the_shell.entity.basilosaurus.ambient",
+    "sounds": [
+      {
+        "name": "the_shell:entity/basilosaurus/ambient",
+        "attenuation_distance": 24
+      }
+    ]
+  },
+  "entity.basilosaurus.death": {
+    "subtitle": "subtitles.the_shell.entity.basilosaurus.death",
+    "sounds": [
+      {
+        "name": "the_shell:entity/basilosaurus/death",
+        "attenuation_distance": 24
+      }
+    ]
+  },
+  "entity.purussaurus.ambient": {
+    "subtitle": "subtitles.the_shell.entity.purussaurus.ambient",
+    "sounds": [
+      {
+        "name": "the_shell:entity/purussaurus/ambient",
+        "attenuation_distance": 24
+      }
+    ]
+  },
+  "entity.purussaurus.death": {
+    "subtitle": "subtitles.the_shell.entity.purussaurus.death",
+    "sounds": [
+      {
+        "name": "the_shell:entity/purussaurus/death",
+        "attenuation_distance": 24
+      }
+    ]
   }
 }

@@ -33,12 +33,15 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.entites.ai.LeviathanBiteCycle;
+import net.ussm.the_shell.init.ModSounds;
 import net.ussm.the_shell.entites.animations.TurnBendState;
 import net.ussm.the_shell.entites.animations.SwimmingTurnProfiles;
 import net.ussm.the_shell.entites.animations.TurnBendProfile;
@@ -90,7 +93,6 @@ public class LeviathanEntity extends Monster implements GeoEntity, AnimatedHitbo
         setPathfindingMalus(PathType.WATER, 0.0F);
         setPathfindingMalus(PathType.WATER_BORDER, 0.0F);
         xpReward = 100;
-        setPersistenceRequired();
         hitbox = new AnimatedHitbox<>(this);
         setId(ENTITY_COUNTER.getAndAdd(hitbox.parts().length + 1) + 1);
     }
@@ -167,8 +169,10 @@ public class LeviathanEntity extends Monster implements GeoEntity, AnimatedHitbo
     }
 
     @Override
-    public boolean checkSpawnRules(LevelAccessor level, MobSpawnType reason) {
-        return reason != MobSpawnType.NATURAL && reason != MobSpawnType.CHUNK_GENERATION;
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason,
+                                        @Nullable SpawnGroupData data) {
+        if (reason != MobSpawnType.NATURAL && reason != MobSpawnType.CHUNK_GENERATION) setPersistenceRequired();
+        return super.finalizeSpawn(level, difficulty, reason, data);
     }
 
     @Override
@@ -275,7 +279,7 @@ public class LeviathanEntity extends Monster implements GeoEntity, AnimatedHitbo
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return isInWaterOrBubble() ? SoundEvents.ELDER_GUARDIAN_AMBIENT : SoundEvents.ELDER_GUARDIAN_AMBIENT_LAND;
+        return ModSounds.mobSound(this, "ambient");
     }
 
     @Override
@@ -285,7 +289,7 @@ public class LeviathanEntity extends Monster implements GeoEntity, AnimatedHitbo
 
     @Override
     protected SoundEvent getDeathSound() {
-        return isInWaterOrBubble() ? SoundEvents.ELDER_GUARDIAN_DEATH : SoundEvents.ELDER_GUARDIAN_DEATH_LAND;
+        return ModSounds.mobSound(this, "death");
     }
 
     @Override

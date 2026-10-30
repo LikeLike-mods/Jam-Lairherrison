@@ -30,6 +30,7 @@ public class ModClientEvents {
         event.registerEntityRenderer(ModEntities.BLUE_WHALE.get(), c -> new CetaceanRenderer<>(c, "blue_whale",
                 net.ussm.the_shell.entites.BlueWhaleEntity.SIZE_MULTIPLIER,
                 1.4F * net.ussm.the_shell.entites.BlueWhaleEntity.GEOMETRY_SCALE, SwimmingTurnProfiles.BLUE_WHALE));
+        event.registerEntityRenderer(ModEntities.PURUSSAURUS.get(), PurussaurusRenderer::new);
         event.registerEntityRenderer(ModEntities.BUTTERFLY.get(), c -> new MobRenderers<>(c, "butterfly", 0.2F, false, false, false));
         event.registerEntityRenderer(ModEntities.CRAB.get(), CrabRenderer::new);
         event.registerEntityRenderer(ModEntities.GECKO.get(), c -> new MobRenderers<>(c, "gecko", 0.25F, true, false, false));

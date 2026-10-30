@@ -238,6 +238,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                 BlockState bottom = ModBlocks.GREY_GRANITE.get().defaultBlockState();
 
                 float swampiness = swamp[x + 1][z + 1];
+                int poolDepth = 0;
 
                 if (slope >= 7f) {
                     topLand = ModBlocks.BROWNSTONE.get().defaultBlockState();
@@ -247,7 +248,13 @@ public class TestChunkGenerator extends ChunkGenerator {
                 else if (swampiness >= 0.5f) {
                     boolean pool = Math.round(h) >= SWAMP_LEVEL && Math.round(n) >= Math.round(h) && Math.round(s) >= Math.round(h)
                             && Math.round(e) >= Math.round(h) && Math.round(w) >= Math.round(h);
-                    if (pool) topLand = Blocks.WATER.defaultBlockState();
+                    noise.SetFrequency(0.04f);
+                    noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+                    float channel = noise.GetNoise(posX, posZ);
+                    if (pool) {
+                        topLand = Blocks.WATER.defaultBlockState();
+                        poolDepth = 2 + Math.round(Math.clamp((channel + 0.4f) / 1.0f, 0f, 1f) * 3f);
+                    }
                     else topLand = Blocks.MUD.defaultBlockState();
                     top2Land = Blocks.MUD.defaultBlockState();
                 }
@@ -269,6 +276,12 @@ public class TestChunkGenerator extends ChunkGenerator {
                     pos.set(x, y, z);
 
                     if (y == -128) chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
+                    else if (poolDepth > 0 && y > a - poolDepth && y <= a) {
+                        chunk.setBlockState(pos, Blocks.WATER.defaultBlockState(), false);
+                    }
+                    else if (poolDepth > 0 && y >= a - poolDepth - 1 && y <= a - poolDepth) {
+                        chunk.setBlockState(pos, Blocks.MUD.defaultBlockState(), false);
+                    }
                     else if (y == a) {
                         if (y < SEA) {
                             chunk.setBlockState(pos, topWater, false);

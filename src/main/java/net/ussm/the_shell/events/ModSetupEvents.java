@@ -51,6 +51,14 @@ public class ModSetupEvents {
             event.register(type, SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                     SpawnRules::inDeepWater, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         }
+        event.register(ModEntities.LEVIATHAN.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SpawnRules::leviathan, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(ModEntities.BLUE_WHALE.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SpawnRules::blueWhale, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(ModEntities.BASILOSAURUS.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SpawnRules::basilosaurus, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(ModEntities.PURUSSAURUS.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SpawnRules::purussaurus, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 
     @SubscribeEvent
