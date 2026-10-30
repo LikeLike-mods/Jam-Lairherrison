@@ -1,5 +1,6 @@
 package net.ussm.the_shell.events;
 
+import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -18,17 +19,21 @@ import net.ussm.the_shell.blocks.NotchAltarBlock;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class TempleProtection {
-    private static final ResourceKey<Structure> TEMPLE = ResourceKey.create(Registries.STRUCTURE, ResourceLocation.withDefaultNamespace("jungle_pyramid"));
+    private static final List<ResourceKey<Structure>> TEMPLES = List.of(
+            ResourceKey.create(Registries.STRUCTURE, ResourceLocation.withDefaultNamespace("jungle_pyramid")),
+            ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "jungle_temple")));
 
     private static boolean isLocked(ServerLevel level, BlockPos pos) {
-        Structure structure = level.registryAccess().registryOrThrow(Registries.STRUCTURE).get(TEMPLE);
-        if (structure == null) return false;
-        StructureStart temple = level.structureManager().getStructureWithPieceAt(pos, structure);
-        if (!temple.isValid()) return false;
-        for (BlockPos p : BlockPos.betweenClosed(temple.getBoundingBox().minX(), temple.getBoundingBox().minY(), temple.getBoundingBox().minZ(),
-                temple.getBoundingBox().maxX(), temple.getBoundingBox().maxY(), temple.getBoundingBox().maxZ())) {
-            BlockState s = level.getBlockState(p);
-            if (s.getBlock() instanceof NotchAltarBlock && !s.getValue(NotchAltarBlock.SOLVED)) return true;
+        for (ResourceKey<Structure> key : TEMPLES) {
+            Structure structure = level.registryAccess().registryOrThrow(Registries.STRUCTURE).get(key);
+            if (structure == null) continue;
+            StructureStart temple = level.structureManager().getStructureWithPieceAt(pos, structure);
+            if (!temple.isValid()) continue;
+            for (BlockPos p : BlockPos.betweenClosed(temple.getBoundingBox().minX(), temple.getBoundingBox().minY(), temple.getBoundingBox().minZ(),
+                    temple.getBoundingBox().maxX(), temple.getBoundingBox().maxY(), temple.getBoundingBox().maxZ())) {
+                BlockState s = level.getBlockState(p);
+                if (s.getBlock() instanceof NotchAltarBlock && !s.getValue(NotchAltarBlock.SOLVED)) return true;
+            }
         }
         return false;
     }
