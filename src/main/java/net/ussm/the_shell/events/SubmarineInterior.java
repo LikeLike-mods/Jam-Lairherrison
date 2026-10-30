@@ -141,7 +141,8 @@ public class SubmarineInterior {
             if (Math.floorMod(lx, 8) != passe) continue;
             for (int ly = -16; ly <= 24; ly++) {
                 for (int lz = -36; lz <= 37; lz++) {
-                    int tx = 7 + lx, ty = 6 + ly, tz = 11 + lz;
+                    // le bas du vrai sous-marin = le sol de la cabine : le fond reste sous les pieces au lieu d'arriver aux hublots
+                    int tx = 7 + lx, ty = 3 + ly, tz = 11 + lz;
                     int proche = 99;
                     for (int n = 0; n <= tier && n < DANS_LA_CABINE.length; n++) {
                         int[] b = DANS_LA_CABINE[n];
@@ -432,6 +433,12 @@ public class SubmarineInterior {
         if (event.getLevel() instanceof Level level && level.dimension() == INTERIOR && !event.getPlayer().isCreative() && event.getState().is(HULL)) {
             event.setCanceled(true);
         }
+    }
+
+    // ni les explosions (creeper, cristal de l'end...) : dans la cabine elles ne cassent aucun bloc
+    @SubscribeEvent
+    public static void noExplosion(net.neoforged.neoforge.event.level.ExplosionEvent.Detonate event) {
+        if (event.getLevel().dimension() == INTERIOR) event.getAffectedBlocks().clear();
     }
 
     // quel sous-marin va avec quelle cabine, et ou il etait la derniere fois

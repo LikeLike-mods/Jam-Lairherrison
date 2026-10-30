@@ -69,6 +69,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.BLACK_PEARL);
                         output.accept(ModItems.GRAPPLING_HOOK);
                         output.accept(ModItems.POCKET_SONAR);
+                        output.accept(ModItems.KYBER_AXE);
                         output.accept(ModItems.OXYGEN_BOTTLE);
                         output.accept(ModBlocks.AIR_BUBBLE);
                         output.accept(ModBlocks.LIGHT_SAND);
@@ -77,6 +78,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.COCONUT);
                         output.accept(ModItems.COCONUT_HALF);
                         output.accept(ModItems.BANANA);
+                        output.accept(ModBlocks.BANANA_PEEL);
                         output.accept(ModItems.BANANA_BREAD);
                         output.accept(ModItems.BANANA_CHIPS);
                         output.accept(ModItems.DATES);

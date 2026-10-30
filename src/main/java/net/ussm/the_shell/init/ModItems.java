@@ -40,7 +40,7 @@ public class ModItems {
             () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperies car C PLUS PROPRE
 
     // banane et datte
-    public static final DeferredItem<Item> BANANA = ITEMS.register("banana", () -> new Item(new Item.Properties().food(ModFoodProperties.BANANA)));
+    public static final DeferredItem<Item> BANANA = ITEMS.register("banana", () -> new net.ussm.the_shell.items.BananaItem(new Item.Properties().food(ModFoodProperties.BANANA)));
     public static final DeferredItem<Item> BANANA_BREAD = ITEMS.register("banana_bread", () -> new Item(new Item.Properties().food(ModFoodProperties.BANANA_BREAD)));
     public static final DeferredItem<Item> BANANA_CHIPS = ITEMS.register("banana_chips", () -> new Item(new Item.Properties().food(ModFoodProperties.BANANA_CHIPS)));
     public static final DeferredItem<Item> DATES = ITEMS.register("dates", () -> new Item(new Item.Properties().food(ModFoodProperties.DATES)));
@@ -214,6 +214,9 @@ public class ModItems {
     public static final DeferredItem<LightsaberItem> SHADOW_SABER_HAMMER_VIOLET = ITEMS.register("lightsaber_shadow_hammer_violet",
         () -> new LightsaberItem("lightsaber_hammer", "lightsaber_shadow_hammer_violet",
                 12, -3.2F, ModItems.SHADOW_SABER_SWORD_VIOLET, createLightsaberProperties()));
+
+    public static final DeferredItem<Item> KYBER_AXE = ITEMS.register("kyber_axe",
+        () -> new net.ussm.the_shell.items.KyberAxeItem(createLightsaberProperties()));
 
     private static Item.Properties createLightsaberProperties() {
         return new Item.Properties()

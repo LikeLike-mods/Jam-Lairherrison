@@ -1025,5 +1025,11 @@
         "volume": 1.5
       }
     ]
+  },
+  "banana_slip": {
+    "subtitle": "subtitles.the_shell.banana_slip",
+    "sounds": [
+      "the_shell:banana_slip"
+    ]
   }
 }

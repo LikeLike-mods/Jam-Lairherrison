@@ -32,6 +32,11 @@ public class SubmarineItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        // pas de sous-marin dans un sous-marin dans un sous-marin...
+        if (level.dimension() == SubmarineInterior.INTERIOR) {
+            if (!level.isClientSide) player.displayClientMessage(Component.translatable("message.the_shell.submarine.no_room"), true);
+            return InteractionResultHolder.fail(stack);
+        }
         BlockHitResult hit = getPlayerPOVHitResult(level, player, ClipContext.Fluid.ANY);
         if (hit.getType() != HitResult.Type.BLOCK) return InteractionResultHolder.pass(stack);
         Vec3 pos = hit.getLocation();

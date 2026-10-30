@@ -35,6 +35,17 @@ public class SubmarineRenderer extends GeoEntityRenderer<Submarine> {
 
     }
 
+    // les pieces de chaque amelioration (fer, diamant, netherite) ne se montrent qu'a partir de leur niveau
+    @Override
+    public void preRender(PoseStack poseStack, Submarine submarine, software.bernie.geckolib.cache.object.BakedGeoModel model, MultiBufferSource bufferSource,
+                          com.mojang.blaze3d.vertex.VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
+        for (int niveau = 1; niveau <= 3; niveau++) {
+            boolean cache = submarine.getTier() < niveau;
+            model.getBone("tier" + niveau).ifPresent(os -> os.setHidden(cache));
+        }
+        super.preRender(poseStack, submarine, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
+    }
+
     @Override
     public RenderType getRenderType(Submarine submarine, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
         return RenderType.entityTranslucent(texture);

@@ -22,6 +22,10 @@ public final class ModNetworking {
     private static void registerPayloads(RegisterPayloadHandlersEvent event) {
         event.registrar("1").optional().playToClient(WaveImpactPayload.TYPE, WaveImpactPayload.STREAM_CODEC,
                 (payload, context) -> waveImpactHandler.accept(payload));
+        event.registrar("1").optional().playToServer(net.ussm.the_shell.network.SlipPayload.TYPE, net.ussm.the_shell.network.SlipPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof net.minecraft.server.level.ServerPlayer player) net.ussm.the_shell.events.SlipEvents.received(player, payload.allonge());
+                }));
         event.registrar("1").optional().playToServer(net.ussm.the_shell.network.CabinButtonPayload.TYPE, net.ussm.the_shell.network.CabinButtonPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> {
                     if (context.player() instanceof net.minecraft.server.level.ServerPlayer player) net.ussm.the_shell.events.SubmarineInterior.downFromSeat(player);
