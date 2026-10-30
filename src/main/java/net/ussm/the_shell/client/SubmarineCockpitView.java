@@ -152,16 +152,17 @@ public class SubmarineCockpitView {
         pose.mulPose(new org.joml.Quaternionf().rotationTo(new org.joml.Vector3f(0.0F, 0.0F, 1.0F), dir.normalize()));
         PoseStack.Pose p = pose.last();
         float w = 0.07F;
-        // les 4 faces longues (de l'epaule en haut du skin a la main en bas) et le bout du poing
+        // les 4 faces longues (de l'epaule en haut du skin a la main en bas) et le bout du poing.
+        // le bras continue derriere l'epaule pour qu'on ne voie jamais ou il commence
         float[][] cotes = {{-w, -w, -w, w}, {-w, w, w, w}, {w, w, w, -w}, {w, -w, -w, -w}};
         for (int i = 0; i < 4; i++) {
             float[] c = cotes[i];
             float u0 = (u + i * 4) / 64.0F, u1 = (u + i * 4 + 4) / 64.0F, v0 = (v + 4) / 64.0F, v1 = (v + 16) / 64.0F;
             float nx = (c[0] + c[2]) / 2, ny = (c[1] + c[3]) / 2;
-            sommet(vc, p, c[0], c[1], 0, u0, v0, light, nx, ny, 0);
+            sommet(vc, p, c[0], c[1], -0.6F, u0, v0, light, nx, ny, 0);
             sommet(vc, p, c[0], c[1], l, u0, v1, light, nx, ny, 0);
             sommet(vc, p, c[2], c[3], l, u1, v1, light, nx, ny, 0);
-            sommet(vc, p, c[2], c[3], 0, u1, v0, light, nx, ny, 0);
+            sommet(vc, p, c[2], c[3], -0.6F, u1, v0, light, nx, ny, 0);
         }
         float bu0 = (u + 8) / 64.0F, bu1 = (u + 12) / 64.0F, bv0 = v / 64.0F, bv1 = (v + 4) / 64.0F;
         sommet(vc, p, -w, -w, l, bu0, bv0, light, 0, 0, 1);
