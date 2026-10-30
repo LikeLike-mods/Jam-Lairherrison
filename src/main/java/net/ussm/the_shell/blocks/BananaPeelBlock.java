@@ -2,7 +2,6 @@ package net.ussm.the_shell.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -43,7 +42,7 @@ public class BananaPeelBlock extends Block {
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity vivant) || vivant.isShiftKeyDown() || !vivant.onGround()) return;
+        if (!(entity instanceof LivingEntity vivant) || vivant.isShiftKeyDown() || !vivant.onGround() || entity.getData(net.ussm.the_shell.init.ModAttachments.SLIPPED)) return;
         // le joueur bouge de son cote (client), les mobs cote serveur
         boolean joueur = entity instanceof Player;
         if (joueur ? !(level.isClientSide && ((Player) entity).isLocalPlayer()) : level.isClientSide) return;
@@ -51,10 +50,13 @@ public class BananaPeelBlock extends Block {
         if (v.horizontalDistanceSqr() < 0.0009) return;
         Vec3 dir = new Vec3(v.x, 0.0, v.z).normalize();
         entity.setDeltaMovement(dir.x * 1.1, 0.25, dir.z * 1.1);
-        if (!joueur) {
+        if (joueur) {
+            // le joueur se retrouve sur le dos (espace pour se relever), le serveur fait entendre le zwouip aux autres
+            net.ussm.the_shell.client.SlipClient.slip((Player) entity);
+        } else {
             entity.hurtMarked = true;
             entity.setYRot(entity.getYRot() + 120.0F + level.random.nextFloat() * 120.0F);
         }
-        level.playSound(joueur ? (Player) entity : null, pos, SoundEvents.SLIME_SQUISH, SoundSource.BLOCKS, 1.0F, 1.4F);
+        level.playSound(joueur ? (Player) entity : null, pos, net.ussm.the_shell.init.ModSounds.BANANA_SLIP.get(), joueur ? SoundSource.PLAYERS : SoundSource.NEUTRAL, 1.0F, 0.95F + level.random.nextFloat() * 0.1F);
     }
 }

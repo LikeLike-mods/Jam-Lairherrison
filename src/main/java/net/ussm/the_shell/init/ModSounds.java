@@ -18,6 +18,7 @@ public final class ModSounds {
             DeferredRegister.create(Registries.SOUND_EVENT, TheShell.MOD_ID);
 
     public static final DeferredHolder<SoundEvent, SoundEvent> LIGHTSABER_IGNITE = register("lightsaber_ignite");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BANANA_SLIP = register("banana_slip");
     public static final DeferredHolder<SoundEvent, SoundEvent> LIGHTSABER_EXTINGUISH = register("lightsaber_extinguish");
     public static final DeferredHolder<SoundEvent, SoundEvent> LIGHTSABER_HUM = register("lightsaber_hum");
 

@@ -43,6 +43,12 @@ public class ModAttachments {
             .copyOnDeath()
             .build());
 
+    // allonge par terre apres avoir glisse sur une peau de banane (les autres joueurs doivent le voir)
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> SLIPPED =
+        ATTACHMENT_TYPES.register("slipped", () -> AttachmentType.builder(() -> false)
+            .sync((holder, to) -> true, ByteBufCodecs.BOOL)
+            .build());
+
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
     }
