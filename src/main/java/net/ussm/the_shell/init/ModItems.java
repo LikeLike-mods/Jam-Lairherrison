@@ -31,6 +31,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> COCONUT_SHELL = ITEMS.register("coconut_shell",
             () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> COCONUT_HALF = ITEMS.register("coconut_half",
             () -> new CoconutHalfItem(new Item.Properties().food(ModFoodProperties.COCONUT_HALF))); //Go check FoodProperties, it's WAY CLEANER
 
@@ -100,8 +101,11 @@ public class ModItems {
 
     public static final DeferredItem<Item> ABYSSAL_SCALE = ITEMS.register("abyssal_scale",
             () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> KYBER_CRYSTAL = ITEMS.register("kyber_crystal",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+
+
     public static final DeferredItem<Item> BLACK_PEARL = ITEMS.register("black_pearl",
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
