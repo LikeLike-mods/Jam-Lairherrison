@@ -2,41 +2,5 @@
   "parent": "the_shell:item/lightsaber_hammer",
   "textures": {
     "particle": "the_shell:item/kyber_axe"
-  },
-  "display": {
-    "firstperson_righthand": {
-      "rotation": [
-        0,
-        150,
-        20
-      ],
-      "translation": [
-        1.5,
-        1.8,
-        1.0
-      ],
-      "scale": [
-        0.3,
-        0.3,
-        0.3
-      ]
-    },
-    "firstperson_lefthand": {
-      "rotation": [
-        0,
-        -150,
-        -20
-      ],
-      "translation": [
-        -1.5,
-        1.8,
-        1.0
-      ],
-      "scale": [
-        0.3,
-        0.3,
-        0.3
-      ]
-    }
   }
 }
