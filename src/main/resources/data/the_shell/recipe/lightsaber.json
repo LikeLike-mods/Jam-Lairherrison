@@ -3,18 +3,15 @@
   "category": "equipment",
   "pattern": [
     "K",
-    "R",
-    "I"
+    "K",
+    "N"
   ],
   "key": {
     "K": {
       "item": "the_shell:kyber_crystal"
     },
-    "R": {
-      "item": "minecraft:redstone"
-    },
-    "I": {
-      "item": "minecraft:iron_ingot"
+    "N": {
+      "item": "minecraft:netherite_ingot"
     }
   },
   "result": {

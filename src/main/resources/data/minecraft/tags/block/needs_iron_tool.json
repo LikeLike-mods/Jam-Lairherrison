@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "the_shell:kyber_ore",
     "the_shell:abyssal_gold_ore",
     "the_shell:abyssal_redstone_ore",
     "the_shell:abyssal_diamond_ore",
