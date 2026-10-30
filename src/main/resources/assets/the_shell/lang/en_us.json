@@ -228,7 +228,7 @@
   "item.the_shell.netherite_abyss_helmet": "Netherite Abyssal Skull",
   "item.the_shell.oxygen_bottle": "Oxygen Bottle",
   "item.the_shell.oxygen_bottle.charges": "%s one-minute charge(s)",
-  "item.the_shell.oxygen_bottle.empty": "Empty: refill it at an air tank",
+  "item.the_shell.oxygen_bottle.empty": "Empty: refill it at a tank",
   "item.the_shell.palm_boat": "Palm Boat",
   "item.the_shell.palm_chest_boat": "Palm Boat with Chest",
   "item.the_shell.pocket_sonar": "Pocket Sonar",
@@ -349,11 +349,11 @@
   "tooltip.the_shell.kyber_crystal.details": "A rare, energy-filled crystal from the abyss. A single one fully recharges the submarine's battery. It is also used to craft the pocket sonar, the air bubble and the lightsabers.",
   "tooltip.the_shell.lightsaber.change_mode": "Shift + Right Click: change lightsaber mode",
   "tooltip.the_shell.machine.details": "The submarine's engine, in its cabin: right-click with coal, redstone or kyber to recharge the battery without going outside.",
-  "tooltip.the_shell.oxygen_bottle.details": "4 one-minute charges of oxygen for the diving suit. Right-click to use one. Refills completely at an air tank.",
+  "tooltip.the_shell.oxygen_bottle.details": "4 one-minute charges of oxygen for the diving suit. Right-click to use one. Refills completely at a tank.",
   "tooltip.the_shell.pocket_sonar.details": "Right-click: a ping makes nearby creatures glow through walls, and reveals ores and chests for 8 seconds.",
   "tooltip.the_shell.submarine.details": "Place it in water. Right-click: take the controls (hold Ctrl to look around without turning). The yellow button on the small console to the right of the seat takes you down to the cabin, bigger on the inside. Recharge the battery with coal, redstone or kyber. Hit it while sneaking to pick it up: it keeps its upgrades, battery and cabin.",
   "tooltip.the_shell.submarine_upgrade_diamond.details": "Right-click a submarine that already has the iron upgrade. Adds a second room to the cabin and more speed.",
   "tooltip.the_shell.submarine_upgrade_iron.details": "Right-click a submarine to upgrade it. Kits go in order: iron, diamond, then netherite. This one adds a room to the cabin and a bit of speed.",
   "tooltip.the_shell.submarine_upgrade_netherite.details": "Right-click a submarine that already has the diamond upgrade. Adds a third room, more speed, and a sonar that shows the direction and distance of the nearest rift from the cockpit.",
-  "tooltip.the_shell.tank.details": "Air tank: right-click to fully refill your diving suit's oxygen, and the oxygen bottle in your hand. Works anywhere, place one near your base."
+  "tooltip.the_shell.tank.details": "Tank: right-click to fully refill your diving suit's oxygen, and the oxygen bottle in your hand. Works anywhere, place one near your base."
 }

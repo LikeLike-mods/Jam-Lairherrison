@@ -228,7 +228,7 @@
   "item.the_shell.netherite_abyss_helmet": "Crâne des abysses en netherite",
   "item.the_shell.oxygen_bottle": "Bouteille d'oxygène",
   "item.the_shell.oxygen_bottle.charges": "%s charge(s) d'une minute",
-  "item.the_shell.oxygen_bottle.empty": "Vide : à remplir à un réservoir d'air",
+  "item.the_shell.oxygen_bottle.empty": "Vide : à remplir à une cuve",
   "item.the_shell.palm_boat": "Bateau en palmier",
   "item.the_shell.palm_chest_boat": "Bateau en palmier avec coffre",
   "item.the_shell.pocket_sonar": "Sonar de poche",
@@ -349,11 +349,11 @@
   "tooltip.the_shell.kyber_crystal.details": "Un cristal rare des abysses, plein d'énergie. Un seul recharge entièrement la batterie du sous-marin. Il sert aussi à fabriquer le sonar de poche, la bulle d'air et les sabres laser.",
   "tooltip.the_shell.lightsaber.change_mode": "Shift + clic droit : changer de mode du sabre laser",
   "tooltip.the_shell.machine.details": "Le moteur du sous-marin, dans sa cabine : clic droit avec du charbon, de la redstone ou du kyber pour recharger la batterie sans sortir.",
-  "tooltip.the_shell.oxygen_bottle.details": "4 charges d'une minute d'oxygène pour le scaphandre. Clic droit pour en utiliser une. Se remplit en entier à un réservoir d'air.",
+  "tooltip.the_shell.oxygen_bottle.details": "4 charges d'une minute d'oxygène pour le scaphandre. Clic droit pour en utiliser une. Se remplit en entier à une cuve.",
   "tooltip.the_shell.pocket_sonar.details": "Clic droit : un ping fait briller les créatures autour de vous à travers les murs, et montre les minerais et les coffres pendant 8 secondes.",
   "tooltip.the_shell.submarine.details": "Posez-le dans l'eau. Clic droit : aux commandes (Ctrl pour regarder autour sans tourner). Le bouton jaune de la petite console à droite du siège fait descendre dans la cabine, plus grande à l'intérieur. Rechargez la batterie avec du charbon, de la redstone ou du kyber. Frappez-le accroupi pour le récupérer : il garde ses améliorations, sa batterie et sa cabine.",
   "tooltip.the_shell.submarine_upgrade_diamond.details": "Clic droit sur un sous-marin déjà amélioré en fer. Ajoute une deuxième pièce à la cabine et encore de la vitesse.",
   "tooltip.the_shell.submarine_upgrade_iron.details": "Clic droit sur un sous-marin pour l'améliorer. Les kits se posent dans l'ordre : fer, diamant, puis netherite. Celui-ci ajoute une pièce à la cabine et un peu de vitesse.",
   "tooltip.the_shell.submarine_upgrade_netherite.details": "Clic droit sur un sous-marin déjà amélioré en diamant. Ajoute une troisième pièce, encore de la vitesse, et un sonar qui indique depuis le cockpit la direction et la distance de la faille la plus proche.",
-  "tooltip.the_shell.tank.details": "Réservoir d'air : clic droit pour remplir à fond l'oxygène du scaphandre, et la bouteille d'oxygène que vous tenez en main. Il marche partout, posez-en un près de votre base."
+  "tooltip.the_shell.tank.details": "La cuve : clic droit pour remplir à fond l'oxygène du scaphandre, et la bouteille d'oxygène que vous tenez en main. Il marche partout, posez-en un près de votre base."
 }
