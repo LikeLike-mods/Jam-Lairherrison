@@ -49,6 +49,18 @@ public class DizzyStars {
         RenderSystem.disableBlend();
     }
 
+    // sans lit le jeu couche le modele au ras du sol (la moitie dedans) : on le remonte tant qu'il est allonge
+    @SubscribeEvent
+    public static void remonte(net.neoforged.neoforge.client.event.RenderPlayerEvent.Pre event) {
+        event.getPoseStack().pushPose();
+        if (event.getEntity().getData(ModAttachments.SLIPPED)) event.getPoseStack().translate(0.0F, 0.28F, 0.0F);
+    }
+
+    @SubscribeEvent
+    public static void redescend(net.neoforged.neoforge.client.event.RenderPlayerEvent.Post event) {
+        event.getPoseStack().popPose();
+    }
+
     @SubscribeEvent
     public static void couches(EntityRenderersEvent.AddLayers event) {
         for (PlayerSkin.Model modele : event.getSkins()) {
@@ -67,21 +79,25 @@ public class DizzyStars {
                            float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
             if (!player.getData(ModAttachments.SLIPPED)) return;
             VertexConsumer vc = buffers.getBuffer(RenderType.entityCutoutNoCull(ETOILE));
+            // on prend juste ou est le milieu de la tete (le modele est couche), et on fait la ronde bien a plat au-dessus
             pose.pushPose();
             getParentModel().head.translateAndRotate(pose);
+            pose.translate(0.0F, -0.25F, 0.0F);
+            org.joml.Vector3f tete = pose.last().pose().transformPosition(new org.joml.Vector3f());
+            pose.popPose();
+            PoseStack monde = new PoseStack();
+            monde.translate(tete.x, tete.y, tete.z);
             for (int i = 0; i < 5; i++) {
                 double a = ageInTicks * 0.2 + i * Math.PI * 2 / 5;
-                pose.pushPose();
-                // au-dessus de la tete (dans le modele, le haut c'est les y negatifs)
-                pose.translate(Math.cos(a) * 0.42, -0.62 + Math.sin(ageInTicks * 0.3 + i) * 0.03, Math.sin(a) * 0.42);
-                PoseStack.Pose p = pose.last();
+                monde.pushPose();
+                monde.translate(Math.cos(a) * 0.42, 0.4 + Math.sin(ageInTicks * 0.3 + i) * 0.03, Math.sin(a) * 0.42);
+                PoseStack.Pose p = monde.last();
                 float s = 0.11F;
                 // deux carres croises : on voit l'etoile de tous les cotes
-                carre(vc, p, -s, -s, 0, s, s, 0);
-                carre(vc, p, 0, -s, -s, 0, s, s);
-                pose.popPose();
+                carre(vc, p, -s, s, 0, s, -s, 0);
+                carre(vc, p, 0, s, -s, 0, -s, s);
+                monde.popPose();
             }
-            pose.popPose();
         }
 
         private static void carre(VertexConsumer vc, PoseStack.Pose p, float x0, float y0, float z0, float x1, float y1, float z1) {
