@@ -15,6 +15,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -70,6 +71,18 @@ public class CoconutBlock extends Block implements Fallable {
             stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    // a la main : on arrache la bourre, il reste la fibre et la coco epluchee
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide) {
+            level.destroyBlock(pos, false, player);
+            Block.popResource(level, pos, new ItemStack(ModItems.PEELED_COCONUT.get()));
+            Block.popResource(level, pos, new ItemStack(ModItems.COCONUT_FIBER.get(), 1 + level.random.nextInt(3)));
+            level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.2F);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override

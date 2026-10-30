@@ -38,7 +38,9 @@ enumExtensions="META-INF/enumextensions.json"
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="the_shell.png" #optional
+logoFile="the_shell.png" #optional
+# pixel art, pas de flou
+logoBlur=false
 
 # A text field displayed in the mod UI
 #credits="" #optional
@@ -48,7 +50,11 @@ authors="LikeLike, Utumno, DrSupernovas, Oesphy"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Un atoll tropical : plages, palmiers et jungle tout pipou à la surface... et des abysses de plus en plus sombres quand on plonge.
+Des îles tropicales toutes pipou en surface, et en dessous des abysses où on voit rien.
+
+Plage, jungle, mangrove, cocos et bananes. Un scaphandre avec de l'oxygène et une pression qui écrase quand tu descends. Des failles vers les abysses, avec des stations englouties, du kyber et des bestioles pas très sympas. Un sous-marin jaune plus grand dedans que dehors. Et un temple de la jungle où Notch te pose des questions.
+
+Astuce : maintiens Ctrl sur un objet du mod pour lire sa description.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
