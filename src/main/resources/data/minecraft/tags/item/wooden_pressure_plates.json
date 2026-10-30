@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_shell:palm_pressure_plate"
+    "the_shell:palm_pressure_plate",
+    "the_shell:date_palm_pressure_plate",
+    "the_shell:banana_pressure_plate"
   ]
 }

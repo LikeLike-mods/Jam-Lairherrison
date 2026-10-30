@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_shell:palm_button"
+    "the_shell:palm_button",
+    "the_shell:date_palm_button",
+    "the_shell:banana_button"
   ]
 }
