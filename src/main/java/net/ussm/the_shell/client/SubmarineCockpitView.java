@@ -82,10 +82,10 @@ public class SubmarineCockpitView {
         box(vc, pose, -0.23F, -0.79F, 1.035F, 0.23F, -0.63F, 1.045F, 0xFF101418, lumiere);
         box(vc, pose, -0.21F, -0.77F, 1.03F, 0.21F, -0.65F, 1.035F, 0xFF2BAFD8, plein);
         float t = sub.tickCount + pt;
-        for (int i = 0; i < 4; i++) {
-            float y = -0.755F + i * 0.028F + (float) Math.sin(t * 0.2 + i) * 0.004F;
-            float larg = 0.06F + 0.12F * (0.5F + 0.5F * (float) Math.sin(t * 0.13 + i * 1.7));
-            box(vc, pose, -0.19F, y, 1.028F, -0.19F + larg, y + 0.01F, 1.03F, 0xFF9FF4FF, plein);
+        // deux barres d'un pixel de haut, avec un pixel vide entre
+        for (int i = 0; i < 2; i++) {
+            float larg = 0.06F + 0.24F * (0.5F + 0.5F * (float) Math.sin(t * 0.13 + i * 1.7));
+            box(vc, pose, -6 * P, -24 * P + i * 2 * P, 1.028F, -6 * P + larg, -23 * P + i * 2 * P, 1.03F, 0xFF9FF4FF, plein);
         }
         float[] aiguilles = {(float) Math.sin(t * 0.07) * 0.9F + (float) Math.sin(t * 0.31) * 0.15F, 1.2F - 2.4F * sub.getEnergy() / Submarine.MAX_ENERGY};
         float[] places = {-0.45F, 0.45F};
@@ -114,15 +114,11 @@ public class SubmarineCockpitView {
         }
         // le bouton pour descendre dans la cabine, sous l'ecran : cadre jaune et noir, il s'allume quand on le vise
         boolean vise = regardeBouton(mc, sub);
-        box(vc, pose, -0.09F, -0.915F, 1.035F, 0.09F, -0.815F, 1.045F, 0xFF1A1A1A, lumiere);
-        for (int i = 0; i < 6; i++) {
-            float x = -0.085F + i * 0.03F;
-            box(vc, pose, x, -0.91F, 1.032F, x + 0.015F, -0.82F, 1.035F, 0xFFE6B53A, lumiere);
-        }
-        box(vc, pose, -0.055F, -0.895F, 1.02F, 0.055F, -0.835F, 1.032F, vise ? 0xFFFFE27A : 0xFFC8962A, vise ? plein : lumiere);
-        // la fleche vers le bas dessus
-        box(vc, pose, -0.006F, -0.875F, 1.018F, 0.006F, -0.85F, 1.02F, 0xFF1A1A1A, plein);
-        box(vc, pose, -0.02F, -0.882F, 1.018F, 0.02F, -0.875F, 1.02F, 0xFF1A1A1A, plein);
+        // (en pixels de la grille : cadre 7x4, bouton 5x2, une fleche de 3 puis 1 pixel)
+        box(vc, pose, -3 * P, -29 * P, 1.035F, 4 * P, -25 * P, 1.045F, 0xFFE6B53A, lumiere);
+        box(vc, pose, -2 * P, -28 * P, 1.02F, 3 * P, -26 * P, 1.032F, vise ? 0xFFFFE27A : 0xFFC8962A, vise ? plein : lumiere);
+        box(vc, pose, -P, -27 * P, 1.016F, 2 * P, -26 * P, 1.018F, 0xFF1A1A1A, plein);
+        box(vc, pose, 0.0F, -28 * P, 1.016F, P, -27 * P, 1.018F, 0xFF1A1A1A, plein);
         // le manche : un socle, une tige, une poignee avec ses bagues et un bouton rouge dessus
         pose.pushPose();
         pose.translate(0.0F, -1.22F, 0.55F);
@@ -132,7 +128,6 @@ public class SubmarineCockpitView {
         pose.mulPose(Axis.ZP.rotationDegrees(-mancheCote * 22.0F));
         box(vc, pose, -0.02F, 0.06F, -0.02F, 0.02F, 0.36F, 0.02F, 0xFF8C949C, lumiere);
         box(vc, pose, -0.04F, 0.36F, -0.04F, 0.04F, 0.52F, 0.04F, 0xFF22262B, lumiere);
-        for (float y = 0.39F; y < 0.52F; y += 0.04F) box(vc, pose, -0.043F, y, -0.043F, 0.043F, y + 0.012F, 0.043F, 0xFF3A4048, lumiere);
         box(vc, pose, -0.03F, 0.52F, -0.03F, 0.03F, 0.545F, 0.03F, 0xFFB02226, lumiere);
         box(vc, pose, -0.015F, 0.545F, -0.015F, 0.015F, 0.555F, 0.015F, 0xFFE8524E, plein);
         pose.popPose();
@@ -160,7 +155,7 @@ public class SubmarineCockpitView {
         org.joml.Vector3f vue = mc.player.getViewVector(1.0F).toVector3f().rotateY((float) Math.toRadians(sub.getYRot()));
         if (vue.z < 0.1F) return false;
         float t = 1.03F / vue.z, x = vue.x * t, y = vue.y * t;
-        return Math.abs(x) < 0.1F && y > -0.93F && y < -0.8F;
+        return x > -3 * P && x < 4 * P && y > -29 * P && y < -25 * P;
     }
 
     // clic droit sur le bouton : on previent le serveur
@@ -181,18 +176,24 @@ public class SubmarineCockpitView {
         pose.translate(epaule.x, epaule.y, epaule.z);
         pose.mulPose(new org.joml.Quaternionf().rotationTo(new org.joml.Vector3f(0.0F, 0.0F, 1.0F), dir.normalize()));
         PoseStack.Pose p = pose.last();
-        float w = 0.07F;
-        // les 4 faces longues (de l'epaule en haut du skin a la main en bas) et le bout du poing.
-        // le bras continue derriere l'epaule pour qu'on ne voie jamais ou il commence
+        // 4 pixels de skin de large = 4 pixels de la grille du cockpit
+        float w = 2 * P;
+        // les 4 faces longues et le bout du poing. les 12 pixels du skin font 12 pixels de grille depuis la main (pas etires),
+        // et plus haut (jusque derriere l'epaule, pour qu'on ne voie jamais ou il commence) on prolonge la rangee du haut
+        float coude = l - 12 * P;
         float[][] cotes = {{-w, -w, -w, w}, {-w, w, w, w}, {w, w, w, -w}, {w, -w, -w, -w}};
         for (int i = 0; i < 4; i++) {
             float[] c = cotes[i];
-            float u0 = (u + i * 4) / 64.0F, u1 = (u + i * 4 + 4) / 64.0F, v0 = (v + 4) / 64.0F, v1 = (v + 16) / 64.0F;
+            float u0 = (u + i * 4) / 64.0F, u1 = (u + i * 4 + 4) / 64.0F, v0 = (v + 4) / 64.0F, v1 = (v + 16) / 64.0F, vh = (v + 5) / 64.0F;
             float nx = (c[0] + c[2]) / 2, ny = (c[1] + c[3]) / 2;
             sommet(vc, p, c[0], c[1], -0.6F, u0, v0, light, nx, ny, 0);
+            sommet(vc, p, c[0], c[1], coude, u0, vh, light, nx, ny, 0);
+            sommet(vc, p, c[2], c[3], coude, u1, vh, light, nx, ny, 0);
+            sommet(vc, p, c[2], c[3], -0.6F, u1, v0, light, nx, ny, 0);
+            sommet(vc, p, c[0], c[1], coude, u0, v0, light, nx, ny, 0);
             sommet(vc, p, c[0], c[1], l, u0, v1, light, nx, ny, 0);
             sommet(vc, p, c[2], c[3], l, u1, v1, light, nx, ny, 0);
-            sommet(vc, p, c[2], c[3], -0.6F, u1, v0, light, nx, ny, 0);
+            sommet(vc, p, c[2], c[3], coude, u1, v0, light, nx, ny, 0);
         }
         float bu0 = (u + 8) / 64.0F, bu1 = (u + 12) / 64.0F, bv0 = v / 64.0F, bv1 = (v + 4) / 64.0F;
         sommet(vc, p, -w, -w, l, bu0, bv0, light, 0, 0, 1);
@@ -208,7 +209,7 @@ public class SubmarineCockpitView {
 
     // une surface en metal decoupee en petites plaques, chacune d'un gris un tout petit peu different
     private static void plaques(VertexConsumer vc, PoseStack pose, float x0, float y0, float z0, float x1, float y1, float z1, int argb, int light) {
-        float pas = 0.18F;
+        float pas = 6 * P;
         int nx = Math.max(1, Math.round((x1 - x0) / pas)), ny = Math.max(1, Math.round((y1 - y0) / pas)), nz = Math.max(1, Math.round((z1 - z0) / pas));
         for (int i = 0; i < nx; i++) {
             for (int j = 0; j < ny; j++) {
@@ -222,8 +223,28 @@ public class SubmarineCockpitView {
         }
     }
 
+    // tout tombe sur une grille de 1/32 de bloc (= un pixel du skin sur les bras), sinon on a des pixels de toutes les tailles (mixels).
+    // l'axe le plus fin d'une plaque reste tel quel : c'est juste l'epaisseur qui sert a empiler les couches
+    private static final float P = 1.0F / 32.0F;
+
+    private static float[] grille(float a0, float a1) {
+        float b0 = Math.round(a0 / P) * P, b1 = Math.round(a1 / P) * P;
+        if (b1 - b0 < P) {
+            b0 = Math.round(((a0 + a1) / 2 - P / 2) / P) * P;
+            b1 = b0 + P;
+        }
+        return new float[]{b0, b1};
+    }
+
     // chaque face a sa propre lumiere (dessus clair, dessous sombre) pour que ca ait du relief
     private static void box(VertexConsumer vc, PoseStack pose, float x0, float y0, float z0, float x1, float y1, float z1, int argb, int light) {
+        float dx = x1 - x0, dy = y1 - y0, dz = z1 - z0;
+        int fin = dx <= dy && dx <= dz ? 0 : dy <= dz ? 1 : 2;
+        boolean epais = Math.min(dx, Math.min(dy, dz)) >= P * 0.75F;
+        float[] g;
+        if (epais || fin != 0) { g = grille(x0, x1); x0 = g[0]; x1 = g[1]; }
+        if (epais || fin != 1) { g = grille(y0, y1); y0 = g[0]; y1 = g[1]; }
+        if (epais || fin != 2) { g = grille(z0, z1); z0 = g[0]; z1 = g[1]; }
         PoseStack.Pose p = pose.last();
         quad(vc, p, teinte(argb, 0.55F), light, 0, -1, 0, x0, y0, z0, x1, y0, z0, x1, y0, z1, x0, y0, z1);
         quad(vc, p, teinte(argb, 1.0F), light, 0, 1, 0, x0, y1, z1, x1, y1, z1, x1, y1, z0, x0, y1, z0);
