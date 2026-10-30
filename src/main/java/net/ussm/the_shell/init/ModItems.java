@@ -215,6 +215,9 @@ public class ModItems {
         () -> new LightsaberItem("lightsaber_hammer", "lightsaber_shadow_hammer_violet",
                 12, -3.2F, ModItems.SHADOW_SABER_SWORD_VIOLET, createLightsaberProperties()));
 
+    public static final DeferredItem<Item> KYBER_AXE = ITEMS.register("kyber_axe",
+        () -> new net.ussm.the_shell.items.KyberAxeItem(createLightsaberProperties()));
+
     private static Item.Properties createLightsaberProperties() {
         return new Item.Properties()
                 .rarity(Rarity.EPIC)
