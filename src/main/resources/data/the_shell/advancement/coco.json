@@ -1,0 +1,32 @@
+{
+  "parent": "the_shell:flytrap_bite",
+  "display": {
+    "icon": {
+      "id": "the_shell:coconut"
+    },
+    "title": {
+      "translate": "advancement.the_shell.coco.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.coco.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "has_submarine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:coconut_half"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_submarine"]
+  ]
+}
