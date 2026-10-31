@@ -1,22 +1,22 @@
 {
   "parent": "minecraft:block/block",
-  "render_type": "minecraft:cutout",
+  "render_type": "minecraft:translucent",
   "textures": {
-    "socle": "the_shell:block/air_vent",
-    "dome": "the_shell:block/reinforced_glass",
-    "particle": "the_shell:block/reinforced_glass"
+    "socle": "the_shell:block/air_bubble_base",
+    "dome": "the_shell:block/air_bubble_dome",
+    "particle": "the_shell:block/air_bubble_dome"
   },
   "elements": [
     {
       "from": [
-        2,
+        3,
         0,
-        2
+        3
       ],
       "to": [
-        14,
-        4,
-        14
+        13,
+        2,
+        13
       ],
       "faces": {
         "north": {
@@ -42,12 +42,12 @@
     {
       "from": [
         4,
-        4,
+        2,
         4
       ],
       "to": [
         12,
-        10,
+        4,
         12
       ],
       "faces": {
@@ -64,6 +64,105 @@
           "texture": "#dome"
         },
         "up": {
+          "texture": "#dome"
+        },
+        "down": {
+          "texture": "#dome"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        4,
+        3
+      ],
+      "to": [
+        13,
+        9,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dome"
+        },
+        "south": {
+          "texture": "#dome"
+        },
+        "east": {
+          "texture": "#dome"
+        },
+        "west": {
+          "texture": "#dome"
+        },
+        "up": {
+          "texture": "#dome"
+        },
+        "down": {
+          "texture": "#dome"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        9,
+        4
+      ],
+      "to": [
+        12,
+        11,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dome"
+        },
+        "south": {
+          "texture": "#dome"
+        },
+        "east": {
+          "texture": "#dome"
+        },
+        "west": {
+          "texture": "#dome"
+        },
+        "up": {
+          "texture": "#dome"
+        },
+        "down": {
+          "texture": "#dome"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        11,
+        6
+      ],
+      "to": [
+        10,
+        12,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dome"
+        },
+        "south": {
+          "texture": "#dome"
+        },
+        "east": {
+          "texture": "#dome"
+        },
+        "west": {
+          "texture": "#dome"
+        },
+        "up": {
+          "texture": "#dome"
+        },
+        "down": {
           "texture": "#dome"
         }
       }
