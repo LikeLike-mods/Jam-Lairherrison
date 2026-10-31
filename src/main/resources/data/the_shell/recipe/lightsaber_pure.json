@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "DKD",
+    "INI",
+    " I "
+  ],
+  "key": {
+    "K": {
+      "item": "the_shell:pure_kyber_crystal"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "the_shell:lightsaber_pure_pickaxe",
+    "count": 1
+  }
+}

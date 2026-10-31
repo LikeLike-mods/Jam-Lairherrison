@@ -18,10 +18,10 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -36,6 +36,7 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.ussm.the_shell.entites.ai.ReptileMoveControl;
 import net.ussm.the_shell.entites.animations.SwimmingTurnProfiles;
 import net.ussm.the_shell.entites.animations.TurnBendProfile;
 import net.ussm.the_shell.entites.animations.TurnBendState;
@@ -63,7 +64,7 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
             Section.of("tail_tip", "tail5", "tail6", "tail7")
     );
 
-    public static final int MAX_TURN_PER_TICK = 6;
+    public static final int MAX_TURN_PER_TICK = 4;
     private static final int NONE = 0;
     private static final int BITE = 1;
     private static final int THREAT = 2;
@@ -97,7 +98,7 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
 
     public PurussaurusEntity(EntityType<? extends PurussaurusEntity> type, Level level) {
         super(type, level);
-        moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.12F, true);
+        moveControl = new ReptileMoveControl(this, 3.5F, 4.5F, 0.12F, 0.02F);
         setPathfindingMalus(PathType.WATER, 0.0F);
         setPathfindingMalus(PathType.WATER_BORDER, 0.0F);
         xpReward = 30;
@@ -118,7 +119,7 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
             case BITE -> "bite";
             case THREAT -> "threat";
             case ROLL -> "death_roll";
-            default -> getDeltaMovement().horizontalDistanceSqr() > 0.000025 ? isInWater() ? "swim" : "walk" : "idle";
+            default -> getDeltaMovement().horizontalDistanceSqr() > 0.000025 ? paddling() ? "swim" : "walk" : "idle";
         };
     }
 
@@ -129,6 +130,11 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
 
     @Override public boolean isMultipartEntity() { return true; }
     @Override public AnimatedHitboxPart[] getParts() { return hitbox == null ? null : hitbox.parts(); }
+
+    @Override protected void pushEntities() {
+        super.pushEntities();
+        AnimatedHitboxPart.pushAway(this, getParts());
+    }
 
     @Override public void setId(int id) {
         super.setId(id);
@@ -170,10 +176,9 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
     @Override
     protected void registerGoals() {
         goalSelector.addGoal(1, new AmbushGoal());
-        goalSelector.addGoal(3, new RandomSwimmingGoal(this, 1.0, 40));
-        goalSelector.addGoal(4, new RandomStrollGoal(this, 1.0, 120));
+        goalSelector.addGoal(3, new RandomSwimmingGoal(this, 1.0, 120));
+        goalSelector.addGoal(4, new RandomStrollGoal(this, 1.0, 240));
         goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 10.0F));
-        goalSelector.addGoal(6, new RandomLookAroundGoal(this));
         targetSelector.addGoal(1, new HurtByTargetGoal(this));
         targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false,
                 player -> distanceToSqr(player) < AMBUSH_RANGE * AMBUSH_RANGE));
@@ -187,12 +192,22 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
     @Override
     public void travel(Vec3 input) {
         if (isControlledByLocalInstance() && isInWater()) {
-            moveRelative(getSpeed(), input);
+            moveRelative(getSpeed(), new Vec3(input.x, 0, input.z));
+            Vec3 motion = getDeltaMovement();
+            double rise = Mth.clamp((waterSurface() - getBbHeight() * 0.65 - getY()) * 0.1, -0.04, 0.03);
+            setDeltaMovement(motion.x, Mth.lerp(0.3, motion.y, rise), motion.z);
             move(MoverType.SELF, getDeltaMovement());
-            setDeltaMovement(getDeltaMovement().scale(0.9));
+            setDeltaMovement(getDeltaMovement().multiply(0.9, 0.8, 0.9));
         } else {
             super.travel(input);
         }
+    }
+
+    private double waterSurface() {
+        BlockPos.MutableBlockPos pos = blockPosition().mutable();
+        int top = level().getMaxBuildHeight();
+        while (pos.getY() < top && level().getFluidState(pos.above()).is(FluidTags.WATER)) pos.move(0, 1, 0);
+        return pos.getY() + level().getFluidState(pos).getHeight(level(), pos);
     }
 
     @Override
@@ -265,6 +280,10 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
         }
     }
 
+    private boolean paddling() {
+        return isInWater() && !onGround();
+    }
+
     private int action() {
         return entityData.get(ACTION);
     }
@@ -320,7 +339,7 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
             case BITE -> state.setAndContinue(BITE_ANIM);
             case THREAT -> state.setAndContinue(THREAT_ANIM);
             case ROLL -> state.setAndContinue(ROLL_ANIM);
-            default -> state.setAndContinue(state.isMoving() ? isInWater() ? SWIM_ANIM : WALK_ANIM : IDLE_ANIM);
+            default -> state.setAndContinue(state.getLimbSwingAmount() > 0.05F ? paddling() ? SWIM_ANIM : WALK_ANIM : IDLE_ANIM);
         }));
     }
 
@@ -335,6 +354,8 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
     }
 
     private final class AmbushGoal extends Goal {
+        private int repath;
+
         AmbushGoal() {
             setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
         }
@@ -372,17 +393,16 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
                 playSound(SoundEvents.CAT_HISS, 2.5F, 0.35F);
                 return;
             }
-            if (distanceToSqr(target) <= BITE_REACH * BITE_REACH) {
+            if (canBite(target)) {
                 getNavigation().stop();
-                setYRot(Mth.approachDegrees(getYRot(), yHeadRot, MAX_TURN_PER_TICK));
-                setYBodyRot(getYRot());
-                if (attackCooldown == 0 && canBite(target)) {
+                if (attackCooldown == 0) {
                     prey = target;
                     attackCooldown = 40;
                     startAction(BITE);
                     playSound(SoundEvents.RAVAGER_ATTACK, 1.5F, 0.7F);
                 }
-            } else {
+            } else if (--repath <= 0 || getNavigation().isDone()) {
+                repath = 10;
                 getNavigation().moveTo(target, 1.8);
             }
         }

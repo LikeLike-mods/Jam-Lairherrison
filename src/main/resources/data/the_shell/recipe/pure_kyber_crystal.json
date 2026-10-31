@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "the_shell:leviathan_heart"
+    },
+    {
+      "tag": "the_shell:shadow_kyber_crystals"
+    },
+    {
+      "item": "the_shell:light_kyber_crystal"
+    }
+  ],
+  "result": {
+    "id": "the_shell:pure_kyber_crystal",
+    "count": 1
+  }
+}

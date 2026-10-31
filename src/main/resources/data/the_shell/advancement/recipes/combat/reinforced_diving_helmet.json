@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:purussaurus_scale"
+          }
+        ]
+      }
+    },
+    "has_skin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "the_shell:titanoboa_skin"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "the_shell:reinforced_diving_helmet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_scale",
+      "has_skin",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "the_shell:reinforced_diving_helmet"
+    ]
+  }
+}

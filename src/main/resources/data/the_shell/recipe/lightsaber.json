@@ -2,16 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "pattern": [
-    "K",
-    "K",
-    "N"
+    " K ",
+    "IRI",
+    " I "
   ],
   "key": {
     "K": {
-      "item": "the_shell:kyber_crystal"
+      "item": "the_shell:shadow_kyber_crystal_white"
     },
-    "N": {
-      "item": "minecraft:netherite_ingot"
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
     }
   },
   "result": {

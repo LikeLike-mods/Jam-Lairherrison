@@ -10,6 +10,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.Vec3;
+import java.util.List;
 
 public final class AnimatedHitboxPart extends PartEntity<LivingEntity> {
     private final String name;
@@ -22,6 +27,31 @@ public final class AnimatedHitboxPart extends PartEntity<LivingEntity> {
     }
 
     public String partName() { return name; }
+
+    public static void pushAway(LivingEntity owner, AnimatedHitboxPart[] parts) {
+        if (parts == null || !owner.isAlive()) return;
+        for (AnimatedHitboxPart part : parts) {
+            AABB box = part.getBoundingBox();
+            List<? extends Entity> targets = owner.level().isClientSide()
+                    ? owner.level().getEntities(EntityTypeTest.forClass(Player.class), box, EntitySelector.pushableBy(owner))
+                    : owner.level().getEntities(owner, box, EntitySelector.pushableBy(owner));
+            Vec3 center = box.getCenter();
+            for (Entity target : targets) {
+                if (target == owner || target instanceof PartEntity<?> || target.isPassengerOfSameVehicle(owner)) continue;
+                double dx = target.getX() - center.x;
+                double dy = target.isInWater() ? target.getY(0.5) - center.y : 0.0;
+                double dz = target.getZ() - center.z;
+                double length = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                if (length < 1.0E-4) {
+                    dx = owner.getRandom().nextDouble() - 0.5;
+                    dz = owner.getRandom().nextDouble() - 0.5;
+                    length = Math.sqrt(dx * dx + dz * dz);
+                }
+                double strength = 0.08 / length;
+                target.push(dx * strength, dy * strength, dz * strength);
+            }
+        }
+    }
 
     public void beginTick() {
         xo = xOld = getX(); yo = yOld = getY(); zo = zOld = getZ();

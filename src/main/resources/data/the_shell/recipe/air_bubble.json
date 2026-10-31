@@ -11,7 +11,7 @@
       "item": "minecraft:glass"
     },
     "K": {
-      "item": "the_shell:kyber_crystal"
+      "tag": "the_shell:kyber_crystals"
     },
     "V": {
       "item": "the_shell:air_vent"

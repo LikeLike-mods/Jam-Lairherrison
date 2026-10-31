@@ -71,4 +71,19 @@ public class ModFoodProperties {
             .nutrition(6)
             .saturationModifier(0.6F)
             .build();
+
+    public static FoodProperties PURUSSAURUS_MEAT = new FoodProperties.Builder()
+            .nutrition(4)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static FoodProperties COOKED_PURUSSAURUS_MEAT = new FoodProperties.Builder()
+            .nutrition(8)
+            .saturationModifier(0.8F)
+            .build();
+
+    public static FoodProperties TITANOBOA_MEAT = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
 }

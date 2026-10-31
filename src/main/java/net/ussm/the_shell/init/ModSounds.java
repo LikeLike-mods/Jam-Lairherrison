@@ -43,7 +43,9 @@ public final class ModSounds {
                 "yeti_crab.death", "hatchetfish.ambient", "hatchetfish.hurt", "hatchetfish.death",
                 "colossal_squid.ambient", "colossal_squid.hurt", "colossal_squid.death", "leviathan.ambient",
                 "leviathan.death", "basilosaurus.ambient", "basilosaurus.death", "blue_whale.ambient", "blue_whale.death",
-                "purussaurus.ambient", "purussaurus.death")) {
+                "purussaurus.ambient", "purussaurus.death", "dragonfly.ambient", "dragonfly.hurt",
+                "dragonfly.death", "firefly.ambient", "firefly.hurt", "firefly.death",
+                "titanoboa.ambient", "titanoboa.hurt", "titanoboa.death")) {
             register("entity." + name);
         }
     }

@@ -17,7 +17,9 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.events.DropWeightPayload;
 import net.ussm.the_shell.init.ModItems;
+import net.minecraft.world.item.Item;
 import net.ussm.the_shell.items.DivingBootsItem;
+import net.ussm.the_shell.items.DivingSuitItem;
 import org.lwjgl.glfw.GLFW;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
@@ -31,8 +33,14 @@ public class WeightedBootsClient {
 
     @SubscribeEvent
     public static void setup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> ItemProperties.register(ModItems.DIVING_BOOTS.get(), ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "weighted"),
-                (stack, level, entity, seed) -> DivingBootsItem.isWeighted(stack) ? 1.0F : 0.0F));
+        event.enqueueWork(() -> {
+            ItemProperties.register(ModItems.DIVING_BOOTS.get(), ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "weighted"),
+                    (stack, level, entity, seed) -> DivingBootsItem.isWeighted(stack) ? 1.0F : 0.0F);
+            for (Item item : new Item[]{ModItems.DIVING_HELMET.get(), ModItems.DIVING_CHESTPLATE.get(), ModItems.DIVING_LEGGINGS.get(), ModItems.DIVING_BOOTS.get()}) {
+                ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "reinforced"),
+                        (stack, level, entity, seed) -> DivingSuitItem.isReinforced(stack) ? 1.0F : 0.0F);
+            }
+        });
     }
 
     @SubscribeEvent

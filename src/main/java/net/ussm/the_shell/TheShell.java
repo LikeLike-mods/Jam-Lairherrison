@@ -1,6 +1,7 @@
 package net.ussm.the_shell;
 
 import net.ussm.the_shell.init.ModArmorMaterials;
+import net.ussm.the_shell.init.ModRecipes;
 import net.ussm.the_shell.init.ModAttachments;
 import net.ussm.the_shell.init.ModBlockEntities;
 import net.ussm.the_shell.init.ModBlocks;
@@ -44,6 +45,7 @@ public class TheShell {
         net.ussm.the_shell.worldgen.StationProcessors.PROCESSORS.register(modEventBus);
         ModEntities.register(modEventBus);
         ModComponents.register(modEventBus);
+        ModRecipes.register(modEventBus);
         ModAttachments.register(modEventBus);
         ModSounds.register(modEventBus);
         ModCriteriaTriggers.register(modEventBus);

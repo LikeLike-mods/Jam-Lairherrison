@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "the_shell:block/titanoboa_shed"
+    },
+    "facing=east": {
+      "model": "the_shell:block/titanoboa_shed",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "the_shell:block/titanoboa_shed",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "the_shell:block/titanoboa_shed",
+      "y": 270
+    }
+  }
+}

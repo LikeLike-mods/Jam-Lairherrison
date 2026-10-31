@@ -36,7 +36,9 @@
     [],
     [],
     [],
-    [],
+    [
+      "the_shell:light_kyber_ore"
+    ],
     [],
     [
       "minecraft:spring_water"
@@ -48,14 +50,28 @@
       "minecraft:seagrass_swamp",
       "the_shell:jungle_flowers",
       "the_shell:flytrap_patch",
-      "the_shell:pitcher_plant_patch"
+      "the_shell:pitcher_plant_patch",
+      "the_shell:titanoboa_shed"
     ],
     []
   ],
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [],
+    "ambient": [
+      {
+        "type": "the_shell:dragonfly",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "the_shell:firefly",
+        "weight": 12,
+        "minCount": 3,
+        "maxCount": 6
+      }
+    ],
     "axolotls": [],
     "creature": [
       {
@@ -69,6 +85,12 @@
     "monster": [
       {
         "type": "the_shell:purussaurus",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "the_shell:titanoboa",
         "weight": 1,
         "minCount": 1,
         "maxCount": 1

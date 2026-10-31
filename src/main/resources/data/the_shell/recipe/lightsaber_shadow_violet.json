@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " K ",
+    "IRI",
+    " I "
+  ],
+  "key": {
+    "K": {
+      "item": "the_shell:shadow_kyber_crystal_violet"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "the_shell:lightsaber_shadow_sword_violet",
+    "count": 1
+  }
+}

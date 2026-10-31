@@ -11,7 +11,7 @@
       "item": "minecraft:diamond"
     },
     "K": {
-      "item": "the_shell:kyber_crystal"
+      "tag": "the_shell:kyber_crystals"
     },
     "N": {
       "item": "minecraft:netherite_ingot"

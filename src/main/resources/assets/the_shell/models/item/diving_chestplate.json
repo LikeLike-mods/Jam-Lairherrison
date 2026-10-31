@@ -2,5 +2,13 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "the_shell:item/diving_chestplate"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "the_shell:reinforced": 1
+      },
+      "model": "the_shell:item/diving_chestplate_reinforced"
+    }
+  ]
 }

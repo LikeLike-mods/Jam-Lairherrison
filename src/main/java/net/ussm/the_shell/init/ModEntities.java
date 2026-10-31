@@ -27,11 +27,16 @@ import net.ussm.the_shell.entites.Submarine;
 import net.ussm.the_shell.entites.BasilosaurusEntity;
 import net.ussm.the_shell.entites.BlueWhaleEntity;
 import net.ussm.the_shell.entites.PurussaurusEntity;
+import net.ussm.the_shell.entites.TitanoboaEntity;
+import net.ussm.the_shell.entites.Dragonfly;
+import net.ussm.the_shell.entites.Firefly;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, TheShell.MOD_ID);
 
     public static final DeferredHolder<EntityType<?>, EntityType<Butterfly>> BUTTERFLY = register("butterfly", Butterfly::new, MobCategory.AMBIENT, 0.5F, 0.3F);
+    public static final DeferredHolder<EntityType<?>, EntityType<Dragonfly>> DRAGONFLY = register("dragonfly", Dragonfly::new, MobCategory.AMBIENT, 0.6F, 0.3F);
+    public static final DeferredHolder<EntityType<?>, EntityType<Firefly>> FIREFLY = register("firefly", Firefly::new, MobCategory.AMBIENT, 0.3F, 0.25F);
     public static final DeferredHolder<EntityType<?>, EntityType<Crab>> CRAB = register("crab", Crab::new, MobCategory.CREATURE, 0.9F, 0.55F);
     public static final DeferredHolder<EntityType<?>, EntityType<Gecko>> GECKO = register("gecko", Gecko::new, MobCategory.CREATURE, 0.4F, 0.2F);
     public static final DeferredHolder<EntityType<?>, EntityType<HermitCrab>> HERMIT_CRAB = register("hermit_crab", HermitCrab::new, MobCategory.CREATURE, 0.4F, 0.4F);
@@ -73,6 +78,10 @@ public class ModEntities {
             ENTITY_TYPES.register("purussaurus", () -> EntityType.Builder.of(PurussaurusEntity::new, MobCategory.MONSTER)
                     .sized(2.2F, 1.3F).eyeHeight(0.9F)
                     .clientTrackingRange(12).updateInterval(2).build(TheShell.MOD_ID + ":purussaurus"));
+    public static final DeferredHolder<EntityType<?>, EntityType<TitanoboaEntity>> TITANOBOA =
+            ENTITY_TYPES.register("titanoboa", () -> EntityType.Builder.of(TitanoboaEntity::new, MobCategory.MONSTER)
+                    .sized(1.0F, 0.8F).eyeHeight(0.5F)
+                    .clientTrackingRange(10).updateInterval(1).build(TheShell.MOD_ID + ":titanoboa"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ThrownAquaPearl>> AQUA_PEARL = ENTITY_TYPES.register("aqua_pearl",
             () -> EntityType.Builder.<net.ussm.the_shell.entites.ThrownAquaPearl>of(net.ussm.the_shell.entites.ThrownAquaPearl::new, MobCategory.MISC)
@@ -85,6 +94,8 @@ public class ModEntities {
 
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(BUTTERFLY.get(), Butterfly.createAttributes().build());
+        event.put(DRAGONFLY.get(), Dragonfly.createAttributes().build());
+        event.put(FIREFLY.get(), Firefly.createAttributes().build());
         event.put(CRAB.get(), Crab.createAttributes().build());
         event.put(GECKO.get(), Gecko.createAttributes().build());
         event.put(HERMIT_CRAB.get(), HermitCrab.createAttributes().build());
@@ -103,6 +114,7 @@ public class ModEntities {
         event.put(BASILOSAURUS.get(), BasilosaurusEntity.createAttributes().build());
         event.put(BLUE_WHALE.get(), BlueWhaleEntity.createAttributes().build());
         event.put(PURUSSAURUS.get(), PurussaurusEntity.createAttributes().build());
+        event.put(TITANOBOA.get(), TitanoboaEntity.createAttributes().build());
         event.put(LEVIATHAN.get(), LeviathanEntity.createAttributes().build());
     }
 

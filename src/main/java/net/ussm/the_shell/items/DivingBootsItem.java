@@ -8,7 +8,6 @@ import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -17,7 +16,7 @@ import net.ussm.the_shell.init.ModComponents;
 
 import java.util.List;
 
-public class DivingBootsItem extends ArmorItem {
+public class DivingBootsItem extends DivingSuitItem {
     public DivingBootsItem(Holder<ArmorMaterial> material, Properties properties) {
         super(material, Type.BOOTS, properties);
     }
@@ -37,6 +36,7 @@ public class DivingBootsItem extends ArmorItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
         tooltip.add(Component.translatable(isWeighted(stack) ? "tooltip.the_shell.diving_boots.weighted" : "tooltip.the_shell.diving_boots.light")
                 .withStyle(ChatFormatting.GRAY));
     }

@@ -1,0 +1,6 @@
+{
+  "parent": "the_shell:item/lightsaber_hammer",
+  "textures": {
+    "particle": "the_shell:item/lightsaber_pure_pickaxe"
+  }
+}

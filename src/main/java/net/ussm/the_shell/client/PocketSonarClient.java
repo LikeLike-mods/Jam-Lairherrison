@@ -49,7 +49,9 @@ public class PocketSonarClient {
     }
 
     private static int colour(String entryName) {
-        if (entryName.contains("kyber")) return 0xFF8CF4FF;
+        if (entryName.contains("light_kyber")) return 0xFFFFD36A;
+        if (entryName.contains("kyber_ore_violet")) return 0xFFB46CFF;
+        if (entryName.contains("kyber")) return 0xFFF0F0F0;
         if (entryName.contains("diamond")) return 0xFF4FE6E0;
         if (entryName.contains("emerald")) return 0xFF3CE070;
         if (entryName.contains("gold")) return 0xFFF4D040;

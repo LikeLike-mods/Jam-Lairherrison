@@ -1,0 +1,22 @@
+{
+  "values": [
+    "#minecraft:aquatic",
+    "minecraft:drowned",
+    "the_shell:jellyfish",
+    "the_shell:abyssal_angler",
+    "the_shell:gulper_eel",
+    "the_shell:dragonfish",
+    "the_shell:giant_isopod",
+    "the_shell:vampire_squid",
+    "the_shell:yeti_crab",
+    "the_shell:hatchetfish",
+    "the_shell:colossal_squid",
+    "the_shell:leviathan",
+    "the_shell:basilosaurus",
+    "the_shell:blue_whale",
+    "the_shell:purussaurus",
+    "the_shell:titanoboa",
+    "the_shell:crab",
+    "the_shell:hermit_crab"
+  ]
+}

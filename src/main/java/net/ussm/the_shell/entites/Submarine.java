@@ -19,6 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.blocks.abyss.AbyssLightBlock;
 import net.ussm.the_shell.init.ModEntities;
 import net.ussm.the_shell.init.ModItems;
+import net.ussm.the_shell.init.ModTags;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
@@ -87,7 +88,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         if (stack.is(net.minecraft.world.item.Items.COAL) || stack.is(net.minecraft.world.item.Items.CHARCOAL)) return 150;
         if (stack.is(net.minecraft.world.item.Items.REDSTONE)) return 200;
         if (stack.is(net.minecraft.world.item.Items.REDSTONE_BLOCK)) return 1800;
-        if (stack.is(ModItems.KYBER_CRYSTAL.get())) return MAX_ENERGY;
+        if (stack.is(ModTags.KYBER_CRYSTALS)) return MAX_ENERGY;
         return 0;
     }
 

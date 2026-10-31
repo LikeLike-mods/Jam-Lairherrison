@@ -14,7 +14,7 @@
       "item": "minecraft:copper_ingot"
     },
     "K": {
-      "item": "the_shell:kyber_crystal"
+      "tag": "the_shell:kyber_crystals"
     },
     "R": {
       "item": "minecraft:redstone"

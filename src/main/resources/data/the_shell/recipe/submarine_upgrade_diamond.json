@@ -14,7 +14,7 @@
       "item": "the_shell:metal_plating"
     },
     "K": {
-      "item": "the_shell:kyber_crystal"
+      "tag": "the_shell:kyber_crystals"
     }
   },
   "result": {

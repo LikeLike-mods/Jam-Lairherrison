@@ -64,8 +64,9 @@
       "bonus_rolls": 0,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "the_shell:kyber_crystal",
+          "type": "minecraft:tag",
+          "name": "the_shell:common_kyber_crystals",
+          "expand": true,
           "functions": [
             {
               "function": "minecraft:set_count",

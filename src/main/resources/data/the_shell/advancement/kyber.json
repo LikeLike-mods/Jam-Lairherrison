@@ -2,7 +2,7 @@
   "parent": "the_shell:abyss",
   "display": {
     "icon": {
-      "id": "the_shell:kyber_crystal"
+      "id": "the_shell:light_kyber_crystal"
     },
     "title": {
       "translate": "advancement.the_shell.kyber.title"
@@ -20,7 +20,7 @@
       "conditions": {
         "items": [
           {
-            "items": "the_shell:kyber_crystal"
+            "items": "#the_shell:kyber_crystals"
           }
         ]
       }

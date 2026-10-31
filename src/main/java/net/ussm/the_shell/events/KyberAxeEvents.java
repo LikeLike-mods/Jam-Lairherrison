@@ -1,6 +1,7 @@
 package net.ussm.the_shell.events;
 
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -8,11 +9,13 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.items.KyberAxeItem;
+import net.ussm.the_shell.items.KyberPickaxeItem;
 import net.ussm.the_shell.items.LightsaberItem;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class KyberAxeEvents {
     private static boolean felling;
+    private static boolean mining;
 
     @SubscribeEvent
     public static void fellTree(BlockEvent.BreakEvent event) {
@@ -24,6 +27,20 @@ public class KyberAxeEvents {
             KyberAxeItem.fellTree(level, event.getPos(), event.getPlayer());
         } finally {
             felling = false;
+        }
+    }
+
+    @SubscribeEvent
+    public static void mineArea(BlockEvent.BreakEvent event) {
+        if (mining || !(event.getLevel() instanceof ServerLevel level) || !(event.getPlayer() instanceof ServerPlayer player)) return;
+        ItemStack main = player.getMainHandItem();
+        if (!(main.getItem() instanceof KyberPickaxeItem) || !LightsaberItem.isActive(main) || player.isShiftKeyDown()
+                || !main.isCorrectToolForDrops(event.getState())) return;
+        mining = true;
+        try {
+            KyberPickaxeItem.mineAround(level, player, event.getPos(), event.getState());
+        } finally {
+            mining = false;
         }
     }
 }

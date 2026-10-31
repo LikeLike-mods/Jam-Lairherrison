@@ -115,6 +115,11 @@ public class LeviathanEntity extends Monster implements GeoEntity, AnimatedHitbo
     @Override public boolean isMultipartEntity() { return true; }
     @Override public AnimatedHitboxPart[] getParts() { return hitbox == null ? null : hitbox.parts(); }
 
+    @Override protected void pushEntities() {
+        super.pushEntities();
+        AnimatedHitboxPart.pushAway(this, getParts());
+    }
+
     @Override public void setId(int id) {
         super.setId(id);
         if (hitbox != null) hitbox.setId(id);

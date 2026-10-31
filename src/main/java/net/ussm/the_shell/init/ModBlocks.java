@@ -126,10 +126,24 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ABYSSAL_EMERALD_ORE = registerBlock("abyssal_emerald_ore",
             () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(3, 7), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_EMERALD_ORE)));
 
-    public static final DeferredBlock<Block> KYBER_ORE = registerBlock("kyber_ore",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_CYAN)
-                    .strength(4.0f, 6.0f)
+    public static final DeferredBlock<Block> SHADOW_KYBER_ORE_WHITE = registerBlock("shadow_kyber_ore_white",
+            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(3, 7), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .strength(4.5f, 6.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)
+                    .lightLevel(s -> 4)));
+    public static final DeferredBlock<Block> SHADOW_KYBER_ORE_VIOLET = registerBlock("shadow_kyber_ore_violet",
+            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(3, 7), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(4.5f, 6.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)
+                    .lightLevel(s -> 4)));
+    public static final DeferredBlock<Block> LIGHT_KYBER_ORE = registerBlock("light_kyber_ore",
+            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(2, 5), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.TERRACOTTA_ORANGE)
+                    .strength(3.0f, 3.0f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
                     .lightLevel(s -> 7)));
@@ -292,6 +306,9 @@ public class ModBlocks {
     public static final DeferredBlock<Block> BANANA_PEEL = registerBlock("banana_peel",
             () -> new BananaPeelBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instabreak()
                     .sound(SoundType.SLIME_BLOCK).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> TITANOBOA_SHED = registerBlock("titanoboa_shed",
+            () -> new TitanoboaShedBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instabreak()
+                    .sound(SoundType.AZALEA_LEAVES).noOcclusion().noCollission().noLootTable().pushReaction(PushReaction.DESTROY)));
 
     public static final DeferredBlock<Block> DATE_PALM_PLANKS = registerBlock("date_palm_planks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).mapColor(MapColor.TERRACOTTA_ORANGE)));

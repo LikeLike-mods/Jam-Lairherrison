@@ -55,8 +55,9 @@
           ]
         },
         {
-          "type": "minecraft:item",
-          "name": "the_shell:kyber_crystal",
+          "type": "minecraft:tag",
+          "name": "the_shell:common_kyber_crystals",
+          "expand": true,
           "weight": 4,
           "functions": [
             {
@@ -216,8 +217,9 @@
           ]
         },
         {
-          "type": "minecraft:item",
-          "name": "the_shell:kyber_crystal",
+          "type": "minecraft:tag",
+          "name": "the_shell:common_kyber_crystals",
+          "expand": true,
           "weight": 3
         }
       ]

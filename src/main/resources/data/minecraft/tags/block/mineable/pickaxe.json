@@ -53,7 +53,6 @@
     "the_shell:abyssal_stone",
     "the_shell:abyssal_basalt",
     "the_shell:hydrothermal_chimney",
-    "the_shell:kyber_ore",
     "the_shell:sulfur_block",
     "the_shell:glowing_coral_block",
     "the_shell:manganese_nodule",
@@ -65,6 +64,9 @@
     "the_shell:abyssal_lapis_ore",
     "the_shell:abyssal_diamond_ore",
     "the_shell:abyssal_emerald_ore",
-    "the_shell:temple_pedestal"
+    "the_shell:temple_pedestal",
+    "the_shell:shadow_kyber_ore_white",
+    "the_shell:shadow_kyber_ore_violet",
+    "the_shell:light_kyber_ore"
   ]
 }

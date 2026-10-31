@@ -95,6 +95,17 @@ public class ModItems {
     public static final DeferredItem<Item> COOKED_CRAB_MEAT = ITEMS.register("cooked_crab_meat",
             () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_CRAB_MEAT)));
 
+    public static final DeferredItem<Item> PURUSSAURUS_MEAT = ITEMS.register("purussaurus_meat",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.PURUSSAURUS_MEAT)));
+    public static final DeferredItem<Item> COOKED_PURUSSAURUS_MEAT = ITEMS.register("cooked_purussaurus_meat",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_PURUSSAURUS_MEAT)));
+    public static final DeferredItem<Item> PURUSSAURUS_SCALE = ITEMS.register("purussaurus_scale",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> TITANOBOA_MEAT = ITEMS.register("titanoboa_meat",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.TITANOBOA_MEAT)));
+    public static final DeferredItem<Item> TITANOBOA_SKIN = ITEMS.register("titanoboa_skin",
+            () -> new Item(new Item.Properties()));
+
 
 
 
@@ -102,8 +113,16 @@ public class ModItems {
     public static final DeferredItem<Item> ABYSSAL_SCALE = ITEMS.register("abyssal_scale",
             () -> new Item(new Item.Properties()));
 
-    public static final DeferredItem<Item> KYBER_CRYSTAL = ITEMS.register("kyber_crystal",
+    public static final DeferredItem<Item> PURE_KYBER_CRYSTAL = ITEMS.register("pure_kyber_crystal",
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> SHADOW_KYBER_CRYSTAL_WHITE = ITEMS.register("shadow_kyber_crystal_white",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final DeferredItem<Item> SHADOW_KYBER_CRYSTAL_VIOLET = ITEMS.register("shadow_kyber_crystal_violet",
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final DeferredItem<Item> LIGHT_KYBER_CRYSTAL = ITEMS.register("light_kyber_crystal",
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final DeferredItem<Item> LEVIATHAN_HEART = ITEMS.register("leviathan_heart",
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
 
     public static final DeferredItem<Item> BLACK_PEARL = ITEMS.register("black_pearl",
@@ -138,15 +157,15 @@ public class ModItems {
                     15));
 
     public static final DeferredItem<ArmorItem> DIVING_HELMET = ITEMS.register("diving_helmet",
-            () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.HELMET, new Item.Properties()
+            () -> new DivingSuitItem(ModArmorMaterials.DIVING, ArmorItem.Type.HELMET, new Item.Properties()
                     .durability(ArmorItem.Type.HELMET.getDurability(15))));
 
     public static final DeferredItem<ArmorItem> DIVING_CHESTPLATE = ITEMS.register("diving_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.CHESTPLATE, new Item.Properties()
+            () -> new DivingSuitItem(ModArmorMaterials.DIVING, ArmorItem.Type.CHESTPLATE, new Item.Properties()
                     .durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
 
     public static final DeferredItem<ArmorItem> DIVING_LEGGINGS = ITEMS.register("diving_leggings",
-            () -> new ArmorItem(ModArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, new Item.Properties()
+            () -> new DivingSuitItem(ModArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, new Item.Properties()
                     .durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
 
     public static final DeferredItem<ArmorItem> DIVING_BOOTS = ITEMS.register("diving_boots",
@@ -172,6 +191,8 @@ public class ModItems {
 
     public static final List<DeferredItem<Item>> SPAWN_EGGS = new ArrayList<>();
     public static final DeferredItem<Item> BUTTERFLY_SPAWN_EGG = spawnEgg("butterfly", ModEntities.BUTTERFLY, 0x2E7BE6, 0x1A1A1A);
+    public static final DeferredItem<Item> DRAGONFLY_SPAWN_EGG = spawnEgg("dragonfly", ModEntities.DRAGONFLY, 0x2F6FBF, 0x2FB7A8);
+    public static final DeferredItem<Item> FIREFLY_SPAWN_EGG = spawnEgg("firefly", ModEntities.FIREFLY, 0x2A2219, 0xF3EE8C);
     public static final DeferredItem<Item> CRAB_SPAWN_EGG = spawnEgg("crab", ModEntities.CRAB, 0xC4502A, 0xEECC9E);
     public static final DeferredItem<Item> GECKO_SPAWN_EGG = spawnEgg("gecko", ModEntities.GECKO, 0x5AAA46, 0xEC842E);
     public static final DeferredItem<Item> HERMIT_CRAB_SPAWN_EGG = spawnEgg("hermit_crab", ModEntities.HERMIT_CRAB, 0xD9A066, 0xB04A2A);
@@ -193,10 +214,11 @@ public class ModItems {
     public static final DeferredItem<Item> FRIED_LEVIATHAN_EGG = ITEMS.register("fried_leviathan_egg",
             () -> new Item(new Item.Properties().stacksTo(16).rarity(Rarity.RARE).food(ModFoodProperties.FRIED_LEVIATHAN_EGG)));
 
-    public static final DeferredItem<Item> LEVIATHAN_SPAWN_EGG = spawnEgg("leviathan", ModEntities.LEVIATHAN, 0x1A1A1A, 0xFF0000);
+    public static final DeferredItem<Item> LEVIATHAN_SPAWN_EGG = spawnEgg("leviathan", ModEntities.LEVIATHAN, 0x244D57, 0x4FE4DC);
     public static final DeferredItem<Item> BASILOSAURUS_SPAWN_EGG = spawnEgg("basilosaurus", ModEntities.BASILOSAURUS, 0x354744, 0xC3B995);
     public static final DeferredItem<Item> BLUE_WHALE_SPAWN_EGG = spawnEgg("blue_whale", ModEntities.BLUE_WHALE, 0x365969, 0xA4C3CD);
     public static final DeferredItem<Item> PURUSSAURUS_SPAWN_EGG = spawnEgg("purussaurus", ModEntities.PURUSSAURUS, 0x40372E, 0xBDAD92);
+    public static final DeferredItem<Item> TITANOBOA_SPAWN_EGG = spawnEgg("titanoboa", ModEntities.TITANOBOA, 0x5D5A2C, 0x2E2614);
 
     private static DeferredItem<Item> spawnEgg(String name, Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight) {
         DeferredItem<Item> egg = ITEMS.register(name + "_spawn_egg", () -> new DeferredSpawnEggItem(type, background, highlight, new Item.Properties()));
@@ -254,11 +276,10 @@ public class ModItems {
     public static final DeferredItem<Item> AQUA_PEARL = ITEMS.register("aqua_pearl", () -> new AquaPearlItem(new Item.Properties()
             .stacksTo(16)));
 
-    public static final DeferredItem<LightsaberItem> KYBER_SICKLE = ITEMS.register("kyber_sickle",
-        () -> new LightsaberItem("lightsaber_sickle", "kyber_sickle",
-                6, -1.6F, ModItems.KYBER_AXE, createLightsaberProperties()));
+    public static final DeferredItem<LightsaberItem> PURE_SABER_PICKAXE = ITEMS.register("lightsaber_pure_pickaxe",
+        () -> new KyberPickaxeItem(createLightsaberProperties()));
 
-    public static final DeferredItem<Item> KYBER_AXE = ITEMS.register("kyber_axe",
+    public static final DeferredItem<LightsaberItem> PURE_SABER_AXE = ITEMS.register("lightsaber_pure_axe",
         () -> new KyberAxeItem(createLightsaberProperties()));
 
     private static Item.Properties createLightsaberProperties() {

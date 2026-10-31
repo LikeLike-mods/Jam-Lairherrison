@@ -59,6 +59,12 @@ public class ModSetupEvents {
                 SpawnRules::basilosaurus, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(ModEntities.PURUSSAURUS.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SpawnRules::purussaurus, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(ModEntities.TITANOBOA.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SpawnRules::titanoboa, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        for (EntityType<? extends Mob> type : List.of(ModEntities.DRAGONFLY.get(), ModEntities.FIREFLY.get())) {
+            event.register(type, SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                    SpawnRules::swampInsect, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        }
     }
 
     @SubscribeEvent

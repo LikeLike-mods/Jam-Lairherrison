@@ -38,7 +38,9 @@
     [],
     [],
     [],
-    [],
+    [
+      "the_shell:light_kyber_ore"
+    ],
     [],
     [
       "minecraft:spring_water"

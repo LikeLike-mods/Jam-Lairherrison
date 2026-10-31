@@ -20,7 +20,7 @@ import net.ussm.the_shell.init.ModSounds;
 
 public class KyberAxeItem extends LightsaberItem {
     public KyberAxeItem(Item.Properties properties) {
-        super("kyber_axe", "kyber_axe", 9, -3.0F, ModItems.KYBER_SICKLE, properties);
+        super("lightsaber_axe", "lightsaber_pure_axe", 9, -3.0F, ModItems.PURE_SABER_PICKAXE, properties);
     }
 
     public static boolean fellsWholeTree(ItemStack stack) {

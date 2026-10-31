@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "ingredient": {
+    "item": "the_shell:purussaurus_meat"
+  },
+  "result": {
+    "id": "the_shell:cooked_purussaurus_meat"
+  },
+  "experience": 0.35,
+  "cookingtime": 200
+}

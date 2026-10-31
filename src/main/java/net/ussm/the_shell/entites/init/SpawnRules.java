@@ -1,6 +1,7 @@
 package net.ussm.the_shell.entites.init;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -80,10 +81,21 @@ public final class SpawnRules {
                 && noneNearby(level, type, pos, 64);
     }
 
+    public static <T extends Entity> boolean swampInsect(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return level.getBlockState(pos).isAir() && !level.getBlockState(pos.below()).isAir();
+    }
+
     public static <T extends Entity> boolean purussaurus(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return level.getDifficulty() != Difficulty.PEACEFUL
                 && level.getFluidState(pos).is(FluidTags.WATER)
                 && level.getFluidState(pos.below()).is(FluidTags.WATER)
+                && noneNearby(level, type, pos, 48);
+    }
+
+    public static <T extends Entity> boolean titanoboa(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        BlockPos below = pos.below();
+        return level.getDifficulty() != Difficulty.PEACEFUL
+                && (level.getFluidState(pos).is(FluidTags.WATER) || level.getBlockState(below).isFaceSturdy(level, below, Direction.UP))
                 && noneNearby(level, type, pos, 48);
     }
 }
