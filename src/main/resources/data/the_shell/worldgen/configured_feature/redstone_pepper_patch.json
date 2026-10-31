@@ -1,0 +1,79 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 6,
+    "xz_spread": 3,
+    "y_spread": 2,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "weight": 1,
+                "data": {
+                  "Name": "the_shell:redstone_pepper_crop",
+                  "Properties": {
+                    "age": "2"
+                  }
+                }
+              },
+              {
+                "weight": 2,
+                "data": {
+                  "Name": "the_shell:redstone_pepper_crop",
+                  "Properties": {
+                    "age": "3"
+                  }
+                }
+              },
+              {
+                "weight": 2,
+                "data": {
+                  "Name": "the_shell:redstone_pepper_crop",
+                  "Properties": {
+                    "age": "4"
+                  }
+                }
+              },
+              {
+                "weight": 3,
+                "data": {
+                  "Name": "the_shell:redstone_pepper_crop",
+                  "Properties": {
+                    "age": "5"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:air"
+              },
+              {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "the_shell:redstone_pepper_crop",
+                  "Properties": {
+                    "age": "0"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
