@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "the_shell:big_mangrove_checked",
+    "features": [
+      {
+        "chance": 0.85,
+        "feature": "the_shell:tall_big_mangrove_checked"
+      }
+    ]
+  }
+}

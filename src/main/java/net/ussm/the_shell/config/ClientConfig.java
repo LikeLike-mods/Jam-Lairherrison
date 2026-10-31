@@ -9,6 +9,9 @@ public final class ClientConfig {
     public static final ModConfigSpec.IntValue SHORE_COLUMNS_PER_TICK;
     public static final ModConfigSpec.DoubleValue WAVE_AMPLITUDE;
     public static final ModConfigSpec.DoubleValue FOAM_STRENGTH;
+    public static final ModConfigSpec.BooleanValue SHADERPACK_COLORS;
+    public static final ModConfigSpec.DoubleValue SHADERPACK_SKY_STRENGTH;
+    public static final ModConfigSpec.DoubleValue SHADERPACK_ORANGE_HEIGHT;
 
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
@@ -24,6 +27,15 @@ public final class ClientConfig {
                 .defineInRange("shoreMapSize", 256, 128, 512);
         SHORE_COLUMNS_PER_TICK = b.comment("Bounded terrain sampling budget. 1024 builds the default map in about 3.2 seconds.")
                 .defineInRange("columnsPerTick", 1024, 128, 4096);
+        b.pop();
+        b.comment("Keep atoll sky's colors with a shaderpack:",
+                "it doesn't change anything outside the dimension.").push("shaderpack");
+        SHADERPACK_COLORS = b.define("enabled", true);
+        SHADERPACK_SKY_STRENGTH = b.comment("0 keeps the shaderpack sky, 1 gives it the atoll colors (its brightness is kept).")
+                .defineInRange("skyStrength", 1.0, 0.0, 1.0);
+        SHADERPACK_ORANGE_HEIGHT = b.comment("How high the pink and orange go above the horizon before the shaderpack's own sky takes over:",
+                        "0 = a thin band near the horizon, 1 = about half of the sky.")
+                .defineInRange("orangeHeight", 0.5, 0.0, 1.0);
         b.pop();
         SPEC = b.build();
     }

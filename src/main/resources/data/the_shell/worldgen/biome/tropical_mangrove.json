@@ -66,7 +66,14 @@
       }
     ],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "the_shell:purussaurus",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
     "underground_water_creature": [
       {
         "type": "minecraft:glow_squid",
