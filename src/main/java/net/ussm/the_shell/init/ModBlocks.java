@@ -520,11 +520,11 @@ public class ModBlocks {
     public static final DeferredBlock<TransparentBlock> PORTHOLE = registerBlock("porthole",
             () -> new TransparentBlock(seeThrough(metal())));
 
-    public static final DeferredBlock<RotatedPillarBlock> STEEL_BEAM = registerBlock("steel_beam",
-            () -> new RotatedPillarBlock(metal()));
+    public static final DeferredBlock<net.ussm.the_shell.blocks.station.SteelBeamBlock> STEEL_BEAM = registerBlock("steel_beam",
+            () -> new net.ussm.the_shell.blocks.station.SteelBeamBlock(metal().noOcclusion()));
 
-    public static final DeferredBlock<RotatedPillarBlock> RUSTY_STEEL_BEAM = registerBlock("rusty_steel_beam",
-            () -> new RotatedPillarBlock(metal()));
+    public static final DeferredBlock<net.ussm.the_shell.blocks.station.SteelBeamBlock> RUSTY_STEEL_BEAM = registerBlock("rusty_steel_beam",
+            () -> new net.ussm.the_shell.blocks.station.SteelBeamBlock(metal().noOcclusion()));
 
     public static final DeferredBlock<WallBlock> METAL_PLATING_WALL = registerBlock("metal_plating_wall",
             () -> new WallBlock(metal()

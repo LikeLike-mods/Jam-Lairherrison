@@ -151,6 +151,9 @@ public class LightsaberItem extends Item implements GeoItem {
         if (player.isShiftKeyDown()) {
             ItemStack next = stack.transmuteCopy(this.nextForm.get());
             next.set(ModComponents.ACTIVE, true);
+            // no spamming: both forms wait a second before the next use
+            player.getCooldowns().addCooldown(this, 20);
+            player.getCooldowns().addCooldown(next.getItem(), 20);
             level.playSound(null, player.getX(), player.getY(), player.getZ(),
                     ModSounds.LIGHTSABER_IGNITE.get(), SoundSource.PLAYERS, 0.6F, 1.0F);
 
@@ -160,8 +163,10 @@ public class LightsaberItem extends Item implements GeoItem {
         boolean active = !isActive(stack);
         if (active && isExhausted(stack)) {
             player.displayClientMessage(Component.translatable("message.the_shell.kyber.exhausted"), true);
+            player.getCooldowns().addCooldown(this, 20);
             return InteractionResultHolder.consume(stack);
         }
+        player.getCooldowns().addCooldown(this, 15);
         stack.set(ModComponents.ACTIVE, active);
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
                 active ? ModSounds.LIGHTSABER_IGNITE.get() : ModSounds.LIGHTSABER_EXTINGUISH.get(),
