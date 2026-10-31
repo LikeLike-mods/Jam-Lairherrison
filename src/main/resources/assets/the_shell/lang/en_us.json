@@ -428,7 +428,7 @@
   "tooltip.the_shell.banana.details": "Once eaten, you keep the peel. Bunches grow under banana tree leaves: right-click a yellow bunch to harvest it, and it grows back.",
   "tooltip.the_shell.banana_peel.details": "Drop it on the ground: whoever walks on it slips and lands on their back (press space to get up). Mobs too! Sneak to walk over it safely.",
   "tooltip.the_shell.black_pearl.details": "Dropped by the colossal squid of the abyss. Used to craft the grappling hook.",
-  "tooltip.the_shell.conch.recharge": "Each blow, there or back, uses one. Right-click it in the inventory with a kyber crystal: +5.",
+  "tooltip.the_shell.conch.details": "Each blow, there or back, uses one. Right-click it in the inventory with a kyber crystal: +5.",
   "tooltip.the_shell.conch.uses": "Uses: %s / %s",
   "tooltip.the_shell.control_console.details": "In the submarine's cabin: right-click to see the battery, the submarine's height and the coordinates of the nearest rift.",
   "tooltip.the_shell.crab_claw.reach": "+10 reach for breaking and placing blocks",

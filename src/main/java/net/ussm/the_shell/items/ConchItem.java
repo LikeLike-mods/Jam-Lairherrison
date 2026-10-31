@@ -81,6 +81,5 @@ public class ConchItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.the_shell.conch.uses", usesLeft(stack), MAX_USES).withStyle(ChatFormatting.AQUA));
-        tooltip.add(Component.translatable("tooltip.the_shell.conch.recharge").withStyle(ChatFormatting.DARK_AQUA));
     }
 }
