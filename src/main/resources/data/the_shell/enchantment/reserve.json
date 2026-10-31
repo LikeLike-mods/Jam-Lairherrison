@@ -1,0 +1,20 @@
+{
+  "description": {
+    "translate": "enchantment.the_shell.reserve"
+  },
+  "supported_items": "#the_shell:enchantable/oxygen_bottle",
+  "weight": 5,
+  "max_level": 2,
+  "min_cost": {
+    "base": 8,
+    "per_level_above_first": 12
+  },
+  "max_cost": {
+    "base": 38,
+    "per_level_above_first": 12
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "mainhand"
+  ]
+}

@@ -4,6 +4,23 @@
     "the_shell:diving_helmet",
     "the_shell:diving_chestplate",
     "the_shell:diving_leggings",
-    "the_shell:diving_boots"
+    "the_shell:diving_boots",
+    "the_shell:lightsaber_shadow_sword_white",
+    "the_shell:lightsaber_shadow_sickle_white",
+    "the_shell:lightsaber_shadow_hammer_white",
+    "the_shell:lightsaber_light_sword",
+    "the_shell:lightsaber_light_sickle",
+    "the_shell:lightsaber_light_hammer",
+    "the_shell:lightsaber_shadow_sword_violet",
+    "the_shell:lightsaber_shadow_sickle_violet",
+    "the_shell:lightsaber_shadow_hammer_violet",
+    "the_shell:kyber_sickle",
+    "the_shell:kyber_axe",
+    "the_shell:grappling_hook",
+    "the_shell:oxygen_bottle",
+    "the_shell:diving_abyss_helmet",
+    "the_shell:iron_abyss_helmet",
+    "the_shell:diamond_abyss_helmet",
+    "the_shell:netherite_abyss_helmet"
   ]
 }

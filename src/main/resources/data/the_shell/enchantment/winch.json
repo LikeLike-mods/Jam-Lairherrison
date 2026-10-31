@@ -1,0 +1,20 @@
+{
+  "description": {
+    "translate": "enchantment.the_shell.winch"
+  },
+  "supported_items": "#the_shell:enchantable/grappling_hook",
+  "weight": 5,
+  "max_level": 3,
+  "min_cost": {
+    "base": 8,
+    "per_level_above_first": 10
+  },
+  "max_cost": {
+    "base": 38,
+    "per_level_above_first": 10
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "mainhand"
+  ]
+}

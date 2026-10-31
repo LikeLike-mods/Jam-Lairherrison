@@ -1,0 +1,20 @@
+{
+  "description": {
+    "translate": "enchantment.the_shell.resonance"
+  },
+  "supported_items": "#the_shell:enchantable/kyber_tool",
+  "weight": 3,
+  "max_level": 3,
+  "min_cost": {
+    "base": 12,
+    "per_level_above_first": 12
+  },
+  "max_cost": {
+    "base": 42,
+    "per_level_above_first": 12
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "mainhand"
+  ]
+}
