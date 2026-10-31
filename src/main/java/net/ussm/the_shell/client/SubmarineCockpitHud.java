@@ -10,10 +10,14 @@ import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.entites.Submarine;
+import net.ussm.the_shell.events.SubmarineInterior;
+import net.ussm.the_shell.init.ModAttachments;
+
+import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class SubmarineCockpitHud {
-    private static java.util.concurrent.CompletableFuture<int[]> search;
+    private static CompletableFuture<int[]> search;
     private static int[] rift;
     private static long last;
 
@@ -30,7 +34,7 @@ public class SubmarineCockpitHud {
         g.fill(x + 1, y + 1, x + 1 + Math.round((w - 2) * energy), y + 5, colour);
         g.drawString(mc.font, Component.translatable("hud.the_shell.submarine.energy", Math.round(energy * 100)), x, y - 11, 0xFFD8E2E8);
         if (sub.getTier() >= 3) sonar(mc, g, sub, x + w, y - 24);
-        if (!mc.player.getData(net.ussm.the_shell.init.ModAttachments.CABIN_BUTTON_USED) && SubmarineCockpitView.seeButton(mc, sub)) {
+        if (!mc.player.getData(ModAttachments.CABIN_BUTTON_USED) && SubmarineCockpitView.seeButton(mc, sub)) {
             Component help = Component.translatable("hud.the_shell.submarine.cabin_button");
             g.drawString(mc.font, help, (g.guiWidth() - mc.font.width(help)) / 2, g.guiHeight() / 2 + 12, 0xFFFFE27A);
         }
@@ -40,7 +44,7 @@ public class SubmarineCockpitHud {
         long now = mc.level.getGameTime();
         if (search == null && now - last > 60) {
             int sx = sub.getBlockX(), sz = sub.getBlockZ();
-            search = java.util.concurrent.CompletableFuture.supplyAsync(() -> net.ussm.the_shell.events.SubmarineInterior.nearestRift(sx, sz));
+            search = CompletableFuture.supplyAsync(() -> SubmarineInterior.nearestRift(sx, sz));
             last = now;
         }
         if (search != null && search.isDone()) {

@@ -17,6 +17,7 @@ import net.ussm.the_shell.config.ClientConfig;
 import net.ussm.the_shell.init.ModNetworking;
 import net.neoforged.fml.config.ModConfig;
 import net.ussm.the_shell.init.ModCriteriaTriggers;
+import net.ussm.the_shell.worldgen.StationProcessors;
 
 import com.mojang.logging.LogUtils;
 
@@ -41,7 +42,7 @@ public class TheShell {
         ModChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
         ModBiomeSources.BIOME_SOURCES.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
-        net.ussm.the_shell.worldgen.StationProcessors.PROCESSORS.register(modEventBus);
+        StationProcessors.PROCESSORS.register(modEventBus);
         ModEntities.register(modEventBus);
         ModComponents.register(modEventBus);
         ModAttachments.register(modEventBus);

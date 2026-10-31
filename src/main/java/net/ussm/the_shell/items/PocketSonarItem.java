@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.ussm.the_shell.client.PocketSonarClient;
 
 public class PocketSonarItem extends Item {
 
@@ -22,7 +23,7 @@ public class PocketSonarItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (level.isClientSide) {
-            net.ussm.the_shell.client.PocketSonarClient.ping(player);
+            PocketSonarClient.ping(player);
         } else {
             for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(24.0), e -> e != player)) {
                 e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 160, 0, false, false));

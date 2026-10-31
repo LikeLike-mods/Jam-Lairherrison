@@ -63,7 +63,7 @@ public class FallenLogFeature extends Feature<NoneFeatureConfiguration> {
                 for (int b = -2; b <= 2; b++) {
                     if (Math.abs(b) == 2 && (a == -1 || a == 2) || random.nextFloat() < 0.15F) continue;
                     BlockPos pos = head.relative(direction, a).relative(direction.getClockWise(), b);
-                    for (int dy = 1; dy >= -1; dy--) {   // hugs the terrain
+                    for (int dy = 1; dy >= -1; dy--) { // hugs the terrain
                         BlockPos p = pos.above(dy);
                         if (free(level, p) && ground(level, p)) {
                             this.setBlock(level, p, leaves);

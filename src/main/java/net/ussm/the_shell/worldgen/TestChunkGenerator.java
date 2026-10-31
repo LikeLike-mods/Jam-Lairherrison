@@ -1,7 +1,5 @@
 package net.ussm.the_shell.worldgen;
 
-import net.minecraft.util.Mth;
-import net.ussm.the_shell.api.FastNoiseLite;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -9,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NaturalSpawner;
@@ -30,8 +29,8 @@ import net.minecraft.world.level.levelgen.RandomSupport;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.blending.Blender;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import net.ussm.the_shell.api.FastNoiseLite;
 import net.ussm.the_shell.init.ModBlocks;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -125,7 +124,7 @@ public class TestChunkGenerator extends ChunkGenerator {
     }
 
     public static float getHeight(float posX, float posZ) {
-        net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(SEED);
+        FastNoiseLite noise = new FastNoiseLite(SEED);
         float h;
 
         noise.SetFrequency(0.0001f);
@@ -170,7 +169,7 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     // To swamp or not to swamp, that is the question
     public static float getSwampiness(float posX, float posZ, float posY) {
-        net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(SEED + 3);
+        FastNoiseLite noise = new FastNoiseLite(SEED + 3);
         noise.SetFrequency(0.001f);
         noise.SetFractalType(FastNoiseLite.FractalType.FBm);
         noise.SetFractalOctaves(1);
@@ -217,7 +216,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                 slope *= 2f;
 
                 // Block hashes
-                net.ussm.the_shell.api.FastNoiseLite noise = new FastNoiseLite(202);
+                FastNoiseLite noise = new FastNoiseLite(202);
                 noise.SetFrequency(0.1f);
                 noise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
                 float hash1 = noise.GetNoise(x + (chunk.getPos().x * 16), z + (chunk.getPos().z * 16));

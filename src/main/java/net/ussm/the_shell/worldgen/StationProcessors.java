@@ -29,7 +29,6 @@ public class StationProcessors {
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<Rust>> RUST = PROCESSORS.register("station_rust", () -> () -> Rust.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<Flood>> FLOOD = PROCESSORS.register("station_flood", () -> () -> Flood.CODEC);
 
-    // This bit of code randomly changes the block states
     public static class Rust extends StructureProcessor {
         public static final MapCodec<Rust> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
                 BuiltInRegistries.BLOCK.byNameCodec().fieldOf("from").forGetter(p -> p.from),
@@ -68,7 +67,6 @@ public class StationProcessors {
         return to;
     }
 
-    // This bit of code randomly floods parts of the station
     public static class Flood extends StructureProcessor {
         public static final MapCodec<Flood> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
                 Codec.floatRange(0, 1).fieldOf("chance").forGetter(p -> p.chance)

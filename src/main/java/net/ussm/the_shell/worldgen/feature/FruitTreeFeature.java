@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class FruitTreeFeature extends Feature<NoneFeatureConfiguration> {
     private final boolean datePalm;
@@ -85,7 +86,7 @@ public class FruitTreeFeature extends Feature<NoneFeatureConfiguration> {
         });
 
         List<Direction> sides = new ArrayList<>(Direction.Plane.HORIZONTAL.stream().toList());
-        Collections.shuffle(sides, new java.util.Random(random.nextLong()));
+        Collections.shuffle(sides, new Random(random.nextLong()));
         int fruits = datePalm ? 2 + random.nextInt(2) : 1 + random.nextInt(2);
         for (int k = 0; k < fruits; k++) {
             BlockPos pos = top.relative(sides.get(k)).below();

@@ -14,9 +14,15 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.entites.Submarine;
+import net.ussm.the_shell.network.CabinButtonPayload;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class SubmarineCockpitView {
@@ -35,7 +41,7 @@ public class SubmarineCockpitView {
         PoseStack pose = event.getPoseStack();
         MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();
         VertexConsumer vc = buffers.getBuffer(TYPE);
-        int light = LightTexture.pack(11, 11), plein = LightTexture.FULL_BRIGHT;
+        int light = LightTexture.pack(11, 11), full = LightTexture.FULL_BRIGHT;
 
         Vec3 v = sub.getDeltaMovement();
         Vec3 forward = Vec3.directionFromRotation(0.0F, yaw);
@@ -72,45 +78,45 @@ public class SubmarineCockpitView {
         box(vc, pose, -0.72F, -0.6F, 1.03F, 0.72F, -0.57F, 1.47F, FRAME_LIGHT, light);
         box(vc, pose, -0.66F, -0.92F, 1.045F, 0.66F, -0.63F, 1.05F, 0xFF22272D, light);
         box(vc, pose, -0.23F, -0.79F, 1.035F, 0.23F, -0.63F, 1.045F, 0xFF101418, light);
-        box(vc, pose, -0.21F, -0.77F, 1.03F, 0.21F, -0.65F, 1.035F, 0xFF2BAFD8, plein);
+        box(vc, pose, -0.21F, -0.77F, 1.03F, 0.21F, -0.65F, 1.035F, 0xFF2BAFD8, full);
         float t = sub.tickCount + pt;
         for (int i = 0; i < 2; i++) {
             float width = 0.06F + 0.24F * (0.5F + 0.5F * (float) Math.sin(t * 0.13 + i * 1.7));
-            box(vc, pose, -6 * P, -24 * P + i * 2 * P, 1.028F, -6 * P + width, -23 * P + i * 2 * P, 1.03F, 0xFF9FF4FF, plein);
+            box(vc, pose, -6 * P, -24 * P + i * 2 * P, 1.028F, -6 * P + width, -23 * P + i * 2 * P, 1.03F, 0xFF9FF4FF, full);
         }
         float[] hand = {(float) Math.sin(t * 0.07) * 0.9F + (float) Math.sin(t * 0.31) * 0.15F, 1.2F - 2.4F * sub.getEnergy() / Submarine.MAX_ENERGY};
         float[] places = {-0.45F, 0.45F};
         for (int i = 0; i < 2; i++) {
             box(vc, pose, places[i] - 0.13F, -0.87F, 1.04F, places[i] + 0.13F, -0.61F, 1.045F, FRAME_LIGHT, light);
-            box(vc, pose, places[i] - 0.11F, -0.85F, 1.035F, places[i] + 0.11F, -0.63F, 1.04F, 0xFFE6E2D4, plein);
+            box(vc, pose, places[i] - 0.11F, -0.85F, 1.035F, places[i] + 0.11F, -0.63F, 1.04F, 0xFFE6E2D4, full);
             for (int k = -2; k <= 2; k++) {
                 pose.pushPose();
                 pose.translate(places[i], -0.74F, 1.034F);
                 pose.mulPose(Axis.ZP.rotation(k * 0.5F));
-                box(vc, pose, -0.004F, 0.08F, -0.002F, 0.004F, 0.1F, 0.0F, 0xFF2A2A2A, plein);
+                box(vc, pose, -0.004F, 0.08F, -0.002F, 0.004F, 0.1F, 0.0F, 0xFF2A2A2A, full);
                 pose.popPose();
             }
             pose.pushPose();
             pose.translate(places[i], -0.74F, 1.03F);
             pose.mulPose(Axis.ZP.rotation(hand[i]));
-            box(vc, pose, -0.007F, 0.0F, -0.004F, 0.007F, 0.095F, 0.0F, i == 0 ? 0xFF2A2A2A : 0xFFD8402C, plein);
+            box(vc, pose, -0.007F, 0.0F, -0.004F, 0.007F, 0.095F, 0.0F, i == 0 ? 0xFF2A2A2A : 0xFFD8402C, full);
             pose.popPose();
-            box(vc, pose, places[i] - 0.015F, -0.755F, 1.026F, places[i] + 0.015F, -0.725F, 1.03F, 0xFF555555, plein);
+            box(vc, pose, places[i] - 0.015F, -0.755F, 1.026F, places[i] + 0.015F, -0.725F, 1.03F, 0xFF555555, full);
         }
         int[] leds = {0xFF4FE07A, 0xFFE6B53A, 0xFFE0482F, 0xFF4FA8F0};
         for (int i = 0; i < 4; i++) {
             float x = -0.6F + i * 0.06F;
             boolean on = i != 2 || (sub.tickCount / 10) % 2 == 0;
-            box(vc, pose, x - 0.02F, -0.9F, 1.04F, x + 0.02F, -0.86F, 1.045F, on ? leds[i] : 0xFF30343A, plein);
+            box(vc, pose, x - 0.02F, -0.9F, 1.04F, x + 0.02F, -0.86F, 1.045F, on ? leds[i] : 0xFF30343A, full);
         }
         boolean targeted = seeButton(mc, sub);
         plates(vc, pose, -36 * P, -39 * P, 0.0F, -22 * P, -24 * P, 20 * P, 0xFF2F353D, light);
         box(vc, pose, -37 * P, -24 * P, -P, -21 * P, -23 * P, 21 * P, FRAME_LIGHT, light);
         float top = -23 * P;
         box(vc, pose, -32 * P, top + 0.002F, 6 * P, -25 * P, top + 0.01F, 11 * P, 0xFFE6B53A, light);
-        box(vc, pose, -31 * P, top + 0.012F, 7 * P, -26 * P, top + 0.025F, 10 * P, targeted ? 0xFFFFE27A : 0xFFC8962A, targeted ? plein : light);
-        box(vc, pose, -30 * P, top + 0.027F, 8 * P, -27 * P, top + 0.032F, 9 * P, 0xFF1A1A1A, plein);
-        box(vc, pose, -29 * P, top + 0.027F, 7 * P, -28 * P, top + 0.032F, 8 * P, 0xFF1A1A1A, plein);
+        box(vc, pose, -31 * P, top + 0.012F, 7 * P, -26 * P, top + 0.025F, 10 * P, targeted ? 0xFFFFE27A : 0xFFC8962A, targeted ? full : light);
+        box(vc, pose, -30 * P, top + 0.027F, 8 * P, -27 * P, top + 0.032F, 9 * P, 0xFF1A1A1A, full);
+        box(vc, pose, -29 * P, top + 0.027F, 7 * P, -28 * P, top + 0.032F, 8 * P, 0xFF1A1A1A, full);
         pose.pushPose();
         pose.translate(0.0F, -1.22F, 0.55F);
         box(vc, pose, -0.09F, 0.0F, -0.09F, 0.09F, 0.03F, 0.09F, METAL_DARK, light);
@@ -120,56 +126,56 @@ public class SubmarineCockpitView {
         box(vc, pose, -0.02F, 0.06F, -0.02F, 0.02F, 0.36F, 0.02F, 0xFF8C949C, light);
         box(vc, pose, -0.04F, 0.36F, -0.04F, 0.04F, 0.52F, 0.04F, 0xFF22262B, light);
         box(vc, pose, -0.03F, 0.52F, -0.03F, 0.03F, 0.545F, 0.03F, 0xFFB02226, light);
-        box(vc, pose, -0.015F, 0.545F, -0.015F, 0.015F, 0.555F, 0.015F, 0xFFE8524E, plein);
+        box(vc, pose, -0.015F, 0.545F, -0.015F, 0.015F, 0.555F, 0.015F, 0xFFE8524E, full);
         pose.popPose();
         pose.popPose();
         buffers.endBatch(TYPE);
 
-        org.joml.Vector3f handle = new org.joml.Vector3f(0.0F, 0.5F, 0.0F)
+        Vector3f handle = new Vector3f(0.0F, 0.5F, 0.0F)
                 .rotateZ((float) Math.toRadians(-leverX * 22.0F)).rotateX((float) Math.toRadians(leverY * 22.0F)).add(0.0F, -1.22F, 0.55F);
         RenderType skin = RenderType.entityTranslucent(mc.player.getSkin().texture());
         VertexConsumer arm = buffers.getBuffer(skin);
         int lightSkin = LightTexture.pack(13, 13);
         pose.pushPose();
         pose.mulPose(Axis.YP.rotationDegrees(-yaw));
-        arm(arm, pose, new org.joml.Vector3f(-0.4F, -0.65F, -0.1F), new org.joml.Vector3f(handle).add(-0.13F, -0.03F, -0.02F), 40, 16, lightSkin);
-        arm(arm, pose, new org.joml.Vector3f(0.4F, -0.65F, -0.1F), new org.joml.Vector3f(handle).add(0.13F, -0.03F, -0.02F), 32, 48, lightSkin);
+        arm(arm, pose, new Vector3f(-0.4F, -0.65F, -0.1F), new Vector3f(handle).add(-0.13F, -0.03F, -0.02F), 40, 16, lightSkin);
+        arm(arm, pose, new Vector3f(0.4F, -0.65F, -0.1F), new Vector3f(handle).add(0.13F, -0.03F, -0.02F), 32, 48, lightSkin);
         pose.popPose();
         buffers.endBatch(skin);
     }
 
     public static boolean seeButton(Minecraft mc, Submarine sub) {
         if (!mc.options.getCameraType().isFirstPerson()) return false;
-        org.joml.Vector3f view = mc.player.getViewVector(1.0F).toVector3f().rotateY((float) Math.toRadians(sub.getYRot()));
+        Vector3f view = mc.player.getViewVector(1.0F).toVector3f().rotateY((float) Math.toRadians(sub.getYRot()));
         if (view.y > -0.05F) return false;
         float t = -23 * P / view.y, x = view.x * t, z = view.z * t;
         return x > -32 * P && x < -25 * P && z > 6 * P && z < 11 * P;
     }
 
     @SubscribeEvent
-    public static void gaze(net.neoforged.neoforge.client.event.ClientTickEvent.Post event) {
+    public static void gaze(ClientTickEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
         boolean ctrl = mc.player != null && mc.player.getVehicle() instanceof Submarine && mc.options.keySprint.isDown();
-        if (Submarine.freeGaze && !ctrl) Submarine.rattrapage = true;
-        if (ctrl || mc.player == null || !(mc.player.getVehicle() instanceof Submarine)) Submarine.rattrapage = false;
+        if (Submarine.freeGaze && !ctrl) Submarine.catchUp = true;
+        if (ctrl || mc.player == null || !(mc.player.getVehicle() instanceof Submarine)) Submarine.catchUp = false;
         Submarine.freeGaze = ctrl;
     }
 
     @SubscribeEvent
-    public static void onClick(net.neoforged.neoforge.client.event.InputEvent.InteractionKeyMappingTriggered event) {
+    public static void onClick(InputEvent.InteractionKeyMappingTriggered event) {
         Minecraft mc = Minecraft.getInstance();
         if (!event.isUseItem() || mc.player == null || !(mc.player.getVehicle() instanceof Submarine sub) || !seeButton(mc, sub)) return;
         event.setCanceled(true);
         event.setSwingHand(false);
-        net.neoforged.neoforge.network.PacketDistributor.sendToServer(net.ussm.the_shell.network.CabinButtonPayload.INSTANCE);
+        PacketDistributor.sendToServer(CabinButtonPayload.INSTANCE);
     }
 
-    private static void arm(VertexConsumer vc, PoseStack pose, org.joml.Vector3f shoulder, org.joml.Vector3f hand, int u, int v, int light) {
-        org.joml.Vector3f dir = new org.joml.Vector3f(hand).sub(shoulder);
+    private static void arm(VertexConsumer vc, PoseStack pose, Vector3f shoulder, Vector3f hand, int u, int v, int light) {
+        Vector3f dir = new Vector3f(hand).sub(shoulder);
         float l = dir.length();
         pose.pushPose();
         pose.translate(shoulder.x, shoulder.y, shoulder.z);
-        pose.mulPose(new org.joml.Quaternionf().rotationTo(new org.joml.Vector3f(0.0F, 0.0F, 1.0F), dir.normalize()));
+        pose.mulPose(new Quaternionf().rotationTo(new Vector3f(0.0F, 0.0F, 1.0F), dir.normalize()));
         PoseStack.Pose p = pose.last();
         float px = 1.0F / 16.0F, w = 2 * px;
         float elbow = l - 12 * px;
@@ -178,24 +184,24 @@ public class SubmarineCockpitView {
             float[] c = sides[i];
             float u0 = (u + i * 4) / 64.0F, u1 = (u + i * 4 + 4) / 64.0F, v0 = (v + 4) / 64.0F, v1 = (v + 16) / 64.0F, vh = (v + 5) / 64.0F;
             float nx = (c[0] + c[2]) / 2, ny = (c[1] + c[3]) / 2;
-            summit(vc, p, c[0], c[1], -0.6F, u0, v0, light, nx, ny, 0);
-            summit(vc, p, c[0], c[1], elbow, u0, vh, light, nx, ny, 0);
-            summit(vc, p, c[2], c[3], elbow, u1, vh, light, nx, ny, 0);
-            summit(vc, p, c[2], c[3], -0.6F, u1, v0, light, nx, ny, 0);
-            summit(vc, p, c[0], c[1], elbow, u0, v0, light, nx, ny, 0);
-            summit(vc, p, c[0], c[1], l, u0, v1, light, nx, ny, 0);
-            summit(vc, p, c[2], c[3], l, u1, v1, light, nx, ny, 0);
-            summit(vc, p, c[2], c[3], elbow, u1, v0, light, nx, ny, 0);
+            vertex(vc, p, c[0], c[1], -0.6F, u0, v0, light, nx, ny, 0);
+            vertex(vc, p, c[0], c[1], elbow, u0, vh, light, nx, ny, 0);
+            vertex(vc, p, c[2], c[3], elbow, u1, vh, light, nx, ny, 0);
+            vertex(vc, p, c[2], c[3], -0.6F, u1, v0, light, nx, ny, 0);
+            vertex(vc, p, c[0], c[1], elbow, u0, v0, light, nx, ny, 0);
+            vertex(vc, p, c[0], c[1], l, u0, v1, light, nx, ny, 0);
+            vertex(vc, p, c[2], c[3], l, u1, v1, light, nx, ny, 0);
+            vertex(vc, p, c[2], c[3], elbow, u1, v0, light, nx, ny, 0);
         }
         float bu0 = (u + 8) / 64.0F, bu1 = (u + 12) / 64.0F, bv0 = v / 64.0F, bv1 = (v + 4) / 64.0F;
-        summit(vc, p, -w, -w, l, bu0, bv0, light, 0, 0, 1);
-        summit(vc, p, -w, w, l, bu0, bv1, light, 0, 0, 1);
-        summit(vc, p, w, w, l, bu1, bv1, light, 0, 0, 1);
-        summit(vc, p, w, -w, l, bu1, bv0, light, 0, 0, 1);
+        vertex(vc, p, -w, -w, l, bu0, bv0, light, 0, 0, 1);
+        vertex(vc, p, -w, w, l, bu0, bv1, light, 0, 0, 1);
+        vertex(vc, p, w, w, l, bu1, bv1, light, 0, 0, 1);
+        vertex(vc, p, w, -w, l, bu1, bv0, light, 0, 0, 1);
         pose.popPose();
     }
 
-    private static void summit(VertexConsumer vc, PoseStack.Pose p, float x, float y, float z, float u, float v, int light, float nx, float ny, float nz) {
+    private static void vertex(VertexConsumer vc, PoseStack.Pose p, float x, float y, float z, float u, float v, int light, float nx, float ny, float nz) {
         vc.addVertex(p, x, y, z).setColor(0xFFFFFFFF).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(p, nx, ny, nz);
     }
 

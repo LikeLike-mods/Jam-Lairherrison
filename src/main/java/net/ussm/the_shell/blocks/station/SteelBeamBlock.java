@@ -17,7 +17,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-// an I-shaped beam: two flanges and a web, not a full block. "rotated" turns the I a quarter turn around the beam.
 public class SteelBeamBlock extends RotatedPillarBlock {
     public static final BooleanProperty ROTATED = BooleanProperty.create("rotated");
 
@@ -39,7 +38,7 @@ public class SteelBeamBlock extends RotatedPillarBlock {
         builder.add(ROTATED);
     }
 
-    // vertical beam: the flanges face the player; lying beam: sneak to place it turned
+    // sneak turns it when lying down
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = super.getStateForPlacement(context);
@@ -49,7 +48,6 @@ public class SteelBeamBlock extends RotatedPillarBlock {
         return state.setValue(ROTATED, turned);
     }
 
-    // empty hand: turn the beam a quarter turn
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!player.getMainHandItem().isEmpty()) return InteractionResult.PASS;
