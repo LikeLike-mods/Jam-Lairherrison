@@ -163,7 +163,7 @@ public class ModItems {
             () -> new SubmarineItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> CONCH = ITEMS.register("conch",
-            () -> new ConchItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+            () -> new ConchItem(new Item.Properties().stacksTo(1).durability(ConchItem.MAX_USES + 1).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
 
     public static final DeferredItem<Item> CRAB_CLAW = ITEMS.register("crab_claw",
             () -> new Item(new Item.Properties()));

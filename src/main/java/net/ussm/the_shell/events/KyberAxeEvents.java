@@ -32,11 +32,13 @@ public class KyberAxeEvents {
     // kyber tools cannot be repaired the usual ways, only with a kyber crystal in the inventory
     @SubscribeEvent
     public static void noAnvil(AnvilUpdateEvent event) {
-        if (event.getLeft().getItem() instanceof LightsaberItem || event.getRight().getItem() instanceof LightsaberItem) event.setCanceled(true);
+        if (event.getLeft().getItem() instanceof LightsaberItem || event.getRight().getItem() instanceof LightsaberItem
+                || event.getLeft().getItem() instanceof net.ussm.the_shell.items.ConchItem || event.getRight().getItem() instanceof net.ussm.the_shell.items.ConchItem) event.setCanceled(true);
     }
 
     @SubscribeEvent
     public static void noGrindstone(GrindstoneEvent.OnPlaceItem event) {
-        if (event.getTopItem().getItem() instanceof LightsaberItem || event.getBottomItem().getItem() instanceof LightsaberItem) event.setCanceled(true);
+        if (event.getTopItem().getItem() instanceof LightsaberItem || event.getBottomItem().getItem() instanceof LightsaberItem
+                || event.getTopItem().getItem() instanceof net.ussm.the_shell.items.ConchItem || event.getBottomItem().getItem() instanceof net.ussm.the_shell.items.ConchItem) event.setCanceled(true);
     }
 }

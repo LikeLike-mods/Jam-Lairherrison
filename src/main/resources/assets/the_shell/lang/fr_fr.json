@@ -285,6 +285,7 @@
   "key.categories.the_shell": "The Shell",
   "key.the_shell.drop_weight": "Lâcher le lest des bottes",
 
+  "message.the_shell.conch.empty": "La conque est vide : clic droit dans l'inventaire avec un cristal de kyber pour la recharger (5 utilisations).",
   "message.the_shell.kyber.exhausted": "Plus d'énergie : clic droit avec un cristal de kyber dans l'inventaire pour recharger.",
   "message.the_shell.kyber_axe.single": "Mode : un bloc à la fois",
   "message.the_shell.kyber_axe.tree": "Mode : tout l'arbre",
@@ -427,6 +428,8 @@
   "tooltip.the_shell.banana.details": "Une fois mangée, il vous reste la peau. Les régimes poussent sous les feuilles des bananiers : clic droit sur un régime jaune pour le récolter, il repoussera.",
   "tooltip.the_shell.banana_peel.details": "Posez-la par terre : qui marche dessus glisse et se retrouve sur le dos (espace pour se relever). Les mobs aussi ! Accroupi, on passe dessus sans glisser.",
   "tooltip.the_shell.black_pearl.details": "Lâchée par le calmar colossal des abysses. Sert à fabriquer le grappin.",
+  "tooltip.the_shell.conch.recharge": "Chaque souffle, à l'aller comme au retour, en utilise une. Clic droit dans l'inventaire avec un cristal de kyber : +5.",
+  "tooltip.the_shell.conch.uses": "Utilisations : %s / %s",
   "tooltip.the_shell.control_console.details": "Dans la cabine du sous-marin : clic droit pour voir la batterie, la hauteur du sous-marin et les coordonnées de la faille la plus proche.",
   "tooltip.the_shell.crab_claw.reach": "Portée +10 pour casser et poser des blocs",
   "tooltip.the_shell.crab_claw.wear": "Usure : %s / %s",
