@@ -178,6 +178,11 @@
   "death.attack.the_shell.flytrap": "%1$s was devoured by a Venus flytrap",
   "death.attack.the_shell.pressure": "%1$s was crushed by the pressure",
 
+  "enchantment.the_shell.reach": "Reach",
+  "enchantment.the_shell.reserve": "Large Reserve",
+  "enchantment.the_shell.resonance": "Resonance",
+  "enchantment.the_shell.winch": "Winch",
+
   "entity.the_shell.abyssal_angler": "Abyssal Anglerfish",
   "entity.the_shell.aqua_pearl": "Underwater Ender Pearl",
   "entity.the_shell.basilosaurus": "Basilosaurus",

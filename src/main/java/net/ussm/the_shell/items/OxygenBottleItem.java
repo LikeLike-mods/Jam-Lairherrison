@@ -14,6 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.ussm.the_shell.events.DeepSeaEvents;
 import net.ussm.the_shell.init.ModAttachments;
+import net.ussm.the_shell.init.ModEnchantments;
 
 public class OxygenBottleItem extends Item {
     private static final int CHARGE = ModAttachments.MAX_OXYGEN / 4;
@@ -25,16 +26,22 @@ public class OxygenBottleItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (stack.getDamageValue() >= stack.getMaxDamage() || player.getData(ModAttachments.OXYGEN) > ModAttachments.MAX_OXYGEN - CHARGE / 4) {
+        int charge = CHARGE + CHARGE / 4 * ModEnchantments.level(level, stack, ModEnchantments.RESERVE);
+        if (stack.getDamageValue() >= stack.getMaxDamage() || player.getData(ModAttachments.OXYGEN) > ModAttachments.MAX_OXYGEN - charge / 4) {
             return InteractionResultHolder.fail(stack);
         }
         if (!level.isClientSide) {
-            DeepSeaEvents.giveOxygen(player, CHARGE);
+            DeepSeaEvents.giveOxygen(player, charge);
             stack.setDamageValue(stack.getDamageValue() + 1);
             level.playSound(null, player.blockPosition(), SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.PLAYERS, 1.0F, 1.2F);
         }
         player.getCooldowns().addCooldown(this, 20);
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+    }
+
+    @Override
+    public int getEnchantmentValue(ItemStack stack) {
+        return 10;
     }
 
     @Override

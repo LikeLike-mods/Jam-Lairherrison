@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "the_shell:lightsaber_shadow_sword_white",
+    "the_shell:lightsaber_shadow_sickle_white",
+    "the_shell:lightsaber_shadow_hammer_white",
+    "the_shell:lightsaber_light_sword",
+    "the_shell:lightsaber_light_sickle",
+    "the_shell:lightsaber_light_hammer",
+    "the_shell:lightsaber_shadow_sword_violet",
+    "the_shell:lightsaber_shadow_sickle_violet",
+    "the_shell:lightsaber_shadow_hammer_violet",
+    "the_shell:kyber_sickle",
+    "the_shell:kyber_axe"
+  ]
+}

@@ -3,7 +3,8 @@
   "package": "net.ussm.the_shell.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ServerLevelMixin"
+    "ServerLevelMixin",
+    "EnchantmentMenuMixin"
   ],
   "injectors": {
     "defaultRequire": 1

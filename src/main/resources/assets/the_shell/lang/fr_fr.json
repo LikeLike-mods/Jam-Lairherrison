@@ -178,6 +178,11 @@
   "death.attack.the_shell.flytrap": "%1$s a été dévoré par une dionée",
   "death.attack.the_shell.pressure": "%1$s a été broyé par la pression",
 
+  "enchantment.the_shell.reach": "Rallonge",
+  "enchantment.the_shell.reserve": "Grande réserve",
+  "enchantment.the_shell.resonance": "Résonance",
+  "enchantment.the_shell.winch": "Treuil",
+
   "entity.the_shell.abyssal_angler": "Baudroie des abysses",
   "entity.the_shell.aqua_pearl": "Perle d'ender sous-marine",
   "entity.the_shell.basilosaurus": "Basilosaure",
