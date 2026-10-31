@@ -5,7 +5,8 @@
   "mixins": [
     "ServerLevelMixin",
     "LevelMixin",
-    "EnchantmentMenuMixin"
+    "EnchantmentMenuMixin",
+    "RepairItemRecipeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

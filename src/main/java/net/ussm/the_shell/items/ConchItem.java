@@ -43,6 +43,7 @@ public class ConchItem extends Item {
             if (!level.isClientSide) player.displayClientMessage(Component.translatable("message.the_shell.conch.empty"), true);
             return InteractionResultHolder.fail(stack);
         }
+        if (!level.isClientSide && level.getServer().getLevel(AtollTravel.ATOLL) == null) return InteractionResultHolder.fail(stack);
         player.startUsingItem(hand);
         player.getCooldowns().addCooldown(this, COOLDOWN);
         if (player instanceof ServerPlayer serverPlayer) {

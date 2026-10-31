@@ -1,5 +1,6 @@
 package net.ussm.the_shell.events;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +29,9 @@ import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.ussm.the_shell.init.ModItems;
 import net.ussm.the_shell.TheShell;
@@ -100,20 +103,44 @@ public class TempleProtection {
         player.displayClientMessage(Component.translatable("message.the_shell.temple.unlocked"), true);
     }
 
+    // altar positions of each temple (by start chunk), looked for once
+    private static final Map<Long, List<BlockPos>> ALTARS = new HashMap<>();
+
+    private static List<BlockPos> altars(ServerLevel level, StructureStart temple) {
+        List<BlockPos> known = ALTARS.get(temple.getChunkPos().toLong());
+        if (known != null) return known;
+        var box = temple.getBoundingBox();
+        List<BlockPos> found = new ArrayList<>();
+        for (BlockPos p : BlockPos.betweenClosed(box.minX(), box.minY(), box.minZ(), box.maxX(), box.maxY(), box.maxZ())) {
+            if (level.getBlockState(p).getBlock() instanceof NotchAltarBlock) found.add(p.immutable());
+        }
+        // only keep the result when the whole temple was loaded
+        if (level.hasChunksAt(box.minX(), box.minZ(), box.maxX(), box.maxZ())) ALTARS.put(temple.getChunkPos().toLong(), found);
+        return found;
+    }
+
+    @SubscribeEvent
+    public static void serverStopped(ServerStoppedEvent event) {
+        ALTARS.clear();
+        CONCHES.clear();
+    }
+
+    @SubscribeEvent
+    public static void loggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        CONCHES.remove(event.getEntity().getUUID());
+    }
+
     // locked until every altar of the temple is solved; a temple without altars stays locked
     private static boolean isLocked(ServerLevel level, BlockPos pos) {
         if (!level.getGameRules().getBoolean(PROTECTION)) return false;
         StructureStart temple = templeAt(level, pos);
         if (temple == null || unlocked(level).temples.contains(temple.getChunkPos().toLong())) return false;
-        boolean altars = false;
-        for (BlockPos p : BlockPos.betweenClosed(temple.getBoundingBox().minX(), temple.getBoundingBox().minY(), temple.getBoundingBox().minZ(),
-                temple.getBoundingBox().maxX(), temple.getBoundingBox().maxY(), temple.getBoundingBox().maxZ())) {
+        List<BlockPos> altars = altars(level, temple);
+        for (BlockPos p : altars) {
             BlockState s = level.getBlockState(p);
-            if (!(s.getBlock() instanceof NotchAltarBlock)) continue;
-            if (!s.getValue(NotchAltarBlock.SOLVED)) return true;
-            altars = true;
+            if (s.getBlock() instanceof NotchAltarBlock && !s.getValue(NotchAltarBlock.SOLVED)) return true;
         }
-        return !altars;
+        return altars.isEmpty();
     }
 
     private static boolean refuse(Player player, ServerLevel level, BlockPos pos) {

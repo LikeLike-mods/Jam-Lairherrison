@@ -19,7 +19,9 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.ussm.the_shell.init.ModTags;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.ussm.the_shell.items.KyberSlot;
+import net.ussm.the_shell.items.LightsaberItem;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -49,7 +51,7 @@ public abstract class EnchantmentMenuMixin {
         if (!this.enchantSlots.getItem(1).is(ModTags.KYBER_CRYSTALS)) return;
         this.random.setSeed((long) (this.enchantmentSeed.get() + slot));
         Stream<Holder<Enchantment>> pool = registries.registryOrThrow(Registries.ENCHANTMENT).holders()
-                .filter(holder -> !holder.is(EnchantmentTags.CURSE)).map(holder -> (Holder<Enchantment>) holder);
+                .filter(holder -> !holder.is(EnchantmentTags.CURSE) && !(stack.getItem() instanceof LightsaberItem && holder.is(Enchantments.MENDING))).map(holder -> (Holder<Enchantment>) holder);
         List<EnchantmentInstance> picked = EnchantmentHelper.selectEnchantment(this.random, stack, cost * 3 / 2, pool);
         if (stack.is(Items.BOOK) && picked.size() > 1) picked.remove(this.random.nextInt(picked.size()));
         List<EnchantmentInstance> result = new ArrayList<>();

@@ -3,6 +3,7 @@ package net.ussm.the_shell.events;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,16 +12,24 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.init.ModAttachments;
+import net.ussm.the_shell.init.ModBlocks;
 import net.ussm.the_shell.init.ModSounds;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class SlipEvents {
+    private static boolean peelNearby(ServerPlayer player) {
+        for (BlockPos pos : BlockPos.betweenClosed(player.blockPosition().offset(-2, -2, -2), player.blockPosition().offset(2, 2, 2)))
+            if (player.level().getBlockState(pos).is(ModBlocks.BANANA_PEEL.get())) return true;
+        return false;
+    }
+
     public static void received(ServerPlayer player, boolean lyingDown) {
-        if (player.getData(ModAttachments.SLIPPED) == lyingDown) return;
+        if (player.getData(ModAttachments.SLIPPED) == lyingDown || lyingDown && !peelNearby(player)) return;
         player.setData(ModAttachments.SLIPPED, lyingDown);
         player.syncData(ModAttachments.SLIPPED);
         if (lyingDown) player.level().playSound(player, player.blockPosition(), ModSounds.BANANA_SLIP.get(), SoundSource.PLAYERS, 1.0F, 0.95F + player.getRandom().nextFloat() * 0.1F);
@@ -32,6 +41,11 @@ public class SlipEvents {
     public static void slipMob(LivingEntity mob) {
         mob.setData(ModAttachments.SLIPPED, true);
         MOB_END.put(mob.getUUID(), mob.level().getGameTime() + 60);
+    }
+
+    @SubscribeEvent
+    public static void mobGone(EntityLeaveLevelEvent event) {
+        MOB_END.remove(event.getEntity().getUUID());
     }
 
     @SubscribeEvent

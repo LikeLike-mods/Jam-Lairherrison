@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
@@ -48,15 +49,18 @@ public class KyberAxeEvents {
     }
 
     // kyber stuff can't be repaired the normal way
+    private static boolean noRepair(ItemStack stack) {
+        return stack.getItem() instanceof LightsaberItem || stack.getItem() instanceof ConchItem;
+    }
+
     @SubscribeEvent
     public static void noAnvil(AnvilUpdateEvent event) {
-        if (event.getLeft().getItem() instanceof LightsaberItem || event.getRight().getItem() instanceof LightsaberItem
-                || event.getLeft().getItem() instanceof ConchItem || event.getRight().getItem() instanceof ConchItem) event.setCanceled(true);
+        ItemStack right = event.getRight();
+        if ((noRepair(event.getLeft()) || noRepair(right)) && !right.isEmpty() && !right.is(Items.ENCHANTED_BOOK)) event.setCanceled(true);
     }
 
     @SubscribeEvent
     public static void noGrindstone(GrindstoneEvent.OnPlaceItem event) {
-        if (event.getTopItem().getItem() instanceof LightsaberItem || event.getBottomItem().getItem() instanceof LightsaberItem
-                || event.getTopItem().getItem() instanceof ConchItem || event.getBottomItem().getItem() instanceof ConchItem) event.setCanceled(true);
+        if ((noRepair(event.getTopItem()) || noRepair(event.getBottomItem())) && !event.getTopItem().isEmpty() && !event.getBottomItem().isEmpty()) event.setCanceled(true);
     }
 }
