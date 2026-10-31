@@ -1,7 +1,6 @@
 package net.ussm.the_shell.items;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -17,11 +16,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.init.ModComponents;
-import org.joml.Vector3f;
 
 public class GrapplingHookItem extends Item {
     private static final double RANGE = 32.0;
-    private static final DustParticleOptions ROPE_DUST = new DustParticleOptions(new Vector3f(0.45F, 0.33F, 0.2F), 0.6F);
 
     public GrapplingHookItem(Properties properties) {
         super(properties);
@@ -56,12 +53,6 @@ public class GrapplingHookItem extends Item {
         // going up the rope takes back the height already fallen, but the hook no longer wipes fall damage
         double up = entity.getDeltaMovement().y;
         if (up > 0.0) entity.fallDistance = (float) Math.max(0.0, entity.fallDistance - up);
-        if (level.isClientSide) {
-            for (int i = 1; i < 10; i++) {
-                Vec3 p = start.add(towards.scale(i / 10.0));
-                level.addParticle(ROPE_DUST, p.x, p.y, p.z, 0.0, 0.0, 0.0);
-            }
-        }
     }
 
     @Override

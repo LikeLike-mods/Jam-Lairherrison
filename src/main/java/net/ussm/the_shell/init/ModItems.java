@@ -110,7 +110,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook",
-            () -> new GrapplingHookItem(new Item.Properties().durability(128)));
+            () -> new GrapplingHookItem(new Item.Properties().durability(32)));
 
     public static final DeferredItem<Item> OXYGEN_BOTTLE = ITEMS.register("oxygen_bottle",
             () -> new OxygenBottleItem(new Item.Properties().durability(4)));
