@@ -52,7 +52,7 @@ public class BananaPeelBlock extends Block {
             net.ussm.the_shell.client.SlipClient.slip((Player) entity);
         } else {
             entity.hurtMarked = true;
-            entity.setYRot(entity.getYRot() + 120.0F + level.random.nextFloat() * 120.0F);
+            if (entity instanceof net.minecraft.world.entity.Mob) net.ussm.the_shell.events.SlipEvents.slipMob(living);
         }
         level.playSound(player ? (Player) entity : null, pos, net.ussm.the_shell.init.ModSounds.BANANA_SLIP.get() /*Not a Banana split*/, player ? SoundSource.PLAYERS : SoundSource.NEUTRAL, 1.0F, 0.95F + level.random.nextFloat() * 0.1F);
     }

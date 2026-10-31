@@ -1,6 +1,7 @@
 package net.ussm.the_shell.init;
 
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -8,6 +9,8 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.client.renderers.*;
+import net.ussm.the_shell.entites.BasilosaurusEntity;
+import net.ussm.the_shell.entites.BlueWhaleEntity;
 import net.ussm.the_shell.entites.animations.SwimmingTurnProfiles;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
@@ -20,16 +23,16 @@ public class ModClientEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.MESSAGE_BOTTLE.get(), MessageBottleRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.TEMPLE_PEDESTAL.get(), net.ussm.the_shell.client.renderers.TemplePedestalRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.TEMPLE_PEDESTAL.get(), TemplePedestalRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SLIDING_DOOR.get(), context -> new SlidingDoorRenderer());
         event.registerEntityRenderer(ModEntities.LEVIATHAN.get(), LeviathanRenderer::new);
         event.registerEntityRenderer(ModEntities.SUBMARINE.get(), SubmarineRenderer::new);
-        event.registerEntityRenderer(ModEntities.AQUA_PEARL.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.AQUA_PEARL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.BASILOSAURUS.get(), c -> new CetaceanRenderer<>(c, "basilosaurus",
-                net.ussm.the_shell.entites.BasilosaurusEntity.SIZE_MULTIPLIER, 1.5F, SwimmingTurnProfiles.BASILOSAURUS));
+                BasilosaurusEntity.SIZE_MULTIPLIER, 1.5F, SwimmingTurnProfiles.BASILOSAURUS));
         event.registerEntityRenderer(ModEntities.BLUE_WHALE.get(), c -> new CetaceanRenderer<>(c, "blue_whale",
-                net.ussm.the_shell.entites.BlueWhaleEntity.SIZE_MULTIPLIER,
-                1.4F * net.ussm.the_shell.entites.BlueWhaleEntity.GEOMETRY_SCALE, SwimmingTurnProfiles.BLUE_WHALE));
+                BlueWhaleEntity.SIZE_MULTIPLIER,
+                1.4F * BlueWhaleEntity.GEOMETRY_SCALE, SwimmingTurnProfiles.BLUE_WHALE));
         event.registerEntityRenderer(ModEntities.PURUSSAURUS.get(), PurussaurusRenderer::new);
         event.registerEntityRenderer(ModEntities.TITANOBOA.get(), TitanoboaRenderer::new);
         event.registerEntityRenderer(ModEntities.BUTTERFLY.get(), c -> new MobRenderers<>(c, "butterfly", 0.2F, false, false, false));

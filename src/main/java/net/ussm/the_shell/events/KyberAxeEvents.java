@@ -6,8 +6,11 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
+import net.neoforged.neoforge.event.GrindstoneEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.ussm.the_shell.TheShell;
+import net.ussm.the_shell.items.ConchItem;
 import net.ussm.the_shell.items.KyberAxeItem;
 import net.ussm.the_shell.items.KyberPickaxeItem;
 import net.ussm.the_shell.items.LightsaberItem;
@@ -42,5 +45,18 @@ public class KyberAxeEvents {
         } finally {
             mining = false;
         }
+    }
+
+    // kyber stuff can't be repaired the normal way
+    @SubscribeEvent
+    public static void noAnvil(AnvilUpdateEvent event) {
+        if (event.getLeft().getItem() instanceof LightsaberItem || event.getRight().getItem() instanceof LightsaberItem
+                || event.getLeft().getItem() instanceof ConchItem || event.getRight().getItem() instanceof ConchItem) event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void noGrindstone(GrindstoneEvent.OnPlaceItem event) {
+        if (event.getTopItem().getItem() instanceof LightsaberItem || event.getBottomItem().getItem() instanceof LightsaberItem
+                || event.getTopItem().getItem() instanceof ConchItem || event.getBottomItem().getItem() instanceof ConchItem) event.setCanceled(true);
     }
 }

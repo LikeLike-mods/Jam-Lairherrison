@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "icon": {
+      "id": "minecraft:mossy_cobblestone"
+    },
+    "title": {
+      "translate": "advancement.the_shell.enter_temple.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.enter_temple.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "in_temple": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": ["the_shell:jungle_temple", "minecraft:jungle_pyramid"]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

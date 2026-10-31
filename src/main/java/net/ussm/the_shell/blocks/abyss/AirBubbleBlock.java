@@ -31,7 +31,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class AirBubbleBlock extends Block implements SimpleWaterloggedBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_15;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final VoxelShape SHAPE = Shapes.or(Block.box(2, 0, 2, 14, 4, 14), Block.box(4, 4, 4, 12, 10, 12));
+    private static final VoxelShape SHAPE = Shapes.or(Block.box(3, 0, 3, 13, 2, 13), Block.box(3, 2, 3, 13, 11, 13));
 
     public AirBubbleBlock(Properties properties) {
         super(properties);

@@ -129,7 +129,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook",
-            () -> new GrapplingHookItem(new Item.Properties().durability(128)));
+            () -> new GrapplingHookItem(new Item.Properties().durability(32)));
 
     public static final DeferredItem<Item> OXYGEN_BOTTLE = ITEMS.register("oxygen_bottle",
             () -> new OxygenBottleItem(new Item.Properties().durability(4)));
@@ -182,7 +182,7 @@ public class ModItems {
             () -> new SubmarineItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> CONCH = ITEMS.register("conch",
-            () -> new ConchItem(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
+            () -> new ConchItem(new Item.Properties().stacksTo(1).durability(ConchItem.MAX_USES + 1).rarity(Rarity.UNCOMMON)));
 
     public static final DeferredItem<Item> CRAB_CLAW = ITEMS.register("crab_claw",
             () -> new Item(new Item.Properties()));
@@ -287,7 +287,7 @@ public class ModItems {
                 .rarity(Rarity.EPIC)
                 .fireResistant()
                 .stacksTo(1)
-                .component(DataComponents.UNBREAKABLE, new Unbreakable(true));
+                .durability(LightsaberItem.MAX_USES + 1);
     }
 
 

@@ -1,31 +1,62 @@
 package net.ussm.the_shell.events;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.TicketType;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.blocks.station.SubmarineWindowBlock;
 import net.ussm.the_shell.entites.Submarine;
+import net.ussm.the_shell.init.ModAttachments;
+import net.ussm.the_shell.init.ModBlocks;
+import net.ussm.the_shell.init.ModEntities;
+import net.ussm.the_shell.worldgen.TestChunkGenerator;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -66,16 +97,16 @@ public class SubmarineInterior {
 
     private static void fishes(ServerLevel inside, int cabin, CompoundTag where) {
         BlockPos c = corner(cabin);
-        net.minecraft.world.phys.AABB zone = new net.minecraft.world.phys.AABB(c.getX() - 13, c.getY() - 10, c.getZ() - 13, c.getX() + 28, c.getY() + 25, c.getZ() + 34);
-        net.minecraft.world.phys.AABB zoneBox = new net.minecraft.world.phys.AABB(c.getX() - 48, c.getY() - 20, c.getZ() - 44, c.getX() + 56, c.getY() + 34, c.getZ() + 52);
-        java.util.List<net.minecraft.world.entity.Mob> fish = inside.getEntitiesOfClass(net.minecraft.world.entity.Mob.class, zoneBox,
-                m -> !m.hasCustomName() && (m instanceof net.minecraft.world.entity.animal.WaterAnimal || m.getType() == net.ussm.the_shell.init.ModEntities.ABYSSAL_ANGLER.get()));
+        AABB zone = new AABB(c.getX() - 13, c.getY() - 10, c.getZ() - 13, c.getX() + 28, c.getY() + 25, c.getZ() + 34);
+        AABB zoneBox = new AABB(c.getX() - 48, c.getY() - 20, c.getZ() - 44, c.getX() + 56, c.getY() + 34, c.getZ() + 52);
+        List<Mob> fish = inside.getEntitiesOfClass(Mob.class, zoneBox,
+                m -> !m.hasCustomName() && (m instanceof WaterAnimal || m.getType() == ModEntities.ABYSSAL_ANGLER.get()));
         int remaining = 0;
-        for (net.minecraft.world.entity.Mob m : fish) {
+        for (Mob m : fish) {
             if (zone.contains(m.position()) && remaining < 7) remaining++;
             else m.discard();
         }
-        for (net.minecraft.world.entity.item.ItemEntity item : inside.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, zoneBox)) {
+        for (ItemEntity item : inside.getEntitiesOfClass(ItemEntity.class, zoneBox)) {
             BlockPos ip = item.blockPosition().subtract(c);
             boolean isInside = false;
             for (int[] b : IN_CABIN) isInside |= ip.getX() >= b[0] && ip.getX() <= b[3] && ip.getY() >= b[1] && ip.getY() <= b[4] && ip.getZ() >= b[2] && ip.getZ() <= b[5];
@@ -84,20 +115,20 @@ public class SubmarineInterior {
         if (remaining >= 7) return;
         String dim = where.getString("Dim");
         boolean abysses = dim.equals(AbyssTravel.ABYSS.location().toString());
-        boolean bright = dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > net.ussm.the_shell.worldgen.TestChunkGenerator.SEA - 24;
-        net.minecraft.world.entity.EntityType<?>[] types = abysses
-                ? new net.minecraft.world.entity.EntityType<?>[]{net.ussm.the_shell.init.ModEntities.HATCHETFISH.get(), net.ussm.the_shell.init.ModEntities.HATCHETFISH.get(),
-                        net.minecraft.world.entity.EntityType.GLOW_SQUID, net.ussm.the_shell.init.ModEntities.ABYSSAL_ANGLER.get()}
-                : bright ? new net.minecraft.world.entity.EntityType<?>[]{net.minecraft.world.entity.EntityType.TROPICAL_FISH, net.minecraft.world.entity.EntityType.TROPICAL_FISH,
-                        net.minecraft.world.entity.EntityType.COD, net.minecraft.world.entity.EntityType.SALMON, net.minecraft.world.entity.EntityType.PUFFERFISH}
-                : new net.minecraft.world.entity.EntityType<?>[]{net.minecraft.world.entity.EntityType.COD, net.minecraft.world.entity.EntityType.SQUID, net.minecraft.world.entity.EntityType.GLOW_SQUID};
-        net.minecraft.util.RandomSource r = inside.random;
+        boolean bright = dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > TestChunkGenerator.SEA - 24;
+        EntityType<?>[] types = abysses
+                ? new EntityType<?>[]{ModEntities.HATCHETFISH.get(), ModEntities.HATCHETFISH.get(),
+                        EntityType.GLOW_SQUID, ModEntities.ABYSSAL_ANGLER.get()}
+                : bright ? new EntityType<?>[]{EntityType.TROPICAL_FISH, EntityType.TROPICAL_FISH,
+                        EntityType.COD, EntityType.SALMON, EntityType.PUFFERFISH}
+                : new EntityType<?>[]{EntityType.COD, EntityType.SQUID, EntityType.GLOW_SQUID};
+        RandomSource r = inside.random;
         for (int attempt = 0; attempt < 12; attempt++) {
             BlockPos p = c.offset(-4 + r.nextInt(23), r.nextInt(17), -4 + r.nextInt(29));
-            if (!inside.getFluidState(p).is(net.minecraft.tags.FluidTags.WATER) || !inside.getFluidState(p.above()).is(net.minecraft.tags.FluidTags.WATER)) continue;
-            if (!(types[r.nextInt(types.length)].create(inside) instanceof net.minecraft.world.entity.Mob mob)) return;
+            if (!inside.getFluidState(p).is(FluidTags.WATER) || !inside.getFluidState(p.above()).is(FluidTags.WATER)) continue;
+            if (!(types[r.nextInt(types.length)].create(inside) instanceof Mob mob)) return;
             mob.moveTo(p.getX() + 0.5, p.getY() + 0.2, p.getZ() + 0.5, r.nextFloat() * 360.0F, 0.0F);
-            net.neoforged.neoforge.event.EventHooks.finalizeMobSpawn(mob, inside, inside.getCurrentDifficultyAt(p), net.minecraft.world.entity.MobSpawnType.NATURAL, null);
+            EventHooks.finalizeMobSpawn(mob, inside, inside.getCurrentDifficultyAt(p), MobSpawnType.NATURAL, null);
             inside.addFreshEntity(mob);
             return;
         }
@@ -109,21 +140,21 @@ public class SubmarineInterior {
         ServerLevel world = inside.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(where.getString("Dim"))));
         if (world == null) return;
         BlockPos sub = BlockPos.containing(where.getDouble("X"), where.getDouble("Y"), where.getDouble("Z"));
-        world.getChunkSource().addRegionTicket(net.minecraft.server.level.TicketType.PORTAL, new net.minecraft.world.level.ChunkPos(sub), 3, sub);
-        net.minecraft.world.level.block.Rotation toCabin = switch (net.minecraft.core.Direction.fromYRot(where.getFloat("Yaw"))) {
-            case EAST -> net.minecraft.world.level.block.Rotation.COUNTERCLOCKWISE_90;
-            case SOUTH -> net.minecraft.world.level.block.Rotation.CLOCKWISE_180;
-            case WEST -> net.minecraft.world.level.block.Rotation.CLOCKWISE_90;
-            default -> net.minecraft.world.level.block.Rotation.NONE;
+        world.getChunkSource().addRegionTicket(TicketType.PORTAL, new ChunkPos(sub), 3, sub);
+        Rotation toCabin = switch (Direction.fromYRot(where.getFloat("Yaw"))) {
+            case EAST -> Rotation.COUNTERCLOCKWISE_90;
+            case SOUTH -> Rotation.CLOCKWISE_180;
+            case WEST -> Rotation.CLOCKWISE_90;
+            default -> Rotation.NONE;
         };
-        net.minecraft.world.level.block.Rotation toWorld = switch (toCabin) {
-            case COUNTERCLOCKWISE_90 -> net.minecraft.world.level.block.Rotation.CLOCKWISE_90;
-            case CLOCKWISE_90 -> net.minecraft.world.level.block.Rotation.COUNTERCLOCKWISE_90;
+        Rotation toWorld = switch (toCabin) {
+            case COUNTERCLOCKWISE_90 -> Rotation.CLOCKWISE_90;
+            case CLOCKWISE_90 -> Rotation.COUNTERCLOCKWISE_90;
             default -> toCabin;
         };
         BlockPos c = corner(cabin);
-        net.minecraft.world.level.block.state.BlockState empty = world.getFluidState(sub).is(net.minecraft.tags.FluidTags.WATER)
-                ? net.minecraft.world.level.block.Blocks.WATER.defaultBlockState() : net.minecraft.world.level.block.Blocks.AIR.defaultBlockState();
+        BlockState empty = world.getFluidState(sub).is(FluidTags.WATER)
+                ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
         for (int lx = -40; lx <= 40; lx++) {
             if (Math.floorMod(lx, 8) != pass) continue;
             for (int ly = -16; ly <= 24; ly++) {
@@ -137,7 +168,7 @@ public class SubmarineInterior {
                     }
                     if (near <= 0) continue;
                     boolean edge = Math.abs(lx) == 40 || ly == -16 || ly == 24 || lz == -36 || lz == 37;
-                    net.minecraft.world.level.block.state.BlockState st = edge ? net.minecraft.world.level.block.Blocks.BARRIER.defaultBlockState()
+                    BlockState st = edge ? Blocks.BARRIER.defaultBlockState()
                             : world.getBlockState(sub.offset(new BlockPos(lx, ly, lz).rotate(toWorld))).rotate(toCabin);
                     if (!edge && near <= 3 && !st.isAir() && st.getFluidState().isEmpty()) st = empty;
                     BlockPos target = c.offset(tx, ty, tz);
@@ -150,11 +181,11 @@ public class SubmarineInterior {
     private static void updateWindows(ServerLevel inside, int cabin, CompoundTag where) {
         String dim = where.getString("Dim");
         int zone = dim.equals(AbyssTravel.ABYSS.location().toString()) ? 2
-                : dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > net.ussm.the_shell.worldgen.TestChunkGenerator.SEA - 24 ? 0 : 1;
+                : dim.equals(AtollTravel.ATOLL.location().toString()) && where.getDouble("Y") > TestChunkGenerator.SEA - 24 ? 0 : 1;
         BlockPos c = corner(cabin);
         for (BlockPos p : BlockPos.betweenClosed(c.offset(-8, 0, 0), c.offset(22, 17, 24))) {
-            net.minecraft.world.level.block.state.BlockState st = inside.getBlockState(p);
-            if (st.is(net.ussm.the_shell.init.ModBlocks.SUBMARINE_WINDOW.get()) && st.getValue(SubmarineWindowBlock.ZONE) != zone) {
+            BlockState st = inside.getBlockState(p);
+            if (st.is(ModBlocks.SUBMARINE_WINDOW.get()) && st.getValue(SubmarineWindowBlock.ZONE) != zone) {
                 inside.setBlock(p, st.setValue(SubmarineWindowBlock.ZONE, zone), Block.UPDATE_CLIENTS);
             }
         }
@@ -168,7 +199,7 @@ public class SubmarineInterior {
     }
 
     private static StructurePlaceSettings isDry() {
-        return new StructurePlaceSettings().setLiquidSettings(net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings.IGNORE_WATERLOGGING);
+        return new StructurePlaceSettings().setLiquidSettings(LiquidSettings.IGNORE_WATERLOGGING);
     }
 
     private static void dryOut(ServerLevel inside, int cabin, int tier) {
@@ -176,12 +207,12 @@ public class SubmarineInterior {
         for (int n = 0; n <= tier && n < IN_CABIN.length; n++) {
             int[] b = IN_CABIN[n];
             for (BlockPos p : BlockPos.betweenClosed(c.offset(b[0], b[1], b[2]), c.offset(b[3], b[4], b[5]))) {
-                net.minecraft.world.level.block.state.BlockState st = inside.getBlockState(p);
-                if (st.is(net.minecraft.world.level.block.Blocks.WATER)) {
-                    inside.setBlock(p, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
-                } else if (st.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED)
-                        && st.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED)) {
-                    inside.setBlock(p, st.setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED, false), Block.UPDATE_CLIENTS);
+                BlockState st = inside.getBlockState(p);
+                if (st.is(Blocks.WATER)) {
+                    inside.setBlock(p, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+                } else if (st.hasProperty(BlockStateProperties.WATERLOGGED)
+                        && st.getValue(BlockStateProperties.WATERLOGGED)) {
+                    inside.setBlock(p, st.setValue(BlockStateProperties.WATERLOGGED, false), Block.UPDATE_CLIENTS);
                 }
             }
         }
@@ -202,8 +233,8 @@ public class SubmarineInterior {
         if (cabins.built.add(cabin)) {
             cabins.extendedTo.remove(cabin);
             cabins.setDirty();
-            inside.getEntitiesOfClass(net.minecraft.world.entity.animal.WaterAnimal.class, new net.minecraft.world.phys.AABB(corner.offset(-8, -2, -2).getCenter(), corner.offset(24, 20, 26).getCenter()))
-                    .forEach(net.minecraft.world.entity.Entity::discard);
+            inside.getEntitiesOfClass(WaterAnimal.class, new AABB(corner.offset(-8, -2, -2).getCenter(), corner.offset(24, 20, 26).getCenter()))
+                    .forEach(Entity::discard);
             inside.getStructureManager().get(CABIN).ifPresent(t -> t.placeInWorld(inside, corner, corner, isDry(), inside.random, Block.UPDATE_CLIENTS));
         }
         for (int tier = 1; tier <= submarine.getTier(); tier++) {
@@ -214,8 +245,8 @@ public class SubmarineInterior {
         cabins.setExtended(cabin, submarine.getTier());
         dryOut(inside, cabin, submarine.getTier());
         for (BlockPos h : new BlockPos[]{new BlockPos(11, 7, 7), new BlockPos(11, 7, 15), new BlockPos(3, 7, 15)}) {
-            if (inside.getBlockState(corner.offset(h)).is(net.ussm.the_shell.init.ModBlocks.REINFORCED_GLASS.get())) {
-                inside.setBlock(corner.offset(h), net.ussm.the_shell.init.ModBlocks.METAL_PLATING.get().defaultBlockState(), Block.UPDATE_CLIENTS);
+            if (inside.getBlockState(corner.offset(h)).is(ModBlocks.REINFORCED_GLASS.get())) {
+                inside.setBlock(corner.offset(h), ModBlocks.METAL_PLATING.get().defaultBlockState(), Block.UPDATE_CLIENTS);
             }
         }
         for (int pass = 0; pass < 8; pass++) mirror(inside, cabin, cabins.subs.get(cabin), cabins.extended(cabin), pass);
@@ -233,30 +264,36 @@ public class SubmarineInterior {
     }
 
     @SubscribeEvent
-    public static void useInside(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+    public static void useInside(PlayerInteractEvent.RightClickBlock event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.level().dimension() != INTERIOR) return;
-        net.minecraft.world.level.block.state.BlockState state = player.level().getBlockState(event.getPos());
+        BlockState state = player.level().getBlockState(event.getPos());
         int cabin = Math.floorDiv((int) Math.floor(player.getX()) + SPACING / 2, SPACING);
         Cabins cabins = Cabins.get(player.server);
         CompoundTag where = cabins.subs.get(cabin);
         if (where == null) return;
         int energy = where.getInt("Energy") + where.getInt("Fuel");
-        if (state.is(net.ussm.the_shell.init.ModBlocks.MACHINE.get())) {
+        if (state.is(ModBlocks.MACHINE.get())) {
             int fuel = Submarine.fuelValue(event.getItemStack());
             if (fuel <= 0) return;
             where.putInt("Fuel", where.getInt("Fuel") + fuel);
             cabins.setDirty();
             event.getItemStack().consume(1, player);
-            player.level().playSound(null, event.getPos(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, net.minecraft.sounds.SoundSource.BLOCKS, 0.6F, 1.4F);
-            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", Math.min(100, (energy + fuel) * 100 / Submarine.MAX_ENERGY)), true);
+            player.level().playSound(null, event.getPos(), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 0.6F, 1.4F);
+            player.displayClientMessage(Component.translatable("message.the_shell.submarine.energy", Math.min(100, (energy + fuel) * 100 / Submarine.MAX_ENERGY)), true);
             event.setCanceled(true);
-        } else if (state.is(net.ussm.the_shell.init.ModBlocks.CONTROL_CONSOLE.get())) {
+        } else if (state.is(ModBlocks.CONTROL_CONSOLE.get())) {
             int sx = (int) Math.floor(where.getDouble("X")), sy = (int) Math.floor(where.getDouble("Y")), sz = (int) Math.floor(where.getDouble("Z"));
             int battery = Math.min(100, energy * 100 / Submarine.MAX_ENERGY);
+            // the rift position needs the sonar, which comes with the netherite upgrade
+            if (cabins.extended(cabin) < 3) {
+                player.displayClientMessage(Component.translatable("message.the_shell.submarine.console_basic", battery), false);
+                event.setCanceled(true);
+                return;
+            }
             int[] rift = nearestRift(sx, sz);
             player.displayClientMessage(rift == null
-                    ? net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console_far", battery, sy)
-                    : net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console", battery, sy, rift[0], rift[1],
+                    ? Component.translatable("message.the_shell.submarine.console_far", battery)
+                    : Component.translatable("message.the_shell.submarine.console", battery, rift[0], rift[1],
                             (int) Math.sqrt((rift[0] - sx) * (rift[0] - sx) + (rift[1] - sz) * (rift[1] - sz))), false);
             event.setCanceled(true);
         }
@@ -267,7 +304,7 @@ public class SubmarineInterior {
             for (int dx = -r; dx <= r; dx += 8) {
                 for (int dz = -r; dz <= r; dz += 8) {
                     if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
-                    if (net.ussm.the_shell.worldgen.TestChunkGenerator.isRift(x + dx, z + dz)) return new int[]{x + dx, z + dz};
+                    if (TestChunkGenerator.isRift(x + dx, z + dz)) return new int[]{x + dx, z + dz};
                 }
             }
         }
@@ -302,13 +339,13 @@ public class SubmarineInterior {
     }
 
     @SubscribeEvent
-    public static void respawnWithoutSub(net.neoforged.neoforge.event.entity.living.LivingDeathEvent event) {
+    public static void respawnWithoutSub(LivingDeathEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.getRespawnDimension() != INTERIOR || player.getRespawnPosition() == null) return;
         int cabin = Math.floorDiv(player.getRespawnPosition().getX() + SPACING / 2, SPACING);
         CompoundTag where = Cabins.get(player.server).subs.get(cabin);
         if (where != null && !where.getBoolean("Stored") && !where.getBoolean("Gone")) return;
         player.setRespawnPosition(Level.OVERWORLD, null, 0.0F, false, false);
-        player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.respawn_lost"));
+        player.sendSystemMessage(Component.translatable("message.the_shell.submarine.respawn_lost"));
     }
 
     public static void remember(Submarine submarine) {
@@ -327,7 +364,7 @@ public class SubmarineInterior {
         }
         if (drive && level.getEntity(where.getUUID("Sub")) instanceof Submarine sub && sub.isVehicle()) {
             player.teleportTo(player.getX(), BOTTOM + 6.0, player.getZ());
-            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.occupied"), true);
+            player.displayClientMessage(Component.translatable("message.the_shell.submarine.occupied"), true);
             return;
         }
         float yaw = where.getFloat("Yaw");
@@ -341,9 +378,9 @@ public class SubmarineInterior {
         if (player.isOnPortalCooldown() || !(player.getVehicle() instanceof Submarine sub) || !sub.isAlive()) return;
         player.stopRiding();
         TO_CABIN.put(player.getUUID(), sub.getUUID());
-        if (!player.getData(net.ussm.the_shell.init.ModAttachments.CABIN_BUTTON_USED)) {
-            player.setData(net.ussm.the_shell.init.ModAttachments.CABIN_BUTTON_USED, true);
-            player.syncData(net.ussm.the_shell.init.ModAttachments.CABIN_BUTTON_USED);
+        if (!player.getData(ModAttachments.CABIN_BUTTON_USED)) {
+            player.setData(ModAttachments.CABIN_BUTTON_USED, true);
+            player.syncData(ModAttachments.CABIN_BUTTON_USED);
         }
     }
 
@@ -381,32 +418,32 @@ public class SubmarineInterior {
     }
 
     @SubscribeEvent
-    public static void refuelFromSeat(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickItem event) {
+    public static void refuelFromSeat(PlayerInteractEvent.RightClickItem event) {
         if (!(event.getEntity().getVehicle() instanceof Submarine sub)) return;
         int fuel = Submarine.fuelValue(event.getItemStack());
         if (fuel <= 0) return;
         if (!event.getLevel().isClientSide && sub.getEnergy() < Submarine.MAX_ENERGY) {
             sub.setEnergy(sub.getEnergy() + fuel);
             event.getItemStack().consume(1, event.getEntity());
-            event.getLevel().playSound(null, sub.blockPosition(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, net.minecraft.sounds.SoundSource.NEUTRAL, 0.6F, 1.4F);
-            event.getEntity().displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", sub.getEnergy() * 100 / Submarine.MAX_ENERGY), true);
+            event.getLevel().playSound(null, sub.blockPosition(), SoundEvents.BEACON_POWER_SELECT, SoundSource.NEUTRAL, 0.6F, 1.4F);
+            event.getEntity().displayClientMessage(Component.translatable("message.the_shell.submarine.energy", sub.getEnergy() * 100 / Submarine.MAX_ENERGY), true);
         }
         event.setCanceled(true);
-        event.setCancellationResult(net.minecraft.world.InteractionResult.SUCCESS);
+        event.setCancellationResult(InteractionResult.SUCCESS);
     }
 
     @SubscribeEvent
-    public static void noBreakFromSeat(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock event) {
+    public static void noBreakFromSeat(PlayerInteractEvent.LeftClickBlock event) {
         if (event.getEntity().getVehicle() instanceof Submarine) event.setCanceled(true);
     }
 
     @SubscribeEvent
-    public static void noUseFromSeat(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+    public static void noUseFromSeat(PlayerInteractEvent.RightClickBlock event) {
         if (event.getEntity().getVehicle() instanceof Submarine) event.setCanceled(true);
     }
 
     @SubscribeEvent
-    public static void noHitFromSeat(net.neoforged.neoforge.event.entity.player.AttackEntityEvent event) {
+    public static void noHitFromSeat(AttackEntityEvent event) {
         if (event.getEntity().getVehicle() instanceof Submarine) event.setCanceled(true);
     }
 
@@ -423,7 +460,7 @@ public class SubmarineInterior {
     }
 
     @SubscribeEvent
-    public static void noExplosion(net.neoforged.neoforge.event.level.ExplosionEvent.Detonate event) {
+    public static void noExplosion(ExplosionEvent.Detonate event) {
         if (event.getLevel().dimension() == INTERIOR) event.getAffectedBlocks().clear();
     }
 

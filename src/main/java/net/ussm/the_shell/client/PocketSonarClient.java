@@ -24,6 +24,7 @@ import net.ussm.the_shell.TheShell;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class PocketSonarClient {
@@ -90,7 +91,7 @@ public class PocketSonarClient {
         }
 
         static final RenderType TYPE = create("the_shell_sonar_lines", DefaultVertexFormat.POSITION_COLOR_NORMAL, VertexFormat.Mode.LINES, 1536, false, false,
-                CompositeState.builder().setShaderState(RENDERTYPE_LINES_SHADER).setLineState(new LineStateShard(java.util.OptionalDouble.of(3.0)))
+                CompositeState.builder().setShaderState(RENDERTYPE_LINES_SHADER).setLineState(new LineStateShard(OptionalDouble.of(3.0)))
                         .setLayeringState(VIEW_OFFSET_Z_LAYERING).setTransparencyState(TRANSLUCENT_TRANSPARENCY).setWriteMaskState(COLOR_WRITE)
                         .setCullState(NO_CULL).setDepthTestState(NO_DEPTH_TEST).createCompositeState(false));
     }

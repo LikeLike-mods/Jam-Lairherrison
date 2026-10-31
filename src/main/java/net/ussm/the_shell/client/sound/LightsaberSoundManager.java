@@ -24,16 +24,16 @@ public final class LightsaberSoundManager {
 
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
-        Minecraft minecraft = Minecraft.getInstance();
-        SoundManager soundManager = minecraft.getSoundManager();
+        Minecraft mc = Minecraft.getInstance();
+        SoundManager soundManager = mc.getSoundManager();
 
-        if (minecraft.level != currentLevel) {
+        if (mc.level != currentLevel) {
             ACTIVE_SOUNDS.values().forEach(soundManager::stop);
             ACTIVE_SOUNDS.clear();
-            currentLevel = minecraft.level;
+            currentLevel = mc.level;
         }
 
-        if (minecraft.level == null || minecraft.isPaused()) return;
+        if (mc.level == null || mc.isPaused()) return;
 
         ACTIVE_SOUNDS.entrySet().removeIf(entry -> {
             LightsaberHumSound sound = entry.getValue();
@@ -44,10 +44,10 @@ public final class LightsaberSoundManager {
             return false;
         });
 
-        if (minecraft.options.getSoundSourceVolume(SoundSource.MASTER) <= 0.0F
-                || minecraft.options.getSoundSourceVolume(SoundSource.PLAYERS) <= 0.0F) return;
+        if (mc.options.getSoundSourceVolume(SoundSource.MASTER) <= 0.0F
+                || mc.options.getSoundSourceVolume(SoundSource.PLAYERS) <= 0.0F) return;
 
-        for (Entity entity : minecraft.level.entitiesForRendering()) {
+        for (Entity entity : mc.level.entitiesForRendering()) {
             if (entity instanceof LivingEntity wielder && !ACTIVE_SOUNDS.containsKey(wielder)
                     && LightsaberHumSound.canPlayFor(wielder)) {
                 LightsaberHumSound sound = new LightsaberHumSound(wielder);

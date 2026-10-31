@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ServerLevel.class)
 public abstract class ServerLevelMixin {
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/SleepStatus;areEnoughDeepSleeping(ILjava/util/List;)Z"))
-    private boolean the_shell$nuitPartagee(SleepStatus status, int percentage, List<ServerPlayer> players) {
+    private boolean the_shell$sharedNight(SleepStatus status, int percentage, List<ServerPlayer> players) {
         return !SleepEvents.SAME_WORLD.contains(((ServerLevel) (Object) this).dimension()) && status.areEnoughDeepSleeping(percentage, players);
     }
 }

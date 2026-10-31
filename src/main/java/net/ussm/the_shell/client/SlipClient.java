@@ -2,6 +2,7 @@ package net.ussm.the_shell.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -16,7 +17,7 @@ import net.ussm.the_shell.network.SlipPayload;
 public class SlipClient {
     private static boolean released;
 
-    public static void slip(net.minecraft.world.entity.player.Player player) {
+    public static void slip(Player player) {
         player.setData(ModAttachments.SLIPPED, true);
         released = false;
         player.setXRot(-90.0F);

@@ -54,9 +54,8 @@ public class AbyssChunkGenerator extends ChunkGenerator {
         };
     }
 
-    //gives the material based on the coordinates
     private static BlockState at(int x, int y, int z, int floor, int ceiling, boolean rift, AbyssTerrain.Zone zone) {
-        if (y >= AbyssTerrain.TOP) return net.ussm.the_shell.init.ModBlocks.ABYSSAL_VOID.get().defaultBlockState();
+        if (y >= AbyssTerrain.TOP) return ModBlocks.ABYSSAL_VOID.get().defaultBlockState();
         if (y <= AbyssTerrain.MIN_Y) return Blocks.BEDROCK.defaultBlockState();
         if (y <= floor) {
             if (y > floor - 3) return surface(zone);

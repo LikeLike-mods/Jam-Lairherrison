@@ -12,7 +12,6 @@ import net.ussm.the_shell.init.ModSounds;
 import net.ussm.the_shell.items.LightsaberItem;
 
 final class LightsaberHumSound extends AbstractTickableSoundInstance {
-    private static final double AUDIBLE_DISTANCE_SQUARED = 16.0 * 16.0;
     private final LivingEntity wielder;
 
     LightsaberHumSound(LivingEntity wielder) {
@@ -28,7 +27,7 @@ final class LightsaberHumSound extends AbstractTickableSoundInstance {
         Minecraft minecraft = Minecraft.getInstance();
         Entity listener = minecraft.getCameraEntity();
         return minecraft.level == wielder.level() && listener != null
-                && listener.distanceToSqr(wielder) < AUDIBLE_DISTANCE_SQUARED
+                && listener.distanceToSqr(wielder) < 256.0
                 && !wielder.isRemoved() && wielder.isAlive() && !wielder.isSilent()
                 && !(wielder instanceof Player player && player.isSpectator())
                 && (isActiveLightsaber(wielder.getMainHandItem()) || isActiveLightsaber(wielder.getOffhandItem()));
@@ -49,7 +48,6 @@ final class LightsaberHumSound extends AbstractTickableSoundInstance {
             stop();
             return;
         }
-
         updatePosition();
     }
 

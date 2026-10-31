@@ -1,7 +1,9 @@
 package net.ussm.the_shell.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -10,6 +12,7 @@ import net.minecraft.util.Mth;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.client.EyesGlowLayer;
 import net.ussm.the_shell.entites.Submarine;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
@@ -28,18 +31,17 @@ public class SubmarineRenderer extends GeoEntityRenderer<Submarine> {
 
     @Override
     public void render(Submarine submarine, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+        Minecraft mc = Minecraft.getInstance();
         if (mc.options.getCameraType().isFirstPerson() && submarine.hasPassenger(mc.getCameraEntity())) return;
         super.render(submarine, entityYaw, partialTick, poseStack, bufferSource, packedLight);
-
     }
 
     @Override
-    public void preRender(PoseStack poseStack, Submarine submarine, software.bernie.geckolib.cache.object.BakedGeoModel model, MultiBufferSource bufferSource,
-                          com.mojang.blaze3d.vertex.VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
-        for (int altarTier = 1; altarTier <= 3; altarTier++) {
-            boolean cache = submarine.getTier() < altarTier;
-            model.getBone("tier" + altarTier).ifPresent(bone -> bone.setHidden(cache));
+    public void preRender(PoseStack poseStack, Submarine submarine, BakedGeoModel model, MultiBufferSource bufferSource,
+                          VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
+        for (int tier = 1; tier <= 3; tier++) {
+            boolean hide = submarine.getTier() < tier;
+            model.getBone("tier" + tier).ifPresent(bone -> bone.setHidden(hide));
         }
         super.preRender(poseStack, submarine, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
     }

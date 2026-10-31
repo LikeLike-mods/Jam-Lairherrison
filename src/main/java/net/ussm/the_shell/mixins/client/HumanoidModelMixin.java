@@ -21,7 +21,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
     @Shadow @Final public ModelPart head;
 
     @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At("TAIL"))
-    private void the_shell$pilote(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
+    private void the_shell$pilot(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
         if (!(entity.getVehicle() instanceof Submarine sub)) return;
         Vec3 v = sub.getDeltaMovement();
         Vec3 ahead = Vec3.directionFromRotation(0.0F, sub.getYRot());

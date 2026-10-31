@@ -1,37 +1,46 @@
 package net.ussm.the_shell.events;
 
-import net.minecraft.network.chat.Component;
-import net.ussm.the_shell.init.ModBlocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.blocks.abyss.AbyssLightBlock;
 import net.ussm.the_shell.entites.Submarine;
+import net.ussm.the_shell.init.ModAttachments;
+import net.ussm.the_shell.init.ModBlocks;
 import net.ussm.the_shell.init.ModItems;
+import net.ussm.the_shell.items.DivingBootsItem;
 import net.ussm.the_shell.worldgen.TestChunkGenerator;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.WeakHashMap;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class DeepSeaEvents {
@@ -44,7 +53,7 @@ public class DeepSeaEvents {
     public static void jump(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
         if (!player.onGround() || !player.isInWater() || !isJumping(player)) return;
-        if (!net.ussm.the_shell.items.DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET))) return;
+        if (!DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET))) return;
         Vec3 v = player.getDeltaMovement();
         player.setDeltaMovement(v.x, 0.34, v.z);
         JUMP_TICK.put(player, player.tickCount);
@@ -54,23 +63,21 @@ public class DeepSeaEvents {
     public static void tick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         boolean inWater = player.isInWater();
-        heavyBoots(player, inWater && net.ussm.the_shell.items.DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET)));
+        heavyBoots(player, inWater && DivingBootsItem.isWeighted(player.getItemBySlot(EquipmentSlot.FEET)));
         if (inWater) ventLift(player);
-
         if (!(player instanceof ServerPlayer serverPlayer)) return;
-
         if (player.isEyeInFluid(FluidTags.WATER)) breathe(player);
         refillOxygen(player, inWater && player.level().getBlockState(player.blockPosition().below()).is(ModBlocks.AIR_VENT.get()));
 
         if (player.tickCount % 20 == 0) pressure(serverPlayer, inWater);
     }
 
-    private static final java.lang.reflect.Field JUMPING = jumpingField();
-    private static final Map<Player, Integer> JUMP_TICK = new java.util.WeakHashMap<>();
+    private static final Field JUMPING = jumpingField();
+    private static final Map<Player, Integer> JUMP_TICK = new WeakHashMap<>();
 
-    private static java.lang.reflect.Field jumpingField() {
+    private static Field jumpingField() {
         try {
-            java.lang.reflect.Field f = net.minecraft.world.entity.LivingEntity.class.getDeclaredField("jumping");
+            Field f = LivingEntity.class.getDeclaredField("jumping");
             f.setAccessible(true);
             return f;
         } catch (ReflectiveOperationException e) {
@@ -118,11 +125,9 @@ public class DeepSeaEvents {
     }
 
     private static void breathe(Player player) {
-
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
-
         if (head.is(ModItems.DIVING_HELMET.get()) || head.is(ModItems.DIVING_ABYSS_HELMET.get())) {
-            int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+            int oxygen = player.getData(ModAttachments.OXYGEN);
             if (oxygen > 0) {
                 player.setAirSupply(player.getMaxAirSupply());
                 if (!(player.getVehicle() instanceof Submarine)) setOxygen(player, oxygen - 1);
@@ -133,35 +138,35 @@ public class DeepSeaEvents {
     }
 
     private static void refillOxygen(Player player, boolean bubbles) {
-        int oxygen = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
-        if (oxygen >= net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN) return;
+        int oxygen = player.getData(ModAttachments.OXYGEN);
+        if (oxygen >= ModAttachments.MAX_OXYGEN) return;
         if (bubbles || player.getVehicle() instanceof Submarine) setOxygen(player, oxygen + 24);
         else if (!player.isEyeInFluid(FluidTags.WATER) && player.tickCount % 3 == 0) setOxygen(player, oxygen + 4);
     }
 
     @SubscribeEvent
-    public static void useTank(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+    public static void useTank(PlayerInteractEvent.RightClickBlock event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || !player.level().getBlockState(event.getPos()).is(ModBlocks.TANK.get())) return;
-        giveOxygen(player, net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN);
+        giveOxygen(player, ModAttachments.MAX_OXYGEN);
         if (event.getItemStack().is(ModItems.OXYGEN_BOTTLE.get())) event.getItemStack().setDamageValue(0);
-        player.level().playSound(null, event.getPos(), net.minecraft.sounds.SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 0.9F);
+        player.level().playSound(null, event.getPos(), SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.BLOCKS, 1.0F, 0.9F);
         player.displayClientMessage(Component.translatable("message.the_shell.submarine.oxygen"), true);
         event.setCanceled(true);
     }
 
     public static void giveOxygen(Player player, int amount) {
-        setOxygen(player, player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN) + amount);
+        setOxygen(player, player.getData(ModAttachments.OXYGEN) + amount);
     }
 
     private static void setOxygen(Player player, int oxygen) {
-        oxygen = Math.max(0, Math.min(net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN, oxygen));
-        int old = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
-        player.setData(net.ussm.the_shell.init.ModAttachments.OXYGEN, oxygen);
-        if (old / 40 != oxygen / 40 || oxygen == 0) player.syncData(net.ussm.the_shell.init.ModAttachments.OXYGEN);
+        oxygen = Math.max(0, Math.min(ModAttachments.MAX_OXYGEN, oxygen));
+        int old = player.getData(ModAttachments.OXYGEN);
+        player.setData(ModAttachments.OXYGEN, oxygen);
+        if (old / 40 != oxygen / 40 || oxygen == 0) player.syncData(ModAttachments.OXYGEN);
     }
 
     @SubscribeEvent
-    public static void subShield(net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent event) {
+    public static void subShield(LivingIncomingDamageEvent event) {
         if (event.getEntity().getVehicle() instanceof Submarine && event.getSource().getEntity() != null) event.setCanceled(true);
     }
 
@@ -193,10 +198,8 @@ public class DeepSeaEvents {
         int level = pressureLevel(player, inWater);
         int last = LAST_LEVEL.getOrDefault(player.getUUID(), 0);
         LAST_LEVEL.put(player.getUUID(), level);
-
         if (level >= 3 && last < 3) player.displayClientMessage(Component.translatable("pressure.the_shell.crushed"), true);
         if (level == 5 && last < 5) player.displayClientMessage(Component.translatable("pressure.the_shell.crushed_hard"), true);
-
         if (level >= 1) player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0, true, false));
         if (level >= 2) {
             player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, level >= 4 ? 1 : 0, true, false));

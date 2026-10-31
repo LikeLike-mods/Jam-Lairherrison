@@ -38,7 +38,7 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
             {1, 7, 3, 1, 0}, {-1, 7, 4, 1, 0}, {0, 7, 4, 1, 0}, {1, 7, 4, 1, 0}, {-1, 7, 5, 1, 0}, {0, 7, 5, 1, 0},
             {1, 7, 5, 1, 0},
     };
-    private static final int STRETCH_FROM = 1;   // the medium palm's trunk gets longer from this height
+    private static final int STRETCH_FROM = 1; // medium trunk gets longer from this height
 
     private final boolean vines;
 
@@ -46,7 +46,6 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
         super(codec);
         this.vines = vines;
     }
-
 
     private static List<int[]> medium(RandomSource random) {
         int extra = random.nextInt(3);
@@ -82,7 +81,7 @@ public class PalmFeature extends Feature<NoneFeatureConfiguration> {
                 if (dx != 0 || dz != 0) shape.add(new int[]{tx + dx, ty, tz + dz, LEAVES, 0});
             }
         }
-        for (Direction d : Direction.Plane.HORIZONTAL) {   // the arms of the star
+        for (Direction d : Direction.Plane.HORIZONTAL) {
             shape.add(new int[]{tx + 2 * d.getStepX(), ty, tz + 2 * d.getStepZ(), LEAVES, 0});
             shape.add(new int[]{tx + d.getStepX(), ty + 1, tz + d.getStepZ(), LEAVES, 0});
         }
