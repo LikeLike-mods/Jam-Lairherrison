@@ -46,7 +46,7 @@ public class ReptileMoveControl extends MoveControl {
         float speed = (float) (speedModifier * mob.getAttributeValue(Attributes.MOVEMENT_SPEED))
                 * (water ? waterSpeed : landSpeed) * forward;
         mob.setSpeed(speed);
-        mob.setYya(0.0F);
+        mob.setYya(water ? (dy < -0.6 ? -1.0F : dy > 0.6 ? 1.0F : 0.0F) : 0.0F);
         if (!water && dy > mob.maxUpStep() && flat < Math.max(1.0F, mob.getBbWidth() * mob.getBbWidth())) {
             mob.getJumpControl().jump();
         }

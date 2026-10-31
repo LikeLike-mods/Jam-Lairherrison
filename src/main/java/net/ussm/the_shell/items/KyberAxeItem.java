@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
+import net.ussm.the_shell.events.TempleProtection;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -76,8 +77,8 @@ public class KyberAxeItem extends LightsaberItem {
         }
         logs.remove(start);
         player.getMainHandItem().hurtAndBreak(Math.max(1, logs.size() / 2), player, EquipmentSlot.MAINHAND);
-        for (BlockPos p : logs) level.destroyBlock(p, true, player);
-        for (BlockPos p : leaves) level.destroyBlock(p, true, player);
+        for (BlockPos p : logs) if (player.isCreative() || !TempleProtection.isLocked(level, p)) level.destroyBlock(p, true, player);
+        for (BlockPos p : leaves) if (player.isCreative() || !TempleProtection.isLocked(level, p)) level.destroyBlock(p, true, player);
         level.playSound(null, start, ModSounds.LIGHTSABER_EXTINGUISH.get(), SoundSource.PLAYERS, 1.0F, 0.6F);
     }
 }

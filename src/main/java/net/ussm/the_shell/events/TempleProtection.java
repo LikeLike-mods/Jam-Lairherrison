@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -131,7 +132,7 @@ public class TempleProtection {
     }
 
     // locked until every altar of the temple is solved; a temple without altars stays locked
-    private static boolean isLocked(ServerLevel level, BlockPos pos) {
+    public static boolean isLocked(ServerLevel level, BlockPos pos) {
         if (!level.getGameRules().getBoolean(PROTECTION)) return false;
         StructureStart temple = templeAt(level, pos);
         if (temple == null || unlocked(level).temples.contains(temple.getChunkPos().toLong())) return false;
@@ -159,13 +160,13 @@ public class TempleProtection {
         });
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void blockBreak(BlockEvent.BreakEvent event) {
         if (event.getState().is(BREAKABLE)) return;
         if (event.getLevel() instanceof ServerLevel level && refuse(event.getPlayer(), level, event.getPos())) event.setCanceled(true);
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void blockPlace(BlockEvent.EntityPlaceEvent event) {
         if (event.getLevel() instanceof ServerLevel level && event.getEntity() instanceof Player player && refuse(player, level, event.getPos())) event.setCanceled(true);
     }

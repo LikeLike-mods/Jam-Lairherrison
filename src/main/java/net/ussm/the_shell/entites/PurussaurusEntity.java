@@ -195,7 +195,8 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
             moveRelative(getSpeed(), new Vec3(input.x, 0, input.z));
             Vec3 motion = getDeltaMovement();
             double rise = Mth.clamp((waterSurface() - getBbHeight() * 0.65 - getY()) * 0.1, -0.04, 0.03);
-            setDeltaMovement(motion.x, Mth.lerp(0.3, motion.y, rise), motion.z);
+            double vertical = input.y != 0 ? input.y * 0.06 : rise;
+            setDeltaMovement(motion.x, Mth.lerp(0.3, motion.y, vertical), motion.z);
             move(MoverType.SELF, getDeltaMovement());
             setDeltaMovement(getDeltaMovement().multiply(0.9, 0.8, 0.9));
         } else {
