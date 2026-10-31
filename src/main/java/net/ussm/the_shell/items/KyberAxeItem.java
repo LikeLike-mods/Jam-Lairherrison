@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -74,6 +75,7 @@ public class KyberAxeItem extends LightsaberItem {
             edge = next;
         }
         logs.remove(start);
+        player.getMainHandItem().hurtAndBreak(Math.max(1, logs.size() / 2), player, EquipmentSlot.MAINHAND);
         for (BlockPos p : logs) level.destroyBlock(p, true, player);
         for (BlockPos p : leaves) level.destroyBlock(p, true, player);
         level.playSound(null, start, ModSounds.LIGHTSABER_EXTINGUISH.get(), SoundSource.PLAYERS, 1.0F, 0.6F);

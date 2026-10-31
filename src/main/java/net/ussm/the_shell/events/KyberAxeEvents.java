@@ -5,6 +5,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
+import net.neoforged.neoforge.event.GrindstoneEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.items.KyberAxeItem;
@@ -25,5 +27,16 @@ public class KyberAxeEvents {
         } finally {
             felling = false;
         }
+    }
+
+    // kyber tools cannot be repaired the usual ways, only with a kyber crystal in the inventory
+    @SubscribeEvent
+    public static void noAnvil(AnvilUpdateEvent event) {
+        if (event.getLeft().getItem() instanceof LightsaberItem || event.getRight().getItem() instanceof LightsaberItem) event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void noGrindstone(GrindstoneEvent.OnPlaceItem event) {
+        if (event.getTopItem().getItem() instanceof LightsaberItem || event.getBottomItem().getItem() instanceof LightsaberItem) event.setCanceled(true);
     }
 }

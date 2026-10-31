@@ -283,6 +283,7 @@
   "key.categories.the_shell": "The Shell",
   "key.the_shell.drop_weight": "Drop boot weight",
 
+  "message.the_shell.kyber.exhausted": "Out of energy: right-click it with a kyber crystal in the inventory to recharge.",
   "message.the_shell.kyber_axe.single": "Mode: one block at a time",
   "message.the_shell.kyber_axe.tree": "Mode: whole tree",
   "message.the_shell.notch.correct.1": "Well done! The first seal opens.",
@@ -431,6 +432,7 @@
   "tooltip.the_shell.kyber_crystal.details": "A rare, energy-filled crystal from the abyss. A single one fully recharges the submarine's battery. It is also used to craft the pocket sonar, the air bubble and the lightsabers.",
   "tooltip.the_shell.kyber_sickle.details": "The sickle form of the kyber axe. Shift + right-click turns it back into the axe.",
   "tooltip.the_shell.lightsaber.change_mode": "Shift + Right Click: change lightsaber mode",
+  "tooltip.the_shell.lightsaber.recharge": "Durability 4000, cannot be repaired. Right-click it in the inventory with a kyber crystal: +750.",
   "tooltip.the_shell.machine.details": "The submarine's engine, in its cabin: right-click with coal, redstone or kyber to recharge the battery without going outside.",
   "tooltip.the_shell.notch_altar.details": "Right-click: Notch asks you a Minecraft question in the chat. Answer by typing in the chat (others don't see your answer). Right answer: the altar lights up and the seals of its level open. In creative, sneak + right-click changes the level (1 easy, 2 medium, 3 hard).",
   "tooltip.the_shell.oxygen_bottle.details": "4 one-minute charges of oxygen for the diving suit. Right-click to use one. Refills completely at a tank.",

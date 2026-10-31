@@ -269,7 +269,7 @@ public class ModItems {
                 .rarity(Rarity.EPIC)
                 .fireResistant()
                 .stacksTo(1)
-                .component(DataComponents.UNBREAKABLE, new Unbreakable(true));
+                .durability(LightsaberItem.MAX_USES + 1);
     }
 
 

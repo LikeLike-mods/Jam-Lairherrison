@@ -12,6 +12,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.ussm.the_shell.init.ModItems;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -87,10 +92,53 @@ public class LightsaberItem extends Item implements GeoItem {
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
         tooltip.add(Component.translatable("tooltip.the_shell.lightsaber.change_mode").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.the_shell.lightsaber.recharge").withStyle(ChatFormatting.DARK_AQUA));
+    }
+
+    public static final int MAX_USES = 4000;
+    public static final int RECHARGE = 750;
+
+    // at 0 the blade goes out by itself (the item keeps 1 hidden point so it never breaks)
+    public static boolean isExhausted(ItemStack stack) {
+        return stack.getDamageValue() >= MAX_USES;
     }
 
     public static boolean isActive(ItemStack stack) {
-        return stack.getOrDefault(ModComponents.ACTIVE, true);
+        return !isExhausted(stack) && stack.getOrDefault(ModComponents.ACTIVE, true);
+    }
+
+    private static void warnIfExhausted(ItemStack stack, LivingEntity user) {
+        if (isExhausted(stack) && user instanceof Player player)
+            player.displayClientMessage(Component.translatable("message.the_shell.kyber.exhausted"), true);
+    }
+
+    @Override
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<Item> onBroken) {
+        return Math.min(amount, Math.max(0, MAX_USES - stack.getDamageValue()));
+    }
+
+    @Override
+    public boolean isRepairable(ItemStack stack) {
+        return false;
+    }
+
+    // right-click in the inventory with a kyber crystal on the cursor
+    @Override
+    public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
+        if (action != ClickAction.SECONDARY || !other.is(ModItems.KYBER_CRYSTAL.get()) || stack.getDamageValue() == 0) return false;
+        stack.setDamageValue(Math.max(0, stack.getDamageValue() - RECHARGE));
+        other.shrink(1);
+        player.playSound(ModSounds.LIGHTSABER_IGNITE.get(), 0.6F, 1.2F);
+        return true;
+    }
+
+    @Override
+    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miner) {
+        if (!level.isClientSide && isActive(stack) && state.getDestroySpeed(level, pos) != 0.0F) {
+            stack.hurtAndBreak(1, miner, EquipmentSlot.MAINHAND);
+            warnIfExhausted(stack, miner);
+        }
+        return false;
     }
 
     @Override
@@ -110,6 +158,10 @@ public class LightsaberItem extends Item implements GeoItem {
         }
 
         boolean active = !isActive(stack);
+        if (active && isExhausted(stack)) {
+            player.displayClientMessage(Component.translatable("message.the_shell.kyber.exhausted"), true);
+            return InteractionResultHolder.consume(stack);
+        }
         stack.set(ModComponents.ACTIVE, active);
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
                 active ? ModSounds.LIGHTSABER_IGNITE.get() : ModSounds.LIGHTSABER_EXTINGUISH.get(),
@@ -145,6 +197,10 @@ public class LightsaberItem extends Item implements GeoItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (isActive(stack)) {
+            stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
+            warnIfExhausted(stack, attacker);
+        }
         return true;
     }
 
