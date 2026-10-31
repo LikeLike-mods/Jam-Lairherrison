@@ -15,18 +15,31 @@ public final class AbyssTerrain {
 
     public enum Zone { PLAINS, VENTS, TRENCH, REEF }
 
-    private static final FastNoiseLite ROLL = noise(SEED + 101, 0.008f, FastNoiseLite.FractalType.FBm, 3);
-    private static final FastNoiseLite BUMPS = noise(SEED + 102, 0.04f, FastNoiseLite.FractalType.FBm, 2);
-    private static final FastNoiseLite TRENCH = noise(SEED + 103, 0.0016f, FastNoiseLite.FractalType.Ridged, 1);
-    private static final FastNoiseLite REGION = noise(SEED + 104, 0.002f, FastNoiseLite.FractalType.FBm, 2);
-    private static final FastNoiseLite ROOF = noise(SEED + 105, 0.01f, FastNoiseLite.FractalType.FBm, 3);
-    private static final FastNoiseLite DRIP = noise(SEED + 106, 0.08f, FastNoiseLite.FractalType.None, 1);
-    private static final FastNoiseLite PLATEAU = noise(SEED + 107, 0.0035f, FastNoiseLite.FractalType.FBm, 3);
+    private static volatile FastNoiseLite ROLL = noise(SEED + 101, 0.008f, FastNoiseLite.FractalType.FBm, 3);
+    private static volatile FastNoiseLite BUMPS = noise(SEED + 102, 0.04f, FastNoiseLite.FractalType.FBm, 2);
+    private static volatile FastNoiseLite TRENCH = noise(SEED + 103, 0.0016f, FastNoiseLite.FractalType.Ridged, 1);
+    private static volatile FastNoiseLite REGION = noise(SEED + 104, 0.002f, FastNoiseLite.FractalType.FBm, 2);
+    private static volatile FastNoiseLite ROOF = noise(SEED + 105, 0.01f, FastNoiseLite.FractalType.FBm, 3);
+    private static volatile FastNoiseLite DRIP = noise(SEED + 106, 0.08f, FastNoiseLite.FractalType.None, 1);
+    private static volatile FastNoiseLite PLATEAU = noise(SEED + 107, 0.0035f, FastNoiseLite.FractalType.FBm, 3);
     // Peaks with worley noise
-    private static final FastNoiseLite PEAK_DIST = cellular(SEED + 108, FastNoiseLite.CellularReturnType.Distance);
-    private static final FastNoiseLite PEAK_SIZE = cellular(SEED + 108, FastNoiseLite.CellularReturnType.CellValue);
+    private static volatile FastNoiseLite PEAK_DIST = cellular(SEED + 108, FastNoiseLite.CellularReturnType.Distance);
+    private static volatile FastNoiseLite PEAK_SIZE = cellular(SEED + 108, FastNoiseLite.CellularReturnType.CellValue);
 
     private AbyssTerrain() {
+    }
+
+    // called when the world seed is known
+    public static void reseed() {
+        ROLL = noise(SEED + 101, 0.008f, FastNoiseLite.FractalType.FBm, 3);
+        BUMPS = noise(SEED + 102, 0.04f, FastNoiseLite.FractalType.FBm, 2);
+        TRENCH = noise(SEED + 103, 0.0016f, FastNoiseLite.FractalType.Ridged, 1);
+        REGION = noise(SEED + 104, 0.002f, FastNoiseLite.FractalType.FBm, 2);
+        ROOF = noise(SEED + 105, 0.01f, FastNoiseLite.FractalType.FBm, 3);
+        DRIP = noise(SEED + 106, 0.08f, FastNoiseLite.FractalType.None, 1);
+        PLATEAU = noise(SEED + 107, 0.0035f, FastNoiseLite.FractalType.FBm, 3);
+        PEAK_DIST = cellular(SEED + 108, FastNoiseLite.CellularReturnType.Distance);
+        PEAK_SIZE = cellular(SEED + 108, FastNoiseLite.CellularReturnType.CellValue);
     }
 
     private static FastNoiseLite noise(int seed, float freq, FastNoiseLite.FractalType fractal, int octaves) {

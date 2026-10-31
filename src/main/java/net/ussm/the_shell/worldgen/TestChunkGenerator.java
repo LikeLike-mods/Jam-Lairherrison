@@ -101,12 +101,25 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     public static final int SEA = 100;
     public static final int ABYSS = SEA - 64;
-    public static final int SEED = 200;
+    // 200 until the world seed is known
+    public static volatile int SEED = 200;
 
     // Rifts
     public static final int RIFT_DOWN = -118;
-    private static final FastNoiseLite RIFT_LINES = riftNoise(SEED + 10, 0.004f, FastNoiseLite.FractalType.Ridged);
-    private static final FastNoiseLite RIFT_PIECES = riftNoise(SEED + 11, 0.004f, FastNoiseLite.FractalType.FBm);
+    private static volatile FastNoiseLite RIFT_LINES = riftNoise(SEED + 10, 0.004f, FastNoiseLite.FractalType.Ridged);
+    private static volatile FastNoiseLite RIFT_PIECES = riftNoise(SEED + 11, 0.004f, FastNoiseLite.FractalType.FBm);
+
+    // every world gets its own islands and rifts, from its seed
+    public static void reseed(long worldSeed) {
+        reseed((int) (worldSeed ^ (worldSeed >>> 32)));
+    }
+
+    public static void reseed(int seed) {
+        SEED = seed;
+        RIFT_LINES = riftNoise(SEED + 10, 0.004f, FastNoiseLite.FractalType.Ridged);
+        RIFT_PIECES = riftNoise(SEED + 11, 0.004f, FastNoiseLite.FractalType.FBm);
+        AbyssTerrain.reseed();
+    }
 
     private static FastNoiseLite riftNoise(int seed, float freq, FastNoiseLite.FractalType type) {
         FastNoiseLite n = new FastNoiseLite(seed);
