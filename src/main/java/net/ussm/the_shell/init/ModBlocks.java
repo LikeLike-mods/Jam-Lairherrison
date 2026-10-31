@@ -1,5 +1,7 @@
 package net.ussm.the_shell.init;
 
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -105,26 +107,40 @@ public class ModBlocks {
                     Block.box(4, 0, 4, 12, 5, 12)));
 
     public static final DeferredBlock<Block> AIR_BUBBLE = registerBlock("air_bubble",
-            () -> new AirBubbleBlock(BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.GLASS).noOcclusion().lightLevel(s -> 6)));
+            () -> new AirBubbleBlock(BlockBehaviour.Properties.of()
+                    .strength(0.5f)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .lightLevel(s -> 6)));
+
     public static final DeferredBlock<Block> SUBMARINE_WINDOW = registerBlock("submarine_window",
-            () -> new SubmarineWindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).lightLevel(s -> 5)));
+            () -> new SubmarineWindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .lightLevel(s -> 5)));
+
 
     public static final DeferredBlock<Block> ABYSSAL_COAL_ORE = registerBlock("abyssal_coal_ore",
-            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COAL_ORE)));
+            () -> new DropExperienceBlock(UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COAL_ORE)));
+
     public static final DeferredBlock<Block> ABYSSAL_IRON_ORE = registerBlock("abyssal_iron_ore",
-            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)));
+            () -> new DropExperienceBlock(ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)));
+
     public static final DeferredBlock<Block> ABYSSAL_COPPER_ORE = registerBlock("abyssal_copper_ore",
-            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE)));
+            () -> new DropExperienceBlock(ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE)));
+
     public static final DeferredBlock<Block> ABYSSAL_GOLD_ORE = registerBlock("abyssal_gold_ore",
-            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_GOLD_ORE)));
+            () -> new DropExperienceBlock(ConstantInt.of(0), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_GOLD_ORE)));
+
     public static final DeferredBlock<Block> ABYSSAL_REDSTONE_ORE = registerBlock("abyssal_redstone_ore",
             () -> new RedStoneOreBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_REDSTONE_ORE)));
+
     public static final DeferredBlock<Block> ABYSSAL_LAPIS_ORE = registerBlock("abyssal_lapis_ore",
-            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(2, 5), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_LAPIS_ORE)));
+            () -> new DropExperienceBlock(UniformInt.of(2, 5), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_LAPIS_ORE)));
+
     public static final DeferredBlock<Block> ABYSSAL_DIAMOND_ORE = registerBlock("abyssal_diamond_ore",
-            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(3, 7), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+            () -> new DropExperienceBlock(UniformInt.of(3, 7), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+
     public static final DeferredBlock<Block> ABYSSAL_EMERALD_ORE = registerBlock("abyssal_emerald_ore",
-            () -> new DropExperienceBlock(net.minecraft.util.valueproviders.UniformInt.of(3, 7), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_EMERALD_ORE)));
+            () -> new DropExperienceBlock(UniformInt.of(3, 7), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_EMERALD_ORE)));
 
     public static final DeferredBlock<Block> KYBER_ORE = registerBlock("kyber_ore",
             () -> new Block(BlockBehaviour.Properties.of()
@@ -211,14 +227,32 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)));
 
     public static final DeferredBlock<AbyssSkullBlock> ABYSS_SKULL = registerBlock("abyss_skull",
-            () -> new AbyssSkullBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(1.0f)
-                    .sound(SoundType.BONE_BLOCK).noOcclusion().pushReaction(PushReaction.DESTROY)));
+            () -> new AbyssSkullBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.SAND)
+                    .strength(1.0f)
+                    .sound(SoundType.BONE_BLOCK)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+
     public static final DeferredBlock<AbyssSkullBlock> LIVING_ABYSS_SKULL = registerBlock("living_abyss_skull",
-            () -> new AbyssSkullBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(1.0f)
-                    .sound(SoundType.MUD).lightLevel(state -> 15).noOcclusion().pushReaction(PushReaction.DESTROY)));
+            () -> new AbyssSkullBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLUE)
+                    .strength(1.0f)
+                    .sound(SoundType.MUD)
+                    .lightLevel(state -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+
     public static final DeferredBlock<AbyssLightBlock> ABYSS_LIGHT = BLOCKS.register("abyss_light",
-            () -> new AbyssLightBlock(BlockBehaviour.Properties.of().replaceable().noCollission().noLootTable().noOcclusion()
-                    .instabreak().lightLevel(state -> 15).pushReaction(PushReaction.DESTROY)));
+            () -> new AbyssLightBlock(BlockBehaviour.Properties.of()
+                    .replaceable()
+                    .noCollission()
+                    .noLootTable()
+                    .noOcclusion()
+                    .instabreak()
+                    .lightLevel(state -> 15)
+                    .pushReaction(PushReaction.DESTROY)));
+
     public static final DeferredBlock<DryGrassBlock> DRY_GRASS = registerBlock("dry_grass",
             () -> new DryGrassBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.SAND)
@@ -332,12 +366,19 @@ public class ModBlocks {
             () -> new ButtonBlock(ModWoodTypes.BANANA_SET, 30, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_BUTTON)));
 
     public static final DeferredBlock<Block> NOTCH_ALTAR = registerBlock("notch_altar",
-            () -> new net.ussm.the_shell.blocks.NotchAltarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).strength(-1.0F, 3600000.0F).noOcclusion()
-                    .lightLevel(s -> s.getValue(net.ussm.the_shell.blocks.NotchAltarBlock.SOLVED) ? 13 : 5)));
+            () -> new NotchAltarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS)
+                    .strength(-1.0F, 3600000.0F)
+                    .noOcclusion()
+                    .lightLevel(s -> s.getValue(NotchAltarBlock.SOLVED) ? 13 : 5)));
+
     public static final DeferredBlock<Block> TEMPLE_SEAL = registerBlock("temple_seal",
-            () -> new net.ussm.the_shell.blocks.TempleSealBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSSY_STONE_BRICKS).strength(-1.0F, 3600000.0F).lightLevel(s -> 4)));
+            () -> new TempleSealBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSSY_STONE_BRICKS)
+                    .strength(-1.0F, 3600000.0F)
+                    .lightLevel(s -> 4)));
+
     public static final DeferredBlock<Block> TEMPLE_PEDESTAL = registerBlock("temple_pedestal",
-            () -> new net.ussm.the_shell.blocks.TemplePedestalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).noOcclusion()));
+            () -> new TemplePedestalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS)
+                    .noOcclusion()));
 
     public static final DeferredBlock<Block> DATE_PALM_LOG = registerBlock("date_palm_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).strength(2f, 3f).ignitedByLava().sound(SoundType.WOOD)));
@@ -576,6 +617,7 @@ public class ModBlocks {
                     .strength(3f, 6f)
                     .noOcclusion()
                     .lightLevel(s -> s.getValue(EmergencyLightBlock.ALARM) && s.getValue(EmergencyLightBlock.FLASH) ? 12 : 0)));
+
     public static final DeferredBlock<IndustrialLampBlock> BROKEN_INDUSTRIAL_LAMP = registerBlock("broken_industrial_lamp",
             () -> new IndustrialLampBlock(metal()
                     .strength(3f, 6f)
