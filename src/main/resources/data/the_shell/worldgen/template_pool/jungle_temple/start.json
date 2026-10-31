@@ -14,7 +14,16 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "the_shell:temple/jungle_temple",
+        "location": "the_shell:temple/jungle_temple_notch_harming",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:temple/jungle_temple_notch_poison",
         "projection": "rigid",
         "processors": "minecraft:empty"
       }
