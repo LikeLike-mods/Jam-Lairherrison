@@ -2,5 +2,13 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "the_shell:item/conch"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "damage": 0.95
+      },
+      "model": "the_shell:item/conch_broken"
+    }
+  ]
 }
