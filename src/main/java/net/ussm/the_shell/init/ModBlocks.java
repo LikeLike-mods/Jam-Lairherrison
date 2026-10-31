@@ -115,6 +115,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> SUBMARINE_WINDOW = registerBlock("submarine_window",
             () -> new SubmarineWindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .strength(-1.0F, 3600000.0F)
                     .lightLevel(s -> 5)));
 
 

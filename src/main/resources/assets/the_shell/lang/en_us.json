@@ -307,6 +307,7 @@
   "message.the_shell.seal.tier.2": "Level 2 seal (also opens with redstone)",
   "message.the_shell.seal.tier.3": "Level 3 seal (also opens with redstone)",
   "message.the_shell.submarine.console": "Battery %s %% · height Y %s · nearest rift at %s, %s (%s blocks)",
+  "message.the_shell.submarine.console_basic": "Battery %s %% · height Y %s · no sonar: the netherite upgrade is needed to locate rifts",
   "message.the_shell.submarine.console_far": "Battery %s %% · height Y %s · no rift within 600 blocks",
   "message.the_shell.submarine.empty": "Battery empty! Recharge it (coal, redstone, kyber)",
   "message.the_shell.submarine.energy": "Submarine battery: %s%%",
