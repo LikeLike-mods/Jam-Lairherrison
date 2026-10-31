@@ -1,14 +1,26 @@
 {
   "variants": {
-    "axis=y": {
+    "axis=y,rotated=false": {
       "model": "the_shell:block/rusty_steel_beam"
     },
-    "axis=z": {
+    "axis=z,rotated=false": {
       "model": "the_shell:block/rusty_steel_beam",
       "x": 90
     },
-    "axis=x": {
+    "axis=x,rotated=false": {
       "model": "the_shell:block/rusty_steel_beam",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,rotated=true": {
+      "model": "the_shell:block/rusty_steel_beam_turned"
+    },
+    "axis=z,rotated=true": {
+      "model": "the_shell:block/rusty_steel_beam_turned",
+      "x": 90
+    },
+    "axis=x,rotated=true": {
+      "model": "the_shell:block/rusty_steel_beam_turned",
       "x": 90,
       "y": 90
     }
