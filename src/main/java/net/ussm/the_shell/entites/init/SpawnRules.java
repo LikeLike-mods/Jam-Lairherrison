@@ -87,7 +87,6 @@ public final class SpawnRules {
 
     public static <T extends Entity> boolean purussaurus(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return level.getDifficulty() != Difficulty.PEACEFUL
-                && level.getFluidState(pos).is(FluidTags.WATER)
                 && noneNearby(level, type, pos, 48);
     }
 

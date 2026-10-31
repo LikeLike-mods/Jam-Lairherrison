@@ -57,7 +57,7 @@ public class ModSetupEvents {
                 SpawnRules::blueWhale, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(ModEntities.BASILOSAURUS.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SpawnRules::basilosaurus, RegisterSpawnPlacementsEvent.Operation.REPLACE);
-        event.register(ModEntities.PURUSSAURUS.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+        event.register(ModEntities.PURUSSAURUS.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SpawnRules::purussaurus, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(ModEntities.TITANOBOA.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SpawnRules::titanoboa, RegisterSpawnPlacementsEvent.Operation.REPLACE);
