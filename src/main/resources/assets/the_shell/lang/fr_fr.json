@@ -465,7 +465,7 @@
   "tooltip.the_shell.diving_chestplate.details": "Pièce du scaphandre : chaque pièce portée réduit l'effet de la pression en profondeur. Les 4 ensemble vous protègent complètement. Peut être renforcée avec 6 écailles de purussaurus et 2 peaux de titanoboa.",
   "tooltip.the_shell.diving_helmet.details": "Sous l'eau, vous respirez l'oxygène du scaphandre. Affiche les jauges d'oxygène et de pression. Chaque pièce du scaphandre réduit la pression, et les 4 ensemble vous protègent complètement. Peut être renforcé avec 6 écailles de purussaurus et 2 peaux de titanoboa.",
   "tooltip.the_shell.diving_leggings.details": "Pièce du scaphandre : chaque pièce portée réduit l'effet de la pression en profondeur. Les 4 ensemble vous protègent complètement. Peuvent être renforcées avec 6 écailles de purussaurus et 2 peaux de titanoboa.",
-  "tooltip.the_shell.diving_suit.reinforced": "Renforcé : armure de netherite, -5 % de dégâts des créatures marines par pièce (-20 % avec le scaphandre complet)",
+  "tooltip.the_shell.diving_suit.reinforced": "Renforcé : plus d'armure, -5 % de dégâts des créatures marines (par pièce)",
   "tooltip.the_shell.grappling_hook.details": "Visez un bloc jusqu'à 32 blocs et maintenez clic droit : le grappin vous tire jusqu'à lui, même sous l'eau.",
   "tooltip.the_shell.leviathan_heart.details": "Il brille encore faiblement. Combinez-le avec un cristal de kyber d'obscurité et un cristal de kyber de lumière pour forger un cristal de kyber pur.",
   "tooltip.the_shell.light_kyber_crystal.details": "Se trouve près de la surface, dans la brownstone. Il alimente le sabre laser de lumière. Tout cristal de kyber recharge entièrement la batterie du sous-marin et sert au sonar de poche, à la bulle d'air et aux améliorations du sous-marin.",

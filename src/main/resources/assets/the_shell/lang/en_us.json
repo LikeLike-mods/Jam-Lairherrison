@@ -465,7 +465,7 @@
   "tooltip.the_shell.diving_chestplate.details": "Diving suit piece: each piece you wear reduces the effect of deep pressure. All 4 together protect you completely. Can be reinforced with 6 purussaurus scales and 2 titanoboa skins.",
   "tooltip.the_shell.diving_helmet.details": "Underwater, you breathe the suit's oxygen. Shows the oxygen and pressure gauges. Each piece of the suit reduces the pressure, and all 4 together protect you completely. Can be reinforced with 6 purussaurus scales and 2 titanoboa skins.",
   "tooltip.the_shell.diving_leggings.details": "Diving suit piece: each piece you wear reduces the effect of deep pressure. All 4 together protect you completely. Can be reinforced with 6 purussaurus scales and 2 titanoboa skins.",
-  "tooltip.the_shell.diving_suit.reinforced": "Reinforced: netherite armor, -5% damage from sea creatures per piece (-20% with the full suit)",
+  "tooltip.the_shell.diving_suit.reinforced": "Reinforced : more armor, -5% damage from sea creatures (per piece)",
   "tooltip.the_shell.grappling_hook.details": "Aim at a block up to 32 blocks away and hold right-click: the hook pulls you to it, even underwater.",
   "tooltip.the_shell.leviathan_heart.details": "It still glows faintly. Combine it with a shadow kyber crystal and a light kyber crystal to forge a pure kyber crystal.",
   "tooltip.the_shell.light_kyber_crystal.details": "Found near the surface, in brownstone. It powers the light lightsaber. Any kyber crystal fully recharges the submarine's battery and is used for the pocket sonar, the air bubble and the submarine upgrades.",
