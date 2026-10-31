@@ -16,7 +16,7 @@ public class ModCreativeModeTabs {
 
     public static final Supplier<CreativeModeTab> BLOCKS = CREATIVE_MODE_TAB.register("blocks",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModBlocks.PALM_LOG.get()))
+                    .icon(() -> new ItemStack(ModItems.CONCH.get()))
                     .title(Component.translatable("creativetab.the_shell.blocks"))
                     .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(ModBlocks.BROWNSTONE);
