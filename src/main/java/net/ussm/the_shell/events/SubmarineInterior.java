@@ -253,6 +253,12 @@ public class SubmarineInterior {
         } else if (state.is(net.ussm.the_shell.init.ModBlocks.CONTROL_CONSOLE.get())) {
             int sx = (int) Math.floor(where.getDouble("X")), sy = (int) Math.floor(where.getDouble("Y")), sz = (int) Math.floor(where.getDouble("Z"));
             int battery = Math.min(100, energy * 100 / Submarine.MAX_ENERGY);
+            // the rift position needs the sonar, which comes with the netherite upgrade
+            if (cabins.extended(cabin) < 3) {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console_basic", battery, sy), false);
+                event.setCanceled(true);
+                return;
+            }
             int[] rift = nearestRift(sx, sz);
             player.displayClientMessage(rift == null
                     ? net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.console_far", battery, sy)

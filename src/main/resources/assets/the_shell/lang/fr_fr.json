@@ -307,6 +307,7 @@
   "message.the_shell.seal.tier.2": "Sceau de niveau 2 (s'ouvre aussi à la redstone)",
   "message.the_shell.seal.tier.3": "Sceau de niveau 3 (s'ouvre aussi à la redstone)",
   "message.the_shell.submarine.console": "Batterie %s %% · hauteur Y %s · faille la plus proche en %s, %s (%s blocs)",
+  "message.the_shell.submarine.console_basic": "Batterie %s %% · hauteur Y %s · pas de sonar : il faut l'amélioration en netherite pour repérer les failles",
   "message.the_shell.submarine.console_far": "Batterie %s %% · hauteur Y %s · aucune faille à moins de 600 blocs",
   "message.the_shell.submarine.empty": "Batterie à plat ! Recharge-la (charbon, redstone, kyber)",
   "message.the_shell.submarine.energy": "Batterie du sous-marin : %s %%",
