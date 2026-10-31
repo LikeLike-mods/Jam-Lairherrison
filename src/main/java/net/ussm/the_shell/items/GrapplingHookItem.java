@@ -53,7 +53,9 @@ public class GrapplingHookItem extends Item {
             double speed = entity.isInWater() ? 0.7 : 1.0;
             entity.setDeltaMovement(towards.normalize().scale(Math.min(speed, dist * 0.25)));
         }
-        entity.resetFallDistance();
+        // going up the rope takes back the height already fallen, but the hook no longer wipes fall damage
+        double up = entity.getDeltaMovement().y;
+        if (up > 0.0) entity.fallDistance = (float) Math.max(0.0, entity.fallDistance - up);
         if (level.isClientSide) {
             for (int i = 1; i < 10; i++) {
                 Vec3 p = start.add(towards.scale(i / 10.0));
