@@ -1,9 +1,9 @@
 {
   "type": "minecraft:random_patch",
   "config": {
-    "tries": 6,
-    "xz_spread": 3,
-    "y_spread": 2,
+    "tries": 24,
+    "xz_spread": 4,
+    "y_spread": 3,
     "feature": {
       "feature": {
         "type": "minecraft:simple_block",
@@ -11,37 +11,55 @@
           "to_place": {
             "type": "minecraft:weighted_state_provider",
             "entries": [
-              {
+              { 
+                "weight": 1, 
+                "data": { 
+                  "Name": "the_shell:redstone_pepper_crop", 
+                  "Properties": { 
+                    "age": "0"
+                  }
+                }
+              },
+              { 
                 "weight": 1,
-                "data": {
+                "data": { 
+                  "Name": "the_shell:redstone_pepper_crop", 
+                  "Properties": { 
+                    "age": "1"
+                  }
+                }
+              },
+              { 
+                "weight": 2, 
+                "data": { 
                   "Name": "the_shell:redstone_pepper_crop",
-                  "Properties": {
+                  "Properties": { 
                     "age": "2"
                   }
                 }
               },
-              {
-                "weight": 2,
-                "data": {
+              { 
+                "weight": 2, 
+                "data": { 
                   "Name": "the_shell:redstone_pepper_crop",
-                  "Properties": {
+                  "Properties": { 
                     "age": "3"
                   }
                 }
               },
-              {
-                "weight": 2,
-                "data": {
-                  "Name": "the_shell:redstone_pepper_crop",
-                  "Properties": {
+              { 
+                "weight": 3, 
+                "data": { 
+                  "Name": "the_shell:redstone_pepper_crop", 
+                  "Properties": { 
                     "age": "4"
                   }
                 }
               },
-              {
-                "weight": 3,
-                "data": {
-                  "Name": "the_shell:redstone_pepper_crop",
+              { 
+                "weight": 5, 
+                "data": { 
+                  "Name": "the_shell:redstone_pepper_crop", 
                   "Properties": {
                     "age": "5"
                   }
@@ -62,13 +80,9 @@
                 "blocks": "minecraft:air"
               },
               {
-                "type": "minecraft:would_survive",
-                "state": {
-                  "Name": "the_shell:redstone_pepper_crop",
-                  "Properties": {
-                    "age": "0"
-                  }
-                }
+                "type": "minecraft:matching_blocks",
+                "offset": [0, -1, 0],
+                "blocks": "minecraft:grass_block"
               }
             ]
           }
