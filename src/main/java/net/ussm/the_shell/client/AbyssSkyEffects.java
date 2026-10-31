@@ -17,8 +17,8 @@ public class AbyssSkyEffects {
         event.register(ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "abyss"),
                 new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
                     @Override
-                    public Vec3 getBrightnessDependentFogColor(Vec3 color, float brightness) {
-                        return color.scale(0.15);
+                    public Vec3 getBrightnessDependentFogColor(Vec3 colour, float brightness) {
+                        return colour.scale(0.15);
                     }
 
                     @Override

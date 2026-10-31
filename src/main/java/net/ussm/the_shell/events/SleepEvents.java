@@ -1,7 +1,5 @@
 package net.ussm.the_shell.events;
 
-import java.util.List;
-import java.util.Set;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -14,9 +12,13 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.ussm.the_shell.TheShell;
+
+import java.util.List;
+import java.util.Set;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class SleepEvents {
@@ -46,7 +48,7 @@ public class SleepEvents {
         }
         if (world.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT)) {
             long j = world.getDayTime() + 24000L;
-            world.setDayTime(net.neoforged.neoforge.event.EventHooks.onSleepFinished(world, j - j % 24000L, world.getDayTime()));
+            world.setDayTime(EventHooks.onSleepFinished(world, j - j % 24000L, world.getDayTime()));
         }
         players.stream().filter(LivingEntity::isSleeping).forEach(p -> p.stopSleepInBed(false, false));
         if (world.getGameRules().getBoolean(GameRules.RULE_WEATHER_CYCLE) && world.isRaining()) world.setWeatherParameters(0, 0, false, false);

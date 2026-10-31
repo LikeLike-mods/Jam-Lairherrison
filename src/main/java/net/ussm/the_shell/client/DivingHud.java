@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +16,9 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.entites.Submarine;
+import net.ussm.the_shell.events.AbyssTravel;
 import net.ussm.the_shell.events.DeepSeaEvents;
+import net.ussm.the_shell.init.ModAttachments;
 import net.ussm.the_shell.init.ModItems;
 import net.ussm.the_shell.worldgen.TestChunkGenerator;
 
@@ -52,7 +53,7 @@ public class DivingHud {
             return;
         }
         float depth = player.isEyeInFluid(FluidTags.WATER) ? Math.max(0.0F, player.level().getSeaLevel() - (float) player.getEyeY()) : 0.0F;
-        if (depth > 0 && player.level().dimension() == net.ussm.the_shell.events.AbyssTravel.ABYSS) depth += MAX_DEPTH;
+        if (depth > 0 && player.level().dimension() == AbyssTravel.ABYSS) depth += MAX_DEPTH;
         int stage = DeepSeaEvents.pressureLevel(player, player.isInWater());
         float fill = stage / 5.0F;
         boolean safe = DeepSeaEvents.hasFullSuit(player) || player.getVehicle() instanceof Submarine;
@@ -64,20 +65,20 @@ public class DivingHud {
         g.fill(x - 2, top - 2, x + 10, bottom + 2, 0xFFC18B47);
         g.fill(x, top, x + 8, bottom, 0xFF0D1114);
         int level = bottom - Math.round((bottom - top) * fill);
-        int color = stage <= 1 ? 0xFF4FD16A : stage == 2 ? 0xFFE3C13B : stage == 3 ? 0xFFE08A2F : 0xFFE0482F;
-        if (!safe && stage >= 3 && (player.tickCount / 5) % 2 == 0) color = 0xFF7A1A12;
-        g.fill(x + 1, level, x + 7, bottom, color);
+        int colour = stage <= 1 ? 0xFF4FD16A : stage == 2 ? 0xFFE3C13B : stage == 3 ? 0xFFE08A2F : 0xFFE0482F;
+        if (!safe && stage >= 3 && (player.tickCount / 5) % 2 == 0) colour = 0xFF7A1A12;
+        g.fill(x + 1, level, x + 7, bottom, colour);
         for (int k = 1; k < 5; k++) {
             int ty = bottom - Math.round((bottom - top) * k / 5.0F);
             g.fill(x - 2, ty, x + 10, ty + 1, 0xFF6B4A22);
         }
-        float o2 = player.getData(net.ussm.the_shell.init.ModAttachments.OXYGEN) / (float) net.ussm.the_shell.init.ModAttachments.MAX_OXYGEN;
+        float o2 = player.getData(ModAttachments.OXYGEN) / (float) ModAttachments.MAX_OXYGEN;
         int ox = x - 34;
         g.fill(ox - 3, top - 3, ox + 9, bottom + 3, 0xFF2E4A5A);
         g.fill(ox - 2, top - 2, ox + 8, bottom + 2, 0xFF6FA9C2);
         g.fill(ox, top, ox + 6, bottom, 0xFF0D1114);
-        int o2Color = o2 > 0.25F ? 0xFF5FD3F0 : (player.tickCount / 5) % 2 == 0 ? 0xFFE0482F : 0xFF7A1A12;
-        g.fill(ox + 1, bottom - Math.round((bottom - top) * o2), ox + 5, bottom, o2Color);
+        int o2Colour = o2 > 0.25F ? 0xFF5FD3F0 : (player.tickCount / 5) % 2 == 0 ? 0xFFE0482F : 0xFF7A1A12;
+        g.fill(ox + 1, bottom - Math.round((bottom - top) * o2), ox + 5, bottom, o2Colour);
         g.drawCenteredString(mc.font, "O2", ox + 3, bottom + 6, 0xFF9FD8EA);
         g.drawCenteredString(mc.font, Math.round(o2 * 100) + "%", ox + 3, bottom + 16, 0xFF6FA9C2);
         String bar = String.format("%.1f", 1.0F + depth / 10.0F);

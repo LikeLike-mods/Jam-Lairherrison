@@ -15,7 +15,6 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.init.ModAttachments;
 
-// a mob that slipped on a banana peel lies on its side, with stars spinning above it
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class MobSlipClient {
 

@@ -24,11 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/*
- * GeckoLib item renderer that cuts the model along the mask volumes.
- * The exact names of the bones to cut are passed to the constructor, children included.
- */
-
+// cuts the listed bones (and their children) along the mask volumes
 public class MaskedItemRenderer<T extends Item & GeoAnimatable> extends GeoItemRenderer<T> {
     private static final Logger LOGGER = LogUtils.getLogger();
     private final Set<String> reportedWarnings = new HashSet<>();

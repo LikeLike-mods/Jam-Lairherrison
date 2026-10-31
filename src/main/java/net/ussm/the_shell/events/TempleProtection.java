@@ -39,13 +39,13 @@ public class TempleProtection {
     // /gamerule theShellTempleProtection false turns the protection off
     public static final GameRules.Key<GameRules.BooleanValue> PROTECTION =
             GameRules.register("theShellTempleProtection", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
-    // blocks that can always be broken inside a temple (traps, webs...)
+    // always breakable inside a temple (traps, webs)
     private static final TagKey<Block> BREAKABLE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "temple_breakable"));
     private static final List<ResourceKey<Structure>> TEMPLES = List.of(
             ResourceKey.create(Registries.STRUCTURE, ResourceLocation.withDefaultNamespace("jungle_pyramid")),
             ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(TheShell.MOD_ID, "jungle_temple")));
 
-    // temples (by start chunk) whose protection was lifted because the conch was taken
+    // temples (by start chunk) that have been unlocked
     private static class Unlocked extends SavedData {
         final Set<Long> temples = new HashSet<>();
 
@@ -76,7 +76,7 @@ public class TempleProtection {
         return null;
     }
 
-    // conches each player had at the last check, so only a conch picked up inside the temple counts
+    // conch count per player at the last check
     private static final Map<UUID, Integer> CONCHES = new HashMap<>();
 
     private static int conches(ServerPlayer player) {
@@ -86,8 +86,7 @@ public class TempleProtection {
         return count;
     }
 
-    // getting a conch (from a chest, a pedestal, the ground...) inside a temple lifts its protection;
-    // walking in with one already on you does nothing
+    // picking up a conch inside a temple unlocks it, walking in with one does nothing
     @SubscribeEvent
     public static void conchTaken(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.tickCount % 20 != 0) return;
@@ -123,7 +122,6 @@ public class TempleProtection {
         return true;
     }
 
-    // TNT and end crystals leave a protected temple alone
     @SubscribeEvent
     public static void noExplosion(ExplosionEvent.Detonate event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;

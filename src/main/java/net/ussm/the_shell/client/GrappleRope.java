@@ -19,7 +19,7 @@ import net.ussm.the_shell.init.ModComponents;
 import net.ussm.the_shell.items.GrapplingHookItem;
 import org.joml.Matrix4f;
 
-// the grappling hook rope is drawn like a lead, from the player's hand to the block it is hooked on
+// drawn like a lead, hand to hooked block
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class GrappleRope {
 
@@ -51,7 +51,6 @@ public class GrappleRope {
         if (drawn) buffers.endBatch(RenderType.leash());
     }
 
-    // same ribbon as the lead, but straight because the rope is taut
     private static void draw(VertexConsumer buffer, Matrix4f pose, Vec3 along, int light) {
         float x = (float) along.x, y = (float) along.y, z = (float) along.z;
         float flat = x * x + z * z;

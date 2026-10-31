@@ -21,8 +21,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.init.ModAttachments;
+import org.joml.Vector3f;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID, value = Dist.CLIENT)
 public class DizzyStars {
@@ -48,25 +50,25 @@ public class DizzyStars {
     }
 
     @SubscribeEvent
-    public static void ascend(net.neoforged.neoforge.client.event.RenderPlayerEvent.Pre event) {
+    public static void ascend(RenderPlayerEvent.Pre event) {
         event.getPoseStack().pushPose();
         if (event.getEntity().getData(ModAttachments.SLIPPED)) event.getPoseStack().translate(0.0F, 0.28F, 0.0F);
     }
 
     @SubscribeEvent
-    public static void descend(net.neoforged.neoforge.client.event.RenderPlayerEvent.Post event) {
+    public static void descend(RenderPlayerEvent.Post event) {
         event.getPoseStack().popPose();
     }
 
     @SubscribeEvent
     public static void layers(EntityRenderersEvent.AddLayers event) {
         for (PlayerSkin.Model model : event.getSkins()) {
-            if (event.getSkin(model) instanceof PlayerRenderer renderer) renderer.addLayer(new Couronne(renderer));
+            if (event.getSkin(model) instanceof PlayerRenderer renderer) renderer.addLayer(new Crown(renderer));
         }
     }
 
-    private static class Couronne extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
-        Couronne(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent) {
+    private static class Crown extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+        Crown(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent) {
             super(parent);
         }
 
@@ -78,7 +80,7 @@ public class DizzyStars {
             pose.pushPose();
             getParentModel().head.translateAndRotate(pose);
             pose.translate(0.0F, -0.25F, 0.0F);
-            org.joml.Vector3f head = pose.last().pose().transformPosition(new org.joml.Vector3f());
+            Vector3f head = pose.last().pose().transformPosition(new Vector3f());
             pose.popPose();
             PoseStack world = new PoseStack();
             world.translate(head.x, head.y, head.z);
@@ -95,13 +97,13 @@ public class DizzyStars {
         }
 
         private static void square(VertexConsumer vc, PoseStack.Pose p, float x0, float y0, float z0, float x1, float y1, float z1) {
-            summit(vc, p, x0, y1, z0, 0, 1);
-            summit(vc, p, x1, y1, z1, 1, 1);
-            summit(vc, p, x1, y0, z1, 1, 0);
-            summit(vc, p, x0, y0, z0, 0, 0);
+            vertex(vc, p, x0, y1, z0, 0, 1);
+            vertex(vc, p, x1, y1, z1, 1, 1);
+            vertex(vc, p, x1, y0, z1, 1, 0);
+            vertex(vc, p, x0, y0, z0, 0, 0);
         }
 
-        private static void summit(VertexConsumer vc, PoseStack.Pose p, float x, float y, float z, float u, float v) {
+        private static void vertex(VertexConsumer vc, PoseStack.Pose p, float x, float y, float z, float u, float v) {
             vc.addVertex(p, x, y, z).setColor(0xFFFFFFFF).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(p, 0, 1, 0);
         }
     }

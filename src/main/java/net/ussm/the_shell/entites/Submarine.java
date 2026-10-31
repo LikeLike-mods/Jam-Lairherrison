@@ -1,22 +1,43 @@
 package net.ussm.the_shell.entites;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.util.Mth;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.blocks.abyss.AbyssLightBlock;
+import net.ussm.the_shell.events.AbyssTravel;
+import net.ussm.the_shell.events.SubmarineInterior;
 import net.ussm.the_shell.init.ModEntities;
 import net.ussm.the_shell.init.ModItems;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -33,11 +54,11 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private int interiorId = -1;
     public static final int MAX_ENERGY = 6000;
-    public static boolean freeGaze, rattrapage;
-    private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> TIER =
-            net.minecraft.network.syncher.SynchedEntityData.defineId(Submarine.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
-    private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> ENERGY =
-            net.minecraft.network.syncher.SynchedEntityData.defineId(Submarine.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
+    public static boolean freeGaze, catchUp;
+    private static final EntityDataAccessor<Integer> TIER =
+            SynchedEntityData.defineId(Submarine.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> ENERGY =
+            SynchedEntityData.defineId(Submarine.class, EntityDataSerializers.INT);
 
     public Submarine(EntityType<? extends Submarine> type, Level level) {
         super(type, level);
@@ -54,7 +75,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     }
 
     @Override
-    protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(ENERGY, MAX_ENERGY);
         builder.define(TIER, 0);
@@ -68,7 +89,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.entityData.set(TIER, tier);
     }
 
-    public static int kitTier(net.minecraft.world.item.ItemStack stack) {
+    public static int kitTier(ItemStack stack) {
         if (stack.is(ModItems.SUBMARINE_UPGRADE_IRON.get())) return 1;
         if (stack.is(ModItems.SUBMARINE_UPGRADE_DIAMOND.get())) return 2;
         if (stack.is(ModItems.SUBMARINE_UPGRADE_NETHERITE.get())) return 3;
@@ -83,10 +104,10 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         this.entityData.set(ENERGY, Math.max(0, Math.min(MAX_ENERGY, energy)));
     }
 
-    public static int fuelValue(net.minecraft.world.item.ItemStack stack) {
-        if (stack.is(net.minecraft.world.item.Items.COAL) || stack.is(net.minecraft.world.item.Items.CHARCOAL)) return 150;
-        if (stack.is(net.minecraft.world.item.Items.REDSTONE)) return 200;
-        if (stack.is(net.minecraft.world.item.Items.REDSTONE_BLOCK)) return 1800;
+    public static int fuelValue(ItemStack stack) {
+        if (stack.is(Items.COAL) || stack.is(Items.CHARCOAL)) return 150;
+        if (stack.is(Items.REDSTONE)) return 200;
+        if (stack.is(Items.REDSTONE_BLOCK)) return 1800;
         if (stack.is(ModItems.KYBER_CRYSTAL.get())) return MAX_ENERGY;
         return 0;
     }
@@ -113,41 +134,41 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     }
 
     @Override
-    protected void removePassenger(net.minecraft.world.entity.Entity passenger) {
+    protected void removePassenger(Entity passenger) {
         super.removePassenger(passenger);
-        if (this.level() instanceof net.minecraft.server.level.ServerLevel server) {
-            server.getChunkSource().broadcast(this, new net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket(this));
+        if (this.level() instanceof ServerLevel server) {
+            server.getChunkSource().broadcast(this, new ClientboundTeleportEntityPacket(this));
         }
     }
 
     @Override
-    public void remove(net.minecraft.world.entity.Entity.RemovalReason reason) {
+    public void remove(Entity.RemovalReason reason) {
         super.remove(reason);
-        if (reason.shouldDestroy()) net.ussm.the_shell.events.SubmarineInterior.lost(this);
+        if (reason.shouldDestroy()) SubmarineInterior.lost(this);
     }
 
     @Override
-    public boolean ignoreExplosion(net.minecraft.world.level.Explosion explosion) {
+    public boolean ignoreExplosion(Explosion explosion) {
         return true;
     }
 
     @Override
-    public net.minecraft.world.phys.AABB getBoundingBoxForCulling() {
+    public AABB getBoundingBoxForCulling() {
         return getBoundingBox().inflate(1.5, 0.8, 1.5);
     }
 
     @Override
-    public Vec3 getDismountLocationForPassenger(net.minecraft.world.entity.LivingEntity passenger) {
+    public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
         Vec3 side = Vec3.directionFromRotation(0.0F, getYRot() + 90.0F).scale(2.2);
         for (Vec3 attempt : new Vec3[]{position().add(side), position().subtract(side), position().add(0.0, 2.0, 0.0)}) {
-            if (level().noCollision(passenger, passenger.getDimensions(net.minecraft.world.entity.Pose.STANDING).makeBoundingBox(attempt))) return attempt;
+            if (level().noCollision(passenger, passenger.getDimensions(Pose.STANDING).makeBoundingBox(attempt))) return attempt;
         }
         return super.getDismountLocationForPassenger(passenger);
     }
 
     @Override
-    public boolean hurt(net.minecraft.world.damagesource.DamageSource source, float amount) {
-        if (source.is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION)) return false;
+    public boolean hurt(DamageSource source, float amount) {
+        if (source.is(DamageTypeTags.IS_EXPLOSION)) return false;
         if (!(source.getEntity() instanceof Player player) || !player.isShiftKeyDown()) return false;
         if (player.getAbilities().instabuild && !this.level().isClientSide && !this.isRemoved()) {
             destroy(source);
@@ -157,19 +178,19 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     }
 
     @Override
-    protected void destroy(net.minecraft.world.damagesource.DamageSource source) {
+    protected void destroy(DamageSource source) {
         this.kill();
-        if (!this.level().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOENTITYDROPS)) return;
-        net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(getDropItem());
-        stack.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, this.getCustomName());
+        if (!this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) return;
+        ItemStack stack = new ItemStack(getDropItem());
+        stack.set(DataComponents.CUSTOM_NAME, this.getCustomName());
         CompoundTag tag = new CompoundTag();
         tag.putInt("Tier", getTier());
         tag.putInt("Energy", getEnergy());
         if (interiorId >= 0) {
             tag.putInt("Interior", interiorId);
-            net.ussm.the_shell.events.SubmarineInterior.store(this);
+            SubmarineInterior.store(this);
         }
-        stack.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(tag));
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         this.spawnAtLocation(stack);
     }
 
@@ -224,36 +245,35 @@ public class Submarine extends VehicleEntity implements GeoEntity {
 
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
-        net.minecraft.world.item.ItemStack kit = player.getItemInHand(hand);
-        int altarTier = kitTier(kit);
-        if (altarTier > 0) {
+        ItemStack stack = player.getItemInHand(hand);
+        int kit = kitTier(stack);
+        if (kit > 0) {
             if (!this.level().isClientSide) {
-                if (altarTier == getTier() + 1) {
-                    setTier(altarTier);
-                    kit.consume(1, player);
-                    net.ussm.the_shell.events.SubmarineInterior.upgrade(this);
-                    this.level().playSound(null, this.blockPosition(), net.minecraft.sounds.SoundEvents.SMITHING_TABLE_USE, net.minecraft.sounds.SoundSource.NEUTRAL, 1.0F, 1.0F);
-                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.upgraded", altarTier), true);
-                } else if (altarTier > getTier()) {
-                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.upgrade_order"), true);
+                if (kit == getTier() + 1) {
+                    setTier(kit);
+                    stack.consume(1, player);
+                    SubmarineInterior.upgrade(this);
+                    this.level().playSound(null, this.blockPosition(), SoundEvents.SMITHING_TABLE_USE, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                    player.displayClientMessage(Component.translatable("message.the_shell.submarine.upgraded", kit), true);
+                } else if (kit > getTier()) {
+                    player.displayClientMessage(Component.translatable("message.the_shell.submarine.upgrade_order"), true);
                 }
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
-        net.minecraft.world.item.ItemStack stack = player.getItemInHand(hand);
         int fuel = fuelValue(stack);
         if (fuel > 0) {
             if (!this.level().isClientSide && getEnergy() < MAX_ENERGY) {
                 setEnergy(getEnergy() + fuel);
                 stack.consume(1, player);
-                this.level().playSound(null, this.blockPosition(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT, net.minecraft.sounds.SoundSource.NEUTRAL, 0.6F, 1.4F);
-                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.energy", getEnergy() * 100 / MAX_ENERGY), true);
+                this.level().playSound(null, this.blockPosition(), SoundEvents.BEACON_POWER_SELECT, SoundSource.NEUTRAL, 0.6F, 1.4F);
+                player.displayClientMessage(Component.translatable("message.the_shell.submarine.energy", getEnergy() * 100 / MAX_ENERGY), true);
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
-        if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-            if (this.isVehicle()) net.ussm.the_shell.events.SubmarineInterior.enter(serverPlayer, this);
-            else if (player.isSecondaryUseActive()) net.ussm.the_shell.events.SubmarineInterior.seatLater(serverPlayer, this);
+        if (player instanceof ServerPlayer serverPlayer) {
+            if (this.isVehicle()) SubmarineInterior.enter(serverPlayer, this);
+            else if (player.isSecondaryUseActive()) SubmarineInterior.seatLater(serverPlayer, this);
             else player.startRiding(this);
         }
         return InteractionResult.sidedSuccess(this.level().isClientSide);
@@ -262,10 +282,10 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
-        net.ussm.the_shell.events.AbyssTravel.check(this);
+        AbyssTravel.check(this);
         if (!this.level().isClientSide && interiorId >= 0 && this.tickCount % 40 == 0) {
-            setEnergy(getEnergy() + net.ussm.the_shell.events.SubmarineInterior.takeFuel(this));
-            net.ussm.the_shell.events.SubmarineInterior.remember(this);
+            setEnergy(getEnergy() + SubmarineInterior.takeFuel(this));
+            SubmarineInterior.remember(this);
         }
         if (this.isControlledByLocalInstance()) {
             Vec3 motion = this.getDeltaMovement();
@@ -275,14 +295,14 @@ public class Submarine extends VehicleEntity implements GeoEntity {
                     boolean free = this.level().isClientSide && freeGaze;
                     if (!free) {
                         float gap = Mth.wrapDegrees(driver.getYRot() - this.getYRot());
-                        if (rattrapage && this.level().isClientSide) {
+                        if (catchUp && this.level().isClientSide) {
                             this.setYRot(this.getYRot() + Mth.clamp(gap, -9.0F, 9.0F));
-                            if (Math.abs(gap) < 9.0F) rattrapage = false;
+                            if (Math.abs(gap) < 9.0F) catchUp = false;
                         } else {
                             this.setYRot(driver.getYRot());
                         }
                     }
-                    Vec3 look = free || rattrapage ? Vec3.directionFromRotation(0.0F, this.getYRot()) : driver.getLookAngle();
+                    Vec3 look = free || catchUp ? Vec3.directionFromRotation(0.0F, this.getYRot()) : driver.getLookAngle();
                     Vec3 left = new Vec3(look.z, 0.0, -look.x).normalize();
                     double boost = 1.0 + 0.15 * getTier();
                     motion = motion.add(look.scale(driver.zza * 0.035 * boost)).add(left.scale(driver.xxa * 0.02 * boost));
@@ -313,7 +333,7 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             }
             if (this.getControllingPassenger() instanceof Player driver && (driver.zza != 0 || driver.xxa != 0) && getEnergy() > 0) {
                 setEnergy(getEnergy() - 1);
-                if (getEnergy() == 0) driver.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.the_shell.submarine.empty"), true);
+                if (getEnergy() == 0) driver.displayClientMessage(Component.translatable("message.the_shell.submarine.empty"), true);
             }
             if (this.isInWater() && this.tickCount % 4 == 0 && getEnergy() > 0) {
                 Vec3 front = this.position().add(Vec3.directionFromRotation(0.0F, this.getYRot()).scale(1.8)).add(0.0, 0.6, 0.0);

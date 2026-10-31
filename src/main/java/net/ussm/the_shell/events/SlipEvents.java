@@ -19,7 +19,6 @@ import net.ussm.the_shell.init.ModSounds;
 
 @EventBusSubscriber(modid = TheShell.MOD_ID)
 public class SlipEvents {
-
     public static void received(ServerPlayer player, boolean lyingDown) {
         if (player.getData(ModAttachments.SLIPPED) == lyingDown) return;
         player.setData(ModAttachments.SLIPPED, lyingDown);
