@@ -230,14 +230,13 @@ public class TestChunkGenerator extends ChunkGenerator {
 
                 // Block hashes
                 FastNoiseLite noise = new FastNoiseLite(202);
-                noise.SetFrequency(0.1f);
+                noise.SetFrequency(0.01f);
                 noise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
                 float hash1 = noise.GetNoise(x + (chunk.getPos().x * 16), z + (chunk.getPos().z * 16));
 
-                noise.SetFrequency(0.01f);
+                noise.SetFrequency(0.1f);
                 noise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
                 float hash2 = noise.GetNoise(x + (chunk.getPos().x * 16), z + (chunk.getPos().z * 16));
-                hash2 += 1;
 
                 noise.SetFrequency(1f);
                 noise.SetNoiseType(FastNoiseLite.NoiseType.Value);
@@ -265,7 +264,7 @@ public class TestChunkGenerator extends ChunkGenerator {
                     float channel = noise.GetNoise(posX, posZ);
                     if (pool) {
                         topLand = Blocks.WATER.defaultBlockState();
-                        poolDepth = 2 + Math.round(Math.clamp((channel + 0.4f) / 1.0f, 0f, 1f) * 3f);
+                        poolDepth = 2 + Math.round(Math.clamp(channel + 0.4f, 0f, 1f) * 3f);
                     }
                     else topLand = Blocks.MUD.defaultBlockState();
                     top2Land = Blocks.MUD.defaultBlockState();
@@ -287,7 +286,16 @@ public class TestChunkGenerator extends ChunkGenerator {
                 while (y <= a || y <= SEA) {
                     pos.set(x, y, z);
 
-                    if (y == -128) chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
+                    float caveProbability = Math.clamp((y / 50f - 2f) - 2f/3f, 0f, 1f);
+                    noise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
+                    noise.SetFrequency(0.15f);
+                    noise.SetDomainWarpType(FastNoiseLite.DomainWarpType.OpenSimplex2);
+                    noise.SetDomainWarpAmp(30f);
+                    float caveNoise = noise.GetNoise(x + (chunk.getPos().x * 16), y, z + (chunk.getPos().z * 16));
+                    boolean cave = caveNoise * caveProbability >= 0.1f;
+
+                    if (cave) chunk.setBlockState(pos, Blocks.AIR.defaultBlockState(), false);
+                    else if (y == -128) chunk.setBlockState(pos, Blocks.BEDROCK.defaultBlockState(), false);
                     else if (poolDepth > 0 && y > a - poolDepth && y <= a) {
                         chunk.setBlockState(pos, Blocks.WATER.defaultBlockState(), false);
                     }
