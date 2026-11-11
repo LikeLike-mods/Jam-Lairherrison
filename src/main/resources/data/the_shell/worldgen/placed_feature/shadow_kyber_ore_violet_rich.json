@@ -2,8 +2,7 @@
   "feature": "the_shell:shadow_kyber_ore_violet",
   "placement": [
     {
-      "type": "minecraft:count",
-      "chance": 12
+      "type": "minecraft:count", "count": 12
     },
     {
       "type": "minecraft:in_square"
@@ -20,8 +19,6 @@
         }
       }
     },
-    {
-      "type": "minecraft:biome"
-    }
+    { "type": "minecraft:biome" }
   ]
 }
