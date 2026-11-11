@@ -2,8 +2,8 @@
   "feature": "the_shell:shadow_kyber_ore_violet",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 2
+      "type": "minecraft:count",
+      "chance": 12
     },
     {
       "type": "minecraft:in_square"
