@@ -18,10 +18,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -31,8 +29,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.ussm.the_shell.TheShell;
 import net.ussm.the_shell.blocks.abyss.AbyssLightBlock;
-import net.ussm.the_shell.blocks.station.MachineBlock;
-import net.ussm.the_shell.blocks.station.TankBlock;
 import net.ussm.the_shell.entites.Submarine;
 import net.ussm.the_shell.init.ModAttachments;
 import net.ussm.the_shell.init.ModBlocks;
@@ -71,8 +67,7 @@ public class DeepSeaEvents {
         if (inWater) ventLift(player);
         if (!(player instanceof ServerPlayer serverPlayer)) return;
         if (player.isEyeInFluid(FluidTags.WATER)) breathe(player);
-        refillOxygen(player, inWater && player.level().getBlockState(player.blockPosition().below()).is(ModBlocks.AIR_VENT.get())
-                && MachineBlock.feeds(player.level(), player.blockPosition().below()));
+        refillOxygen(player, inWater && player.level().getBlockState(player.blockPosition().below()).is(ModBlocks.AIR_VENT.get()));
 
         if (player.tickCount % 20 == 0) pressure(serverPlayer, inWater);
     }
@@ -151,27 +146,12 @@ public class DeepSeaEvents {
 
     @SubscribeEvent
     public static void useTank(PlayerInteractEvent.RightClickBlock event) {
-        Player player = event.getEntity();
-        BlockState state = player.level().getBlockState(event.getPos());
-        // sneak = normal click, so blocks can be placed against it
-        if (!state.is(ModBlocks.TANK.get()) || player.isShiftKeyDown()) return;
-        event.setCanceled(true);
-        event.setCancellationResult(InteractionResult.SUCCESS);
-        if (!(player instanceof ServerPlayer)) return;
-        ItemStack stack = event.getItemStack();
-        boolean bottle = stack.is(ModItems.OXYGEN_BOTTLE.get()) && stack.getDamageValue() > 0;
-        if (!bottle && player.getData(ModAttachments.OXYGEN) >= ModAttachments.MAX_OXYGEN) return;
-        int fill = state.getValue(TankBlock.FILL);
-        if (fill == 0) {
-            player.displayClientMessage(Component.translatable("message.the_shell.tank.empty"), true);
-            return;
-        }
-        // one charge per click: the bottle first, else your own air
-        if (bottle) stack.setDamageValue(stack.getDamageValue() - 1);
-        else giveOxygen(player, ModAttachments.MAX_OXYGEN);
-        player.level().setBlock(event.getPos(), state.setValue(TankBlock.FILL, fill - 1), Block.UPDATE_CLIENTS);
+        if (!(event.getEntity() instanceof ServerPlayer player) || !player.level().getBlockState(event.getPos()).is(ModBlocks.TANK.get())) return;
+        giveOxygen(player, ModAttachments.MAX_OXYGEN);
+        if (event.getItemStack().is(ModItems.OXYGEN_BOTTLE.get())) event.getItemStack().setDamageValue(0);
         player.level().playSound(null, event.getPos(), SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.BLOCKS, 1.0F, 0.9F);
-        player.displayClientMessage(Component.translatable("message.the_shell.tank.left", fill - 1, TankBlock.MAX_FILL), true);
+        player.displayClientMessage(Component.translatable("message.the_shell.submarine.oxygen"), true);
+        event.setCanceled(true);
     }
 
     public static void giveOxygen(Player player, int amount) {

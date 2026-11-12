@@ -1,6 +1,5 @@
 package net.ussm.the_shell;
 
-import net.ussm.the_shell.init.ModStructures;
 import net.ussm.the_shell.init.ModArmorMaterials;
 import net.ussm.the_shell.init.ModRecipes;
 import net.ussm.the_shell.init.ModAttachments;
@@ -44,7 +43,6 @@ public class TheShell {
         ModChunkGenerators.CHUNK_GENERATORS.register(modEventBus);
         ModBiomeSources.BIOME_SOURCES.register(modEventBus);
         ModFeatures.FEATURES.register(modEventBus);
-        ModStructures.register(modEventBus);
         StationProcessors.PROCESSORS.register(modEventBus);
         ModEntities.register(modEventBus);
         ModComponents.register(modEventBus);

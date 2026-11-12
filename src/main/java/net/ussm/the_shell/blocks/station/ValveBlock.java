@@ -1,7 +1,5 @@
 package net.ussm.the_shell.blocks.station;
 
-import net.ussm.the_shell.init.ModBlocks;
-import net.minecraft.network.chat.Component;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -84,15 +82,8 @@ public class ValveBlock extends FaceAttachedHorizontalDirectionalBlock implement
             updateNeighbours(turned, level, pos);
             level.playSound(null, pos, SoundEvents.IRON_TRAPDOOR_OPEN, SoundSource.BLOCKS, 0.8F, turned.getValue(POWERED) ? 0.6F : 0.5F);
             level.gameEvent(player, turned.getValue(POWERED) ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos);
-            if (level.getBlockState(attached(turned, pos)).is(ModBlocks.PIPE.get()))
-                player.displayClientMessage(Component.translatable(turned.getValue(POWERED) ? "message.the_shell.valve.closed" : "message.the_shell.valve.open"), true);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
-    }
-
-    // the block it is fixed on
-    public static BlockPos attached(BlockState state, BlockPos pos) {
-        return pos.relative(getConnectedDirection(state).getOpposite());
     }
 
     private void updateNeighbours(BlockState state, Level level, BlockPos pos) {

@@ -52,7 +52,6 @@ public class ModClientEvents {
         event.registerEntityRenderer(ModEntities.VAMPIRE_SQUID.get(), c -> new MobRenderers<>(c, "vampire_squid", 0.0F, false, true, false, MobRenderers.SwimPose.LEAN));
         event.registerEntityRenderer(ModEntities.YETI_CRAB.get(), c -> new MobRenderers<>(c, "yeti_crab", 0.4F, false, false, false));
         event.registerEntityRenderer(ModEntities.HATCHETFISH.get(), c -> new MobRenderers<>(c, "hatchetfish", 0.15F, false, true, false, MobRenderers.SwimPose.PITCH));
-        event.registerEntityRenderer(ModEntities.SWORDFISH.get(), c -> new MobRenderers<>(c, "swordfish", 0.4F, false, false, false, MobRenderers.SwimPose.PITCH));
         event.registerEntityRenderer(ModEntities.COLOSSAL_SQUID.get(), c -> new MobRenderers<>(c, "colossal_squid", 1.0F, false, true, false, MobRenderers.SwimPose.PITCH));
     }
 }

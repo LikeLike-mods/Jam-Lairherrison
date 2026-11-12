@@ -19,9 +19,6 @@
   },
   "result": {
     "id": "the_shell:oxygen_bottle",
-    "count": 1,
-    "components": {
-      "minecraft:damage": 4
-    }
+    "count": 1
   }
 }

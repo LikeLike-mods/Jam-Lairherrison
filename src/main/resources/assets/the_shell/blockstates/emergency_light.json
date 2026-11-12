@@ -1,106 +1,210 @@
 {
   "variants": {
-    "facing=up,lit=false": {
+    "facing=up,waterlogged=false,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off"
     },
-    "facing=up,lit=true,alarm=false": {
+    "facing=up,waterlogged=false,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off"
+    },
+    "facing=up,waterlogged=false,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off"
+    },
+    "facing=up,waterlogged=false,alarm=true,flash=true": {
       "model": "the_shell:block/emergency_light"
     },
-    "facing=up,lit=true,alarm=true,flash=true": {
-      "model": "the_shell:block/emergency_light_flash"
-    },
-    "facing=up,lit=true,alarm=true,flash=false": {
+    "facing=up,waterlogged=true,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off"
     },
-    "facing=down,lit=false": {
+    "facing=up,waterlogged=true,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off"
+    },
+    "facing=up,waterlogged=true,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off"
+    },
+    "facing=up,waterlogged=true,alarm=true,flash=true": {
+      "model": "the_shell:block/emergency_light"
+    },
+    "facing=down,waterlogged=false,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 180
     },
-    "facing=down,lit=true,alarm=false": {
+    "facing=down,waterlogged=false,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 180
+    },
+    "facing=down,waterlogged=false,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 180
+    },
+    "facing=down,waterlogged=false,alarm=true,flash=true": {
       "model": "the_shell:block/emergency_light",
       "x": 180
     },
-    "facing=down,lit=true,alarm=true,flash=true": {
-      "model": "the_shell:block/emergency_light_flash",
-      "x": 180
-    },
-    "facing=down,lit=true,alarm=true,flash=false": {
+    "facing=down,waterlogged=true,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 180
     },
-    "facing=north,lit=false": {
+    "facing=down,waterlogged=true,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 180
+    },
+    "facing=down,waterlogged=true,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 180
+    },
+    "facing=down,waterlogged=true,alarm=true,flash=true": {
+      "model": "the_shell:block/emergency_light",
+      "x": 180
+    },
+    "facing=north,waterlogged=false,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 90
     },
-    "facing=north,lit=true,alarm=false": {
+    "facing=north,waterlogged=false,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90
+    },
+    "facing=north,waterlogged=false,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90
+    },
+    "facing=north,waterlogged=false,alarm=true,flash=true": {
       "model": "the_shell:block/emergency_light",
       "x": 90
     },
-    "facing=north,lit=true,alarm=true,flash=true": {
-      "model": "the_shell:block/emergency_light_flash",
-      "x": 90
-    },
-    "facing=north,lit=true,alarm=true,flash=false": {
+    "facing=north,waterlogged=true,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 90
     },
-    "facing=south,lit=false": {
+    "facing=north,waterlogged=true,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90
+    },
+    "facing=north,waterlogged=true,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90
+    },
+    "facing=north,waterlogged=true,alarm=true,flash=true": {
+      "model": "the_shell:block/emergency_light",
+      "x": 90
+    },
+    "facing=south,waterlogged=false,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 90,
       "y": 180
     },
-    "facing=south,lit=true,alarm=false": {
+    "facing=south,waterlogged=false,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=false,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=false,alarm=true,flash=true": {
       "model": "the_shell:block/emergency_light",
       "x": 90,
       "y": 180
     },
-    "facing=south,lit=true,alarm=true,flash=true": {
-      "model": "the_shell:block/emergency_light_flash",
-      "x": 90,
-      "y": 180
-    },
-    "facing=south,lit=true,alarm=true,flash=false": {
+    "facing=south,waterlogged=true,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 90,
       "y": 180
     },
-    "facing=east,lit=false": {
+    "facing=south,waterlogged=true,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=true,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=true,alarm=true,flash=true": {
+      "model": "the_shell:block/emergency_light",
+      "x": 90,
+      "y": 180
+    },
+    "facing=east,waterlogged=false,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 90,
       "y": 90
     },
-    "facing=east,lit=true,alarm=false": {
+    "facing=east,waterlogged=false,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=false,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=false,alarm=true,flash=true": {
       "model": "the_shell:block/emergency_light",
       "x": 90,
       "y": 90
     },
-    "facing=east,lit=true,alarm=true,flash=true": {
-      "model": "the_shell:block/emergency_light_flash",
-      "x": 90,
-      "y": 90
-    },
-    "facing=east,lit=true,alarm=true,flash=false": {
+    "facing=east,waterlogged=true,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 90,
       "y": 90
     },
-    "facing=west,lit=false": {
+    "facing=east,waterlogged=true,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=true,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=true,alarm=true,flash=true": {
+      "model": "the_shell:block/emergency_light",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,waterlogged=false,alarm=false,flash=false": {
       "model": "the_shell:block/emergency_light_off",
       "x": 90,
       "y": 270
     },
-    "facing=west,lit=true,alarm=false": {
+    "facing=west,waterlogged=false,alarm=false,flash=true": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=false,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=false,alarm=true,flash=true": {
       "model": "the_shell:block/emergency_light",
       "x": 90,
       "y": 270
     },
-    "facing=west,lit=true,alarm=true,flash=true": {
-      "model": "the_shell:block/emergency_light_flash",
+    "facing=west,waterlogged=true,alarm=false,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
       "x": 90,
       "y": 270
     },
-    "facing=west,lit=true,alarm=true,flash=false": {
+    "facing=west,waterlogged=true,alarm=false,flash=true": {
       "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=true,alarm=true,flash=false": {
+      "model": "the_shell:block/emergency_light_off",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=true,alarm=true,flash=true": {
+      "model": "the_shell:block/emergency_light",
       "x": 90,
       "y": 270
     }

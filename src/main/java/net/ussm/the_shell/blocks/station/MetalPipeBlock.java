@@ -58,8 +58,8 @@ public class MetalPipeBlock extends Block implements SimpleWaterloggedBlock {
                 BlockStateProperties.UP, BlockStateProperties.DOWN, WATERLOGGED);
     }
 
-    protected boolean connectsTo(BlockState state) {
-        return state.is(this) || state.is(CONNECTABLE);
+    private static boolean connectsTo(BlockState state) {
+        return state.getBlock() instanceof MetalPipeBlock || state.is(CONNECTABLE);
     }
 
     @Override

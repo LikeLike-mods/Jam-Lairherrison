@@ -43,38 +43,18 @@ public class EmergencyLightBlock extends IndustrialLampBlock {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        // alarm when monsters are close, or when a redstone signal comes in
         boolean danger = state.getValue(LIT) && !level.getEntitiesOfClass(Mob.class, new AABB(pos).inflate(12.0), m -> m instanceof Enemy && m.isAlive()).isEmpty();
-        boolean alarm = danger || (state.getValue(LIT) && state.getValue(POWERED));
-        BlockState next = state.setValue(ALARM, alarm).setValue(FLASH, alarm && !state.getValue(FLASH));
+        BlockState next = state.setValue(ALARM, danger).setValue(FLASH, danger && !state.getValue(FLASH));
         if (next != state) {
             level.setBlock(pos, next, Block.UPDATE_ALL);
             if (next.getValue(ALARM) != state.getValue(ALARM)) level.updateNeighborsAt(pos, this);
-            // two tone siren
-            if (alarm) level.playSound(null, pos, SoundEvents.NOTE_BLOCK_BIT.value(), SoundSource.BLOCKS, 0.5F, next.getValue(FLASH) ? 0.7F : 0.5F);
+            if (next.getValue(FLASH)) level.playSound(null, pos, SoundEvents.NOTE_BLOCK_BIT.value(), SoundSource.BLOCKS, 0.4F, 0.5F);
         }
         if (state.getValue(LIT)) level.scheduleTick(pos, this, 10);
     }
 
-    // a signal turns it on in alarm mode, losing it goes back to watching for monsters
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean movedByPiston) {
-        boolean signal = level.hasNeighborSignal(pos);
-        if (signal == state.getValue(POWERED)) return;
-        BlockState next = state.setValue(POWERED, signal);
-        if (signal && !state.getValue(LIT)) {
-            next = next.setValue(LIT, true);
-            level.playSound(null, pos, SoundEvents.COPPER_BULB_TURN_ON, SoundSource.BLOCKS, 0.8F, 1.0F);
-        }
-        level.setBlock(pos, next, Block.UPDATE_ALL);
-        level.scheduleTick(pos, this, 2);
-    }
-
-    // quiet buzz while it is on
-    @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (state.getValue(LIT) && !state.getValue(ALARM) && random.nextInt(40) == 0)
-            level.playLocalSound(pos, SoundEvents.BEACON_AMBIENT, SoundSource.BLOCKS, 0.15F, 1.8F, false);
     }
 
     @Override
@@ -84,6 +64,6 @@ public class EmergencyLightBlock extends IndustrialLampBlock {
 
     @Override
     protected int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return state.getValue(ALARM) && !state.getValue(POWERED) ? 15 : 0;
+        return state.getValue(ALARM) ? 15 : 0;
     }
 }

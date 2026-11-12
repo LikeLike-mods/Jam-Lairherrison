@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "the_shell:block/machine_top",
-    "front": "the_shell:block/fuel_generator_front_on",
-    "side": "the_shell:block/machine_side"
-  }
-}

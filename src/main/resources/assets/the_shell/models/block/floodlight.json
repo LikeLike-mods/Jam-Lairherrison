@@ -14,7 +14,7 @@
       ],
       "to": [
         11,
-        1,
+        2,
         11
       ],
       "faces": {
@@ -41,45 +41,13 @@
     {
       "from": [
         7,
-        1,
+        2,
         7
       ],
       "to": [
         9,
-        4,
+        5,
         9
-      ],
-      "faces": {
-        "north": {
-          "texture": "#metal"
-        },
-        "south": {
-          "texture": "#metal"
-        },
-        "east": {
-          "texture": "#metal"
-        },
-        "west": {
-          "texture": "#metal"
-        },
-        "up": {
-          "texture": "#metal"
-        },
-        "down": {
-          "texture": "#metal"
-        }
-      }
-    },
-    {
-      "from": [
-        4,
-        4,
-        5
-      ],
-      "to": [
-        12,
-        11,
-        12
       ],
       "faces": {
         "north": {
@@ -106,44 +74,12 @@
       "from": [
         3,
         5,
-        7
-      ],
-      "to": [
-        4,
-        9,
-        10
-      ],
-      "faces": {
-        "north": {
-          "texture": "#metal"
-        },
-        "south": {
-          "texture": "#metal"
-        },
-        "east": {
-          "texture": "#metal"
-        },
-        "west": {
-          "texture": "#metal"
-        },
-        "up": {
-          "texture": "#metal"
-        },
-        "down": {
-          "texture": "#metal"
-        }
-      }
-    },
-    {
-      "from": [
-        12,
-        5,
-        7
+        5
       ],
       "to": [
         13,
-        9,
-        10
+        13,
+        12
       ],
       "faces": {
         "north": {
@@ -168,61 +104,38 @@
     },
     {
       "from": [
-        5,
-        5,
+        4,
+        6,
         4
       ],
       "to": [
-        11,
-        10,
+        12,
+        12,
         5
       ],
       "faces": {
         "north": {
-          "uv": [
-            5,
-            5,
-            11,
-            10
-          ],
+          "texture": "#lens"
+        },
+        "south": {
+          "texture": "#lens"
+        },
+        "east": {
+          "texture": "#lens"
+        },
+        "west": {
           "texture": "#lens"
         },
         "up": {
-          "uv": [
-            5,
-            5,
-            11,
-            6
-          ],
-          "texture": "#metal"
+          "texture": "#lens"
         },
         "down": {
-          "uv": [
-            5,
-            9,
-            11,
-            10
-          ],
-          "texture": "#metal"
-        },
-        "east": {
-          "uv": [
-            4,
-            5,
-            5,
-            10
-          ],
-          "texture": "#metal"
-        },
-        "west": {
-          "uv": [
-            4,
-            5,
-            5,
-            10
-          ],
-          "texture": "#metal"
+          "texture": "#lens"
         }
+      },
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
       }
     }
   ]

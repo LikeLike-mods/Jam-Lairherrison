@@ -1,7 +1,5 @@
 package net.ussm.the_shell.entites;
 
-import net.ussm.the_shell.items.ChargingPlugItem;
-import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -62,9 +60,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
             SynchedEntityData.defineId(Submarine.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> ENERGY =
             SynchedEntityData.defineId(Submarine.class, EntityDataSerializers.INT);
-    // charger it is plugged into, for the cable
-    private static final EntityDataAccessor<Optional<BlockPos>> CHARGER =
-            SynchedEntityData.defineId(Submarine.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
 
     public Submarine(EntityType<? extends Submarine> type, Level level) {
         super(type, level);
@@ -85,7 +80,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         super.defineSynchedData(builder);
         builder.define(ENERGY, MAX_ENERGY);
         builder.define(TIER, 0);
-        builder.define(CHARGER, Optional.empty());
     }
 
     public int getTier() {
@@ -211,7 +205,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         if (tag.contains("Interior")) interiorId = tag.getInt("Interior");
         if (tag.contains("Energy")) setEnergy(tag.getInt("Energy"));
         setTier(tag.getInt("Tier"));
-        setCharger(tag.contains("Charger") ? BlockPos.of(tag.getLong("Charger")) : null);
     }
 
     @Override
@@ -219,15 +212,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
         tag.putInt("Interior", interiorId);
         tag.putInt("Energy", getEnergy());
         tag.putInt("Tier", getTier());
-        if (getCharger() != null) tag.putLong("Charger", getCharger().asLong());
-    }
-
-    public BlockPos getCharger() {
-        return this.entityData.get(CHARGER).orElse(null);
-    }
-
-    public void setCharger(BlockPos pos) {
-        this.entityData.set(CHARGER, Optional.ofNullable(pos));
     }
 
     @Override
@@ -263,7 +247,6 @@ public class Submarine extends VehicleEntity implements GeoEntity {
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (stack.getItem() instanceof ChargingPlugItem) return ChargingPlugItem.plugInto(this, player, stack);
         int kit = kitTier(stack);
         if (kit > 0) {
             if (!this.level().isClientSide) {

@@ -142,8 +142,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SUBMARINE_UPGRADE_DIAMOND);
                         output.accept(ModItems.SUBMARINE_UPGRADE_NETHERITE);
                         output.accept(ModBlocks.HIBISCUS);
-                        output.accept(ModBlocks.STARFISH);
-                        output.accept(ModBlocks.PURPLE_STARFISH);
                         output.accept(ModBlocks.BIRD_OF_PARADISE);
                         output.accept(ModBlocks.FRANGIPANI);
                         output.accept(ModBlocks.SHADOW_LILY);
@@ -194,10 +192,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.CONTROL_CONSOLE);
                         output.accept(ModBlocks.MACHINE);
                         output.accept(ModBlocks.TANK);
-                        output.accept(ModBlocks.FUEL_GENERATOR);
-                        output.accept(ModBlocks.SOLAR_PANEL);
-                        output.accept(ModBlocks.POWER_CABLE);
-                        output.accept(ModBlocks.SUBMARINE_CHARGER);
                         output.accept(ModBlocks.RUSTY_BARREL);
                         output.accept(ModBlocks.HANGING_CABLES);
                         output.accept(ModBlocks.DANGER_SIGN);
