@@ -24,8 +24,13 @@ import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.RandomSupport;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.blending.Blender;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
+import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.ussm.the_shell.init.ModBlocks;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -73,11 +78,20 @@ public class AbyssChunkGenerator extends ChunkGenerator {
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         Heightmap floorMap = chunk.getOrCreateHeightmapUnprimed(Heightmap.Types.OCEAN_FLOOR_WG);
         Heightmap surfaceMap = chunk.getOrCreateHeightmapUnprimed(Heightmap.Types.WORLD_SURFACE_WG);
+        List<Fit> fits = new ArrayList<>();
+        if (structureManager != null) for (StructureStart start : structureManager.startsForStructure(chunk.getPos(), s -> s.terrainAdaptation() != TerrainAdjustment.NONE)) {
+            // how deep the start piece got sunk (quarry pit, depot...), same for every piece
+            BoundingBox first = start.getPieces().get(0).getBoundingBox();
+            int sunk = AbyssTerrain.floor((first.minX() + first.maxX()) / 2, (first.minZ() + first.maxZ()) / 2) - first.minY();
+            for (StructurePiece piece : start.getPieces())
+                if (piece.isCloseToChunk(chunk.getPos(), 16)) fits.add(new Fit(piece.getBoundingBox(), piece.getBoundingBox().minY() + sunk));
+        }
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = chunk.getPos().getMinBlockX() + dx;
                 int z = chunk.getPos().getMinBlockZ() + dz;
                 int floor = AbyssTerrain.floor(x, z);
+                for (Fit fit : fits) floor = fit.apply(x, z, floor);
                 int ceiling = AbyssTerrain.ceiling(x, z);
                 boolean rift = TestChunkGenerator.isRift(x, z);
                 AbyssTerrain.Zone zone = AbyssTerrain.zone(x, z);
@@ -90,6 +104,15 @@ public class AbyssChunkGenerator extends ChunkGenerator {
             }
         }
         return CompletableFuture.completedFuture(chunk);
+    }
+
+    // ground goes flat at the piece's ground level, then slopes back to normal around it
+    private record Fit(BoundingBox box, int ground) {
+        int apply(int x, int z, int floor) {
+            int d = Math.max(0, Math.max(Math.max(box.minX() - x, x - box.maxX()), Math.max(box.minZ() - z, z - box.maxZ())));
+            if (d > 16) return floor;
+            return Math.min(Math.max(floor, ground - d * 2), ground + d);
+        }
     }
 
     @Override

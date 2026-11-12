@@ -3,6 +3,7 @@ package net.ussm.the_shell.blocks.station;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -20,6 +21,10 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.ussm.the_shell.blocks.DecorBlock;
+import net.ussm.the_shell.events.DeepSeaEvents;
+import net.ussm.the_shell.events.SubmarineInterior;
+import net.ussm.the_shell.init.ModAttachments;
+import net.ussm.the_shell.init.ModBlocks;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
@@ -42,6 +47,10 @@ public class MachineBlock extends DecorBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide) {
+            if (!state.getValue(POWERED) && !powered(level, pos)) {
+                player.displayClientMessage(Component.translatable("message.the_shell.energy.none"), true);
+                return InteractionResult.SUCCESS;
+            }
             BlockState toggled = state.cycle(POWERED);
             level.setBlock(pos, toggled, Block.UPDATE_ALL);
             boolean on = toggled.getValue(POWERED);
@@ -59,6 +68,11 @@ public class MachineBlock extends DecorBlock {
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!state.getValue(POWERED)) return;
+        if (!powered(level, pos)) {   // power cut
+            level.setBlock(pos, state.setValue(POWERED, false), Block.UPDATE_ALL);
+            level.playSound(null, pos, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 0.6F, 1.4F);
+            return;
+        }
         giveAir(level, new AABB(pos).inflate(6.0));
         for (BlockPos vent : connectedVents(level, pos)) giveAir(level, new AABB(vent).inflate(4.0));
         level.scheduleTick(pos, this, 20);
@@ -66,8 +80,47 @@ public class MachineBlock extends DecorBlock {
 
     private static void giveAir(Level level, AABB area) {
         for (Player player : level.getEntitiesOfClass(Player.class, area)) {
-            if (player.isEyeInFluid(FluidTags.WATER)) player.setAirSupply(player.getMaxAirSupply());
+            if (!player.isEyeInFluid(FluidTags.WATER)) continue;
+            player.setAirSupply(player.getMaxAirSupply());
+            int missing = ModAttachments.MAX_OXYGEN - player.getData(ModAttachments.OXYGEN);
+            if (missing > 0) DeepSeaEvents.giveOxygen(player, Math.min(480, missing));   // the diving suit too
         }
+    }
+
+    // in the submarine cabin it is the engine, it runs on the battery
+    private static boolean powered(Level level, BlockPos pos) {
+        return level.dimension() == SubmarineInterior.INTERIOR || Energy.power(level, pos) > 0;
+    }
+
+    // a turned valve fixed on a pipe shuts it
+    private static boolean open(Level level, BlockPos pipe) {
+        for (Direction d : Direction.values()) {
+            BlockPos p = pipe.relative(d);
+            BlockState s = level.getBlockState(p);
+            if (s.getBlock() instanceof ValveBlock && s.getValue(ValveBlock.POWERED) && pipe.equals(ValveBlock.attached(s, p))) return false;
+        }
+        return true;
+    }
+
+    // a vent only blows when a running pump is on its pipes
+    public static boolean feeds(Level level, BlockPos vent) {
+        Set<BlockPos> seen = new HashSet<>();
+        ArrayDeque<BlockPos> todo = new ArrayDeque<>();
+        seen.add(vent);
+        todo.add(vent);
+        while (!todo.isEmpty() && seen.size() < 256) {
+            BlockPos p = todo.poll();
+            for (Direction d : Direction.values()) {
+                BlockPos n = p.relative(d);
+                if (!seen.add(n)) continue;
+                BlockState s = level.getBlockState(n);
+                if (s.is(ModBlocks.PIPE.get())) {
+                    if (open(level, n)) todo.add(n);
+                }
+                else if (s.getBlock() instanceof MachineBlock && s.getValue(POWERED)) return true;
+            }
+        }
+        return false;
     }
 
     private static Set<BlockPos> connectedVents(Level level, BlockPos start) {
@@ -82,7 +135,9 @@ public class MachineBlock extends DecorBlock {
                 BlockPos n = p.relative(d);
                 if (!seen.add(n)) continue;
                 BlockState s = level.getBlockState(n);
-                if (s.getBlock() instanceof MetalPipeBlock) todo.add(n);
+                if (s.is(ModBlocks.PIPE.get())) {
+                    if (open(level, n)) todo.add(n);
+                }
                 else if (s.getBlock() instanceof AirVentBlock) vents.add(n);
             }
         }

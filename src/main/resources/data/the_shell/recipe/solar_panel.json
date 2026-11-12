@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GGG",
+    "LRL",
+    "PPP"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "P": {
+      "item": "the_shell:metal_plating"
+    }
+  },
+  "result": {
+    "id": "the_shell:solar_panel",
+    "count": 1
+  }
+}

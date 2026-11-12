@@ -8,6 +8,9 @@
     "the_shell:abyssal_redstone_ore",
     "the_shell:abyssal_lapis_ore",
     "the_shell:abyssal_diamond_ore",
-    "the_shell:abyssal_emerald_ore"
+    "the_shell:abyssal_emerald_ore",
+    "the_shell:shadow_kyber_ore_white",
+    "the_shell:shadow_kyber_ore_violet",
+    "the_shell:light_kyber_ore"
   ]
 }

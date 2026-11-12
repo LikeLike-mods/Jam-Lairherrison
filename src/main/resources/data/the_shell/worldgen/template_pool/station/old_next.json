@@ -1,0 +1,167 @@
+{
+  "fallback": "the_shell:station/caps",
+  "elements": [
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_straight_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_long_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_glass_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_corner_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_t_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/corridor_cross_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_dorm_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_living_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_mess_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_infirmary_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_workshop_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_lab_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_reactor_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_greenhouse_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_storage_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_bedroom_1_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_bedroom_2_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "the_shell:station/room_bedroom_3_ruined",
+        "projection": "rigid",
+        "processors": "the_shell:station_old"
+      }
+    }
+  ]
+}

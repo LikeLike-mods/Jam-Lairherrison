@@ -1,0 +1,146 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "front": "the_shell:block/submarine_charger_front",
+    "side": "the_shell:block/machine_side",
+    "top": "the_shell:block/machine_top",
+    "cable": "the_shell:block/power_cable",
+    "particle": "the_shell:block/machine_side"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        1,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#top"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        1,
+        6
+      ],
+      "to": [
+        11,
+        15,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#front",
+          "uv": [
+            5,
+            1,
+            11,
+            15
+          ]
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#top"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        15,
+        5
+      ],
+      "to": [
+        12,
+        16,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#top"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        5,
+        4
+      ],
+      "to": [
+        10,
+        8,
+        6
+      ],
+      "faces": {
+        "north": {
+          "texture": "#cable"
+        },
+        "south": {
+          "texture": "#cable"
+        },
+        "east": {
+          "texture": "#cable"
+        },
+        "west": {
+          "texture": "#cable"
+        },
+        "up": {
+          "texture": "#cable"
+        },
+        "down": {
+          "texture": "#cable"
+        }
+      }
+    }
+  ]
+}

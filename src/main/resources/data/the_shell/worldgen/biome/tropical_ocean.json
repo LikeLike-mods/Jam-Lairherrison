@@ -28,7 +28,8 @@
     [
       "minecraft:warm_ocean_vegetation",
       "minecraft:seagrass_warm",
-      "minecraft:sea_pickle"
+      "minecraft:sea_pickle",
+      "the_shell:starfish_underwater"
     ],
     []
   ],
@@ -54,6 +55,12 @@
         "weight": 6,
         "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "the_shell:swordfish",
+        "weight": 3,
+        "minCount": 1,
+        "maxCount": 2
       }
     ],
     "water_creature": [

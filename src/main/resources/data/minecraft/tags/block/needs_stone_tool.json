@@ -48,6 +48,10 @@
     "the_shell:broken_industrial_lamp",
     "the_shell:abyssal_iron_ore",
     "the_shell:abyssal_copper_ore",
-    "the_shell:abyssal_lapis_ore"
+    "the_shell:abyssal_lapis_ore",
+    "the_shell:power_cable",
+    "the_shell:fuel_generator",
+    "the_shell:solar_panel",
+    "the_shell:submarine_charger"
   ]
 }

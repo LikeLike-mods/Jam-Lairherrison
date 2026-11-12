@@ -20,6 +20,6 @@ public class WorldSeed {
 
     @SubscribeEvent
     public static void joined(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) PacketDistributor.sendToPlayer(player, new SeedPayload(TestChunkGenerator.SEED));
+        if (event.getEntity() instanceof ServerPlayer player && player.connection.hasChannel(SeedPayload.TYPE)) PacketDistributor.sendToPlayer(player, new SeedPayload(TestChunkGenerator.SEED));
     }
 }

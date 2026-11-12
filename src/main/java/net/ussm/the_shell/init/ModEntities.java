@@ -55,6 +55,7 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.6F, 1.1F);
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.YetiCrab>> YETI_CRAB = register("yeti_crab", net.ussm.the_shell.entites.YetiCrab::new, MobCategory.AXOLOTLS, 0.8F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.Hatchetfish>> HATCHETFISH = register("hatchetfish", net.ussm.the_shell.entites.Hatchetfish::new, MobCategory.WATER_AMBIENT, 0.35F, 0.45F);
+    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.Swordfish>> SWORDFISH = register("swordfish", net.ussm.the_shell.entites.Swordfish::new, MobCategory.WATER_AMBIENT, 0.9F, 0.6F);
     public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ColossalSquid>> COLOSSAL_SQUID = register("colossal_squid", net.ussm.the_shell.entites.ColossalSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.6F, 2.8F);
 
 
@@ -113,6 +114,7 @@ public class ModEntities {
         event.put(VAMPIRE_SQUID.get(), VampireSquid.createAttributes().build());
         event.put(YETI_CRAB.get(), YetiCrab.createAttributes().build());
         event.put(HATCHETFISH.get(), AbstractFish.createAttributes().build());
+        event.put(SWORDFISH.get(), net.ussm.the_shell.entites.Swordfish.createAttributes().build());
         event.put(COLOSSAL_SQUID.get(), ColossalSquid.createAttributes().build());
         event.put(BASILOSAURUS.get(), BasilosaurusEntity.createAttributes().build());
         event.put(BLUE_WHALE.get(), BlueWhaleEntity.createAttributes().build());

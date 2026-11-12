@@ -1,5 +1,6 @@
 package net.ussm.the_shell.init;
 
+import net.ussm.the_shell.items.ChargingPlugItem;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.*;
@@ -131,6 +132,9 @@ public class ModItems {
     public static final DeferredItem<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook",
             () -> new GrapplingHookItem(new Item.Properties().durability(32)));
 
+    public static final DeferredItem<Item> CHARGING_PLUG = ITEMS.register("charging_plug",
+            () -> new ChargingPlugItem(new Item.Properties().stacksTo(1)));
+
     public static final DeferredItem<Item> OXYGEN_BOTTLE = ITEMS.register("oxygen_bottle",
             () -> new OxygenBottleItem(new Item.Properties().durability(4)));
 
@@ -207,6 +211,7 @@ public class ModItems {
     public static final DeferredItem<Item> VAMPIRE_SQUID_SPAWN_EGG = spawnEgg("vampire_squid", ModEntities.VAMPIRE_SQUID, 0x600E24, 0xEC282C);
     public static final DeferredItem<Item> YETI_CRAB_SPAWN_EGG = spawnEgg("yeti_crab", ModEntities.YETI_CRAB, 0xE8DCC8, 0xF4F4EC);
     public static final DeferredItem<Item> HATCHETFISH_SPAWN_EGG = spawnEgg("hatchetfish", ModEntities.HATCHETFISH, 0xB8C4CC, 0x7FD8FF);
+    public static final DeferredItem<Item> SWORDFISH_SPAWN_EGG = spawnEgg("swordfish", ModEntities.SWORDFISH, 0x2B4A78, 0xC9D6E0);
     public static final DeferredItem<Item> COLOSSAL_SQUID_SPAWN_EGG = spawnEgg("colossal_squid", ModEntities.COLOSSAL_SQUID, 0x8A1E22, 0x6FD0FF);
 
     public static final DeferredItem<Item> LEVIATHAN_EGG = ITEMS.register("leviathan_egg",

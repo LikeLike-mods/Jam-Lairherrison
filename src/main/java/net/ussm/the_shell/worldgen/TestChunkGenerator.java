@@ -118,6 +118,8 @@ public class TestChunkGenerator extends ChunkGenerator {
         SEED = seed;
         RIFT_LINES = riftNoise(SEED + 10, 0.004f, FastNoiseLite.FractalType.Ridged);
         RIFT_PIECES = riftNoise(SEED + 11, 0.004f, FastNoiseLite.FractalType.FBm);
+        CAVES_A = riftNoise(SEED + 20, 0.02f, FastNoiseLite.FractalType.FBm);
+        CAVES_B = riftNoise(SEED + 21, 0.02f, FastNoiseLite.FractalType.FBm);
         AbyssTerrain.reseed();
     }
 
@@ -128,6 +130,16 @@ public class TestChunkGenerator extends ChunkGenerator {
         n.SetFractalType(type);
         n.SetFractalOctaves(1);
         return n;
+    }
+
+    // caves inside the mountains: worm tunnels where two noises cross zero, and a few big halls
+    private static volatile FastNoiseLite CAVES_A = riftNoise(SEED + 20, 0.02f, FastNoiseLite.FractalType.FBm);
+    private static volatile FastNoiseLite CAVES_B = riftNoise(SEED + 21, 0.02f, FastNoiseLite.FractalType.FBm);
+
+    public static boolean isCave(int x, int y, int z) {
+        float a = CAVES_A.GetNoise(x, y * 1.7f, z);
+        float b = CAVES_B.GetNoise(x, y * 1.7f, z);
+        return (Math.abs(a) < 0.075f && Math.abs(b) < 0.075f) || a > 0.6f;
     }
 
     public static boolean isRift(int x, int z) {
@@ -319,6 +331,14 @@ public class TestChunkGenerator extends ChunkGenerator {
                     y += 1;
                 }
 
+                // Mountain caves, they only open on the cliffs
+                if (a > SEA + 14) {
+                    int roof = slope >= 7f ? a : a - 6;
+                    for (int cy = SEA + 3; cy < roof; cy++) {
+                        if (isCave(posX, cy, posZ)) chunk.setBlockState(pos.set(x, cy, z), Blocks.CAVE_AIR.defaultBlockState(), false);
+                    }
+                }
+
                 // Rifts
                 if (isRift(posX, posZ)) {
                     chunk.setBlockState(pos.set(x, -128, z), ModBlocks.ABYSSAL_VOID.get().defaultBlockState(), false);
@@ -341,9 +361,13 @@ public class TestChunkGenerator extends ChunkGenerator {
         return -128;
     }
 
+    // same ground as fillFromNoise, so structures land on the islands
     @Override
     public int getBaseHeight(int x, int z, Heightmap.Types type, LevelHeightAccessor world, RandomState random) {
-        return 0;
+        float raw = getHeight(x, z);
+        int top = isRift(x, z) ? -128 : Math.round(raw + (SWAMP_LEVEL - raw) * getSwampiness(x, z, raw));
+        boolean floor = type == Heightmap.Types.OCEAN_FLOOR || type == Heightmap.Types.OCEAN_FLOOR_WG;
+        return (floor ? top : Math.max(top, SEA)) + 1;
     }
 
     @Override
@@ -353,11 +377,6 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     @Override
     public void addDebugScreenInfo(List<String> list, RandomState random, BlockPos pos) {}
-
-
-    @Override
-    public void createStructures(RegistryAccess registryAccess, ChunkGeneratorStructureState structureState, StructureManager structureManager, ChunkAccess chunk, StructureTemplateManager structureTemplateManager) {
-    }
 
 
 }

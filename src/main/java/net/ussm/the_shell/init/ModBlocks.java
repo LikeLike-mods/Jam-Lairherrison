@@ -290,6 +290,14 @@ public class ModBlocks {
                     .ignitedByLava()
                     .pushReaction(PushReaction.DESTROY)));
 
+    public static final DeferredBlock<net.ussm.the_shell.blocks.archipelago.StarfishBlock> STARFISH = registerBlock("starfish",
+            () -> new net.ussm.the_shell.blocks.archipelago.StarfishBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE)
+                    .noCollission().instabreak().noOcclusion().sound(SoundType.CORAL_BLOCK).pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<net.ussm.the_shell.blocks.archipelago.StarfishBlock> PURPLE_STARFISH = registerBlock("purple_starfish",
+            () -> new net.ussm.the_shell.blocks.archipelago.StarfishBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE)
+                    .noCollission().instabreak().noOcclusion().sound(SoundType.CORAL_BLOCK).pushReaction(PushReaction.DESTROY)));
+
     public static final DeferredBlock<TropicalFlowerBlock> HIBISCUS = registerBlock("hibiscus",
             () -> new TropicalFlowerBlock(MobEffects.REGENERATION, 8.0f, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)));
 
@@ -594,6 +602,18 @@ public class ModBlocks {
     public static final DeferredBlock<TankBlock> TANK = registerBlock("tank",
             () -> new TankBlock(metal()));
 
+    public static final DeferredBlock<PowerCableBlock> POWER_CABLE = registerBlock("power_cable",
+            () -> new PowerCableBlock(metal().strength(1.5f).noOcclusion()));
+
+    public static final DeferredBlock<FuelGeneratorBlock> FUEL_GENERATOR = registerBlock("fuel_generator",
+            () -> new FuelGeneratorBlock(metal().lightLevel(s -> s.getValue(FuelGeneratorBlock.LIT) ? 10 : 0)));
+
+    public static final DeferredBlock<SolarPanelBlock> SOLAR_PANEL = registerBlock("solar_panel",
+            () -> new SolarPanelBlock(metal().strength(2f).noOcclusion()));
+
+    public static final DeferredBlock<SubmarineChargerBlock> SUBMARINE_CHARGER = registerBlock("submarine_charger",
+            () -> new SubmarineChargerBlock(metal().noOcclusion()));
+
     public static final DeferredBlock<StorageBlock> RUSTY_BARREL = registerBlock("rusty_barrel",
             () -> new StorageBlock(metal(), Block.box(2, 0, 2, 14, 14, 14)));
 
@@ -634,7 +654,7 @@ public class ModBlocks {
             () -> new EmergencyLightBlock(metal()
                     .strength(3f, 6f)
                     .noOcclusion()
-                    .lightLevel(s -> s.getValue(EmergencyLightBlock.ALARM) && s.getValue(EmergencyLightBlock.FLASH) ? 12 : 0)));
+                    .lightLevel(s -> !s.getValue(EmergencyLightBlock.LIT) ? 0 : s.getValue(EmergencyLightBlock.ALARM) ? (s.getValue(EmergencyLightBlock.FLASH) ? 13 : 4) : 7)));
 
     public static final DeferredBlock<IndustrialLampBlock> BROKEN_INDUSTRIAL_LAMP = registerBlock("broken_industrial_lamp",
             () -> new IndustrialLampBlock(metal()

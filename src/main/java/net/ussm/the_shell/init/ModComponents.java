@@ -36,6 +36,10 @@ public class ModComponents {
         COMPONENTS.registerComponentType("grapple_target",
             builder -> builder.networkSynchronized(BlockPos.STREAM_CODEC));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> CHARGER_POS =
+        COMPONENTS.registerComponentType("charger_pos",
+            builder -> builder.persistent(BlockPos.CODEC).networkSynchronized(BlockPos.STREAM_CODEC));
+
     public static void register(IEventBus eventBus) {
         COMPONENTS.register(eventBus);
     }

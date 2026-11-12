@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "the_shell:machine",
+    "the_shell:fuel_generator",
+    "the_shell:solar_panel",
+    "the_shell:submarine_charger"
+  ]
+}

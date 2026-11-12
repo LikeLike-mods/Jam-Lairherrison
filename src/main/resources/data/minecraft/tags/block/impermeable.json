@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "the_shell:reinforced_glass",
+    "the_shell:porthole",
+    "the_shell:submarine_window"
+  ]
+}

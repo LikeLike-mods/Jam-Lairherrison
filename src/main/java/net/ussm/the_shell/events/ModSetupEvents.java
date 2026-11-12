@@ -43,6 +43,8 @@ public class ModSetupEvents {
             event.register(type, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                     SpawnRules::onGrass, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         }
+event.register(ModEntities.SWORDFISH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                net.minecraft.world.entity.animal.WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(ModEntities.JELLYFISH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SpawnRules::inLagoon, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         for (EntityType<? extends Mob> type : List.of(ModEntities.ABYSSAL_ANGLER.get(), ModEntities.GULPER_EEL.get(),

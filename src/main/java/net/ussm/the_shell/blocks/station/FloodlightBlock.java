@@ -13,7 +13,7 @@ public class FloodlightBlock extends LightDecorBlock {
     public static final int RANGE = 24;
 
     public FloodlightBlock(Properties properties) {
-        super(properties, Block.box(3, 0, 4, 13, 13, 12), true);
+        super(properties, Block.box(3, 0, 4, 13, 11, 12), true);
     }
 
     @Override
