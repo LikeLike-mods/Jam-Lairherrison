@@ -1,0 +1,21 @@
+{
+  "name": "Seagull",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:feather",
+  "advancement": "the_shell:encyclopedie/find_seagull",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Hmm... A Seagull, what a funny bird, no? It try to steal your meal... Be nice with them."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:seagull",
+      "scale": 0.8,
+      "rotate": true,
+      "default_rotation ": -90,
+      "name": "Seagull",
+      "text": "A bird with dark past..."
+    }
+  ]
+}

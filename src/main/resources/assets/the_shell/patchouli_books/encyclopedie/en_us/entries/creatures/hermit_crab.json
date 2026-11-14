@@ -1,0 +1,21 @@
+{
+  "name": "Hermit Crab",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:nautilus_shell",
+  "advancement": "the_shell:encyclopedie/find_hermit_crab",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "You can find them everywhere on the beach, like crabs. They are shy like many people."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:hermit_crab",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation ": -90,
+      "name": "Hermit Crab",
+      "text": "A shy crab who don't love people..."
+    }
+  ]
+}
