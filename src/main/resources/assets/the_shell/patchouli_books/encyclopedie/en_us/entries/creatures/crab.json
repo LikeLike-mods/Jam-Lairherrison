@@ -1,0 +1,27 @@
+{
+  "name": "Crab",
+  "category": "the_shell:creatures",
+  "icon": "the_shell:crab_claw",
+  "advancement": "the_shell:encyclopedie/find_crab",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Crabs are a typical animal of The Shell, you can find them everywhere on the beach. Maybe try to become friend with them? OR try to do an automatic factory of cooked meat carb? $(br)How know what you will do to them...."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:crab",
+      "scale": 0.8,
+      "rotate": true,
+      "default_rotation ": -90,
+      "name": "A crab",
+      "text": "Look at it! It want become your friend!"
+    },
+    {
+      "type": "patchouli:smelting",
+      "title": "Crab Meat",
+      "recipe": "the_shell:cooked_crab_meat",
+      "text": "What else can make you feel better after a long adventure than a good portion of cooked crab? $(br)You can cook it also with a campfire or a smelt."
+    }
+  ]
+}
