@@ -134,9 +134,6 @@ public class ModItems {
     public static final DeferredItem<Item> OXYGEN_BOTTLE = ITEMS.register("oxygen_bottle",
             () -> new OxygenBottleItem(new Item.Properties().durability(4)));
 
-    public static final DeferredItem<Item> POCKET_SONAR = ITEMS.register("pocket_sonar",
-            () -> new PocketSonarItem(new Item.Properties().durability(96)));
-
     public static final DeferredItem<Item> IRON_ABYSS_HELMET = ITEMS.register("iron_abyss_helmet",
             () -> new AbyssHelmetItem(new Item.Properties()
                     .stacksTo(1)

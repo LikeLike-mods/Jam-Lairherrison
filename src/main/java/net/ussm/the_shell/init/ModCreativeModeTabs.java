@@ -1,5 +1,7 @@
 package net.ussm.the_shell.init;
 
+import net.minecraft.resources.ResourceKey;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.ussm.the_shell.TheShell;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -14,21 +16,24 @@ public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TheShell.MOD_ID);
 
-    public static final Supplier<CreativeModeTab> BLOCKS = CREATIVE_MODE_TAB.register("blocks",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ARCHIPELAGO = CREATIVE_MODE_TAB.register("archipelago",
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModItems.CONCH.get()))
-                    .title(Component.translatable("creativetab.the_shell.blocks"))
+                    .title(Component.translatable("creativetab.the_shell.archipelago"))
                     .displayItems(((itemDisplayParameters, output) -> {
+                        output.accept(ModBlocks.NOTCH_ALTAR);
+                        output.accept(ModBlocks.TEMPLE_SEAL);
+                        output.accept(ModBlocks.TEMPLE_PEDESTAL);
+                        output.accept(ModItems.CONCH);
+
                         output.accept(ModBlocks.BROWNSTONE);
-                        output.accept(ModBlocks.PALM_LOG);
-                        output.accept(ModBlocks.PALM_LEAVES);
+                        output.accept(ModBlocks.LIGHT_KYBER_ORE);
+                        output.accept(ModBlocks.GREY_GRANITE);
+                        output.accept(ModBlocks.SHADOW_KYBER_ORE_WHITE);
+
                         output.accept(ModBlocks.PALM_SAPLING);
-                        output.accept(ModBlocks.BANANA_STEM);
-                        output.accept(ModBlocks.BANANA_LEAVES);
-                        output.accept(ModBlocks.BANANA_SAPLING);
-                        output.accept(ModBlocks.DATE_PALM_LOG);
-                        output.accept(ModBlocks.DATE_PALM_LEAVES);
-                        output.accept(ModBlocks.DATE_PALM_SAPLING);
+                        output.accept(ModBlocks.PALM_LEAVES);
+                        output.accept(ModBlocks.PALM_LOG);
                         output.accept(ModBlocks.STRIPPED_PALM_LOG);
                         output.accept(ModBlocks.PALM_WOOD);
                         output.accept(ModBlocks.STRIPPED_PALM_WOOD);
@@ -41,6 +46,17 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.PALM_TRAPDOOR);
                         output.accept(ModBlocks.PALM_PRESSURE_PLATE);
                         output.accept(ModBlocks.PALM_BUTTON);
+                        output.accept(ModItems.PALM_SIGN);
+                        output.accept(ModItems.PALM_HANGING_SIGN);
+                        output.accept(ModItems.PALM_BOAT);
+                        output.accept(ModItems.PALM_CHEST_BOAT);
+                        output.accept(ModBlocks.COCONUT);
+                        output.accept(ModItems.COCONUT_HALF);
+                        output.accept(ModItems.COCONUT_SHELL);
+
+                        output.accept(ModBlocks.DATE_PALM_SAPLING);
+                        output.accept(ModBlocks.DATE_PALM_LEAVES);
+                        output.accept(ModBlocks.DATE_PALM_LOG);
                         output.accept(ModBlocks.DATE_PALM_PLANKS);
                         output.accept(ModBlocks.DATE_PALM_STAIRS);
                         output.accept(ModBlocks.DATE_PALM_SLAB);
@@ -50,6 +66,12 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.DATE_PALM_TRAPDOOR);
                         output.accept(ModBlocks.DATE_PALM_PRESSURE_PLATE);
                         output.accept(ModBlocks.DATE_PALM_BUTTON);
+                        output.accept(ModItems.DATES);
+                        output.accept(ModItems.DATE_SYRUP);
+
+                        output.accept(ModBlocks.BANANA_SAPLING);
+                        output.accept(ModBlocks.BANANA_LEAVES);
+                        output.accept(ModBlocks.BANANA_STEM);
                         output.accept(ModBlocks.BANANA_PLANKS);
                         output.accept(ModBlocks.BANANA_STAIRS);
                         output.accept(ModBlocks.BANANA_SLAB);
@@ -59,88 +81,19 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BANANA_TRAPDOOR);
                         output.accept(ModBlocks.BANANA_PRESSURE_PLATE);
                         output.accept(ModBlocks.BANANA_BUTTON);
-                        output.accept(ModItems.PALM_SIGN);
-                        output.accept(ModItems.PALM_HANGING_SIGN);
-                        output.accept(ModItems.PALM_BOAT);
-                        output.accept(ModItems.PALM_CHEST_BOAT);
-                        output.accept(ModBlocks.DRY_GRASS);
-                        output.accept(ModBlocks.SHORT_DRY_GRASS);
-                        output.accept(ModBlocks.ABYSSAL_STONE);
-                        output.accept(ModBlocks.ABYSSAL_SILT);
-                        output.accept(ModBlocks.ABYSSAL_BASALT);
-                        output.accept(ModBlocks.HYDROTHERMAL_CHIMNEY);
-                        output.accept(ModBlocks.TUBE_WORMS);
-                        output.accept(ModBlocks.GLOWING_ANEMONE);
-                        output.accept(ModBlocks.MANGANESE_NODULE);
-                        output.accept(ModBlocks.SHADOW_KYBER_ORE_WHITE);
-                        output.accept(ModBlocks.SHADOW_KYBER_ORE_VIOLET);
-                        output.accept(ModBlocks.LIGHT_KYBER_ORE);
-                        output.accept(ModBlocks.ABYSSAL_COAL_ORE);
-                        output.accept(ModBlocks.ABYSSAL_IRON_ORE);
-                        output.accept(ModBlocks.ABYSSAL_COPPER_ORE);
-                        output.accept(ModBlocks.ABYSSAL_GOLD_ORE);
-                        output.accept(ModBlocks.ABYSSAL_REDSTONE_ORE);
-                        output.accept(ModBlocks.ABYSSAL_LAPIS_ORE);
-                        output.accept(ModBlocks.ABYSSAL_DIAMOND_ORE);
-                        output.accept(ModBlocks.ABYSSAL_EMERALD_ORE);
-                        output.accept(ModBlocks.SULFUR_BLOCK);
-                        output.accept(ModBlocks.GLOWING_CORAL_BLOCK);
-                        output.accept(ModItems.SHADOW_KYBER_CRYSTAL_WHITE);
-                        output.accept(ModItems.SHADOW_KYBER_CRYSTAL_VIOLET);
-                        output.accept(ModItems.LIGHT_KYBER_CRYSTAL);
-                        output.accept(ModItems.LEVIATHAN_HEART);
-                        output.accept(ModItems.PURE_KYBER_CRYSTAL);
-                        output.accept(ModItems.BLACK_PEARL);
-                        output.accept(ModItems.GRAPPLING_HOOK);
-                        output.accept(ModItems.POCKET_SONAR);
-                        output.accept(ModItems.SHADOW_SABER_SWORD);
-                        output.accept(ModItems.SHADOW_SABER_SWORD_VIOLET);
-                        output.accept(ModItems.LIGHT_SABER_SWORD);
-                        output.accept(ModItems.PURE_SABER_PICKAXE);
-                        output.accept(ModItems.AQUA_PEARL);
-                        output.accept(ModItems.OXYGEN_BOTTLE);
-                        output.accept(ModBlocks.AIR_BUBBLE);
-                        output.accept(ModBlocks.NOTCH_ALTAR);
-                        output.accept(ModBlocks.TEMPLE_SEAL);
-                        output.accept(ModBlocks.TEMPLE_PEDESTAL);
-                        output.accept(ModBlocks.LIGHT_SAND);
-                        output.accept(ModBlocks.LIGHT_SAND_WET);
-                        output.accept(ModBlocks.GREY_GRANITE);
-                        output.accept(ModBlocks.COCONUT);
-                        output.accept(ModItems.COCONUT_HALF);
                         output.accept(ModItems.BANANA);
                         output.accept(ModBlocks.BANANA_PEEL);
-                        output.accept(ModBlocks.TITANOBOA_SHED);
                         output.accept(ModItems.BANANA_BREAD);
                         output.accept(ModItems.BANANA_CHIPS);
-                        output.accept(ModItems.DATES);
-                        output.accept(ModItems.DATE_SYRUP);
-                        output.accept(ModItems.COCONUT_SHELL);
+
+                        output.accept(ModBlocks.LIGHT_SAND);
+                        output.accept(ModBlocks.LIGHT_SAND_WET);
+                        output.accept(ModBlocks.DRY_GRASS);
+                        output.accept(ModBlocks.SHORT_DRY_GRASS);
+                        output.accept(ModBlocks.MESSAGE_BOTTLE);
+
                         output.accept(ModItems.REDSTONE_PEPPER);
                         output.accept(ModItems.REDSTONE_PEPPER_SEEDS);
-                        output.accept(ModItems.RAW_CRAB_MEAT);
-                        output.accept(ModItems.COOKED_CRAB_MEAT);
-                        output.accept(ModItems.PURUSSAURUS_MEAT);
-                        output.accept(ModItems.COOKED_PURUSSAURUS_MEAT);
-                        output.accept(ModItems.PURUSSAURUS_SCALE);
-                        output.accept(ModItems.TITANOBOA_MEAT);
-                        output.accept(ModItems.TITANOBOA_SKIN);
-                        output.accept(ModBlocks.MESSAGE_BOTTLE);
-                        output.accept(ModBlocks.ABYSS_SKULL);
-                        output.accept(ModItems.ABYSSAL_SCALE);
-                        output.accept(ModBlocks.LIVING_ABYSS_SKULL);
-                        output.accept(ModItems.IRON_ABYSS_HELMET);
-                        output.accept(ModItems.DIAMOND_ABYSS_HELMET);
-                        output.accept(ModItems.NETHERITE_ABYSS_HELMET);
-                        output.accept(ModItems.DIVING_HELMET);
-                        output.accept(ModItems.DIVING_CHESTPLATE);
-                        output.accept(ModItems.DIVING_LEGGINGS);
-                        output.accept(ModItems.DIVING_BOOTS);
-                        output.accept(ModItems.DIVING_ABYSS_HELMET);
-                        output.accept(ModItems.SUBMARINE);
-                        output.accept(ModItems.SUBMARINE_UPGRADE_IRON);
-                        output.accept(ModItems.SUBMARINE_UPGRADE_DIAMOND);
-                        output.accept(ModItems.SUBMARINE_UPGRADE_NETHERITE);
                         output.accept(ModBlocks.HIBISCUS);
                         output.accept(ModBlocks.BIRD_OF_PARADISE);
                         output.accept(ModBlocks.FRANGIPANI);
@@ -150,63 +103,158 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.FLYTRAP);
                         output.accept(ModBlocks.PITCHER_PLANT);
                         output.accept(ModItems.NECTAR);
+
+                        output.accept(ModItems.RAW_CRAB_MEAT);
+                        output.accept(ModItems.COOKED_CRAB_MEAT);
                         output.accept(ModItems.CRAB_CLAW);
-                        output.accept(ModItems.CONCH);
-                        output.accept(ModBlocks.METAL_PLATING);
-                        output.accept(ModBlocks.METAL_PLATING_STAIRS);
-                        output.accept(ModBlocks.METAL_PLATING_SLAB);
-                        output.accept(ModBlocks.RUSTY_METAL_PLATING);
-                        output.accept(ModBlocks.RUSTY_METAL_PLATING_STAIRS);
-                        output.accept(ModBlocks.RUSTY_METAL_PLATING_SLAB);
-                        output.accept(ModBlocks.METAL_GRATE);
-                        output.accept(ModBlocks.RUSTY_METAL_GRATE);
-                        output.accept(ModBlocks.REINFORCED_GLASS);
-                        output.accept(ModBlocks.INDUSTRIAL_LAMP);
-                        output.accept(ModBlocks.PIPE);
-                        output.accept(ModBlocks.VALVE);
-                        output.accept(ModBlocks.SLIDING_DOOR);
-                        output.accept(ModBlocks.BROKEN_SLIDING_DOOR);
-                        output.accept(ModBlocks.CHECKER_PLATE);
-                        output.accept(ModBlocks.RUSTY_CHECKER_PLATE);
-                        output.accept(ModBlocks.CORRUGATED_METAL);
-                        output.accept(ModBlocks.RUSTY_CORRUGATED_METAL);
-                        output.accept(ModBlocks.RIVETED_PANEL);
-                        output.accept(ModBlocks.RUSTY_RIVETED_PANEL);
-                        output.accept(ModBlocks.HAZARD_BLOCK);
-                        output.accept(ModBlocks.STATION_CONCRETE);
-                        output.accept(ModBlocks.AIR_VENT);
-                        output.accept(ModBlocks.METAL_CRATE);
-                        output.accept(ModBlocks.PORTHOLE);
-                        output.accept(ModBlocks.STEEL_BEAM);
-                        output.accept(ModBlocks.RUSTY_STEEL_BEAM);
-                        output.accept(ModBlocks.METAL_PLATING_WALL);
-                        output.accept(ModBlocks.RUSTY_METAL_PLATING_WALL);
-                        output.accept(ModBlocks.METAL_GRATE_STAIRS);
-                        output.accept(ModBlocks.METAL_GRATE_SLAB);
-                        output.accept(ModBlocks.RUSTY_METAL_GRATE_STAIRS);
-                        output.accept(ModBlocks.RUSTY_METAL_GRATE_SLAB);
-                        output.accept(ModBlocks.STEEL_TRAPDOOR);
-                        output.accept(ModBlocks.RUSTY_STEEL_TRAPDOOR);
-                        output.accept(ModBlocks.METAL_LADDER);
-                        output.accept(ModBlocks.REINFORCED_GLASS_PANE);
-                        output.accept(ModBlocks.CONTROL_CONSOLE);
-                        output.accept(ModBlocks.MACHINE);
-                        output.accept(ModBlocks.TANK);
-                        output.accept(ModBlocks.RUSTY_BARREL);
-                        output.accept(ModBlocks.HANGING_CABLES);
-                        output.accept(ModBlocks.DANGER_SIGN);
-                        output.accept(ModBlocks.LIGHT_STRIP);
-                        output.accept(ModBlocks.FLOODLIGHT);
-                        output.accept(ModBlocks.EMERGENCY_LIGHT);
-                        output.accept(ModBlocks.BROKEN_INDUSTRIAL_LAMP);
-                        ModItems.SPAWN_EGGS.forEach(output::accept);
+
+                        output.accept(ModItems.TITANOBOA_MEAT);
+                        output.accept(ModBlocks.TITANOBOA_SHED);
+                        output.accept(ModItems.TITANOBOA_SKIN);
+                        output.accept(ModItems.PURUSSAURUS_MEAT);
+                        output.accept(ModItems.COOKED_PURUSSAURUS_MEAT);
+                        output.accept(ModItems.PURUSSAURUS_SCALE);
+
+                        output.accept(ModItems.PURUSSAURUS_SPAWN_EGG);
+                        output.accept(ModItems.TITANOBOA_SPAWN_EGG);
+                        output.accept(ModItems.POISON_FROG_SPAWN_EGG);
+                        output.accept(ModItems.DRAGONFLY_SPAWN_EGG);
+                        output.accept(ModItems.FIREFLY_SPAWN_EGG);
+                        output.accept(ModItems.BUTTERFLY_SPAWN_EGG);
+                        output.accept(ModItems.TOUCAN_SPAWN_EGG);
+                        output.accept(ModItems.GECKO_SPAWN_EGG);
+                        output.accept(ModItems.HERMIT_CRAB_SPAWN_EGG);
+                        output.accept(ModItems.CRAB_SPAWN_EGG);
+                        output.accept(ModItems.SEAGULL_SPAWN_EGG);
+                        output.accept(ModItems.JELLYFISH_SPAWN_EGG);
+                        output.accept(ModItems.BASILOSAURUS_SPAWN_EGG);
+                        output.accept(ModItems.BLUE_WHALE_SPAWN_EGG);
+                    })).build());
+
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ABYSS = CREATIVE_MODE_TAB.register("abyss",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ModBlocks.LIVING_ABYSS_SKULL.get()))
+                    .title(Component.translatable("creativetab.the_shell.abyss"))
+                    .withTabsBefore(ModCreativeModeTabs.ARCHIPELAGO.getKey())
+                    .displayItems((((itemDisplayParameters, output) -> {
+                        output.accept(ModBlocks.ABYSSAL_STONE);
+                        output.accept(ModBlocks.ABYSSAL_COAL_ORE);
+                        output.accept(ModBlocks.ABYSSAL_IRON_ORE);
+                        output.accept(ModBlocks.ABYSSAL_COPPER_ORE);
+                        output.accept(ModBlocks.ABYSSAL_GOLD_ORE);
+                        output.accept(ModBlocks.ABYSSAL_REDSTONE_ORE);
+                        output.accept(ModBlocks.ABYSSAL_LAPIS_ORE);
+                        output.accept(ModBlocks.ABYSSAL_DIAMOND_ORE);
+                        output.accept(ModBlocks.ABYSSAL_EMERALD_ORE);
+                        output.accept(ModBlocks.SHADOW_KYBER_ORE_VIOLET);
+
+                        output.accept(ModBlocks.HYDROTHERMAL_CHIMNEY);
+                        output.accept(ModBlocks.SULFUR_BLOCK);
+                        output.accept(ModBlocks.ABYSSAL_BASALT);
+                        output.accept(ModBlocks.ABYSSAL_SILT);
+                        output.accept(ModBlocks.TUBE_WORMS);
+                        output.accept(ModBlocks.GLOWING_ANEMONE);
+                        output.accept(ModBlocks.GLOWING_CORAL_BLOCK);
+                        output.accept(ModBlocks.MANGANESE_NODULE);
+
+                        output.accept(ModItems.BLACK_PEARL);
+                        output.accept(ModItems.AQUA_PEARL);
+                        output.accept(ModItems.GRAPPLING_HOOK);
+                        output.accept(ModBlocks.AIR_BUBBLE);
+
+                        output.accept(ModItems.ABYSSAL_ANGLER_SPAWN_EGG);
+                        output.accept(ModItems.GULPER_EEL_SPAWN_EGG);
+                        output.accept(ModItems.DRAGONFISH_SPAWN_EGG);
+                        output.accept(ModItems.GIANT_ISOPOD_SPAWN_EGG);
+                        output.accept(ModItems.VAMPIRE_SQUID_SPAWN_EGG);
+                        output.accept(ModItems.YETI_CRAB_SPAWN_EGG);
+                        output.accept(ModItems.HATCHETFISH_SPAWN_EGG);
+                        output.accept(ModItems.COLOSSAL_SQUID_SPAWN_EGG);
                         output.accept(ModItems.LEVIATHAN_SPAWN_EGG);
                         output.accept(ModItems.LEVIATHAN_EGG);
                         output.accept(ModItems.FRIED_LEVIATHAN_EGG);
-                        output.accept(ModItems.SHADOW_SABER_SWORD);
-                        output.accept(ModItems.SHADOW_SABER_SWORD_VIOLET);
+                        output.accept(ModItems.LEVIATHAN_HEART);
+
+                        output.accept(ModItems.LIGHT_KYBER_CRYSTAL);
                         output.accept(ModItems.LIGHT_SABER_SWORD);
-                    })).build());
+                        output.accept(ModItems.SHADOW_KYBER_CRYSTAL_WHITE);
+                        output.accept(ModItems.SHADOW_SABER_SWORD);
+                        output.accept(ModItems.SHADOW_KYBER_CRYSTAL_VIOLET);
+                        output.accept(ModItems.SHADOW_SABER_SWORD_VIOLET);
+                        output.accept(ModItems.PURE_KYBER_CRYSTAL);
+                        output.accept(ModItems.PURE_SABER_PICKAXE);
+
+                        output.accept(ModItems.ABYSSAL_SCALE);
+                        output.accept(ModBlocks.ABYSS_SKULL);
+                        output.accept(ModBlocks.LIVING_ABYSS_SKULL);
+                        output.accept(ModItems.IRON_ABYSS_HELMET);
+                        output.accept(ModItems.DIAMOND_ABYSS_HELMET);
+                        output.accept(ModItems.NETHERITE_ABYSS_HELMET);
+                        output.accept(ModItems.DIVING_ABYSS_HELMET);
+                        output.accept(ModItems.DIVING_HELMET);
+                        output.accept(ModItems.DIVING_CHESTPLATE);
+                        output.accept(ModItems.DIVING_LEGGINGS);
+                        output.accept(ModItems.DIVING_BOOTS);
+                        output.accept(ModItems.OXYGEN_BOTTLE);
+                        output.accept(ModItems.SUBMARINE);
+                        output.accept(ModItems.SUBMARINE_UPGRADE_IRON);
+                        output.accept(ModItems.SUBMARINE_UPGRADE_DIAMOND);
+                        output.accept(ModItems.SUBMARINE_UPGRADE_NETHERITE);
+
+                        output.accept(ModBlocks.METAL_PLATING);
+                        output.accept(ModBlocks.METAL_PLATING_STAIRS);
+                        output.accept(ModBlocks.METAL_PLATING_SLAB);
+                        output.accept(ModBlocks.METAL_GRATE);
+                        output.accept(ModBlocks.METAL_GRATE_STAIRS);
+                        output.accept(ModBlocks.METAL_GRATE_SLAB);
+                        output.accept(ModBlocks.SLIDING_DOOR);
+                        output.accept(ModBlocks.CHECKER_PLATE);
+                        output.accept(ModBlocks.CORRUGATED_METAL);
+                        output.accept(ModBlocks.RIVETED_PANEL);
+                        output.accept(ModBlocks.STEEL_BEAM);
+                        output.accept(ModBlocks.METAL_PLATING_WALL);
+                        output.accept(ModBlocks.STEEL_TRAPDOOR);
+
+                        output.accept(ModBlocks.RUSTY_METAL_PLATING);
+                        output.accept(ModBlocks.RUSTY_METAL_PLATING_STAIRS);
+                        output.accept(ModBlocks.RUSTY_METAL_PLATING_SLAB);
+                        output.accept(ModBlocks.RUSTY_METAL_GRATE);
+                        output.accept(ModBlocks.RUSTY_METAL_GRATE_STAIRS);
+                        output.accept(ModBlocks.RUSTY_METAL_GRATE_SLAB);
+                        output.accept(ModBlocks.BROKEN_SLIDING_DOOR);
+                        output.accept(ModBlocks.RUSTY_CHECKER_PLATE);
+                        output.accept(ModBlocks.RUSTY_CORRUGATED_METAL);
+                        output.accept(ModBlocks.RUSTY_RIVETED_PANEL);
+                        output.accept(ModBlocks.RUSTY_STEEL_BEAM);
+                        output.accept(ModBlocks.RUSTY_METAL_PLATING_WALL);
+                        output.accept(ModBlocks.RUSTY_STEEL_TRAPDOOR);
+
+                        output.accept(ModBlocks.INDUSTRIAL_LAMP);
+                        output.accept(ModBlocks.BROKEN_INDUSTRIAL_LAMP);
+                        output.accept(ModBlocks.EMERGENCY_LIGHT);
+                        output.accept(ModBlocks.FLOODLIGHT);
+                        output.accept(ModBlocks.LIGHT_STRIP);
+
+                        output.accept(ModBlocks.REINFORCED_GLASS);
+                        output.accept(ModBlocks.REINFORCED_GLASS_PANE);
+
+                        output.accept(ModBlocks.PIPE);
+                        output.accept(ModBlocks.VALVE);
+
+                        output.accept(ModBlocks.STATION_CONCRETE);
+                        output.accept(ModBlocks.HAZARD_BLOCK);
+                        output.accept(ModBlocks.AIR_VENT);
+                        output.accept(ModBlocks.PORTHOLE);
+
+                        output.accept(ModBlocks.METAL_LADDER);
+                        output.accept(ModBlocks.METAL_CRATE);
+                        output.accept(ModBlocks.TANK);
+                        output.accept(ModBlocks.RUSTY_BARREL);
+                        output.accept(ModBlocks.CONTROL_CONSOLE);
+                        output.accept(ModBlocks.MACHINE);
+                        output.accept(ModBlocks.HANGING_CABLES);
+                        output.accept(ModBlocks.DANGER_SIGN);
+                    }))).build());
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TAB.register(eventBus);

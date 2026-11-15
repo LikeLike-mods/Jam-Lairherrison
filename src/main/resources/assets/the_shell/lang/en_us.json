@@ -178,7 +178,8 @@
 
   "console.the_shell.sonar": "Sonar: %s creatures detected",
 
-  "creativetab.the_shell.blocks": "The Shell",
+  "creativetab.the_shell.archipelago": "The Archipelago",
+  "creativetab.the_shell.abyss": "The Abyss",
 
   "death.attack.the_shell.flytrap": "%1$s was devoured by a Venus flytrap",
   "death.attack.the_shell.pressure": "%1$s was crushed by the pressure",
@@ -286,7 +287,6 @@
   "item.the_shell.oxygen_bottle.empty": "Empty: refill it at a tank",
   "item.the_shell.palm_boat": "Palm Boat",
   "item.the_shell.palm_chest_boat": "Palm Boat with Chest",
-  "item.the_shell.pocket_sonar": "Pocket Sonar",
   "item.the_shell.poison_frog_spawn_egg": "Poison Dart Frog Spawn Egg",
   "item.the_shell.pure_kyber_crystal": "Pure Kyber Crystal",
   "item.the_shell.purussaurus_meat": "Purussaurus Meat",

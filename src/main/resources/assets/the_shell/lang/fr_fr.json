@@ -178,7 +178,8 @@
 
   "console.the_shell.sonar": "Sonar : %s créatures détectées",
 
-  "creativetab.the_shell.blocks": "The Shell",
+  "creativetab.the_shell.archipelago": "L'archipel",
+  "creativetab.the_shell.abyss": "Les abysses",
 
   "death.attack.the_shell.flytrap": "%1$s a été dévoré par une dionée",
   "death.attack.the_shell.pressure": "%1$s a été broyé par la pression",
@@ -286,7 +287,6 @@
   "item.the_shell.oxygen_bottle.empty": "Vide : à remplir à une cuve",
   "item.the_shell.palm_boat": "Bateau en palmier",
   "item.the_shell.palm_chest_boat": "Bateau en palmier avec coffre",
-  "item.the_shell.pocket_sonar": "Sonar de poche",
   "item.the_shell.poison_frog_spawn_egg": "Œuf d'apparition de grenouille dendrobate",
   "item.the_shell.pure_kyber_crystal": "Cristal de kyber pur",
   "item.the_shell.purussaurus_meat": "Viande de purussaurus",
