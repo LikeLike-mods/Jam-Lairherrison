@@ -17,7 +17,7 @@ public class CrabRenderer extends GeoEntityRenderer<Crab> {
 
     @Override
     public RenderType getRenderType(Crab animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-        return RenderType.entityCutout(texture);
+        return RenderType.entityCutoutNoCull(texture);
     }
 
     private static class CrabModel extends DefaultedEntityGeoModel<Crab> {

@@ -38,7 +38,7 @@ public class MobRenderers<T extends Entity & GeoAnimatable> extends GeoEntityRen
 
     @Override
     public RenderType getRenderType(T animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-        return translucent ? RenderType.entityTranslucentCull(texture) : RenderType.entityCutout(texture);
+        return translucent ? RenderType.entityTranslucentCull(texture) : RenderType.entityCutoutNoCull(texture);
     }
 
     @Override

@@ -1,0 +1,21 @@
+{
+  "name": "Gecko",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:lime_dye",
+  "advancement": "the_shell:encyclopedie/find_gecko",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "They are hiding in the jungle... If you catch one, it's probably your lucky day!"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:gecko",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation ": -90,
+      "name": "Gecko",
+      "text": "Look at it! This tiny legs! It run everywhere!"
+    }
+  ]
+}
