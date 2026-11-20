@@ -1,0 +1,21 @@
+{
+  "name": "Dragonfly",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:cyan_dye",
+  "advancement": "the_shell:encyclopedie/find_dragonfly",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Dragonfly."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:dragonfly",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Dragonfly",
+      "text": "TODO : description de Dragonfly."
+    }
+  ]
+}

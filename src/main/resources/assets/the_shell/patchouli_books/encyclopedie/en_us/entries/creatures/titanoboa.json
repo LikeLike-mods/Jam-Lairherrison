@@ -1,0 +1,21 @@
+{
+  "name": "Titanoboa",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:green_dye",
+  "advancement": "the_shell:encyclopedie/find_titanoboa",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Titanoboa."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:titanoboa",
+      "scale": 0.5,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Titanoboa",
+      "text": "TODO : description de Titanoboa."
+    }
+  ]
+}

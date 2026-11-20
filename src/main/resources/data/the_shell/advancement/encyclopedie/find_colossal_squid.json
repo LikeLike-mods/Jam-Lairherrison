@@ -1,0 +1,7 @@
+{
+  "criteria": {
+    "decouvert": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

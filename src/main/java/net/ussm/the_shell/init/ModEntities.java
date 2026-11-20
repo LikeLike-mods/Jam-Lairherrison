@@ -10,29 +10,7 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.ussm.the_shell.TheShell;
-import net.ussm.the_shell.entites.AbyssalAngler;
-import net.ussm.the_shell.entites.Butterfly;
-import net.ussm.the_shell.entites.ColossalSquid;
-import net.ussm.the_shell.entites.Crab;
-import net.ussm.the_shell.entites.Dragonfish;
-import net.ussm.the_shell.entites.Gecko;
-import net.ussm.the_shell.entites.GiantIsopod;
-import net.ussm.the_shell.entites.GulperEel;
-import net.ussm.the_shell.entites.HermitCrab;
-import net.ussm.the_shell.entites.Jellyfish;
-import net.ussm.the_shell.entites.PoisonFrog;
-import net.ussm.the_shell.entites.Seagull;
-import net.ussm.the_shell.entites.Toucan;
-import net.ussm.the_shell.entites.VampireSquid;
-import net.ussm.the_shell.entites.YetiCrab;
-import net.ussm.the_shell.entites.LeviathanEntity;
-import net.ussm.the_shell.entites.Submarine;
-import net.ussm.the_shell.entites.BasilosaurusEntity;
-import net.ussm.the_shell.entites.BlueWhaleEntity;
-import net.ussm.the_shell.entites.PurussaurusEntity;
-import net.ussm.the_shell.entites.TitanoboaEntity;
-import net.ussm.the_shell.entites.Dragonfly;
-import net.ussm.the_shell.entites.Firefly;
+import net.ussm.the_shell.entites.*;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, TheShell.MOD_ID);
@@ -53,9 +31,9 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<Dragonfish>> DRAGONFISH = register("dragonfish", Dragonfish::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.5F, 0.4F);
     public static final DeferredHolder<EntityType<?>, EntityType<GiantIsopod>> GIANT_ISOPOD = register("giant_isopod", GiantIsopod::new, MobCategory.AXOLOTLS, 0.9F, 0.45F);
     public static final DeferredHolder<EntityType<?>, EntityType<VampireSquid>> VAMPIRE_SQUID = register("vampire_squid", VampireSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 0.6F, 1.1F);
-    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.YetiCrab>> YETI_CRAB = register("yeti_crab", net.ussm.the_shell.entites.YetiCrab::new, MobCategory.AXOLOTLS, 0.8F, 0.45F);
-    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.Hatchetfish>> HATCHETFISH = register("hatchetfish", net.ussm.the_shell.entites.Hatchetfish::new, MobCategory.WATER_AMBIENT, 0.35F, 0.45F);
-    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ColossalSquid>> COLOSSAL_SQUID = register("colossal_squid", net.ussm.the_shell.entites.ColossalSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.6F, 2.8F);
+    public static final DeferredHolder<EntityType<?>, EntityType<YetiCrab>> YETI_CRAB = register("yeti_crab", YetiCrab::new, MobCategory.AXOLOTLS, 0.8F, 0.45F);
+    public static final DeferredHolder<EntityType<?>, EntityType<Hatchetfish>> HATCHETFISH = register("hatchetfish", Hatchetfish::new, MobCategory.WATER_AMBIENT, 0.35F, 0.45F);
+    public static final DeferredHolder<EntityType<?>, EntityType<ColossalSquid>> COLOSSAL_SQUID = register("colossal_squid",ColossalSquid::new, MobCategory.UNDERGROUND_WATER_CREATURE, 1.6F, 2.8F);
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<Submarine>> SUBMARINE = register("submarine", Submarine::new, MobCategory.MISC, 2.0F, 1.5F);
@@ -86,9 +64,12 @@ public class ModEntities {
                     .sized(1.0F, 0.8F).eyeHeight(0.5F)
                     .clientTrackingRange(10).updateInterval(1).build(TheShell.MOD_ID + ":titanoboa"));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<net.ussm.the_shell.entites.ThrownAquaPearl>> AQUA_PEARL = ENTITY_TYPES.register("aqua_pearl",
-            () -> EntityType.Builder.<net.ussm.the_shell.entites.ThrownAquaPearl>of(net.ussm.the_shell.entites.ThrownAquaPearl::new, MobCategory.MISC)
-                    .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("aqua_pearl"));
+    public static final DeferredHolder<EntityType<?>, EntityType< ThrownAquaPearl>> AQUA_PEARL = ENTITY_TYPES.register("aqua_pearl",
+            () -> EntityType.Builder.< ThrownAquaPearl>of( ThrownAquaPearl::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+                    .build("aqua_pearl"));
 
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.EntityFactory<T> factory,
                                                                                            MobCategory category, float width, float height) {

@@ -1,0 +1,21 @@
+{
+  "name": "Vampire Squid",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:ink_sac",
+  "advancement": "the_shell:encyclopedie/find_vampire_squid",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Vampire Squid."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:vampire_squid",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Vampire Squid",
+      "text": "TODO : description de Vampire Squid."
+    }
+  ]
+}

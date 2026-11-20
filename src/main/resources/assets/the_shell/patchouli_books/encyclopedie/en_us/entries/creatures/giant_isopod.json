@@ -1,0 +1,21 @@
+{
+  "name": "Giant Isopod",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:nautilus_shell",
+  "advancement": "the_shell:encyclopedie/find_giant_isopod",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Giant Isopod."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:giant_isopod",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Giant Isopod",
+      "text": "TODO : description de Giant Isopod."
+    }
+  ]
+}

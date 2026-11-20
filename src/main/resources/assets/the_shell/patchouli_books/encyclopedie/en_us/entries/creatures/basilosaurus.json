@@ -1,0 +1,21 @@
+{
+  "name": "Basilosaurus",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:bone",
+  "advancement": "the_shell:encyclopedie/find_basilosaurus",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Basilosaurus."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:basilosaurus",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Basilosaurus",
+      "text": "TODO : description de Basilosaurus."
+    }
+  ]
+}

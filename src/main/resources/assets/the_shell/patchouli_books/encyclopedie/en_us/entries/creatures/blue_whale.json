@@ -1,0 +1,21 @@
+{
+  "name": "Blue Whale",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:prismarine_shard",
+  "advancement": "the_shell:encyclopedie/find_blue_whale",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Blue Whale."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:blue_whale",
+      "scale": 0.4,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Blue Whale",
+      "text": "TODO : description de Blue Whale."
+    }
+  ]
+}

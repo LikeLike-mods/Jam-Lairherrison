@@ -2,6 +2,9 @@ package net.ussm.the_shell.entites;
 
 import java.util.EnumSet;
 import java.util.List;
+
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.ussm.the_shell.entites.hitbox.AnimatedHitboxRig.Section;
 import javax.annotation.Nullable;
 
@@ -41,6 +44,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.entites.ai.LeviathanBiteCycle;
+import net.ussm.the_shell.events.EncyclopedieHelper;
 import net.ussm.the_shell.init.ModSounds;
 import net.ussm.the_shell.entites.animations.TurnBendState;
 import net.ussm.the_shell.entites.animations.SwimmingTurnProfiles;
@@ -381,5 +385,16 @@ public class LeviathanEntity extends Monster implements GeoEntity, AnimatedHitbo
             setYRot(Mth.approachDegrees(getYRot(), yHeadRot, MAX_TURN_PER_TICK));
             setYBodyRot(getYRot());
         }
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (EncyclopedieHelper.holdsBook(player, hand)) {
+            if (!level().isClientSide) {
+                EncyclopedieHelper.unlock(player, "encyclopedie/find_leviathan");
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
     }
 }

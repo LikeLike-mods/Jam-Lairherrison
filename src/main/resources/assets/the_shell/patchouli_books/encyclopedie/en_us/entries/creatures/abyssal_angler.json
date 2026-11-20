@@ -1,0 +1,21 @@
+{
+  "name": "Abyssal Angler",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:glow_ink_sac",
+  "advancement": "the_shell:encyclopedie/find_abyssal_angler",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Abyssal Angler."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:abyssal_angler",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Abyssal Angler",
+      "text": "TODO : description de Abyssal Angler."
+    }
+  ]
+}

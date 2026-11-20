@@ -1,0 +1,21 @@
+{
+  "name": "Yeti Crab",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:snowball",
+  "advancement": "the_shell:encyclopedie/find_yeti_crab",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Yeti Crab."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:yeti_crab",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Yeti Crab",
+      "text": "TODO : description de Yeti Crab."
+    }
+  ]
+}

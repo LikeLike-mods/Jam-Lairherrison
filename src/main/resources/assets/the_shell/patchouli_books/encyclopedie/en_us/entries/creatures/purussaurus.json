@@ -1,0 +1,21 @@
+{
+  "name": "Purussaurus",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:bone",
+  "advancement": "the_shell:encyclopedie/find_purussaurus",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Purussaurus."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:purussaurus",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Purussaurus",
+      "text": "TODO : description de Purussaurus."
+    }
+  ]
+}

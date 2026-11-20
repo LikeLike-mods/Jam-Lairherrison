@@ -2,6 +2,10 @@ package net.ussm.the_shell.entites;
 
 import java.util.EnumSet;
 import java.util.List;
+
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.ussm.the_shell.entites.hitbox.AnimatedHitboxRig.Section;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
@@ -25,6 +29,7 @@ import net.minecraft.world.phys.Vec3;
 import net.ussm.the_shell.entites.init.CetaceanEntity;
 import net.ussm.the_shell.entites.animations.SwimmingTurnProfiles;
 import net.ussm.the_shell.entites.animations.TurnBendProfile;
+import net.ussm.the_shell.events.EncyclopedieHelper;
 import net.ussm.the_shell.world.water.WaveImpacts;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
@@ -276,5 +281,16 @@ public class BlueWhaleEntity extends CetaceanEntity {
             if (isPerformingSurfaceActivity()) stopSurfaceActivity();
             else activityCooldown = Math.max(activityCooldown, 200);
         }
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (EncyclopedieHelper.holdsBook(player, hand)) {
+            if (!level().isClientSide) {
+                EncyclopedieHelper.unlock(player, "encyclopedie/find_blue_whale");
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
     }
 }

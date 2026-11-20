@@ -10,6 +10,7 @@ import net.minecraft.world.entity.animal.AbstractSchoolingFish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.ussm.the_shell.events.EncyclopedieHelper;
 import net.ussm.the_shell.init.ModSounds;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -28,11 +29,6 @@ public class Hatchetfish extends AbstractSchoolingFish implements GeoEntity {
     @Override
     public int getMaxSchoolSize() {
         return 8;
-    }
-
-    @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        return InteractionResult.PASS;
     }
 
     @Override
@@ -69,5 +65,16 @@ public class Hatchetfish extends AbstractSchoolingFish implements GeoEntity {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (EncyclopedieHelper.holdsBook(player, hand)) {
+            if (!level().isClientSide) {
+                EncyclopedieHelper.unlock(player, "encyclopedie/find_hatchetfish");
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
     }
 }

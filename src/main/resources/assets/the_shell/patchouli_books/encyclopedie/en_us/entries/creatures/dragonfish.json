@@ -1,0 +1,21 @@
+{
+  "name": "Dragonfish",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:cod",
+  "advancement": "the_shell:encyclopedie/find_dragonfish",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Dragonfish."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:dragonfish",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Dragonfish",
+      "text": "TODO : description de Dragonfish."
+    }
+  ]
+}

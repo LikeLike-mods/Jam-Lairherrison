@@ -1,0 +1,21 @@
+{
+  "name": "Colossal Squid",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:glow_ink_sac",
+  "advancement": "the_shell:encyclopedie/find_colossal_squid",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Colossal Squid."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:colossal_squid",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Colossal Squid",
+      "text": "TODO : description de Colossal Squid."
+    }
+  ]
+}

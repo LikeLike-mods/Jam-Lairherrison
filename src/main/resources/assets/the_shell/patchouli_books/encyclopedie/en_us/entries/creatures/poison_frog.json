@@ -1,0 +1,21 @@
+{
+  "name": "Poison Frog",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:spider_eye",
+  "advancement": "the_shell:encyclopedie/find_poison_frog",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Poison Frog."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:poison_frog",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Poison Frog",
+      "text": "TODO : description de Poison Frog."
+    }
+  ]
+}

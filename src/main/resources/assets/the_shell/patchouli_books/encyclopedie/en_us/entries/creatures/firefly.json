@@ -1,0 +1,21 @@
+{
+  "name": "Firefly",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:glowstone_dust",
+  "advancement": "the_shell:encyclopedie/find_firefly",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO : texte d'ambiance pour Firefly."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:firefly",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Firefly",
+      "text": "TODO : description de Firefly."
+    }
+  ]
+}
