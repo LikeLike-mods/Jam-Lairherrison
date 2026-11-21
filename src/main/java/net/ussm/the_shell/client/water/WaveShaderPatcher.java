@@ -21,45 +21,50 @@ public final class WaveShaderPatcher {
     private static final Pattern REGION_OFFSET = Pattern.compile("uniform\\s+vec3\\s+u_RegionOffset\\s*;");
     private static final Pattern IRIS_NORMAL = Pattern.compile("irs_Normal\\s*=\\s*decodeOct24");
     private static final Pattern IRIS_TANGENT = Pattern.compile("irs_Tangent\\s*=");
-    private static final Pattern SODIUM_FOG = Pattern.compile("fragColor\\s*=\\s*_linearFog\\s*\\(");
+    private static final Pattern CHUNK_FOG = Pattern.compile("fragColor\\s*=\\s*_linearFog\\s*\\(\\s*(\\w+)");
+    private static final Pattern CHUNK_LIGHT = Pattern.compile("v_Color\\s*=\\s*_vert_color\\s*\\*\\s*([^;]+);");
     private static final Pattern LAST_BRACE = Pattern.compile("}\\s*$");
 
     private WaveShaderPatcher() {}
 
-    public static String patchSodiumVertex(String source) {
+    public static String patchChunkVertex(String renderer, String source) {
         if (source.contains(MARKER)) return source;
         Matcher main = MAIN.matcher(source);
+        Matcher light = CHUNK_LIGHT.matcher(source);
         String library = library(false);
-        if (library == null || !main.find() || !source.contains("vec3 position =")) return unchanged("Sodium vertex shader", source);
+        if (library == null || !main.find() || !light.find() || !source.contains("vec3 position =")) {
+            return unchanged(renderer + " vertex shader", source);
+        }
         String head = source.substring(0, main.start());
         String body = source.substring(main.start());
         Matcher init = VERT_INIT_CALL.matcher(body);
         Matcher end = LAST_BRACE.matcher(body);
-        if (!init.find() || !end.find()) return unchanged("Sodium vertex shader", source);
+        if (!init.find() || !end.find()) return unchanged(renderer + " vertex shader", source);
         body = body.substring(0, end.start())
                 + "    " + PREFIX + "surfacePosition = position;\n"
-                + "    " + PREFIX + "waterLight = texture(u_LightTex, _vert_tex_light_coord).rgb;\n"
+                + "    " + PREFIX + "waterLight = (" + light.group(1).trim() + ").rgb;\n"
                 + body.substring(end.start());
         body = body.substring(0, init.end()) + " " + MARKER + "();" + body.substring(init.end());
         String block = "out vec3 " + PREFIX + "surfacePosition;\n"
                 + "out vec3 " + PREFIX + "waterLight;\n"
                 + "out float " + PREFIX + "waterSurface;\n"
                 + library + vertexFunction("");
-        TheShell.LOGGER.info("Ocean waves patched into Sodium's terrain shaders");
+        TheShell.LOGGER.info("Ocean waves patched into {}'s terrain shaders", renderer);
         return head + block + body;
     }
 
-    public static String patchSodiumFragment(String source) {
+    public static String patchChunkFragment(String renderer, String source) {
         if (source.contains(PREFIX + "applyWaterSurface")) return source;
         Matcher main = MAIN.matcher(source);
         String library = library(true);
-        if (library == null || !main.find()) return unchanged("Sodium fragment shader", source);
+        if (library == null || !main.find()) return unchanged(renderer + " fragment shader", source);
         String head = source.substring(0, main.start());
         String body = source.substring(main.start());
-        Matcher fog = SODIUM_FOG.matcher(body);
-        if (!fog.find()) return unchanged("Sodium fragment shader", source);
+        Matcher fog = CHUNK_FOG.matcher(body);
+        if (!fog.find()) return unchanged(renderer + " fragment shader", source);
+        String color = fog.group(1);
         body = body.substring(0, fog.start())
-                + "color = " + PREFIX + "applyWaterSurface(color, " + PREFIX + "surfacePosition, " + PREFIX + "waterSurface, "
+                + color + " = " + PREFIX + "applyWaterSurface(" + color + ", " + PREFIX + "surfacePosition, " + PREFIX + "waterSurface, "
                 + PREFIX + "waterLight, vec4(1.0));\n    " + body.substring(fog.start());
         String block = "in vec3 " + PREFIX + "surfacePosition;\n"
                 + "in vec3 " + PREFIX + "waterLight;\n"
@@ -147,7 +152,7 @@ public final class WaveShaderPatcher {
     }
 
     private static String unchanged(String what, String source) {
-        TheShell.LOGGER.warn("Ocean waves: unexpected {}, it is left untouched (no waves with this Sodium version)", what);
+        TheShell.LOGGER.warn("Ocean waves: unexpected {}, it is left untouched (no waves with this version)", what);
         return source;
     }
 }

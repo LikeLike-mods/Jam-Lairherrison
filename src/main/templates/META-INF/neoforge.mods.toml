@@ -56,7 +56,7 @@ A tropical sunshine coast, with deep space underneath
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]
 config="${mod_id}.mixins.json"
-# Compat Sodium / Iris (waves et sky)
+# Compat Sodium / Iris et Embeddium / NeOculus (waves et sky)
 [[mixins]]
 config="${mod_id}.compat.mixins.json"
 
