@@ -10,8 +10,11 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 public class CompatMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.endsWith(".iris.SodiumProgramsMixin")) return isLoaded("iris") && isLoaded("sodium");
         if (mixinClassName.contains(".compat.iris.")) return isLoaded("iris");
+        if (mixinClassName.contains(".compat.oculus.")) return isLoaded("oculus") && isLoaded("embeddium");
         if (mixinClassName.contains(".compat.sodium.")) return isLoaded("sodium");
+        if (mixinClassName.contains(".compat.embeddium.")) return isLoaded("embeddium");
         return true;
     }
 

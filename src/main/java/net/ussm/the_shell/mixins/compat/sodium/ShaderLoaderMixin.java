@@ -14,8 +14,8 @@ public abstract class ShaderLoaderMixin {
     private static void the_shell$patchOceanWaves(ResourceLocation name, CallbackInfoReturnable<String> cir) {
         if (!name.getNamespace().equals("sodium")) return;
         switch (name.getPath()) {
-            case "blocks/block_layer_opaque.vsh" -> cir.setReturnValue(WaveShaderPatcher.patchSodiumVertex(cir.getReturnValue()));
-            case "blocks/block_layer_opaque.fsh" -> cir.setReturnValue(WaveShaderPatcher.patchSodiumFragment(cir.getReturnValue()));
+            case "blocks/block_layer_opaque.vsh" -> cir.setReturnValue(WaveShaderPatcher.patchChunkVertex("Sodium", cir.getReturnValue()));
+            case "blocks/block_layer_opaque.fsh" -> cir.setReturnValue(WaveShaderPatcher.patchChunkFragment("Sodium", cir.getReturnValue()));
             default -> {}
         }
     }

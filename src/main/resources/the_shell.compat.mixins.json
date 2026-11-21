@@ -5,9 +5,12 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "client": [
+    "embeddium.ShaderChunkRendererMixin",
+    "embeddium.ShaderLoaderMixin",
     "iris.CommonUniformsMixin",
     "iris.IrisRenderingPipelineMixin",
     "iris.SodiumProgramsMixin",
+    "oculus.EmbeddiumProgramsMixin",
     "sodium.ShaderChunkRendererMixin",
     "sodium.ShaderLoaderMixin"
   ],

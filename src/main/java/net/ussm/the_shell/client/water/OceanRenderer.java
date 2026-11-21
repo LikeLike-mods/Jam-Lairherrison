@@ -72,12 +72,10 @@ public final class OceanRenderer {
         if (!checkedRenderer) {
             checkedRenderer = true;
             supportedRenderer = true;
-            for (String id : new String[]{"embeddium", "oculus", "optifine"}) {
-                if (ModList.get().isLoaded(id)) {
-                    supportedRenderer = false;
-                    TheShell.LOGGER.warn("Ocean waves disabled: {} replaces the terrain renderer and is not supported "
-                            + "(vanilla, Sodium and Iris are).", id);
-                }
+            if (ModList.get().isLoaded("optifine")) {
+                supportedRenderer = false;
+                TheShell.LOGGER.warn("Ocean waves disabled: OptiFine is not supported "
+                        + "(use Sodium and Iris instead).");
             }
         }
         return supportedRenderer;
