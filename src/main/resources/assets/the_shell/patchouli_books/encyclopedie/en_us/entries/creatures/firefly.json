@@ -6,16 +6,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Firefly."
+      "text": "When night falls, tiny lights wake up. I am not alone in the dark after all."
     },
     {
-      "type": "patchouli:entity",
-      "entity": "the_shell:firefly",
-      "scale": 1,
-      "rotate": true,
-      "default_rotation": -90,
-      "name": "Firefly",
-      "text": "TODO : description de Firefly."
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/firefly.png"
+      ],
+      "title": "Firefly",
+      "text": "They are the light of soul."
     }
   ]
 }

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Dragonfish."
+      "text": "Teeth like needles, a glow in the dark. Who made something so small look so angry?"
     },
     {
       "type": "patchouli:entity",
@@ -15,7 +15,7 @@
       "rotate": true,
       "default_rotation": -90,
       "name": "Dragonfish",
-      "text": "TODO : description de Dragonfish."
+      "text": "A slender hunter of the deep, with a glowing chin and a hungry grin."
     }
   ]
 }

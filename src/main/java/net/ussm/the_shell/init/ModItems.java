@@ -81,7 +81,7 @@ public class ModItems {
             () -> new HoneyBottleItem(new Item.Properties()
                     .craftRemainder(Items.GLASS_BOTTLE)
                     .stacksTo(16)
-                    .food(ModFoodProperties.NECTAR))); // Cleaner this way, go check ModFoodProperties
+                    .food(ModFoodProperties.NECTAR))); // check ModFoodProperties
 
     public static final DeferredItem<Item> REDSTONE_PEPPER = ITEMS.register("redstone_pepper",
             () -> new Item(new Item.Properties().food(ModFoodProperties.REDSTONE_PEPPER)));

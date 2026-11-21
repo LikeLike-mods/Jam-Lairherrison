@@ -6,16 +6,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Poison Frog."
+      "text": "It live in the jungle and the mangrove. TO NOT TOUCH IT!"
     },
     {
-      "type": "patchouli:entity",
-      "entity": "the_shell:poison_frog",
-      "scale": 1,
-      "rotate": true,
-      "default_rotation": -90,
-      "name": "Poison Frog",
-      "text": "TODO : description de Poison Frog."
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/poison_frog.png"
+      ],
+      "title": "Poison Frog",
+      "text": "A tiny, cute, and happy frog"
     }
   ]
 }

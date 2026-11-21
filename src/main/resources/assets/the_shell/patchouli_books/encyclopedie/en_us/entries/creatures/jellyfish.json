@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Jellyfish."
+      "text": "It floats. It stings. Admire it from a distance."
     },
     {
       "type": "patchouli:entity",
@@ -15,7 +15,7 @@
       "rotate": true,
       "default_rotation": -90,
       "name": "Jellyfish",
-      "text": "TODO : description de Jellyfish."
+      "text": "A soft drifter of the sea, with trailing tentacles. Beautiful, and not to be touched."
     }
   ]
 }

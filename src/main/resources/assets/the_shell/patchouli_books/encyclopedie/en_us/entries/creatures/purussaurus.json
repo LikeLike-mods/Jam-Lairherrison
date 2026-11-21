@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Purussaurus."
+      "text": "The ground shook. The birds went silent. Then something stepped out of the mud..."
     },
     {
       "type": "patchouli:entity",
       "entity": "the_shell:purussaurus",
-      "scale": 1,
+      "scale": 0.3,
       "rotate": true,
       "default_rotation": -90,
       "name": "Purussaurus",
-      "text": "TODO : description de Purussaurus."
+      "text": "A giant caiman with a bite that crushes anything. The mangrove is its kingdom."
     }
   ]
 }

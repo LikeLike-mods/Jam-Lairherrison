@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Dragonfly."
+      "text": "Quick! Quicker than my eyes. It darts over the water, and then... gone."
     },
     {
-      "type": "patchouli:entity",
-      "entity": "the_shell:dragonfly",
-      "scale": 1,
-      "rotate": true,
-      "default_rotation": -90,
-      "name": "Dragonfly",
-      "text": "TODO : description de Dragonfly."
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/dragonfly.png",
+        "the_shell:textures/gui/entries/dragonfly2.png"
+      ],
+      "title": "Dragonfly",
+      "text": "Fast wings over still water. Where the dragonfly flies, the pond is clean."
     }
   ]
 }

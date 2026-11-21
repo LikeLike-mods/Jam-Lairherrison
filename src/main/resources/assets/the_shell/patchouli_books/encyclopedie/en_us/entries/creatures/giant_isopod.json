@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Giant Isopod."
+      "text": "Like a pill bug, but... bigger. Much bigger. It can wait years for a meal. I have no such patience."
     },
     {
       "type": "patchouli:entity",
@@ -15,7 +15,7 @@
       "rotate": true,
       "default_rotation": -90,
       "name": "Giant Isopod",
-      "text": "TODO : description de Giant Isopod."
+      "text": "A patient scavenger of the seafloor. It cleans up whatever falls from above."
     }
   ]
 }

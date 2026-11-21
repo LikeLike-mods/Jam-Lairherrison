@@ -6,16 +6,14 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Yeti Crab."
+      "text": "A white crab with a fuzzy coat. It keeps its own little garden. $(b)Pale, hairy arms waving near the hot vents. Is it growing something on its claws? Surely not..."
     },
     {
-      "type": "patchouli:entity",
-      "entity": "the_shell:yeti_crab",
-      "scale": 1,
-      "rotate": true,
-      "default_rotation": -90,
-      "name": "Yeti Crab",
-      "text": "TODO : description de Yeti Crab."
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/abyss_crab.png"
+      ],
+      "title": "Yeti Crab"
     }
   ]
 }

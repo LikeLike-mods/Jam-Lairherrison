@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Butterfly."
+      "text": "Soft wings, bright colors. It lands on flowers like it owns the garden. Maybe it does"
     },
     {
       "type": "patchouli:entity",
@@ -15,7 +15,7 @@
       "rotate": true,
       "default_rotation": -90,
       "name": "Butterfly",
-      "text": "TODO : description de Butterfly."
+      "text": "A small, peaceful flutterer. It loves flowers and hates nothing."
     }
   ]
 }

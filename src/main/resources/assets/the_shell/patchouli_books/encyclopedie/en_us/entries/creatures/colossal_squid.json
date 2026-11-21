@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Colossal Squid."
+      "text": "The sea moves, and it is not the tide. Something huge is down there"
     },
     {
       "type": "patchouli:entity",
       "entity": "the_shell:colossal_squid",
-      "scale": 1,
+      "scale": 0.8,
       "rotate": true,
       "default_rotation": -90,
       "name": "Colossal Squid",
-      "text": "TODO : description de Colossal Squid."
+      "text": "The heaviest squid of the ocean. Its arms carry hooks that swivel. Stay on the surface."
     }
   ]
 }

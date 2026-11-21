@@ -6,14 +6,14 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Leviathan."
+      "text": "Some people swear have seen a big creature in the bottom of the sea $(br)But if you read this word, you find it..."
     },
     {
       "type": "patchouli:image",
       "images": [
         "the_shell:textures/gui/entries/leviathan.png"
       ],
-      "title": "A leviathan?"
+      "title": "A ...?"
     }
   ]
 }

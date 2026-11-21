@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Blue Whale."
+      "text": "The largest creature that ever lived. Gentle, slow, impossible to forget."
     },
     {
       "type": "patchouli:entity",
@@ -15,7 +15,7 @@
       "rotate": true,
       "default_rotation": -90,
       "name": "Blue Whale",
-      "text": "TODO : description de Blue Whale."
+      "text": "I heard it before I saw it. A song so deep my chest hummed with it."
     }
   ]
 }

@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO : texte d'ambiance pour Vampire Squid."
+      "text": "It is not a vampire. It is not really a squid. It never drank anything but drifting snow."
     },
     {
       "type": "patchouli:entity",
       "entity": "the_shell:vampire_squid",
-      "scale": 1,
+      "scale": 0.8,
       "rotate": true,
       "default_rotation": -90,
       "name": "Vampire Squid",
-      "text": "TODO : description de Vampire Squid."
+      "text": "It wraps itself in its cloak and glows when scared. Mostly harmless. Mostly."
     }
   ]
 }
