@@ -1,0 +1,21 @@
+{
+  "name": "Toucan",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:black_dye",
+  "advancement": "the_shell:encyclopedie/find_toucan",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ça vit dans la jungle... peut-être... Je ne le vois jamais... Qui sait ? Peut-être qu'ils ont une base secrète ?"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:toucan",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation ": -90,
+      "name": "Toucan",
+      "text": "Un oiseau avec un gros bec ! Que peut-il manger avec ?"
+    }
+  ]
+}

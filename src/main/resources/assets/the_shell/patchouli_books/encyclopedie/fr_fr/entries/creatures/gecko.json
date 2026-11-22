@@ -1,0 +1,20 @@
+{
+  "name": "Gecko",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:lime_dye",
+  "advancement": "the_shell:encyclopedie/find_gecko",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ils se cachent dans la jungle... Si vous en attrapez un, c'est sans doute votre jour de chance !"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/gecko.png"
+      ],
+      "title": "Gecko",
+      "text": "Regardez le! Ces toutes petites pattes ! Ça court partout !"
+    }
+  ]
+}

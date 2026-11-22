@@ -1,0 +1,19 @@
+{
+  "name": "Crabe Yeti",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:snowball",
+  "advancement": "the_shell:encyclopedie/find_yeti_crab",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Un crabe blanc au pelage duveteux. Il entretient son propre petit jardin. $(b)Des pattes pâles et poilues s’agitent près des sources hydrothermales brûlantes. Serait-il en train de faire pousser quelque chose sur ses pinces ? Sûrement pas..."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/abyss_crab.png"
+      ],
+      "title": "Crabe Yeti"
+    }
+  ]
+}

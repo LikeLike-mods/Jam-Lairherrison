@@ -1,0 +1,19 @@
+{
+  "name": "Leviathan",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:heart_of_the_sea",
+  "advancement": "the_shell:encyclopedie/find_leviathan",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Certaines personnes jurent avoir aperçu une créature imposante au fond des mers $(br)Mais si vous lisez ce mot, vous l'avez découvert..."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/leviathan.png"
+      ],
+      "title": "Un ...?"
+    }
+  ]
+}

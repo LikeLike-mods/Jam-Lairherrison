@@ -1,0 +1,21 @@
+{
+  "name": "Titanoboa",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:green_dye",
+  "advancement": "the_shell:encyclopedie/find_titanoboa",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Un serpent aussi épais qu’un tronc d’arbre. Il se cache dans la mangrove. Surveillez où vous mettez les pieds."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:titanoboa",
+      "scale": 0.1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Titanoboa",
+      "text": "Ce n’est pas une liane. Les lianes ne respirent pas. Les lianes ne vous suivent pas."
+    }
+  ]
+}

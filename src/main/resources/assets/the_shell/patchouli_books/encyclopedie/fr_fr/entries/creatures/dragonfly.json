@@ -1,0 +1,21 @@
+{
+  "name": "Libellule",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:cyan_dye",
+  "advancement": "the_shell:encyclopedie/find_dragonfly",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vite ! Plus vite que mon regard. Il file au-dessus de l'eau, et puis... disparaît."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/dragonfly.png",
+        "the_shell:textures/gui/entries/dragonfly2.png"
+      ],
+      "title": "Libellule",
+      "text": "Des ailes rapides au-dessus d’une eau immobile. Là où vole la libellule, l’étang est pur."
+    }
+  ]
+}

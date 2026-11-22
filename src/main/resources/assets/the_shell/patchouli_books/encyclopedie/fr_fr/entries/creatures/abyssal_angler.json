@@ -1,0 +1,21 @@
+{
+  "name": "Baudroie abyssale",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:glow_ink_sac",
+  "advancement": "the_shell:encyclopedie/find_abyssal_angler",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Un poisson avec une lumière sur sa tête. Le leurre est brillant mais la gueule est plus grande."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:abyssal_angler",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Baudroie abyssale",
+      "text": "Une lumière dans l'obscurité... Je l'ai suivi. Mauvaise idée. Plus j'allais loin, moins cela ressemblait à un ami."
+    }
+  ]
+}

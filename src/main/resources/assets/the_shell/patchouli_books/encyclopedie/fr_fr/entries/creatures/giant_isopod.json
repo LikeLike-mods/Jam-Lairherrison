@@ -1,0 +1,21 @@
+{
+  "name": "Isopode géant",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:nautilus_shell",
+  "advancement": "the_shell:encyclopedie/find_giant_isopod",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ça ressemble à un cloporte, mais… en plus gros. Bien plus gros. Ça peut attendre des années avant de manger. Je n'ai pas une telle patience."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:giant_isopod",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Isopode géant",
+      "text": "Un patient charognard des fonds marins. Il nettoie tout ce qui tombe d’en haut."
+    }
+  ]
+}

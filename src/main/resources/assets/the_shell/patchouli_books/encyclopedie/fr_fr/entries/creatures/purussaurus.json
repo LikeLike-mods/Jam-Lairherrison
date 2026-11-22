@@ -1,0 +1,21 @@
+{
+  "name": "Purussaurus",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:bone",
+  "advancement": "the_shell:encyclopedie/find_purussaurus",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Le sol trembla. Les oiseaux se turent. Puis, quelque chose émergea de la boue..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:purussaurus",
+      "scale": 0.3,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Purussaurus",
+      "text": "Un caïman géant doté d’une morsure capable de tout broyer. La mangrove est son royaume."
+    }
+  ]
+}

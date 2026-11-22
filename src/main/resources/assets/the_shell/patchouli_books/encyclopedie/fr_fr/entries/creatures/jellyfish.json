@@ -1,0 +1,21 @@
+{
+  "name": "Méduse",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:light_blue_dye",
+  "advancement": "the_shell:encyclopedie/find_jellyfish",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ça flotte. Ça pique. Admirez-le à distance."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:jellyfish",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Méduse",
+      "text": "Une créature marine qui dérive en douceur, avec des tentacules qui traînent. Magnifique, mais à ne surtout pas toucher."
+    }
+  ]
+}

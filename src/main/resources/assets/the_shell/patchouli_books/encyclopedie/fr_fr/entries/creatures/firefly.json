@@ -1,0 +1,20 @@
+{
+  "name": "Luciole",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:glowstone_dust",
+  "advancement": "the_shell:encyclopedie/find_firefly",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "À la tombée de la nuit, de minuscules lumières s’éveillent. Je ne suis donc pas seul dans l’obscurité, après tout."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/firefly.png"
+      ],
+      "title": "Luciole",
+      "text": "Ils sont la lumière des âmes."
+    }
+  ]
+}
