@@ -1,0 +1,27 @@
+{
+  "name": "Crabe",
+  "category": "the_shell:creatures",
+  "icon": "the_shell:crab_claw",
+  "advancement": "the_shell:encyclopedie/find_crab",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Les crabes sont des animaux emblématiques de The Shell On en trouve partout sur les plages. Pourquoi ne pas essayer de vous lier d'amitié avec eux ? Ou peut-être tenter de mettre en place une usine automatisée de viande de crabe cuite ? $(br)Qui sait ce que vous leur ferez subir..."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:crab",
+      "scale": 0.8,
+      "rotate": true,
+      "default_rotation ": -90,
+      "name": "Un crabe",
+      "text": "Regarde-le ! Il veut devenir ton ami !"
+    },
+    {
+      "type": "patchouli:smelting",
+      "title": "Viande de crabe",
+      "recipe": "the_shell:cooked_crab_meat",
+      "text": "Quoi de mieux, après une longue aventure, qu’une bonne portion de crabe cuit ? $(br)Vous pouvez également le faire cuire sur un feu de camp ou à l’aide d’un fourneau."
+    }
+  ]
+}

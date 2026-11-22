@@ -1,0 +1,21 @@
+{
+  "name": "Hatchetfish",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:salmon",
+  "advancement": "the_shell:encyclopedie/find_hatchetfish",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Une fine lame argentée, plate comme une lame de couteau. Son ventre émet une lueur, si bien que rien, en dessous, ne peut en distinguer l’ombre. Malin."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:hatchetfish",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Hatchetfish",
+      "text": "Fin comme une lame de hache, brillant comme un miroir. Il se dissimule en brillant."
+    }
+  ]
+}

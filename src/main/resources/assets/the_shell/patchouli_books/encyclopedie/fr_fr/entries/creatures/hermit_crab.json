@@ -1,0 +1,21 @@
+{
+  "name": "Crabe ermite",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:nautilus_shell",
+  "advancement": "the_shell:encyclopedie/find_hermit_crab",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "On peut les trouver partout sur la plage, comme des crabes. Ils sont timides, comme beaucoup de gens."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:hermit_crab",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation ": -90,
+      "name": "Crabe ermite",
+      "text": "Un crabe timide qui n'aime pas les gens..."
+    }
+  ]
+}

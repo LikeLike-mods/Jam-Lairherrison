@@ -1,0 +1,21 @@
+{
+  "name": "Pieuvre Vampire",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:ink_sac",
+  "advancement": "the_shell:encyclopedie/find_vampire_squid",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ce n’est pas un vampire. Ce n’est pas vraiment un calmar. Il n’a jamais rien vu d’autre que de la neige en dérive."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:vampire_squid",
+      "scale": 0.8,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Pieuvre Vampire",
+      "text": "Il s’enveloppe dans son manteau et se met à luire lorsqu’il a peur. Globalement inoffensif. Enfin, en grande partie."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Papillon",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:white_dye",
+  "advancement": "the_shell:encyclopedie/find_butterfly",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Des ailes délicates, des couleurs éclatantes. Il se pose sur les fleurs comme s’il était le maître du jardin. Peut-être l’est-il, d’ailleurs."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:butterfly",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Papillon",
+      "text": "Une petite créature ailée, paisible. Elle aime les fleurs et ne déteste rien"
+    }
+  ]
+}

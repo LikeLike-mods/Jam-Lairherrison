@@ -1,0 +1,21 @@
+{
+  "name": "Grandgousier",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:ink_sac",
+  "advancement": "the_shell:encyclopedie/find_gulper_eel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sa bouche est plus grande que son corps. Ou peut-être que son corps n’est qu’une bouche"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:gulper_eel",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Grandgousier",
+      "text": "Une anguille qui avale tout ce qui passe à proximité. Ne vous approchez pas."
+    }
+  ]
+}
