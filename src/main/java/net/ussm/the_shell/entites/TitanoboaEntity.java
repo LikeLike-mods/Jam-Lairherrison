@@ -11,6 +11,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -39,6 +41,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.ussm.the_shell.entites.ai.ReptileMoveControl;
 import net.ussm.the_shell.entites.hitbox.AnimatedHitboxPart;
+import net.ussm.the_shell.events.EncyclopedieHelper;
 import net.ussm.the_shell.init.ModSounds;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -453,5 +456,16 @@ public class TitanoboaEntity extends Monster implements GeoEntity {
         public void stop() {
             getNavigation().stop();
         }
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (EncyclopedieHelper.holdsBook(player, hand)) {
+            if (!level().isClientSide) {
+                EncyclopedieHelper.unlock(player, "encyclopedie/find_titanoboa");
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
     }
 }

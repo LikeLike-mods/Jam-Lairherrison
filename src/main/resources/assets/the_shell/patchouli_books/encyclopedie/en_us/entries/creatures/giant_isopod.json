@@ -1,0 +1,21 @@
+{
+  "name": "Giant Isopod",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:nautilus_shell",
+  "advancement": "the_shell:encyclopedie/find_giant_isopod",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Like a pill bug, but... bigger. Much bigger. It can wait years for a meal. I have no such patience."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:giant_isopod",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Giant Isopod",
+      "text": "A patient scavenger of the seafloor. It cleans up whatever falls from above."
+    }
+  ]
+}

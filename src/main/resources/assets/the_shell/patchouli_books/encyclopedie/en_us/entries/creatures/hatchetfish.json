@@ -1,0 +1,21 @@
+{
+  "name": "Hatchetfish",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:salmon",
+  "advancement": "the_shell:encyclopedie/find_hatchetfish",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A silver sliver, flat like a blade. Its belly glows so nothing below can see its shadow. Clever."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:hatchetfish",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Hatchetfish",
+      "text": "Thin as an axe blade, shiny as a mirror. It hides by shining."
+    }
+  ]
+}

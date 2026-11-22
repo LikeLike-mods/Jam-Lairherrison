@@ -2,6 +2,8 @@ package net.ussm.the_shell.entites.hitbox;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -64,6 +66,11 @@ public final class AnimatedHitboxPart extends PartEntity<LivingEntity> {
             beginTick();
             positioned = true;
         }
+    }
+
+    @Override
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        return getParent().interact(player, hand);
     }
 
     @Override public boolean isPickable() { return getParent().isAlive(); }

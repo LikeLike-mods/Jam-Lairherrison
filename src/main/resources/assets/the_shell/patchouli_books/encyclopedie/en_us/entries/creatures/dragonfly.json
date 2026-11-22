@@ -1,0 +1,21 @@
+{
+  "name": "Dragonfly",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:cyan_dye",
+  "advancement": "the_shell:encyclopedie/find_dragonfly",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Quick! Quicker than my eyes. It darts over the water, and then... gone."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/dragonfly.png",
+        "the_shell:textures/gui/entries/dragonfly2.png"
+      ],
+      "title": "Dragonfly",
+      "text": "Fast wings over still water. Where the dragonfly flies, the pond is clean."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Poison Frog",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:spider_eye",
+  "advancement": "the_shell:encyclopedie/find_poison_frog",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "It live in the jungle and the mangrove. TO NOT TOUCH IT!"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/poison_frog.png"
+      ],
+      "title": "Poison Frog",
+      "text": "A tiny, cute, and happy frog"
+    }
+  ]
+}

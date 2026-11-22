@@ -1,0 +1,21 @@
+{
+  "name": "Titanoboa",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:green_dye",
+  "advancement": "the_shell:encyclopedie/find_titanoboa",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A serpent as thick as a tree trunk. It hides in warm swamps. Watch your step."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:titanoboa",
+      "scale": 0.1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Titanoboa",
+      "text": "That is not a vine. Vines do not breathe. Vines do not follow you."
+    }
+  ]
+}

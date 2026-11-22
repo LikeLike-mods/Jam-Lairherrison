@@ -1,0 +1,19 @@
+{
+  "name": "Yeti Crab",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:snowball",
+  "advancement": "the_shell:encyclopedie/find_yeti_crab",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A white crab with a fuzzy coat. It keeps its own little garden. $(b)Pale, hairy arms waving near the hot vents. Is it growing something on its claws? Surely not..."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/abyss_crab.png"
+      ],
+      "title": "Yeti Crab"
+    }
+  ]
+}

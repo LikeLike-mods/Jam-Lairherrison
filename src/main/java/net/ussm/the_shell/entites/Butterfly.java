@@ -1,5 +1,7 @@
 package net.ussm.the_shell.entites;
 
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -9,9 +11,11 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.ussm.the_shell.entites.ai.VisitFlowerGoal;
 import net.ussm.the_shell.entites.init.FlyingMobs;
+import net.ussm.the_shell.events.EncyclopedieHelper;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
@@ -50,5 +54,16 @@ public class Butterfly extends FlyingMobs {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "move", 3, state ->
                 state.setAndContinue(this.isFlying() || state.isMoving() ? DefaultAnimations.FLY : DefaultAnimations.IDLE)));
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (EncyclopedieHelper.holdsBook(player, hand)) {
+            if (!level().isClientSide) {
+                EncyclopedieHelper.unlock(player, "encyclopedie/find_butterfly");
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
     }
 }

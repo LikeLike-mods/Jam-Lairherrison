@@ -1,0 +1,21 @@
+{
+  "name": "Blue Whale",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:prismarine_shard",
+  "advancement": "the_shell:encyclopedie/find_blue_whale",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The largest creature that ever lived. Gentle, slow, impossible to forget."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:blue_whale",
+      "scale": 0.4,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Blue Whale",
+      "text": "I heard it before I saw it. A song so deep my chest hummed with it."
+    }
+  ]
+}

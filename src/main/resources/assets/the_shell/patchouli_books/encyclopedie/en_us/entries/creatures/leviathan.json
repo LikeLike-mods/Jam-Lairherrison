@@ -1,0 +1,19 @@
+{
+  "name": "Leviathan",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:heart_of_the_sea",
+  "advancement": "the_shell:encyclopedie/find_leviathan",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Some people swear have seen a big creature in the bottom of the sea $(br)But if you read this word, you find it..."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/leviathan.png"
+      ],
+      "title": "A ...?"
+    }
+  ]
+}

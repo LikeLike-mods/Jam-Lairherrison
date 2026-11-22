@@ -9,12 +9,11 @@
       "text": "They are hiding in the jungle... If you catch one, it's probably your lucky day!"
     },
     {
-      "type": "patchouli:entity",
-      "entity": "the_shell:gecko",
-      "scale": 1,
-      "rotate": true,
-      "default_rotation ": -90,
-      "name": "Gecko",
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/gecko.png"
+      ],
+      "title": "Gecko",
       "text": "Look at it! This tiny legs! It run everywhere!"
     }
   ]

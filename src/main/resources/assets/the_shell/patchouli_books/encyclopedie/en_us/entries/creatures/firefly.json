@@ -1,0 +1,20 @@
+{
+  "name": "Firefly",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:glowstone_dust",
+  "advancement": "the_shell:encyclopedie/find_firefly",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "When night falls, tiny lights wake up. I am not alone in the dark after all."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "the_shell:textures/gui/entries/firefly.png"
+      ],
+      "title": "Firefly",
+      "text": "They are the light of soul."
+    }
+  ]
+}

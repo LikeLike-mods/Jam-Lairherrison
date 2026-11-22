@@ -1,0 +1,21 @@
+{
+  "name": "Abyssal Angler",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:glow_ink_sac",
+  "advancement": "the_shell:encyclopedie/find_abyssal_angler",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A fish with a lantern on its head. The lure is bright, the mouth is bigger."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:abyssal_angler",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Abyssal Angler",
+      "text": "A light in the dark... I followed it. Bad idea The deeper I went, the less it felt like a friend."
+    }
+  ]
+}

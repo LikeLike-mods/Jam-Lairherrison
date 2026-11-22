@@ -2,6 +2,9 @@ package net.ussm.the_shell.entites;
 
 import java.util.EnumSet;
 import java.util.List;
+
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.ussm.the_shell.entites.hitbox.AnimatedHitboxRig.Section;
 import javax.annotation.Nullable;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -28,6 +31,7 @@ import net.minecraft.world.level.Level;
 import net.ussm.the_shell.entites.init.CetaceanEntity;
 import net.ussm.the_shell.entites.animations.SwimmingTurnProfiles;
 import net.ussm.the_shell.entites.animations.TurnBendProfile;
+import net.ussm.the_shell.events.EncyclopedieHelper;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.RawAnimation;
@@ -201,5 +205,16 @@ public class BasilosaurusEntity extends CetaceanEntity implements Enemy {
             getNavigation().stop();
             cancelBite();
         }
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (EncyclopedieHelper.holdsBook(player, hand)) {
+            if (!level().isClientSide) {
+                EncyclopedieHelper.unlock(player, "encyclopedie/find_basilosaurus");
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
     }
 }

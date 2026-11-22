@@ -1,0 +1,21 @@
+{
+  "name": "Gulper Eel",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:ink_sac",
+  "advancement": "the_shell:encyclopedie/find_gulper_eel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Its mouth is bigger than its body. Or maybe its body is only a mouth"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:gulper_eel",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Gulper Eel",
+      "text": "An eel that swallows whatever drifts close. Do not drift close."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Dragonfish",
+  "category": "the_shell:creatures",
+  "icon": "minecraft:cod",
+  "advancement": "the_shell:encyclopedie/find_dragonfish",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Teeth like needles, a glow in the dark. Who made something so small look so angry?"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "the_shell:dragonfish",
+      "scale": 1,
+      "rotate": true,
+      "default_rotation": -90,
+      "name": "Dragonfish",
+      "text": "A slender hunter of the deep, with a glowing chin and a hungry grin."
+    }
+  ]
+}

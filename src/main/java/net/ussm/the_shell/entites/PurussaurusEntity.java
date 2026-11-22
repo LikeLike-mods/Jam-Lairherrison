@@ -10,6 +10,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,6 +46,7 @@ import net.ussm.the_shell.entites.hitbox.AnimatedHitbox;
 import net.ussm.the_shell.entites.hitbox.AnimatedHitboxEntity;
 import net.ussm.the_shell.entites.hitbox.AnimatedHitboxPart;
 import net.ussm.the_shell.entites.hitbox.AnimatedHitboxRig.Section;
+import net.ussm.the_shell.events.EncyclopedieHelper;
 import net.ussm.the_shell.init.ModSounds;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -412,5 +415,16 @@ public class PurussaurusEntity extends Monster implements GeoEntity, AnimatedHit
         public void stop() {
             getNavigation().stop();
         }
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (EncyclopedieHelper.holdsBook(player, hand)) {
+            if (!level().isClientSide) {
+                EncyclopedieHelper.unlock(player, "encyclopedie/find_purussaurus");
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
     }
 }

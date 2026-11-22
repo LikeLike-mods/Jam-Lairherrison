@@ -1,0 +1,22 @@
+{
+  "parent": "the_shell:root",
+  "display": {
+    "icon": {
+      "id": "minecraft:writable_book"
+    },
+    "title": {
+      "translate": "advancement.the_shell.all_found.title"
+    },
+    "description": {
+      "translate": "advancement.the_shell.all_found.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "all_found": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

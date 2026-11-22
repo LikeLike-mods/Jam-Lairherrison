@@ -1,6 +1,9 @@
 package net.ussm.the_shell.entites;
 
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.state.BlockState;
+import net.ussm.the_shell.events.EncyclopedieHelper;
 import net.ussm.the_shell.init.ModSounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.core.BlockPos;
@@ -175,5 +178,16 @@ public class GiantIsopod extends Monster implements GeoEntity {
         } else {
             super.playStepSound(pos, state);
         }
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (EncyclopedieHelper.holdsBook(player, hand)) {
+            if (!level().isClientSide) {
+                EncyclopedieHelper.unlock(player, "encyclopedie/find_giant_isopod");
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
     }
 }
