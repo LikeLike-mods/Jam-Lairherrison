@@ -1,0 +1,7 @@
+{
+  "type": "the_shell:coastal_village",
+  "biomes": "#the_shell:has_coastal_village",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

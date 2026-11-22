@@ -39,11 +39,17 @@
     [],
     [],
     [
-      "the_shell:light_kyber_ore"
+      "the_shell:light_kyber_ore",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_emerald"
     ],
     [],
     [
-      "minecraft:spring_water"
+      "minecraft:spring_water",
+      "the_shell:mountain_dripstone",
+      "the_shell:mountain_pointed_dripstone",
+      "the_shell:mountain_glow_lichen"
     ],
     [
       "the_shell:palm_tree_jungle",
@@ -54,7 +60,10 @@
       "the_shell:flytrap_patch",
       "the_shell:redstone_pepper_patch",
       "the_shell:pitcher_plant_patch",
-      "the_shell:banana_tree_jungle"
+      "the_shell:banana_tree_jungle",
+      "the_shell:mountain_moss_ceiling",
+      "the_shell:mountain_cave_vines",
+      "the_shell:mountain_spore_blossom"
     ],
     [],
     []
