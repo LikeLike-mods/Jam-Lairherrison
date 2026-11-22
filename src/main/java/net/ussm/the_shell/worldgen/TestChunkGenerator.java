@@ -351,7 +351,10 @@ public class TestChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getBaseHeight(int x, int z, Heightmap.Types type, LevelHeightAccessor world, RandomState random) {
-        return 0;
+        float raw = getHeight(x, z);
+        int top = isRift(x, z) ? -128 : Math.round(raw + (SWAMP_LEVEL - raw) * getSwampiness(x, z, raw));
+        boolean floor = type == Heightmap.Types.OCEAN_FLOOR || type == Heightmap.Types.OCEAN_FLOOR_WG;
+        return (floor ? top : Math.max(top, SEA)) + 1;
     }
 
     @Override
@@ -362,10 +365,20 @@ public class TestChunkGenerator extends ChunkGenerator {
     @Override
     public void addDebugScreenInfo(List<String> list, RandomState random, BlockPos pos) {}
 
-
     @Override
-    public void createStructures(RegistryAccess registryAccess, ChunkGeneratorStructureState structureState, StructureManager structureManager, ChunkAccess chunk, StructureTemplateManager structureTemplateManager) {
+    public void createStructures(
+            RegistryAccess registryAccess,
+            ChunkGeneratorStructureState structureState,
+            StructureManager structureManager,
+            ChunkAccess chunk,
+            StructureTemplateManager structureTemplateManager
+    ) {
+        super.createStructures(
+                registryAccess,
+                structureState,
+                structureManager,
+                chunk,
+                structureTemplateManager
+        );
     }
-
-
 }

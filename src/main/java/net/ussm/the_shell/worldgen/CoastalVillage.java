@@ -45,29 +45,76 @@ public class CoastalVillage extends Structure {
         return c.chunkGenerator().getBaseHeight(x, z, Heightmap.Types.OCEAN_FLOOR_WG, c.heightAccessor(), c.randomState()) - 1;
     }
 
+
     @Override
     protected Optional<GenerationStub> findGenerationPoint(GenerationContext c) {
-        int x0 = c.chunkPos().getMiddleBlockX(), z0 = c.chunkPos().getMiddleBlockZ();
-        int g0 = ground(c, x0, z0);
-        if (g0 < SEA || g0 > SEA + 5) return Optional.empty();
-        Direction sea = null;
-        int shore = 99;
-        for (Direction d : Direction.Plane.HORIZONTAL) {
-            for (int k = 6; k <= 36; k += 2) {
-                if (ground(c, x0 + d.getStepX() * k, z0 + d.getStepZ() * k) < SEA - 1) {
-                    if (k < shore) { shore = k; sea = d; }
-                    break;
+        int chunkX = c.chunkPos().getMinBlockX();
+        int chunkZ = c.chunkPos().getMinBlockZ();
+
+        for (int dx = 2; dx <= 14; dx += 4) {
+            for (int dz = 2; dz <= 14; dz += 4) {
+                int x = chunkX + dx;
+                int z = chunkZ + dz;
+                int g = ground(c, x, z);
+                if (g < SEA || g > SEA + 12) {
+                    continue;
                 }
+
+                Direction sea = null;
+                int shore = Integer.MAX_VALUE;
+                for (Direction d : Direction.Plane.HORIZONTAL) {
+                    for (int k = 4; k <= 64; k += 2) {
+                        int level = ground(
+                                c,
+                                x + d.getStepX() * k,
+                                z + d.getStepZ() * k
+                        );
+                        if (level < SEA - 1) {
+                            if (k < shore) {
+                                shore = k;
+                                sea = d;
+                            }
+                            break;
+                        }
+                    }
+                }
+                if (sea == null) {
+                    continue;
+                }
+
+                boolean landBehind = false;
+                for (int k = 3; k <= 12; k += 3) {
+                    int level = ground(
+                            c,
+                            x - sea.getStepX() * k,
+                            z - sea.getStepZ() * k
+                    );
+                    if (level >= SEA) {
+                        landBehind = true;
+                        break;
+                    }
+                }
+                if (!landBehind) {
+                    continue;
+                }
+
+                final Direction facing = sea;
+                final int distance = shore;
+                BlockPos origin = new BlockPos(x, g, z);
+                return Optional.of(
+                        new GenerationStub(
+                                origin,
+                                builder -> new Layout(
+                                        c,
+                                        builder,
+                                        origin,
+                                        facing
+                                ).build(distance)
+                        )
+                );
             }
         }
-        if (sea == null) return Optional.empty();
-        for (int k = 8; k <= 24; k += 4) {
-            if (ground(c, x0 - sea.getStepX() * k, z0 - sea.getStepZ() * k) < SEA) return Optional.empty();
-        }
-        Direction f = sea;
-        int s = shore;
-        BlockPos o = new BlockPos(x0, g0, z0);
-        return Optional.of(new GenerationStub(o, b -> new Layout(c, b, o, f).build(s)));
+        return Optional.empty();
     }
 
     private static final class Layout {
@@ -151,44 +198,74 @@ public class CoastalVillage extends Structure {
 
         void build(int shore) {
             place("plaza", RIGID, o, PLAZA, f, true);
-            int length = shore + 22;
-            BlockPos start = at(6, 0);
-            road(start, f, length);
-            for (int k = 6; k < length - 4; k += 11) {
-                building(at(6 + k, 2), r.getOpposite());
-                building(at(6 + k, -2), r);
-            }
-            int endA = 6 + (length + 8) / 9 * 9 + 5;
-            BlockPos end = at(endA, 0);
-            if (wet(end)) {
-                place("water_plaza", RIGID, end.atY(DECK), DECK_PLAZA, f, false);
-                for (int side : new int[]{1, -1}) {
-                    Direction way = side > 0 ? r : r.getOpposite();
-                    BlockPos p0 = at(endA, 6 * side);
-                    road(p0, way, 27);
-                    for (int k = 4; k < 27; k += 11) {
-                        building(p0.relative(way, k).relative(f.getOpposite(), 2), f);
-                        building(p0.relative(way, k).relative(f, 2), f.getOpposite());
-                    }
+            int length = Math.max(72, Math.min(144, shore * 2 + 64));
+            int start = -length / 2;
+
+            road(at(0, start), r, length);
+            for (int offset = 12; offset < length - 8; offset += 18) {
+                int position = start + offset;
+                BlockPos junction = at(0, position);
+                int seaLength = 18 + rand.nextInt(4) * 9;
+                road(junction, f, seaLength);
+                int landLength = 9 + rand.nextInt(3) * 9;
+                road(junction, f.getOpposite(), landLength);
+                for (int k = 5; k < seaLength - 3; k += 11) {
+                    BlockPos p = junction.relative(f, k);
+                    building(p.relative(r, 2), r.getOpposite());
+                    building(p.relative(r, -2), r);
                 }
-            } else {
-                place("plaza", RIGID, end.atY(land(end)), PLAZA, f, false);
+                building(at(4, position + 5), f.getOpposite());
+                building(at(-4, position + 5), f);
             }
+
             for (int side : new int[]{1, -1}) {
-                Direction way = side > 0 ? r : r.getOpposite();
-                BlockPos s0 = at(0, 6 * side);
-                road(s0, way, 36);
-                for (int k = 5; k < 36; k += 11) {
-                    building(s0.relative(way, k).relative(f.getOpposite(), 2), f);
-                    building(s0.relative(way, k).relative(f, 2), f.getOpposite());
+                Direction branch = side > 0 ? r : r.getOpposite();
+                int branchLength = 18 + rand.nextInt(3) * 9;
+                BlockPos startBranch = at(0, side * (length / 2 - 9));
+                road(startBranch, branch, branchLength);
+                for (int k = 5; k < branchLength - 3; k += 11) {
+                    BlockPos p = startBranch.relative(branch, k);
+                    building(p.relative(f, 2), f.getOpposite());
+                    building(p.relative(f.getOpposite(), 2), f);
                 }
-                BlockPos sq = s0.relative(way, 40);
-                if (!wet(sq)) place("square", RIGID, sq.atY(land(sq)), SQUARE, f, false);
             }
-            road(at(-6, 0), f.getOpposite(), 18);
-            for (int k = 5; k < 18; k += 11) {
-                building(at(-6 - k, 2), r.getOpposite());
-                building(at(-6 - k, -2), r);
+
+            BlockPos seaEnd = at(0, length / 2 + 9);
+            if (wet(seaEnd)) {
+                place(
+                        "water_plaza",
+                        RIGID,
+                        seaEnd.atY(DECK),
+                        DECK_PLAZA,
+                        f,
+                        true
+                );
+                for (int side : new int[]{1, -1}) {
+                    Direction branch = side > 0 ? r : r.getOpposite();
+                    road(seaEnd, branch, 27);
+                }
+            }
+
+            BlockPos landEnd = at(0, -length / 2 - 9);
+            if (!wet(landEnd)) {
+                place(
+                        "square",
+                        RIGID,
+                        landEnd.atY(land(landEnd)),
+                        SQUARE,
+                        f,
+                        false
+                );
+            }
+        }
+        void organicBranch(BlockPos start, Direction direction, int length) {
+            road(start, direction, length);
+            for (int k = 5; k < length - 3; k += 11) {
+                BlockPos p = start.relative(direction, k);
+                building(p.relative(direction.getClockWise(), 2),
+                        direction.getClockWise().getOpposite());
+                building(p.relative(direction.getCounterClockWise(), 2),
+                        direction.getCounterClockWise().getOpposite());
             }
         }
     }

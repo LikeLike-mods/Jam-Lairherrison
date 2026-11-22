@@ -1,9 +1,9 @@
 {
-  "feature": "minecraft:dripstone_cluster",
+  "feature": "the_shell:cave_dripstone",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 5
+      "count": 256
     },
     {
       "type": "minecraft:in_square"

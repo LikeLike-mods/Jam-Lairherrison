@@ -26,6 +26,7 @@ public class ModFeatures {
             () -> new PalmFeature(NoneFeatureConfiguration.CODEC, false));
     public static final DeferredHolder<Feature<?>, PalmFeature> PALM_WITH_VINES = FEATURES.register("palm_with_vines",
             () -> new PalmFeature(NoneFeatureConfiguration.CODEC, true));
+
     public static final DeferredHolder<Feature<?>, FallenLogFeature> DRIFTWOOD = FEATURES.register("driftwood",
             () -> new FallenLogFeature(NoneFeatureConfiguration.CODEC, 2, 4, false));
     public static final DeferredHolder<Feature<?>, FallenLogFeature> FALLEN_PALM = FEATURES.register("fallen_palm",
@@ -34,8 +35,13 @@ public class ModFeatures {
             () -> new BeachRockFeature(NoneFeatureConfiguration.CODEC));
     public static final DeferredHolder<Feature<?>, MessageBottleFeature> MESSAGE_BOTTLE = FEATURES.register("message_bottle",
             () -> new MessageBottleFeature(NoneFeatureConfiguration.CODEC));
+
     public static final DeferredHolder<Feature<?>, net.ussm.the_shell.worldgen.feature.TitanoboaShedFeature> TITANOBOA_SHED = FEATURES.register("titanoboa_shed",
             () -> new net.ussm.the_shell.worldgen.feature.TitanoboaShedFeature(NoneFeatureConfiguration.CODEC));
+
+    public static final DeferredHolder<Feature<?>, net.ussm.the_shell.worldgen.feature.CaveDripstoneFeature> CAVE_DRIPSTONE = FEATURES.register("cave_dripstone",
+            () -> new net.ussm.the_shell.worldgen.feature.CaveDripstoneFeature(NoneFeatureConfiguration.CODEC));
+
     public static final DeferredHolder<Feature<?>, HydrothermalChimneyFeature> HYDROTHERMAL_CHIMNEY =
             FEATURES.register("hydrothermal_chimney", () -> new HydrothermalChimneyFeature(NoneFeatureConfiguration.CODEC));
     public static final DeferredHolder<Feature<?>, AbyssBlobFeature> ABYSS_BLOB = FEATURES.register("abyss_blob",
