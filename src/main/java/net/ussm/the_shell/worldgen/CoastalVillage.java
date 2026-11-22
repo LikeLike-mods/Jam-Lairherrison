@@ -198,16 +198,16 @@ public class CoastalVillage extends Structure {
 
         void build(int shore) {
             place("plaza", RIGID, o, PLAZA, f, true);
-            int length = Math.max(72, Math.min(144, shore * 2 + 64));
+            int length = Math.max(30, Math.min(72, shore * 2 + 64));
             int start = -length / 2;
 
             road(at(0, start), r, length);
             for (int offset = 12; offset < length - 8; offset += 18) {
                 int position = start + offset;
                 BlockPos junction = at(0, position);
-                int seaLength = 18 + rand.nextInt(4) * 9;
+                int seaLength = 12 + rand.nextInt(3) * 9;
                 road(junction, f, seaLength);
-                int landLength = 9 + rand.nextInt(3) * 9;
+                int landLength = 3 + rand.nextInt(2) * 6;
                 road(junction, f.getOpposite(), landLength);
                 for (int k = 5; k < seaLength - 3; k += 11) {
                     BlockPos p = junction.relative(f, k);
@@ -242,7 +242,7 @@ public class CoastalVillage extends Structure {
                 );
                 for (int side : new int[]{1, -1}) {
                     Direction branch = side > 0 ? r : r.getOpposite();
-                    road(seaEnd, branch, 27);
+                    road(seaEnd, branch, 18);
                 }
             }
 

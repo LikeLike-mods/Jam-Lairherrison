@@ -1,5 +1,11 @@
 {
   "parent": "the_shell:root",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "patchouli"
+    }
+  ],
   "display": {
     "icon": {
       "id": "minecraft:writable_book"
